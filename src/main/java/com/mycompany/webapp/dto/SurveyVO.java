@@ -8,5 +8,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SurveyVO {
-
+	private String surveyId;
 }

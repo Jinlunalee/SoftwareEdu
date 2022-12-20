@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+<div class="card m-2">
+	<div class="card-header">
+		Home
+	</div>
+	<div class="card-body">
+		Content
+		
+	</div>
+</div>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
