@@ -20,8 +20,8 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/app.css"/>
 	</head>
 	<body>
-		<div class="d-flex flex-column vh-100">
-			<nav class="navbar navbar-dark bg-dark text-white font-weight-bold">
+		<div class="d-flex flex-column vh-100" style="background-color:#e8eff5;">
+			<nav class="navbar navbar-white bg-white text-white font-weight-bold">
 				<a class="navbar-brand" href="/home"> 
 					<img src="${pageContext.request.contextPath}/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top">
 					Spring
@@ -40,10 +40,9 @@
 					</div>
 				</div>
 			</nav>
-	
-			<div class="flex-grow-1 container-fluid">
+			<div class="flex-grow-1 container-fluid" style="border-radius: 44px;margin: 52px; overflow: hidden; width: auto;background-color:white;">
 				<div class="row h-100">
-					<div class="col-md-4 p-3 bg-dark">
+					<div class="col-md-4 p-3" style="background-color:#053863;">
 						<div class="h-100 d-flex flex-column">
 							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
 								<%@ include file="/WEB-INF/views/common/menu.jsp" %>
