@@ -21,7 +21,7 @@ public class RegisterController {
 
 	//상세조회
 	@RequestMapping(value="/register/details/{registerId}", method=RequestMethod.GET)
-	public String getRegisterDetails(@PathVariable String studentId) {
+	public String getRegisterDetails(@PathVariable String registerId) {
 		return "register/details";
 	}
 

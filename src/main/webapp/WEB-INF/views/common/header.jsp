@@ -22,10 +22,17 @@
 	<body>
 		<div class="d-flex flex-column vh-100">
 			<nav class="navbar navbar-dark bg-dark text-white font-weight-bold">
-				<a class="navbar-brand" href="/"> 
+				<a class="navbar-brand" href="/home"> 
 					<img src="${pageContext.request.contextPath}/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top">
 					Spring
 				</a>
+				<ul>
+						<a href="<c:url value='/course/regularlist'/>">과정목록</a>
+						<a href="<c:url value='/register/list'/>">수강목록</a>
+						<a href="<c:url value='/student/list'/>">수강생목록</a>
+						<a href="<c:url value='/survey/list'/>">강의 만족도 조사 목록</a>
+						<a href="<c:url value='/data/download'/>">연계 자료 다운</a>
+				</ul>
 				<div>
 					<div>
 						<a class="btn btn-success btn-sm" href="#">로그인</a>

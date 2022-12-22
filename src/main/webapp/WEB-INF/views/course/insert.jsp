@@ -7,7 +7,8 @@
 		Home
 	</div>
 	<div class="card-body">
-		Content
+		Content<br>
+		새강좌 입력창
 		
 	</div>
 </div>
