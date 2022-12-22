@@ -37,12 +37,12 @@ public class CourseController {
 	
 	@RequestMapping(value="/course/update/{courseId}", method=RequestMethod.POST)
 	public String updateCourse(CourseVO courseVo) {
-		return "redirect:/course/details"+courseVo.getCourseId();
+		return "redirect:/course/details/"+courseVo.getCourseId();
 	}
 	
 	//삭제
 	@RequestMapping(value="/course/delete/{courseId}", method=RequestMethod.POST)
-	public String deleteCourse(@PathVariable String courseId ,CourseVO courseVo) {
+	public String deleteCourse(@PathVariable String courseId, CourseVO courseVo) {
 		return "redirect:/course/list";
 	}
 	
@@ -54,7 +54,7 @@ public class CourseController {
 	
 	@RequestMapping(value="/course/insert", method=RequestMethod.POST)
 	public String insertCourse(CourseVO courseVo) {
-		return "redirect:/course/details"+courseVo.getCourseId();
+		return "redirect:/course/details/"+courseVo.getCourseId();
 	}
 	
 }
