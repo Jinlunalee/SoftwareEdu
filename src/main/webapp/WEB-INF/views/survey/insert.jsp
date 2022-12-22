@@ -7,8 +7,9 @@
 		Home
 	</div>
 	<div class="card-body">
-		Content
-		
+		Content<br>
+		새 만족도 조사 입력 페이지<br>
+		문항추가
 	</div>
 </div>
 

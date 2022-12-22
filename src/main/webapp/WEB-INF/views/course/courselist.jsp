@@ -7,8 +7,13 @@
 		Home
 	</div>
 	<div class="card-body">
-		Content
-		
+		Content<br>
+		강좌 목록 <br>
+		<a href="<c:url value='/course/details/1'/>">1번강좌명</a>
+		강좌명 <br>
+		강좌명 <br>
+		강좌명 <br>
+		<a href="<c:url value='/course/insert'/>">새 강좌 입력</a>
 	</div>
 </div>
 

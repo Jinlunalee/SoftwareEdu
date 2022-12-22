@@ -7,7 +7,9 @@
 		Home
 	</div>
 	<div class="card-body">
-		Content
+		Content<br>
+		수강 수정 페이지 <br>
+		
 		
 	</div>
 </div>

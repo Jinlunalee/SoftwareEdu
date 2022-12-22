@@ -7,8 +7,10 @@
 		Home
 	</div>
 	<div class="card-body">
-		Content
-		
+		Content <br>
+		만족도조사 상세페이지 <br> 
+		수정 안함
+		삭제는 팝업
 	</div>
 </div>
 
