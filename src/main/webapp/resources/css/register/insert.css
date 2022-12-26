@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.a {
+	list-style: none;
+	width: 50%;
+}
+
+.a li {
+	
+}
+
+.wrap {
+	padding: 17px;
+    
+    width: 900px;
+    height: 500%;
+    border: 1px solid #bababa;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.search-box {
+	text-align: center;
+	background-color: #f7f7f7;
+	height: 50px;
+}
+
+.search-content {
+	padding: 14px;
+}
+
+input {
+	background-color: #003964;
+	width: 100px;
+	height: 45px;
+	line-height: 47px;
+	border-radius: 8px;
+	color: #fff;
+}
+
+.submit-btn {
+	text-align: center;
+	margin: 10px;
+}
