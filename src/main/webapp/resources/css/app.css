@@ -5,6 +5,13 @@
     font-weight: normal;
     font-style: normal;
 }
+<<<<<<< HEAD
+
+* {
+	font-family: 'G-sans', "sans-serif";
+}
+=======
+>>>>>>> refs/remotes/origin/master
 
 * {
 	font-family: 'G-sans', "sans-serif";
@@ -46,4 +53,10 @@ a{
 
 a:hover{
     text-decoration: none;
+<<<<<<< HEAD
+}
+.card {
+	border:none;
+=======
+>>>>>>> refs/remotes/origin/master
 }

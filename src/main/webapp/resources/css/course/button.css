@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.submit-btn {
+	text-align: center;
+	margin: 10px;
+}
+.submit-btn input {
+	background-color: #003964;
+	width: 100px;
+	height: 45px;
+	line-height: 47px;
+	border-radius: 8px;
+	color: #fff;
+	border: 0;
+}
