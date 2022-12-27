@@ -3,17 +3,12 @@
     margin:22px;
     display: inline-flex;
     align-items: center;
+    width: 100%;
 }
-.survey_id {
-    border-radius: 25px;
-    background-color: #053863ab;
-    color: white;
-    padding: 12px;
-}
-.survey_title{
+.survey_title_input{
     margin-left:15px;
     font-size: 29px;
-    font-weight: bold;
+    width: 75%;
 }
 .question-set {
     margin-bottom:30px;
@@ -25,6 +20,15 @@
 .surveyqn-img {
     width: 55px;
     margin-right:10px;
+}
+.serveyqn-select {
+    width:55%;
+    font-size: 20px;
+}
+.surveyqn-inputbox{
+    font-size: 20px;
+    margin-left: 72px;
+    width: 55%;
 }
 .answer{
     font-size:20px;
