@@ -13,15 +13,17 @@
     align-items: center;
 }
 .main-first-row {
-	width: 100%;
 	display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-top: 35px;
+    white-space: normal;
+
 }
 .main-first-row-btn {
-	width: 270px;
-    height: 315px;
-    border-radius: 32px;
+	width: 230px;
+    height: 250px;
+    border-radius: 32px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +49,7 @@
 	display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;	
+    margin:  25px;
 }
 .main-second-row-btn {
 	width: 680px;
@@ -55,7 +58,8 @@
     display: flex;
 	flex-direction: column;
     font-size: 25px;
-    background-color:#EBEBEB;
+    background-color:#EBEBEB;  
+    text-align: center;
 }
 .main-second-row-btn .title {
 	margin: 20px 0 20px 20px;
@@ -65,6 +69,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
 }
 .main-second-row-btn .level-content-item{
 	width: 160px;
@@ -87,11 +92,11 @@
 
 .main-second-row-btn .regular-content-item{
 	width: 640px;
-    height: 40px;
+    height:100px; 
     background-color: #D9D9D9;
     border-radius: 25px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding-left: 20px;
 }
