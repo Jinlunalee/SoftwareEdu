@@ -24,6 +24,12 @@ public class SurveyController {
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/update";
 	}
+	@RequestMapping("/survey/summary")
+	public String summaryTest(Model model) {
+		model.addAttribute("menu", "survey");
+		model.addAttribute("menuKOR", "만족도 조사 관리");
+		return "survey/summary";
+	}
 	
 	//목록조회
 	@RequestMapping(value="/survey/list", method=RequestMethod.GET)
