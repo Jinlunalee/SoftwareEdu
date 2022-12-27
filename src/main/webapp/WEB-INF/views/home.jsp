@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>
 	</head>
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
 

@@ -3,6 +3,7 @@ package com.mycompany.webapp.controller;
 import java.sql.Date;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,31 +16,38 @@ public class RegisterController {
 	
 	//목록조회
 	@RequestMapping(value="/register/list", method=RequestMethod.GET)
-	public String getRegisterList() {
+	public String getRegisterList(Model model) {
+		model.addAttribute("menu", "register");
+		model.addAttribute("menuKOR", "수강 관리");
 		return "register/list";
 	}
 
 	//상세조회
 	@RequestMapping(value="/register/details/{registerId}", method=RequestMethod.GET)
-	public String getRegisterDetails(@PathVariable String registerId) {
+	public String getRegisterDetails(@PathVariable String registerId, Model model) {
+		model.addAttribute("menu", "register");
+		model.addAttribute("menuKOR", "수강 관리");
 		return "register/details";
 	}
 
 	//검색
 	@RequestMapping(value="/register/search", method=RequestMethod.GET)
-	public String searchRegister(@RequestParam Date registerDate, @RequestParam String studentName, @RequestParam String courseName) {
+	public String searchRegister(@RequestParam Date registerDate, @RequestParam String studentName, @RequestParam String courseName, Model model) {
+		model.addAttribute("menu", "register");
+		model.addAttribute("menuKOR", "수강 관리");
 		return "register/search";
 	}
 	
 	//엑셀파일 다운로드
 	@RequestMapping(value="/register/download", method=RequestMethod.GET)
 	public void downloadRegister() {
-		
 	}
 	
 	//수정
 	@RequestMapping(value="/register/update/{registerId}", method=RequestMethod.GET)
-	public String updateRegister(@PathVariable String registerId) {
+	public String updateRegister(@PathVariable String registerId, Model model) {
+		model.addAttribute("menu", "register");
+		model.addAttribute("menuKOR", "수강 관리");
 		return "register/update";
 	}
 
@@ -56,7 +64,9 @@ public class RegisterController {
 
 	//입력
 	@RequestMapping(value="/register/insert", method=RequestMethod.GET)
-	public String insertRegister() {
+	public String insertRegister(Model model) {
+		model.addAttribute("menu", "register");
+		model.addAttribute("menuKOR", "수강 관리");
 		return "register/insert";
 	}
 
