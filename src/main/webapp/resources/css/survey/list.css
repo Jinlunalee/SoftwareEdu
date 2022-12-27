@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+.list .table-header-left {
+    width: 30%;
+}
 .input-text {
 	width: 450px;
     height: 45px;
@@ -78,78 +80,43 @@ tr {
     height: 37px;
 }
 
-.modal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
+#modal {
 	display: none;
+  	position:relative;
+  	width:100%;
+  	height:100%;
+  	z-index:1;
 }
 
-.modal-content {
-	width: 410px;
-	height: 240px;
-  	background-color: #8db2ff;
-  	color: #fff;
-  	border-radius: 10px;
-  	position: relative;
-  	top: 50%;
-  	left: 50%;
-  	margin-top: -100px;
-  	margin-left: -200px;
-  	text-align: center;
-  	box-sizing: border-box;
-  	padding: 40px 20px;
-  	line-height: 23px;
-  	cursor: pointer;
-  	text-align: left;
-  	list-style: none;
+#modal h2 {
+  margin:0;   
 }
 
-.input-time {
-	width: 70px;
-	height: 40px;
-	position: relative;
-    left: 130px;
-    bottom: 25px;
+#modal button {
+  display:inline-block;
+  width:100px;
+  margin-left:calc(100% - 100px - 10px);
 }
 
-.input-time-btn {
-	width: 50px;
-	height: 40px;
-	position: relative;
-	left: 210px;
-    bottom: 53px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
+#modal .modal_content {
+  width:500px;
+  margin:100px auto;
+  padding:20px 10px;
+  background:#fff;
+  border:2px solid #666;
+  list-style: none;
 }
 
-#close-btn {
-	text-align: right;
-	position: relative;
-    bottom: 50px;
+#modal .modal_layer {
+  position:fixed;
+  top:0;
+  left:0;
+  width:500%;
+  height:500%;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:-1;
 }
 
-.close-btn {
-	width: 50px;
-	height: 30px;
-	border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-}
-
-.paging {
-	list-style: none;
-}
-
-.paging li {
-	float: left;
-	margin: 10px;
-}
-
-#paging {
-	position: relative;
-	left: 370px;
+#modal_close_btn {
+	width:50px;
 }

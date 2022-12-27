@@ -47,3 +47,10 @@ a{
 a:hover{
     text-decoration: none;
 }
+.card {
+	border:none;
+}
+.home_img {
+	width: 20px;
+    height: 20px;
+}

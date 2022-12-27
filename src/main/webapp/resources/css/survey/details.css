@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.survey_top {
+    margin:22px;
+    display: inline-flex;
+    align-items: center;
+}
+.survey_id {
+    border-radius: 25px;
+    background-color: #053863ab;
+    color: white;
+    padding: 12px;
+}
+.survey_title{
+    margin-left:15px;
+    font-size: 29px;
+    font-weight: bold;
+}
+.question-set {
+    margin-bottom:30px;
+}
+.question{
+    font-size:23px;
+    margin-bottom: 8px;
+}
+.surveyqn-img {
+    width: 55px;
+    margin-right:10px;
+}
+.answer{
+    font-size:20px;
+}
+.answer-item {
+    margin-right: 5px;
+    margin-left: 22px;
+}
+.buttons{
+    text-align: center;
+}
+.button-item {
+    background-color: #003964;
+    border: none;
+    width: 100px;
+    height: 45px;
+    border-radius: 8px;
+    color: #fff;
+    margin-left: 7px;
+    margin-right: 7px;
+}

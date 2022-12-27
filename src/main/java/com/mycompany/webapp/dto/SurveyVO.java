@@ -9,4 +9,6 @@ import lombok.ToString;
 @ToString
 public class SurveyVO {
 	private String surveyId;
+
+
 }

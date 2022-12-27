@@ -39,19 +39,17 @@
 				<tr>
 					<td>2022.12.03</td>
 					<td>이수강</td>
-					<td><a id="modal_open_btn">처음 시작하는 스프링 프레임워크</a></td>
-					<div id="modal">
-						<div class="modal_content">
-							<li>홍길동 | STDT001
-							<li>강좌명 : 자바 초급</li>
-							<li>강의 시간 : 09:00 ~ 18:00</li>
-							<li>교육 기간 : 2022.12.19 ~ 2022.12.22</li>
-							<li>진도율 : 80%</li>
-							<input type="button" onclick="location.href='<c:url value="/register/update/1"/>'" value="수정">
-							<button type="button" id="modal_close_btn">창 닫기</button>
+					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
+					<div class="modal">
+						<div class="modal-content">
+							<li>홍길동 | STDT001</li>
+							<li>강좌명 | 자바 초급</li>
+							<li>강의 시간 | 09:00 ~ 18:00</li>
+							<li>교육 기간 | 2022.12.19 ~ 2022.12.22</li>
+							<li>진도율 | 80%</li>
+							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
+							<div id="close-btn"><button class="close-btn"></button></div>
 						</div>
-
-						<div class="modal_layer"></div>
 					</div>
 					<td>12</td>
 					<td><img src="<c:url value='/resources/images/register/waiting.png'/>" /></td>
@@ -63,22 +61,22 @@
 						</form></td>
 				</tr>
 			</c:forEach>
+			
 			<c:forEach var="i" begin="1" end="5" step="1">
 				<tr>
 					<td>2022.12.03</td>
 					<td>이수강</td>
-					<td><a id="modal_open_btn">처음 시작하는 스프링 프레임워크</a></td>
-					<div id="modal">
-						<div class="modal_content">
+					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
+					<div class="modal">
+						<div class="modal-content">
 							<li>홍길동 | STDT001
 							<li>강좌명 : 자바 초급</li>
 							<li>강의 시간 : 09:00 ~ 18:00</li>
 							<li>교육 기간 : 2022.12.19 ~ 2022.12.22</li>
 							<li>진도율 : 80%</li>
-							<button type="button" id="modal_close_btn">창 닫기</button>
+							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
+							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
-
-						<div class="modal_layer"></div>
 					</div>
 					<td>12</td>
 					<td><img src="<c:url value='/resources/images/register/complete.png'/>" /></td>
@@ -93,17 +91,36 @@
 			</c:forEach>
 		</table>
 		<div class="down">
+		<a href="#">
 		<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" />
+		</a>
+		</div>
+		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
+		<div id="paging">
+		<ul class="paging">
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+			<li><a href="#">8</a></li>
+			<li><a href="#">9</a></li>
+			<li><a href="#">10</a></li>
+		</ul>
 		</div>
 	</div>
 	
 	<script>
-		$("#modal_open_btn").click(function() {
-			$("#modal").attr("style", "display:block");
-		});
-
-		$("#modal_close_btn").click(function() {
-			$("#modal").attr("style", "display:none");
+		$(function(){
+			$(".modal-open").click(function(){
+				$(".modal").fadeIn();
+			});
+			
+			$(".close-btn").click(function(){
+				$(".modal").fadeOut();
+			});
 		});
 	</script>
 	<script>
@@ -115,6 +132,7 @@
 		}
 	}
 	</script>
+	
 </div>
 
 
