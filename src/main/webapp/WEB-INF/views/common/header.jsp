@@ -66,6 +66,6 @@
 						</div>
 					</div>
 	
-					<div class="col-md-8 p-3">
+					<div class="col-md-9 p-3">
 						<div class=" h-100 d-flex flex-column">
 							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px">
