@@ -1,6 +1,53 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'G-sans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: 'G-sans', "sans-serif";
+}
 
 .error {
 	color: red;
 	font-size: 0.7rem;
+}
+
+.navbar {
+	height: 120px;
+}
+.navbar-brand {
+	letter-spacing: -2px;
+}
+.navbar-brand:hover {
+	color: black;
+    text-decoration: none;
+}
+.nav-list {
+	font-size: 33px;
+    letter-spacing: -4px;
+}
+.nav-btn {
+	background-color:#3C76ED;
+}
+.container-fluid {
+	border-radius: 44px;
+	margin: 19px 35px; 
+	overflow: hidden; 
+	width: auto;
+	background-color:white;
+}
+
+a{
+	color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+.card {
+	border:none;
 }

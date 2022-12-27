@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.select_course {
+	border: none;
+}
+.insert_form input, select:not(.select_course) {
+	height: 55px;
+    border-radius: 8px;
+    margin: 5px 10px;
+    padding: 3px 20px 0 20px;
+    border: 1px solid #e8e8e8;
+}
+.insert_form textarea {
+	border-color: #e8e8e8;
+}
+.filebox .insert_FileUpload {
+	width: 70%;
+    display: inline-block;
+}
+.filebox label { /*label 스타일 변경*/
+	display: inline-block;
+    background-color: #1A54CD;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    cursor: pointer;
+    height: 55px;
+    margin: 5px 10px;
+    vertical-align: middle;
+}
+.filebox input[type="file"] { /* 기존 디자인 없애기 */
+	position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+}
+.readonly_txt {
+	color : #666;
+}

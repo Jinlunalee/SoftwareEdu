@@ -38,16 +38,8 @@
 					</div>
 				</div>
 			</nav>
-			<div class="flex-grow-1 container-fluid">
-				<div class="row h-100">
-					<div class="col-md-3 p-3" style="background-color:#053863;">
-						<div class="h-100 d-flex flex-column">
-							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
-								<%@ include file="/WEB-INF/views/common/menu.jsp" %>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-md-8 p-3">
+			<div class="container-fluid">
+				<div class="h-100">
+					<div class="p-3">
 						<div class=" h-100 d-flex flex-column">
-							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px">
+							<div class="main-content"style="height: 100%">
