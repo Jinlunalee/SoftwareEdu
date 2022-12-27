@@ -1,0 +1,21 @@
+.aside-bar {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.aside-bar-menu{
+    height: 100px;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}
+.menu-text{
+	font-size: 38px;
+    color: #fff;
+}
+.submenu-items{
+
+}
+.aside-bar-submenu{
+
+}

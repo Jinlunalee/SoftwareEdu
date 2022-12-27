@@ -17,7 +17,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/app.css"/>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/app.css"/>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/menu.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.2.js"></script>
 		<script type="text/javascript">
@@ -29,7 +30,7 @@
 			const arrLink = submenuLinks[tag];
 			
 			for(let i=0, max = arrName.length; i<max; i++) {
-				let line = '<div class="aside-bar-submenu-' + i + '"><a href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
+				let line = '<div class="submenu-items aside-bar-submenu-' + i + '"><a href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
 				$(".aside-bar-submenu").append(line);
 			};
 		});
