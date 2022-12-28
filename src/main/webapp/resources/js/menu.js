@@ -26,7 +26,7 @@ const submenuLinks = {
         'http://localhost:8080/SoftwareEducation/student/list', ''
     ],
     register : [
-        'http://localhost:8080/SoftwareEducation/register/list', 'http://localhost:8080/SoftwareEducation/register/insert'
+        'http://localhost:8080/SoftwareEducation/register/list', 'http://localhost/SoftwareEducation/register/insert'
     ],
     survey : [
         'http://localhost:8080/SoftwareEducation/survey/list', 'http://localhost:8080/SoftwareEducation/survey/insert', 'http://localhost:8080/SoftwareEducation/survey/summary'

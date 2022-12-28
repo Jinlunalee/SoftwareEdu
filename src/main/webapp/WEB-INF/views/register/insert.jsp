@@ -38,18 +38,36 @@
 	<div class="wrap">
 	<div class="search-box">
 	<div class="search-content">
-	과정 명 &nbsp; &nbsp;
-	<select>
-		<option>RGCR0001  |  국비지원과정</option>
-		<option>RGCR0002  |  전문가과정</option>
-		<option>RGCR0003  |  기초과정</option>	
-	</select>
-	&nbsp; &nbsp; 강좌 명 &nbsp; &nbsp;
-	<select>
-	<option>CRSE0001  |  자바 초급</option>
-	<option>CRSE0002  |  자바 중급</option>
-	<option>CRSE0003  |  CSS 기초</option>
-	</select>
+	강좌/과정 &nbsp; &nbsp;
+		<select onchange="changeType(this)">
+			<option>강좌와 과정 중 선택</option>
+			<option value="a">강좌</option>
+			<option value="b">과정</option>
+		</select>
+		
+		<select id="courselist">
+			<option>리스트 목록</option>
+		</select>
+		
+		<script>
+			function changeType(v) {
+				var course = ["자바 start", "자바 활용", "C언어 시작", "C언어 실습", "파이썬 기초"];
+				var cl = ["자바 국비 과정", "자바 전문가 과정", "자바 기초 과정", "C언어 국비 과정", "C언어 전문가 과정", "C언어 기초 과정", "파이썬 국비 과정", "파이썬 전문가 과정", "파이썬 기초 과정"];
+				var target = document.getElementById("courselist");
+				
+				if(v.value == "a") var d = course;
+				else if(v.value == "b") var d = cl;
+				
+				target.options.length = 0;
+				
+				for(x in d) {
+					var opt = document.createElement("option");
+					opt.value = d[x];
+					opt.innerHTML = d[x];
+					target.appendChild(opt);
+				}
+			}
+		</script>
 	</div>
 	</div>
 	
