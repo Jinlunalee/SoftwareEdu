@@ -3,6 +3,7 @@
     margin:22px;
     display: inline-flex;
     align-items: center;
+    width: 100%;
 }
 .survey_id {
     border-radius: 25px;
@@ -11,23 +12,44 @@
     padding: 12px;
 }
 .survey_title{
-    margin-left:15px;
-    font-size: 29px;
+    margin-left: 16px;
+    font-size: 26px;
     font-weight: bold;
 }
+.survey_title_input{
+    margin-left:15px;
+    font-size: 29px;
+    width: 75%;
+}
+.survey_content {
+	margin-top : 10px;
+}
 .question-set {
-    margin-bottom:30px;
+    margin-bottom:43px;
 }
 .question{
-    font-size:23px;
+    font-size:20px;
     margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .surveyqn-img {
-    width: 55px;
+    width: 35px;
     margin-right:10px;
 }
+.serveyqn-select {
+    width:40%;
+    font-size: 20px;
+}
+.surveyqn-inputbox{
+    font-size: 20px;
+    margin-left: 5px;
+    width: 150%;
+    height: 28px;
+}
 .answer{
-    font-size:20px;
+    font-size:15px;
 }
 .answer-item {
     margin-right: 5px;
