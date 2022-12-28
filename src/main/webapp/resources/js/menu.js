@@ -20,19 +20,19 @@ const submenuNames = {
 
 const submenuLinks = {
     course : [
-        'http://localhost:8080/SoftwareEducation/course/regularlist', '', '', '', 'http://localhost:8080/SoftwareEducation/course/courselist', 'http://localhost:8080/SoftwareEducation/course/insert'
+        'http://localhost/SoftwareEducation/course/regularlist', '', '', '', 'http://localhost/SoftwareEducation/course/courselist', 'http://localhost/SoftwareEducation/course/insert'
     ],
     student : [
-        'http://localhost:8080/SoftwareEducation/student/list', ''
+        'http://localhost/SoftwareEducation/student/list', ''
     ],
     register : [
-        'http://localhost:8080/SoftwareEducation/register/list', 'http://localhost/SoftwareEducation/register/insert'
+        'http://localhost/SoftwareEducation/register/list', 'http://localhost/SoftwareEducation/register/insert'
     ],
     survey : [
-        'http://localhost:8080/SoftwareEducation/survey/list', 'http://localhost:8080/SoftwareEducation/survey/insert', 'http://localhost:8080/SoftwareEducation/survey/summary'
+        'http://localhost/SoftwareEducation/survey/list', 'http://localhost/SoftwareEducation/survey/insert', 'http://localhost/SoftwareEducation/survey/summary'
     ],
     data : [
-        'http://localhost:8080/SoftwareEducation/data/download'
+        'http://localhost/SoftwareEducation/data/download'
     ]
 }
 

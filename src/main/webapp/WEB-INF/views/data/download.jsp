@@ -12,8 +12,9 @@ img {
 </style> 
 
 <div class="card m-2">
-	<div class="card-header">연계 자료 관리  > 연계 자료 조회 
-		
+	<div class="card-header">
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	<div>연계 자료 관리  > <span class="submenu-title">연계 자료 조회 </span></div>		
 	</div>
 	<div class="card-body">
 		<br>

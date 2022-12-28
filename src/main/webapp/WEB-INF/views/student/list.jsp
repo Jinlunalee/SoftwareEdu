@@ -5,7 +5,10 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
 
 <div class="card m-2">
-	<div class="card-header">수강생 관리 > 수강생 정보 확인</div>
+	<div class="card-header">
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	<div>수강생 관리 > <span class="submenu-title">수강생 정보 확인</span></div>
+	</div>
 	<div class="card-body">
 		<div class="search-box">
 			 <select class="select-box">

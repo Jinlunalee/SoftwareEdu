@@ -13,6 +13,9 @@
 .insert_form textarea {
 	border-color: #e8e8e8;
 }
+.filebox {
+	display: flex;
+}
 .filebox .insert_FileUpload {
 	width: 70%;
     display: inline-block;
