@@ -8,7 +8,7 @@
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 강좌 관리 > 개설 강좌 정보 확인 > 개설 강좌 수정 페이지</div>
+	 <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 수정 페이지</div>
 	</div>
 	<div class="card-body">
 		<div class="sub_title">정기과정명 | 웹 개발자 과정 </div>

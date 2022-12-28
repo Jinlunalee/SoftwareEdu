@@ -7,7 +7,7 @@
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 수강 관리 > 수강 목록 조회</div>
+	 <div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
 	</div>
 	<div class="card-body">
 		<div class="search">
@@ -45,7 +45,7 @@
 					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
 					<div class="modal">
 						<div class="modal-content">
-							<li id="rgt-stu">홍길동  |  STDT001</li>
+							<li style="text-align: center;">홍길동  |  STDT001</li>
 							<br>
 							<li>강좌명 | 자바 초급</li>
 							<li>강의 시간 | 09:00 ~ 18:00</li>

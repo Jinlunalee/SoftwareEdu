@@ -29,10 +29,21 @@
 			const arrName = submenuNames[tag];
 			const arrLink = submenuLinks[tag];
 			
+			//페이지별 서브메뉴 텍스트 가져오기
+			const submenuTitle = $(".submenu-title").html();
+			
 			for(let i=0, max = arrName.length; i<max; i++) {
-				let line = '<div class="submenu-items aside-bar-submenu-' + i + '" onclick="Click(this)"><a href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
+				let color = '';
+				//현재 페이지 서브메뉴일때 color에 값 추가
+				if(submenuTitle == submenuNames[tag][i]){
+					color = 'style="color: #1A54CD;"'
+				}
+				let line = '<div class="submenu-items aside-bar-submenu-' + i + '"><a '+ color +'href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
 				$(".aside-bar-submenu").append(line);
 			};
+			
+			//$(".submenu").css("color","red");
+			
 		});
 		</script>
 		
