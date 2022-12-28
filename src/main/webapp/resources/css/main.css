@@ -18,6 +18,7 @@
     flex-wrap: wrap;
     margin-top: 35px;
     white-space: normal;
+    text-align: center;
 
 }
 .main-first-row-btn {
@@ -50,6 +51,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;	
     margin:  25px;
+    text-align: center;
 }
 .main-second-row-btn {
 	width: 680px;
@@ -92,7 +94,7 @@
 
 .main-second-row-btn .regular-content-item{
 	width: 640px;
-    height:100px; 
+    height:40px; 
     background-color: #D9D9D9;
     border-radius: 25px;
     display: flex;

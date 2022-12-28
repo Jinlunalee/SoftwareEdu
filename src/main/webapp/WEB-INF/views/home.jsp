@@ -24,7 +24,7 @@ position: relative;
  width: 160px;
  height: 100px; 
  margin: 10px;
- 
+
  }
  
  #course_image {
@@ -43,7 +43,10 @@ width: 160px;
 height: 299px;
 
 }
-  
+   
+ a{
+  text-align: center;
+  }
 </style>
 	
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
