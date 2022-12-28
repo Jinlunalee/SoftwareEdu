@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
 
 
@@ -41,13 +42,14 @@ width: 180px;
 height: 299px;
 
 }
-   
  a{
   text-align: center;
   }
   
 </style>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>	
+
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
  
 <div class="main-first-row"> 

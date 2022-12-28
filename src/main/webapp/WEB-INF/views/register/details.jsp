@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/register/details.css'/>"/>
 <div class="card m-2">
 	<div class="card-header">
-		수강 관리  >  등록 수강 정보 확인  >  등록 수강 상세 페이지
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	 <div> > 수강 관리  >  등록 수강 정보 확인  >  등록 수강 상세 페이지
+	</div>
 	</div>
 	<div class="card-body">
 	

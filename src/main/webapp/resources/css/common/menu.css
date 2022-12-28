@@ -4,18 +4,28 @@
     align-items: center;
 }
 .aside-bar-menu{
-    height: 100px;
+	background-color: #053863;
+    height: 150px;
+    width: 100%;
+    padding: 25px;
     align-items: center;
     display: flex;
     font-size: 30px;
 }
 .menu-text{
-	font-size: 38px;
+	font-size: 29px;
     color: #fff;
+    margin: auto;
 }
 .submenu-items{
-
+	border-bottom: 1px solid #e8e8e8;
+	padding-left: 10px;
 }
 .aside-bar-submenu{
-
+	background-color: #FFFFFF;
+    width: 100%;
+    padding: 15px;
+    margin: 20px;
+    margin-top: 0px;
+    line-height: 49px;
 }
