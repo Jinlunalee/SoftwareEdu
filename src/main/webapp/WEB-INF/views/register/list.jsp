@@ -5,7 +5,10 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
 
 <div class="card m-2">
-	<div class="card-header">수강 관리 > 수강 목록 조회</div>
+	<div class="card-header"> 
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	 <div> > 수강 관리 > 수강 목록 조회</div>
+	</div>
 	<div class="card-body">
 		<div class="search">
 			<input class="input-date" type="date"> <select

@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/list.css'/>" />
 
 <div class="card m-2">
-	<div class="card-header">만족도 조사 관리 > 만족도 조사 양식 목록 조회</div>
+	<div class="card-header">
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	 <div> > 만족도 조사 관리 > 만족도 조사 양식 목록 조회</div>
+	</div>
 	<div class="card-body">
 
 		<table class="list">
