@@ -5,7 +5,7 @@
 <div class="card m-2">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 수강 관리  >  수강 목록 조회  >  수강 수정 페이지</div>
+	 <div> > 수강 관리  > <span class="submenu-title">수강 목록 조회</span>  > 수강 수정 페이지</div>
 	</div>
 	<div class="card-body">
 	

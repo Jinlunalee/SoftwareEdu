@@ -6,7 +6,8 @@
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 만족도 조사 관리 > 만족도 조사 양식 목록 조회 > 만족도 조사 양식 상세 조회 </div>
+	 <div> > 만족도 조사 관리 > <span class="submenu-title">만족도 조사 양식 목록 조회</span>
+	  > 만족도 조사 양식 상세 조회 </div>
 	</div>
 	<div class="card-body">
 		<div class="survey_top"><span class="survey_id">만족도 조사 아이디1</span><span class="survey_title">만족도 조사 제목</span></div>

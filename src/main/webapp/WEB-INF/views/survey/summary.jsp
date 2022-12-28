@@ -19,7 +19,10 @@ const changeSelect = function(value){
 </script>
 
 <div class="card m-2">
-	<div class="card-header">만족도 조사 관리 > 만족도 조사 통계</div>
+	<div class="card-header">
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	<div>만족도 조사 관리 > <span class="submenu-title">만족도 조사 통계</span></div>
+	</div>
 	<div class="card-body">
 	
 	<c:url value="/servey/insert" var="actionURL" scope="page"/>

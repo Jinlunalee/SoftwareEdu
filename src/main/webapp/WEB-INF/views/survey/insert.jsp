@@ -19,10 +19,9 @@ const changeSelect = function(value){
 </script>
 
 <div class="card m-2">
-<<<<<<< HEAD
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 만족도 조사 관리 > 만족도 조사 양식 목록 조회 > 만족도 조사 양식 상세 조회 </div>
+	 <div> > 만족도 조사 관리 > <span class="submenu-title">만족도 조사 양식 추가</span></div>
 	</div>
 	<div class="card-body">
 	
