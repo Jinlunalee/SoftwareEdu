@@ -20,7 +20,7 @@ const submenuNames = {
 
 const submenuLinks = {
     course : [
-        'http://localhost:8080/SoftwareEducation/course/regularlist', '', '', '', 'http://localhost:8080/SoftwareEducation/course/courselist', 'http://localhost:8080/SoftwareEducation/course/insert'
+        'http://localhost/SoftwareEducation/course/regularlist', '', '', '', 'http://localhost:8080/SoftwareEducation/course/courselist', 'http://localhost:8080/SoftwareEducation/course/insert'
     ],
     student : [
         'http://localhost:8080/SoftwareEducation/student/list', ''

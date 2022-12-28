@@ -3,7 +3,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="card m-2">
-	<div class="card-header">
+	<div class="card-header"> 
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	 <div> > </div>
+	</div>
 		Home
 	</div>
 	<div class="card-body">

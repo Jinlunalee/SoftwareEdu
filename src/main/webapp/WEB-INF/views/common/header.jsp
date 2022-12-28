@@ -30,7 +30,7 @@
 			const arrLink = submenuLinks[tag];
 			
 			for(let i=0, max = arrName.length; i<max; i++) {
-				let line = '<div class="submenu-items aside-bar-submenu-' + i + '"><a href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
+				let line = '<div class="submenu-items aside-bar-submenu-' + i + '" onclick="Click(this)"><a href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
 				$(".aside-bar-submenu").append(line);
 			};
 		});
@@ -58,7 +58,7 @@
 			</nav>
 			<div class="flex-grow-1 container-fluid">
 				<div class="row h-100">
-					<div class="col-md-3 p-3" style="background-color:#053863;">
+					<div class="col-md-3" style="border: 1px solid #e8e8e8;padding: 0 !important;">
 						<div class="h-100 d-flex flex-column">
 							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
 								<%@ include file="/WEB-INF/views/common/menu.jsp" %>

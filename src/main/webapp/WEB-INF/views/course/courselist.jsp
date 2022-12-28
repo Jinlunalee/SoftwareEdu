@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/course.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 
-<div class="card m-2" style="border:none">
+<div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 	 <div> > 강좌 관리 > 개설 강좌 정보 확인 > 개설 강좌 목록 </div>

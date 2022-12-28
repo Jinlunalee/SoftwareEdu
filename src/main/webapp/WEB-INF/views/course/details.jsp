@@ -6,7 +6,10 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 
 <div class="card m-2">
-	<div class="card-header"> 강좌 관리 > 개설 강좌 정보 확인 > 개설 강좌 상세 페이지</div>
+	<div class="card-header"> 
+	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+	 <div> > 강좌 관리 > 개설 강좌 정보 확인 > 개설 강좌 상세 페이지</div>
+	</div>
 	<div class="card-body">
 		<div class="sub_title">정기과정명 | 웹 개발자 과정 </div>
 		<div class="course_title">
@@ -15,6 +18,12 @@
 		</div>
 		<!-- 교육 상세내용 -->
 		<table class="list">
+			<colgroup>
+				<col width="50%">
+				<col width="15%">
+				<col width="35%">
+			</colgroup>
+			
 			<thead>
 			<tr>
 				<th></th>
