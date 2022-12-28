@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link rel="stylesheet" href="<c:url value='/resources/css/survey/insert.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/survey/details.css'/>" />
 <script type="text/javascript">
 const changeSelect = function(value){
 	if(value == "add") {
@@ -41,8 +41,7 @@ const changeSelect = function(value){
 					</c:forEach>
 					<option value="add">새 문항 추가</option>
 				</select>
-				<!-- select option의 value가 "add"일 때 if문 실행 -->
-				<div class="surveyqn-input-1"></div>
+				<span class="surveyqn-input-1"></span>
 			</div>
 			<div class="answer">
 				<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
@@ -61,7 +60,6 @@ const changeSelect = function(value){
 					</c:forEach>
 					<option value="add">새 문항 추가</option>
 				</select>
-				<!-- select option의 value가 "add"일 때 if문 실행 -->
 				<div class="surveyqn-input-2"></div>
 			</div>
 			<div class="answer">
@@ -81,7 +79,6 @@ const changeSelect = function(value){
 					</c:forEach>
 					<option value="add">새 문항 추가</option>
 				</select>
-				<!-- select option의 value가 "add"일 때 if문 실행 -->
 				<div class="surveyqn-input-3"></div>
 			</div>
 			<div class="answer">
@@ -101,7 +98,6 @@ const changeSelect = function(value){
 					</c:forEach>
 					<option value="add">새 문항 추가</option>
 				</select>
-				<!-- select option의 value가 "add"일 때 if문 실행 -->
 				<div class="surveyqn-input-4"></div>
 			</div>
 			<div class="answer">
@@ -121,7 +117,6 @@ const changeSelect = function(value){
 					</c:forEach>
 					<option value="add">새 문항 추가</option>
 				</select>
-				<!-- select option의 value가 "add"일 때 if문 실행 -->
 				<div class="surveyqn-input-5"></div>
 			</div>
 			<div class="answer">
@@ -132,10 +127,11 @@ const changeSelect = function(value){
 				<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
 			</div>
 		</ul>
-		</div>
+		
 		<div class="buttons">
 			<button type="button" class="button-item survey-btn" onclick="location.href ='<c:url value="/survey/update"/>'">저장</button>
 			<button type="button" class="button-item delete-btn" onclick="history.back();">뒤로가기</button>
+		</div>
 		</div>
 	</form:form>
 	</div>
