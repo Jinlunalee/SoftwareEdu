@@ -16,9 +16,7 @@
 				class="input-button" type="button" value="검색">
 		</div>
 		
-
-		
-		
+	
 		
 		<div class="view">
 			<select class="select-view">
@@ -45,7 +43,7 @@
 					<td>1900.01.01</td>
 					<td><form>
 						<button type="button" class="btn btn-secondary">수정</button>
-							<button type="button" class="btn btn-secondary">삭제</button>
+							<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
 						</form></td>
 				</tr>
 			</c:forEach>
