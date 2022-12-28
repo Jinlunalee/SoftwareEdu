@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+
+
 <style>
 .main-first-row { text-align: center;}
 .main-first-row img {
@@ -16,7 +20,7 @@ position: relative;
  } 
 
  #second_image {
- width: 160px;
+ width: 180px; 
  height: 100px; 
  margin: 10px;
 
@@ -34,16 +38,18 @@ position: relative;
 justify-content: center;
 }
 .level-content-item{
-width: 160px;
+width: 180px; 
 height: 299px;
 
 }
  a{
   text-align: center;
   }
+  
 </style>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>	
+
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
  
 <div class="main-first-row"> 

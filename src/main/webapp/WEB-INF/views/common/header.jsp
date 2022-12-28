@@ -69,7 +69,7 @@
 			</nav>
 			<div class="flex-grow-1 container-fluid">
 				<div class="row h-100">
-					<div class="col-md-3" style="border: 1px solid #e8e8e8;padding: 0 !important;">
+					<div class="col-md-2" style="border: 1px solid #e8e8e8;padding: 0 !important;">
 						<div class="h-100 d-flex flex-column">
 							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
 								<%@ include file="/WEB-INF/views/common/menu.jsp" %>
@@ -77,6 +77,6 @@
 						</div>
 					</div>
 	
-					<div class="col-md-9 p-3">
+					<div class="col-md-10 p-3">
 						<div class=" h-100 d-flex flex-column">
 							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px">
