@@ -10,7 +10,7 @@
 	<div>수강생 관리 > <span class="submenu-title">수강생 정보 확인</span></div>
 	</div>
 	<div class="card-body">
-		<div class="search-box">
+		<div class="search">
 			 <select class="select-box">
 				<option>수강생 명</option>
 				<option>수강생 아이디</option>
