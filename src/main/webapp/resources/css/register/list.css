@@ -55,6 +55,7 @@
 .view {
 	text-align: end;
     margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .list {
@@ -107,6 +108,10 @@ tr {
   	list-style: none;
 }
 
+#rgt-stu {
+	text-align: center;
+}
+
 .input-time {
 	width: 70px;
 	height: 40px;
@@ -117,7 +122,7 @@ tr {
 
 .input-time-btn {
 	width: 50px;
-	height: 40px;
+	height: 30px;
 	position: relative;
 	left: 210px;
     bottom: 53px;

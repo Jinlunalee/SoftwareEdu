@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
 <h6 class="text-white">
 	<div class="aside-bar">
 		<div class="aside-bar-menu">
@@ -37,3 +36,4 @@
 		init();
 		
 	</script>
+</h6>

@@ -12,8 +12,8 @@
 
 		<table class="list">
 			<tr>
-				<th>만족도 조사 아이디</th>
-				<th>만족도 조사 제목</th>
+				<th class="table-header-left">만족도 조사 아이디</th>
+				<th class="table-header-right">만족도 조사 제목</th>
 			</tr>
 			<c:forEach var="i" begin="1" end="5" step="1">
 				<tr>

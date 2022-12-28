@@ -41,14 +41,14 @@
 		<div class="d-flex flex-column vh-100" style="background-color:#e8eff5;">
 			<nav class="navbar navbar-white bg-white text-white font-weight-bold">
 				<a class="navbar-brand" href="<c:url value='/'/>"> 
-					<img src="${pageContext.request.contextPath}/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top">
+					<img class="logo-header" src="${pageContext.request.contextPath}/resources/images/logo_header.png">
 					소프트웨어 교육 연수원 - 관리시스템
 				</a>
-				<div class="nav-list" id="menu-1" onclick='clickMenu(this)'><a href="<c:url value='/course/regularlist'/>">강좌 관리</a></div>
-				<div class="nav-list" id="menu-2" onclick='clickMenu(this)'><a href="<c:url value='/register/list'/>">수강 관리</a></div>						
-				<div class="nav-list" id="menu-3" onclick='clickMenu(this)'><a href="<c:url value='/student/list'/>">수강생 관리</a></div>
-				<div class="nav-list" id="menu-4" onclick='clickMenu(this)'><a href="<c:url value='/survey/list'/>">강의 만족도 조사 관리</a></div>
-				<div class="nav-list" id="menu-5" onclick='clickMenu(this)'><a href="<c:url value='/data/download'/>">연계 자료 다운</a></div>
+				<div class="nav-list"><a href="<c:url value='/course/regularlist'/>">강좌 관리</a></div>
+				<div class="nav-list"><a href="<c:url value='/student/list'/>">수강생 관리</a></div>						
+				<div class="nav-list"><a href="<c:url value='/register/list'/>">수강 관리</a></div>
+				<div class="nav-list"><a href="<c:url value='/survey/list'/>">강의 만족도 조사 관리</a></div>
+				<div class="nav-list"><a href="<c:url value='/data/download'/>">연계 자료 다운</a></div>
 				<div>
 					<div>
 						<a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그인</a>

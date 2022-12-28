@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
     font-family: 'G-sans';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -9,30 +10,24 @@
 * {
 	font-family: 'G-sans', "sans-serif";
 }
+
 .error {
 	color: red;
 	font-size: 0.7rem;
 }
+
 .navbar {
 	height: 120px;
 }
 .navbar-brand {
-    letter-spacing: -2px;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
+	letter-spacing: -2px;
 }
 .navbar-brand:hover {
 	color: black;
     text-decoration: none;
 }
-.logo-header {
-	width:30px;
-	height: 30px;
-	margin-right: 5px;
-}
 .nav-list {
-	font-size: 26px;
+	font-size: 33px;
     letter-spacing: -4px;
 }
 .nav-btn {
@@ -53,15 +48,8 @@ a{
 
 a:hover{
     text-decoration: none;
+
 }
 .card {
 	border:none;
-}
-.card-header {
-	display:flex;
-}
-.home_img {
-	width: 20px;
-    height: 20px;
-    margin-right: 7px;
 }

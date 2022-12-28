@@ -3,10 +3,8 @@
 .a {
 	list-style: none;
 	width: 50%;
-}
-
-.a li {
-	
+	margin-top: 20px;
+	display: flex;
 }
 
 .wrap {
@@ -31,17 +29,42 @@
 }
 
 input {
-    background-color: #003964;
-    border: none;
-    width: 100px;
-    height: 45px;
-    border-radius: 8px;
-    color: #fff;
-    margin-left: 7px;
-    margin-right: 7px;
+	background-color: #003964;
+	width: 100px;
+	height: 45px;
+	line-height: 47px;
+	border-radius: 8px;
+	color: #fff;
 }
 
 .submit-btn {
 	text-align: center;
 	margin: 10px;
+}
+
+.a li::before {
+	content: url("https://www.moe.go.kr/img/2021Renewal/common/list_bul_1.svg");
+}
+
+.a li {
+	width: 400px;
+}
+
+.user-info {
+	position: relative;
+	left: 120px;
+}
+
+.user-info2 {
+	position: relative;
+}
+
+.course-info {
+	position: relative;
+	left: 40px;
+}
+
+.course-info2 {
+	position: relative;
+	left: 10px;
 }

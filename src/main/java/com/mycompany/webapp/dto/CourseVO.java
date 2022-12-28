@@ -9,4 +9,5 @@ import lombok.ToString;
 @ToString
 public class CourseVO {
 	private String courseId;
+
 }
