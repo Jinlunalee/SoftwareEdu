@@ -9,14 +9,20 @@ const changeQuestionNumber = function(value) {
 	let questionNumber = value;
 	console.log(questionNumber);
 	const questionSet = document.querySelector("#question-set-3");
-	console.log(questionSet);
  		$("#new-questions").empty();
 	for(let i=0, max = questionNumber; i<max-3; i++){
 		$(questionSet).clone().appendTo('#new-questions');
-		console.log("hello");
+		/* 아이디명 바꾸기 */
+		changeId(i);
 	};
 };
-
+/* 아이디 명 바꾸기 */
+function changeId(i) {
+	let number = (i+4).toString();
+	console.log(number);
+	document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
+	console.log(document.querySelector("#new-questions .question-set-3"));
+};
 /* 문항 추가 버튼 클릭하여 추가 */
 /* $(document).ready(function () {
 	console.log("ready");
@@ -29,27 +35,24 @@ const changeQuestionNumber = function(value) {
 }); */
 
 /* 문항 종류 dropdown에서  "새 문항 입력" select시 입력 창 출력 */
-const changeSelect = function(value){
+const changeQuestionAddSelect = (value, event) => {
 	if(value == "add") {
 		console.log("새 문항 추가");
 /* 		document.querySelector(".surveyqn-input").innerHTML = `<input type="text" placeholder="새로운 문항을 입력해주세요."`; */
-/* 		버튼이 있는 클래스 찾아서 변수에 저장
-		해당 클래스 하단에 추가하기 */
-		document.querySelector();
+/* 		셀렉트가 있는 아이디 찾아서 변수에 저장
+		해당 셀렉트 하단에 추가하기 */
+		let eventParentElement = (event.target.parentElement);
+		console.log(event.target.parentElement);
 		const addInput = '<input class="surveyqn-inputbox" type="text" placeholder="새로운 문항을 입력해주세요.">';
-		$(".surveyqn-input").append(addInput);
+		$(eventParentElement).append(addInput);
 	} else {
 		console.log("기존 항목 선택");
-/* 		버튼이 있는 클래스 찾아서 변수에 저장
-		해당 클래스 추가 내용 지우기 */ 
+/* 		셀렉트가 있는 아이디 찾아서 변수에 저장
+		해당 셀렉트 추가 내용 지우기 */ 
 		$(".surveyqn-input *").remove();
 	}
 }
-
-
 </script>
-
-
 <div class="card m-2">
 
 	<div class="card-header"> 
@@ -88,7 +91,7 @@ const changeSelect = function(value){
 						<div id="question-set-${i}" class="question-set">
 							<div class="question">
 								<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-								<select class="serveyqn-select" name="serveyqn-select" onchange="changeSelect(this.value)">
+								<select class="serveyqn-select" name="serveyqn-select" onchange="changeQuestionAddSelect(this.value)">
 									<c:forEach var="i" begin="1" end="5" step="1">
 										<option value="${surveyqn}">문항${i}</option>
 									</c:forEach>
