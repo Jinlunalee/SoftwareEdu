@@ -143,6 +143,7 @@ tr {
 
 .paging {
 	list-style: none;
+	display: inline;
 }
 
 .paging li {
@@ -151,6 +152,7 @@ tr {
 }
 
 #paging {
+	display: inline;
 	position: relative;
-	left: 370px;
+	left: 40%;
 }
