@@ -1,21 +1,16 @@
 @charset "UTF-8";
+
 @font-face {
     font-family: 'G-sans';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-<<<<<<< HEAD
 
 * {
 	font-family: 'G-sans', "sans-serif";
 }
-=======
->>>>>>> refs/remotes/origin/master
 
-* {
-	font-family: 'G-sans', "sans-serif";
-}
 .error {
 	color: red;
 	font-size: 0.7rem;
@@ -53,10 +48,8 @@ a{
 
 a:hover{
     text-decoration: none;
-<<<<<<< HEAD
+
 }
 .card {
 	border:none;
-=======
->>>>>>> refs/remotes/origin/master
 }

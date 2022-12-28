@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/insert.css'/>" />
 <div class="card m-2">
-	<div class="card-header">수강 관리 > 새 수강 추가</div>
+	<div class="card-header">수강 관리  >  수강 추가</div>
 	<div class="card-body">
 	
 	<div class="wrap">
@@ -19,14 +19,18 @@
 	</div>
 	
 	<ul class="a">
-	<li>회원 아이디 | STDT001</li>
-	<li>이름 | 홍길동</li>
-	<li>생년월일 | 1990-01-01</li>
-	<li>성별 | 남성</li>
-	<li>이메일 | stdt001@gmail.com</li>
-	<li>전화번호 | 010-6832-1973</li>
-	<li>주소 | 서울시 종로구 혜화동</li>
-	<li>직위 | 학생</li>
+	<div class="user-info">
+	<li> 회원 아이디 | STDT001</li>
+	<li> 이름 | 홍길동</li>
+	<li> 생년월일 | 1990-01-01</li>
+	<li> 성별 | 남성</li>
+	</div>
+	<div class="user-info2">
+	<li> 이메일 | stdt001@gmail.com</li>
+	<li> 전화번호 | 010-6832-1973</li>
+	<li> 주소 | 서울시 종로구 혜화동</li>
+	<li> 직위 | 학생</li>
+	</div>
 	</ul>
 	</div>
 	
@@ -34,7 +38,13 @@
 	<div class="wrap">
 	<div class="search-box">
 	<div class="search-content">
-	강좌 명 &nbsp; &nbsp;
+	과정 명 &nbsp; &nbsp;
+	<select>
+		<option>RGCR0001  |  국비지원과정</option>
+		<option>RGCR0002  |  전문가과정</option>
+		<option>RGCR0003  |  기초과정</option>	
+	</select>
+	&nbsp; &nbsp; 강좌 명 &nbsp; &nbsp;
 	<select>
 	<option>CRSE0001  |  자바 초급</option>
 	<option>CRSE0002  |  자바 중급</option>
@@ -44,20 +54,23 @@
 	</div>
 	
 	<ul class="a">
-	<li>강좌 아이디 | CRSE0001</li>
-	<li>강좌 명 | 자바 초급</li>
-	<li>강좌 기간 | 2020-01-05 ~ 2020-04-04</li>
-	<li>강좌 시간 | 09:00 ~ 20:00</li>
-	<li>모집 기간 | 2020-01-01 ~ 2020-01-04</li>
-	<li>모집 인원 | 30</li>
-	<li>모집 상태 | 신청 중</li>
+	<div class="course-info">
+	<li> 강좌 아이디 | CRSE0001</li>
+	<li> 강좌 명 | 자바 초급</li>
+	<li> 강좌 기간 | 2020-01-05 ~ 2020-04-04</li>
+	<li> 강좌 시간 | 09:00 ~ 20:00</li>
+	</div>
+	<div class="course-info2">
+	<li> 모집 기간 | 2020-01-01 ~ 2020-01-04</li>
+	<li> 모집 인원 | 30</li>
+	<li> 모집 상태 | 신청 중</li>
+	</div>
 	</ul>
 	</div>
 	<div class="submit-btn">
 	<input type="button" value="저 장">
-	<input type="reset" value="취 소">
+	<input type="reset" onclick="location.href='<c:url value="/register/list"/>'" value="취 소">
 	</div>
 	</div>
 </div>
-
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>

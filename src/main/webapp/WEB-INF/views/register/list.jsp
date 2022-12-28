@@ -42,7 +42,8 @@
 					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
 					<div class="modal">
 						<div class="modal-content">
-							<li>홍길동 | STDT001</li>
+							<li id="rgt-stu">홍길동  |  STDT001</li>
+							<br>
 							<li>강좌명 | 자바 초급</li>
 							<li>강의 시간 | 09:00 ~ 18:00</li>
 							<li>교육 기간 | 2022.12.19 ~ 2022.12.22</li>
@@ -57,7 +58,7 @@
 							<input type="button" value="승인">
 						</form></td>
 					<td><form>
-							<input type="button" value="반려">
+							<input type="button" value="반려" onclick="ret()">
 						</form></td>
 				</tr>
 			</c:forEach>
@@ -69,7 +70,7 @@
 					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
 					<div class="modal">
 						<div class="modal-content">
-							<li>홍길동 | STDT001
+							<li>홍길동 | STDT001 | 수강 중
 							<li>강좌명 : 자바 초급</li>
 							<li>강의 시간 : 09:00 ~ 18:00</li>
 							<li>교육 기간 : 2022.12.19 ~ 2022.12.22</li>
@@ -84,7 +85,7 @@
 							<input type="button" onclick="location.href='<c:url value="/register/update/1"/>'" value="수정">
 						</form></td>
 					<td><form>
-							<input type="button" onclick="del()" value="삭 제">
+							<input type="button" onclick="del()" value="삭제">
 							
 						</form></td>
 				</tr>
@@ -127,6 +128,14 @@
 	function del() {
 		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
 			console.log('삭제')
+		} else {
+			console.log('취소')
+		}
+	}
+	
+	function ret() {
+		if(confirm('수강을 반려하시겠습니까?') == true) {
+			console.log('반려')
 		} else {
 			console.log('취소')
 		}
