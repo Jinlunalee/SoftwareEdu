@@ -17,7 +17,7 @@
 	display: flex;
 }
 .filebox .insert_FileUpload {
-	width: 70%;
+	width: 60%;
     display: inline-block;
 }
 .filebox label { /*label 스타일 변경*/
