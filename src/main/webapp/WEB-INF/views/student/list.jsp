@@ -10,7 +10,7 @@
 	<div>수강생 관리 > <span class="submenu-title">수강생 정보 확인</span></div>
 	</div>
 	<div class="card-body">
-		<div class="search-box">
+		<div class="search">
 			 <select class="select-box">
 				<option>수강생 명</option>
 				<option>수강생 아이디</option>
@@ -19,9 +19,7 @@
 				class="input-button" type="button" value="검색">
 		</div>
 		
-
-		
-		
+	
 		
 		<div class="view">
 			<select class="select-view">
@@ -48,7 +46,7 @@
 					<td>1900.01.01</td>
 					<td><form>
 						<button type="button" class="btn btn-secondary">수정</button>
-							<button type="button" class="btn btn-secondary">삭제</button>
+							<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
 						</form></td>
 				</tr>
 			</c:forEach>

@@ -59,7 +59,7 @@
 				<div class="nav-list"><a href="<c:url value='/student/list'/>">수강생 관리</a></div>						
 				<div class="nav-list"><a href="<c:url value='/register/list'/>">수강 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/survey/list'/>">강의 만족도 조사 관리</a></div>
-				<div class="nav-list"><a href="<c:url value='/data/download'/>">연계 자료 다운</a></div>
+				<div class="nav-list"><a href="<c:url value='/data/download'/>">연계 자료 관리</a></div>
 				<div>
 					<div>
 						<a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그인</a>
@@ -69,14 +69,14 @@
 			</nav>
 			<div class="flex-grow-1 container-fluid">
 				<div class="row h-100">
-					<div class="col-md-3" style="border: 1px solid #e8e8e8;padding: 0 !important;">
+					<div class="col-md-2" style="border: 1px solid #e8e8e8;padding: 0 !important;">
 						<div class="h-100 d-flex flex-column">
-							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
+							<div class="flex-grow-1" style="height: 0px; overflow-y: auto;">
 								<%@ include file="/WEB-INF/views/common/menu.jsp" %>
 							</div>
 						</div>
 					</div>
 	
-					<div class="col-md-9 p-3">
+					<div class="col-md-10 p-3">
 						<div class=" h-100 d-flex flex-column">
-							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px">
+							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px; overflow-x: hidden!important;">

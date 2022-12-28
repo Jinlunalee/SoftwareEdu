@@ -121,9 +121,5 @@
 		}
 	}
 	
-	const inputImage = document.querySelector(".detail_img");
-	inputImage.addEventListener("change",e => {
-		previewImg(e.tar)
-	});
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

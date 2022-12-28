@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/course.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
@@ -54,10 +55,11 @@
             </tr>
            </thead>
 		  <tbody>
+		  <c:forEach var="i" begin="1" end="10" step="1">
             <tr>
-              <td>??1</td>
-              <td class="title">
-				<span class="txt">
+              <td>${i}</td>
+              <td>
+				<span>
 					<a href="<c:url value='/course/details/1'/>">강좌명 한번에끝내는 JS 상세보기로 연결 </a>
 		        </span>
               </td>
@@ -66,13 +68,28 @@
               <td>300,000</td>
               <td>신청중(15/30)</td>
               <td>
-              	<div class="submit-btn" style="display:flex;">
-					<input type="button" onclick="location.href='<c:url value="/course/update/1"/>'" value="수정">
-			        <input type="button" onclick="del()" value="삭제">
+              	<div>
+              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/course/update/1"/>'">수정</button>
+					<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
 				</div> 
               </td>
              </tr>
+          </c:forEach>
 		</table>
+		<div id="paging">
+		<ul class="paging">
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+			<li><a href="#">8</a></li>
+			<li><a href="#">9</a></li>
+			<li><a href="#">10</a></li>
+		</ul>
+		</div>
 	</div>
 </div>
 

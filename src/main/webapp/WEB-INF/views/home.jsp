@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+
+
 <style>
 .main-first-row { text-align: center;}
 .main-first-row img {
@@ -16,7 +20,7 @@ position: relative;
  } 
 
  #second_image {
- width: 160px;
+ width: 180px; 
  height: 100px; 
  margin: 10px;
 
@@ -34,24 +38,26 @@ position: relative;
 justify-content: center;
 }
 .level-content-item{
-width: 160px;
+width: 180px; 
 height: 299px;
 
 }
  a{
   text-align: center;
   }
+  
 </style>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>	
+
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
  
 <div class="main-first-row"> 
 	<div class="main-first-row-btn first-btn"><a href="<c:url value='/course/regularlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_course.jpg'/>" style="display:block;" />강좌</a></div>
-	<div class="main-first-row-btn second-btn"><a href="<c:url value='/register/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
-	<div class="main-first-row-btn third-btn"><a href="<c:url value='/student/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
+	<div class="main-first-row-btn second-btn"><a href="<c:url value='/student/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
+	<div class="main-first-row-btn third-btn"><a href="<c:url value='/register/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
 	<div class="main-first-row-btn fourth-btn"><a href="<c:url value='/survey/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_survey.jpg'/>" style="display:block;" />강의 만족도 조사</a></div>
-	<div class="main-first-row-btn fifth-btn"><a href="<c:url value='/data/download'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_download.png'/>" style="display:block;" />연계 자료 조회</a></div>
+	<div class="main-first-row-btn fifth-btn"><a href="<c:url value='/data/download'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_download.png'/>" style="display:block;" />연계 자료</a></div>
 </div>
  
 <div class="main-second-row">
@@ -73,6 +79,5 @@ height: 299px;
 	</div>
 </div>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
+<%@ include file="/WEB-INF/views/common/footer-main.jsp" %>
 

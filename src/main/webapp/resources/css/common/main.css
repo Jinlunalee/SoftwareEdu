@@ -50,8 +50,11 @@
 	display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;	
-    margin:  20px;
-    margin-bottom: 25px;
+
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
 }
 .main-second-row-btn {
 	width: 680px;
@@ -74,8 +77,8 @@
 
 }
 .main-second-row-btn .level-content-item{
-	width: 160px;
-    height: 299px;
+	width: 180px;  
+    height: 299px; 
     background-color: #D9D9D9;
     border-radius: 25px;
     display: flex;

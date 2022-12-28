@@ -40,14 +40,16 @@ table.list thead tr {
 table.list tbody tr {
     height: 60px;
 }
+table.list tbody td {
+	font-size: 11px;
+}
 table.list td {
     position: relative;
-    font-size: 1rem;
     color: #666;
     padding: 20px 12px;
 }
 table.list td.title {
-    font-size: 1.063rem;
+	font-size:1em;
     color: #333;
     text-align: left;
     position: relative;

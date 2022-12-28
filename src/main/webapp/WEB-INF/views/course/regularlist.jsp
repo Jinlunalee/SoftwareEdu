@@ -47,14 +47,16 @@
             </tr>
            </thead>
 		  <tbody>
+		  <c:forEach var="i" begin="1" end="5" step="1">
             <tr>
-              <td>??5</td>
+              <td>${i}</td>
               <td class="title" >
 				<span class="txt">
-					<a href="<c:url value='/course/courselist'/>">과정명 강좌보기로 연결 </a>
+					<a href="<c:url value='/course/courselist'/>">앱 개발자 과정</a>
 		        </span>
               </td>
              </tr>
+          </c:forEach>
 		</table>
 	</div>
 </div>
