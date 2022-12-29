@@ -2,12 +2,13 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
 
 <div class="card m-2">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	<div>수강생 관리 > <span class="submenu-title">수강생 정보 확인</span></div>
+	<div>> 수강생 관리 > <span class="submenu-title">수강생 정보 확인</span></div>
 	</div>
 	<div class="card-body">
 		<div class="search">
@@ -46,7 +47,7 @@
 					<td>1900.01.01</td>
 					<td><form>
 						<button type="button" class="btn btn-secondary">수정</button>
-							<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
+						<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
 						</form></td>
 				</tr>
 			</c:forEach>
@@ -72,6 +73,23 @@
 		}
 	}
 	</script>
+
+
+		<div id="paging">
+		<ul class="paging">
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+			<li><a href="#">8</a></li>
+			<li><a href="#">9</a></li>
+			<li><a href="#">10</a></li>
+		</ul>
+		</div>	
+	
 </div>
 
 

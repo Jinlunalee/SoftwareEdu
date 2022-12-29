@@ -5,10 +5,7 @@
 
 <style>
 .main-first-row { text-align: center;}
-.main-first-row img {
-width: 100px;
-height: 100px;
-}
+
  #first_image {
 position: relative;
  top: -51px;
@@ -17,6 +14,8 @@ position: relative;
  left: 60px; 
  border-radius: 50%;
  border: 4px solid white;
+ width: 100px;
+height: 100px;
  } 
 
  #second_image {
