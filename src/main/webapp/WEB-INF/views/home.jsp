@@ -18,6 +18,40 @@ position: relative;
 height: 100px;
  } 
 
+
+#first_image_forth {
+    position: relative;
+    top: -51px;
+    right: 80px;
+    bottom: 300px;
+    left: 103px;
+    border-radius: 50%;
+    border: 4px solid white;
+    width: 100px;
+    height: 100px;
+}
+
+
+#first_image_fifth {
+    position: relative;
+    top: -51px;
+    right: 80px;
+    bottom: 300px;
+    left: 63px;
+    border-radius: 50%;
+    border: 4px solid white;
+    width: 100px;
+    height: 100px;
+}
+
+
+
+
+
+
+
+
+
  #second_image {
  width: 180px; 
  height: 100px; 
@@ -55,8 +89,8 @@ height: 299px;
 	<div class="main-first-row-btn first-btn"><a href="<c:url value='/course/regularlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_course.jpg'/>" style="display:block;" />강좌</a></div>
 	<div class="main-first-row-btn second-btn"><a href="<c:url value='/student/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
 	<div class="main-first-row-btn third-btn"><a href="<c:url value='/register/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
-	<div class="main-first-row-btn fourth-btn"><a href="<c:url value='/survey/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_survey.jpg'/>" style="display:block;" />강의 만족도 조사</a></div>
-	<div class="main-first-row-btn fifth-btn"><a href="<c:url value='/data/download'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_download.png'/>" style="display:block;" />연계 자료</a></div>
+	<div class="main-first-row-btn fourth-btn"><a href="<c:url value='/survey/list'/>"><img id="first_image_forth" src="<c:url value='/resources/images/main/main_survey.jpg'/>" style="display:block;" />강의 만족도 조사</a></div>
+	<div class="main-first-row-btn fifth-btn"><a href="<c:url value='/data/download'/>"><img id="first_image_fifth" src="<c:url value='/resources/images/main/main_download.png'/>" style="display:block;" />연계 자료</a></div>
 </div>
  
 <div class="main-second-row">
