@@ -12,23 +12,26 @@
 	</div>
 	<div class="card-body">
 		<div class="sub_title">정기과정명 | 
-			<select class="select_course" name="정기과정명">
-				<option>선택안함</option>
-				<option>앱 개발자 과정</option>
-				<option>웹 개발자 과정</option>
+			<select class="select_course" name="정기과정명" onchange="courseChange(this)">
+				<option>과정명</option>
+				<option value="a">앱 개발자 과정</option>
+				<option value="b">웹 개발자 과정</option>
 			</select> 
 		</div>
 		<form class="insert_form" action="<c:url value=''/>" method="post" enctype="multipart/form-data">
 			<div class="course_title">
 			<div class="main_title"><b>강좌명</b> 
-				<select>
-					<option>한번에 끝내는 JavaScript</option>
-					<option>두번만에 끝내는 JS</option>
-					<option>세번만에 끝낸 JS</option>
+				<select class="select_smallCourse">
+					<option>강좌선택</option>
 				</select>
 			</div>
 			</div>
 			<table class="list">
+				<colgroup>
+					<col width="40%">
+					<col width="15%">
+					<col width="45%">
+				</colgroup>
 			<thead>
 			<tr>
 				<th></th>
@@ -37,7 +40,7 @@
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<img class="detail_img"/>
+					<img class="detail_img" src="<c:url value='/resources/images/course/no_image.png'/>"/>
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> <input type="date"> ~ <input type="date"> </td>
@@ -105,6 +108,7 @@
 			  $(".insert_FileUpload").val(fileName);
 		});
 	});
+	
 	function previewImg(input) {
 		if(input.files && input.files[0]){
 			var reader = new FileReader();
@@ -114,6 +118,25 @@
 			reader.readAsDataURL(input.files[0]);
 		}else {
 			document.querySelector('.detail_img').src = "";
+		}
+	}
+	
+	function courseChange(e){
+		var course1 = ["AI가 대신 만들어주는 앱", "자바 기초"];
+		var course2 = ["한번에 끝내는 HTML","두번만에 끝내는 CSS", "세번해도 안끝나는 JS"];
+		var target = document.querySelector(".select_smallCourse");
+		
+		if(e.value == "a") var d = course1;
+		else if(e.value == "b") var d = course2;
+		
+		target.options.length = 0;
+		
+		for(x in d) {
+			var opt = document.createElement("option");
+			console.log(d[x]);
+			opt.value = d[x];
+			opt.innerHTML = d[x];
+			target.appendChild(opt);
 		}
 	}
 	</script>

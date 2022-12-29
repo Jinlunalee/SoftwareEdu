@@ -65,3 +65,18 @@ a:hover{
     height: 20px;
     margin-right: 7px;
 }
+.footer {
+	background-color: #fff;
+	padding: 0 30px;
+    white-space: pre-line;
+    display: flex;
+}
+.footer_title {
+	margin-right: 60px;
+}
+.footer_content {
+	font-size: 0.875rem;
+    color: #878787;
+    line-height: 25px;
+    font-weight: 500;
+}

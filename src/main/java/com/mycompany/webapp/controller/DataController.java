@@ -12,7 +12,7 @@ public class DataController {
 	@RequestMapping(value="/data/download", method=RequestMethod.GET)
 	public String downloadData(Model model) {
 		model.addAttribute("menu", "data");
-		model.addAttribute("menuKOR", "연계 자료 다운");
+		model.addAttribute("menuKOR", "연계 자료 관리");
 		return "data/download";
 	}
 }

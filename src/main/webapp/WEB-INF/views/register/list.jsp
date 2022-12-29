@@ -58,10 +58,10 @@
 					<td>12</td>
 					<td><img src="<c:url value='/resources/images/register/waiting.png'/>" /></td>
 					<td><form>
-							<input type="button" value="승인">
+							<input class="btn btn-secondary"type="button" value="승인">
 						</form></td>
 					<td><form>
-							<input type="button" value="반려" onclick="ret()">
+							<input class="btn btn-secondary"type="button" value="반려" onclick="ret()">
 						</form></td>
 				</tr>
 			</c:forEach>
@@ -85,10 +85,10 @@
 					<td>12</td>
 					<td><img src="<c:url value='/resources/images/register/complete.png'/>" /></td>
 					<td><form>
-							<input type="button" onclick="location.href='<c:url value="/register/update/1"/>'" value="수정">
+							<input class="btn btn-secondary" type="button" onclick="location.href='<c:url value="/register/update/1"/>'" value="수정">
 						</form></td>
 					<td><form>
-							<input type="button" onclick="del()" value="삭제">
+							<input class="btn btn-secondary" type="button" onclick="del()" value="삭제">
 							
 						</form></td>
 				</tr>
@@ -100,6 +100,7 @@
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
+		<div class="test">
 		<div id="paging">
 		<ul class="paging">
 			<li><a href="#">1</a></li>
@@ -113,6 +114,7 @@
 			<li><a href="#">9</a></li>
 			<li><a href="#">10</a></li>
 		</ul>
+		</div>
 		</div>
 	</div>
 	
