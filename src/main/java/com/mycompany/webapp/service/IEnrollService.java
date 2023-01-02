@@ -1,5 +1,16 @@
 package com.mycompany.webapp.service;
 
-public interface IEnrollService {
+import java.util.List;
 
+import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.StudentVO;
+import com.mycompany.webapp.dto.SubjectVO;
+
+public interface IEnrollService {
+	List<EnrollVO> getEnrollList();
+	EnrollVO getEnrollDetails();
+	StudentVO getName(String studentId);
+	SubjectVO getSubjectName(String subjectId);
+	EnrollVO getOpenDetails();
+	int getProgress(String studentId);
 }

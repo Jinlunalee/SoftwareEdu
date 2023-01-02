@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class StudentVO {
 	private String studentId;
+	private String name;
 
 
 }
