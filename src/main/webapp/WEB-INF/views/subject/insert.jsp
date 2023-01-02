@@ -4,6 +4,28 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/survey/details.css'/>" />
+<script type="text/javascript">
+/* 문항 개수를 입력 받아 추가 */
+const changeQuestionNumber = function(value) {
+	let questionNumber = value;
+	console.log(questionNumber);
+	const questionSet = document.querySelector("#question-set-3");
+ 		$("#new-questions").empty();
+	for(let i=0, max = questionNumber; i<max-3; i++){
+		$(questionSet).clone().appendTo('#new-questions');
+		/* 아이디명 바꾸기 */
+		changeId(i);
+	};
+};
+/* 아이디 명 바꾸기 */
+function changeId(i) {
+	let number = (i+4).toString();
+	console.log(number);
+	document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
+	console.log(document.querySelector("#new-questions .question-set-3"));
+};
+</script>
 
 <div class="card m-2">
 	<div class="card-header"> 
@@ -63,30 +85,24 @@
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td> <input type="text"> 원 <br>
-					<c:if test="${1 eq 1}">* 교육비 지원을 받는 강좌입니다.</c:if>
+				<td> <input type="text"> 원  <c:if test="${1 eq 1}"><span class="support">     ※교육비 지원을 받는 강좌입니다.</span></c:if>
 				</td>
 			</tr>
 			<tr>
-				<td> 만족도 조사 아아디</td>
-				<td>
-					<select>
-						<option>SVEW0001</option>
-						<option>SVEW0002</option>
-						<option>SVEW0003</option>
-					</select>
-				</td>
+				<td> 만족도 조사</td>
+				<td> <button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;">입력</button> </td>
 			</tr>
 			<tr>
 				<td> 첨부파일 </td>
 				<td class="filebox"> 
 					<input class="insert_FileUpload" placeholder="업로드 파일의 최대 크기는 50MB 입니다.">
-					<label for="file">파일찾기</label>
+					<span><label for="file">파일찾기</label></span>
 					<input type="file" name="file" id="file" onchange="previewImg(this);">
 				</td>
 			</tr>
 			</tbody>
 		</table>
+		
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
 			<p class="txt"> <textarea cols="60" rows="10"></textarea></p>
@@ -95,6 +111,64 @@
 			<input type="submit" value="저장">
 		</div>
 		</form>
+				
+		<!-- modal -->
+		<div class="modal">
+			<div class="modal_body">
+				<div class="content-grid">
+					<c:url value="/servey/insert" var="actionURL" scope="page"/>
+					<form:form class="" action="${actionURL}" modelAttribute="survey">
+						<div class="survey_top">
+							<div class="question-number">
+								<div class="question-number-upper-row">
+									<div class="question-number-text">문항 개수</div>
+									<span><select class="question-number-dropdown" onchange="changeQuestionNumber(this.value)">
+										<option value=3>3개</option>
+										<option value=4>4개</option>
+										<option value=5>5개</option>
+										<option value=6>6개</option>
+										<option value=7>7개</option>
+										<option value=8>8개</option>
+										<option value=9>9개</option>
+										<option value=10>10개</option>
+									</select></span>
+								</div>
+								<div class="question-number-lower-row">
+									<div class="question-number-warning">*문항은 최소 3개부터 최대 10개까지 입력 가능합니다.</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="survey_content">
+							<div id="question-grid" class="question-grid">
+								<c:forEach var="i" begin="1" end="3" step="1">
+									<div id="question-set-${i}" class="question-set">
+										<div class="question">
+											<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
+											<input class="serveyqn-input" type="text" placeholder="문항을 입력해주세요.">
+											<span id="surveyqn-input" class="serveyqn-input"></span>
+										</div>
+										<div class="answer">
+											<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
+											<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
+											<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
+											<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족
+											<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<div id="new-questions" class="new-questions"></div>
+						</div>
+			<!-- 			<span id="spantag" class="spantag"><button type="button" class="add-question-btn" value="문항 추가" id="btnAction">+문항 추가</button></span> -->
+						<div class="buttons">
+							<button type="button" class="button-item survey-btn" onclick="location.href ='<c:url value="/survey/update"/>'">저장</button>
+							<button type="button" class="button-item delete-btn" onclick="history.back();">뒤로가기</button>
+						</div>
+					</form:form>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 </div>
@@ -139,5 +213,28 @@
 			target.appendChild(opt);
 		}
 	}
+	
+	/* 모달창 */
+	const body = document.querySelector('body');
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+    btnOpenPopup.addEventListener('click', () => {
+      modal.classList.toggle('show');
+
+      if (modal.classList.contains('show')) {
+        body.style.overflow = 'hidden';
+      }
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.classList.toggle('show');
+
+        if (!modal.classList.contains('show')) {
+          body.style.overflow = 'auto';
+        }
+      }
+    });
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

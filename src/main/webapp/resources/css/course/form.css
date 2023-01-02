@@ -3,12 +3,20 @@
 .select_course {
 	border: none;
 }
+
+.insert_form td{
+	height:35px;
+}
 .insert_form input, select:not(.select_course) {
-	height: 55px;
+	height: 35px;
     border-radius: 8px;
-    margin: 5px 10px;
+    margin: 5px 10px 5px 0;
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
+}
+.insert_form td .support {
+	color: cornflowerblue;
+    font-size: 12px;
 }
 .insert_form textarea {
 	border-color: #e8e8e8;
@@ -17,17 +25,15 @@
 	display: flex;
 }
 .filebox .insert_FileUpload {
-	width: 60%;
+	width: 67%;
     display: inline-block;
 }
 .filebox label { /*label 스타일 변경*/
 	display: inline-block;
     background-color: #1A54CD;
     color: #FFFFFF;
-    padding: 10px 20px;
+    padding: 5px 10px;
     cursor: pointer;
-    height: 55px;
-    margin: 5px 10px;
     vertical-align: middle;
 }
 .filebox input[type="file"] { /* 기존 디자인 없애기 */
