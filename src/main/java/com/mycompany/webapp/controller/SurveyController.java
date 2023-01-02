@@ -9,22 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mycompany.webapp.dto.SurveyVO;
 
 @Controller
+@RequestMapping("/survey")
 public class SurveyController {
 	
 	//테스트
-	@RequestMapping("/survey/details/")
+	@RequestMapping("/details/")
 	public String detailsTest(Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/details";
 	}
-	@RequestMapping("/survey/update/")
+	@RequestMapping("/update/")
 	public String updateTest(Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/update";
 	}
-	@RequestMapping("/survey/summary")
+	@RequestMapping("/summary")
 	public String summaryTest(Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
@@ -32,7 +33,7 @@ public class SurveyController {
 	}
 	
 	//목록조회
-	@RequestMapping(value="/survey/list", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String getSurveyList(Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
@@ -40,7 +41,7 @@ public class SurveyController {
 	}
 
 	//상세조회
-	@RequestMapping(value="/survey/details/{surveyId}", method=RequestMethod.GET)
+	@RequestMapping(value="/details/{surveyId}", method=RequestMethod.GET)
 	public String getSurveyDetails(@PathVariable String surveyId, Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
@@ -48,40 +49,40 @@ public class SurveyController {
 	}
 
 	//수정
-	@RequestMapping(value="/survey/update/{surveyId}", method=RequestMethod.GET)
+	@RequestMapping(value="/update/{surveyId}", method=RequestMethod.GET)
 	public String updateSurvey(@PathVariable String surveyId, Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/update";
 	}
 
-	@RequestMapping(value="/survey/update", method=RequestMethod.POST)
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updateSurvey(SurveyVO surveyVo) {
 		return "redirect:/survey/details"+surveyVo.getSurveyId();
 	}
 
 	//삭제
-	@RequestMapping(value="/survey/delete/{surveyId}", method=RequestMethod.POST)
-	public String deleteSurvey(@PathVariable String courseId ,SurveyVO surveyVo) {
+	@RequestMapping(value="/delete/{surveyId}", method=RequestMethod.POST)
+	public String deleteSurvey(@PathVariable String subjectId ,SurveyVO surveyVo) {
 		return "redirect:/survey/list";
 	}
 
 	//입력
-	@RequestMapping(value="/survey/insert", method=RequestMethod.GET)
+	@RequestMapping(value="/insert", method=RequestMethod.GET)
 	public String insertSurvey(Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/insert";
 	}
 
-	@RequestMapping(value="/survey/insert", method=RequestMethod.POST)
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertSurvey(SurveyVO surveyVo) {
 		return "redirect:/survey/details"+surveyVo.getSurveyId();
 	}
 	
 	//통계
-	@RequestMapping(value="/survey/summary/{courseId}", method=RequestMethod.GET)
-	public String getSurveySummary(@PathVariable String courseId, Model model) {
+	@RequestMapping(value="/summary/{subjectId}", method=RequestMethod.GET)
+	public String getSurveySummary(@PathVariable String subjectId, Model model) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
 		return "survey/summary";
