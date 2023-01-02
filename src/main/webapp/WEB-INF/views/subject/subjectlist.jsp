@@ -28,7 +28,7 @@
 		<!-- list top -->
 		<div class="list_top">
 		  <div class="cnt">
-			전체목록 <b class="basic_txt_color"> ?? </b>개, 
+			전체목록 <b class="basic_txt_color">${subListSize}</b>개, 
 			페이지<b class="basic_txt_color"> ?? </b> / ??
 		  </div>
 		  <div class="view">

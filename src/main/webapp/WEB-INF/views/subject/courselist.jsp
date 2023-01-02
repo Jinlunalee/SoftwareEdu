@@ -21,11 +21,10 @@
           <input class="input-button" type="button" value="검색">
         </div>
         
-                
 		<!-- list top -->
 		<div class="list_top">
 		  <div class="cnt">
-			전체목록 <b class="basic_txt_color"> ?? </b>개, 
+			전체목록 <b class="basic_txt_color">${courseListSize}</b>개, 
 			페이지<b class="basic_txt_color"> ?? </b> / ??
 		  </div>
 		  <div class="view">
@@ -65,11 +64,16 @@
               <td>${course.recruitStartDay}~${course.recruitEndDay}</td>
               <td>${course.cost}</td>
               <td>${course.state}</td>
+              <td>
+              	<div>
+              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+					<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
+				</div> 
+              </td>
              </tr>
           </c:forEach>
           </c:if>
 		</table>
-		<a href="<c:url value='/subject/subjectlist'/>">웹 개발자</a>
 	</div>
 </div>
 
