@@ -6,8 +6,8 @@
 img {
     vertical-align: middle;
     border-style: none;
-    width: 35px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 </style> 
 
@@ -18,9 +18,9 @@ img {
 	</div>
 	<div class="card-body">
 		<br>
-	<button type="button" class="btn btn-outline-secondary">연계 정보 출력  <img src="<c:url value='/resources/images/download.png'/>" /></button>
-	
+	<button type="button" class="btn btn-outline-secondary">연계 정보 출력  <img src="<c:url value='/resources/images/check.png'/>" /></button>	
 	</div>
+		
 </div>
 
 
