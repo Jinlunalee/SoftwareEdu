@@ -1,3 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosa.myapp.dao.ISubjectRepository"></mapper>
+<mapper namespace="com.mycompany.webapp.dao.ISubjectRepository">
+	
+	<select id="selectCourseList" resultType="SubjectVO">
+		select 
+			open.course_id as "courseId", 
+			course_title as "courseTitle",
+			min(start_day) over (partition by open.course_id) as "startDay",
+    		max(end_day) over (partition by open.course_id) as "endDay",
+			recruit_start_day as "recruitStartDay", 
+			recruit_end_day as "recruitEndDay",
+			state_cd as "state"
+		from open 
+				left join subject on open.subject_id = subject.subject_id
+        		left join course on open.course_id = course.course_id
+	</select>
+	
+	<select id="selectSubjectList" resultType="SubjectVO">
+		select 
+			open.subject_id as "subjectId", 
+			subject_title as "subjectTitle",
+			open.course_id as "courseId", 
+			course.course_title as "courseTitle", 
+			start_day as "startDay", 
+			end_day as "endDay", 
+			recruit_start_day as "recruitStartDay", 
+			recruit_end_day as "recruitEndDay", 
+			subject.cost as "cost", 
+			state_cd as "state",
+			comn_cd_title as "comnCdTitle"
+		from open 
+				left join subject on open.subject_id = subject.subject_id
+        		left join course on open.course_id = course.course_id
+        		left join common_code on open.state_cd = common_code.comn_cd_title
+	</select>
+
+
+</mapper>

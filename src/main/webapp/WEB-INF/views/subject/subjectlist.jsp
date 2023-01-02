@@ -45,28 +45,31 @@
 		<table class="list">
 		  <thead>
             <tr>
-                <th>강좌 아이디</th>
+                <th>강좌아이디</th>
+                <th>과정명</th>
                 <th>강좌명</th>
                 <th>연수기간</th>
-                <th>신청일</th>
+                <th>신청기간</th>
                 <th>교육비</th>
                 <th>상태</th>
                 <th></th>
             </tr>
            </thead>
 		  <tbody>
-		  <c:forEach var="i" begin="1" end="10" step="1">
+		  <c:if test="${subListSize ne 0}">
+		  <c:forEach var="subject" items="${subjectList}">
             <tr>
-              <td>${i}</td>
+              <td>${subject.subjectId}</td>
+              <td>${subject.courseTitle}</td>
               <td>
 				<span>
-					<a href="<c:url value='/subject/details/1'/>">강좌명 한번에끝내는 JS 상세보기로 연결 </a>
+					<a href="<c:url value='/subject/details/1'/>">${subject.subjectTitle}</a>
 		        </span>
               </td>
-              <td>2022.12.15 ~ 2023.1.14</td>
-              <td>2022.10.14 ~ 2022.11.14</td>
-              <td>300,000</td>
-              <td>신청중(15/30)</td>
+              <td>${subject.startDay}~${subject.endDay}</td>
+              <td>${subject.recruitStartDay}~${subject.recruitEndDay}</td>
+              <td>${subject.cost}</td>
+              <td>${subject.comnCdTitle}</td>
               <td>
               	<div>
               		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
@@ -75,6 +78,7 @@
               </td>
              </tr>
           </c:forEach>
+          </c:if>
 		</table>
 		<div id="paging">
 		<ul class="paging">
