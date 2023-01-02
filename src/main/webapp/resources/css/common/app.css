@@ -14,7 +14,7 @@
 	font-size: 0.7rem;
 }
 .navbar {
-	height: 120px;
+	height: 80px;
 }
 .navbar-brand {
     letter-spacing: -2px;
@@ -77,6 +77,6 @@ a:hover{
 .footer_content {
 	font-size: 0.875rem;
     color: #878787;
-    line-height: 25px;
+    line-height: 17px;
     font-weight: 500;
 }
