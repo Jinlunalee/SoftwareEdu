@@ -24,7 +24,6 @@ public class SubjectVO {
 	private String recruitEndDay; //모집 마감 일자
 	private int recruitPeople; // 모집인원
 	private String state; //강좌 상태 코드
-	private String delYN; //삭제 여부
 	
 	private String comnCdTitle; //공통코드명
 	
