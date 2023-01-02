@@ -40,7 +40,7 @@
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<img class="detail_img" src="<c:url value='/resources/images/course/no_image.png'/>"/>
+					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> <input type="date"> ~ <input type="date"> </td>
@@ -88,7 +88,7 @@
 			</tbody>
 		</table>
 		<div class="course_intro">
-			<img src="<c:url value='/resources/images/course/course_intro.png'/>"/>
+			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
 			<p class="txt"> <textarea cols="60" rows="10"></textarea></p>
 		</div>
 		<div class="submit-btn">

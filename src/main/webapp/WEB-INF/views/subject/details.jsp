@@ -32,7 +32,7 @@
 			<tbody>
 			<tr>
 				<td rowspan="7">
-					<img class="detail_img" src="<c:url value='/resources/images/course/AI.jpg'/>"/>
+					<img class="detail_img" src="<c:url value='/resources/images/subject/AI.jpg'/>"/>
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> 2022.12.15~2023.01.14(30일)</td>
@@ -68,13 +68,13 @@
 		
 		<!-- 교육 소개 -->
 		<div class="course_intro">
-			<img src="<c:url value='/resources/images/course/course_intro.png'/>"/>
+			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
 			<p class="txt">강좌에 대한 간략한 소개 </p>
 		</div>
 		
 		<!-- button -->
 		<div class="submit-btn">
-			<input type="button" onclick="location.href='<c:url value="/course/update/1"/>'" value="수정">
+			<input type="button" onclick="location.href='<c:url value="/subject/update/1"/>'" value="수정">
 	        <input type="button" onclick="del()" value="삭제">
 		</div> 
 	</div>
