@@ -60,7 +60,7 @@
               <td>${i}</td>
               <td>
 				<span>
-					<a href="<c:url value='/course/details/1'/>">강좌명 한번에끝내는 JS 상세보기로 연결 </a>
+					<a href="<c:url value='/subject/details/1'/>">강좌명 한번에끝내는 JS 상세보기로 연결 </a>
 		        </span>
               </td>
               <td>2022.12.15 ~ 2023.1.14</td>
@@ -69,7 +69,7 @@
               <td>신청중(15/30)</td>
               <td>
               	<div>
-              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/course/update/1"/>'">수정</button>
+              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
 					<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
 				</div> 
               </td>
