@@ -20,7 +20,6 @@ img {
 		<br>
 	<button type="button" class="btn btn-outline-secondary">연계 정보 출력  <img src="<c:url value='/resources/images/check.png'/>" /></button>	
 	</div>
-		
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
