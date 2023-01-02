@@ -1,13 +1,13 @@
 // Controller에서 model 담아서 뷰로 보내기
 
 const submenuNames = {
-    course : [
+    subject : [
         '과정 정보 확인', '과정 추가', '강좌 정보 확인', '강좌 등록', '개설 강좌 목록', '강좌 개설'
     ],
     student : [
         '수강생 정보 확인', '수강생 추가'
     ],
-    register : [
+    enroll : [
         '수강 목록 조회', '수강 추가'
     ],
     survey : [
@@ -19,14 +19,14 @@ const submenuNames = {
 }
 
 const submenuLinks = {
-    course : [
-        'http://localhost/SoftwareEducation/course/regularlist', '', '', '', 'http://localhost/SoftwareEducation/course/courselist', 'http://localhost/SoftwareEducation/course/insert'
+    subject : [
+        'http://localhost/SoftwareEducation/subject/courselist', '', '', '', 'http://localhost/SoftwareEducation/subject/subjectlist', 'http://localhost/SoftwareEducation/subject/insert'
     ],
     student : [
         'http://localhost/SoftwareEducation/student/list', ''
     ],
-    register : [
-        'http://localhost/SoftwareEducation/register/list', 'http://localhost/SoftwareEducation/register/insert'
+    enroll : [
+        'http://localhost/SoftwareEducation/enroll/list', 'http://localhost/SoftwareEducation/enroll/insert'
     ],
     survey : [
         'http://localhost/SoftwareEducation/survey/list', 'http://localhost/SoftwareEducation/survey/insert', 'http://localhost/SoftwareEducation/survey/summary'
