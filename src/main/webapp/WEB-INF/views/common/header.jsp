@@ -62,7 +62,7 @@
 				<div class="nav-list"><a href="<c:url value='/data/download'/>">연계 자료 관리</a></div>
 				<div>
 					<div>
-						<a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그인</a>
+
 						<a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그아웃</a>
 					</div>
 				</div>
