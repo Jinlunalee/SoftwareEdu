@@ -61,11 +61,24 @@
 			</tr>
 			<tr>
 				<td> 만족도 조사</td>
-				<td> <button class="btn-open-popup btn btn-secondary">조회</button> </td>
+				<td> <button class="btn-open-popup btn btn-secondary" style="height:35px;">조회</button> </td>
 			</tr>
 			</tbody>
 		</table>
 		
+		<!-- 교육 소개 -->
+		<div class="course_intro">
+			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
+			<p class="txt">강좌에 대한 간략한 소개 </p>
+		</div>
+		
+		<!-- button -->
+		<div class="submit-btn">
+			<input type="button" onclick="location.href='<c:url value="/subject/update/1"/>'" value="수정">
+	        <input type="button" onclick="del()" value="삭제">
+		</div> 
+		
+		<!-- modal -->
 		<div class="modal">
 			<div class="modal_body">
 			<div class="content-grid">
@@ -88,19 +101,8 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		</div>		
 		
-		<!-- 교육 소개 -->
-		<div class="course_intro">
-			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt">강좌에 대한 간략한 소개 </p>
-		</div>
-		
-		<!-- button -->
-		<div class="submit-btn">
-			<input type="button" onclick="location.href='<c:url value="/subject/update/1"/>'" value="수정">
-	        <input type="button" onclick="del()" value="삭제">
-		</div> 
 	</div>
 </div>
 

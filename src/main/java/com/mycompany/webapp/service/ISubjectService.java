@@ -1,5 +1,10 @@
 package com.mycompany.webapp.service;
 
-public interface ISubjectService {
+import java.util.List;
 
+import com.mycompany.webapp.dto.SubjectVO;
+
+public interface ISubjectService {
+	List<SubjectVO> selectCourseList();
+	List<SubjectVO> selectSubjectList();
 }

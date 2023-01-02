@@ -1,5 +1,10 @@
 package com.mycompany.webapp.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,16 +13,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.ISubjectService;
 
 @Controller
 @RequestMapping("/subject")
 public class SubjectController {
-
+	static final Logger logger = LoggerFactory.getLogger(SubjectController.class);
+	
+	@Autowired
+	ISubjectService subjectService;
+	
 	//과정목록조회
 	@RequestMapping(value="/courselist", method=RequestMethod.GET)
 	public String getCourseList(Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		List<SubjectVO> courseList = subjectService.selectCourseList();
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("courseListSize", courseList.size());
+		logger.info("courseList: " + courseList);
+		
 		return "subject/courselist";
 	}
 
@@ -26,6 +42,12 @@ public class SubjectController {
 	public String getSubjectList(Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		List<SubjectVO> subjectList = subjectService.selectSubjectList();
+		model.addAttribute("subjectList", subjectList);
+		model.addAttribute("subListSize", subjectList.size());
+		logger.info("subjectlist: " + subjectList);
+		
 		return "subject/subjectlist";
 	}
 
