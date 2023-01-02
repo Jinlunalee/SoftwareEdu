@@ -91,13 +91,7 @@ const changeQuestionAddSelect = (value, event) => {
 						<div id="question-set-${i}" class="question-set">
 							<div class="question">
 								<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-								<select class="serveyqn-select" name="serveyqn-select" onchange="changeQuestionAddSelect(this.value)">
-									<c:forEach var="i" begin="1" end="5" step="1">
-										<option value="${surveyqn}">문항${i}</option>
-									</c:forEach>
-									<option value="add">새 문항 입력</option>
-								</select>
-								<span id="surveyqn-input" class="serveyqn-input"></span>
+								<input class="serveyqn-input" type="text" placeholder="문항을 입력해주세요.">
 							</div>
 							<div class="answer">
 								<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
@@ -116,8 +110,8 @@ const changeQuestionAddSelect = (value, event) => {
 				<button type="button" class="button-item survey-btn" onclick="location.href ='<c:url value="/survey/update"/>'">저장</button>
 				<button type="button" class="button-item delete-btn" onclick="history.back();">뒤로가기</button>
 			</div>
+			</form:form>
 			</div>
-		</form:form>
 		</div>
 	</div>
 	

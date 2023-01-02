@@ -21,11 +21,10 @@
           <input class="input-button" type="button" value="검색">
         </div>
         
-                
 		<!-- list top -->
 		<div class="list_top">
 		  <div class="cnt">
-			전체목록 <b class="basic_txt_color"> ?? </b>개, 
+			전체목록 <b class="basic_txt_color">${courseListSize}</b>개, 
 			페이지<b class="basic_txt_color"> ?? </b> / ??
 		  </div>
 		  <div class="view">
@@ -42,21 +41,38 @@
 		<table class="list">
 		  <thead>
             <tr>
-                <th>번호</th>
-                <th>제목</th>
+                <th>과정아이디</th>
+                <th>과정명</th>
+                <th>연수기간</th>
+                <th>신청기간</th>
+                <th>교육비</th>
+                <th>상태</th>
+                <th></th>
             </tr>
            </thead>
 		  <tbody>
-		  <c:forEach var="i" begin="1" end="5" step="1">
+		  <c:if test="${courseListSize ne 0}">
+		  <c:forEach var="course" items="${courseList}">
             <tr>
-              <td>${i}</td>
-              <td class="title" >
-				<span class="txt">
-					<a href="<c:url value='/course/courselist'/>">앱 개발자 과정</a>
+              <td>${course.courseId}</td>
+              <td>
+				<span>
+					<a href="<c:url value='/subject/details/1'/>">${course.courseTitle}</a>
 		        </span>
+              </td>
+              <td>${course.startDay}~${course.endDay}</td>
+              <td>${course.recruitStartDay}~${course.recruitEndDay}</td>
+              <td>${course.cost}</td>
+              <td>${course.state}</td>
+              <td>
+              	<div>
+              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+					<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
+				</div> 
               </td>
              </tr>
           </c:forEach>
+          </c:if>
 		</table>
 	</div>
 </div>
