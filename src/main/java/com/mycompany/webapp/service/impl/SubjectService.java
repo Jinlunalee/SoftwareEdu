@@ -2,9 +2,9 @@ package com.mycompany.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.mycompany.webapp.service.ICourseService;
+import com.mycompany.webapp.service.ISubjectService;
 
 @Service
-public class CourseService implements ICourseService{
+public class SubjectService implements ISubjectService{
 
 }

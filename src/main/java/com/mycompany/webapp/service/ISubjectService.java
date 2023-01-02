@@ -1,5 +1,5 @@
 package com.mycompany.webapp.service;
 
-public interface IRegisterService {
+public interface ISubjectService {
 
 }
