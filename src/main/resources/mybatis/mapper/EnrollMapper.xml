@@ -3,53 +3,49 @@
 <mapper namespace="com.mycompany.webapp.dao.IEnrollRepository">
 
 	<select id="getEnrollList" resultType="EnrollVO">
-		SELECT enroll_id AS "enrollId", 
-		subject_id AS "subjectId", 
-		subject_seq AS "subjectSeq", 
-		student_id AS "studentId", 
-		state_cd AS "stateCd", 
-		complete_hours AS "completeHours", 
-		reg_id AS "regId", 
-		reg_dt AS "regDt", 
-		modi_id AS "modiId", 
-		modi_dt AS "modiDt", 
-		del_yn AS "delYn", 
-		cancel_rs_cd AS "cancelRsCd", 
-		cancel_rs_etc AS "cancelRsEtc" 
-		FROM ENROLL
+		SELECT  enroll_id AS "enrollId", 
+				e.subject_id AS "subjectId", 
+				e.subject_seq AS "subjectSeq", 
+				e.student_id AS "studentId", 
+				name AS "name", 
+        		s.subject_title AS "subjectTitle", 
+				e.state_cd AS "stateCd", 
+				complete_hours AS "completeHours", 
+				e.reg_id AS "regId", 
+				e.reg_dt AS "regDt", 
+				e.modi_id AS "modiId", 
+				e.modi_dt AS "modiDt", 
+				e.del_yn AS "delYn", 
+				cancel_rs_etc AS "cancelRsEtc", 
+        		start_time AS "startTime", 
+        		end_time AS "endTime", 
+        		start_day AS "startDay", 
+        		end_day AS "endDay" 
+		FROM ENROLL e 
+		LEFT OUTER JOIN STUDENT t 
+		ON e.student_id = t.student_id 
+        LEFT OUTER JOIN OPEN o 
+        ON e.subject_id = o.subject_id 
+        LEFT OUTER JOIN SUBJECT s 
+        ON e.subject_id = s.subject_id
 	</select>
 	
-	<select id="getEnrollDetails" resultType="EnrollVO">
-		SELECT enroll_id AS "enrollId", 
-		subject_id AS "subjectId", 
-		subject_seq AS "subjectSeq", 
-		student_id AS "studentId", 
-		state_cd AS "stateCd", 
-		complete_hours AS "completeHours", 
-		reg_id AS "regId", 
-		reg_dt AS "regDt", 
-		modi_id AS "modiId", 
-		modi_dt AS "modiDt", 
-		del_yn AS "delYn", 
-		cancel_rs_cd AS "cancelRsCd", 
-		cancel_rs_etc AS "cancelRsEtc" 
-		FROM ENROLL
+	<select id="getEnrollListBySubject" resultType="EnrollVO">
+		SELECT  e.subject_id AS "subjectId", 
+				e.subject_seq AS "subjectSeq", 
+        		s.subject_title AS "subjectTitle" 
+		FROM ENROLL e 
+		LEFT OUTER JOIN SUBJECT s 
+		ON e.subject_id = s.subject_id
 	</select>
 	
 	<select id="getSubjectDetails" parameterType = "String" resultType="SubjectVO">
-		SELECT s.subject_id AS "subjectId", 
-				subject_title AS "subjectTitle", 
-				support_yn AS "supportYn", 
-				cat_cd AS "catCd", 
-				days AS "days", 
-				hours AS "hours", 
-				level_cd AS "levelCd", 
-				level_etc AS "levelEtc", 
-				cost AS "cost", 
-				reg_year AS "regYear" 
-		FROM SUBJECT s
-		LEFT OUTER JOIN ENROLL e 
-		ON s.subject_id = e.subject_id and e.subject_id = #{subjectId}
+		SELECT e.subject_id AS "subjectId", 
+		e.subject_seq AS "subjectSeq",
+        s.subject_title AS "subjectTitle"
+FROM ENROLL e 
+LEFT OUTER JOIN SUBJECT s 
+ON e.subject_id = s.subject_id
 	</select>
 	
 	<select id="getName" parameterType="String" resultType="StudentVO">
@@ -79,6 +75,16 @@
 		WHERE e.subject_id = s.subject_id AND e.student_id = #{studentId}
 	</select>
 
-
+	<update id="clickCancel" parameterType="map">
+		UPDATE ENROLL 
+		SET state_cd = 'ERL05' 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="clickDelete" parameterType="map">
+		UPDATE ENROLL 
+		SET del_yn = 'Y' 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
 
 </mapper>

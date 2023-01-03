@@ -22,8 +22,8 @@ public class EnrollService implements IEnrollService{
 		return enrollRepository.getEnrollList();
 	}
 	
-	public EnrollVO getEnrollDetails() {
-		return enrollRepository.getEnrollDetails();
+	public List<EnrollVO> getEnrollListBySubject() {
+		return enrollRepository.getEnrollListBySubject();
 	}
 	
 	public StudentVO getName(String studentId) {
@@ -40,6 +40,14 @@ public class EnrollService implements IEnrollService{
 	
 	public int getProgress(String studentId) {
 		return enrollRepository.getProgress(studentId);
+	}
+	
+	public void clickCancel(String studentId, String subjectId, String subjectSeq) {
+		enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
+	}
+	
+	public void clickDelete(String studentId, String subjectId, String subjectSeq) {
+		enrollRepository.clickDelete(studentId, subjectId, subjectSeq);
 	}
 
 }
