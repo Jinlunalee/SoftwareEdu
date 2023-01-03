@@ -12,10 +12,11 @@ public class SubjectVO {
 	private String subjectId; //강좌아이디
 	private String subjectTitle; //강좌명
 	private int subjectSeq; //강좌시퀀스
-	private String support; //지원여부
+	private String supportYn; //지원여부
 	private int days; //일수
 	private int hours; //시수
 	private String level; //레벨
+	private String levelEtc; // 기타
 	private int cost; //수강비
 	
 	private String courseId; //과정 아이디
@@ -32,13 +33,4 @@ public class SubjectVO {
 	private String state; //강좌 상태 코드
 	
 	private String comnCdTitle; //공통코드명
-	
-	private String supprotYn;
-	private String catCd;
-	private int days;
-	private int hours;
-	private String levelCd;
-	private String levelEtc;
-	private int regYear;
-	
-}
+	}
