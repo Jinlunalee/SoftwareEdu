@@ -63,7 +63,7 @@
               <td>${subject.courseTitle}</td>
               <td>
 				<span>
-					<a href="<c:url value='/subject/details/1'/>">${subject.subjectTitle}</a>
+					<a href="<c:url value='/subject/details/${subject.subjectId}'/>">${subject.subjectTitle}</a>
 		        </span>
               </td>
               <td>${subject.startDay}~${subject.endDay}</td>

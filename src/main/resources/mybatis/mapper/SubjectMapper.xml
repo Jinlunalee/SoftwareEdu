@@ -36,5 +36,23 @@
         		left join common_code on open.state_cd = common_code.comn_cd_title
 	</select>
 
-
+	<select id="selectSubjectDetails" parameterType="String" resultType="SubjectVO">
+		select 
+			open.subject_id as "subjectId", 
+			subject_title as "subjectTitle",
+			open.course_id as "courseId", 
+			course.course_title as "courseTitle", 
+			start_day as "startDay", 
+			end_day as "endDay", 
+			recruit_start_day as "recruitStartDay", 
+			recruit_end_day as "recruitEndDay", 
+			subject.cost as "cost", 
+			state_cd as "state",
+			comn_cd_title as "comnCdTitle"
+		from open 
+				left join subject on open.subject_id = subject.subject_id
+        		left join course on open.course_id = course.course_id
+        		left join common_code on open.state_cd = common_code.comn_cd_title
+        where open.subject_id = #{subjectId}
+	</select>
 </mapper>

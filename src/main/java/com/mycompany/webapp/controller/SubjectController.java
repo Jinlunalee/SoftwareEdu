@@ -56,6 +56,10 @@ public class SubjectController {
 	public String getSubjectDetails(@PathVariable String subjectId, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		SubjectVO subject = subjectService.selectSubjectDetails(subjectId);
+		model.addAttribute("subject", subject);
+		
 		return "subject/details";
 	}
 

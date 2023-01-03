@@ -12,10 +12,9 @@ public interface ISubjectRepository {
 	List<SubjectVO> selectCourseList(); // 개설 과정 목록 조회
 	List<SubjectVO> selectSubjectList(); // 개설 강좌 목록 조회
 	
+	SubjectVO selectSubjectDetails(String subjectId); // 강좌 상세보기
+	
 	int insertSubject(SubjectVO subject); // 과정/강좌 개설
 	int insertFileData(UploadfileVO file); // 과정/강좌 개설 첨부파일
-	
-	SubjectVO selectSubjectDetails(String subjectId); // 과정/강좌 상세보기
-	
 	
 }

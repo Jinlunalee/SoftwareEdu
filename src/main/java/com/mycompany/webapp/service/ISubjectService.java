@@ -7,4 +7,7 @@ import com.mycompany.webapp.dto.SubjectVO;
 public interface ISubjectService {
 	List<SubjectVO> selectCourseList();
 	List<SubjectVO> selectSubjectList();
+	
+	SubjectVO selectSubjectDetails(String subjectId);
+	
 }
