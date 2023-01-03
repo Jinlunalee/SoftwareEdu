@@ -39,12 +39,13 @@
 				<th>승인</th>
 				<th></th>
 			</tr>
-			<c:forEach var="ls" items="${list}">
+			<c:forEach var="ls" items="${list}" varStatus="vs">
+				
 				<tr>
 					<td>${ls.regDt}</td>
 					<td>${ls.name}</td>
 					<td><a class="modal-open">${ls.subjectTitle}</a></td>
-					<div class="modal">
+					<div id="${vs.index}"class="modal">
 						<div class="modal-content">
 							<li style="text-align: center;">${ls.name}  |  ${ls.studentId}  |  <c:if test="${ls.stateCd eq 'ERL06'}"> 수강 완료</c:if></li>
 							<br>
@@ -52,7 +53,12 @@
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
 							<li>진도율 | ${ratio} %</li>
-							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
+							<li>현재 완료 시간  |  ${ls.completeHours}</li>
+							완료한 시간 입력
+							<form action="/">
+							<input class="input-time" type="number">
+							<input class="input-time-btn" type="submit" value="입력">
+							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
@@ -104,6 +110,8 @@
 					</c:if>
 					</td>
 				</tr>
+				
+				
 				
 				
 				
