@@ -2,34 +2,34 @@
 
 const submenuNames = {
     subject : [
-        '과정 정보 확인', '과정 추가', '강좌 정보 확인', '강좌 등록', '개설 강좌 목록', '강좌 개설'
+        '과정 목록', '강좌 목록', '개설 과정 목록', '개설 강좌 목록'
     ],
     student : [
-        '수강생 정보 확인', '수강생 추가'
+        '수강생 목록'
     ],
     enroll : [
-        '수강 목록 조회', '수강 추가'
+        '수강 목록'
     ],
     survey : [
-        '만족도 조사 양식 목록 조회', '만족도 조사 양식 추가', '만족도 조사 통계'
+        '만족도 조사 통계'
     ],
     data : [
-        '연계 자료 관리'
+        '연계 자료 조회'
     ]
 }
 
 const submenuLinks = {
     subject : [
-        'http://localhost/SoftwareEducation/subject/courselist', '', '', '', 'http://localhost/SoftwareEducation/subject/subjectlist', 'http://localhost/SoftwareEducation/subject/insert'
+        '', '', 'http://localhost/SoftwareEducation/subject/courselist', 'http://localhost/SoftwareEducation/subject/subjectlist'
     ],
     student : [
         'http://localhost/SoftwareEducation/student/list', ''
     ],
     enroll : [
-        'http://localhost/SoftwareEducation/enroll/list', 'http://localhost/SoftwareEducation/enroll/insert'
+        'http://localhost/SoftwareEducation/enroll/list'
     ],
     survey : [
-        'http://localhost/SoftwareEducation/survey/list', 'http://localhost/SoftwareEducation/survey/insert', 'http://localhost/SoftwareEducation/survey/summary'
+        'http://localhost/SoftwareEducation/survey/summary'
     ],
     data : [
         'http://localhost/SoftwareEducation/data/download'

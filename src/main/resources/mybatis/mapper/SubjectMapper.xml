@@ -3,11 +3,12 @@
 <mapper namespace="com.mycompany.webapp.dao.ISubjectRepository">
 	
 	<select id="selectCourseList" resultType="SubjectVO">
-		select 
+		select DISTINCT
 			open.course_id as "courseId", 
 			course_title as "courseTitle",
 			min(start_day) over (partition by open.course_id) as "startDay",
     		max(end_day) over (partition by open.course_id) as "endDay",
+			sum(cost) over (partition by open.course_id) as "cost",
 			recruit_start_day as "recruitStartDay", 
 			recruit_end_day as "recruitEndDay",
 			state_cd as "state"

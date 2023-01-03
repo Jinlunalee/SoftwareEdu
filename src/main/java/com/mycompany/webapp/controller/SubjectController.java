@@ -45,7 +45,7 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		List<SubjectVO> subjectList = subjectService.selectCourseList();
+		List<SubjectVO> subjectList = subjectService.selectSubjectList();
 		model.addAttribute("subjectList", subjectList);
 		model.addAttribute("subListSize", subjectList.size());
 		logger.info("subjectlist: " + subjectList);
