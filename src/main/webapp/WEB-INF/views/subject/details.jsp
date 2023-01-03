@@ -14,7 +14,6 @@
 		<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
 		<div class="course_title">
 			<div class="main_title"><b class="basic_txt_color">${subject.subjectId}</b>  ${subject.subjectTitle}</div>
-			<div class="course_state">${subject.state}</div>
 			<div class="course_state">${subject.comnCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
@@ -36,29 +35,30 @@
 					<img class="detail_img" src="<c:url value='/resources/images/subject/AI.jpg'/>"/>
 				</td>
 				<td> 연수기간(일수)</td>
-				<td> ${subject.startDay} ~ ${subject.endDay}
-				2022.12.15~2023.01.14(30일)</td>
+				<td> ${subject.startDay} ~ ${subject.endDay}(${subject.days})</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
-				<td> 09:00 ~ 18:00 </td>
+				<td> ${subject.startTime} ~ ${subject.endTime}</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
-				<td> 2022.12.29 ~ 2023.01.23 </td>
+				<td> ${subject.recruitStartDay} ~ ${subject.recruitEndDay} </td>
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td> 초급 </td>
+				<td> ${subject.level} 
+					<c:if test="${not empty subject.levelEtc}">(${subject.levelEtc})</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> 0/50 </td>
+				<td> ${totalPeople}/${subject.recruitPeople} </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td> 300,000 
-					<c:if test="${1 eq 1}">* 교육비 지원을 받는 강좌입니다.</c:if>
+				<td> ${subject.cost}
+					<c:if test="${subject.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -71,7 +71,7 @@
 		<!-- 교육 소개 -->
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt">강좌에 대한 간략한 소개 </p>
+			<p class="txt">${subject.content}</p>
 		</div>
 		
 		<!-- button -->

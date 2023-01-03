@@ -8,6 +8,6 @@ public interface ISubjectService {
 	List<SubjectVO> selectCourseList();
 	List<SubjectVO> selectSubjectList();
 	
-	SubjectVO selectSubjectDetails(String subjectId);
-	
+	SubjectVO selectSubjectDetails(String subjectId, int subjectSeq);
+	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
 }

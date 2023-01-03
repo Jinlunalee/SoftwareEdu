@@ -54,14 +54,18 @@ public class SubjectController {
 	}
 
 	//상세조회
-	@RequestMapping(value="/details/{subjectId}", method=RequestMethod.GET)
-	public String getSubjectDetails(@PathVariable String subjectId, Model model) {
+	@RequestMapping(value="/details/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
+	public String getSubjectDetails(@PathVariable String subjectId, @PathVariable int subjectSeq, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		SubjectVO subject = subjectService.selectSubjectDetails(subjectId);
+		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
+		int totalPeople = subjectService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject에 있는 state가 아니라 enroll에 있는거 가져와야함
 		model.addAttribute("subject", subject);
+		model.addAttribute("totalPeople", totalPeople);
 		
+		logger.info("details/subject: "+ subject);
+		logger.info("details/subject: "+ totalPeople);
 		return "subject/details";
 	}
 
