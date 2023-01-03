@@ -9,7 +9,6 @@
 /* 문항 개수를 입력 받아 추가 */
 const changeQuestionNumber = function(value) {
 	let questionNumber = value;
-	console.log(questionNumber);
 	const questionSet = document.querySelector("#question-set-3");
  		$("#new-questions").empty();
 	for(let i=0, max = questionNumber; i<max-3; i++){
@@ -21,12 +20,12 @@ const changeQuestionNumber = function(value) {
 /* 아이디 명 바꾸기 */
 function changeId(i) {
 	let number = (i+4).toString();
-	console.log(number);
 	document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
-	console.log(document.querySelector("#new-questions .question-set-3"));
 };
 </script>
-
+<!-- 모달 저장 버튼은 data-bs-dismiss=modal 로 둠 -->
+<!-- 모달에서 입력한 값을 onclick 이벤트로 input 태그 hidden type에 저장 -->
+<!-- 한꺼번에 폼으로 전달 -->
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
@@ -108,7 +107,7 @@ function changeId(i) {
 			<p class="txt"> <textarea cols="60" rows="10"></textarea></p>
 		</div>
 		<div class="submit-btn">
-			<input type="submit" value="저장">
+			<input type="submit" class="btn-submit-open-popup" value="저장">
 		</div>
 		</form>
 				
@@ -116,7 +115,7 @@ function changeId(i) {
 		<div class="modal">
 			<div class="modal_body">
 				<div class="content-grid">
-					<c:url value="/servey/insert" var="actionURL" scope="page"/>
+					<c:url value="/subject/insert" var="actionURL" scope="page"/>
 					<form:form class="" action="${actionURL}" modelAttribute="survey">
 						<div class="survey_top">
 							<div class="question-number">
@@ -145,7 +144,8 @@ function changeId(i) {
 									<div id="question-set-${i}" class="question-set">
 										<div class="question">
 											<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-											<input class="serveyqn-input" type="text" placeholder="문항을 입력해주세요.">
+											<input name="questionSet[${i}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
+											<input class="serveyqn-input" name="questionSet[${i}].questionContent" type="text" placeholder="문항을 입력해주세요.">
 											<span id="surveyqn-input" class="serveyqn-input"></span>
 										</div>
 										<div class="answer">
@@ -162,8 +162,8 @@ function changeId(i) {
 						</div>
 			<!-- 			<span id="spantag" class="spantag"><button type="button" class="add-question-btn" value="문항 추가" id="btnAction">+문항 추가</button></span> -->
 						<div class="buttons">
-							<button type="button" class="button-item survey-btn" onclick="location.href ='<c:url value="/survey/update"/>'">저장</button>
-							<button type="button" class="button-item delete-btn" onclick="history.back();">뒤로가기</button>
+							<input type="submit" class="button-item survey-btn" value='저장'>
+							<button type="submit" class="button-item survey-btn">저장</button>
 						</div>
 					</form:form>
 				</div>

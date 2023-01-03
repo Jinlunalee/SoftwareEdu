@@ -7,9 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class StudentVO {
-	private String studentId;
-	private String name;
-
-
+public class SurveyQuestionSetVO {
+	private String questionNum;
+	private String questionContent;
 }

@@ -9,5 +9,25 @@ import lombok.ToString;
 @ToString
 public class EnrollVO {
 	private String enrollId;
+	private String subjectId;
+	private int subjectSeq;
+	private String studentId;
+	private String stateCd;
+	private int completeHours;
+	private String regId;
+	private String regDt;
+	private String modiId;
+	private String modiDt;
+	private String delYn;
+	private String cancelRsCd;
+	private String cancelRsEtc;
+	
+	private String startTime;
+	private String endTime;
+	private String startDay;
+	private String endDay;
+	
+	private int progress;
+	
 
 }

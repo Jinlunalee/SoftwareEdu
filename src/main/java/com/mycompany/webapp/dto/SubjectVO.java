@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SubjectVO {
+	
 	private String subjectId; //강좌아이디
 	private String subjectTitle; //강좌명
 	private int subjectSeq; //강좌시퀀스
@@ -32,5 +33,12 @@ public class SubjectVO {
 	
 	private String comnCdTitle; //공통코드명
 	
-
+	private String supprotYn;
+	private String catCd;
+	private int days;
+	private int hours;
+	private String levelCd;
+	private String levelEtc;
+	private int regYear;
+	
 }
