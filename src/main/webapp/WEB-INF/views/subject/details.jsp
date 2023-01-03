@@ -11,10 +11,11 @@
 	 <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
 	</div>
 	<div class="card-body">
-		<div class="sub_title">정기과정명 | 웹 개발자 과정 </div>
+		<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
 		<div class="course_title">
-			<div class="main_title"><b class="basic_txt_color">강좌아이디</b> 한번에 끝내는 JavaScript </div>
-			<div class="course_state">모집중</div>
+			<div class="main_title"><b class="basic_txt_color">${subject.subjectId}</b>  ${subject.subjectTitle}</div>
+			<div class="course_state">${subject.state}</div>
+			<div class="course_state">${subject.comnCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
 		<table class="list">
@@ -35,7 +36,8 @@
 					<img class="detail_img" src="<c:url value='/resources/images/subject/AI.jpg'/>"/>
 				</td>
 				<td> 연수기간(일수)</td>
-				<td> 2022.12.15~2023.01.14(30일)</td>
+				<td> ${subject.startDay} ~ ${subject.endDay}
+				2022.12.15~2023.01.14(30일)</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
@@ -115,6 +117,7 @@
 		}
 	}
 	
+	/* 모달창 */
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
     const btnOpenPopup = document.querySelector('.btn-open-popup');

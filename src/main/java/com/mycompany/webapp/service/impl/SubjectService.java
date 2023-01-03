@@ -25,4 +25,9 @@ public class SubjectService implements ISubjectService{
 		return subjectRepository.selectSubjectList();
 	}
 
+	@Override
+	public SubjectVO selectSubjectDetails(String subjectId) {
+		return subjectRepository.selectSubjectDetails(subjectId);
+	}
+
 }
