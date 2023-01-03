@@ -10,20 +10,29 @@
 const changeQuestionNumber = function(value) {
 	let questionNumber = value;
 	const questionSet = document.querySelector("#question-set-3");
- 		$("#new-questions").empty();
+	$("#new-questions").empty();
 	for(let i=0, max = questionNumber; i<max-3; i++){
 		$(questionSet).clone().appendTo('#new-questions');
-		/* 아이디명 바꾸기 */
-		changeId(i);
+		changeClassId(i);
+		changeEverything(i);
 	};
 };
-/* 아이디 명 바꾸기 */
-function changeId(i) {
+/* Modal 클래스 id 바꾸기 */
+function changeClassId(i) {
 	let number = (i+4).toString();
 	document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
 };
+/* Modal input 클래스 id, Num value, Set name 바꾸기  */
+function changeEverything(i) {
+	let number = (i+4).toString();
+	document.querySelector("#new-questions #question-inputNum-3").setAttribute("value", number); // questionNum 값 넣기
+	document.querySelector("#new-questions #question-inputNum-3").setAttribute("name", 'questionSet[' + number + '].questionNum'); // questionNum name값 넣기 (매핑을 위함)
+	document.querySelector("#new-questions #question-inputSet-3").setAttribute("name", 'questionSet[' + number + '].questionContent'); // questionContent name값 넣기 (매핑을 위함)
+	document.querySelector("#new-questions #question-inputNum-3").setAttribute("id", 'question-inputNum-' + number); // questionNum 아이디 바꾸기
+	document.querySelector("#new-questions #question-inputSet-3").setAttribute("id", 'question-inputSet-' + number); // questionContent 아이디 바꾸기
+}
 </script>
-<!-- 모달 저장 버튼은 data-bs-dismiss=modal 로 둠 -->
+<!-- 모달 저장 버튼은 닫기 버튼으로 둠 -->
 <!-- 모달에서 입력한 값을 onclick 이벤트로 input 태그 hidden type에 저장 -->
 <!-- 한꺼번에 폼으로 전달 -->
 <div class="card m-2">
@@ -102,6 +111,63 @@ function changeId(i) {
 			</tbody>
 		</table>
 		
+		<div class="hidden-inputs" style="display: none;">
+		</div>
+		
+		<!-- modal -->
+		<div class="modal">
+			<div class="modal_body">
+				<div class="content-grid">
+					<div class="survey_top">
+						<div class="question-number">
+							<div class="question-number-upper-row">
+								<div class="question-number-text">문항 개수</div>
+								<span><select class="question-number-dropdown" id="question-number-dropdown" onchange="changeQuestionNumber(this.value)">
+									<option value=3>3개</option>
+									<option value=4>4개</option>
+									<option value=5>5개</option>
+									<option value=6>6개</option>
+									<option value=7>7개</option>
+									<option value=8>8개</option>
+									<option value=9>9개</option>
+									<option value=10>10개</option>
+								</select></span>
+							</div>
+							<div class="question-number-lower-row">
+								<div class="question-number-warning">*문항은 최소 3개부터 최대 10개까지 입력 가능합니다.</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="survey_content">
+						<div id="question-grid" class="question-grid">
+							<c:forEach var="i" begin="1" end="3" step="1">
+								<div id="question-set-${i}" class="question-set">
+									<div class="question">
+										<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
+										<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
+										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i}].questionContent" type="text" placeholder="문항을 입력해주세요.">
+										<span id="surveyqn-input" class="serveyqn-input"></span>
+									</div>
+									<div class="answer">
+										<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
+										<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
+										<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
+										<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족
+										<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+						<div id="new-questions" class="new-questions"></div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="button-item close-btn" onclick="">입력완료</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
 			<p class="txt"> <textarea cols="60" rows="10"></textarea></p>
@@ -109,67 +175,7 @@ function changeId(i) {
 		<div class="submit-btn">
 			<input type="submit" class="btn-submit-open-popup" value="저장">
 		</div>
-		</form>
-				
-		<!-- modal -->
-		<div class="modal">
-			<div class="modal_body">
-				<div class="content-grid">
-					<c:url value="/subject/insert" var="actionURL" scope="page"/>
-					<form:form class="" action="${actionURL}" modelAttribute="survey">
-						<div class="survey_top">
-							<div class="question-number">
-								<div class="question-number-upper-row">
-									<div class="question-number-text">문항 개수</div>
-									<span><select class="question-number-dropdown" onchange="changeQuestionNumber(this.value)">
-										<option value=3>3개</option>
-										<option value=4>4개</option>
-										<option value=5>5개</option>
-										<option value=6>6개</option>
-										<option value=7>7개</option>
-										<option value=8>8개</option>
-										<option value=9>9개</option>
-										<option value=10>10개</option>
-									</select></span>
-								</div>
-								<div class="question-number-lower-row">
-									<div class="question-number-warning">*문항은 최소 3개부터 최대 10개까지 입력 가능합니다.</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="survey_content">
-							<div id="question-grid" class="question-grid">
-								<c:forEach var="i" begin="1" end="3" step="1">
-									<div id="question-set-${i}" class="question-set">
-										<div class="question">
-											<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-											<input name="questionSet[${i}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
-											<input class="serveyqn-input" name="questionSet[${i}].questionContent" type="text" placeholder="문항을 입력해주세요.">
-											<span id="surveyqn-input" class="serveyqn-input"></span>
-										</div>
-										<div class="answer">
-											<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
-											<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
-											<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
-											<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족
-											<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-							<div id="new-questions" class="new-questions"></div>
-						</div>
-			<!-- 			<span id="spantag" class="spantag"><button type="button" class="add-question-btn" value="문항 추가" id="btnAction">+문항 추가</button></span> -->
-						<div class="buttons">
-							<input type="submit" class="button-item survey-btn" value='저장'>
-							<button type="submit" class="button-item survey-btn">저장</button>
-						</div>
-					</form:form>
-				</div>
-			</div>
-		</div>
-		
+		</form>		
 	</div>
 </div>
 
@@ -214,27 +220,57 @@ function changeId(i) {
 		}
 	}
 	
-	/* 모달창 */
+	/* 모달창 열기 */
 	const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
     const btnOpenPopup = document.querySelector('.btn-open-popup');
 
     btnOpenPopup.addEventListener('click', () => {
-      modal.classList.toggle('show');
+      modal.classList.toggle('show'); // class를 이용한 모달 on
 
-      if (modal.classList.contains('show')) {
-        body.style.overflow = 'hidden';
+      if (modal.classList.contains('show')) { // 모달이 on일 때
+        body.style.overflow = 'hidden'; // body의 스크롤을 막음
       }
     });
 
     modal.addEventListener('click', (event) => {
       if (event.target === modal) {
-        modal.classList.toggle('show');
+        modal.classList.toggle('show'); // class를 이용한 모달 on
 
-        if (!modal.classList.contains('show')) {
-          body.style.overflow = 'auto';
+        if (!modal.classList.contains('show')) { // 모달이 off일 때
+          body.style.overflow = 'auto';  // body의 스크롤을 풂
         }
       }
     });
+    
+    /* 모달창 닫기 */
+    const closeBtn = modal.querySelector(".close-btn");
+    
+    $(closeBtn).click(function(){
+		modal.classList.remove('show');
+		saveInputQuestions();
+	});
+    
+    /* 입력값 추출하여 input태그 hidden타입으로 저장 */
+    // closeBtn.addEventListner('click', saveInputQuestions);
+	
+	function saveInputQuestions() {
+		console.log("connected!");
+		const hiddenInputs = document.getElementsByClassName("hidden-inputs");
+		var questionNumber = $("#question-number-dropdown option:selected").val();
+
+	    /* input태그 hidden타입으로 저장  */
+		for(var k=1; k<=questionNumber; k++) {
+			console.log("repeat " + k);
+			let questionInputNum = "#question-inputNum-" + k;
+			let questionInputSet = "#question-inputSet-" + k;
+			let hiddenQuestionInputSet = ".hidden-inputs #question-inputSet-" + k;
+			let hiddenInputNum = document.querySelector(questionInputNum);
+			let hiddenInputSet = document.querySelector(questionInputSet);
+			$(hiddenInputNum).clone().appendTo(hiddenInputs);
+			$(hiddenInputSet).clone().appendTo(hiddenInputs);
+			document.querySelector(hiddenQuestionInputSet).setAttribute("value", $(questionInputSet).val()); // Modal의 questionContent에서 받은 value를 hidden div의 questionContent에 넣기
+		};
+    }
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
