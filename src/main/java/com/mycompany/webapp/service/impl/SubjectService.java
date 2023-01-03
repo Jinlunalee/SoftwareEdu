@@ -26,8 +26,13 @@ public class SubjectService implements ISubjectService{
 	}
 
 	@Override
-	public SubjectVO selectSubjectDetails(String subjectId) {
-		return subjectRepository.selectSubjectDetails(subjectId);
+	public SubjectVO selectSubjectDetails(String subjectId, int subjectSeq) {
+		return subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
+	}
+
+	@Override
+	public int recruitTotalPeople(String subjectId, int subjectSeq, String state) {
+		return subjectRepository.recruitTotalPeople(subjectId, subjectSeq, state);
 	}
 
 }

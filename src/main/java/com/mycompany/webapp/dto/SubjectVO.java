@@ -1,5 +1,7 @@
 package com.mycompany.webapp.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,4 +35,11 @@ public class SubjectVO {
 	private String state; //강좌 상태 코드
 	
 	private String comnCdTitle; //공통코드명
+	
+	private MultipartFile file; //첨부파일 
+	private String fileId;
+	private String fileName;
+	private int fileSize;
+	private String fileContentType;
+	
 	}

@@ -63,7 +63,7 @@
               <td>${subject.courseTitle}</td>
               <td>
 				<span>
-					<a href="<c:url value='/subject/details/${subject.subjectId}'/>">${subject.subjectTitle}</a>
+					<a href="<c:url value='/subject/details/${subject.subjectId}/${subject.subjectSeq}'/>">${subject.subjectTitle}</a>
 		        </span>
               </td>
               <td>${subject.startDay}~${subject.endDay}</td>
@@ -72,9 +72,25 @@
               <td>${subject.comnCdTitle}</td>
               <td>
               	<div>
-              		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
-					<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
-				</div> 
+              		<c:choose>
+              			<c:when test="${subject.comnCdTitle eq '모집예정'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+							<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '진행중'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '폐강'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '진행완료'}">
+              			</c:when>
+              			<c:otherwise>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">폐강</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+						</c:otherwise>
+              		</c:choose>
+              	</div> 
               </td>
              </tr>
           </c:forEach>
