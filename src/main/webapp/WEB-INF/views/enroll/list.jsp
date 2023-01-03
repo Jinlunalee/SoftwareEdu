@@ -39,13 +39,13 @@
 				<th>승인</th>
 				<th></th>
 			</tr>
-			<c:forEach var="ls" items="${list}">
+			<c:forEach var="ls" items="${list}" varStatus="status">
 				<tr>
 					<td>${ls.regDt}</td>
 					<td>${ls.name}</td>
-					<td><a class="modal-open">${ls.subjectTitle}</a></td>
-					<div class="modal">
-						<div class="modal-content">
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count});">${ls.subjectTitle}</a></td>
+					<div class="modal modal-${status.count}">
+						<div class="modal-content modal-content-${status.count}">
 							<li style="text-align: center;">${ls.name}  |  ${ls.studentId}  |  <c:if test="${ls.stateCd eq 'ERL06'}"> 수강 완료</c:if></li>
 							<br>
 							<li>강좌명 | ${ls.subjectTitle}</li>
@@ -104,10 +104,6 @@
 					</c:if>
 					</td>
 				</tr>
-				
-				
-				
-				
 			</c:forEach>
 		</table>
 		<div class="down">
@@ -135,15 +131,17 @@
 	</div>
 	
 	<script>
-		$(function(){
-			$(".modal-open").click(function(){
-				$(".modal").fadeIn();
+ 		function showModal(i){
+ 			var openBtnClassName = ".modal-open-" + i;
+ 			var modalClassName = ".modal-" + i; 
+			$(openBtnClassName).click(function(){
+				$(modalClassName).fadeIn();
 			});
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
-		});
+		};
 	</script>
 	<script>
 
