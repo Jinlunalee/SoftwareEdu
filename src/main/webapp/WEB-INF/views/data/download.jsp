@@ -63,7 +63,7 @@ img {
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
 				<br> <a>연수원_교육비 지원대상<br>교육비 지원 대상 교육과정을 수강하는 수강생 교육 정보<br>(이수율 포함)
 				</a>
-				<button type="button" class="btn btn-outline-secondary">
+				<button type="button" class="btn btn-outline-secondary" id="second_btn">
 					연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
 			</div>
@@ -72,7 +72,7 @@ img {
 				<br>
 				<a> 연수원_교육비 지원대상<br>교육비 지원 대상 교육과정을 수강하는 수강생 교육 정보<br>(이수율 포함)
 				</a>
-				<button type="button" class="btn btn-outline-secondary">
+				<button type="button" class="btn btn-outline-secondary" id="thid_btn">
 					연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
 			</div>
