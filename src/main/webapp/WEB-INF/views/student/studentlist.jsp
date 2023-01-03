@@ -23,7 +23,12 @@
 				class="input-button" type="button" value="검색">
 		</div>
 		
-
+		<div class="list_top">
+		  <div class="cnt">
+			전체목록 <b class="basic_txt_color">${studentListSize}</b>개, 
+			페이지<b class="basic_txt_color"> ?? </b> / ??
+			
+			 
 		<div class="view">
 				<button type="button" class="btn btn-outline-secondary">수강생추가</button>
 			<select class="select-view">
@@ -31,6 +36,7 @@
 				<option>30개</option>
 				<option>50개</option>
 			</select>
+		</div>
 		</div>
 
 		<table class="list">
@@ -43,23 +49,26 @@
 				<th>수정/삭제</th>
 				<th></th>
 			</tr>
-			<c:forEach var="i" begin="1" end="10" step="1">
+
+		  <c:if test="${studentListSize ne 0}">
+		  <c:forEach var="course" items="${studentList}">
 				<tr>
-					<td>이수강</td>
-					<td>sugang</td>
-					<td>sugang@sg.com</td>
-					<td>1900.01.01</td>
-					<td>학생</td>
+				<th>${student.name}</th>
+				<th>${student.studentId}</th>
+				<th>${student.email}</th>
+				<th>${student.birth}</th>
+				<th>${student.position}</th>
 					<td><form>
 						<button type="button" class="btn btn-secondary">수정</button>
 						<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
 						</form></td>
 				</tr>
 			</c:forEach>
+			</c:if>
 		</table>
 
 	</div>
-	
+	</div>
 	<script>
 		$("#modal_open_btn").click(function() {
 			$("#modal").attr("style", "display:block");
@@ -80,21 +89,9 @@
 	</script>
 
 
-		<div id="paging">
-		<ul class="paging">
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">10</a></li>
-		</ul>
-		</div>	
+
 	
+
 </div>
 
 
