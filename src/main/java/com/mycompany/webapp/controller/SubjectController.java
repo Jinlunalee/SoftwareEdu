@@ -66,6 +66,7 @@ public class SubjectController {
 		
 		logger.info("details/subject: "+ subject);
 		logger.info("details/subject: "+ totalPeople);
+		
 		return "subject/details";
 	}
 
@@ -78,10 +79,14 @@ public class SubjectController {
 	}
 
 	//수정
-	@RequestMapping(value="/update/{subjectId}", method=RequestMethod.GET)
-	public String updateSubject(@PathVariable String subjectId, Model model) {
+	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
+	public String updateSubject(@PathVariable String subjectId, @PathVariable int subjectSeq,Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
+		model.addAttribute("subject", subject);
+		
 		return "subject/update";
 	}
 
