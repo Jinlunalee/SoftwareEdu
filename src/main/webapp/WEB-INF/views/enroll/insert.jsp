@@ -12,12 +12,11 @@
 	<div class="wrap">
 	<div class="search-box">
 	<div class="search-content">
-	수강생 명 &nbsp; &nbsp;
-	<select>
-	<option>STDT001  |  홍길동</option>
-	<option>STDT002  |  홍길서</option>
-	<option>STDT003  |  홍길남</option>
-	</select>
+	<span class="name">수강생 명</span> &nbsp; &nbsp;
+	<form class="search">
+	<input class="search-in" type="text">
+	<input class="btn btn2" type="submit" value="검색">
+	</form>
 	</div>
 	</div>
 	
@@ -41,16 +40,17 @@
 	<div class="wrap">
 	<div class="search-box">
 	<div class="search-content">
-	강좌/과정 &nbsp; &nbsp;
-		<select onchange="changeType(this)">
+	<span class="name">강좌/과정</span> &nbsp; &nbsp;
+		<select class="sel" onchange="changeType(this)">
 			<option>강좌와 과정 중 선택</option>
 			<option value="a">강좌</option>
 			<option value="b">과정</option>
 		</select>
 		
-		<select id="courselist">
-			<option>리스트 목록</option>
-		</select>
+		<form class="search">
+		<input type="text" class="search-in">
+		<input type="submit" class="btn btn2" value="검색">
+		</form>
 		
 		<script>
 			function changeType(v) {
@@ -89,8 +89,8 @@
 	</ul>
 	</div>
 	<div class="submit-btn">
-	<input type="button" value="저 장">
-	<input type="reset" onclick="location.href='<c:url value="/register/list"/>'" value="취 소">
+	<input class="btn" type="button" value="저 장">
+	<input class="btn" type="reset" onclick="location.href='<c:url value="/enroll/list"/>'" value="취 소">
 	</div>
 	</div>
 </div>

@@ -22,23 +22,7 @@ public class EnrollService implements IEnrollService{
 		return enrollRepository.getEnrollList();
 	}
 	
-	public List<EnrollVO> getEnrollListBySubject() {
-		return enrollRepository.getEnrollListBySubject();
-	}
-	
-	public StudentVO getName(String studentId) {
-		return enrollRepository.getName(studentId);
-	}
-	
-	public SubjectVO getSubjectName(String subjectId) {
-		return enrollRepository.getSubjectName(subjectId);
-	}
-	
-	public EnrollVO getOpenDetails() {
-		return enrollRepository.getOpenDetails();
-	}
-	
-	public int getProgress(String studentId) {
+	public String getProgress(String studentId) {
 		return enrollRepository.getProgress(studentId);
 	}
 	

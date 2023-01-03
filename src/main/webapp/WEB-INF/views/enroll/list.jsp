@@ -12,15 +12,28 @@
 	</div>
 	<div class="card-body">
 		<div class="search">
-			<input class="input-date" type="date"> <select
-				class="select-box">
+		<span>신청기간</span>
+			<input class="input-date" type="date"> ~
+			<input class="input-date" type="date"> 
+			<select class="select-box">
 				<option>수강생 명</option>
 				<option>강좌 명</option>
-			</select> <input class="input-text" type="text"
+			</select>
+			<select class="select-box">
+				<option>수강상태</option>
+				<option>수강신청취소</option>
+				<option>수강예정</option>
+				<option>수강중</option>
+				<option>수강취소</option>
+				<option>수강신청</option>
+				<option>수강완료</option>
+			</select>
+			<input class="input-text" type="text"
 				placeholder="수강생 명 / 강좌 명을 입력해 주세요"> <input
 				class="input-button" type="button" value="검색">
 		</div>
 		<div class="view">
+		<a href="<c:url value='/enroll/insert'/>"><img src="<c:url value='/resources/images/register/add.png'/>"/></a>
 			<select class="select-view">
 				<option>10개</option>
 				<option>30개</option>
@@ -39,20 +52,20 @@
 				<th>승인</th>
 				<th></th>
 			</tr>
-			<c:forEach var="ls" items="${list}" varStatus="vs">
-				
+
+			<c:forEach var="ls" items="${list}" varStatus="status">
 				<tr>
 					<td>${ls.regDt}</td>
 					<td>${ls.name}</td>
-					<td><a class="modal-open">${ls.subjectTitle}</a></td>
-					<div id="${vs.index}"class="modal">
-						<div class="modal-content">
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count});">${ls.subjectTitle}</a></td>
+					<div class="modal modal-${status.count}">
+						<div class="modal-content modal-content-${status.count}">
 							<li style="text-align: center;">${ls.name}  |  ${ls.studentId}  |  <c:if test="${ls.stateCd eq 'ERL06'}"> 수강 완료</c:if></li>
 							<br>
 							<li>강좌명 | ${ls.subjectTitle}</li>
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
-							<li>진도율 | ${ratio} %</li>
+							진도율 |  <div id="ratio"></div>
 							<li>현재 완료 시간  |  ${ls.completeHours}</li>
 							완료한 시간 입력
 							<form action="/">
@@ -110,17 +123,12 @@
 					</c:if>
 					</td>
 				</tr>
-				
-				
-				
-				
-				
-				
+
 			</c:forEach>
 		</table>
 		<div class="down">
 		<a href="#">
-		<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" />
+		<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
@@ -143,25 +151,50 @@
 	</div>
 	
 	<script>
-		$(function(){
-			$(".modal-open").click(function(){
-				$(".modal").fadeIn();
+ 		function showModal(i){
+ 			var openBtnClassName = ".modal-open-" + i;
+ 			var modalClassName = ".modal-" + i; 
+			$(openBtnClassName).click(function(){
+				$(modalClassName).fadeIn();
 			});
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
-		});
+		};
 	</script>
+	
+	<script>
+		$('document').ready(function() {
+			var studentId = $("#stu").val();
+			var ratioEl = $("#ratio");
+			$.ajax({
+				type: "GET",
+				url: "ratio/" + studentId,
+				success: function(data) {
+					ratioEl.text(data + '%');
+			
+				}
+				
+			});
+			
+		})
+		
+		
+			
+		
+	</script>
+	
+	
+	
+	
+	
 	<script>
 
 		function del() {
-			var a = $("#stu");
-			var b = $("#sub");
-			var c = $("#seq");
-			var studentId = a.val();
-			var subjectId = b.val();
-			var subjectSeq = c.val();
+			var studentId = $("#stu").val();
+			var subjectId = $("#sub").val();
+			var subjectSeq = $("#seq").val();
 		
 		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
 			console.log("true");

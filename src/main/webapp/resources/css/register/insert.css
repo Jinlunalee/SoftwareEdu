@@ -29,16 +29,14 @@
 }
 
 input {
-	background-color: #003964;
 	width: 100px;
 	height: 45px;
 	border-radius: 8px;
-	color: #fff;
 }
 
 .submit-btn {
 	text-align: center;
-	margin: 10px;
+	margin-top: 40px;
 }
 
 .a li::before {
@@ -66,4 +64,36 @@ input {
 .course-info2 {
 	position: relative;
 	left: 10px;
+}
+
+.search{
+	display: inline;
+}
+
+.search-in{
+	width: 30%;
+	height: 40px;
+	position: relative;
+	bottom: 10px;
+}
+
+.btn{
+	background-color: #003964;
+	color: #fff;
+}
+
+.btn{
+	position: relative;
+    bottom: 10px;
+}
+
+.name{
+	position: relative;
+    bottom: 10px;
+}
+
+.sel{
+	position: relative;
+    bottom: 10px;
+    height: 30px;
 }
