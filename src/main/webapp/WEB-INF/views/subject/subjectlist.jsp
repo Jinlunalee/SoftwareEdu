@@ -32,6 +32,7 @@
 			페이지<b class="basic_txt_color"> ?? </b> / ??
 		  </div>
 		  <div class="view">
+  		    <button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 			<select class="select-view">
 				<option>10개</option>
 				<option>30개</option>
