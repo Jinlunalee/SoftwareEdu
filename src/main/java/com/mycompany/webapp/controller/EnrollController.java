@@ -1,7 +1,9 @@
 package com.mycompany.webapp.controller;
 
 import java.sql.Date;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +12,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.StudentVO;
+import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.IEnrollService;
 
 @Controller
 @RequestMapping("/enroll")
 public class EnrollController {
+	
+	@Autowired
+	IEnrollService enrollService;
 	
 	//목록조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String getEnrollList(Model model) {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
+		
+		List<EnrollVO> list = enrollService.getEnrollList();
+		model.addAttribute("list", list);
+		
+		EnrollVO enroll = enrollService.getEnrollDetails();
+		StudentVO student = enrollService.getName(enroll.getStudentId());
+		model.addAttribute("student", student);
+		
+		SubjectVO subject = enrollService.getSubjectName(enroll.getSubjectId());
+		model.addAttribute("subject", subject);
+		
+		EnrollVO enroll2 = enrollService.getOpenDetails();
+		model.addAttribute("open", enroll2);
+		
+		System.out.println(enroll.getStudentId());
+		int pro = enrollService.getProgress(enroll.getStudentId());
+		model.addAttribute("ratio", pro);
+		
 		return "enroll/list";
 	}
 

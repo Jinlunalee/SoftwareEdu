@@ -38,58 +38,33 @@
 				<th>반려/삭제</th>
 				<th></th>
 			</tr>
-			<c:forEach var="i" begin="1" end="5" step="1">
+			<c:forEach var="ls" items="${list}">
 				<tr>
-					<td>2022.12.03</td>
-					<td>이수강</td>
-					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
+					<td>${ls.regDt}</td>
+					<td>${student.name}</td>
+					<td><a class="modal-open">${subject.subjectTitle}</a></td>
 					<div class="modal">
 						<div class="modal-content">
-							<li style="text-align: center;">홍길동  |  STDT001</li>
+							
+							<li style="text-align: center;">${student.name}  |  ${ls.studentId}  |  <c:if test="${ls.stateCd eq 'ERL06'}"> 수강 완료</c:if></li>
 							<br>
-							<li>강좌명 | 자바 초급</li>
-							<li>강의 시간 | 09:00 ~ 18:00</li>
-							<li>교육 기간 | 2022.12.19 ~ 2022.12.22</li>
-							<li>진도율 | 80%</li>
+							<li>강좌명 | ${subject.subjectTitle}</li>
+							<li>강의 시간 | ${open.startTime} ~ ${open.endTime} </li>
+							<li>교육 기간 | ${open.startDay} ~ ${open.endDay} </li>
+							<li>진도율 | ${ratio} %</li>
 							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
-							<div id="close-btn"><button class="close-btn"></button></div>
+							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
-					<td>12</td>
-					<td><img src="<c:url value='/resources/images/register/waiting.png'/>" /></td>
+					<td>${ls.subjectId}</td>
+					<c:if test="${ls.stateCd eq 'ERL06'}">
+					<td><img src="<c:url value='/resources/images/register/complete.png'/>" /></td>
+					</c:if>
 					<td><form>
 							<input class="btn btn-secondary"type="button" value="승인">
 						</form></td>
 					<td><form>
 							<input class="btn btn-secondary"type="button" value="반려" onclick="ret()">
-						</form></td>
-				</tr>
-			</c:forEach>
-			
-			<c:forEach var="i" begin="1" end="5" step="1">
-				<tr>
-					<td>2022.12.03</td>
-					<td>이수강</td>
-					<td><a class="modal-open">처음 시작하는 스프링 프레임워크</a></td>
-					<div class="modal">
-						<div class="modal-content">
-							<li>홍길동 | STDT001 | 수강 중
-							<li>강좌명 : 자바 초급</li>
-							<li>강의 시간 : 09:00 ~ 18:00</li>
-							<li>교육 기간 : 2022.12.19 ~ 2022.12.22</li>
-							<li>진도율 : 80%</li>
-							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
-							<div id="close-btn"><button class="close-btn">닫기</button></div>
-						</div>
-					</div>
-					<td>12</td>
-					<td><img src="<c:url value='/resources/images/register/complete.png'/>" /></td>
-					<td><form>
-							<input class="btn btn-secondary" type="button" onclick="location.href='<c:url value="/register/update/1"/>'" value="수정">
-						</form></td>
-					<td><form>
-							<input class="btn btn-secondary" type="button" onclick="del()" value="삭제">
-							
 						</form></td>
 				</tr>
 			</c:forEach>

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SubjectVO {
+	
 	private String subjectId; //강좌아이디
 	private String subjectTitle; //강좌명
 	private int subjectSeq; //강좌시퀀스
@@ -24,9 +25,15 @@ public class SubjectVO {
 	private String recruitEndDay; //모집 마감 일자
 	private int recruitPeople; // 모집인원
 	private String state; //강좌 상태 코드
-	private String delYN; //삭제 여부
 	
 	private String comnCdTitle; //공통코드명
 	
-
+	private String supprotYn;
+	private String catCd;
+	private int days;
+	private int hours;
+	private String levelCd;
+	private String levelEtc;
+	private int regYear;
+	
 }
