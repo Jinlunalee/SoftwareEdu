@@ -243,33 +243,30 @@ function changeEverything(i) {
       }
     });
     
-    /* 모달창 닫기 */
+    /* closeBtn 눌렀을 때 - 모달창 닫기, Modal 입력값 부모창에 저장*/
     const closeBtn = modal.querySelector(".close-btn");
     
     $(closeBtn).click(function(){
-		modal.classList.remove('show');
-		saveInputQuestions();
+		modal.classList.remove('show'); // 모달창 닫기
+		saveInputQuestions(); // Modal 입력값을 부모창에 저장  
 	});
     
-    /* 입력값 추출하여 input태그 hidden타입으로 저장 */
-    // closeBtn.addEventListner('click', saveInputQuestions);
-	
+    /* Modal 입력값을 부모창에 저장 */
 	function saveInputQuestions() {
 		console.log("connected!");
-		const hiddenInputs = document.getElementsByClassName("hidden-inputs");
-		var questionNumber = $("#question-number-dropdown option:selected").val();
-
-	    /* input태그 hidden타입으로 저장  */
+		const hiddenInputs = document.getElementsByClassName("hidden-inputs"); // Modal에서 받은 항목명이 들어갈 hidden div
+		var questionNumber = $("#question-number-dropdown option:selected").val(); // 항목 개수
+		$(hiddenInputs).empty(); // 중복 방지
+	    /* Modal에서 받은 항목명을 hidden div에 저장  */
 		for(var k=1; k<=questionNumber; k++) {
-			console.log("repeat " + k);
-			let questionInputNum = "#question-inputNum-" + k;
-			let questionInputSet = "#question-inputSet-" + k;
-			let hiddenQuestionInputSet = ".hidden-inputs #question-inputSet-" + k;
-			let hiddenInputNum = document.querySelector(questionInputNum);
-			let hiddenInputSet = document.querySelector(questionInputSet);
-			$(hiddenInputNum).clone().appendTo(hiddenInputs);
-			$(hiddenInputSet).clone().appendTo(hiddenInputs);
-			document.querySelector(hiddenQuestionInputSet).setAttribute("value", $(questionInputSet).val()); // Modal의 questionContent에서 받은 value를 hidden div의 questionContent에 넣기
+			let questionInputNum = "#question-inputNum-" + k; // 가져올 Modal에 있는 항목순번 아이디 저장
+			let questionInputSet = "#question-inputSet-" + k; // 가져올 Modal에 있는 항목명 아이디 저장
+			let hiddenQuestionInputSet = ".hidden-inputs #question-inputSet-" + k; // 붙여넣은 hidden div아래에 있는 항목명 아이디 저장
+			let hiddenInputNum = document.querySelector(questionInputNum); // Modal에서 저장한 항목순번 가져오기
+			let hiddenInputSet = document.querySelector(questionInputSet); // Modal에서 저장한 항목명 가져오기
+			$(hiddenInputNum).clone().appendTo(hiddenInputs); // 복제해서 hidden div에 추가하기
+			$(hiddenInputSet).clone().appendTo(hiddenInputs); // 복제해서 hidden div에 추가하기
+			document.querySelector(hiddenQuestionInputSet).setAttribute("value", $(questionInputSet).val()); // Modal의 항목명에서 받은 value를 hidden div의 항목명에 넣기
 		};
     }
 	</script>
