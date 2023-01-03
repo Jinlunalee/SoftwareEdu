@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.StudentVO;
-import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IEnrollService;
 
 @Controller
@@ -32,22 +31,49 @@ public class EnrollController {
 		List<EnrollVO> list = enrollService.getEnrollList();
 		model.addAttribute("list", list);
 		
-		EnrollVO enroll = enrollService.getEnrollDetails();
-		StudentVO student = enrollService.getName(enroll.getStudentId());
-		model.addAttribute("student", student);
+		//List<EnrollVO> list2 = enrollService.getEnrollListBySubject();
+		//model.addAttribute("list2", list2);
 		
-		SubjectVO subject = enrollService.getSubjectName(enroll.getSubjectId());
-		model.addAttribute("subject", subject);
-		
-		EnrollVO enroll2 = enrollService.getOpenDetails();
-		model.addAttribute("open", enroll2);
-		
-		System.out.println(enroll.getStudentId());
-		int pro = enrollService.getProgress(enroll.getStudentId());
-		model.addAttribute("ratio", pro);
+//		EnrollVO enroll = enrollService.getEnrollDetails();
+//		System.out.println(enroll.getStudentId());
+//		StudentVO student = enrollService.getName(enroll.getStudentId());
+//		model.addAttribute("student", student);
+//		
+//		SubjectVO subject = enrollService.getSubjectName(enroll.getSubjectId());
+//		model.addAttribute("subject", subject);
+//		
+//		EnrollVO enroll2 = enrollService.getOpenDetails();
+//		model.addAttribute("open", enroll2);
+//		
+//		System.out.println(enroll.getStudentId());
+//		int pro = enrollService.getProgress(enroll.getStudentId());
+//		model.addAttribute("ratio", pro);
 		
 		return "enroll/list";
 	}
+	
+//	@RequestMapping(value="/dt/{studentId}", method=RequestMethod.GET)
+//	public String getDetails(@PathVariable String studentId, Model model) {
+//		StudentVO student = enrollService.getName(studentId);
+//		model.addAttribute("student", student);
+//		return "enroll/list";
+//	}
+	
+	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
+	public String clickCancel(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		enrollService.clickCancel(studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
+	}
+	
+	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
+	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		System.out.println("컨트롤 체크");
+		enrollService.clickDelete(studentId, subjectId, subjectSeq);
+		System.out.println("컨트롤러 체크");
+		return "redirect:/enroll/list";
+	}
+	
+	
 
 	//상세조회
 	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
