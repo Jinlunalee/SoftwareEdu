@@ -18,5 +18,6 @@ public class StudentVO {
 	private String add_do_cd;		// 수강생 주소 도 코드
 	private String add_etc;		// 수강생 주소 기타
 	private String position;		// 수강생 지위
+	private int std_cnt;		//전체수강생 수
 	
 }

@@ -132,16 +132,16 @@ a{
 
 				<div class="box" id="show_JSON" >
 				<img id="check_img" src="<c:url value='/resources/images/json.png'/>"/><br>
-				<a>연수원 교육비 지원 대상
-
+				<div id="result">연수원 교육비 지원 대상
+				<a>수강생이름</a>
+				<a>${student.name}</a>
+				
+				</div>
 				
 				
 				
+				</div>
 				
-				
-				
-				</a></div>
-			
 				<div class="box" id="show_XML" >
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br><a>연수원 교육비 지원 대상</a></div>
 				
@@ -150,7 +150,6 @@ a{
 
 			</div>
 		</div>
-
 </div>
 
 
@@ -158,6 +157,34 @@ a{
 
 	<script>
 
+	$(document).ready(function(){
+	    $("#first_btn").click(getStudentList);
+	});
+	function getStudentList(){
+	    $.ajax({
+	        url:"data/download",                    //list.jsp에 AJAX요청
+	        success:function(data){
+	           	alert("data");
+	            let obj=JSON.parse(data);      //data를 받아와서 JSON형태로 변환
+	            let array=["<ol>"]; 
+	            obj["list"].forEach(
+	                    list = array.push("<li>"+studentName+"</li>")    
+	                    //JSON에 있는 studentName의 value를 li태그에 넣어서 array에 넣어줌
+	            );
+	            array.push("</ol>");                                   
+	 
+	            $("#result").html(array.join(""));  
+	            //array의 요소들을 다 합쳐서 하나로 만든후 id="result"인 태그에 html로 출력
+	        }
+ 
+	    });    
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 $(function (){
