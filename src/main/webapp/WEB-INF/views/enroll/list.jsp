@@ -12,15 +12,28 @@
 	</div>
 	<div class="card-body">
 		<div class="search">
-			<input class="input-date" type="date"> <select
-				class="select-box">
+		<span>신청기간</span>
+			<input class="input-date" type="date"> ~
+			<input class="input-date" type="date"> 
+			<select class="select-box">
 				<option>수강생 명</option>
 				<option>강좌 명</option>
-			</select> <input class="input-text" type="text"
+			</select>
+			<select class="select-box">
+				<option>수강상태</option>
+				<option>수강신청취소</option>
+				<option>수강예정</option>
+				<option>수강중</option>
+				<option>수강취소</option>
+				<option>수강신청</option>
+				<option>수강완료</option>
+			</select>
+			<input class="input-text" type="text"
 				placeholder="수강생 명 / 강좌 명을 입력해 주세요"> <input
 				class="input-button" type="button" value="검색">
 		</div>
 		<div class="view">
+		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
 			<select class="select-view">
 				<option>10개</option>
 				<option>30개</option>
@@ -39,6 +52,7 @@
 				<th>승인</th>
 				<th></th>
 			</tr>
+
 			<c:forEach var="ls" items="${list}" varStatus="status">
 				<tr>
 					<td>${ls.regDt}</td>
@@ -51,8 +65,13 @@
 							<li>강좌명 | ${ls.subjectTitle}</li>
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
-							<li>진도율 | ${ratio} %</li>
-							완료한 시간 입력<input class="input-time" type="number"><input class="input-time-btn" type="button" value="입력">
+							진도율 |  <div id="ratio"></div>
+							<li>현재 완료 시간  |  ${ls.completeHours}</li>
+							완료한 시간 입력
+							<form action="/">
+							<input class="input-time" type="number">
+							<input class="input-time-btn" type="submit" value="입력">
+							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
@@ -104,11 +123,12 @@
 					</c:if>
 					</td>
 				</tr>
+
 			</c:forEach>
 		</table>
 		<div class="down">
 		<a href="#">
-		<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" />
+		<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
@@ -143,15 +163,38 @@
 			});
 		};
 	</script>
+	
+	<script>
+		$('document').ready(function() {
+			var studentId = $("#stu").val();
+			var ratioEl = $("#ratio");
+			$.ajax({
+				type: "GET",
+				url: "ratio/" + studentId,
+				success: function(data) {
+					ratioEl.text(data + '%');
+			
+				}
+				
+			});
+			
+		})
+		
+		
+			
+		
+	</script>
+	
+	
+	
+	
+	
 	<script>
 
 		function del() {
-			var a = $("#stu");
-			var b = $("#sub");
-			var c = $("#seq");
-			var studentId = a.val();
-			var subjectId = b.val();
-			var subjectSeq = c.val();
+			var studentId = $("#stu").val();
+			var subjectId = $("#sub").val();
+			var subjectSeq = $("#seq").val();
 		
 		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
 			console.log("true");

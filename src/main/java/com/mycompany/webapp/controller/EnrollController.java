@@ -1,8 +1,15 @@
 package com.mycompany.webapp.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.EnrollVO;
-import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
 @Controller
@@ -31,33 +38,8 @@ public class EnrollController {
 		List<EnrollVO> list = enrollService.getEnrollList();
 		model.addAttribute("list", list);
 		
-		//List<EnrollVO> list2 = enrollService.getEnrollListBySubject();
-		//model.addAttribute("list2", list2);
-		
-//		EnrollVO enroll = enrollService.getEnrollDetails();
-//		System.out.println(enroll.getStudentId());
-//		StudentVO student = enrollService.getName(enroll.getStudentId());
-//		model.addAttribute("student", student);
-//		
-//		SubjectVO subject = enrollService.getSubjectName(enroll.getSubjectId());
-//		model.addAttribute("subject", subject);
-//		
-//		EnrollVO enroll2 = enrollService.getOpenDetails();
-//		model.addAttribute("open", enroll2);
-//		
-//		System.out.println(enroll.getStudentId());
-//		int pro = enrollService.getProgress(enroll.getStudentId());
-//		model.addAttribute("ratio", pro);
-		
 		return "enroll/list";
 	}
-	
-//	@RequestMapping(value="/dt/{studentId}", method=RequestMethod.GET)
-//	public String getDetails(@PathVariable String studentId, Model model) {
-//		StudentVO student = enrollService.getName(studentId);
-//		model.addAttribute("student", student);
-//		return "enroll/list";
-//	}
 	
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String clickCancel(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
@@ -73,8 +55,12 @@ public class EnrollController {
 		return "redirect:/enroll/list";
 	}
 	
+	@RequestMapping(value="/ratio/{studentId}")
+	public @ResponseBody String getProgress(@PathVariable String studentId) {
+		return enrollService.getProgress(studentId);
+	}
 	
-
+	
 	//상세조회
 	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
 	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
@@ -93,7 +79,33 @@ public class EnrollController {
 	
 	//엑셀파일 다운로드
 	@RequestMapping(value="/download", method=RequestMethod.GET)
-	public void downloadEnroll() {
+	public void downloadEnroll(HttpServletResponse response) throws IOException {
+		Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet("테스트");
+        int rowNo = 0;
+ 
+        Row headerRow = sheet.createRow(rowNo++);
+        headerRow.createCell(0).setCellValue("수강 아이디");
+        headerRow.createCell(1).setCellValue("강좌 아이디");
+        headerRow.createCell(2).setCellValue("강좌 시퀀스");
+        headerRow.createCell(3).setCellValue("수강생 아이디");
+        headerRow.createCell(4).setCellValue("수강 완료 시간");
+ 
+        List<EnrollVO> list = enrollService.getEnrollList();
+        for (EnrollVO enroll : list) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(enroll.getEnrollId());
+            row.createCell(1).setCellValue(enroll.getSubjectId());
+            row.createCell(2).setCellValue(enroll.getSubjectSeq());
+            row.createCell(3).setCellValue(enroll.getStudentId());
+            row.createCell(4).setCellValue(enroll.getCompleteHours());
+        }
+ 
+        response.setContentType("ms-vnd/excel");
+        response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+ 
+        workbook.write(response.getOutputStream());
+        workbook.close();
 	}
 	
 	//수정

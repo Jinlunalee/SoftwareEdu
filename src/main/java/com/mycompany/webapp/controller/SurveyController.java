@@ -1,36 +1,24 @@
 package com.mycompany.webapp.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.SurveyVO;
+import com.mycompany.webapp.service.IEnrollService;
 
 @Controller
 @RequestMapping("/survey")
 public class SurveyController {
 	
-	//테스트
-	@RequestMapping("/details/")
-	public String detailsTest(Model model) {
-		model.addAttribute("menu", "survey");
-		model.addAttribute("menuKOR", "만족도 조사 관리");
-		return "survey/details";
-	}
-	@RequestMapping("/update/")
-	public String updateTest(Model model) {
-		model.addAttribute("menu", "survey");
-		model.addAttribute("menuKOR", "만족도 조사 관리");
-		return "survey/update";
-	}
-	@RequestMapping("/summary")
-	public String summaryTest(Model model) {
-		model.addAttribute("menu", "survey");
-		model.addAttribute("menuKOR", "만족도 조사 관리");
-		return "survey/summary";
-	}
+	@Autowired
+	IEnrollService enrollService;
 	
 	//목록조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -81,10 +69,13 @@ public class SurveyController {
 	}
 	
 	//통계
-	@RequestMapping(value="/summary/{subjectId}", method=RequestMethod.GET)
-	public String getSurveySummary(@PathVariable String subjectId, Model model) {
+	@RequestMapping(value="/summary", method=RequestMethod.GET)
+	public String getSurveySummary(Model model, SurveyVO surveyVo) {
 		model.addAttribute("menu", "survey");
 		model.addAttribute("menuKOR", "만족도 조사 관리");
+		
+		List<EnrollVO> list = enrollService.getEnrollList();
+		model.addAttribute("list", list);
 		return "survey/summary";
 	}
 }

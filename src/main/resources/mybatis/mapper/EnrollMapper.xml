@@ -30,49 +30,10 @@
         ON e.subject_id = s.subject_id
 	</select>
 	
-	<select id="getEnrollListBySubject" resultType="EnrollVO">
-		SELECT  e.subject_id AS "subjectId", 
-				e.subject_seq AS "subjectSeq", 
-        		s.subject_title AS "subjectTitle" 
-		FROM ENROLL e 
-		LEFT OUTER JOIN SUBJECT s 
-		ON e.subject_id = s.subject_id
-	</select>
-	
-	<select id="getSubjectDetails" parameterType = "String" resultType="SubjectVO">
-		SELECT e.subject_id AS "subjectId", 
-		e.subject_seq AS "subjectSeq",
-        s.subject_title AS "subjectTitle"
-FROM ENROLL e 
-LEFT OUTER JOIN SUBJECT s 
-ON e.subject_id = s.subject_id
-	</select>
-	
-	<select id="getName" parameterType="String" resultType="StudentVO">
-		SELECT name AS "name" 
-		FROM STUDENT 
-		WHERE student_id = #{studentId}
-	</select>
-	
-	<select id="getSubjectName" parameterType="String" resultType="SubjectVO">
-		SELECT subject_title AS "subjectTitle"
-		FROM SUBJECT
-		WHERE subject_id = #{subjectId}
-	</select>
-	
-	<select id="getOpenDetails" resultType="EnrollVO">
-		SELECT start_time AS "startTime", 
-				end_time AS "endTime", 
-				start_day AS "startDay", 
-				end_day AS "endDay"
-		FROM OPEN o, ENROLL e
-		WHERE o.subject_id = e.subject_id AND o.subject_seq = e.subject_seq
-	</select>
-	
-	<select id="getProgress" parameterType="String" resultType="int">
-		SELECT e.complete_hours/s.hours * 100
-		FROM ENROLL e, SUBJECT s
-		WHERE e.subject_id = s.subject_id AND e.student_id = #{studentId}
+	<select id="getProgress" parameterType="String" resultType="String">
+		SELECT complete_hours/hours * 100 
+		FROM ENROLL e, SUBJECT s 
+		WHERE e.subject_id = s.subject_id AND student_id = #{studentId}
 	</select>
 
 	<update id="clickCancel" parameterType="map">

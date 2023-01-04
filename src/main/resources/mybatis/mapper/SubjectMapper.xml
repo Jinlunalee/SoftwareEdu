@@ -77,11 +77,42 @@
         		left join common_code on open.state_cd = common_code.comn_cd
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
 	</select>
+	
 	<select id="recruitTotalPeople" parameterType="map" resultType="int">
 		select count(*) 
 		from enroll 
 		where enroll.subject_id=#{subjectId} and enroll.subject_seq=#{subjectSeq} 
 			and enroll.state_cd=#{state}
-		
 	</select>
+	
+	<insert id="insertSubject" parameterType="SubjectVO">
+		insert into open 
+						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
+                		recruit_people, state_cd, reg_id, reg_dt)
+		values 
+			(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId},#{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+				#{recruitPeople},#{state}, 'mgr1', SYSDATE)
+	</insert>
+	
+	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
+		insert into upload_file 
+			(file_id, subject_id, file_name, file_size, file_content_type, file_data)
+		values(#{fileId}, #{subjectId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData})
+	</insert>
+	
+	<select id="selectAllCourse" resultType="SubjectVO">
+		select 
+			course_id as "courseId", 
+			course_title as "courseTitle"
+		from course
+	</select>
+	
+	<select id="selectAllSubject" resultType="SubjectVO">
+		select 
+			subject_id as "subjectId", 
+			subject_title as "subjectTitle"
+		from subject
+	</select>
+	
+	
 </mapper>

@@ -12,11 +12,7 @@ import com.mycompany.webapp.dto.SubjectVO;
 @Mapper
 public interface IEnrollRepository {
 	List<EnrollVO> getEnrollList();
-	List<EnrollVO> getEnrollListBySubject();
-	StudentVO getName(String studentId);
-	SubjectVO getSubjectName(String subjectId);
-	EnrollVO getOpenDetails();
-	int getProgress(String studentId);
+	String getProgress(String studentId);
 	void clickCancel(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	void clickDelete(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 }
