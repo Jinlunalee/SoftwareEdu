@@ -161,7 +161,7 @@ a {
 
 			<div class="box" id="show_XML" style="overflow:scroll;">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
-				<div>연수원 교육비 지원 대상   (이건 그냥 출력 버튼 비활성화예정)
+				<div>연수원 교육비 지원 대상   ()
 				<table class="list">
 					<tr>
 					<th>수강생 아이디</th>
@@ -237,20 +237,7 @@ a {
 
 	
 	
-	
-	function getDataList() {
-		$.ajax({
-			url : "getjson", 
-			async : true,
-            type : "GET",
-            contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
-			success : function(data) {
 
-				$("#result3").html(data);
-			}
-
-		});
-	}
 	$(function() {
 		$("#first_btn").click(function() {
 			$("#show_JSON").toggle();
