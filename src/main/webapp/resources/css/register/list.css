@@ -139,6 +139,8 @@ tr {
 	border-radius: 8px;
     color: #fff;
     background-color: #003964;
+    position: relative;
+    bottom: 33px;
 }
 
 .paging {

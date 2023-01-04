@@ -10,8 +10,10 @@ import lombok.ToString;
 public class EnrollVO {
 	private String enrollId;
 	private String subjectId;
+	private String subjectTitle;
 	private int subjectSeq;
 	private String studentId;
+	private String name;
 	private String stateCd;
 	private int completeHours;
 	private String regId;

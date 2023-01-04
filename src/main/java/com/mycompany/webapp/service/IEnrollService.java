@@ -8,9 +8,7 @@ import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IEnrollService {
 	List<EnrollVO> getEnrollList();
-	EnrollVO getEnrollDetails();
-	StudentVO getName(String studentId);
-	SubjectVO getSubjectName(String subjectId);
-	EnrollVO getOpenDetails();
-	int getProgress(String studentId);
+	String getProgress(String studentId);
+	void clickCancel(String studentId, String subjectId, String subjectSeq);
+	void clickDelete(String studentId, String subjectId, String subjectSeq);
 }

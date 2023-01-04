@@ -31,22 +31,11 @@ table.list th {
     font-size: 0.963rem;
     color: #000;
 }
-table.list tr {
-	border-bottom: 1px solid #e8e8e8;
-}
-table.list thead tr {
-    height: 50px;
-}
-table.list tbody tr {
-    height: 60px;
-}
 table.list tbody td {
 	font-size: 11px;
 }
 table.list td {
-    position: relative;
     color: #666;
-    padding: 20px 12px;
 }
 table.list td.title {
 	font-size:1em;
