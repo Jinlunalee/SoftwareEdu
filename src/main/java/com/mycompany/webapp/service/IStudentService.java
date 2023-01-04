@@ -8,5 +8,6 @@ public interface IStudentService {
 
 
 	List<StudentVO> getStudentList();
+	List<StudentVO> getDataList();
 
 }

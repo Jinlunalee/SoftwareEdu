@@ -21,6 +21,11 @@ public class StudentService implements IStudentService{
 		return studentRepository.getStudentList();
 	}
 
+	@Override
+	public List<StudentVO> getDataList () {
+		return studentRepository.getDataList();
+	}
+	
 	// 여기서부터 추가
 	/*
 	public List<StudentVO> getStudentList(Pager pager) {

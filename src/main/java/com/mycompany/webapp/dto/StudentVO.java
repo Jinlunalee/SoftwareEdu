@@ -20,4 +20,7 @@ public class StudentVO {
 	private String position;		// 수강생 지위
 	private int std_cnt;		//전체수강생 수
 	
+	private String supportYn;  // 교육비 지원 여부
+	private String comnCdTitle; // 공통코드명
+	
 }

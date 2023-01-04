@@ -3,7 +3,6 @@
 <mapper namespace="com.mycompany.webapp.dao.IStudentRepository">
 
 	<select id="getStudentList" resultType="StudentVO">
-
 		select 
 			name as "name",
 			student_id as "studentId",
@@ -11,6 +10,22 @@
 			birth as "birth",
 			position as "position"
 		from student
-
 	</select>
+	
+	
+	<select id="getDataList" resultType="StudentVO">
+	
+    select
+    student.student_id as "studentId", 
+    name as "name",
+    support_yn as "supportYn",
+    common_code.comn_cd_title as "comnCdTitle"
+	from student
+	left join enroll on enroll.student_id = student.student_id
+	left join subject on subject.subject_id = enroll.subject_id
+    left join common_code on common_code.comn_cd = enroll.state_cd
+	where support_yn = 'Y'
+	
+	</select>
+
 </mapper>
