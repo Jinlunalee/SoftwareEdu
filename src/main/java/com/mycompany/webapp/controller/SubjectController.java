@@ -1,5 +1,7 @@
 package com.mycompany.webapp.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.SurveyVO;
+import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.ISubjectService;
 
 @Controller
@@ -108,13 +112,47 @@ public class SubjectController {
 	public String insertSubject(Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		List<SubjectVO> allCourseList = subjectService.selectAllCourse();
+		List<SubjectVO> allSubjectList = subjectService.selectAllSubject();
+		model.addAttribute("allCourseList", allCourseList);
+		model.addAttribute("allSubjectList", allSubjectList);
+		
 		return "subject/insert";
 	}
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(SubjectVO subjectVo, @ModelAttribute(value="SurveyVO") SurveyVO surveyVo) {
+	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") SurveyVO surveyVo) {
 		System.out.println(surveyVo); // 리스트 테스트 받기
-		return "redirect:/subject/details/"+subjectVo.getSubjectId();
+		
+		//time,date format
+		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
+		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
+		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
+		subject.setStartDay(subject.getRecruitEndDay().replaceAll("-", ""));
+		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
+		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
+		
+		logger.info("subject/insert:"+subject);
+		
+		try {
+			MultipartFile mf = subject.getFile();
+			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
+				UploadfileVO file = new UploadfileVO();
+				file.setFileName(mf.getOriginalFilename());
+				file.setFileSize(mf.getSize());
+				file.setFileContentType(mf.getContentType());
+				file.setFileData(mf.getBytes());
+				
+				subjectService.insertFileData(subject, file);
+			}else { // 첨부파일 없을 때
+				subjectService.insertSubject(subject);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
 	}
 
 }
