@@ -1,5 +1,9 @@
+function showTableChart(list) {
+  console.log();
+}
+function showBarChart(list) {
 
-
+}
 
 var tableOptions = {
     series: [80, 55, 13, 43, 22],

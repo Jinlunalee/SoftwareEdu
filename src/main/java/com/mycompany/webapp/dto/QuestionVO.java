@@ -9,8 +9,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class SurveyVO {
-	private String surveyId;
+public class QuestionVO {
+	private String subjectId;
 	private String subjectSeq;
-	private List<SurveyQuestionSetVO> questionSet;
+	private List<QuestionSetVO> questionSet;
 }
