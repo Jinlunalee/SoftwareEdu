@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.dao.ISubjectRepository;
 import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.ISubjectService;
 
 @Service
@@ -33,6 +35,32 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public int recruitTotalPeople(String subjectId, int subjectSeq, String state) {
 		return subjectRepository.recruitTotalPeople(subjectId, subjectSeq, state);
+	}
+
+	@Override
+	public int insertSubject(SubjectVO subject) {
+		return subjectRepository.insertSubject(subject);
+	}
+	
+	@Transactional
+	@Override
+	public int insertFileData(SubjectVO subject, UploadfileVO file) {
+		subjectRepository.insertSubject(subject);
+		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
+			file.setSubjectId(subject.getSubjectId());
+			subjectRepository.insertFileData(file);
+		}
+		return 0;
+	}
+
+	@Override
+	public List<SubjectVO> selectAllCourse() {
+		return subjectRepository.selectAllCourse();
+	}
+
+	@Override
+	public List<SubjectVO> selectAllSubject() {
+		return subjectRepository.selectAllSubject();
 	}
 
 }

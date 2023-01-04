@@ -33,7 +33,7 @@
 				class="input-button" type="button" value="검색">
 		</div>
 		<div class="view">
-		<a href="<c:url value='/enroll/insert'/>"><img src="<c:url value='/resources/images/register/add.png'/>"/></a>
+		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
 			<select class="select-view">
 				<option>10개</option>
 				<option>30개</option>

@@ -11,7 +11,7 @@ public class UploadfileVO {
 	private String fileId;
 	private String subjectId;
 	private String fileName;
-	private int fileSize;
+	private long fileSize;
 	private String fileContentType;
 	private byte[] fileData;
 }

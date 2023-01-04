@@ -1,5 +1,7 @@
 package com.mycompany.webapp.service;
 
-public interface ISurveyService {
+import com.mycompany.webapp.dto.AnswerVO;
 
+public interface ISurveyService {
+	AnswerVO getAnswerValue(String subjectId, int subjectSeq, int questionNum, int answerValue);
 }

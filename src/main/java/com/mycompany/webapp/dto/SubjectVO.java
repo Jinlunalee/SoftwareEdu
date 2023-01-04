@@ -39,7 +39,7 @@ public class SubjectVO {
 	private MultipartFile file; //첨부파일 
 	private String fileId;
 	private String fileName;
-	private int fileSize;
+	private long fileSize;
 	private String fileContentType;
 	
 	}
