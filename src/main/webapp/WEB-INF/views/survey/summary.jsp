@@ -4,8 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
 <script type="text/javascript">
-const changeSelect = function(value){
-	
+const changeSelect = function(list){
+	showTableChart(list);
+	showBarChart(list);
 }
 
 </script>
@@ -18,8 +19,8 @@ const changeSelect = function(value){
 		<div class="content-grid">
 			<div class="course-id-dropdown">
 				<select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
-					<c:forEach var="i" begin="1" end="5" step="1">
-						<option value="${courseId}">강좌아이디${i}</option>
+					<c:forEach var="list" items="${list}">
+						<option value="${list}">수강아이디 : ${list.enrollId} ( 강좌명  : ${list.subjectTitle} | 강좌순번 : ${list.subjectSeq} )</option>
 					</c:forEach>
 				</select>
 			</div>

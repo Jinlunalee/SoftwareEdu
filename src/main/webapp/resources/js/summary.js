@@ -1,4 +1,7 @@
-var options = {
+
+
+
+var tableOptions = {
     series: [80, 55, 13, 43, 22],
     chart: {
     width: 500,
@@ -18,11 +21,11 @@ var options = {
   }]
   };
 
-  var chartTable = new ApexCharts(document.querySelector("#chart-table"), options);
+  var chartTable = new ApexCharts(document.querySelector("#chart-table"), tableOptions);
   chartTable.render();
 
 
-var options = {
+var barOptions = {
     series: [{
     name: '매우만족',
     data: [70, 50, 80, 20, 21]
@@ -73,5 +76,5 @@ var options = {
   }
   };
 
-  var chartBar = new ApexCharts(document.querySelector("#chart-bar"), options);
+  var chartBar = new ApexCharts(document.querySelector("#chart-bar"), barOptions);
   chartBar.render();
