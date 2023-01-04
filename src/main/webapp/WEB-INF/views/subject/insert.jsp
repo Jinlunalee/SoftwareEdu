@@ -35,9 +35,6 @@ function changeEverything(i) {
 	document.querySelector("#new-questions #question-inputSet-3").setAttribute("id", 'question-inputSet-' + number); // questionContent 아이디 바꾸기
 }
 </script>
-<!-- 모달 저장 버튼은 닫기 버튼으로 둠 -->
-<!-- 모달에서 입력한 값을 onclick 이벤트로 input 태그 hidden type에 저장 -->
-<!-- 한꺼번에 폼으로 전달 -->
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>

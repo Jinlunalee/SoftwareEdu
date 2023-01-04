@@ -123,7 +123,6 @@ public class SubjectController {
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") SurveyVO surveyVo) {
-		System.out.println(surveyVo); // 리스트 테스트 받기
 		
 		//time,date format
 		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
@@ -134,6 +133,7 @@ public class SubjectController {
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
 		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+surveyVo); // surveyVO 받기
 		
 		try {
 			MultipartFile mf = subject.getFile();
