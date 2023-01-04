@@ -56,11 +56,7 @@
 		  <c:forEach var="course" items="${courseList}">
             <tr>
               <td>${course.courseId}</td>
-              <td>
-				<span>
-					<a href="<c:url value='/subject/details/1'/>">${course.courseTitle}</a>
-		        </span>
-              </td>
+              <td>${course.courseTitle}</td>
               <td>${course.startDay}~${course.endDay}</td>
               <td>${course.recruitStartDay}~${course.recruitEndDay}</td>
               <td>${course.cost}</td>
@@ -81,8 +77,8 @@
               			<c:when test="${subject.comnCdTitle eq '진행완료'}">
               			</c:when>
               			<c:otherwise>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
               				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">폐강</button>
-							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
 						</c:otherwise>
               		</c:choose>
               	</div> 

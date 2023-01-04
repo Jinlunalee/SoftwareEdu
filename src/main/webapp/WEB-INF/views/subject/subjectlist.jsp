@@ -87,8 +87,8 @@
               			<c:when test="${subject.comnCdTitle eq '진행완료'}">
               			</c:when>
               			<c:otherwise>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
               				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">폐강</button>
-							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
 						</c:otherwise>
               		</c:choose>
               	</div> 

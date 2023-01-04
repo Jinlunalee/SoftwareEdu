@@ -77,15 +77,19 @@ function changeEverything(i) {
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> 
-					<input type="date" name="startDay" id="startDay" onchange="changeDay()">
+					<input type="date" name="startDay" id="startDay">
 					~ 
 					<input type="date" name="endDay" id="endDay" readonly>
-					<input type="hidden" name="days" id="days" value=90>
+					<input type="hidden" name="hours" id="hours" value=720>
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
-				<td> <input type="time" name="startTime"> ~ <input type="time" name="endTime"> </td>
+				<td> <!-- 30분단위로 입력(초) -->
+					<input type="time" name="startTime" id="startTime" min="9:00" max="21:00" step="1800"> 
+					~ 
+					<input type="time" name="endTime" id="endTime" onchange="changeDay()"> 
+				</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
@@ -236,18 +240,46 @@ function changeEverything(i) {
 		}
 	}
 	
-	/*일수에 맞춰 endDay 설정해주기 (아직 날짜가 다름;;)*/
+	/*시수에 맞춰 endDay 설정해주기 (아직 날짜가 다름;;)*/
 	function changeDay(){
 		const startDay = document.getElementById("startDay").value;
-		const days = document.getElementById("days").value;
 
-		let endDay2 = new Date(startDay);
-		endDay2.setDate(endDay2.getDate() + days);
+		const startTime = document.getElementById("startTime").value;
+		const endTime = document.getElementById("endTime").value;
+		let hours = document.getElementById("hours").value;
+
+		let startHour = parseInt(startTime.substring(0,2));
+		let startMin = parseInt(startTime.substring(3))
+		let endHour = parseInt(endTime.substring(0,2));
+		let endMin = parseInt(endTime.substring(3));
+
+		let diffHour = endHour - startHour;
+		let diffMin
+		if(endMin < startMin){
+			diffMin = (endMin - startMin) + 60;
+			diffHour = diffHour - 1;
+		}else{
+			diffMin = endMin - startMin;
+		}
+		diffMin = (diffMin/60).toFixed(2); // 소수점으로 변환
+
+		let diffTime = diffHour+diffMin; // 시작시간과 끝시간 계산
+
+		console.log(diffHour);
+		console.log(diffMin);
+		console.log(diffTime);
+
+		hours = (hours / diffTime).toFixed();
+		console.log(hours);
+
+		let startDay2 = new Date(startDay);
+		startDay2.setDate(startDay2.getDate() + hours);
 
 		let endDay = document.getElementById("endDay");
-		endDay.value = endDay2.toJSON().substring(0,10);
+		endDay.value = startDay2.toJSON().substring(0,10);
 	}
 	
+
 	/*오늘날짜와 기간들 비교해서 상태 입력*/
 	function inputState(){
 		const date = new Date();
