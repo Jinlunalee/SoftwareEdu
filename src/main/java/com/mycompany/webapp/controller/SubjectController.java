@@ -1,7 +1,5 @@
 package com.mycompany.webapp.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.slf4j.Logger;
