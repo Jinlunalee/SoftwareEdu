@@ -19,4 +19,7 @@ public class StudentVO {
 	private String add_etc;		// 수강생 주소 기타
 	private String position;		// 수강생 지위
 	
+	private String type; // 검색 타입
+	private String keyword; // 검색 내용
+	
 }

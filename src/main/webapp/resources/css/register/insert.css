@@ -97,3 +97,10 @@ input {
     bottom: 10px;
     height: 30px;
 }
+
+.sc{
+	position: relative;
+    bottom: 10px;
+    height: 40px;
+    border-radius: 8px;
+}

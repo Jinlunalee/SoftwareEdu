@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
 @Controller
@@ -38,15 +40,19 @@ public class EnrollController {
 		List<EnrollVO> list = enrollService.getEnrollList();
 		model.addAttribute("list", list);
 		
+		List<CommonCodeVO> cancelList = enrollService.getCancelList();
+		model.addAttribute("cancelList", cancelList);
+		
 		return "enroll/list";
 	}
 	
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String clickCancel(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		enrollService.clickCancel(studentId, subjectId, subjectSeq);
+	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
+	// 논리 삭제
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		System.out.println("컨트롤 체크");
@@ -55,9 +61,27 @@ public class EnrollController {
 		return "redirect:/enroll/list";
 	}
 	
-	@RequestMapping(value="/ratio/{studentId}")
-	public @ResponseBody String getProgress(@PathVariable String studentId) {
-		return enrollService.getProgress(studentId);
+	@ResponseBody
+	@RequestMapping(value="/ratio/{studentId}/{subjectId}/{subjectSeq}")
+	public String getRatio(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		System.out.println("값" + enrollService.getRatio(studentId, subjectId, subjectSeq));
+		return enrollService.getRatio(studentId, subjectId, subjectSeq);
+	}
+	
+	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
+	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
+	}
+	
+	
+	// 수강 추가 수강생 ajax
+	@RequestMapping(value="/studentlist")
+	public @ResponseBody List<StudentVO> getStudentList(@RequestParam("type") String type, @RequestParam("keyword") String keyword) {
+		StudentVO studentVO = new StudentVO();
+		studentVO.setType(type);
+		studentVO.setKeyword(keyword);
+		return enrollService.getStudentList(studentVO);
 	}
 	
 	

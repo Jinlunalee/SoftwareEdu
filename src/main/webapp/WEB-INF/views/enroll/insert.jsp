@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/insert.css'/>" />
 <div class="card m-2">
 	<div class="card-header"> 
@@ -13,27 +14,58 @@
 	<div class="search-box">
 	<div class="search-content">
 	<span class="name">수강생 명</span> &nbsp; &nbsp;
-	<form class="search">
-	<input class="search-in" type="text">
-	<input class="btn btn2" type="submit" value="검색">
+	
+	<form name="search-form" class="search">
+		<select name="type" class="sc">
+			<option selected value="">수강생 명 / 아이디</option>
+			<option value="name">수강생 명</option>
+			<option value="studentId">아이디 </option>
+		</select>
+		<input type="text" name="keyword" class="search-in">
+		<input type="button" onclick="getStudentList()" class="btn btn2" value="검색">
 	</form>
+	
+	<script>
+		function getStudentList() {
+			$.ajax({
+				type : 'GET',
+				url : 'studentlist',
+				dataType : 'json',
+				data : $("form[name=search-form]").serialize(),
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+				success : function(result){
+					$(".rs").empty();
+					if(result.length > 0) {
+						var ul = $("<ul/>");
+						
+						for(var i in result) {
+							var $studentId = result[i].studentId;
+							var $name = result[i].name;
+							var $birth = result[i].birth;
+							var $email = result[i].email;
+							var $phone = result[i].phone;
+							
+							var li = $("<ul/>").append(
+									$("<li/>").text($name),
+									$("<li/>").text($birth),
+									$("<li/>").text($email),
+									$("<li/>").text($phone),
+									
+							);
+							ul.append(li);
+						}
+						$(".rs").append(ul);
+					}
+				}
+			})
+		}
+	</script>
 	</div>
 	</div>
 	
-	<ul class="a">
-	<div class="user-info">
-	<li> 회원 아이디 | STDT001</li>
-	<li> 이름 | 홍길동</li>
-	<li> 생년월일 | 1990-01-01</li>
-	<li> 성별 | 남성</li>
-	</div>
-	<div class="user-info2">
-	<li> 이메일 | stdt001@gmail.com</li>
-	<li> 전화번호 | 010-6832-1973</li>
-	<li> 주소 | 서울시 종로구 혜화동</li>
-	<li> 직위 | 학생</li>
-	</div>
-	</ul>
+	<div class="rs"></div>
+	
+	
 	</div>
 	
 	

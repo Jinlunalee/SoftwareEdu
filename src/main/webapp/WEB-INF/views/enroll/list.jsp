@@ -50,10 +50,14 @@
 				<th>현재 상태</th>
 				<th>취소/삭제</th>
 				<th>승인</th>
-				<th></th>
 			</tr>
 
 			<c:forEach var="ls" items="${list}" varStatus="status">
+					<div class="hd">
+						<input id="stu" type="hidden" value="${ls.studentId}">
+						<input id="sub" type="hidden" value="${ls.subjectId}">
+						<input id="seq" type="hidden" value="${ls.subjectSeq}">
+					</div>
 				<tr>
 					<td>${ls.regDt}</td>
 					<td>${ls.name}</td>
@@ -65,18 +69,20 @@
 							<li>강좌명 | ${ls.subjectTitle}</li>
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
-							진도율 |  <div id="ratio"></div>
+							진도율 |  <span id="ratio"></span>
 							<li>현재 완료 시간  |  ${ls.completeHours}</li>
 							완료한 시간 입력
-							<form action="/">
-							<input class="input-time" type="number">
-							<input class="input-time-btn" type="submit" value="입력">
+							<form action="<c:url value='/enroll/addhours/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post"/>
+								<input name="addHours" class="input-time" type="number">
+								<input type="submit" class="input-time-btn"  value="입력">
 							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
 					<td>${ls.subjectId}</td>
 					<td>
+					
+					<%-- 수강 상태에 따른 현재 상태 --%>
 					<c:choose>
 					<c:when test="${ls.stateCd eq 'ERL01'}">
 					<img src="<c:url value='/resources/images/register/ERL01.png'/>" />
@@ -98,32 +104,53 @@
 					</c:when>
 					</c:choose>
 					</td>
+					
 					<td>
+					<%-- 취소 버튼이 나오는 경우 --%>
 					<c:choose>
 					<c:when test="${ls.stateCd eq 'ERL01' or ls.stateCd eq 'ERL03' or ls.stateCd eq 'ERL04'}">
-					<form action="<c:url value='/enroll/cancel/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post">
-							<input type="submit" class="btn btn-secondary" value="취소">
+					<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
+					
+					<%-- 취소 사유 모달창 --%>
+					<div class="modal modal-${status.count}">
+					<div class="modal-content modal-content-${status.count}">
+					<span style="font-size: 1.2em;">수강 신청을 취소하시겠습니까?</span>
+					<form action="<c:url value='/enroll/cancel/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post" class="cacelform">
+						<select name="cancelRsCd" class="cancelrs">
+							<option>취소 사유</option>
+								<c:forEach var="cl" items="${cancelList}">
+									<option value="${cl.comnCd}">${cl.comnCdTitle}</option>	
+								</c:forEach>	
+						</select>
+						<input type="text" name="cancelRsEtc" class="cancelrs"  placeholder="기타 입력">
+						<input type="submit" value="확인" class="confirm">
 					</form>
+					
+					<div id="close-btn">
+					<button class="close-btn2">닫기</button>
+					</div>
+					</div>
+					</div>
 					</c:when>
+					
+					<%-- 삭제 버튼 나오는 경우  --%>
 					<c:when test="${ls.stateCd eq 'ERL02' or ls.stateCd eq 'ERL05'}">
 					<form>
-						<input id="stu" type="hidden" value="${ls.studentId}">
-						<input id="sub" type="hidden" value="${ls.subjectId}">
-						<input id="seq" type="hidden" value="${ls.subjectSeq}">
 						<input type="submit" onclick="del()" class="btn btn-secondary" value="삭제">
 					</form>
 					</c:when>
 					</c:choose>
 					</td>
+					
 					<td>
 					<c:if test="${ls.stateCd eq 'ERL01'}">
 					<form>
-							<input class="btn btn-secondary"type="button" value="승인" onclick="ret()">
+						<input class="btn btn-secondary"type="button"  onclick="approval()" value="승인">
 					</form>
 					</c:if>
 					</td>
-				</tr>
-
+					
+				</tr>	
 			</c:forEach>
 		</table>
 		<div class="down">
@@ -161,59 +188,43 @@
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
+			$(".close-btn2").click(function(){
+				$(".modal").fadeOut();
+			});
 		};
 	</script>
 	
 	<script>
-		$('document').ready(function() {
+		$('.modal-open').click(function() {
 			var studentId = $("#stu").val();
+			console.log(studentId);
+			var subjectId = $("#sub").val();
+			var subjectSeq = $("#seq").val();
 			var ratioEl = $("#ratio");
 			$.ajax({
-				type: "GET",
-				url: "ratio/" + studentId,
+				url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
 				success: function(data) {
+					console.log(data);
 					ratioEl.text(data + '%');
-			
 				}
-				
 			});
-			
 		})
-		
-		
-			
-		
 	</script>
 	
-	
-	
-	
-	
 	<script>
-
 		function del() {
 			var studentId = $("#stu").val();
 			var subjectId = $("#sub").val();
 			var subjectSeq = $("#seq").val();
 		
-		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
-			console.log("true");
+		if(confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
-				async: false,
 				type : "POST", 
 				url : "enroll/del/" + studentId + "/" + subjectId + "/" + subjectSeq
 			})
 			
 		} else {
 			return false;
-		}
-	}
-	
-	function ret() {
-		if(confirm('수강을 반려하시겠습니까?') == true) {
-			console.log('반려')
-		} else {
-			console.log('취소')
 		}
 	}
 	</script>
