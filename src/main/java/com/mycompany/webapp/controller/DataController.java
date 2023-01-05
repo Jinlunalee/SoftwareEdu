@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +86,7 @@ public class DataController {
 	public String getxml(Model model) {
 		List<StudentVO> dataList = studentService.getDataList();
 		
-		String result = "";
+		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
 		for (StudentVO vo : dataList) {	
 			String studentId = vo.getStudentId();
 			String name = vo.getName();
@@ -96,7 +94,7 @@ public class DataController {
 			String comnCdTitle = vo.getComnCdTitle();
 		
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
-			
+			// +=로 문자열을 이어붙이기
         result += "<student>";
         result += "<studentId>"+ studentId +"</studentId>";
         result += "<name>" + name + "</name>";
