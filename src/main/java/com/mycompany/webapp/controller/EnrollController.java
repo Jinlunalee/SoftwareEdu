@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
@@ -82,6 +83,21 @@ public class EnrollController {
 		studentVO.setType(type);
 		studentVO.setKeyword(keyword);
 		return enrollService.getStudentList(studentVO);
+	}
+	
+	// 수강 추가 강좌 과정 ajax
+	@RequestMapping(value="/openlist")
+	public @ResponseBody List<OpenVO> getOpenList(@RequestParam("subcor") String subCor, @RequestParam("kw") String kw) {
+		OpenVO openVO = new OpenVO();
+		openVO.setSubCor(subCor);
+		openVO.setKw(kw);
+		return enrollService.getOpenList(openVO);
+	}
+	
+	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
+	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
+		enrollService.approval(studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
 	}
 	
 	

@@ -25,7 +25,7 @@
 		LEFT OUTER JOIN STUDENT t 
 		ON e.student_id = t.student_id 
         LEFT OUTER JOIN OPEN o 
-        ON e.subject_id = o.subject_id 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
         LEFT OUTER JOIN SUBJECT s 
         ON e.subject_id = s.subject_id 
         WHERE NOT (e.del_yn ='Y')
@@ -62,6 +62,34 @@
 			</when>
 		</choose>
 	</select>
+	
+	<select id="getOpenList" parameterType="OpenVO" resultType="OpenVO">
+		SELECT o.subject_id AS "subjectId", 
+				subject_seq AS "subjectSeq", 
+				subject_title AS "subjectTitle", 
+				o.course_id AS "courseId", 
+				start_day AS "startDay", 
+				end_day AS "endDay", 
+				start_time AS "startTime", 
+				end_time AS "endTime", 
+				recruit_start_day AS "recruitStartDay", 
+				recruit_end_day AS "recruitEndDay", 
+				recruit_people AS "recruitPeople" 
+		FROM OPEN o 
+		LEFT OUTER JOIN SUBJECT s 
+		ON o.subject_id = s.subject_id 
+		LEFT OUTER JOIN COURSE c 
+		ON o.course_id = c.course_id 
+		WHERE
+		<choose>
+			<when test="subCor != null and subCor.equals('subject')">
+				(subject_title = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') AND o.course_id is NULL
+			</when>
+			<when test="subCor != null and subCor.equals('course')">
+				course_title = #{kw} OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%'
+			</when>
+		</choose>
+	</select>
 
 	<update id="clickCancel" parameterType="map">
 		UPDATE ENROLL 
@@ -84,6 +112,12 @@
 	<update id="updateCancelRsCd" parameterType="map">
 		UPDATE ENROLL 
 		SET cancel_rs_cd = #{cancelRsCd}, cancel_rs_etc = #{cancelRsEtc} 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="approval" parameterType="map">
+		UPDATE ENROLL 
+		SET state_cd = 'ERL03' 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
 
