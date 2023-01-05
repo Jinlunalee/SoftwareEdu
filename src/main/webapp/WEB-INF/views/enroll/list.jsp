@@ -11,6 +11,8 @@
 	 <div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
 	</div>
 	<div class="card-body">
+		
+		<%-- 검색  --%>
 		<div class="search">
 		<span>신청기간</span>
 			<input class="input-date" type="date"> ~
@@ -32,6 +34,8 @@
 				placeholder="수강생 명 / 강좌 명을 입력해 주세요"> <input
 				class="input-button" type="button" value="검색">
 		</div>
+		
+		<%-- 뷰 갯수 --%>
 		<div class="view">
 		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
 			<select class="select-view">
@@ -41,6 +45,7 @@
 			</select>
 		</div>
 
+		<%-- 목록 --%>
 		<table class="list">
 			<tr>
 				<th>신청일자</th>
@@ -53,23 +58,27 @@
 			</tr>
 
 			<c:forEach var="ls" items="${list}" varStatus="status">
-					<div class="hd">
-						<input id="stu" type="hidden" value="${ls.studentId}">
-						<input id="sub" type="hidden" value="${ls.subjectId}">
-						<input id="seq" type="hidden" value="${ls.subjectSeq}">
-					</div>
 				<tr>
 					<td>${ls.regDt}</td>
 					<td>${ls.name}</td>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count});">${ls.subjectTitle}</a></td>
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${ls.studentId}', '${ls.subjectId}', '${ls.subjectSeq}');">${ls.subjectTitle}</a></td>
 					<div class="modal modal-${status.count}">
 						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${ls.name}  |  ${ls.studentId}  |  <c:if test="${ls.stateCd eq 'ERL06'}"> 수강 완료</c:if></li>
+							<li style="text-align: center;">${ls.name}  |  ${ls.studentId}  |  
+							<c:choose>
+								<c:when test="${ls.stateCd eq 'ERL01'}">수강 신청</c:when>
+								<c:when test="${ls.stateCd eq 'ERL02'}">수강 신청 취소</c:when>
+								<c:when test="${ls.stateCd eq 'ERL03'}">수강 예정</c:when>
+								<c:when test="${ls.stateCd eq 'ERL04'}">수강 중</c:when>
+								<c:when test="${ls.stateCd eq 'ERL05'}">수강 취소</c:when>
+								<c:when test="${ls.stateCd eq 'ERL06'}">수강 완료</c:when>
+							</c:choose>
+							</li>
 							<br>
 							<li>강좌명 | ${ls.subjectTitle}</li>
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
-							진도율 |  <span id="ratio"></span>
+							<span>진도율 | </span><span class="rt"></span>
 							<li>현재 완료 시간  |  ${ls.completeHours}</li>
 							완료한 시간 입력
 							<form action="<c:url value='/enroll/addhours/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post"/>
@@ -109,11 +118,11 @@
 					<%-- 취소 버튼이 나오는 경우 --%>
 					<c:choose>
 					<c:when test="${ls.stateCd eq 'ERL01' or ls.stateCd eq 'ERL03' or ls.stateCd eq 'ERL04'}">
-					<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
+					<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
 					
 					<%-- 취소 사유 모달창 --%>
-					<div class="modal modal-${status.count}">
-					<div class="modal-content modal-content-${status.count}">
+					<div class="modal2 modal2-${status.count}">
+					<div class="modal-content2 modal-content2-${status.count}">
 					<span style="font-size: 1.2em;">수강 신청을 취소하시겠습니까?</span>
 					<form action="<c:url value='/enroll/cancel/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post" class="cacelform">
 						<select name="cancelRsCd" class="cancelrs">
@@ -126,7 +135,7 @@
 						<input type="submit" value="확인" class="confirm">
 					</form>
 					
-					<div id="close-btn">
+					<div id="close-btn2">
 					<button class="close-btn2">닫기</button>
 					</div>
 					</div>
@@ -136,7 +145,7 @@
 					<%-- 삭제 버튼 나오는 경우  --%>
 					<c:when test="${ls.stateCd eq 'ERL02' or ls.stateCd eq 'ERL05'}">
 					<form>
-						<input type="submit" onclick="del()" class="btn btn-secondary" value="삭제">
+						<input type="submit" onclick="del('${ls.studentId}', '${ls.subjectId}', '${ls.subjectSeq}')" class="btn btn-secondary" value="삭제">
 					</form>
 					</c:when>
 					</c:choose>
@@ -144,9 +153,9 @@
 					
 					<td>
 					<c:if test="${ls.stateCd eq 'ERL01'}">
-					<form>
-						<input class="btn btn-secondary"type="button"  onclick="approval()" value="승인">
-					</form>
+						<form>
+						<input type="submit" class="btn btn-secondary" onclick="approval('${ls.studentId}', '${ls.subjectId}', '${ls.subjectSeq}')" value="승인">
+						</form>
 					</c:if>
 					</td>
 					
@@ -188,45 +197,59 @@
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
+		};
+		
+		function showModal2(i){
+ 			var openBtnClassName = ".modal-open2-" + i;
+ 			var modalClassName = ".modal2-" + i; 
+			$(openBtnClassName).click(function(){
+				$(modalClassName).fadeIn();
+			});
+
 			$(".close-btn2").click(function(){
-				$(".modal").fadeOut();
+				$(".modal2").fadeOut();
 			});
 		};
 	</script>
 	
 	<script>
-		$('.modal-open').click(function() {
-			var studentId = $("#stu").val();
-			console.log(studentId);
-			var subjectId = $("#sub").val();
-			var subjectSeq = $("#seq").val();
-			var ratioEl = $("#ratio");
+		function rto(studentId, subjectId, subjectSeq) {
+			var ratioEl = $(".rt");
 			$.ajax({
 				url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
 				success: function(data) {
-					console.log(data);
 					ratioEl.text(data + '%');
 				}
 			});
-		})
+		}
 	</script>
 	
 	<script>
-		function del() {
-			var studentId = $("#stu").val();
-			var subjectId = $("#sub").val();
-			var subjectSeq = $("#seq").val();
+		function del(studentId, subjectId, subjectSeq) {
 		
 		if(confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
 				type : "POST", 
-				url : "enroll/del/" + studentId + "/" + subjectId + "/" + subjectSeq
+				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
 			})
 			
 		} else {
 			return false;
 		}
 	}
+	</script>
+	
+	<script>
+			function approval(studentId, subjectId, subjectSeq) {
+				if(confirm('수강 신청을 승인하시겠습니까?')) {
+					$.ajax({
+						url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq
+					})
+				}
+				else{
+					
+				}
+			}
 	</script>
 	
 </div>

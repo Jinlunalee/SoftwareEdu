@@ -11,6 +11,7 @@
 		<typeAlias type="com.mycompany.webapp.dto.QuestionVO" alias="QuestionVO" />
 		<typeAlias type="com.mycompany.webapp.dto.QuestionSetVO" alias="QuestionSetVO" />
 		<typeAlias type="com.mycompany.webapp.dto.AnswerVO" alias="AnswerVO" />
+		<typeAlias type="com.mycompany.webapp.dto.OpenVO" alias="OpenVO" />
 	</typeAliases>
 </configuration>
 

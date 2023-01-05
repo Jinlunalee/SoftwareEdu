@@ -45,11 +45,11 @@
 							var $email = result[i].email;
 							var $phone = result[i].phone;
 							
-							var li = $("<ul/>").append(
-									$("<li/>").text($name),
-									$("<li/>").text($birth),
-									$("<li/>").text($email),
-									$("<li/>").text($phone),
+							var li = $("<ul class='stu'/>").append(
+									$("<li/>").text(' ' + '이름 : ' + $name),
+									$("<li/>").text(' ' + '생년월일 : ' + $birth),
+									$("<li/>").text(' ' + '이메일 : ' + $email),
+									$("<li/>").text(' ' + '전화번호 : ' + $phone),
 									
 							);
 							ul.append(li);
@@ -64,62 +64,91 @@
 	</div>
 	
 	<div class="rs"></div>
-	
-	
 	</div>
-	
 	
 	<div class="wrap">
 	<div class="search-box">
 	<div class="search-content">
-	<span class="name">강좌/과정</span> &nbsp; &nbsp;
-		<select class="sel" onchange="changeType(this)">
-			<option>강좌와 과정 중 선택</option>
-			<option value="a">강좌</option>
-			<option value="b">과정</option>
+	<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
+	<form name="search-subject-course" class="search2">
+		<select name="subcor" class="sc2">
+			<option selected value="">강좌 / 과정</option>
+			<option value="subject">강좌</option>
+			<option value="course">과정</option>
 		</select>
-		
-		<form class="search">
-		<input type="text" class="search-in">
-		<input type="submit" class="btn btn2" value="검색">
-		</form>
-		
-		<script>
-			function changeType(v) {
-				var course = ["자바 start", "자바 활용", "C언어 시작", "C언어 실습", "파이썬 기초"];
-				var cl = ["자바 국비 과정", "자바 전문가 과정", "자바 기초 과정", "C언어 국비 과정", "C언어 전문가 과정", "C언어 기초 과정", "파이썬 국비 과정", "파이썬 전문가 과정", "파이썬 기초 과정"];
-				var target = document.getElementById("courselist");
-				
-				if(v.value == "a") var d = course;
-				else if(v.value == "b") var d = cl;
-				
-				target.options.length = 0;
-				
-				for(x in d) {
-					var opt = document.createElement("option");
-					opt.value = d[x];
-					opt.innerHTML = d[x];
-					target.appendChild(opt);
+		<input type="text" name="kw" class="search-in">
+		<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
+	</form>
+	
+	<script>
+		function getOpenList() {
+			$.ajax({
+				type : 'GET',
+				url : 'openlist', 
+				dataType : 'json',
+				data : $("form[name=search-subject-course]").serialize(),
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+				success : function(result){
+					$(".rs2").empty();
+					if(result.length > 0) {
+						var td = $("<table class='tb'/>");
+						
+						var rowTitle = $("<tr/>").append(
+								$("<td/>").text("강좌 아이디"),
+								$("<td/>").text("강좌 시퀀스 "),
+								$("<td/>").text("강좌 제목"),
+								$("<td/>").text("과정 아이디"),
+								$("<td/>").text("시작 일자"),
+								$("<td/>").text("종료 일자"),
+								$("<td/>").text("시작 시간"),
+								$("<td/>").text("종료 시간"),
+								$("<td/>").text("모집 시작일"),
+								$("<td/>").text("모집 마감일"),
+								$("<td/>").text("모집 인원")
+								)
+							td.append(rowTitle);
+						
+						for(var i in result) {
+							var $subjectId = result[i].subjectId;
+							var $subjectSeq = result[i].subjectSeq;
+							var $subjectTitle = result[i].subjectTitle;
+							var $courseId = result[i].courseId;
+							var $startDay = result[i].startDay;
+							var $endDay = result[i].endDay;
+							var $startTime = result[i].startTime;
+							var $endTime = result[i].endTime;
+							var $recruitStartDay = result[i].recruitStartDay;
+							var $recruitEndDay = result[i].recruitEndDay;
+							var $recruitPeople = result[i].recruitPeople;
+														
+							var row = $("<tr/>").append(
+									$("<td/>").text($subjectId),
+									$("<td/>").text($subjectSeq),
+									$("<td/>").text($subjectTitle),
+									$("<td/>").text($courseId),
+									$("<td/>").text($startDay),
+									$("<td/>").text($endDay),
+									$("<td/>").text($startTime),
+									$("<td/>").text($endTime),
+									$("<td/>").text($recruitStartDay),
+									$("<td/>").text($recruitEndDay),
+									$("<td/>").text($recruitPeople)
+									
+							);
+							td.append(row);
+						}
+						$(".rs2").append(td);
+					}
 				}
-			}
-		</script>
+			})
+		}
+	</script>
+	
 	</div>
+	</div>
+	<div class="rs2"></div>
 	</div>
 	
-	<ul class="a">
-	<div class="course-info">
-	<li> 강좌 아이디 | CRSE0001</li>
-	<li> 강좌 명 | 자바 초급</li>
-	<li> 강좌 기간 | 2020-01-05 ~ 2020-04-04</li>
-	<li> 강좌 시간 | 09:00 ~ 20:00</li>
-	</div>
-	<div class="course-info2">
-	<li> 모집 기간 | 2020-01-01 ~ 2020-01-04</li>
-	<li> 모집 인원 | 30</li>
-	<li> 모집 상태 | 신청 중</li>
-	</div>
-	</ul>
-	</div>
 	<div class="submit-btn">
 	<input class="btn" type="button" value="저 장">
 	<input class="btn" type="reset" onclick="location.href='<c:url value="/enroll/list"/>'" value="취 소">
