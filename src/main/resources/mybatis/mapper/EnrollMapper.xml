@@ -103,7 +103,7 @@
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
 	
-	<update id="clickDelete" parameterType="map">
+	<update id="clickDeleteOnOpen" parameterType="map">
 		UPDATE ENROLL 
 		SET del_yn = 'Y' 
 		WHERE subject_id = #{subjectId} AND subject_seq = #{subjectSeq}

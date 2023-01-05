@@ -146,7 +146,7 @@ public class SubjectController {
 	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
 	public void clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq) {
 		// enroll 논리 삭제
-		enrollService.clickDelete(subjectId, subjectSeq);
+		enrollService.clickDeleteOnOpen(subjectId, subjectSeq);
 		// answer 논리 삭제
 		surveyService.clickdeleteAnswer(subjectId, subjectSeq);
 		// question 논리 삭제
