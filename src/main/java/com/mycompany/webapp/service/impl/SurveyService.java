@@ -31,4 +31,14 @@ public class SurveyService implements ISurveyService {
 		return surveyRepository.selectSubjectListByFinishedState();
 	}
 
+	@Override
+	public void clickdeleteQuestion(String subjectId, int subjectSeq) {
+		surveyRepository.clickdeleteQuestion(subjectId, subjectSeq);
+	}
+
+	@Override
+	public void clickdeleteAnswer(String subjectId, int subjectSeq) {
+		surveyRepository.clickdeleteAnswer(subjectId, subjectSeq);
+	}
+
 }

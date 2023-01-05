@@ -49,4 +49,12 @@ left join subject s
 on o.subject_id = s.subject_id
 where state_cd = 'OPN05'
 </select>
+
+<update id="clickdeleteQuestion" parameterType="map">
+
+</update>
+
+<update id="clickdeleteAnswer" parameterType="map">
+
+</update>
 </mapper>

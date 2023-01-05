@@ -11,4 +11,6 @@ public interface ISurveyService {
 	AnswerVO getAnswerValue(String subjectId, int subjectSeq, int questionNum, int answerValue);
 	int getCountQuestionNum(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	List<SubjectVO> selectSubjectListByFinishedState();
+	void clickdeleteQuestion(String subjectId, int subjectSeq);
+	void clickdeleteAnswer(String subjectId, int subjectSeq);
 }
