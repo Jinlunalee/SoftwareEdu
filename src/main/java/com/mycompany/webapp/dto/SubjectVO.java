@@ -15,6 +15,7 @@ public class SubjectVO {
 	private String subjectTitle; //강좌명
 	private int subjectSeq; //강좌시퀀스
 	private String supportYn; //지원여부
+	private String catSubject;//강좌 분류 코드
 	private int days; //일수
 	private int hours; //시수
 	private String level; //레벨
@@ -23,7 +24,7 @@ public class SubjectVO {
 	
 	private String courseId; //과정 아이디
 	private String courseTitle; // 과정명
-	private String cat; // 과정 분류 코드
+	private String catCourse; // 과정 분류 코드
 	private String content; //개설 강좌 내용
 	private String startTime; //개설 강좌 시작 시간
 	private String endTime; //개설 강좌 종료 시간

@@ -17,6 +17,7 @@
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
+        where open.course_id IS NOT NULL
 	</select>
 	
 	<select id="selectSubjectList" resultType="SubjectVO">
@@ -85,6 +86,24 @@
 			and enroll.state_cd=#{state}
 	</select>
 	
+	<update id="updateSubject" parameterType="SubjectVO">
+		update open
+		set 
+    		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
+    		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
+    		content = #{content}
+		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="updateFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
+		update upload_file
+		set
+			file_name=#{fileName}, file_size=#{fileSize}, 
+			file_content_type=#{fileContentType}, file_data=#{fileData}
+		where 
+			file_id=#{fileId} and subject_id=#{subjectId}
+	</update>
+	
 	<insert id="insertSubject" parameterType="SubjectVO">
 		insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
@@ -113,6 +132,21 @@
 			subject_title as "subjectTitle"
 		from subject
 	</select>
+	
+	<select id="infoSubject" parameterType="String" resultType="SubjectVO">
+		select 
+				subject_title as "subjectTitle", 
+				support_yn as "supportYn", 
+				cat_cd as "catSubject", 
+				days as "days", 
+				hours as "hours", 
+				level_cd as "level", 
+				level_etc as "levelEtc", 
+				cost as "cost"
+		from subject 
+		where subject_id= #{subjectId};
+	</select>
+	
 	
 	
 </mapper>

@@ -16,7 +16,7 @@
 	<div class="card-body">
 		<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
 				
-		<form class="insert_form" action="<c:url value=''/>" method="post" enctype="multipart/form-data">
+		<form class="insert_form" action="<c:url value='/subject/update/${subject.subjectId}/${subject.subjectSeq}'/>" method="post" enctype="multipart/form-data">
 			<div class="course_title">
 				<div class="main_title"><b>${subject.subjectId}</b> 
 					<input class="readonly_txt" type="text" value="${subject.subjectTitle}" readonly>
@@ -44,7 +44,7 @@
 				<td> 연수기간(일수)</td>
 				<td> 
 					<fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/>
-					<input type="date" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>"> 
+					<input type="date" name="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>"> 
 					~ 
 					<fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/>
 					<input type="date" name="endDay" value="<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>">
@@ -53,19 +53,19 @@
 			<tr>
 				<td> 연수시간</td>
 				<td> <fmt:parseDate value="${subject.startTime}" var="startTime" pattern="HHmm"/>
-					<input type="time" value="<fmt:formatDate value="${startTime}" pattern="HH:mm"/>"> 
+					<input type="time" name="startTime" value="<fmt:formatDate value="${startTime}" pattern="HH:mm"/>"> 
 					~
 					<fmt:parseDate value="${subject.endTime}" var="endTime" pattern="HHmm"/>
-					<input type="time" value="<fmt:formatDate value="${endTime}" pattern="HH:mm"/>">
+					<input type="time" name="endTime" value="<fmt:formatDate value="${endTime}" pattern="HH:mm"/>">
 				</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
 				<td> <fmt:parseDate value="${subject.recruitStartDay}" var="recruitStart" pattern="yyyyMMdd"/>
-					<input type="date" value="<fmt:formatDate value="${recruitStart}" pattern="yyyy-MM-dd"/>"> 
+					<input type="date" name="recruitStartDay" value="<fmt:formatDate value="${recruitStart}" pattern="yyyy-MM-dd"/>"> 
 					~ 
 					<fmt:parseDate value="${subject.recruitEndDay}" var="recruitEnd" pattern="yyyyMMdd"/>
-					<input type="date" name="endDay" value="<fmt:formatDate value="${recruitEnd}" pattern="yyyy-MM-dd"/>">
+					<input type="date" name="recruitEndDay" value="<fmt:formatDate value="${recruitEnd}" pattern="yyyy-MM-dd"/>">
 				</td>
 			</tr>
 			<tr>
@@ -76,11 +76,11 @@
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> <input type="text" name="" value="${subject.recruitPeople}"> 명 </td>
+				<td> <input type="text" name="recruitPeople" value="${subject.recruitPeople}"> 명 </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td class="readonly_txt"> <input type="text" value="${subject.cost}" readonly> 원 <br>
+				<td class="readonly_txt"> <input type="text" name="cost" value="${subject.cost}" readonly> 원 <br>
 					<c:if test="${subject.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
 				</td>
 			</tr>
@@ -102,7 +102,7 @@
 		</table>
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt"> <textarea cols="60" rows="10">${subject.content}</textarea></p>
+			<p class="txt"> <textarea name="content" cols="60" rows="10">${subject.content}</textarea></p>
 		</div>
 		<div class="submit-btn">
 			<input type="submit" value="저장">

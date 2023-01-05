@@ -1,6 +1,9 @@
 package com.mycompany.webapp.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.SubjectVO;
@@ -92,9 +96,37 @@ public class SubjectController {
 		return "subject/update";
 	}
 
-	@RequestMapping(value="/update/{subjectId}", method=RequestMethod.POST)
-	public String updateSubject(SubjectVO subjectVo) {
-		return "redirect:/subject/details/"+subjectVo.getSubjectId();
+	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
+	public String updateSubject(SubjectVO subject) {
+		logger.info("subject/update:"+subject);
+		
+		//time,date format
+		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
+		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
+		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
+		subject.setRecruitEndDay(subject.getRecruitEndDay().replaceAll("-", ""));
+		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
+		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
+				
+		
+		try {
+			MultipartFile mf = subject.getFile();
+			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
+				UploadfileVO file = new UploadfileVO();
+				file.setFileName(mf.getOriginalFilename());
+				file.setFileSize(mf.getSize());
+				file.setFileContentType(mf.getContentType());
+				file.setFileData(mf.getBytes());
+				
+				subjectService.updateFileData(subject, file);
+			}else { // 첨부파일 없을 때
+				subjectService.updateSubject(subject);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
 	}
 
 	//삭제
@@ -127,7 +159,7 @@ public class SubjectController {
 		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
 		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
 		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
-		subject.setStartDay(subject.getRecruitEndDay().replaceAll("-", ""));
+		subject.setRecruitEndDay(subject.getRecruitEndDay().replaceAll("-", ""));
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
@@ -150,7 +182,15 @@ public class SubjectController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
+		return "redirect:/subject/subjectlist";
+	}
+	
+	@RequestMapping(value="/ajax", method=RequestMethod.GET)
+	public @ResponseBody SubjectVO ajaxTest(String subjectId) {
+		logger.info("test/subjectId: " + subjectId);
+		return subjectService.infoSubject(subjectId);
+		
+		
 	}
 
 }

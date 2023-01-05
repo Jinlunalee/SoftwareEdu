@@ -75,19 +75,19 @@
               	<div>
               		<c:choose>
               			<c:when test="${subject.comnCdTitle eq '모집예정'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
 							<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '진행중'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '폐강'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '진행완료'}">
               			</c:when>
               			<c:otherwise>
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
               				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">폐강</button>
 						</c:otherwise>
               		</c:choose>

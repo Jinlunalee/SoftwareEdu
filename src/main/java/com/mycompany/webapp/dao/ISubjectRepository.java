@@ -16,11 +16,17 @@ public interface ISubjectRepository {
 	SubjectVO selectSubjectDetails(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); // 강좌 상세보기
 	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
 	
+	int updateSubject(SubjectVO subject); // 과정/강좌 수정
+	int updateFileData(UploadfileVO file); // 과정/강좌 수정 첨부파일
+	
 	int insertSubject(SubjectVO subject); // 과정/강좌 개설
 	int insertFileData(UploadfileVO file); // 과정/강좌 개설 첨부파일
 	
 	List<SubjectVO> selectAllCourse();//과정명 가져오기
 	List<SubjectVO> selectAllSubject(); //강좌명 가져오기
 	
+	int checkCourse(String courseId); // 강좌개설시, 같은 과정이 존재하는지 확인
+	
+	SubjectVO infoSubject(String subjectId); // 강좌에 대한 정보
 	
 }

@@ -63,4 +63,24 @@ public class SubjectService implements ISubjectService{
 		return subjectRepository.selectAllSubject();
 	}
 
+	@Override
+	public int updateSubject(SubjectVO subject) {
+		return subjectRepository.updateSubject(subject);
+	}
+
+	@Override
+	public int updateFileData(SubjectVO subject, UploadfileVO file) {
+		subjectRepository.updateSubject(subject);
+		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
+			file.setSubjectId(subject.getSubjectId());
+			subjectRepository.updateFileData(file);
+		}
+		return 0;
+	}
+
+	@Override
+	public SubjectVO infoSubject(String subjectId) {
+		return subjectRepository.infoSubject(subjectId);
+	}
+
 }

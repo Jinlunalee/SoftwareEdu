@@ -65,6 +65,7 @@
 				<td> 교육비</td>
 				<td> ${subject.cost}
 					<c:if test="${subject.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
+					<c:if test="${subject.supportYn eq 'N'}">* 교육비 지원하지않는 강좌입니다.</c:if>
 				</td>
 			</tr>
 			<tr>
