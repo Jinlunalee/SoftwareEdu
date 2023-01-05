@@ -99,20 +99,25 @@ public class SurveyController {
 		System.out.println("subjectId : " + subjectId);
 		System.out.println("subjectSeq : " + subjectSeq);
 		int subjectSeqInt = Integer.parseInt(subjectSeq);
-		List<AnswerVO> answerList = new ArrayList<>();
+		
 		AnswerVO answerVo = new AnswerVO();
-		System.out.println(surveyService.getCountQuestionNum(subjectId, subjectSeqInt));
+		
+		// 데이터 쌓을 List<AnswerVO> 만들기
+		List<AnswerVO> answerList = new ArrayList<>();
+
 		// 문항 수만큼 반복
-		for(int i=0; i<surveyService.getCountQuestionNum(subjectId, subjectSeqInt); i++) {
+		for(int i=1; i<=surveyService.getCountQuestionNum(subjectId, subjectSeqInt); i++) {
 			// 답변 개수 (5개) 만큼 반복
-			for(int k=0; k<5; k++) {
-				answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k);
-				answerList.add(answerVo);
+			for(int k=1; k<=5; k++) {
+				answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k); // vo에 답변 저장하기
+				answerList.add(answerVo); // 리스트에 add
 			}
 		}
 		logger.info("survey/summary-post: "+ answerList);
+		
+		// 문자열로 바꿔서 리턴
 		String result = answerList.toString();
-//		String result = "안녕";
+		
 		return result;
 	}
 }

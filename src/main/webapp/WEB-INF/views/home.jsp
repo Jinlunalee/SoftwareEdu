@@ -1,8 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
-<!DOCTYPE html>
-
-
 <style>
 .main-first-row { text-align: center;}
 

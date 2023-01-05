@@ -1,7 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
 <div class="card m-2">
 	<div class="card-header">
