@@ -27,13 +27,40 @@
         LEFT OUTER JOIN OPEN o 
         ON e.subject_id = o.subject_id 
         LEFT OUTER JOIN SUBJECT s 
-        ON e.subject_id = s.subject_id
+        ON e.subject_id = s.subject_id 
+        WHERE NOT (e.del_yn ='Y')
 	</select>
 	
-	<select id="getProgress" parameterType="String" resultType="String">
-		SELECT complete_hours/hours * 100 
+	<select id="getRatio" parameterType="map" resultType="string">
+		SELECT ROUND(complete_hours/hours * 100) 
 		FROM ENROLL e, SUBJECT s 
-		WHERE e.subject_id = s.subject_id AND student_id = #{studentId}
+		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
+	</select>
+	
+	<select id="getCancelList" resultType="CommonCodeVO">
+		SELECT comn_cd AS "comnCd", 
+		comn_cd_title AS "comnCdTitle" 
+		FROM COMMON_CODE 
+		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL05' 
+		OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
+	</select>
+	
+	<select id="getStudentList" parameterType="StudentVO" resultType="StudentVO">
+		SELECT student_id AS "studentId", 
+				name AS "name", 
+				birth AS "birth", 
+				email AS "email", 
+				phone AS "phone" 
+		FROM STUDENT 
+		WHERE 
+		<choose>
+			<when test="type != null and type.equals('name')">
+				name = #{keyword}
+			</when>
+			<when test="type != null and type.equals('studentId')">
+				student_id = #{keyword}
+			</when>
+		</choose>
 	</select>
 
 	<update id="clickCancel" parameterType="map">
@@ -45,6 +72,18 @@
 	<update id="clickDelete" parameterType="map">
 		UPDATE ENROLL 
 		SET del_yn = 'Y' 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="addHours" parameterType="map">
+		UPDATE ENROLL 
+		SET complete_hours = complete_hours + #{addHours} 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="updateCancelRsCd" parameterType="map">
+		UPDATE ENROLL 
+		SET cancel_rs_cd = #{cancelRsCd}, cancel_rs_etc = #{cancelRsEtc} 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
 

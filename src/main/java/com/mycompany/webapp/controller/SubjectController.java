@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.SubjectVO;
-import com.mycompany.webapp.dto.SurveyVO;
+import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.ISubjectService;
 
@@ -152,8 +152,7 @@ public class SubjectController {
 	}
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") SurveyVO surveyVo) {
-		System.out.println(surveyVo); // 리스트 테스트 받기
+	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") QuestionVO questionVo) {
 		
 		//time,date format
 		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
@@ -164,6 +163,7 @@ public class SubjectController {
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
 		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+questionVo); // surveyVO 받기
 		
 		try {
 			MultipartFile mf = subject.getFile();
