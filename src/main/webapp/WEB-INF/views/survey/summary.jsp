@@ -3,13 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
-<script type="text/javascript">
-const changeSelect = function(subjectList){
-	showTableChart(subjectList);
-	showBarChart(subjectList);
-}
-
-</script>
 <div class="card m-2">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
@@ -20,7 +13,7 @@ const changeSelect = function(subjectList){
 			<div class="course-id-dropdown">
 				<select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
 					<c:forEach var="subjectList" items="${subjectList}">
-						<option value="${subjectList}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
+						<option value="${subjectList.subjectId}/${subjectList.subjectSeq}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
 					</c:forEach>
 				</select>
 				<div>
@@ -46,6 +39,32 @@ const changeSelect = function(subjectList){
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+	});
+	const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
+		let subjectArr = subject.split('/');
+		let subjectId = subjectArr[0];
+		let subjectSeq = subjectArr[1];
+		console.log("subjectId : " + subjectId);
+		console.log("subjectSeq : " + subjectSeq);
+		console.log(typeof subjectSeq);
+		$.ajax({
+			url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
+			type : "GET",
+			success : function(data){
+				showTableChart(data); // subject에 따른 table chart 보여주기
+				showBarChart(data); // subject에 따른 bar chart 보여주기
+			},
+			// success : function() {
+			// 	alert("good");
+			// },
+			error:function(data){
+				alert("error");
+			}
+		});
+	}
+	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
 

@@ -1,5 +1,6 @@
 package com.mycompany.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -93,12 +94,25 @@ public class SurveyController {
 		return "survey/summary";
 	}
 	
-	@RequestMapping(value="/summary", method=RequestMethod.POST)
-	public String getSurveySummary(Model model, SubjectVO subjectVo, AnswerVO answerVo, String subjectId, int subjectSeq, int questionNum, int answerValue) {
-		answerVo = surveyService.getAnswerValue(subjectId, subjectSeq, questionNum, answerValue);
-		model.addAttribute("answerVo", answerVo);
-		System.out.println("check");
-		logger.info("survey/summary-post: "+ answerVo);
-		return "redirect:/survey/summary/"+subjectId+"/"+subjectSeq+"/"+questionNum+"/"+answerValue;
+	@RequestMapping(value="/getjson", method=RequestMethod.GET)
+	public String getjson(String subjectId, String subjectSeq) {
+		System.out.println("subjectId : " + subjectId);
+		System.out.println("subjectSeq : " + subjectSeq);
+		int subjectSeqInt = Integer.parseInt(subjectSeq);
+		List<AnswerVO> answerList = new ArrayList<>();
+		AnswerVO answerVo = new AnswerVO();
+		System.out.println(surveyService.getCountQuestionNum(subjectId, subjectSeqInt));
+		// 문항 수만큼 반복
+		for(int i=0; i<surveyService.getCountQuestionNum(subjectId, subjectSeqInt); i++) {
+			// 답변 개수 (5개) 만큼 반복
+			for(int k=0; k<5; k++) {
+				answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k);
+				answerList.add(answerVo);
+			}
+		}
+		logger.info("survey/summary-post: "+ answerList);
+		String result = answerList.toString();
+//		String result = "안녕";
+		return result;
 	}
 }

@@ -18,4 +18,9 @@ public class SurveyService implements ISurveyService {
 		return surveyRepository.getAnswerValue(subjectId, subjectSeq, questionNum, answerValue);
 	}
 
+	@Override
+	public int getCountQuestionNum(String subjectId, int subjectSeq) {
+		return surveyRepository.getCountQuestionNum(subjectId, subjectSeq);
+	}
+
 }

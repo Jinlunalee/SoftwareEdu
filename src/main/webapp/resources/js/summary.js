@@ -1,7 +1,11 @@
-function showTableChart(list) {
-  console.log();
+// subject에 따른 table chart 보여주기
+function showTableChart(data) {
+  console.log("showTableChart function working");
+
 }
-function showBarChart(list) {
+
+// subject에 따른 bar chart 보여주기
+function showBarChart(data) {
 
 }
 
