@@ -119,6 +119,7 @@ public class SurveyController {
 				answerVoList.add(answerVo);
 			}
 		}
+		logger.info("survey/summary-post: "+ answerVoList);
 		return answerVoList;
 	}
 	
