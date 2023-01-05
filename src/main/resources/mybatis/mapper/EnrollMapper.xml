@@ -83,10 +83,10 @@
 		WHERE
 		<choose>
 			<when test="subCor != null and subCor.equals('subject')">
-				subject_title = #{kw} AND subject_title LIKE '% %' AND o.course_id is NULL
+				(subject_title = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') AND o.course_id is NULL
 			</when>
 			<when test="subCor != null and subCor.equals('course')">
-				course_title = #{kw} AND course_title LIKE '% %'
+				course_title = #{kw} OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%'
 			</when>
 		</choose>
 	</select>
