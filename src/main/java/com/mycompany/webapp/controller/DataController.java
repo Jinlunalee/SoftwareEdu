@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,4 +79,33 @@ public class DataController {
 		
 		return result;
 	}	
+	
+	
+	
+	
+	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String getxml(Model model) {
+		List<StudentVO> dataList = studentService.getDataList();
+		
+		String result = "";
+		for (StudentVO vo : dataList) {	
+			String studentId = vo.getStudentId();
+			String name = vo.getName();
+			String supportYn = vo.getSupportYn();
+			String comnCdTitle = vo.getComnCdTitle();
+		
+			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
+			
+        result += "<student>";
+        result += "<studentId>"+ studentId +"</studentId>";
+        result += "<name>" + name + "</name>";
+        result +=  "<supportYn>" + supportYn +"</suppotyYn>";
+        result +=  "<comnCdTitle>" + comnCdTitle +"</comnCdTitle>";
+        result +=  "</student>";
+
+		}
+		
+	return result;
+	}
 }
