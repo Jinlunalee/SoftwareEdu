@@ -1,6 +1,36 @@
 // subject에 따른 table chart 보여주기
 function showTableChart(data) {
-  console.log("showTableChart function working");
+  // data.answerValueByQuestion.questionNum = 문항번호
+  // data.answerValueByQuestion.answerValueCount.answerValue = 답변값
+  // data.answerValueByQuestion.answerValueCount.countAnswerValue = 답변카운트
+  console.log(data);
+  console.log(data[0]);
+  console.log(data[1]);
+  console.log(data[2]);
+  // const countPerAnswerValue1 = data[0].answerValueCount[0].countAnswerValue;
+  // console.log(countPerAnswerValue1);
+  // for(var i=0; i<data[0].answerValueByQuestion.answerValueCount.answerValue; i++){
+  //   console.log(i);
+  // }
+    
+  
+  
+  // $.each(data, function(data){
+  //   console.log(data.subjectId);
+  //   console.log(data.subjectSeq);
+  //   console.log(data.answerValueCount);
+  // })
+
+
+
+  // $.each(data, function(index, item) { // 데이터 =item
+  //   $("#demo").append(index + " "); // index가 끝날때까지 
+  //   $("#demo").append(item.name + " ");
+  //   $("#demo").append(item.age + " ");
+  //   $("#demo").append(item.address + " ");
+  //   $("#demo").append(item.phone + "<br>");
+  // });
+
 
 }
 

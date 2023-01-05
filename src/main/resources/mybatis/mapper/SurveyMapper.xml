@@ -36,4 +36,11 @@ from (
 where question_num!=99999
 </select>
 
+<select id="selectSubjectListByFinishedState" resultType="map">
+select 
+	open.subject_id as "subjectId", 
+	subject_seq as "subjectSeq"
+from open
+    where state_cd = 'OPN05'
+</select>
 </mapper>
