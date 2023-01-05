@@ -7,6 +7,7 @@
 		<typeAlias type="com.mycompany.webapp.dto.EnrollVO" alias="EnrollVO" />
 		<typeAlias type="com.mycompany.webapp.dto.SubjectVO" alias="SubjectVO" />
 		<typeAlias type="com.mycompany.webapp.dto.StudentVO" alias="StudentVO" />
+		<typeAlias type="com.mycompany.webapp.dto.CommonCodeVO" alias="CommonCodeVO" />
 		<typeAlias type="com.mycompany.webapp.dto.QuestionVO" alias="QuestionVO" />
 		<typeAlias type="com.mycompany.webapp.dto.QuestionSetVO" alias="QuestionSetVO" />
 		<typeAlias type="com.mycompany.webapp.dto.AnswerVO" alias="AnswerVO" />

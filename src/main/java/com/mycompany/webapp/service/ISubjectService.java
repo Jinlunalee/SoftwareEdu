@@ -12,9 +12,15 @@ public interface ISubjectService {
 	SubjectVO selectSubjectDetails(String subjectId, int subjectSeq);
 	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
 	
+	int updateSubject(SubjectVO subject); // 과정/강좌 수정
+	int updateFileData(SubjectVO subject, UploadfileVO file); // 과정/강좌 수정 첨부파일
+	
 	int insertSubject(SubjectVO subject); // 과정/강좌 개설
 	int insertFileData(SubjectVO subject, UploadfileVO file); // 과정/강좌 개설 첨부파일
 	
 	List<SubjectVO> selectAllCourse();//과정명 가져오기
 	List<SubjectVO> selectAllSubject(); //강좌명 가져오기
+	
+	SubjectVO infoSubject(String subjectId); // 강좌에 대한 정보
+	
 }

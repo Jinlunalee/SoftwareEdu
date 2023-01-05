@@ -75,20 +75,21 @@ function changeEverything(i) {
 				<td rowspan="8">
 					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
 				</td>
-				<td> 연수기간(일수)</td>
+				<td> 연수기간(시수)</td>
 				<td> 
-					<input type="date" name="startDay" id="startDay">
+					<input type="date" name="startDay" id="startDay" onchange="selectRecruitDay()">
 					~ 
 					<input type="date" name="endDay" id="endDay" readonly>
 					<input type="hidden" name="hours" id="hours" value=720>
+					<span id="printDay"> <span>
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
 				<td> <!-- 30분단위로 입력(초) -->
-					<input type="time" name="startTime" id="startTime" min="9:00" max="21:00" step="1800"> 
+					<input type="time" name="startTime" id="startTime" min="9:00" max="24:00" step="1800"> 
 					~ 
-					<input type="time" name="endTime" id="endTime" onchange="changeDay()"> 
+					<input type="time" name="endTime" id="endTime" onchange="selectEndDay()"> 
 				</td>
 			</tr>
 			<tr>
@@ -109,7 +110,7 @@ function changeEverything(i) {
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td> <input type="text" name="cost"> 원  
+				<td> 원  
 					<c:if test="${subject.supportYn eq 'Y'}"><span class="support">※교육비 지원을 받는 강좌입니다.</span></c:if>
 				</td>
 			</tr>
@@ -208,6 +209,28 @@ function changeEverything(i) {
 		});
 	});
 	
+	/*강좌변화에 따라 비동기로 데이터 출력*/
+	$(function(){
+		$('#subjectId').on('change',function(){
+			const subjectId = $('#subjectId').val();
+			console.log(subjectId);
+			$.ajax({
+				type: "get",
+				url: "ajax?subjectId="+subjectId,
+				data: {
+					// subjectId: subjectId,
+				},
+				success: function(data) {
+					console.log("subjectId: "+subjectId);
+				},
+				error: function(){
+					console.log("fail");
+				}
+			})
+
+		});
+	});
+
 	/*첨부파일 이미지 미리보기*/
 	function previewImg(input) {
 		if(input.files && input.files[0]){
@@ -220,7 +243,7 @@ function changeEverything(i) {
 			document.querySelector('.detail_img').src = "";
 		}
 	}
-	
+	/*select 두개 연계 (필요X)*/
 	function courseChange(e){
 		var course1 = ["AI가 대신 만들어주는 앱", "자바 기초"];
 		var course2 = ["한번에 끝내는 HTML","두번만에 끝내는 CSS", "세번해도 안끝나는 JS"];
@@ -241,7 +264,7 @@ function changeEverything(i) {
 	}
 	
 	/*시수에 맞춰 endDay 설정해주기 (아직 날짜가 다름;;)*/
-	function changeDay(){
+	function selectEndDay(){
 		const startDay = document.getElementById("startDay").value;
 
 		const startTime = document.getElementById("startTime").value;
@@ -254,59 +277,78 @@ function changeEverything(i) {
 		let endMin = parseInt(endTime.substring(3));
 
 		let diffHour = endHour - startHour;
-		let diffMin
+		let diffMin = 0;
 		if(endMin < startMin){
 			diffMin = (endMin - startMin) + 60;
 			diffHour = diffHour - 1;
 		}else{
 			diffMin = endMin - startMin;
 		}
-		diffMin = (diffMin/60).toFixed(2); // 소수점으로 변환
+		diffMin = Math.ceil(diffMin/60 * 100) / 100; //소수점 두자리 변환
 
 		let diffTime = diffHour+diffMin; // 시작시간과 끝시간 계산
 
-		console.log(diffHour);
-		console.log(diffMin);
-		console.log(diffTime);
-
-		hours = (hours / diffTime).toFixed();
-		console.log(hours);
+		let days = Math.ceil(hours / diffTime); // 일수 = 시수/입력한 시간차이
 
 		let startDay2 = new Date(startDay);
-		startDay2.setDate(startDay2.getDate() + hours);
+		startDay2.setDate(startDay2.getDate() + days);
 
 		let endDay = document.getElementById("endDay");
 		endDay.value = startDay2.toJSON().substring(0,10);
+
+		//일수 출력
+		const printDay = document.getElementById("printDay");
+		printDay.innerText = "("+days+"일)";
+
 	}
+
+	/*신청시작 == 연수시작 한달전, 신청끝 == 신청시작 + 2주 */
+	function selectRecruitDay(){
+		const startDay = document.getElementById("startDay").value;
+		let recruitStartDay = document.getElementById("recruitStartDay");
+		let recruitEndDay = document.getElementById("recruitEndDay");
 	
+		//신청시작일자
+		let rSDay = new Date(startDay);
+		rSDay.setMonth(rSDay.getMonth()-1);
+		recruitStartDay.value = rSDay.toJSON().substring(0,10);
+		recruitStartDay.max = startDay;
+
+		//신청끝나는일자
+		rSDay.setDate(rSDay.getDate()+14);
+		recruitEndDay.value = rSDay.toJSON().substring(0,10);
+		recruitEndDay.min = recruitStartDay.value; // 신청시작일자 전까지
+		recruitEndDay.max = startDay; //연수시작 시간날까지만 가능
+		recruitEndDay.onchange(); //값이 바뀐 엘리먼트의 onchange 함수 실행
+	}
 
 	/*오늘날짜와 기간들 비교해서 상태 입력*/
 	function inputState(){
 		const date = new Date();
-		const today = date.toJSON().substring(0,10).replaceAll('-','');
+		const today = parseInt(date.toJSON().substring(0,10).replaceAll('-',''));
 
-		const recruitStartDay = document.getElementById('recruitStartDay').value;
-		const recruitEndDay = document.getElementById('recruitEndDay').value;
+		let recruitStartDay = document.getElementById('recruitStartDay').value.replaceAll('-','');
+		let recruitEndDay = document.getElementById('recruitEndDay').value.replaceAll('-','');
 
-		console.log(today);
-		console.log(recruitStartDay);
-		console.log(recruitEndDay);
-
-		let parseStartDay = recruitStartDay.replaceAll('-','');
-		let parseEndDay = recruitEndDay.replaceAll('-','');
+		// console.log(today);
+		// console.log(recruitStartDay);
+		// console.log(recruitEndDay);
 
 		let state = document.getElementById('state');
-		if(today < parseStartDay) { //현재날짜가 모집시작일 보다 작으면
+
+		if(today < recruitStartDay) { //현재날짜가 모집시작일 보다 작으면
 			state.value = 'OPN01'; //모집예정
-		}else if(parseStartDay <= today && today <= parseEndDay){
+		}else if(recruitStartDay <= today && today <= recruitEndDay){
 			state.value = 'OPN02'; //모집중
 		}else{
-			state.value = 'OPN01'; //경우의 수 더 없을가?
+			state.value = 'OPN03'; //모집마감
 		}
-		console.log(state);
 		console.log(state.value);
 	}
 	
+	/*강좌변화에 따라 비동기로 데이터 출력*/
+	
+
 
 	/* 모달창 열기 */
 	const body = document.querySelector('body');

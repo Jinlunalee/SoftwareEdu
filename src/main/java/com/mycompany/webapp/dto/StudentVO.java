@@ -23,4 +23,7 @@ public class StudentVO {
 	private String supportYn;  // 교육비 지원 여부
 	private String comnCdTitle; // 공통코드명
 	
+	private String type; // 검색 타입
+	private String keyword; // 검색 내용
+	
 }

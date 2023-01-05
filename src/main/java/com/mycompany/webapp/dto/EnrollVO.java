@@ -30,6 +30,7 @@ public class EnrollVO {
 	private String endDay;
 	
 	private int progress;
+	private int addHours;
 	
 
 }
