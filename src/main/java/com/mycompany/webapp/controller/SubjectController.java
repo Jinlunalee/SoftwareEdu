@@ -152,7 +152,7 @@ public class SubjectController {
 	}
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") QuestionVO questionVo) {
+	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
 		
 		//time,date format
 		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
