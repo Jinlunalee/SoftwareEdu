@@ -103,6 +103,12 @@
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
 	
+	<update id="clickDelete" parameterType="map">
+		UPDATE ENROLL 
+		SET del_yn = 'Y' 
+		WHERE subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
 	<update id="addHours" parameterType="map">
 		UPDATE ENROLL 
 		SET complete_hours = complete_hours + #{addHours} 

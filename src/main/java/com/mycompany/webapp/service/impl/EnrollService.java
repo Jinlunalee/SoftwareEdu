@@ -38,6 +38,12 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.clickDelete(studentId, subjectId, subjectSeq);
 	}
 	
+
+	@Override
+	public void clickDelete(String subjectId, int subjectSeq) {
+		enrollRepository.clickDelete(subjectId, subjectSeq);
+	}
+	
 	public void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
 		int addHours = enroll.getAddHours();
 		enrollRepository.addHours(addHours, studentId, subjectId, subjectSeq);
@@ -60,5 +66,6 @@ public class EnrollService implements IEnrollService{
 	public List<OpenVO> getOpenList(OpenVO openVO) {
 		return enrollRepository.getOpenList(openVO);
 	}
+
 	
 }

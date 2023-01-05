@@ -12,6 +12,7 @@ public interface IEnrollService {
 	String getRatio(String studentId, String subjectId, String subjectSeq);
 	void clickCancel(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
 	void clickDelete(String studentId, String subjectId, String subjectSeq);
+	void clickDelete(String subjectId, int subjectSeq);
 	void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
 	List<CommonCodeVO> getCancelList();
 	List<StudentVO> getStudentList(StudentVO studentVO);
