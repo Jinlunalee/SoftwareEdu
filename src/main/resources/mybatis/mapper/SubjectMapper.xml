@@ -165,7 +165,7 @@
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		update open
-		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,
+		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay}
 		where course_id = #{courseId}
 	</update>
 	
