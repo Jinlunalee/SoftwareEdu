@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
@@ -37,6 +38,12 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.clickDelete(studentId, subjectId, subjectSeq);
 	}
 	
+
+	@Override
+	public void clickDeleteOnOpen(String subjectId, int subjectSeq) {
+		enrollRepository.clickDeleteOnOpen(subjectId, subjectSeq);
+	}
+	
 	public void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
 		int addHours = enroll.getAddHours();
 		enrollRepository.addHours(addHours, studentId, subjectId, subjectSeq);
@@ -50,5 +57,15 @@ public class EnrollService implements IEnrollService{
 	public List<StudentVO> getStudentList(StudentVO studentVO) {
 		return enrollRepository.getStudentList(studentVO);
 	}
+	
+	public void approval(String studentId, String subjectId, String subjectSeq) {
+		enrollRepository.approval(studentId, subjectId, subjectSeq);
+	}
+	
+	@Override
+	public List<OpenVO> getOpenList(OpenVO openVO) {
+		return enrollRepository.getOpenList(openVO);
+	}
 
+	
 }

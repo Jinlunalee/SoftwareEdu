@@ -1,15 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
-<script type="text/javascript">
-const changeSelect = function(subjectList){
-	showTableChart(subjectList);
-	showBarChart(subjectList);
-}
 
-</script>
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+
+<link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
 <div class="card m-2">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
@@ -19,12 +15,12 @@ const changeSelect = function(subjectList){
 		<div class="content-grid">
 			<div class="course-id-dropdown">
 				<select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
+					<option value="">완료된 강좌명 및 강좌순번을 선택하세요.</option>
 					<c:forEach var="subjectList" items="${subjectList}">
-						<option value="${subjectList}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
+						<option value="${subjectList.subjectId}/${subjectList.subjectSeq}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
 					</c:forEach>
 				</select>
 				<div>
-				test : ${answerVo.countAnswerValue}
 				</div>
 			</div>
 			<div class="charts">
@@ -46,6 +42,31 @@ const changeSelect = function(subjectList){
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+	});
+	const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
+		if(subject){
+			let subjectArr = subject.split('/');
+			let subjectId = subjectArr[0];
+			let subjectSeq = subjectArr[1];
+			$.ajax({
+				url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
+				type : "GET",
+				success : function(data){
+					console.log(data);
+					showTableChart(data); // subject에 따른 table chart 보여주기
+					showBarChart(data); // subject에 따른 bar chart 보여주기
+				},
+				error:function(){
+					alert("well well well");
+				}
+			});
+		} else {
+			// subject가 비어있을 때, 즉 "선택하세요."를 선택했을 때
+		}
+	}
+	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
 

@@ -104,3 +104,45 @@ input {
     height: 40px;
     border-radius: 8px;
 }
+
+.rs2{
+	margin-top :40px;
+}
+
+table > tr {
+	font-size: 14px;
+    text-align: center;
+}
+
+.search2 {
+	display: inline;
+}
+
+.sc2{
+	position: relative;
+    bottom: 10px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.tb{
+	margin: 0px auto;
+	border-top: 2px solid #bababa;
+}
+
+.tb tr {
+	border-bottom: 1px solid #e8e8e8;
+    height: 40px;
+}
+
+li::before{
+	content: url("https://www.moe.go.kr/img/2021Renewal/common/list_bul_1.svg");
+}
+
+li{
+	list-style : none;
+}
+
+.stu{
+	margin-top: 15px;
+}

@@ -76,4 +76,33 @@ public class DataController {
 		
 		return result;
 	}	
+	
+	
+	
+	
+	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String getxml(Model model) {
+		List<StudentVO> dataList = studentService.getDataList();
+		
+		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
+		for (StudentVO vo : dataList) {	
+			String studentId = vo.getStudentId();
+			String name = vo.getName();
+			String supportYn = vo.getSupportYn();
+			String comnCdTitle = vo.getComnCdTitle();
+		
+			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
+			// +=로 문자열을 이어붙이기
+        result += "<student>";
+        result += "<studentId>"+ studentId +"</studentId>";
+        result += "<name>" + name + "</name>";
+        result +=  "<supportYn>" + supportYn +"</suppotyYn>";
+        result +=  "<comnCdTitle>" + comnCdTitle +"</comnCdTitle>";
+        result +=  "</student>";
+
+		}
+		
+	return result;
+	}
 }

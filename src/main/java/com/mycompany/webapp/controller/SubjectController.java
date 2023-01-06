@@ -1,9 +1,6 @@
 package com.mycompany.webapp.controller;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.QuestionVO;
+import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
+import com.mycompany.webapp.service.IEnrollService;
 import com.mycompany.webapp.service.ISubjectService;
+import com.mycompany.webapp.service.ISurveyService;
 
 @Controller
 @RequestMapping("/subject")
@@ -30,6 +29,12 @@ public class SubjectController {
 	
 	@Autowired
 	ISubjectService subjectService;
+	
+	@Autowired
+	ISurveyService surveyService;
+	
+	@Autowired
+	IEnrollService enrollService;
 	
 	//과정목록조회
 	@RequestMapping(value="/courselist", method=RequestMethod.GET)
@@ -136,6 +141,22 @@ public class SubjectController {
 		model.addAttribute("menuKOR", "강좌 관리");
 		return "redirect:/subject/subjectlist";
 	}
+	
+	// 논리 삭제
+	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
+	public void clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq) {
+		// enroll 논리 삭제
+		enrollService.clickDeleteOnOpen(subjectId, subjectSeq);
+		// answer 논리 삭제
+		surveyService.clickdeleteAnswer(subjectId, subjectSeq);
+		// question 논리 삭제
+		surveyService.clickdeleteQuestion(subjectId, subjectSeq);
+		// open 논리 삭제
+		
+		// upload file 논리 삭제
+		
+		
+	}
 
 	//입력
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
@@ -152,7 +173,7 @@ public class SubjectController {
 	}
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(SubjectVO subject, @ModelAttribute(value="SurveyVO") QuestionVO questionVo) {
+	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
 		
 		//time,date format
 		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
