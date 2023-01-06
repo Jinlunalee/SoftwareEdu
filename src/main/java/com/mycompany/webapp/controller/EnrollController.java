@@ -10,9 +10,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,15 +25,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IPagerService;
 
 @Controller
 @RequestMapping("/enroll")
 public class EnrollController {
+	static final Logger logger = LoggerFactory.getLogger(EnrollController.class);
 	
 	@Autowired
 	IEnrollService enrollService;
+	
+	@Autowired
+	IPagerService pagerService;
 	
 	//목록조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -46,6 +55,35 @@ public class EnrollController {
 		
 		return "enroll/list";
 	}
+	
+	// paging 목록조회
+	@GetMapping("/boardList")
+	public String enrollList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountEnrollRow();
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<EnrollVO> boardList = pagerService.selectEnrollListByPage(pager);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		
+		// cancel list
+		List<CommonCodeVO> cancelList = enrollService.getCancelList();
+		model.addAttribute("cancelList", cancelList);
+		
+		return "enroll/list";
+	}
+
 	
 	// 입력
 	@RequestMapping(value="/insert", method=RequestMethod.GET)

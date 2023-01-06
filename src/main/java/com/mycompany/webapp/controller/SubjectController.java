@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.QuestionVO;
+import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
 import com.mycompany.webapp.service.ISurveyService;
 
@@ -36,7 +40,10 @@ public class SubjectController {
 	@Autowired
 	IEnrollService enrollService;
 	
-	//과정목록조회 (course)
+	@Autowired
+	IPagerService pagerService;
+	
+	//개설 과정 목록조회 (course)
 	@RequestMapping(value="/courselist", method=RequestMethod.GET)
 	public String getCourseList(Model model) {
 		model.addAttribute("menu", "subject");
@@ -46,6 +53,30 @@ public class SubjectController {
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("courseListSize", courseList.size());
 		logger.info("courseList: " + courseList);
+		
+		return "subject/courselist";
+	}
+	
+	// paging 개설 과정 목록 조회 (course)
+	@GetMapping("/courseBoardList")
+	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountOpenCourseRow();
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<SubjectVO> boardList = pagerService.selectOpenCourseListByPage(pager);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
 		
 		return "subject/courselist";
 	}
@@ -63,12 +94,38 @@ public class SubjectController {
 		
 		return "subject/subjectlist";
 	}
+	
+	// paging 강좌 목록 조회 (open)
+	@GetMapping("/subjectBoardList")
+	public String subjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountOpenSubjectRow();
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<SubjectVO> boardList = pagerService.selectOpenSubjectListByPage(pager);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		
+		return "subject/subjectlist";
+	}
 
 	// 개설 강좌 상세조회 (open)
 	@RequestMapping(value="/details/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
 	public String getSubjectDetails(@PathVariable String subjectId, @PathVariable int subjectSeq, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		
+		// subjectId, subjectSeq 이용해서 question 테이블에 해당하는 정보를 surveyVO에 담아서 model로 넘기기
 		
 		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
 		int totalPeople = subjectService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject에 있는 state가 아니라 enroll에 있는거 가져와야함
