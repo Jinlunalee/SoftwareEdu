@@ -2,6 +2,8 @@ package com.mycompany.webapp.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 
@@ -23,5 +25,7 @@ public interface ISubjectService {
 	
 	List<SubjectVO> infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
 //	SubjectVO infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
-
+	
+	void clickDeleteOpen(String subjectId, int subjectSeq);
+	void clickDeleteUploadFile(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 }

@@ -165,8 +165,20 @@
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		update open
-		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,
+		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay}
 		where course_id = #{courseId}
+	</update>
+	
+	<update id="clickDeleteOpen" parameterType="map">
+		update open
+		set del_yn = 'N'
+		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="clickDeleteUploadFile" parameterType="map">
+		update upload_file
+		set del_yn = 'N'
+		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
 </mapper>

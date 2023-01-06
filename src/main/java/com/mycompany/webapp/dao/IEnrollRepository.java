@@ -16,7 +16,7 @@ public interface IEnrollRepository {
 	String getRatio(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	void clickCancel(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	void clickDelete(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
-	void clickDeleteOnOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	void clickDeleteEnrollByOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void addHours(@Param("addHours") int addHours, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	//int getHours(String enrollId);
 	List<CommonCodeVO> getCancelList();
