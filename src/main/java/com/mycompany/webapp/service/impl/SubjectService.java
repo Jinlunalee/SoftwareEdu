@@ -129,4 +129,14 @@ public class SubjectService implements ISubjectService{
 		
 		
 	}
+
+	@Override
+	public void clickDeleteOpen(String subjectId, int subjectSeq) {
+		subjectRepository.clickDeleteOpen(subjectId, subjectSeq);
+	}
+
+	@Override
+	public void clickDeleteUploadFile(String subjectId, int subjectSeq) {
+		subjectRepository.clickDeleteUploadFile(subjectId, subjectSeq);
+	}
 }

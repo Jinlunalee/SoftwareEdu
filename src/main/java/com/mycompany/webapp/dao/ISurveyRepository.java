@@ -13,6 +13,6 @@ public interface ISurveyRepository {
 	AnswerVO getAnswerValue(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("questionNum") int questionNum, @Param("answerValue") int answerValue);
 	int getCountQuestionNum(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	List<SubjectVO> selectSubjectListByFinishedState();
-	void clickdeleteQuestion(String subjectId, int subjectSeq);
-	void clickdeleteAnswer(String subjectId, int subjectSeq);
+	void clickDeleteQuestion(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	void clickDeleteAnswer(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 }

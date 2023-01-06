@@ -32,13 +32,13 @@ public class SurveyService implements ISurveyService {
 	}
 
 	@Override
-	public void clickdeleteQuestion(String subjectId, int subjectSeq) {
-		surveyRepository.clickdeleteQuestion(subjectId, subjectSeq);
+	public void clickDeleteQuestion(String subjectId, int subjectSeq) {
+		surveyRepository.clickDeleteQuestion(subjectId, subjectSeq);
 	}
 
 	@Override
-	public void clickdeleteAnswer(String subjectId, int subjectSeq) {
-		surveyRepository.clickdeleteAnswer(subjectId, subjectSeq);
+	public void clickDeleteAnswer(String subjectId, int subjectSeq) {
+		surveyRepository.clickDeleteAnswer(subjectId, subjectSeq);
 	}
 
 }
