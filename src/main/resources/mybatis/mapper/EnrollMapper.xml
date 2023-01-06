@@ -37,6 +37,12 @@
 		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
 	</select>
 	
+	<select id="getHours" parameterType="string" resultType="int">
+		SELECT complete_hours 
+		FROM ENROLL 
+		WHERE enroll_id = #{enrollId}
+	</select>
+	
 	<select id="getCancelList" resultType="CommonCodeVO">
 		SELECT comn_cd AS "comnCd", 
 		comn_cd_title AS "comnCdTitle" 
@@ -126,5 +132,18 @@
 		SET state_cd = 'ERL03' 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
+	
+	<insert id="addEnroll" parameterType="map">
+		INSERT INTO ENROLL 
+		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
+		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
+		del_yn, cancel_rs_cd, cancel_rs_etc) 
+		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 'N', NULL, NULL)
+	</insert>
+	
+	<select id="getMaxEnrollId" resultType="int">
+		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
+		FROM ENROLL
+	</select>
 
 </mapper>

@@ -79,11 +79,11 @@
 							<li>강의 시간 | ${ls.startTime} ~ ${ls.endTime} </li>
 							<li>교육 기간 | ${ls.startDay} ~ ${ls.endDay} </li>
 							<span>진도율 | </span><span class="rt"></span>
-							<li>현재 완료 시간  |  ${ls.completeHours}</li>
+							<li>현재 완료 시간  | ${ls.completeHours}</li>
 							완료한 시간 입력
 							<form action="<c:url value='/enroll/addhours/${ls.studentId}/${ls.subjectId}/${ls.subjectSeq}'/>" method="post"/>
 								<input name="addHours" class="input-time" type="number">
-								<input type="submit" class="input-time-btn"  value="입력">
+								<input type="submit" onclick="getHours(${ls.enrollId})" class="input-time-btn"  value="입력">
 							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
@@ -247,11 +247,21 @@
 					})
 				}
 				else{
-					
 				}
 			}
 	</script>
 	
+	<script>
+			function getHours(enrollId) {
+				var ch = $(".ch");
+					$.ajax({
+						url : "gethours" + enrollId,
+						success: function(data) {
+						ch.text(data + '시간');
+					}
+					})
+			}
+	</script>
 </div>
 
 

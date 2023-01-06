@@ -47,6 +47,15 @@ public class EnrollController {
 		return "enroll/list";
 	}
 	
+	// 입력
+	@RequestMapping(value="/insert", method=RequestMethod.GET)
+	public String insertEnroll(Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		return "enroll/insert";
+	}
+	
+	// 취소 누르면 수강 취소 상태
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
@@ -56,25 +65,30 @@ public class EnrollController {
 	// 논리 삭제
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		System.out.println("컨트롤 체크");
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
-		System.out.println("컨트롤러 체크");
 		return "redirect:/enroll/list";
 	}
 	
+	// 진행률
 	@ResponseBody
 	@RequestMapping(value="/ratio/{studentId}/{subjectId}/{subjectSeq}")
 	public String getRatio(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		System.out.println("값" + enrollService.getRatio(studentId, subjectId, subjectSeq));
 		return enrollService.getRatio(studentId, subjectId, subjectSeq);
 	}
 	
+	// 수강 완료한 시간 입력
 	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
+	// 완료 시간 ajax
+//	@ResponseBody
+//	@RequestMapping(value="/gethours/{enrollId}")
+//	public int getHours(@PathVariable String enrollId) {
+//		return enrollService.getHours(enrollId);
+//	}
 	
 	// 수강 추가 수강생 ajax
 	@RequestMapping(value="/studentlist")
@@ -94,30 +108,21 @@ public class EnrollController {
 		return enrollService.getOpenList(openVO);
 	}
 	
+	// 승인하면 수강 예정 상태
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
 	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
-	
-	//상세조회
-	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
-	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/details";
-	}
-
-	//검색
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String searchEnroll(@RequestParam Date enrollDate, @RequestParam String studentName, @RequestParam String courseName, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/search";
+	// 수강 추가
+	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
+	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+		enrollService.addEnroll(studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
 	}
 	
-	//엑셀파일 다운로드
+	//엑셀 파일 다운로드
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public void downloadEnroll(HttpServletResponse response) throws IOException {
 		Workbook workbook = new HSSFWorkbook();
@@ -148,35 +153,4 @@ public class EnrollController {
         workbook.close();
 	}
 	
-	//수정
-	@RequestMapping(value="/update/{enrollId}", method=RequestMethod.GET)
-	public String updateEnroll(@PathVariable String enrollId, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/update";
-	}
-
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String updateEnroll(EnrollVO enrollVo) {
-		return "redirect:/enroll/details"+enrollVo.getEnrollId();
-	}
-
-	//삭제
-	@RequestMapping(value="/delete/{enrollId}", method=RequestMethod.POST)
-	public String deleteEnroll(@PathVariable String studentId ,EnrollVO enrollVo) {
-		return "redirect:/enroll/list";
-	}
-
-	//입력
-	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insertEnroll(Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/insert";
-	}
-
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertEnroll(EnrollVO enrollVo) {
-		return "redirect:/enroll/details"+enrollVo.getEnrollId();
-	}
 }

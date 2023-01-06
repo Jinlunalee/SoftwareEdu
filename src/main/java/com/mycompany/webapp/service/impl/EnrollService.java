@@ -23,10 +23,12 @@ public class EnrollService implements IEnrollService{
 		return enrollRepository.getEnrollList();
 	}
 	
+	@Override
 	public String getRatio(String studentId, String subjectId, String subjectSeq) {
 		return enrollRepository.getRatio(studentId, subjectId, subjectSeq);
 	}
 	
+	@Override
 	public void clickCancel(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
 		String cancelRsCd = enroll.getCancelRsCd();
 		String cancelRsEtc = enroll.getCancelRsEtc();
@@ -34,6 +36,7 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
 	}
 	
+	@Override
 	public void clickDelete(String studentId, String subjectId, String subjectSeq) {
 		enrollRepository.clickDelete(studentId, subjectId, subjectSeq);
 	}
@@ -44,11 +47,17 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.clickDeleteOnOpen(subjectId, subjectSeq);
 	}
 	
+	@Override
 	public void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
 		int addHours = enroll.getAddHours();
 		enrollRepository.addHours(addHours, studentId, subjectId, subjectSeq);
 	}
 	
+//	public int getHours(String enrollId) {
+//		return enrollRepository.getHours(enrollId);
+//	}
+	
+	@Override
 	public List<CommonCodeVO> getCancelList() {
 		return enrollRepository.getCancelList();
 	}
@@ -58,6 +67,7 @@ public class EnrollService implements IEnrollService{
 		return enrollRepository.getStudentList(studentVO);
 	}
 	
+	@Override
 	public void approval(String studentId, String subjectId, String subjectSeq) {
 		enrollRepository.approval(studentId, subjectId, subjectSeq);
 	}
@@ -65,6 +75,12 @@ public class EnrollService implements IEnrollService{
 	@Override
 	public List<OpenVO> getOpenList(OpenVO openVO) {
 		return enrollRepository.getOpenList(openVO);
+	}
+	
+	@Override
+	public void addEnroll(String studentId, String subjectId, int subjectSeq) {
+		int maxEnrollId = enrollRepository.getMaxEnrollId() + 1;
+		enrollRepository.addEnroll(studentId, subjectId, subjectSeq, maxEnrollId);
 	}
 
 	

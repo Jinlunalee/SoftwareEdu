@@ -25,19 +25,28 @@
 		<input type="button" onclick="getStudentList()" class="btn btn2" value="검색">
 	</form>
 	
+		
+	
 	<script>
+		var a;
+		var b;
+		var c;
+		
 		function getStudentList() {
 			$.ajax({
 				type : 'GET',
 				url : 'studentlist',
-				dataType : 'json',
 				data : $("form[name=search-form]").serialize(),
+				async : false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 				success : function(result){
+					
+					a = JSON.stringify(result[0].studentId);
+					a = a.replace(/\"/gi, "");
+					
 					$(".rs").empty();
 					if(result.length > 0) {
 						var ul = $("<ul/>");
-						
 						for(var i in result) {
 							var $studentId = result[i].studentId;
 							var $name = result[i].name;
@@ -49,46 +58,45 @@
 									$("<li/>").text(' ' + '이름 : ' + $name),
 									$("<li/>").text(' ' + '생년월일 : ' + $birth),
 									$("<li/>").text(' ' + '이메일 : ' + $email),
-									$("<li/>").text(' ' + '전화번호 : ' + $phone),
-									
+									$("<li/>").text(' ' + '전화번호 : ' + $phone)
 							);
 							ul.append(li);
 						}
 						$(".rs").append(ul);
 					}
+					
 				}
 			})
 		}
-	</script>
-	</div>
-	</div>
-	
-	<div class="rs"></div>
-	</div>
-	
-	<div class="wrap">
-	<div class="search-box">
-	<div class="search-content">
-	<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
-	<form name="search-subject-course" class="search2">
-		<select name="subcor" class="sc2">
-			<option selected value="">강좌 / 과정</option>
-			<option value="subject">강좌</option>
-			<option value="course">과정</option>
-		</select>
-		<input type="text" name="kw" class="search-in">
-		<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
-	</form>
-	
-	<script>
+		
+		function addEnroll(){
+			var studentId = a;
+			var subjectId = b;
+			var subjectSeq = c;
+			
+			$.ajax({
+				type : 'POST',
+				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
+				async : false,
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(result){
+				}
+			})
+		}
+		
 		function getOpenList() {
 			$.ajax({
 				type : 'GET',
 				url : 'openlist', 
 				dataType : 'json',
 				data : $("form[name=search-subject-course]").serialize(),
+				async : false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 				success : function(result){
+					b = JSON.stringify(result[0].subjectId);
+					b = b.replace(/\"/gi, "");
+					c = JSON.stringify(result[0].subjectSeq);
+					c = c.replace(/\"/gi, "");
 					$(".rs2").empty();
 					if(result.length > 0) {
 						var td = $("<table class='tb'/>");
@@ -143,6 +151,25 @@
 			})
 		}
 	</script>
+	</div>
+	</div>
+	
+	<div class="rs"></div>
+	</div>
+	
+	<div class="wrap">
+	<div class="search-box">
+	<div class="search-content">
+	<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
+	<form name="search-subject-course" class="search2">
+		<select name="subcor" class="sc2">
+			<option selected value="">강좌 / 과정</option>
+			<option value="subject">강좌</option>
+			<option value="course">과정</option>
+		</select>
+		<input type="text" name="kw" class="search-in">
+		<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
+	</form>
 	
 	</div>
 	</div>
@@ -150,8 +177,10 @@
 	</div>
 	
 	<div class="submit-btn">
-	<input class="btn" type="button" value="저 장">
-	<input class="btn" type="reset" onclick="location.href='<c:url value="/enroll/list"/>'" value="취 소">
+	<form>
+	<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
+	<input type="reset" onclick="location.href='<c:url value="/enroll/list"/>'" value="취 소" class="btn">
+	</form>
 	</div>
 	</div>
 </div>
