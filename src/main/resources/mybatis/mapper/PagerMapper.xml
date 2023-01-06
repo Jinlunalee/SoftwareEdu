@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.dao.IPagerRepository">
+
+	<select id="getCountStudentRow" resultType="int">
+		SELECT count(*) FROM student
+	</select>
+
+	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
+		SELECT
+			rnum,
+			name,
+			student_id as "studentId", 
+			email, 
+			birth, 
+			position
+		FROM (
+		  SELECT ROWNUM as rnum, name, student_id, email, birth, position
+		  FROM (
+		    SELECT name, student_id, email, birth, position
+		    FROM student
+		    ORDER BY student_id
+		  )
+		  WHERE rownum &lt;= #{endRowNo}
+		)
+		WHERE rnum &gt;= #{startRowNo}
+	</select>
+</mapper>

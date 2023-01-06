@@ -2,6 +2,8 @@ package com.mycompany.webapp.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,19 +12,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
-
+import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.IStudentService;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+	static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 	
 	@Autowired
 	IStudentService studentService;
+	
+	@Autowired
+	IPagerService pagerService;
 	
 	//목록조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -30,39 +36,40 @@ public class StudentController {
 		model.addAttribute("menu", "student");
 		model.addAttribute("menuKOR", "수강생 관리");
 		
-		List<StudentVO> studentList = studentService.getStudentList();
-		model.addAttribute("studentList", studentList);
-		model.addAttribute("studentListSize", studentList.size());
+		List<StudentVO> boardList = studentService.getStudentList();
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size());
+		logger.info("boardList: " + boardList);
 		return "student/list";
 	}
 
-	/*
-	
-	@GetMapping("/studentList")
-	public String studentList(@RequestParam(defaultValue="1") int pageNo, Model model) {
+	// paging 목록조회
+	@GetMapping("/boardList")
+	public String studentList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "student");
+		model.addAttribute("menuKOR", "수강생 관리");
+		
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = 
+		int totalRows = pagerService.getCountStudentRow();
 
 		// 페이저 정보가 담긴 Pager 객체 생성
-		Pager pager = new Pager(5, 5, totalRows, pageNo);
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<StudentVO> studentList = studentService.getBoards(pager);
+		List<StudentVO> boardList = pagerService.selectStudentListByPage(pager);
 
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
-		model.addAttribute("boards", boards);
-
-
-		return "board/boardList";
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		System.out.println("boardList.size() : " + boardList.size());
+		System.out.println("rowsPerPage: " + rowsPerPage);
+		System.out.println("rowsPerPage: " + pager.getRowsPerPage());
+		
+		return "student/list";
 	}
-	
-	
-	
-	
-	*/
-	
-	
+
 	
 	//상세조회
 	@RequestMapping(value="/details/{studentId}", method=RequestMethod.GET)
