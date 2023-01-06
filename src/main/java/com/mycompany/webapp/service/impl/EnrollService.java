@@ -40,8 +40,8 @@ public class EnrollService implements IEnrollService{
 	
 
 	@Override
-	public void clickDeleteOnOpen(String subjectId, int subjectSeq) {
-		enrollRepository.clickDeleteOnOpen(subjectId, subjectSeq);
+	public void clickDeleteEnrollByOpen(String subjectId, int subjectSeq) {
+		enrollRepository.clickDeleteEnrollByOpen(subjectId, subjectSeq);
 	}
 	
 	public void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {

@@ -36,7 +36,7 @@ public class SubjectController {
 	@Autowired
 	IEnrollService enrollService;
 	
-	//과정목록조회
+	//과정목록조회 (course)
 	@RequestMapping(value="/courselist", method=RequestMethod.GET)
 	public String getCourseList(Model model) {
 		model.addAttribute("menu", "subject");
@@ -50,7 +50,7 @@ public class SubjectController {
 		return "subject/courselist";
 	}
 
-	//강좌목록조회
+	// 개설 강좌 목록조회 (open)
 	@RequestMapping(value="/subjectlist", method=RequestMethod.GET)
 	public String getSubjectList(Model model) {
 		model.addAttribute("menu", "subject");
@@ -64,7 +64,7 @@ public class SubjectController {
 		return "subject/subjectlist";
 	}
 
-	//상세조회
+	// 개설 강좌 상세조회 (open)
 	@RequestMapping(value="/details/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
 	public String getSubjectDetails(@PathVariable String subjectId, @PathVariable int subjectSeq, Model model) {
 		model.addAttribute("menu", "subject");
@@ -81,7 +81,7 @@ public class SubjectController {
 		return "subject/details";
 	}
 
-	//검색
+	// 개설 강좌 검색 (open)
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String searchSubject(@RequestParam String subjectTitle, @RequestParam String subjectId, Model model) {
 		model.addAttribute("menu", "subject");
@@ -89,7 +89,7 @@ public class SubjectController {
 		return "subject/search";
 	}
 
-	//수정
+	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
 	public String updateSubject(@PathVariable String subjectId, @PathVariable int subjectSeq,Model model) {
 		model.addAttribute("menu", "subject");
@@ -101,6 +101,7 @@ public class SubjectController {
 		return "subject/update";
 	}
 
+	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String updateSubject(SubjectVO subject) {
 		logger.info("subject/update:"+subject);
@@ -134,7 +135,7 @@ public class SubjectController {
 		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
 	}
 
-	//삭제
+	// 개설 강좌 삭제 (open)
 	@RequestMapping(value="/delete/{subjectId}")
 	public String deleteSubject(@PathVariable String subjectId ,SubjectVO subjectVo, Model model) {
 		model.addAttribute("menu", "subject");
@@ -142,23 +143,22 @@ public class SubjectController {
 		return "redirect:/subject/subjectlist";
 	}
 	
-	// 논리 삭제
+	// 개설 강좌 논리 삭제 (open)
 	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
 	public void clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq) {
 		// enroll 논리 삭제
-		enrollService.clickDeleteOnOpen(subjectId, subjectSeq);
+		enrollService.clickDeleteEnrollByOpen(subjectId, subjectSeq);
 		// answer 논리 삭제
-		surveyService.clickdeleteAnswer(subjectId, subjectSeq);
+		surveyService.clickDeleteAnswer(subjectId, subjectSeq);
 		// question 논리 삭제
-		surveyService.clickdeleteQuestion(subjectId, subjectSeq);
+		surveyService.clickDeleteQuestion(subjectId, subjectSeq);
 		// open 논리 삭제
-		
+		subjectService.clickDeleteOpen(subjectId, subjectSeq);
 		// upload file 논리 삭제
-		
-		
+		subjectService.clickDeleteUploadFile(subjectId, subjectSeq);
 	}
 
-	//입력
+	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
 	public String insertSubject(Model model) {
 		model.addAttribute("menu", "subject");
@@ -172,6 +172,7 @@ public class SubjectController {
 		return "subject/insert";
 	}
 
+	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
 		
@@ -206,6 +207,7 @@ public class SubjectController {
 		return "redirect:/subject/subjectlist";
 	}
 	
+	// 개설 강좌 입력 폼 비동기 출력
 	@RequestMapping(value="/ajax", method=RequestMethod.GET)
 	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
