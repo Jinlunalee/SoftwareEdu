@@ -25,8 +25,10 @@ public interface ISubjectRepository {
 	List<SubjectVO> selectAllCourse();//과정명 가져오기
 	List<SubjectVO> selectAllSubject(); //강좌명 가져오기
 	
-	int checkCourse(String courseId); // 강좌개설시, 같은 과정이 존재하는지 확인
+	SubjectVO infoSubject(String subjectId); // 강좌에 대한 기본 정보 출력
+	SubjectVO infoOpenCourse(String courseId); // 같은 개설 과정에 대한 정보
+	int checkOpenCourse(String courseId); // 강좌개설시, 같은 과정이 존재하는지 open테이블에서 확인(최초개설인지 개설되어있는 과정인지 확인)
 	
-	SubjectVO infoSubject(String subjectId); // 강좌에 대한 정보
+	int updateRecruitSameCourse(SubjectVO subject); //같은 과정 신청일자 변경
 	
 }

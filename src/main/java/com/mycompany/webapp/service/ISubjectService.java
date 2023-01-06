@@ -21,6 +21,7 @@ public interface ISubjectService {
 	List<SubjectVO> selectAllCourse();//과정명 가져오기
 	List<SubjectVO> selectAllSubject(); //강좌명 가져오기
 	
-	SubjectVO infoSubject(String subjectId); // 강좌에 대한 정보
-	
+	List<SubjectVO> infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
+//	SubjectVO infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
+
 }

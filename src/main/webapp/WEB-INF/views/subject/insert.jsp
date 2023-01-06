@@ -44,6 +44,7 @@ function changeEverything(i) {
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
 			<div class="sub_title">정기과정명 | 
 				<select class="select_course" name="courseId" id="courseId">
+					<option value="none">선택안함</option>
 					<c:forEach var="course" items="${allCourseList}">
 						<option value="${course.courseId}">${course.courseTitle}</option>
 					</c:forEach>
@@ -80,29 +81,30 @@ function changeEverything(i) {
 					<input type="date" name="startDay" id="startDay" onchange="selectRecruitDay()">
 					~ 
 					<input type="date" name="endDay" id="endDay" readonly>
-					<input type="hidden" name="hours" id="hours" value=720>
 					<span id="printDay"> <span>
+					<input type="hidden" name="hours" id="hours" value="">
+					<span id="printHours"></span>
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
 				<td> <!-- 30분단위로 입력(초) -->
-					<input type="time" name="startTime" id="startTime" min="9:00" max="24:00" step="1800"> 
+					<input type="time" name="startTime" id="startTime" min="9:00" max="24:00" step="1800" onchange="selectEndDay()"> 
 					~ 
-					<input type="time" name="endTime" id="endTime" onchange="selectEndDay()"> 
+					<input type="time" name="endTime" id="endTime" max="24:00" step="1800" onchange="selectEndDay()"> 
 				</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
 				<td> 
-					<input type="date" name="recruitStartDay" id="recruitStartDay"> 
+					<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()"> 
 					~ 
 					<input type="date" name="recruitEndDay" id="recruitEndDay" onchange="inputState()"> 
 				</td>
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td></td>
+				<td><span name="level" id="level"></span></td>
 			</tr>
 			<tr>
 				<td> 모집인원</td>
@@ -110,8 +112,8 @@ function changeEverything(i) {
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td> 원  
-					<c:if test="${subject.supportYn eq 'Y'}"><span class="support">※교육비 지원을 받는 강좌입니다.</span></c:if>
+				<td><span name="cost" id="cost"></span>  
+					<span class="support"></span>
 				</td>
 			</tr>
 			<tr>
@@ -188,7 +190,7 @@ function changeEverything(i) {
 		
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt"> <textarea name="content" cols="60" rows="10"></textarea></p>
+			<p class="txt"> <textarea name="content" cols="60" rows="10"></textarea> </p>
 		</div>
 		<div class="submit-btn">
 			<input type="hidden" name="state" id="state" value="모집중">
@@ -208,20 +210,106 @@ function changeEverything(i) {
 			  $(".insert_FileUpload").val(fileName);
 		});
 	});
-	
+
 	/*강좌변화에 따라 비동기로 데이터 출력*/
 	$(function(){
-		$('#subjectId').on('change',function(){
+		$('#subjectId, #courseId').on('change',function(){
+			const courseId = $('#courseId').val();
 			const subjectId = $('#subjectId').val();
 			console.log(subjectId);
 			$.ajax({
 				type: "get",
-				url: "ajax?subjectId="+subjectId,
+				url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
 				data: {
 					// subjectId: subjectId,
 				},
-				success: function(data) {
+				success: function(result) {
 					console.log("subjectId: "+subjectId);
+					console.log("courseId:"+courseId);
+
+					let startDay = $('#startDay');
+					let recruitStartDay = $('#recruitStartDay');
+					let recruitEndDay = $('#recruitEndDay');
+					let printHours = $('#printHours');
+					let hours = $('#hours');
+					let level = $('#level');
+					let cost = $('#cost');
+					let support = $('.support');
+
+					startDay.empty();
+					startDay.val('');
+					recruitStartDay.val('');
+					recruitEndDay.val('');
+					printHours.empty();
+					level.empty();
+					cost.empty();
+					support.empty();
+					
+
+					if(courseId === "none"){ //과정없을때 (선택안했을때)
+						printHours.append("("+result[0].hours+"시간)");
+						hours.val(result[0].hours);
+
+						if(!result[0].levelEtc){//난이도 기타값이 null일때
+							level.append(result[0].level);
+						}else{
+							level.append(result[0].level+"("+result[0].levelEtc+")");
+						}
+
+						cost.append(result[0].cost+"원");
+
+						if(result[0].supportYn === 'Y'){
+							support.append("※교육비 지원을 받는 강좌입니다.");
+						}
+					} else { //과정있을때 (1. 최조개설 2.개설되어있는 과정)
+						if(!result[0].recruitStartDay) { //신청일자가 존재하지 않음 -> 최초개설
+							console.log("최초개설");
+							console.log("result: "+result);//리스트 몇개 넘어오는지 확인
+							printHours.append("("+result[0].hours+"시간)");
+							hours.val = result[0].hours;
+							if(!result[0].levelEtc){//난이도 기타값이 null일때
+								level.append(result[0].level);
+							}else{
+								level.append(result[0].level+"("+result[0].levelEtc+")");
+							}
+							cost.append(result[0].cost+"원");
+							if(result[0].supportYn === 'Y'){
+								support.append("※교육비 지원을 받는 강좌입니다.");
+							}
+						}else { //개설되어있는 경우
+							console.log("result: "+result);//리스트 몇개 넘어오는지 확인
+							console.log("개설되어있는 경우");
+
+							//과정 정보 입력
+							let date = result[0].endDay.substring(0,4)+"-"+result[0].endDay.substring(4,6)+"-"+result[0].endDay.substring(6);
+							startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
+
+							date = result[0].recruitStartDay.substring(0,4)+"-"+result[0].recruitStartDay.substring(4,6)+"-"+result[0].recruitStartDay.substring(6);
+							recruitStartDay.val(date);
+
+							date = result[0].recruitEndDay.substring(0,4)+"-"+result[0].recruitEndDay.substring(4,6)+"-"+result[0].recruitEndDay.substring(6);
+							recruitEndDay.val(date);
+
+							startDay.change();
+							recruitStartDay.change();
+							recruitEndDay.change();
+
+							//강좌 정보 입력
+							printHours.append("("+result[1].hours+"시간)");
+							hours.val = result[0].hours;
+							if(!result[0].levelEtc){//난이도 기타값이 null일때
+								level.append(result[1].level);
+							}else{
+								level.append(result[1].level+"("+result[1].levelEtc+")");
+							}
+							cost.append(result[1].cost+"원");
+							if(result[1].supportYn === 'Y'){
+								support.append("※교육비 지원을 받는 강좌입니다.");
+							}
+
+						}
+					}
+
 				},
 				error: function(){
 					console.log("fail");
@@ -263,10 +351,30 @@ function changeEverything(i) {
 		}
 	}
 	
-	/*시수에 맞춰 endDay 설정해주기 (아직 날짜가 다름;;)*/
-	function selectEndDay(){
-		const startDay = document.getElementById("startDay").value;
+	/*String -> date 변환*/
+	function parse(str){ // 2022-11-11
+		var y = str.substring(0,4);
+		console.log(y);
+		var m = str.substring(5,7);
+		console.log(m);
+		var d = str.substring(8);
+		console.log(d);
+		return new Date(y,m-1,d);
+	}
 
+	/*시수에 맞춰 endDay 설정해주기*/
+	$(function(){
+		$('#startTime, #endTime').on('change', function(){
+			if()
+		})
+	});
+	
+	/*시수에 맞춰 endDay 설정해주기*/
+	function selectEndDay(){
+		console.log("change startTime, endTime");
+
+		const startDay = document.getElementById("startDay").value;
+		var startDay2 = new Date(startDay);
 		const startTime = document.getElementById("startTime").value;
 		const endTime = document.getElementById("endTime").value;
 		let hours = document.getElementById("hours").value;
@@ -275,6 +383,11 @@ function changeEverything(i) {
 		let startMin = parseInt(startTime.substring(3))
 		let endHour = parseInt(endTime.substring(0,2));
 		let endMin = parseInt(endTime.substring(3));
+
+		console.log(startHour);
+		console.log(startMin);
+		console.log(endHour);
+		console.log(endMin);
 
 		let diffHour = endHour - startHour;
 		let diffMin = 0;
@@ -286,12 +399,22 @@ function changeEverything(i) {
 		}
 		diffMin = Math.ceil(diffMin/60 * 100) / 100; //소수점 두자리 변환
 
+		console.log("diff");
+		console.log(diffHour);
+		console.log(diffMin);
+
 		let diffTime = diffHour+diffMin; // 시작시간과 끝시간 계산
+		
+		console.log(typeof diffTime);
 
-		let days = Math.ceil(hours / diffTime); // 일수 = 시수/입력한 시간차이
+		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
 
-		let startDay2 = new Date(startDay);
-		startDay2.setDate(startDay2.getDate() + days);
+		console.log("hours: "+hours);
+		console.log(startDay);
+		console.log(startDay2);
+		console.log('?? : '+startDay2.getDate());
+		console.log(days);
+		console.log(startDay2.toJSON());
 
 		let endDay = document.getElementById("endDay");
 		endDay.value = startDay2.toJSON().substring(0,10);
@@ -304,6 +427,7 @@ function changeEverything(i) {
 
 	/*신청시작 == 연수시작 한달전, 신청끝 == 신청시작 + 2주 */
 	function selectRecruitDay(){
+		console.log("change startDay");
 		const startDay = document.getElementById("startDay").value;
 		let recruitStartDay = document.getElementById("recruitStartDay");
 		let recruitEndDay = document.getElementById("recruitEndDay");
@@ -327,13 +451,8 @@ function changeEverything(i) {
 		const date = new Date();
 		const today = parseInt(date.toJSON().substring(0,10).replaceAll('-',''));
 
-		let recruitStartDay = document.getElementById('recruitStartDay').value.replaceAll('-','');
-		let recruitEndDay = document.getElementById('recruitEndDay').value.replaceAll('-','');
-
-		// console.log(today);
-		// console.log(recruitStartDay);
-		// console.log(recruitEndDay);
-
+		let recruitStartDay = parseInt(document.getElementById('recruitStartDay').value.replaceAll('-',''));
+		let recruitEndDay = parseInt(document.getElementById('recruitEndDay').value.replaceAll('-',''));
 		let state = document.getElementById('state');
 
 		if(today < recruitStartDay) { //현재날짜가 모집시작일 보다 작으면
@@ -345,9 +464,6 @@ function changeEverything(i) {
 		}
 		console.log(state.value);
 	}
-	
-	/*강좌변화에 따라 비동기로 데이터 출력*/
-	
 
 
 	/* 모달창 열기 */

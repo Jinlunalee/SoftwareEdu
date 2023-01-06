@@ -107,10 +107,10 @@
 	<insert id="insertSubject" parameterType="SubjectVO">
 		insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
-                		recruit_people, state_cd, reg_id, reg_dt)
+                		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 		values 
 			(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId},#{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
-				#{recruitPeople},#{state}, 'mgr1', SYSDATE)
+				#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
 	</insert>
 	
 	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
@@ -135,6 +135,7 @@
 	
 	<select id="infoSubject" parameterType="String" resultType="SubjectVO">
 		select 
+				subject_id as "subjectId",
 				subject_title as "subjectTitle", 
 				support_yn as "supportYn", 
 				cat_cd as "catSubject", 
@@ -144,9 +145,28 @@
 				level_etc as "levelEtc", 
 				cost as "cost"
 		from subject 
-		where subject_id= #{subjectId};
+		where subject_id= #{subjectId}
 	</select>
 	
+	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
+		select DISTINCT 
+						course_id as "courseId", 
+						min(start_day) over (partition by course_id) as "startDay", 
+						max(end_day) over (partition by course_id) as "endDay", 
+						recruit_start_day as "recruitStartDay", 
+						recruit_end_day as "recruitEndDay"
+		from open
+		where course_id = #{courseId}
+	</select>
 	
+	<select id="checkOpenCourse" parameterType="String" resultType="int">
+		select count(*) from open where course_id = #{courseId}
+	</select>
+	
+	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
+		update open
+		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,
+		where course_id = #{courseId}
+	</update>
 	
 </mapper>

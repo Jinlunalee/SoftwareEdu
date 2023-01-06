@@ -186,9 +186,9 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value="/ajax", method=RequestMethod.GET)
-	public @ResponseBody SubjectVO ajaxTest(String subjectId) {
-		logger.info("test/subjectId: " + subjectId);
-		return subjectService.infoSubject(subjectId);
+	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
+		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
+		return subjectService.infoSubjectCourse(courseId, subjectId);
 		
 		
 	}
