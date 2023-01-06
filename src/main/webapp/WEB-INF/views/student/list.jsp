@@ -31,10 +31,11 @@
 	<!--	페이지<b class="basic_txt_color">  ??</b> /??  -->	
 				<div class="view">
 						<button type="button" class="btn btn-outline-secondary">수강생추가</button>
-					<select class="select-view" onchange="changeRowsPerPage(this.value)">
-						<option value="10">10개</option>
-						<option value="30">30개</option>
-						<option value="50">50개</option>
+					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+						<option value="<c:url value="/student/boardList?pageNo=1"/>">선택</option>
+						<option value="<c:url value="/student/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
+						<option value="<c:url value="/student/boardList?pageNo=1&rowsPerPage=30"/>">30개</option>
+						<option value="<c:url value="/student/boardList?pageNo=1&rowsPerPage=50"/>">50개</option>
 					</select>
 				</div>
 			</div>
@@ -117,13 +118,13 @@
 		}
 	}
 	</script>
-	<script>
+	<!-- <script>
 		function changeRowsPerPage(value) {
 			var pageNo = "${pager.pageNo}";
 			console.log("pageNo: "+ pageNo);
 			console.log("rowsPerPage: " + value);
 			$.ajax({
-				url : "boardList?pageNo=" + pageNo + "&rowsPerPage=" + value,
+				url : "boardList?pageNo=" + pageNo + "&rowsPerPage=" + value, 
 				type : "GET",
 				success : function() {
 					
@@ -132,7 +133,7 @@
 				}
 			})
 		}
-	</script>
+	</script> -->
 </div>
 
 
