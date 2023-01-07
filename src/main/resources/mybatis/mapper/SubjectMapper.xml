@@ -127,12 +127,25 @@
 	</select>
 	
 	<insert id="insertSubject" parameterType="SubjectVO">
-		insert into open 
+		<choose>
+			<when test="fileId != null">
+				insert into open 
+						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
+                		recruit_people, state_cd, reg_id, reg_dt, del_yn)
+				values 
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+			</when>
+			<otherwise>
+				insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
-		values 
-			(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId},#{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
-				#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+				values 
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+			</otherwise>
+		</choose>
+		
 	</insert>
 	
 	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
@@ -187,7 +200,7 @@
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		update open
-		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay}
+		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
 		where course_id = #{courseId}
 	</update>
 	

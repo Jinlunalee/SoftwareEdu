@@ -56,6 +56,18 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int insertFileData(SubjectVO subject, UploadfileVO file) {
+		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+		if(check > 0) { // 같은 과정 존재
+			subjectRepository.updateRecruitSameCourse(subject);
+		}
+		String maxFileId = subjectRepository.selectMaxFileId();
+		String maxFileId1 = maxFileId.substring(0,4);
+		String maxFileId2 = String.format("%04d", Integer.parseInt(maxFileId.substring(4))+1); //4자리수 맞추기
+		logger.info("maxFileID: "+maxFileId1+maxFileId2);
+		
+		subject.setFileId(maxFileId1+maxFileId2);
+		file.setFileId(maxFileId1+maxFileId2);
+		
 		if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
 			subjectRepository.insertFileData(file);
 		}
