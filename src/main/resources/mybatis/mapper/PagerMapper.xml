@@ -25,4 +25,28 @@
 		)
 		WHERE rnum &gt;= #{startRowNo}
 	</select>
+	
+	<select id="getCountOpenCourseRow" resultType="int">
+		SELECT count(*) FROM open where course_id IS NOT NULL
+	</select>
+
+	<select id="selectOpenCourseListByPage" parameterType="Pager" resultType="SubjectVO">
+		
+	</select>	
+	
+	<select id="getCountOpenSubjectRow" resultType="int">
+		SELECT count(*) FROM open
+	</select>
+
+	<select id="selectOpenSubjectListByPage" parameterType="Pager" resultType="SubjectVO">
+		
+	</select>
+	
+		<select id="getCountEnrollRow" resultType="int">
+		SELECT count(*) FROM enroll
+	</select>
+
+	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
+		
+	</select>
 </mapper>

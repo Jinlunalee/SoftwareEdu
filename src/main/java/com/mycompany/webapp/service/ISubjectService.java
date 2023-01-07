@@ -16,6 +16,7 @@ public interface ISubjectService {
 	
 	int updateSubject(SubjectVO subject); // 과정/강좌 수정
 	int updateFileData(SubjectVO subject, UploadfileVO file); // 과정/강좌 수정 첨부파일
+	UploadfileVO getFile(String fileId);
 	
 	int insertSubject(SubjectVO subject); // 과정/강좌 개설
 	int insertFileData(SubjectVO subject, UploadfileVO file); // 과정/강좌 개설 첨부파일

@@ -2,7 +2,6 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
@@ -89,7 +88,7 @@ function changeEverything(i) {
 			<tr>
 				<td> 연수시간</td>
 				<td> <!-- 30분단위로 입력(초) -->
-					<input type="time" name="startTime" id="startTime" min="9:00" max="24:00" step="1800"> 
+					<input type="time" name="startTime" id="startTime" min="09:00" max="24:00" step="1800"> 
 					~ 
 					<input type="time" name="endTime" id="endTime" max="24:00" step="1800"> 
 				</td>
@@ -193,7 +192,7 @@ function changeEverything(i) {
 			<p class="txt"> <textarea name="content" cols="60" rows="10"></textarea> </p>
 		</div>
 		<div class="submit-btn">
-			<input type="hidden" name="state" id="state" value="모집중">
+			<input type="hidden" name="state" id="state" value="">
 			<input type="submit" class="btn-submit-open-popup" value="저장">
 		</div>
 		</form>		
@@ -211,6 +210,10 @@ function changeEverything(i) {
 		});
 	});
 
+	var ajaxRecruitStart;
+	var ajaxRecruitEnd;
+	var ajaxStart;
+	var ajaxEnd;
 	/*강좌변화에 따라 비동기로 데이터 출력*/
 	$(function(){
 		$('#subjectId, #courseId').on('change',function(){
@@ -294,23 +297,27 @@ function changeEverything(i) {
 							// let date = result[0].endDay.substring(0,4)+"-"+result[0].endDay.substring(4,6)+"-"+result[0].endDay.substring(6);
 							let date = parse(result[0].endDay);
 							startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
+							ajaxEnd = date;
 
-							//startDay의 min을 endDay로 지정 (과정이 개설되어있는경우에만 필요)
+							//startDay의 min을 endDay로 지정 (과정이 개설되어있는경우에만 필요) -- 아직안됨
 							console.log("endDay: "+ date);
 							startDay.attr('value', date);
 							console.log("startDay"+startDay.val());
 
+							date = parse(result[0].startDay);
+							ajaxStart = date;
+
 							// date = result[0].recruitStartDay.substring(0,4)+"-"+result[0].recruitStartDay.substring(4,6)+"-"+result[0].recruitStartDay.substring(6);
 							date = parse(result[0].recruitStartDay);
 							recruitStartDay.val(date);
+							ajaxRecruitStart = date;
 
 							// date = result[0].recruitEndDay.substring(0,4)+"-"+result[0].recruitEndDay.substring(4,6)+"-"+result[0].recruitEndDay.substring(6);
 							date = parse(result[0].recruitEndDay);
 							recruitEndDay.val(date);
+							ajaxRecruitEnd = date;
 
 							startDay.change();
-							recruitStartDay.change();
-							recruitEndDay.change();
 
 							//강좌 정보 입력
 							console.log('result[1].hours:'+result[1].hours);
@@ -420,25 +427,43 @@ function changeEverything(i) {
 		})
 	});
 
-	/*신청시작 == 연수시작 한달전, 신청끝 == 신청시작 + 2주 */
+	/*신청시작 == 연수시작 한달전, 신청끝 == 신청시작 + 2주 => 이경우는 과정이 없을때/과정이있지만 최초개설일떄*/
 	function selectRecruitDay(){
 		console.log("change startDay");
 		const startDay = document.getElementById("startDay").value;
 		let recruitStartDay = document.getElementById("recruitStartDay");
 		let recruitEndDay = document.getElementById("recruitEndDay");
-	
-		//신청시작일자
-		let rSDay = new Date(startDay);
-		rSDay.setMonth(rSDay.getMonth()-1);
-		recruitStartDay.value = rSDay.toJSON().substring(0,10);
-		recruitStartDay.max = startDay;
 
-		//신청끝나는일자
-		rSDay.setDate(rSDay.getDate()+14);
-		recruitEndDay.value = rSDay.toJSON().substring(0,10);
-		recruitEndDay.min = recruitStartDay.value; // 신청시작일자 전까지
-		recruitEndDay.max = startDay; //연수시작 시간날까지만 가능
-		recruitEndDay.onchange(); //값이 바뀐 엘리먼트의 onchange 함수 실행
+		if(ajaxRecruitStart){// 같은 과정이 있으면 그 과정의 신청기간을 들고와서 입력해줌
+		
+			//신청시작일자
+			recruitStartDay.value = ajaxRecruitStart;
+			recruitStartDay.max = ajaxStart; //같은과정 연수 시작하기 전
+
+			//신청끝나는일자
+			recruitEndDay.value = ajaxRecruitEnd;
+			recruitEndDay.min = recruitStartDay.value;
+			recruitEndDay.max = ajaxStart;  //같은과정 연수 시작하기 전
+
+			recruitStartDay.onchange();
+			recruitEndDay.onchange();
+
+		}else{//신청시작 == 연수시작 한달전, 신청끝 == 신청시작 + 2주 => 이경우는 과정이 없을때/과정이있지만 최초개설일떄
+			
+			//신청시작일자
+			let rSDay = new Date(startDay);
+			rSDay.setMonth(rSDay.getMonth()-1);
+			recruitStartDay.value = rSDay.toJSON().substring(0,10);
+			recruitStartDay.max = startDay;
+
+			//신청끝나는일자
+			rSDay.setDate(rSDay.getDate()+14);
+			recruitEndDay.value = rSDay.toJSON().substring(0,10);
+			recruitEndDay.min = recruitStartDay.value; // 신청시작일자 전까지
+			recruitEndDay.max = startDay; //연수시작 시간날까지만 가능
+			recruitEndDay.onchange(); //값이 바뀐 엘리먼트의 onchange 함수 실행
+		}
+	
 	}
 
 	/*오늘날짜와 기간들 비교해서 상태 입력*/

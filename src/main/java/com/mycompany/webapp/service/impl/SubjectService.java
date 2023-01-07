@@ -47,7 +47,7 @@ public class SubjectService implements ISubjectService{
 	public int insertSubject(SubjectVO subject) {
 		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
 		subjectRepository.insertSubject(subject);
-		if(check != 0) { // 같은 과정 존재
+		if(check > 0) { // 같은 과정 존재
 			subjectRepository.updateRecruitSameCourse(subject);
 		}
 		return 0;
@@ -56,14 +56,30 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int insertFileData(SubjectVO subject, UploadfileVO file) {
-		subjectRepository.insertSubject(subject);
-		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
-			file.setSubjectId(subject.getSubjectId());
+		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+		if(check > 0) { // 같은 과정 존재
+			subjectRepository.updateRecruitSameCourse(subject);
+		}
+		String maxFileId = subjectRepository.selectMaxFileId();
+		String maxFileId1 = maxFileId.substring(0,4);
+		String maxFileId2 = String.format("%04d", Integer.parseInt(maxFileId.substring(4))+1); //4자리수 맞추기
+		logger.info("maxFileID: "+maxFileId1+maxFileId2);
+		
+		subject.setFileId(maxFileId1+maxFileId2);
+		file.setFileId(maxFileId1+maxFileId2);
+		
+		if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
 			subjectRepository.insertFileData(file);
 		}
+		subjectRepository.insertSubject(subject);
 		return 0;
 	}
-
+	
+	@Override
+	public UploadfileVO getFile(String fileId) {
+		return subjectRepository.getFile(fileId);
+	}
+	
 	@Override
 	public List<SubjectVO> selectAllCourse() {
 		return subjectRepository.selectAllCourse();
@@ -82,11 +98,33 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int updateFileData(SubjectVO subject, UploadfileVO file) {
-		subjectRepository.updateSubject(subject);
-		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
-			file.setSubjectId(subject.getSubjectId());
-			subjectRepository.updateFileData(file);
+		logger.info("service/updatefiledate/:" + subject.getFileId() + file.getFileId());
+		logger.info("service/update/subject:" +subject);
+		logger.info("service/update/subject:" +file);
+		
+		if(subject.getFileId() == null || subject.getFileId() == null || subject.getFileId().equals("")) { //그전에 파일이 없다가 나중에 추가
+			String maxFileId = subjectRepository.selectMaxFileId();
+			String maxFileId1 = maxFileId.substring(0,4);
+			String maxFileId2 = String.format("%04d", Integer.parseInt(maxFileId.substring(4))+1); //4자리수 맞추기
+			logger.info("maxFileID: "+maxFileId1+maxFileId2);
+			
+			subject.setFileId(maxFileId1+maxFileId2);
+			file.setFileId(maxFileId1+maxFileId2);
+			
+			if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {//첨부파일있을때 
+				subjectRepository.insertFileData(file);	
+				logger.info("insert filedata:"+file);
+			}
+			logger.info("update subject:"+subject);
+			subjectRepository.updateSubject(subject);//fk때문에 나중에 입력되어야 함
+		}else { //파일 있다가 수정
+			if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
+				file.setFileId(subject.getFileId());
+				subjectRepository.updateFileData(file);
+			}
+			subjectRepository.updateSubject(subject);
 		}
+		
 		return 0;
 	}
 	
@@ -139,4 +177,6 @@ public class SubjectService implements ISubjectService{
 	public void clickDeleteUploadFile(String subjectId, int subjectSeq) {
 		subjectRepository.clickDeleteUploadFile(subjectId, subjectSeq);
 	}
+
+	
 }

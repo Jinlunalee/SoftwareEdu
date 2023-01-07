@@ -41,7 +41,8 @@
 			recruit_end_day as "recruitEndDay",
 			recruit_people as "recruitPeople",
 			state_cd as "state",
-			comn_cd_title as "comnCdTitle"
+			comn_cd_title as "comnCdTitle",
+			file_id as "fileId"
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
@@ -71,11 +72,16 @@
 			recruit_end_day as "recruitEndDay",
 			recruit_people as "recruitPeople",
 			state_cd as "state",
-			comn_cd_title as "comnCdTitle"
+			comn_cd_title as "comnCdTitle",
+			upload_file.file_id as "fileId", 
+			file_name as "fileName", 
+			file_size as "fileSize", 
+			file_content_type as "fileContentType"			
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
+        		left join upload_file on open.file_id = upload_file.file_id
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
@@ -91,32 +97,61 @@
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
     		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
-    		content = #{content}
+    		content = #{content}, file_id=#{fileId}
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
-	<update id="updateFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
+	<update id="updateFileData" parameterType="UploadfileVO">
 		update upload_file
 		set
 			file_name=#{fileName}, file_size=#{fileSize}, 
 			file_content_type=#{fileContentType}, file_data=#{fileData}
 		where 
-			file_id=#{fileId} and subject_id=#{subjectId}
+			file_id=#{fileId}
 	</update>
 	
+	<select id="getFile" parameterType="String" resultType="UploadfileVO">
+		select 
+				file_id as "fileId", 
+				file_name as "fileName", 
+				file_size as "fileSize",
+				file_content_type as "fileContentType", 
+				file_data as "fileData"
+		from upload_file
+		where file_id = #{fileId}
+	</select>
+	
+	<select id="selectMaxFileId" resultType="String">
+		select max(file_id)
+		from upload_file
+	</select>
+	
 	<insert id="insertSubject" parameterType="SubjectVO">
-		insert into open 
+		<choose>
+			<when test="fileId != null">
+				insert into open 
+						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
+                		recruit_people, state_cd, reg_id, reg_dt, del_yn)
+				values 
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+			</when>
+			<otherwise>
+				insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
-		values 
-			(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId},#{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
-				#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+				values 
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+			</otherwise>
+		</choose>
+		
 	</insert>
 	
 	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
 		insert into upload_file 
-			(file_id, subject_id, file_name, file_size, file_content_type, file_data)
-		values(#{fileId}, #{subjectId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData})
+			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
+		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', SYSDATE, 'N')
 	</insert>
 	
 	<select id="selectAllCourse" resultType="SubjectVO">
@@ -165,7 +200,7 @@
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		update open
-		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay}
+		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
 		where course_id = #{courseId}
 	</update>
 	

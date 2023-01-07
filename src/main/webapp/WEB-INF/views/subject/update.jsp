@@ -2,7 +2,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
@@ -39,7 +39,14 @@
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
+					<c:if test="${!empty subject.fileName}">
+						<c:set var="len" value="${fn:length(subject.fileName)}"/>
+						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
+						<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
+							<img class="detail_img" src='<c:url value="/file/${subject.fileId}"/>'><br>
+						</c:if>
+					</c:if>
+					<!-- img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/-->
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> 
@@ -105,6 +112,7 @@
 			<p class="txt"> <textarea name="content" cols="60" rows="10">${subject.content}</textarea></p>
 		</div>
 		<div class="submit-btn">
+			<input type="hidden" name="fileId" value="${subject.fileId}">
 			<input type="submit" value="저장">
 		</div>
 		</form>
