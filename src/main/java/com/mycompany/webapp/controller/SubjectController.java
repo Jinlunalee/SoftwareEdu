@@ -120,7 +120,6 @@ public class SubjectController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("boardList: " + boardList);
-
 		return "subject/subjectlist";
 	}
 
@@ -131,7 +130,7 @@ public class SubjectController {
 		model.addAttribute("menuKOR", "강좌 관리");
 		
 		// subjectId, subjectSeq 이용해서 question 테이블에 해당하는 정보를 surveyVO에 담아서 model로 넘기기
-				
+
 		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
 		int totalPeople = subjectService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject에 있는 state가 아니라 enroll에 있는거 가져와야함
 		model.addAttribute("subject", subject);

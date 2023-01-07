@@ -10,9 +10,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,15 +25,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IPagerService;
 
 @Controller
 @RequestMapping("/enroll")
 public class EnrollController {
+	static final Logger logger = LoggerFactory.getLogger(EnrollController.class);
 	
 	@Autowired
 	IEnrollService enrollService;
+	
+	@Autowired
+	IPagerService pagerService;
 	
 	//목록조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -47,6 +56,44 @@ public class EnrollController {
 		return "enroll/list";
 	}
 	
+	// paging 목록조회
+	@GetMapping("/boardList")
+	public String enrollList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountEnrollRow();
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<EnrollVO> boardList = pagerService.selectEnrollListByPage(pager);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		
+		// cancel list
+		List<CommonCodeVO> cancelList = enrollService.getCancelList();
+		model.addAttribute("cancelList", cancelList);
+		
+		return "enroll/list";
+	}
+
+	
+	// 입력
+	@RequestMapping(value="/insert", method=RequestMethod.GET)
+	public String insertEnroll(Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		return "enroll/insert";
+	}
+	
+	// 취소 누르면 수강 취소 상태
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
@@ -56,25 +103,30 @@ public class EnrollController {
 	// 논리 삭제
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		System.out.println("컨트롤 체크");
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
-		System.out.println("컨트롤러 체크");
 		return "redirect:/enroll/list";
 	}
 	
+	// 진행률
 	@ResponseBody
 	@RequestMapping(value="/ratio/{studentId}/{subjectId}/{subjectSeq}")
 	public String getRatio(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		System.out.println("값" + enrollService.getRatio(studentId, subjectId, subjectSeq));
 		return enrollService.getRatio(studentId, subjectId, subjectSeq);
 	}
 	
+	// 수강 완료한 시간 입력
 	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
+	// 완료 시간 ajax
+//	@ResponseBody
+//	@RequestMapping(value="/gethours/{enrollId}")
+//	public int getHours(@PathVariable String enrollId) {
+//		return enrollService.getHours(enrollId);
+//	}
 	
 	// 수강 추가 수강생 ajax
 	@RequestMapping(value="/studentlist")
@@ -94,30 +146,21 @@ public class EnrollController {
 		return enrollService.getOpenList(openVO);
 	}
 	
+	// 승인하면 수강 예정 상태
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
 	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
-	
-	//상세조회
-	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
-	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/details";
-	}
-
-	//검색
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String searchEnroll(@RequestParam Date enrollDate, @RequestParam String studentName, @RequestParam String courseName, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/search";
+	// 수강 추가
+	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
+	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+		enrollService.addEnroll(studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
 	}
 	
-	//엑셀파일 다운로드
+	//엑셀 파일 다운로드
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public void downloadEnroll(HttpServletResponse response) throws IOException {
 		Workbook workbook = new HSSFWorkbook();
@@ -148,35 +191,4 @@ public class EnrollController {
         workbook.close();
 	}
 	
-	//수정
-	@RequestMapping(value="/update/{enrollId}", method=RequestMethod.GET)
-	public String updateEnroll(@PathVariable String enrollId, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/update";
-	}
-
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String updateEnroll(EnrollVO enrollVo) {
-		return "redirect:/enroll/details"+enrollVo.getEnrollId();
-	}
-
-	//삭제
-	@RequestMapping(value="/delete/{enrollId}", method=RequestMethod.POST)
-	public String deleteEnroll(@PathVariable String studentId ,EnrollVO enrollVo) {
-		return "redirect:/enroll/list";
-	}
-
-	//입력
-	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insertEnroll(Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		return "enroll/insert";
-	}
-
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertEnroll(EnrollVO enrollVo) {
-		return "redirect:/enroll/details"+enrollVo.getEnrollId();
-	}
 }

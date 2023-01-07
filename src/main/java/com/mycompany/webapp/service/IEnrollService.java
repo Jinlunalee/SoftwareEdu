@@ -14,8 +14,10 @@ public interface IEnrollService {
 	void clickDelete(String studentId, String subjectId, String subjectSeq);
 	void clickDeleteEnrollByOpen(String subjectId, int subjectSeq);
 	void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
+//	int getHours(String enrollId);
 	List<CommonCodeVO> getCancelList();
 	List<StudentVO> getStudentList(StudentVO studentVO);
 	void approval(String studentId, String subjectId, String subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
+	void addEnroll(String studentId, String subjcetId, int subjectSeq);
 }
