@@ -2,8 +2,6 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
@@ -75,11 +73,7 @@ function changeEverything(i) {
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<c:set var="len" value="${fn:length(subject.fileName}"/>
-					<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
-					<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
-						<img src='<c:url value="/file/${subject.fileId}"/>'><br>
-					</c:if>
+					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
 				</td>
 				<td> 연수기간(시수)</td>
 				<td> 
@@ -223,7 +217,7 @@ function changeEverything(i) {
 			const subjectId = $('#subjectId').val();
 			$.ajax({
 				type: "get",
-				url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
+				url: "ajaxTest?courseId="+courseId+"&subjectId="+subjectId,
 				data: {
 					// subjectId: subjectId,
 				},

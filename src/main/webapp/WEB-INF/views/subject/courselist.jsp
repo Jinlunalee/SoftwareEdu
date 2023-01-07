@@ -65,20 +65,20 @@
               	<div>
               		<c:choose>
               			<c:when test="${subject.comnCdTitle eq '모집예정'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
 							<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '진행중'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '폐강'}">
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '진행완료'}">
               			</c:when>
               			<c:otherwise>
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">수정</button>
-              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/1"/>'">폐강</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="location.href=''">폐강</button>
 						</c:otherwise>
               		</c:choose>
               	</div> 
@@ -90,4 +90,14 @@
 	</div>
 </div>
 
+	<script>
+	function del() {
+		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
+			console.log('삭제')
+		} else {
+			console.log('취소')
+		}
+	}
+	</script>
+	
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -41,7 +41,8 @@
 			recruit_end_day as "recruitEndDay",
 			recruit_people as "recruitPeople",
 			state_cd as "state",
-			comn_cd_title as "comnCdTitle"
+			comn_cd_title as "comnCdTitle",
+			file_id as "fileId"
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
@@ -71,11 +72,16 @@
 			recruit_end_day as "recruitEndDay",
 			recruit_people as "recruitPeople",
 			state_cd as "state",
-			comn_cd_title as "comnCdTitle"
+			comn_cd_title as "comnCdTitle",
+			upload_file.file_id as "fileId", 
+			file_name as "fileName", 
+			file_size as "fileSize", 
+			file_content_type as "fileContentType"			
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
+        		left join upload_file on open.file_id = upload_file.file_id
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
@@ -104,6 +110,22 @@
 			file_id=#{fileId}
 	</update>
 	
+	<select id="getFile" parameterType="String" resultType="UploadfileVO">
+		select 
+				file_id as "fileId", 
+				file_name as "fileName", 
+				file_size as "fileSize",
+				file_content_type as "fileContentType", 
+				file_data as "fileData"
+		from upload_file
+		where file_id = #{fileId}
+	</select>
+	
+	<select id="selectMaxFileId" resultType="String">
+		select max(file_id)
+		from upload_file
+	</select>
+	
 	<insert id="insertSubject" parameterType="SubjectVO">
 		insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
@@ -115,8 +137,8 @@
 	
 	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
 		insert into upload_file 
-			(file_id, subject_id, file_name, file_size, file_content_type, file_data)
-		values(#{fileId}, #{subjectId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData})
+			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
+		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', SYSDATE, 'N')
 	</insert>
 	
 	<select id="selectAllCourse" resultType="SubjectVO">

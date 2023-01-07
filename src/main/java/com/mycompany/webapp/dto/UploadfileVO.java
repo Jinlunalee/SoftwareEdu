@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude="fileData")
 public class UploadfileVO {
 	private String fileId;
 	private String fileName;

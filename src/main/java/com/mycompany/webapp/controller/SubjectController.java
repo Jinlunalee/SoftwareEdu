@@ -1,10 +1,15 @@
 package com.mycompany.webapp.controller;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -88,7 +93,7 @@ public class SubjectController {
 		model.addAttribute("menuKOR", "강좌 관리");
 		return "subject/search";
 	}
-
+	
 	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
 	public String updateSubject(@PathVariable String subjectId, @PathVariable int subjectSeq,Model model) {
@@ -100,7 +105,7 @@ public class SubjectController {
 		
 		return "subject/update";
 	}
-
+	
 	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String updateSubject(SubjectVO subject) {
@@ -132,6 +137,19 @@ public class SubjectController {
 		}
 		
 		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
+	}
+	
+	// 이미지 첨부파일 
+	@RequestMapping("/file/{fileId}")
+	public ResponseEntity<byte[]> getFile(@PathVariable String fileId){
+		UploadfileVO file = subjectService.getFile(fileId);
+		logger.info("getFile: "+file.toString());
+		final HttpHeaders headers = new HttpHeaders();
+		String[] mtypes = file.getFileContentType().split("/");
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
+		headers.setContentLength(file.getFileSize());
+		headers.setContentDispositionFormData("attachment", file.getFileName(), Charset.forName("UTF-8"));
+		return new ResponseEntity<byte[]>(file.getFileData(), headers, HttpStatus.OK);
 	}
 
 	// 개설 강좌 삭제 (open)
@@ -207,7 +225,7 @@ public class SubjectController {
 	}
 	
 	// 개설 강좌 입력 폼 비동기 출력
-	@RequestMapping(value="/ajax", method=RequestMethod.GET)
+	@RequestMapping(value="/ajaxTest", method=RequestMethod.GET)
 	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
 		return subjectService.infoSubjectCourse(courseId, subjectId);

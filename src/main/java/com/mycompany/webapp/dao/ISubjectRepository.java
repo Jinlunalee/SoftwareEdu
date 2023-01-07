@@ -18,6 +18,8 @@ public interface ISubjectRepository {
 	
 	int updateSubject(SubjectVO subject); // 과정/강좌 수정
 	int updateFileData(UploadfileVO file); // 과정/강좌 수정 첨부파일
+	UploadfileVO getFile(String fileId); // 파일 첨부파일 가져오기 
+	String selectMaxFileId();//파일아이디 최대값
 	
 	int insertSubject(SubjectVO subject); // 과정/강좌 개설
 	int insertFileData(UploadfileVO file); // 과정/강좌 개설 첨부파일
