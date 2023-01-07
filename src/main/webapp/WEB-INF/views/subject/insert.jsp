@@ -217,7 +217,7 @@ function changeEverything(i) {
 			const subjectId = $('#subjectId').val();
 			$.ajax({
 				type: "get",
-				url: "ajaxTest?courseId="+courseId+"&subjectId="+subjectId,
+				url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
 				data: {
 					// subjectId: subjectId,
 				},

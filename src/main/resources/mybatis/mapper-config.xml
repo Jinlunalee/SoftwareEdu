@@ -12,6 +12,7 @@
 		<typeAlias type="com.mycompany.webapp.dto.QuestionSetVO" alias="QuestionSetVO" />
 		<typeAlias type="com.mycompany.webapp.dto.AnswerVO" alias="AnswerVO" />
 		<typeAlias type="com.mycompany.webapp.dto.OpenVO" alias="OpenVO" />
+		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="Pager"/>
 		<typeAlias type="com.mycompany.webapp.dto.UploadfileVO" alias="UploadfileVO" />
 	</typeAliases>
 </configuration>
