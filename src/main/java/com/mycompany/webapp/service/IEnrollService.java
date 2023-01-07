@@ -1,6 +1,7 @@
 package com.mycompany.webapp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
@@ -20,4 +21,5 @@ public interface IEnrollService {
 	void approval(String studentId, String subjectId, String subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
+	void addCourse(Map<String, Object> addCourse, String studentId);
 }

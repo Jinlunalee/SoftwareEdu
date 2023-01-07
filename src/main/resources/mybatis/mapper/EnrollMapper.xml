@@ -96,6 +96,11 @@
 			</when>
 		</choose>
 	</select>
+	
+	<select id="getMaxEnrollId" resultType="int">
+		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
+		FROM ENROLL
+	</select>
 
 	<update id="clickCancel" parameterType="map">
 		UPDATE ENROLL 
@@ -141,9 +146,21 @@
 		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 'N', NULL, NULL)
 	</insert>
 	
-	<select id="getMaxEnrollId" resultType="int">
-		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
-		FROM ENROLL
-	</select>
+	<insert id="addCourse" parameterType="map">
+		INSERT INTO ENROLL 
+		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
+		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
+		del_yn, cancel_rs_cd, cancel_rs_etc) 
+		VALUES 
+		<foreach collection="list" item="item" separator=",">
+		( 'ENRL0' || #{maxEnrollId}, #{item.subjectId}, 
+			#{item.subjectSeq}, #{studentId}, 
+			'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 
+			'N', NULL, NULL
+		)
+		</foreach>
+	</insert>
+	
+	
 
 </mapper>

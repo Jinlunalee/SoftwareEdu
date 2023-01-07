@@ -1,8 +1,8 @@
 package com.mycompany.webapp.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -119,6 +120,14 @@ public class EnrollController {
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
+		return "redirect:/enroll/list";
+	}
+	
+	// 과정 추가
+	@RequestMapping(value="/addcourse/{studentId}", method=RequestMethod.POST)
+	public String addCourse(@RequestBody Map<String, Object> addCourse, @PathVariable String studentId) {
+		System.out.println(addCourse);
+		enrollService.addCourse(addCourse, studentId);
 		return "redirect:/enroll/list";
 	}
 	

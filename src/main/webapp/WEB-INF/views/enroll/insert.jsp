@@ -31,6 +31,7 @@
 		var a;
 		var b;
 		var c;
+		var d;
 		
 		function getStudentList() {
 			$.ajax({
@@ -40,7 +41,6 @@
 				async : false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 				success : function(result){
-					
 					a = JSON.stringify(result[0].studentId);
 					a = a.replace(/\"/gi, "");
 					
@@ -73,7 +73,9 @@
 			var studentId = a;
 			var subjectId = b;
 			var subjectSeq = c;
+			var course = d;
 			
+			if(studentId && subjectId && subjectSeq) {
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
@@ -81,7 +83,23 @@
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
 				}
-			})
+				})
+			}
+			else if(studentId && course){
+				$.ajax({
+					type : 'POST',
+					url : 'addcourse/' + studentId,
+					async : false,
+					data : course,
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					success : function(result){
+					}
+				})
+				
+				
+				
+				
+			}
 		}
 		
 		function getOpenList() {
@@ -93,10 +111,15 @@
 				async : false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 				success : function(result){
-					b = JSON.stringify(result[0].subjectId);
-					b = b.replace(/\"/gi, "");
-					c = JSON.stringify(result[0].subjectSeq);
-					c = c.replace(/\"/gi, "");
+					if(result.length > 1) {
+						d = JSON.stringify(result);
+					}else{
+						b = JSON.stringify(result[0].subjectId);
+						b = b.replace(/\"/gi, "");
+						c = JSON.stringify(result[0].subjectSeq);
+						c = c.replace(/\"/gi, "");	
+					}
+					
 					$(".rs2").empty();
 					if(result.length > 0) {
 						var td = $("<table class='tb'/>");

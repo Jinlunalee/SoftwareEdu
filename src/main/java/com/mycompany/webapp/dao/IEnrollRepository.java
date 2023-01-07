@@ -1,6 +1,7 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +26,6 @@ public interface IEnrollRepository {
 	void approval(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("maxEnrollId") int maxEnrollId);
-	
+	void addCourse(Map<String, Object> addCourse, String studnetId, String maxEnroll2);
 	int getMaxEnrollId();
 }

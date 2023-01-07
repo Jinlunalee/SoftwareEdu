@@ -1,6 +1,7 @@
 package com.mycompany.webapp.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,12 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.addEnroll(studentId, subjectId, subjectSeq, maxEnrollId);
 	}
 
-	
+	@Override
+	public void addCourse(Map<String, Object> addCourse, String studentId) {
+		for(int i=0; i<addCourse.size(); i++) {
+		int maxEnrollId = enrollRepository.getMaxEnrollId() + 1;
+		String maxEnrollId2 = "ENRL0" + maxEnrollId;
+		enrollRepository.addCourse(addCourse, studentId, maxEnrollId2);
+		}
+	}
 }
