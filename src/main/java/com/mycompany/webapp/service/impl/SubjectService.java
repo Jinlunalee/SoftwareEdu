@@ -58,7 +58,6 @@ public class SubjectService implements ISubjectService{
 	public int insertFileData(SubjectVO subject, UploadfileVO file) {
 		subjectRepository.insertSubject(subject);
 		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
-			file.setSubjectId(subject.getSubjectId());
 			subjectRepository.insertFileData(file);
 		}
 		return 0;
@@ -84,7 +83,6 @@ public class SubjectService implements ISubjectService{
 	public int updateFileData(SubjectVO subject, UploadfileVO file) {
 		subjectRepository.updateSubject(subject);
 		if(file != null && file.getFileName() != null && file.getFileName().equals("")) {
-			file.setSubjectId(subject.getSubjectId());
 			subjectRepository.updateFileData(file);
 		}
 		return 0;

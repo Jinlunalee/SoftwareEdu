@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class UploadfileVO {
 	private String fileId;
-	private String subjectId;
 	private String fileName;
 	private long fileSize;
 	private String fileContentType;

@@ -2,6 +2,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
@@ -74,7 +75,11 @@ function changeEverything(i) {
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
+					<c:set var="len" value="${fn:length(subject.fileName}"/>
+					<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
+					<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
+						<img src='<c:url value="/file/${subject.fileId}"/>'><br>
+					</c:if>
 				</td>
 				<td> 연수기간(시수)</td>
 				<td> 

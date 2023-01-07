@@ -91,17 +91,17 @@
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
     		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
-    		content = #{content}
+    		content = #{content}, file_id=#{fileId}
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
-	<update id="updateFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
+	<update id="updateFileData" parameterType="UploadfileVO">
 		update upload_file
 		set
 			file_name=#{fileName}, file_size=#{fileSize}, 
 			file_content_type=#{fileContentType}, file_data=#{fileData}
 		where 
-			file_id=#{fileId} and subject_id=#{subjectId}
+			file_id=#{fileId}
 	</update>
 	
 	<insert id="insertSubject" parameterType="SubjectVO">

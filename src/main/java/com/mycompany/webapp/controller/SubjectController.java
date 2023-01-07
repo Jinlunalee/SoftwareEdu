@@ -114,7 +114,6 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 				
-		
 		try {
 			MultipartFile mf = subject.getFile();
 			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
