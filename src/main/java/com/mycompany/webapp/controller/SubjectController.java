@@ -81,7 +81,7 @@ public class SubjectController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		logger.info("boardList: " + boardList);
+		logger.info("OpenCourseBoardList: " + boardList);
 
 		return "subject/courselist";
 	}
@@ -118,7 +118,7 @@ public class SubjectController {
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("OpenSubjectBoardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("boardList: " + boardList);
 		return "subject/subjectlist";
 	}

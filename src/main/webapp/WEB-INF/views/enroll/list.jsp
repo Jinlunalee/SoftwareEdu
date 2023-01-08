@@ -37,11 +37,12 @@
 		
 		<%-- 뷰 갯수 --%>
 		<div class="view">
-		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
-			<select class="select-view">
-				<option>10개</option>
-				<option>30개</option>
-				<option>50개</option>
+			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
+			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+				<option value="<c:url value="/enroll/boardList?pageNo=1"/>">선택</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=30"/>">30개</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=50"/>">50개</option>
 			</select>
 		</div>
 

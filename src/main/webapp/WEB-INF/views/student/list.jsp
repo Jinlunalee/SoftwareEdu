@@ -27,10 +27,9 @@
 
 		<div class="list_top">
 			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.rowsPerPage}</b>개, 
-	<!--	페이지<b class="basic_txt_color">  ??</b> /??  -->	
+			전체목록 <b class="basic_txt_color">${pager.rowsPerPage}</b>개,
 				<div class="view">
-						<button type="button" class="btn btn-outline-secondary">수강생추가</button>
+					<button type="button" class="btn btn-outline-secondary">수강생추가</button>
 					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 						<option value="<c:url value="/student/boardList?pageNo=1"/>">선택</option>
 						<option value="<c:url value="/student/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
