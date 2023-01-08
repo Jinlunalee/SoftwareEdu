@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -195,7 +196,7 @@ public class SubjectController {
 		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
 	}
 	
-	// 이미지 첨부파일 
+	// 이미지 첨부파일 보여주기
 	@RequestMapping("/file/{fileId}")
 	public ResponseEntity<byte[]> getFile(@PathVariable String fileId){
 		UploadfileVO file = subjectService.getFile(fileId);
@@ -285,8 +286,13 @@ public class SubjectController {
 	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
 		return subjectService.infoSubjectCourse(courseId, subjectId);
-		
-		
+	}
+	
+	//개설강좌 폐강처리
+	@PostMapping(value="/closesubject")
+	public String closeSubject(String subjectId, int subjectSeq) {
+		subjectService.closeSubject(subjectId, subjectSeq);
+		return "redirect:/subject/subjectlist";
 	}
 
 }

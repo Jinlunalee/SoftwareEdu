@@ -29,4 +29,6 @@ public interface ISubjectService {
 	
 	void clickDeleteOpen(String subjectId, int subjectSeq);
 	void clickDeleteUploadFile(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	
+	int closeSubject(String subjectId, int subjectSeq); //폐깡처리
 }
