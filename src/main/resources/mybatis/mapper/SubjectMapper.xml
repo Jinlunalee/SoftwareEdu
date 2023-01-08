@@ -204,6 +204,12 @@
 		where course_id = #{courseId}
 	</update>
 	
+	<update id="closeSubject" parameterType="map">
+		update open 
+		set state_cd = 'OPN07' 
+		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
+	</update>
+	
 	<update id="clickDeleteOpen" parameterType="map">
 		update open
 		set del_yn = 'N'

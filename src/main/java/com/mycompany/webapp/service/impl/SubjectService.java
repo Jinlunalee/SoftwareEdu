@@ -164,8 +164,6 @@ public class SubjectService implements ISubjectService{
 //			logger.info("service/infoSubjectCourse/subject: " + subject);
 //			return subject;
 //		}
-		
-		
 	}
 
 	@Override
@@ -176,6 +174,11 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public void clickDeleteUploadFile(String subjectId, int subjectSeq) {
 		subjectRepository.clickDeleteUploadFile(subjectId, subjectSeq);
+	}
+
+	@Override
+	public int closeSubject(String subjectId, int subjectSeq) {
+		return subjectRepository.closeSubject(subjectId, subjectSeq);
 	}
 
 	

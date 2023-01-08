@@ -27,11 +27,53 @@
 	</select>
 	
 	<select id="getCountOpenCourseRow" resultType="int">
-		SELECT count(*) FROM open where course_id IS NOT NULL
+		SELECT count(distinct course_id) FROM open where course_id IS NOT NULL
 	</select>
 
 	<select id="selectOpenCourseListByPage" parameterType="Pager" resultType="SubjectVO">
-		
+		select
+		    rnum,
+		    "courseId", 
+		    "courseTitle",
+		    "startDay",
+		    "endDay",
+		    "cost",
+		    "recruitStartDay", 
+		    "recruitEndDay",
+		    "state",
+		    "comnCdTitle"
+		from (
+		    select 
+		        rownum as rnum,
+		        "courseId", 
+		        "courseTitle",
+		        "startDay",
+		        "endDay",
+		        "cost",
+		        "recruitStartDay", 
+		        "recruitEndDay",
+		        "state",
+		        "comnCdTitle"
+		    from (
+		        select DISTINCT
+					open.course_id as "courseId", 
+					course_title as "courseTitle",
+					min(start_day) over (partition by open.course_id) as "startDay",
+		    		max(end_day) over (partition by open.course_id) as "endDay",
+					sum(cost) over (partition by open.course_id) as "cost",
+					recruit_start_day as "recruitStartDay", 
+					recruit_end_day as "recruitEndDay",
+					state_cd as "state",
+					comn_cd_title as "comnCdTitle"
+				from open 
+						left join subject on open.subject_id = subject.subject_id
+		        		left join course on open.course_id = course.course_id
+		        		left join common_code on open.state_cd = common_code.comn_cd
+		        where open.course_id IS NOT NULL
+		  )
+		  WHERE rownum &lt;= #{endRowNo}
+		)
+		WHERE rnum &gt;= #{startRowNo}
 	</select>	
 	
 	<select id="getCountOpenSubjectRow" resultType="int">
@@ -39,7 +81,84 @@
 	</select>
 
 	<select id="selectOpenSubjectListByPage" parameterType="Pager" resultType="SubjectVO">
-		
+		select
+		    rnum, 
+		    "subjectId", 
+		    "subjectSeq",
+		    "subjectTitle",
+		    "supportYn", 
+		    "days", 
+		    "hours", 
+		    "level", 
+		    "levelEtc", 
+		    "cost",
+		    "courseId", 
+		    "courseTitle", 
+		    "startTime",
+		    "endTime",
+		    "startDay",
+		    "endDay", 
+		    "recruitStartDay", 
+		    "recruitEndDay",
+		    "recruitPeople",
+		    "state",
+		    "comnCdTitle",
+		    "fileId"
+		from (
+		    select
+		        rownum as rnum,
+		        "subjectId", 
+		        "subjectSeq",
+		        "subjectTitle",
+		        "supportYn", 
+		        "days", 
+		        "hours", 
+		        "level", 
+		        "levelEtc", 
+		        "cost",
+		        "courseId", 
+		        "courseTitle", 
+		        "startTime",
+		        "endTime",
+		        "startDay",
+		        "endDay", 
+		        "recruitStartDay", 
+		        "recruitEndDay",
+		        "recruitPeople",
+		        "state",
+		        "comnCdTitle",
+				"fileId"
+		    from (
+		        select 
+					open.subject_id as "subjectId", 
+					subject_seq as "subjectSeq",
+					subject_title as "subjectTitle",
+					support_yn as "supportYn", 
+					days as "days", 
+					hours as "hours", 
+					level_cd as "level", 
+					level_etc as "levelEtc", 
+					subject.cost as "cost",
+					open.course_id as "courseId", 
+					course.course_title as "courseTitle", 
+					start_time as "startTime",
+					end_time as "endTime",
+					start_day as "startDay",
+					end_day as "endDay", 
+					recruit_start_day as "recruitStartDay", 
+					recruit_end_day as "recruitEndDay",
+					recruit_people as "recruitPeople",
+					state_cd as "state",
+					comn_cd_title as "comnCdTitle",
+					file_id as "fileId"
+				from open 
+						left join subject on open.subject_id = subject.subject_id
+		        		left join course on open.course_id = course.course_id
+		        		left join common_code on open.state_cd = common_code.comn_cd
+		  )
+		  WHERE rownum &lt;= #{endRowNo}
+		)
+		WHERE rnum &gt;= #{startRowNo}
 	</select>
 	
 		<select id="getCountEnrollRow" resultType="int">
@@ -47,6 +166,77 @@
 	</select>
 
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
-		
+		SELECT
+		    rnum,
+		    "enrollId", 
+		    "subjectId", 
+		    "subjectSeq", 
+		    "studentId", 
+		    "name", 
+		    "subjectTitle", 
+		    "stateCd", 
+		    "completeHours", 
+		    "regId", 
+		    "regDt", 
+		    "modiId", 
+		    "modiDt", 
+		    "delYn", 
+		    "cancelRsEtc", 
+		    "startTime", 
+		    "endTime", 
+		    "startDay", 
+		        "endDay" 
+		FROM (
+		    SELECT
+		        rownum as rnum,
+		        "enrollId", 
+		        "subjectId", 
+		        "subjectSeq", 
+		        "studentId", 
+		        "name", 
+		        "subjectTitle", 
+		        "stateCd", 
+		        "completeHours", 
+		        "regId", 
+		        "regDt", 
+		        "modiId", 
+		        "modiDt", 
+		        "delYn", 
+		        "cancelRsEtc", 
+		        "startTime", 
+		        "endTime", 
+		        "startDay", 
+		        "endDay" 
+		    FROM (
+		        SELECT  enroll_id AS "enrollId", 
+		                e.subject_id AS "subjectId", 
+		                e.subject_seq AS "subjectSeq", 
+		                e.student_id AS "studentId", 
+		                name AS "name", 
+		                s.subject_title AS "subjectTitle", 
+		                e.state_cd AS "stateCd", 
+		                complete_hours AS "completeHours", 
+		                e.reg_id AS "regId", 
+		                e.reg_dt AS "regDt", 
+		                e.modi_id AS "modiId", 
+		                e.modi_dt AS "modiDt", 
+		                e.del_yn AS "delYn", 
+		                cancel_rs_etc AS "cancelRsEtc", 
+		                start_time AS "startTime", 
+		                end_time AS "endTime", 
+		                start_day AS "startDay", 
+		                end_day AS "endDay" 
+		        FROM ENROLL e 
+		        LEFT OUTER JOIN STUDENT t 
+		        ON e.student_id = t.student_id 
+		        LEFT OUTER JOIN OPEN o 
+		        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+		        LEFT OUTER JOIN SUBJECT s 
+		        ON e.subject_id = s.subject_id 
+		        WHERE NOT (e.del_yn ='Y')
+		  )
+		  WHERE rownum &lt;= #{endRowNo}
+		)
+		WHERE rnum &gt;= #{startRowNo}
 	</select>
 </mapper>

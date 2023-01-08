@@ -75,8 +75,8 @@ public class EnrollController {
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		logger.info("boardList: " + boardList);
+		model.addAttribute("EnrollBoardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("EnrollBoardList: " + boardList);
 		
 		// cancel list
 		List<CommonCodeVO> cancelList = enrollService.getCancelList();

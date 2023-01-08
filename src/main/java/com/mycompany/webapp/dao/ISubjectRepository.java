@@ -34,4 +34,6 @@ public interface ISubjectRepository {
 	int updateRecruitSameCourse(SubjectVO subject); //같은 과정 신청일자 변경
 	void clickDeleteOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void clickDeleteUploadFile(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	
+	int closeSubject(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);//폐강버튼 눌렀을 때 
 }

@@ -63,9 +63,8 @@ public class StudentController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("boardList: " + boardList);
-		System.out.println("boardList.size() : " + boardList.size());
-		System.out.println("rowsPerPage: " + rowsPerPage);
-		System.out.println("rowsPerPage: " + pager.getRowsPerPage());
+		System.out.println("boardList.size: " +boardList.size());
+		System.out.println("pager.endPageNo: " + pager.getEndPageNo());
 		
 		return "student/list";
 	}
