@@ -28,4 +28,5 @@ public interface IEnrollRepository {
 	void addEnroll(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("maxEnrollId") int maxEnrollId);
 	void addCourse(Map<String, Object> addCourse, String studnetId, String maxEnroll2);
 	int getMaxEnrollId();
+	List<EnrollVO> getSearchList(EnrollVO enroll);
 }

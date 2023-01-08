@@ -1,5 +1,7 @@
 package com.mycompany.webapp.dto;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -31,6 +33,15 @@ public class EnrollVO {
 	
 	private int progress;
 	private int addHours;
+	
+	private Date applyStartDay;
+	private Date applyEndDay;
+	private String student;
+	private String course;
+	private String state;
+	private String keyword1;
+	private String keyword2;
+	
 	
 
 }

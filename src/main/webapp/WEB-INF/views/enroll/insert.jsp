@@ -79,7 +79,6 @@
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
-				async : false,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
 				}
@@ -89,7 +88,6 @@
 				$.ajax({
 					type : 'POST',
 					url : 'addcourse/' + studentId,
-					async : false,
 					data : course,
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success : function(result){
@@ -113,9 +111,11 @@
 				success : function(result){
 					if(result.length > 1) {
 						d = JSON.stringify(result);
+						console.log(d);
 					}else{
 						b = JSON.stringify(result[0].subjectId);
 						b = b.replace(/\"/gi, "");
+						console.log(b);
 						c = JSON.stringify(result[0].subjectSeq);
 						c = c.replace(/\"/gi, "");	
 					}
@@ -205,6 +205,7 @@
 	<input type="reset" onclick="location.href='<c:url value="/enroll/list"/>'" value="취 소" class="btn">
 	</form>
 	</div>
+	
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
