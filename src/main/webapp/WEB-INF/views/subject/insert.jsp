@@ -164,8 +164,8 @@ function changeEverything(i) {
 								<div id="question-set-${i}" class="question-set">
 									<div class="question">
 										<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-										<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
-										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i}].questionContent" type="text" placeholder="문항을 입력해주세요.">
+										<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i-1}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
+										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" placeholder="문항을 입력해주세요.">
 										<span id="surveyqn-input" class="serveyqn-input"></span>
 									</div>
 									<div class="answer">
@@ -205,8 +205,8 @@ function changeEverything(i) {
 	$(function(){
 		$("#file").on('change',function(){
 			console.log("change");
-			  var fileName = $("#file").val();
-			  $(".insert_FileUpload").val(fileName);
+			var fileName = $("#file").val();
+			$(".insert_FileUpload").val(fileName);
 		});
 	});
 
@@ -496,17 +496,17 @@ function changeEverything(i) {
 
       if (modal.classList.contains('show')) { // 모달이 on일 때
         body.style.overflow = 'hidden'; // body의 스크롤을 막음
-      }
+		}
     });
 
     modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
+		if (event.target === modal) {
         modal.classList.toggle('show'); // class를 이용한 모달 on
 
-        if (!modal.classList.contains('show')) { // 모달이 off일 때
-          body.style.overflow = 'auto';  // body의 스크롤을 풂
-        }
-      }
+			if (!modal.classList.contains('show')) { // 모달이 off일 때
+			body.style.overflow = 'auto';  // body의 스크롤을 풂
+			}
+		}
     });
     
     /* closeBtn 눌렀을 때 - 모달창 닫기, Modal 입력값 부모창에 저장*/
@@ -532,6 +532,7 @@ function changeEverything(i) {
 			let hiddenInputSet = document.querySelector(questionInputSet); // Modal에서 저장한 항목명 가져오기
 			$(hiddenInputNum).clone().appendTo(hiddenInputs); // 복제해서 hidden div에 추가하기
 			$(hiddenInputSet).clone().appendTo(hiddenInputs); // 복제해서 hidden div에 추가하기
+			console.log(questionInputSet);
 			document.querySelector(hiddenQuestionInputSet).setAttribute("value", $(questionInputSet).val()); // Modal의 항목명에서 받은 value를 hidden div의 항목명에 넣기
 		};
     }

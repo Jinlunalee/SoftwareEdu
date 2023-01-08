@@ -10,7 +10,7 @@
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
+	<div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
 	</div>
 	<div class="card-body">
 		<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
@@ -93,7 +93,7 @@
 		<!-- button -->
 		<div class="submit-btn">
 			<input type="button" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'" value="수정">
-	        <input type="button" onclick="del()" value="삭제">
+			<input type="button" onclick="del()" value="삭제">
 		</div> 
 		
 		<!-- modal -->
@@ -101,14 +101,14 @@
 			<div class="modal_body">
 			<div class="content-grid">
 				<div class="survey_content">
-				<c:forEach var="i" begin="1" end="5" step="1">
+				<c:forEach var="question" items="${questionSet}">
 				<div class="question-set">
 					<div class="question">
 						<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-						수업 진도가 적당하였습니까?
+						${question.questionNum}. ${question.questionContent}
 					</div>
 					<div class="answer">
-						<input class="answer-item answer-5" type="radio" name="check${i}" checked="checked" value="5" onclick="return(false)">매우 만족
+						<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
 						<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
 						<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
 						<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족

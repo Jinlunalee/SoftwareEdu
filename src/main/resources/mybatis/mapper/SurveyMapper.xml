@@ -62,13 +62,18 @@
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
-	<select id="selectSubjectQuestionSet" parameterType="map" resultType="QuestionVO">
+	<select id="selectSubjectQuestionSet" parameterType="map" resultType="QuestionSetVO">
 		select
 			question_num as "questionNum", 
 			question_content as "questionContent"
 		from question
-		where subject_id=${subjectId} and subject_seq=${subjectSeq}
+		where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
+	<insert id="insertQuestion" parameterType="QuestionVO">
+		insert into question
+		    (subject_id, subject_seq, question_num, question_content, reg_id, reg_dt, del_yn)
+		values(#{subjectId}, #{subjectSeq}, #{questionNum}, #{questionContent}, 'mgr1', SYSDATE, 'N')
+	</insert>
 
 </mapper>

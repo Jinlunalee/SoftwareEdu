@@ -144,6 +144,7 @@ public class SubjectController {
 		
 		logger.info("details/subject: "+ subject);
 		logger.info("details/subject: "+ totalPeople);
+		logger.info("details/subject: "+ questionSet);
 		
 		return "subject/details";
 	}
@@ -263,8 +264,9 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
-		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+subject); // Seq가 0으로 찍힘
 		logger.info("subject/insert:"+questionVo); // surveyVO 받기
+		//surveyService.insertQuestion(questionVo);
 		
 		try {
 			MultipartFile mf = subject.getFile();
