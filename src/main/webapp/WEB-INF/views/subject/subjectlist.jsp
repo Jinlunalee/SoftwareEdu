@@ -74,10 +74,11 @@
               <td>${subject.comnCdTitle}</td>
               <td>
               	<div>
+              		<!-- 모집상태에 따라 나오는 버튼 변경 -->
               		<c:choose>
               			<c:when test="${subject.comnCdTitle eq '모집예정'}">
               				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
-							<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
+							<button type="button" class="btn btn-secondary" id="delButton" >삭제</button>
               			</c:when>
               			<c:when test="${subject.comnCdTitle eq '진행중'}">
               				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
@@ -116,9 +117,46 @@
 </div>
 
 	<script>
-	function del() {
+		$('#delButton').on('click',function(e){
+			if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
+			console.log('삭제')
+			console.log(e);
+			$.ajax({
+				type : "POST",
+				url:"closesubject",
+				data:{
+					subjectId:subjectId,
+					subjectSeq:subjectSeq,
+				},
+				success:function(){
+					console.log("성공");
+				},
+				fail:function(){
+					console.log("취소");
+				}
+			})
+			} else {
+				console.log('취소')
+			}
+		});
+
+	function del(subjectId, subjectSeq) {
 		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
 			console.log('삭제')
+			$.ajax({
+				type : "POST",
+				url:"closesubject",
+				data:{
+					subjectId:subjectId,
+					subjectSeq:subjectSeq,
+				},
+				success:function(){
+					console.log("성공");
+				},
+				fail:function(){
+					console.log("취소");
+				}
+			})
 		} else {
 			console.log('취소')
 		}
