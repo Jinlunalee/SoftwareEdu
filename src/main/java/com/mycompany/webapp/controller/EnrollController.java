@@ -169,6 +169,22 @@ public class EnrollController {
 		return "redirect:/enroll/list";
 	}
 	
+	// 수강 목록 검색
+	@RequestMapping(value="/searchlist")
+	public String getSearchList(EnrollVO enroll, @RequestParam("student") String student, @RequestParam("course") String course, @RequestParam("state") String state, @RequestParam("keyword1") String keyword1, @RequestParam("keyword2") String keyword2, Model model) {
+		enroll.setStudent(student);
+		enroll.setCourse(course);
+		enroll.setState(state);
+		enroll.setKeyword1(keyword1);
+		enroll.setKeyword2(keyword2);
+		enroll.setStartDay(enroll.getStartDay().replaceAll("-", ""));
+		enroll.setEndDay(enroll.getEndDay().replaceAll("-", ""));
+		System.out.println(enroll.toString());
+		List<EnrollVO> searchList = enrollService.getSearchList(enroll);
+		model.addAttribute("searchList", searchList);
+		return "enroll/search";
+	}
+	
 	//엑셀 파일 다운로드
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public void downloadEnroll(HttpServletResponse response) throws IOException {

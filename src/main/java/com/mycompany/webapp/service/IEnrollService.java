@@ -22,4 +22,5 @@ public interface IEnrollService {
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
 	void addCourse(Map<String, Object> addCourse, String studentId);
+	List<EnrollVO> getSearchList(EnrollVO enroll);
 }

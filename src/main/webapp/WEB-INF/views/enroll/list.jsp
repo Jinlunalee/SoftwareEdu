@@ -15,24 +15,31 @@
 		<%-- 검색  --%>
 		<div class="search">
 		<span>신청기간</span>
-			<input class="input-date" type="date"> ~
-			<input class="input-date" type="date"> 
-			<select class="select-box">
-				<option>수강생 명</option>
-				<option>강좌 명</option>
+		<form name="sc-form">
+			<input name="applyStartDay" class="input-date" type="date"> ~
+			<input name="applyEndDay"class="input-date" type="date"> 
+			<select name="student" class="select-box">
+				<option value="sdName">수강생 명</option>
+				<option value="sdId">수강생 아이디</option>
 			</select>
-			<select class="select-box">
+			<input name="keyword1" class="input-text" type="text" placeholder="수강생 명을 입력해 주세요">
+			<select name="course">
+				<option value="sj">강좌</option>
+				<option value="cs">과정</option>
+			</select>
+			<input name="keyword2" class="input-text" type="text" placeholder="강좌 명을 입력해 주세요">
+			<select name="state" class="select-box">
 				<option>수강상태</option>
-				<option>수강신청취소</option>
-				<option>수강예정</option>
-				<option>수강중</option>
-				<option>수강취소</option>
-				<option>수강신청</option>
-				<option>수강완료</option>
+				<option value="applyCancel">수강신청취소</option>
+				<option value="expect">수강예정</option>
+				<option value="progress">수강 중</option>
+				<option value="cancel">수강취소</option>
+				<option value="apply">수강신청</option>
+				<option value="complete">수강완료</option>
 			</select>
-			<input class="input-text" type="text"
-				placeholder="수강생 명 / 강좌 명을 입력해 주세요"> <input
-				class="input-button" type="button" value="검색">
+			
+			<input type="submit" onclick="search()" class="input-button" value="검색">
+			</form>
 		</div>
 		
 		<%-- 뷰 갯수 --%>
@@ -261,6 +268,19 @@
 					}
 					})
 			}
+	</script>
+	
+	<script>
+		function search() {
+			$.ajax({
+				type : 'GET',
+				url : 'searchlist',
+				data : $("form[name=sc-form]").serialize(),
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(result){
+					}
+			})
+		}
 	</script>
 </div>
 

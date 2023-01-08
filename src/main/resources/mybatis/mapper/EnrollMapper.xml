@@ -101,6 +101,67 @@
 		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
 		FROM ENROLL
 	</select>
+	
+	<select id="getSearchList" parameterType="EnrollVO" resultType="EnrollVO">
+		SELECT  enroll_id AS "enrollId", 
+				e.subject_id AS "subjectId", 
+				e.subject_seq AS "subjectSeq", 
+				e.student_id AS "studentId", 
+				name AS "name", 
+        		s.subject_title AS "subjectTitle", 
+				e.state_cd AS "stateCd", 
+				complete_hours AS "completeHours", 
+				e.reg_id AS "regId", 
+				e.reg_dt AS "regDt", 
+				e.modi_id AS "modiId", 
+				e.modi_dt AS "modiDt", 
+				e.del_yn AS "delYn", 
+				cancel_rs_etc AS "cancelRsEtc", 
+        		start_time AS "startTime", 
+        		end_time AS "endTime", 
+        		start_day AS "startDay", 
+        		end_day AS "endDay" 
+		FROM ENROLL e 
+		LEFT OUTER JOIN STUDENT t 
+		ON e.student_id = t.student_id 
+        LEFT OUTER JOIN OPEN o 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+        LEFT OUTER JOIN SUBJECT s 
+        ON e.subject_id = s.subject_id 
+        WHERE NOT (e.del_yn ='Y')
+		<choose>
+			<when test="applyStartDay != null and applyEndDay != null">
+				e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
+			</when>
+			<when test="student != null and student.equals('sdName')">
+				name = #{keyword1}
+			</when>
+			<when test="student != null and student.equals('sdId')">
+				e.student_id = #{keyword1}
+			</when>
+			<when test="course != null and course.equals('sj')">
+				s.subject_title = #{keyword2}
+			</when>
+			<when test="state != null and state.equals('apply')">
+				e.state_cd = 'ERL01'
+			</when>
+			<when test="state != null and state.equals('applyCancel')">
+				e.state_cd = 'ERL02'
+			</when>
+			<when test="state != null and state.equals('expect')">
+				e.state_cd = 'ERL03'
+			</when>
+			<when test="state != null and state.equals('progress')">
+				e.state_cd = 'ERL04'
+			</when>
+			<when test="state != null and state.equals('cancel')">
+				e.state_cd = 'ERL05'
+			</when>
+			<when test="state != null and state.equals('complete')">
+				e.state_cd = 'ERL06'
+			</when>
+		</choose>
+	</select>
 
 	<update id="clickCancel" parameterType="map">
 		UPDATE ENROLL 
