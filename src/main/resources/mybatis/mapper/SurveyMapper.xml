@@ -61,5 +61,14 @@
 		set del_yn = 'N'
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
+	
+	<select id="selectSubjectQuestionSet" parameterType="map" resultType="QuestionVO">
+		select
+			question_num as "questionNum", 
+			question_content as "questionContent"
+		from question
+		where subject_id=${subjectId} and subject_seq=${subjectSeq}
+	</select>
+	
 
 </mapper>

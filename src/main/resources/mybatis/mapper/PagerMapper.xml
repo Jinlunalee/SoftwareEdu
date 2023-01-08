@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="getCountOpenCourseRow" resultType="int">
-		SELECT count(*) FROM open where course_id IS NOT NULL
+		SELECT count(distinct course_id) FROM open where course_id IS NOT NULL
 	</select>
 
 	<select id="selectOpenCourseListByPage" parameterType="Pager" resultType="SubjectVO">
