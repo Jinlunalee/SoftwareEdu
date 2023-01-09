@@ -157,15 +157,16 @@ public class EnrollController {
 	// 수강 추가
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+		System.out.println(studentId);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
 	// 과정 추가
-	@RequestMapping(value="/addcourse/{studentId}", method=RequestMethod.POST)
-	public String addCourse(@RequestBody Map<String, Object> addCourse, @PathVariable String studentId) {
-		System.out.println(addCourse);
-		enrollService.addCourse(addCourse, studentId);
+	@RequestMapping(value="/addcourse/{studentId}/{courseId}", method=RequestMethod.POST)
+	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
+		System.out.println(courseId);
+		enrollService.addCourse(studentId, courseId);
 		return "redirect:/enroll/list";
 	}
 	

@@ -12,6 +12,7 @@ public class OpenVO {
 	private int subjectSeq;
 	private String subjectTitle;
 	private String courseId;
+	private String courseTitle;
 	private String startDay;
 	private String endDay;
 	private String startTime;
