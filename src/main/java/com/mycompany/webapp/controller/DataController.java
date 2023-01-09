@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.StudentVO;
-
+import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IStudentService;
+
+import oracle.sql.DATE;
 
 @Controller
 @RequestMapping("/data")
@@ -109,5 +112,10 @@ public class DataController {
 		}
 		
 	return result;
+	}
+	
+	@RequestMapping(value="/getjsonSbj")
+	public @ResponseBody List<SubjectVO> getjsonSbj() {
+		return studentService.getSbjDataList();
 	}
 }

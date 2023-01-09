@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.IStudentRepository;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
-
+import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IStudentService;
 
 @Service
@@ -25,6 +25,12 @@ public class StudentService implements IStudentService{
 	public List<StudentVO> getDataList () {
 		return studentRepository.getDataList();
 	}
+	
+	@Override
+	public List<SubjectVO> getSbjDataList() {
+		return studentRepository.getSbjDataList();
+	}
+
 	
 	// 여기서부터 추가
 	/*
