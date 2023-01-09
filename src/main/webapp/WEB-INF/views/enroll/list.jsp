@@ -14,21 +14,21 @@
 		
 		<%-- 수강 검색  --%>
 		<div class="search">
-		<span>신청기간</span>
+		<span id="applyperiod">신청기간</span>
 		<form name="sc-form">
 			<input type="date" name="applyStartDay" class="input-date"> ~
 			<input type="date" name="applyEndDay"class="input-date">
 			
 			<%-- 수강생 선택 --%>
 			<select name="student" class="select-box">
-				<option value="">수강생 선택</option>
+				<option value="">이름/아이디</option>
 				<option value="sdName">수강생 명</option>
 				<option value="sdId">수강생 아이디</option>
 			</select>
 			<input type="text" name="keyword1" class="input-text"  placeholder="수강생 명을 입력해 주세요">
 			
 			<%-- 강좌 과정 선택 --%>
-			<select name="course">
+			<select name="course" class="select-box">
 				<option value="">강좌/과정</option>
 				<option value="sj">강좌</option>
 				<option value="cs">과정</option>
@@ -294,6 +294,7 @@
 	
 	<script>
 		function search() {
+			
 			$.ajax({
 				type : 'POST',
 				url : 'searchlist',
@@ -301,6 +302,8 @@
 				data : $("form[name=sc-form]").serialize(),
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
+					let url = '/enroll/searchlist';
+					location.replace(url);
 				}
 			})
 		}
