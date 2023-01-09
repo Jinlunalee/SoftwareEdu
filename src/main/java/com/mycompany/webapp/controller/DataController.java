@@ -19,8 +19,6 @@ import com.mycompany.webapp.service.IStudentService;
 @Controller
 @RequestMapping("/data")
 public class DataController {
-
-	
 	
 	@Autowired
 	IStudentService studentService;
