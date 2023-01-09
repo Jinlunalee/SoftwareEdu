@@ -270,9 +270,8 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
-		logger.info("subject/insert:"+subject); // Seq가 0으로 찍힘
-		logger.info("subject/insert:"+questionVo); // surveyVO 받기
-		//surveyService.insertQuestion(questionVo);
+		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+questionVo);
 		
 		try {
 			MultipartFile mf = subject.getFile();
@@ -284,8 +283,16 @@ public class SubjectController {
 				file.setFileData(mf.getBytes());
 				
 				subjectService.insertFileData(subject, file);
+				
+				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				surveyService.insertQuestion(questionVo);
 			}else { // 첨부파일 없을 때
-				subjectService.insertSubject(subject);
+				//subjectService.insertSubject(subject);
+				
+				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				surveyService.insertQuestion(questionVo);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
