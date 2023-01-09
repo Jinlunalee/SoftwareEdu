@@ -28,7 +28,7 @@ public interface ISubjectService {
 //	SubjectVO infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
 	
 	void clickDeleteOpen(String subjectId, int subjectSeq);
-	void clickDeleteUploadFile(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	void clickDeleteUploadFile(String fileId);
 	
 	int closeSubject(String subjectId, int subjectSeq); //폐깡처리
 }

@@ -200,7 +200,10 @@ function changeEverything(i) {
 </div>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	<script type="text/javascript">
+<<<<<<< HEAD
+=======
 	/*파일 누르면 이름 들어가게*/
 	$(function(){
 		$("#file").on('change',function(){
@@ -486,6 +489,7 @@ function changeEverything(i) {
 	}
 
 
+>>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
 	/* 모달창 열기 */
 	const body = document.querySelector('body');
     const modal = document.querySelector('.modal');

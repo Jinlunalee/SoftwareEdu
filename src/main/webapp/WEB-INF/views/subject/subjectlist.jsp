@@ -46,6 +46,61 @@
 		
 		<!-- list table -->
 		<table class="list">
+<<<<<<< HEAD
+		  <thead>
+            <tr>
+                <th>강좌아이디</th>
+                <th>과정명</th>
+                <th>강좌명</th>
+                <th>연수기간</th>
+                <th>신청기간</th>
+                <th>교육비</th>
+                <th>상태</th>
+                <th></th>
+            </tr>
+           </thead>
+		  <tbody>
+		  <c:if test="${subListSize ne 0}">
+		  <c:forEach var="subject" items="${subjectList}">
+            <tr>
+              <td>${subject.subjectId}</td>
+              <td>${subject.courseTitle}</td>
+              <td>
+				<span>
+					<a href="<c:url value='/subject/details/${subject.subjectId}/${subject.subjectSeq}'/>">${subject.subjectTitle}</a>
+		        </span>
+              </td>
+              <td>${subject.startDay}~${subject.endDay}</td>
+              <td>${subject.recruitStartDay}~${subject.recruitEndDay}</td>
+              <td>${subject.cost}</td>
+              <td>${subject.comnCdTitle}</td>
+              <td>
+              	<div>
+              		<!-- 모집상태에 따라 나오는 버튼 변경 -->
+              		<c:choose>
+              			<c:when test="${subject.comnCdTitle eq '모집예정'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+							<button type="button" class="btn btn-secondary" onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">삭제</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '진행중'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '폐강'}">
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+              			</c:when>
+              			<c:when test="${subject.comnCdTitle eq '진행완료'}">
+              			</c:when>
+              			<c:otherwise>
+              				<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+              				<button type="button" class="btn btn-secondary" onclick="close('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">폐강</button>
+						</c:otherwise>
+              		</c:choose>
+              	</div> 
+              </td>
+             </tr>
+          </c:forEach>
+          </c:if>
+=======
 			<thead>
 				<tr>
 					<th>강좌아이디</th>
@@ -126,54 +181,34 @@
 						</div>
 					</td>
 				</tr>
+>>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
 		</table>
 	</div>
 </div>
 
-	<script>
-		$('#delButton').on('click',function(e){
-			if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
-			console.log('삭제')
-			console.log(e);
-			$.ajax({
-				type : "POST",
-				url:"closesubject",
-				data:{
-					subjectId:subjectId,
-					subjectSeq:subjectSeq,
-				},
-				success:function(){
-					console.log("성공");
-				},
-				fail:function(){
-					console.log("취소");
-				}
-			})
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+	<script type="text/javascript">
+		/*수강삭제*/
+		function del(subjectId, subjectSeq, fileId) {
+			if(confirm('수강 정보를 삭제하시겠습니까?')) {
+				alert('삭제');
+				alert(subjectId+'/'+subjectSeq+'/'+fileId);
+				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
 			} else {
-				console.log('취소')
+				alert('취소');
 			}
-		});
-
-	function del(subjectId, subjectSeq) {
-		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
-			console.log('삭제')
-			$.ajax({
-				type : "POST",
-				url:"closesubject",
-				data:{
-					subjectId:subjectId,
-					subjectSeq:subjectSeq,
-				},
-				success:function(){
-					console.log("성공");
-				},
-				fail:function(){
-					console.log("취소");
-				}
-			})
-		} else {
-			console.log('취소')
 		}
-	}
+	
+		/*폐강*/
+		function close(subjectId, subjectSeq, fileId){
+			if(confirm('폐강하시겠습니까?')) {
+				alert('폐강');
+				alert(subjectId+'/'+subjectSeq+'/'+fileId);
+				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
+			} else {
+				alert('취소');
+			}
+		}
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
