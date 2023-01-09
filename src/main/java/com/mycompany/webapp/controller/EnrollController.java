@@ -191,8 +191,8 @@ public class EnrollController {
 		System.out.println("jsp 값 확인 : " + enroll.toString());
 		List<EnrollVO> searchList = enrollService.getSearchList(enroll);
 		//System.out.println("컨트롤러 결과 값 : " + searchList);
-		model.addAttribute("searchList", searchList);
-		return "/enroll/search";
+		model.addAttribute("boardList", searchList);
+		return "enroll/search";
 	}
 	
 	//엑셀 파일 다운로드
