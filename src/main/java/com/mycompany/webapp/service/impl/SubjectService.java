@@ -147,7 +147,7 @@ public class SubjectService implements ISubjectService{
 		
 		logger.info("service/infoSubjectCourse/check : " + check);
 		
-		if("none".equals(courseId)) { // 과정 입력 X
+		if("".equals(courseId)) { // 과정 입력 X
 			logger.info("coursId X");
 			list.add(subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
 		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)

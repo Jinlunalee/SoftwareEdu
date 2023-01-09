@@ -13,6 +13,8 @@ public class EnrollVO {
 	private String enrollId;
 	private String subjectId;
 	private String subjectTitle;
+	private String courseId;
+	private String courseTitle;
 	private int subjectSeq;
 	private String studentId;
 	private String name;
@@ -34,8 +36,8 @@ public class EnrollVO {
 	private int progress;
 	private int addHours;
 	
-	private Date applyStartDay;
-	private Date applyEndDay;
+	private String applyStartDay;
+	private String applyEndDay;
 	private String student;
 	private String course;
 	private String state;

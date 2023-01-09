@@ -12,43 +12,51 @@
 	</div>
 	<div class="card-body">
 		
-		<%-- 검색  --%>
+		<%-- 수강 검색  --%>
 		<div class="search">
 		<span>신청기간</span>
 		<form name="sc-form">
-			<input name="applyStartDay" class="input-date" type="date"> ~
-			<input name="applyEndDay"class="input-date" type="date"> 
+			<input type="date" name="applyStartDay" class="input-date"> ~
+			<input type="date" name="applyEndDay"class="input-date">
+			
+			<%-- 수강생 선택 --%>
 			<select name="student" class="select-box">
+				<option value="">수강생 선택</option>
 				<option value="sdName">수강생 명</option>
 				<option value="sdId">수강생 아이디</option>
 			</select>
-			<input name="keyword1" class="input-text" type="text" placeholder="수강생 명을 입력해 주세요">
-			<select name="course" class="select-box">
+			<input type="text" name="keyword1" class="input-text"  placeholder="수강생 명을 입력해 주세요">
+			
+			<%-- 강좌 과정 선택 --%>
+			<select name="course">
+				<option value="">강좌/과정</option>
 				<option value="sj">강좌</option>
 				<option value="cs">과정</option>
 			</select>
-			<input name="keyword2" class="input-text" type="text" placeholder="강좌 명을 입력해 주세요">
-			<select name="state" class="select-box">
-				<option>수강상태</option>
-				<option value="applyCancel">수강신청취소</option>
-				<option value="expect">수강예정</option>
-				<option value="progress">수강 중</option>
-				<option value="cancel">수강취소</option>
-				<option value="apply">수강신청</option>
-				<option value="complete">수강완료</option>
-			</select>
+			<input type="text" name="keyword2" class="input-text"  placeholder="강좌 명을 입력해 주세요">
 			
+			<%-- 수강 상태 선택 --%>
+			<select name="state" class="select-box">
+				<option value="">수강 상태</option>
+				<option value="applyCancel">수강 신청 취소</option>
+				<option value="expect">수강 예정</option>
+				<option value="progress">수강 중</option>
+				<option value="cancel">수강 취소</option>
+				<option value="apply">수강 신청</option>
+				<option value="complete">수강 완료</option>
+			</select>
 			<input type="submit" onclick="search()" class="input-button" value="검색">
 			</form>
 		</div>
 		
 		<%-- 뷰 갯수 --%>
 		<div class="view">
-		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
-			<select class="select-view">
-				<option>10개</option>
-				<option>30개</option>
-				<option>50개</option>
+			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
+			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+				<option value="<c:url value="/enroll/boardList?pageNo=1"/>">선택</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=30"/>">30개</option>
+				<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=50"/>">50개</option>
 			</select>
 		</div>
 
@@ -59,6 +67,8 @@
 				<th>수강생 명</th>
 				<th>강좌 명</th>
 				<th>강좌아이디</th>
+				<th>과정 명</th>
+				<th>과정 아이디</th>
 				<th>현재 상태</th>
 				<th>취소/삭제</th>
 				<th>승인</th>
@@ -68,7 +78,7 @@
 				<tr>
 					<td>${searchList.regDt}</td>
 					<td>${searchList.name}</td>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${ls.studentId}', '${ls.subjectId}', '${ls.subjectSeq}');">${ls.subjectTitle}</a></td>
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${searchList.studentId}', '${searchList.subjectId}', '${searchList.subjectSeq}');">${searchList.subjectTitle}</a></td>
 					<div class="modal modal-${status.count}">
 						<div class="modal-content modal-content-${status.count}">
 							<li style="text-align: center;">${searchList.name}  |  ${searchList.studentId}  |  
@@ -96,6 +106,8 @@
 						</div>
 					</div>
 					<td>${searchList.subjectId}</td>
+					<td>${searchList.courseTitle}</td>
+					<td>${searchList.courseId}</td>
 					<td>
 					
 					<%-- 수강 상태에 따른 현재 상태 --%>
@@ -273,12 +285,13 @@
 	<script>
 		function search() {
 			$.ajax({
-				type : 'GET',
+				type : 'POST',
 				url : 'searchlist',
+				async : false,
 				data : $("form[name=sc-form]").serialize(),
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-					}
+				}
 			})
 		}
 	</script>

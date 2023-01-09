@@ -157,32 +157,42 @@ public class EnrollController {
 	// 수강 추가
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+		System.out.println(studentId);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
 	// 과정 추가
-	@RequestMapping(value="/addcourse/{studentId}", method=RequestMethod.POST)
-	public String addCourse(@RequestBody Map<String, Object> addCourse, @PathVariable String studentId) {
-		System.out.println(addCourse);
-		enrollService.addCourse(addCourse, studentId);
+	@RequestMapping(value="/addcourse/{studentId}/{courseId}", method=RequestMethod.POST)
+	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
+		System.out.println(courseId);
+		enrollService.addCourse(studentId, courseId);
 		return "redirect:/enroll/list";
 	}
 	
-	// 수강 목록 검색
-	@RequestMapping(value="/searchlist")
+	// 수강 목록 검색 필터
+	@RequestMapping(value="/searchlist", method=RequestMethod.GET)
 	public String getSearchList(EnrollVO enroll, @RequestParam("student") String student, @RequestParam("course") String course, @RequestParam("state") String state, @RequestParam("keyword1") String keyword1, @RequestParam("keyword2") String keyword2, Model model) {
+		
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		
+		List<CommonCodeVO> cancelList = enrollService.getCancelList();
+		model.addAttribute("cancelList", cancelList);
+		
+		enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
+		enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
 		enroll.setStudent(student);
 		enroll.setCourse(course);
 		enroll.setState(state);
 		enroll.setKeyword1(keyword1);
 		enroll.setKeyword2(keyword2);
-		enroll.setStartDay(enroll.getStartDay().replaceAll("-", ""));
-		enroll.setEndDay(enroll.getEndDay().replaceAll("-", ""));
-		System.out.println(enroll.toString());
+		
+		System.out.println("jsp 값 확인 : " + enroll.toString());
 		List<EnrollVO> searchList = enrollService.getSearchList(enroll);
+		//System.out.println("컨트롤러 결과 값 : " + searchList);
 		model.addAttribute("searchList", searchList);
-		return "enroll/search";
+		return "/enroll/search";
 	}
 	
 	//엑셀 파일 다운로드

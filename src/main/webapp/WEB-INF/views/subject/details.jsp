@@ -93,11 +93,7 @@
 		<!-- button -->
 		<div class="submit-btn">
 			<input type="button" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'" value="수정">
-<<<<<<< HEAD
 	        <input type="button" onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')" value="삭제">
-=======
-			<input type="button" onclick="del()" value="삭제">
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
 		</div> 
 		
 		<!-- modal -->

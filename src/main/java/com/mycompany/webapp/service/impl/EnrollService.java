@@ -85,16 +85,23 @@ public class EnrollService implements IEnrollService{
 	}
 
 	@Override
-	public void addCourse(Map<String, Object> addCourse, String studentId) {
-		for(int i=0; i<addCourse.size(); i++) {
-		int maxEnrollId = enrollRepository.getMaxEnrollId() + 1;
-		String maxEnrollId2 = "ENRL0" + maxEnrollId;
-		enrollRepository.addCourse(addCourse, studentId, maxEnrollId2);
+	public void addCourse(String studentId, String courseId) {
+		// course에 담긴 subject 갯수 가져오기
+		int subjectCount = enrollRepository.getSubjectCountByCourse(courseId);
+		
+		// open테이블에서 정보 가져오기
+		List<OpenVO> openVo = enrollRepository.getSubjectInfoByCourse(courseId);
+		
+		// 갯수만큼 enrollId +1 해주고, addEnroll 해주기
+		for(int i=0; i<subjectCount; i++) {
+			int maxEnrollId = enrollRepository.getMaxEnrollId() + 1;
+			enrollRepository.addEnroll(studentId, openVo.get(i).getSubjectId(), openVo.get(i).getSubjectSeq(), maxEnrollId);
 		}
 	}
 
 	@Override
 	public List<EnrollVO> getSearchList(EnrollVO enroll) {
+		System.out.println("서비스 : " + enrollRepository.getSearchList(enroll));
 		return enrollRepository.getSearchList(enroll);
 	}
 	
