@@ -21,7 +21,10 @@ public class StudentVO {
 	private int std_cnt;		//전체수강생 수
 	
 	private String supportYn;  // 교육비 지원 여부
-	private String comnCdTitle; // 공통코드명
+	private String comnCdTitle; // 공통코드명  
+	private String stateCd;
+	// 위의 공통코드를 얘로 수정해야 함 
+	
 	
 	private String type; // 검색 타입
 	private String keyword; // 검색 내용

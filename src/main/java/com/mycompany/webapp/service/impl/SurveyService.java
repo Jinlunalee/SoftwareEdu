@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.ISurveyRepository;
 import com.mycompany.webapp.dto.AnswerVO;
 import com.mycompany.webapp.dto.QuestionSetVO;
+import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.ISurveyService;
 
@@ -45,6 +46,11 @@ public class SurveyService implements ISurveyService {
 	@Override
 	public List<QuestionSetVO> selectSubjectQuestionSet(String subjectId, int subjectSeq) {
 		return surveyRepository.selectSubjectQuestionSet(subjectId, subjectSeq);
+	}
+
+	@Override
+	public void insertQuestion(QuestionVO questionVo) {
+		surveyRepository.insertQuestion(questionVo);		
 	}
 
 }

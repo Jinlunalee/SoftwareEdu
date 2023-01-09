@@ -89,10 +89,16 @@ public class SubjectService implements ISubjectService{
 	public List<SubjectVO> selectAllSubject() {
 		return subjectRepository.selectAllSubject();
 	}
-
+	
+	@Transactional
 	@Override
 	public int updateSubject(SubjectVO subject) {
-		return subjectRepository.updateSubject(subject);
+		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+		subjectRepository.updateSubject(subject);
+		if(check > 0) { // 같은 과정 존재
+			subjectRepository.updateRecruitSameCourse(subject);
+		}
+		return 0;
 	}
 	
 	@Transactional
@@ -101,6 +107,11 @@ public class SubjectService implements ISubjectService{
 		logger.info("service/updatefiledate/:" + subject.getFileId() + file.getFileId());
 		logger.info("service/update/subject:" +subject);
 		logger.info("service/update/subject:" +file);
+		
+		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+		if(check > 0) { // 같은 과정 존재
+			subjectRepository.updateRecruitSameCourse(subject);
+		}
 		
 		if(subject.getFileId() == null || subject.getFileId() == null || subject.getFileId().equals("")) { //그전에 파일이 없다가 나중에 추가
 			String maxFileId = subjectRepository.selectMaxFileId();
@@ -136,7 +147,7 @@ public class SubjectService implements ISubjectService{
 		
 		logger.info("service/infoSubjectCourse/check : " + check);
 		
-		if("none".equals(courseId)) { // 과정 입력 X
+		if("".equals(courseId)) { // 과정 입력 X
 			logger.info("coursId X");
 			list.add(subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
 		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)
@@ -172,8 +183,8 @@ public class SubjectService implements ISubjectService{
 	}
 
 	@Override
-	public void clickDeleteUploadFile(String subjectId, int subjectSeq) {
-		subjectRepository.clickDeleteUploadFile(subjectId, subjectSeq);
+	public void clickDeleteUploadFile(String fileId) {
+		subjectRepository.clickDeleteUploadFile(fileId);
 	}
 
 	@Override

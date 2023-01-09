@@ -144,6 +144,7 @@ public class SubjectController {
 		
 		logger.info("details/subject: "+ subject);
 		logger.info("details/subject: "+ totalPeople);
+		logger.info("details/subject: "+ questionSet);
 		
 		return "subject/details";
 	}
@@ -223,8 +224,9 @@ public class SubjectController {
 	}
 	
 	// 개설 강좌 논리 삭제 (open)
-	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
-	public void clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq) {
+	@RequestMapping(value="/del/{subjectId}/{subjectSeq}/{fileId}")
+	public String clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
+		logger.info("del/open:"+fileId);
 		// enroll 논리 삭제
 		enrollService.clickDeleteEnrollByOpen(subjectId, subjectSeq);
 		// answer 논리 삭제
@@ -234,7 +236,12 @@ public class SubjectController {
 		// open 논리 삭제
 		subjectService.clickDeleteOpen(subjectId, subjectSeq);
 		// upload file 논리 삭제
-		subjectService.clickDeleteUploadFile(subjectId, subjectSeq);
+		if(fileId != null && !"".equals(fileId)) { //파일id가 있는 경우
+			logger.info("del/uploadfile:"+fileId);
+			subjectService.clickDeleteUploadFile(fileId);
+		}
+
+		return "redirect:/subject/subjectlist";
 	}
 
 	// 개설 강좌 입력 (open)
@@ -263,8 +270,9 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
-		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+subject); // Seq가 0으로 찍힘
 		logger.info("subject/insert:"+questionVo); // surveyVO 받기
+		//surveyService.insertQuestion(questionVo);
 		
 		try {
 			MultipartFile mf = subject.getFile();
@@ -294,9 +302,10 @@ public class SubjectController {
 	}
 	
 	//개설강좌 폐강처리
-	@PostMapping(value="/closesubject")
-	public String closeSubject(String subjectId, int subjectSeq) {
+	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}/{fileId}")
+	public String closeSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
 		subjectService.closeSubject(subjectId, subjectSeq);
+		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
 		return "redirect:/subject/subjectlist";
 	}
 

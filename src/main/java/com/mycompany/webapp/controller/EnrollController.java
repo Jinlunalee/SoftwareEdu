@@ -48,8 +48,8 @@ public class EnrollController {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 		
-		List<EnrollVO> list = enrollService.getEnrollList();
-		model.addAttribute("list", list);
+		List<EnrollVO> boardList = enrollService.getEnrollList();
+		model.addAttribute("boardList", boardList);
 		
 		List<CommonCodeVO> cancelList = enrollService.getCancelList();
 		model.addAttribute("cancelList", cancelList);
@@ -75,7 +75,7 @@ public class EnrollController {
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("EnrollBoardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("EnrollBoardList: " + boardList);
 		
 		// cancel list
@@ -157,15 +157,16 @@ public class EnrollController {
 	// 수강 추가
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+		System.out.println(studentId);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/list";
 	}
 	
 	// 과정 추가
-	@RequestMapping(value="/addcourse/{studentId}", method=RequestMethod.POST)
-	public String addCourse(@RequestBody Map<String, Object> addCourse, @PathVariable String studentId) {
-		System.out.println(addCourse);
-		enrollService.addCourse(addCourse, studentId);
+	@RequestMapping(value="/addcourse/{studentId}/{courseId}", method=RequestMethod.POST)
+	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
+		System.out.println(courseId);
+		enrollService.addCourse(studentId, courseId);
 		return "redirect:/enroll/list";
 	}
 	

@@ -17,7 +17,7 @@
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
-        where open.course_id IS NOT NULL
+        where open.course_id IS NOT NULL and del_yn = 'N'
 	</select>
 	
 	<select id="selectSubjectList" resultType="SubjectVO">
@@ -47,6 +47,8 @@
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
+        where del_yn = 'N'
+        order by start_day, end_day
 	</select>
 
 	<select id="selectSubjectDetails" parameterType="map" resultType="SubjectVO">
@@ -195,7 +197,7 @@
 	</select>
 	
 	<select id="checkOpenCourse" parameterType="String" resultType="int">
-		select count(*) from open where course_id = #{courseId}
+		select count(*) from open where course_id = #{courseId} and del_yn = 'N'
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
@@ -204,22 +206,22 @@
 		where course_id = #{courseId}
 	</update>
 	
-	<update id="closeSubject" parameterType="map">
-		update open 
-		set state_cd = 'OPN07' 
-		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
-	</update>
-	
 	<update id="clickDeleteOpen" parameterType="map">
 		update open
-		set del_yn = 'N'
+		set del_yn = 'Y'
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
 	<update id="clickDeleteUploadFile" parameterType="map">
 		update upload_file
-		set del_yn = 'N'
-		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
+		set del_yn = 'Y'
+		where file_id = #{fileId}
+	</update>
+	
+	<update id="closeSubject" parameterType="map">
+		update open 
+		set state_cd = 'OPN07' 
+		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
 	</update>
 	
 </mapper>

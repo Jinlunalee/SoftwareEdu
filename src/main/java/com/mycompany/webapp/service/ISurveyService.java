@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.AnswerVO;
 import com.mycompany.webapp.dto.QuestionSetVO;
+import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface ISurveyService {
@@ -14,5 +15,6 @@ public interface ISurveyService {
 	List<SubjectVO> selectSubjectListByFinishedState();
 	void clickDeleteQuestion(String subjectId, int subjectSeq);
 	void clickDeleteAnswer(String subjectId, int subjectSeq);
-	List<QuestionSetVO> selectSubjectQuestionSet(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	List<QuestionSetVO> selectSubjectQuestionSet(String subjectId, int subjectSeq);
+	void insertQuestion(QuestionVO questionVo);
 }
