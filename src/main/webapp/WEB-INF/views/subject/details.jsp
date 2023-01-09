@@ -93,7 +93,7 @@
 		<!-- button -->
 		<div class="submit-btn">
 			<input type="button" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'" value="수정">
-	        <input type="button" onclick="del()" value="삭제">
+	        <input type="button" onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')" value="삭제">
 		</div> 
 		
 		<!-- modal -->
@@ -124,15 +124,18 @@
 	</div>
 </div>
 
+	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	<script>
-	function del() {
-		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
-			console.log('삭제')
+	/*수강삭제*/
+	function del(subjectId, subjectSeq, fileId) {
+		if(confirm('수강 정보를 삭제하시겠습니까?')) {
+			alert('삭제');
+			alert(subjectId+'/'+subjectSeq+'/'+fileId);
+			location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
 		} else {
-			console.log('취소')
+			alert('취소');
 		}
 	}
-	
 	/* 모달창 */
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
