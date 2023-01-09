@@ -11,7 +11,7 @@ img {
 }
 
 .card_check {
-	margin: 40px;
+	margin: 15px;
 }
 
 #check_img {
@@ -76,10 +76,14 @@ a {
 	
 }
 
+.second_card {
+margin-top: 60px;
+}
+
 
 </style>
 
-
+ 
 
 
 <div class="card m-2">
@@ -88,92 +92,91 @@ a {
 			src="<c:url value='/resources/images/home_small.png'/>" />
 		<div>
 			> 연계 자료 관리 > <span class="submenu-title">연계 자료 조회 </span>
-		</div>
+		</div> 
 	</div>
 	<div class="card-body">
 		<br>
 
 		<div class="card_left" style="width: 50%">
+		<div class="first_card">
+		
+		
 			<div class="card_check">
-
 				<img id="check_img"
 					src="<c:url value='/resources/images/json.png'/>" /> <br> <a>연수원_교육비
-					지원대상<br> 교육비 지원 대상 교육과정을 수강하는 수강생 교육 정보<br> (이수율 포함)
+					지원대상 교육과정을 수강하는<br>수강생 교육 정보<br> (이수율 포함)
 				</a>
 				<button type="button" class="btn btn-outline-secondary"
-					id="first_btn">
-					연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
 			</div>
+
 
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 지원대상<br>교육비 지원 대상 교육과정을 수강하는 수강생 교육 정보<br>
-					(이수율 포함)
-				</a>
+				<br> <a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>
+					(이수율 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
-					id="second_btn">
-					연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
-				</button>
-			</div>
-
-			<div class="card_check">
-				<img id="check_img" src="<c:url value='/resources/images/csv.png'/>" />
-				<br> <a> 연수원_교육비 지원대상<br>교육비 지원 대상 교육과정을 수강하는 수강생 교육
-					정보<br> (이수율 포함)
-				</a>
-				<button type="button" class="btn btn-outline-secondary"
-					id="third_btn">
-					연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
 			</div>
 		</div>
+
+
+
+		<div class="second_card">
+			<div class="card_check">
+				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<button type="button" class="btn btn-outline-secondary"
+					id="third_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+				</button>
+			</div>
+			
+			
+			
+			<div class="card_check">
+				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<button type="button" class="btn btn-outline-secondary"
+					id="forth_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+				</button>
+			</div>			
+			</div>
+		</div>
+		
+		
 		<div class="vl"></div>
 
 		<div class="card_right">
 
 
 			<div class="box" id="show_JSON" style="overflow:scroll;">
-				<img id="check_img"
-					src="<c:url value='/resources/images/json.png'/>" /><br>
+				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" /><br>
 				<div id="result">
-					연수원 교육비 지원 대상
-
-					<!-- 		<table class="list">
-					<tr>
-					<th>수강생 아이디</th>
-					<th>수강생명</th>
-					<th>강좌비지원여부</th>
-					<th>공통코드명</th>
-					</tr>
-					<c:forEach var="dataList" items="${dataList}" varStatus="status">
-					<tr>
-					<th>${dataList.studentId}</th>
-					<th>${dataList.name}</th>
-					<th>${dataList.supportYn}</th>
-					<th>${dataList.comnCdTitle}</th>
-					</tr>
-					</c:forEach>
-				</table>   -->
-
 				</div>
 			</div>
 
 			<div class="box" id="show_XML" style="overflow:scroll;">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
-				<div id="resultXml">연수원 교육비 지원 대상  
-				
+				<div id="resultXml">
 				</div>			
 			</div>
 
 
-			<div class="box" id="show_CSV" style="overflow:scroll;">
-				<img id="check_img" src="<c:url value='/resources/images/csv.png'/>" /><br>
-				<div id="result3">연수원 교육비 지원 대상
+			<div class="box" id="show_JSON2" style="overflow:scroll;">
+				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" /><br>
+				<div id="result3">
+				</div>	
+			</div>		
 				
 				
-				</div>			
+			<div class="box" id="show_XML2" style="overflow:scroll;">
+				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
+				<div id="result4">
+				</div>		
 			</div>
+			
 		</div>
 	</div>
 </div>
@@ -207,6 +210,57 @@ a {
 		});
 	}
 
+	function getJsonSbj() {
+		$.ajax({
+			type : "GET",
+			url : "getjsonSbj",
+			// data : input이 필요할 때 쓰는 것. 여기에는 input이 없으므로 적을 필요가 없음
+			async : true,
+//             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success : function(data) {
+
+        		var str = "";
+        		
+        		str += "[";
+            	for (var i = 0; i < data.length; i++) {
+            		str += "{";
+            		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
+            		str += '"강좌아이디, 강좌시퀀스":' + '"' + data[i].sbjIdSeq + '",';
+            		str += '"강좌명":' + '"' + data[i].subjectTitle + '",';
+            		str += '"강좌 시수":' + '"' + data[i].hours + '",';
+            		str += '"강좌 시작 일자":' + '"' + data[i].startDay + '",';
+            		str += '"강좌 종료 일자":' + '"' + data[i].endDay + '",';
+            		str += '"강좌 비용":' + '"' + data[i].cost + '",';
+            		str += '"전송 시간":' + '"' + data[i].sendDt + '",';
+            		str += '"수강 완료 된 연수생 수":' + '"' + data[i].cntStd + '"';
+
+            		/*
+            		alert(
+           				data[i].sbjIdSeq + '\n' +
+                   		data[i].subjectTitle + '\n' +
+                   		data[i].hours + '\n' +
+                   		data[i].startDay + '\n' +
+                   		data[i].endDay + '\n' +
+                   		data[i].cost + '\n' +
+                   		data[i].sendDt
+                   		data[i].cntStd
+            		);
+            		*/
+            		
+            		if (i == data.length - 1) { // 마지막일때
+            			str += "}";
+            		} else { // 마지막이아닐때
+            			str += "},";
+            		}
+            	}
+            	str += "]";
+            	
+// alert(str);
+				 $("#result3").text(str);
+			}
+		});
+	}
 	
 	
 	
@@ -215,7 +269,8 @@ a {
 		$("#first_btn").click(function() {
 			$("#show_JSON").toggle();
 			$("#show_XML").hide();
-			$("#show_CSV").hide();
+			$("#show_JSON2").hide();
+			$("#show_XML2").hide();
 			
 			getJson();
 		});
@@ -225,7 +280,8 @@ a {
 		$("#second_btn").click(function() {
 			$("#show_XML").toggle();
 			$("#show_JSON").hide();
-			$("#show_CSV").hide();
+			$("#show_XML2").hide();
+			$("#show_JSON2").hide();
 			
 			getXml();
 		});
@@ -233,8 +289,21 @@ a {
 
 	$(function() {
 		$("#third_btn").click(function() {
-			$("#show_CSV").toggle();
+			$("#show_JSON2").toggle();
 			$("#show_JSON").hide();
+			$("#show_XML").hide();
+			$("#show_XML2").hide();
+			
+			getJsonSbj();
+		});
+	});
+	
+	
+	$(function() {
+		$("#forth_btn").click(function() {
+			$("#show_XML2").toggle();
+			$("#show_JSON").hide();
+			$("#show_JSON2").hide();
 			$("#show_XML").hide();
 		});
 	});
