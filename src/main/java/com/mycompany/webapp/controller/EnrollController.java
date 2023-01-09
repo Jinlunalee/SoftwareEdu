@@ -48,8 +48,8 @@ public class EnrollController {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 		
-		List<EnrollVO> list = enrollService.getEnrollList();
-		model.addAttribute("list", list);
+		List<EnrollVO> boardList = enrollService.getEnrollList();
+		model.addAttribute("boardList", boardList);
 		
 		List<CommonCodeVO> cancelList = enrollService.getCancelList();
 		model.addAttribute("cancelList", cancelList);
