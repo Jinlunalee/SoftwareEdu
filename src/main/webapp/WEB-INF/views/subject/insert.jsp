@@ -43,7 +43,7 @@ function changeEverything(i) {
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
 			<div class="sub_title">정기과정명 | 
 				<select class="select_course" name="courseId" id="courseId">
-					<option value="none">선택안함</option>
+					<option value="">선택안함</option>
 					<c:forEach var="course" items="${allCourseList}">
 						<option value="${course.courseId}">${course.courseTitle}</option>
 					</c:forEach>
@@ -53,6 +53,7 @@ function changeEverything(i) {
 			<div class="course_title">
 			<div class="main_title"><b>강좌명</b> 
 				<select class="select_smallCourse" name="subjectId" id="subjectId">
+					<option value="">선택안함</option>
 					<c:forEach var="subject" items="${allSubjectList}">
 						<option value="${subject.subjectId}">${subject.subjectTitle}</option>
 					</c:forEach>

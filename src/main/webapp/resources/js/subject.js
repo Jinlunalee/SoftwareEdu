@@ -72,7 +72,7 @@ $(function(){
 				support.empty();
 
 
-				if(courseId === "none"){ //과정없을때 (선택안했을때)
+				if(courseId === ""){ //과정없을때 (선택안했을때)
 					printHours.append("("+result[0].hours+"시간)");
 					hours.val(result[0].hours);
 
@@ -89,8 +89,7 @@ $(function(){
 					}
 				} else { //과정있을때 (1. 최조개설 2.개설되어있는 과정)
 					if(!result[0].recruitStartDay) { //신청일자가 존재하지 않음 -> 최초개설
-						console.log("최초개설");
-						console.log("result: "+result);//리스트 몇개 넘어오는지 확인
+						console.log("최초개설")
 						printHours.append("("+result[0].hours+"시간)");
 						hours.val(result[0].hours);
 						if(!result[0].levelEtc){//난이도 기타값이 null일때
@@ -108,7 +107,6 @@ $(function(){
 						console.log("개설되어있는 경우");
 
 						//과정 정보 입력
-						// let date = result[0].endDay.substring(0,4)+"-"+result[0].endDay.substring(4,6)+"-"+result[0].endDay.substring(6);
 						let date = parse(result[0].endDay);
 						startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
 						ajaxEnd = date;
@@ -121,12 +119,10 @@ $(function(){
 						date = parse(result[0].startDay);
 						ajaxStart = date;
 
-						// date = result[0].recruitStartDay.substring(0,4)+"-"+result[0].recruitStartDay.substring(4,6)+"-"+result[0].recruitStartDay.substring(6);
 						date = parse(result[0].recruitStartDay);
 						recruitStartDay.val(date);
 						ajaxRecruitStart = date;
 
-						// date = result[0].recruitEndDay.substring(0,4)+"-"+result[0].recruitEndDay.substring(4,6)+"-"+result[0].recruitEndDay.substring(6);
 						date = parse(result[0].recruitEndDay);
 						recruitEndDay.val(date);
 						ajaxRecruitEnd = date;
@@ -288,6 +284,8 @@ function inputState(){
 	let recruitStartDay = parseInt(document.getElementById('recruitStartDay').value.replaceAll('-',''));
 	let recruitEndDay = parseInt(document.getElementById('recruitEndDay').value.replaceAll('-',''));
 	let state = document.getElementById('state');
+
+	state.value = ''; //원래있던 상태 초기화
 
 	if(today < recruitStartDay) { //현재날짜가 모집시작일 보다 작으면
 		state.value = 'OPN01'; //모집예정
