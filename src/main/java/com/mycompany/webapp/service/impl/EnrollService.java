@@ -95,6 +95,7 @@ public class EnrollService implements IEnrollService{
 
 	@Override
 	public List<EnrollVO> getSearchList(EnrollVO enroll) {
+		System.out.println("서비스 : " + enrollRepository.getSearchList(enroll));
 		return enrollRepository.getSearchList(enroll);
 	}
 	
