@@ -3,6 +3,7 @@ package com.mycompany.webapp.controller;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.Pager;
+import com.mycompany.webapp.dto.QuestionSetVO;
 import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
@@ -55,10 +57,10 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		List<SubjectVO> courseList = subjectService.selectCourseList();
-		model.addAttribute("courseList", courseList);
-		model.addAttribute("courseListSize", courseList.size());
-		logger.info("courseList: " + courseList);
+		List<SubjectVO> boardList = subjectService.selectCourseList();
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size());
+		logger.info("courseList: " + boardList);
 		
 		return "subject/courselist";
 	}
@@ -82,7 +84,7 @@ public class SubjectController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		logger.info("boardList: " + boardList);
+		logger.info("OpenCourseBoardList: " + boardList);
 
 		return "subject/courselist";
 	}
@@ -93,10 +95,10 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		List<SubjectVO> subjectList = subjectService.selectSubjectList();
-		model.addAttribute("subjectList", subjectList);
-		model.addAttribute("subListSize", subjectList.size());
-		logger.info("subjectlist: " + subjectList);
+		List<SubjectVO> boardList = subjectService.selectSubjectList();
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size());
+		logger.info("subjectlist: " + boardList);
 		
 		return "subject/subjectlist";
 	}
@@ -121,6 +123,7 @@ public class SubjectController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("boardList: " + boardList);
+		
 		return "subject/subjectlist";
 	}
 
@@ -130,7 +133,9 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		// subjectId, subjectSeq 이용해서 question 테이블에 해당하는 정보를 surveyVO에 담아서 model로 넘기기
+		// 만족도 조사 항목
+		List<QuestionSetVO> questionSet = surveyService.selectSubjectQuestionSet(subjectId, subjectSeq);
+		model.addAttribute("questionSet", questionSet);
 
 		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
 		int totalPeople = subjectService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject에 있는 state가 아니라 enroll에 있는거 가져와야함
@@ -139,6 +144,7 @@ public class SubjectController {
 		
 		logger.info("details/subject: "+ subject);
 		logger.info("details/subject: "+ totalPeople);
+		logger.info("details/subject: "+ questionSet);
 		
 		return "subject/details";
 	}
@@ -264,8 +270,9 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
-		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+subject); // Seq가 0으로 찍힘
 		logger.info("subject/insert:"+questionVo); // surveyVO 받기
+		//surveyService.insertQuestion(questionVo);
 		
 		try {
 			MultipartFile mf = subject.getFile();

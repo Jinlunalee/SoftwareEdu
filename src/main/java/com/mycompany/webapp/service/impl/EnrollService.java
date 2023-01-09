@@ -92,4 +92,11 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.addCourse(addCourse, studentId, maxEnrollId2);
 		}
 	}
+
+	@Override
+	public List<EnrollVO> getSearchList(EnrollVO enroll) {
+		return enrollRepository.getSearchList(enroll);
+	}
+	
+	
 }

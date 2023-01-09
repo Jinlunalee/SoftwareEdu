@@ -30,7 +30,7 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public int getCountOpenCourseRow() {
-		return pagerRepository.getCountOpenSubjectRow();
+		return pagerRepository.getCountOpenCourseRow();
 	}
 
 	@Override

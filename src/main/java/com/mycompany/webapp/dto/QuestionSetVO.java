@@ -8,6 +8,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class QuestionSetVO {
-	private String questionNum;
+	private int questionNum;
 	private String questionContent;
 }

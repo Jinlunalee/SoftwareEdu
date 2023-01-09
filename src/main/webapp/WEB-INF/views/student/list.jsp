@@ -27,10 +27,10 @@
 
 		<div class="list_top">
 			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.rowsPerPage}</b>개, 
-	<!--	페이지<b class="basic_txt_color">  ??</b> /??  -->	
+			전체목록 <b class="basic_txt_color">${boardListSize}</b>개,
+			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 				<div class="view">
-						<button type="button" class="btn btn-outline-secondary">수강생추가</button>
+					<button type="button" class="btn btn-outline-secondary">수강생추가</button>
 					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 						<option value="<c:url value="/student/boardList?pageNo=1"/>">선택</option>
 						<option value="<c:url value="/student/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
@@ -55,11 +55,11 @@
 				<c:if test="${boardListSize ne 0}">  	
 					<c:forEach var="board" items="${boardList}" varStatus="status"> 
 						<tr>
-							<th>${board.name}</th>
-							<th>${board.studentId}</th>
-							<th>${board.email}</th>
-							<th>${board.birth}</th>
-							<th>${board.position}</th>
+							<td>${board.name}</td>
+							<td>${board.studentId}</td>
+							<td>${board.email}</td>
+							<td>${board.birth}</td>
+							<td>${board.position}</td>
 							<td>
 								<form>
 									<button type="button" class="btn btn-secondary">수정</button>

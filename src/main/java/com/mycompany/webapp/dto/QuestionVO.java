@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class QuestionVO {
 	private String subjectId;
-	private String subjectSeq;
+	private int subjectSeq;
 	private List<QuestionSetVO> questionSet;
 }

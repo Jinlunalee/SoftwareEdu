@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.AnswerVO;
+import com.mycompany.webapp.dto.QuestionSetVO;
+import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 @Mapper
@@ -15,4 +17,6 @@ public interface ISurveyRepository {
 	List<SubjectVO> selectSubjectListByFinishedState();
 	void clickDeleteQuestion(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void clickDeleteAnswer(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	List<QuestionSetVO> selectSubjectQuestionSet(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	void insertQuestion(QuestionVO questionVo);
 }
