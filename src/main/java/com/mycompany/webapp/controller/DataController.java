@@ -19,8 +19,6 @@ import com.mycompany.webapp.service.IStudentService;
 @Controller
 @RequestMapping("/data")
 public class DataController {
-
-	
 	
 	@Autowired
 	IStudentService studentService;
@@ -65,7 +63,13 @@ public class DataController {
 			map.put("수강생이름", name);
 			map.put("강좌비지원여부", supportYn);
 			map.put("진행상황", comnCdTitle);
-			 
+			
+			
+			// 여기에 추가해야 할 것
+			//수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
+			// 강좌비 지원여부는 제외하기 그냥 어차피 지금도 매퍼에서 그 조건으로 조회해서 가지고 오는 거라서
+			
+			
 			// 3.3. 변환된 HashMap을 JSON배열에 추가
 			jsonDataList.put(map);
 			
@@ -100,7 +104,8 @@ public class DataController {
         result +=  "<supportYn>" + supportYn +"</suppotyYn>";
         result +=  "<comnCdTitle>" + comnCdTitle +"</comnCdTitle>";
         result +=  "</student>";
-
+//        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
+//        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
 		}
 		
 	return result;

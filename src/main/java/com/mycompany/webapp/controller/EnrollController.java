@@ -48,8 +48,8 @@ public class EnrollController {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 		
-		List<EnrollVO> list = enrollService.getEnrollList();
-		model.addAttribute("list", list);
+		List<EnrollVO> boardList = enrollService.getEnrollList();
+		model.addAttribute("boardList", boardList);
 		
 		List<CommonCodeVO> cancelList = enrollService.getCancelList();
 		model.addAttribute("cancelList", cancelList);
@@ -75,7 +75,7 @@ public class EnrollController {
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("EnrollBoardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 		logger.info("EnrollBoardList: " + boardList);
 		
 		// cancel list
