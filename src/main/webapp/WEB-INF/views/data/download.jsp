@@ -226,14 +226,14 @@ margin-top: 60px;
             	for (var i = 0; i < data.length; i++) {
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"sbjIdSeq":' + '"' + data[i].sbjIdSeq + '",';
-            		str += '"subjectTitle":' + '"' + data[i].subjectTitle + '",';
-            		str += '"hours":' + '"' + data[i].hours + '",';
-            		str += '"startDay":' + '"' + data[i].startDay + '",';
-            		str += '"endDay":' + '"' + data[i].endDay + '",';
-            		str += '"cost":' + '"' + data[i].cost + '",';
-            		str += '"sendDt":' + '"' + data[i].sendDt + '",';
-            		str += '"cntStd":' + '"' + data[i].cntStd + '"';
+            		str += '"강좌아이디, 강좌시퀀스":' + '"' + data[i].sbjIdSeq + '",';
+            		str += '"강좌명":' + '"' + data[i].subjectTitle + '",';
+            		str += '"강좌 시수":' + '"' + data[i].hours + '",';
+            		str += '"강좌 시작 일자":' + '"' + data[i].startDay + '",';
+            		str += '"강좌 종료 일자":' + '"' + data[i].endDay + '",';
+            		str += '"강좌 비용":' + '"' + data[i].cost + '",';
+            		str += '"전송 시간":' + '"' + data[i].sendDt + '",';
+            		str += '"수강 완료 된 연수생 수":' + '"' + data[i].cntStd + '"';
 
             		/*
             		alert(
