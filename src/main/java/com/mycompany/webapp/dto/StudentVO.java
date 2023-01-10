@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class StudentVO {
+	
 	private String studentId;  // 수강생 아이디
 	private String name;		// 수강생 이름
 	private String password;	// 수강생 비밀번호
@@ -26,11 +27,10 @@ public class StudentVO {
 	// 위의 공통코드를 얘로 수정해야 함 
 	//  카멜표기법, _표기법 섞여있으니까 하나로 통일하기
 	private String sendDt;
+	private String agentId;
 	private String stdSbj;
 	private String rate;
-	private String agentId;
-	
-	
+
 	
 	
 	private String type; // 검색 타입

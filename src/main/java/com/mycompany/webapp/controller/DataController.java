@@ -41,10 +41,12 @@ public class DataController {
 	}
 	
 	
-	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public String getjson(Model model) {
-		
+	
+	@RequestMapping(value="/getjson")
+	public @ResponseBody List<StudentVO> getjson(){
+	/*	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	 * public String getjson(Model model) {
+			
 		// 1. 조회
 		List<StudentVO> dataList = studentService.getDataList();
 		
@@ -86,9 +88,9 @@ public class DataController {
 			// 3.1 ~ 3.3이 반복.
 		}
 		// jsonDataList가 완성. 문자열로 바꿔서 리턴.
-		String result = jsonDataList.toString();
+		String result = jsonDataList.toString();    */
 		
-		return result;
+		return studentService.getDataList();
 	}	
 	
 	
@@ -111,12 +113,12 @@ public class DataController {
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
         result += "<student>";
-        result += "<agentId>" + "KOSA01" + "</agentId>";
-        result += "<stdSbj>"+ stdSbj +"</stdSbj>";
-        result += "<name>" + name + "</name>";
-        result +=  "<rate>" + rate +"</rate>";
-        result +=  "<stateCd>" + stateCd +"</stateCd>";
-        result +=  "<sendDt>" + sendDt + "<sendDt>";
+        result += "<훈련기관아이디>" + "KOSA01" + "</훈련기관아이디>";
+        result += "<수강생,강좌 정보>"+ stdSbj +"</수강생,강좌 정보>";
+        result += "<수강생이름>" + name + "</수강생이름>";
+        result +=  "<이수율>" + rate +"%"+ "</이수율>";
+        result +=  "<진행상태>" + stateCd +"</진행상태>";
+        result +=  "<전송시간>" + sendDt + "<전송시간>";
         result +=  "</student>";
 //        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
