@@ -20,13 +20,13 @@ const submenuNames = {
 
 const submenuLinks = {
     subject : [
-        '', '', 'http://localhost/SoftwareEducation/subject/courselist', 'http://localhost/SoftwareEducation/subject/subjectlist'
+        '', '', 'http://localhost/SoftwareEducation/subject/courseBoardList', 'http://localhost/SoftwareEducation/subject/subjectBoardList'
     ],
     student : [
-        'http://localhost/SoftwareEducation/student/list', ''
+        'http://localhost/SoftwareEducation/student/boardList', ''
     ],
     enroll : [
-        'http://localhost/SoftwareEducation/enroll/list'
+        'http://localhost/SoftwareEducation/enroll/boardList'
     ],
     survey : [
         'http://localhost/SoftwareEducation/survey/summary'

@@ -136,7 +136,7 @@
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
 						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
-							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</when>
 			<otherwise>
 				insert into open 
@@ -144,7 +144,7 @@
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
 						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
-							#{recruitPeople},#{state}, 'mgr1', SYSDATE, 'N')
+							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</otherwise>
 		</choose>
 		
@@ -153,7 +153,7 @@
 	<insert id="insertFileData" parameterType="com.mycompany.webapp.dto.UploadfileVO">
 		insert into upload_file 
 			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
-		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', SYSDATE, 'N')
+		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 	</insert>
 	
 	<select id="selectAllCourse" resultType="SubjectVO">
