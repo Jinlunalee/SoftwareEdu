@@ -19,7 +19,7 @@
 		<div class="search">
 			<select class="select-box">
 				<option>수강생 명</option>
-				<option>수강생 아이디</option>
+				<option>구분</option>
 			</select> 
 			<input class="input-text" type="text" placeholder="수강생 명을 입력해 주세요"> 
 			<input class="input-button" type="button" value="검색">

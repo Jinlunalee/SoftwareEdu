@@ -70,10 +70,16 @@
 		where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
-	<insert id="insertQuestion" parameterType="QuestionVO">
+	<insert id="insertQuestion" parameterType="map">
 		insert into question
 		    (subject_id, subject_seq, question_num, question_content, reg_id, reg_dt, del_yn)
-		values(#{subjectId}, #{subjectSeq}, #{questionNum}, #{questionContent}, 'mgr1', SYSDATE, 'N')
+		values(#{subjectId}, #{subjectSeq}, #{questionSetVo.questionNum}, #{questionSetVo.questionContent}, 'mgr1', SYSDATE, 'N')
 	</insert>
+	
+	<select id="getMaxSubjectSeq" parameterType="String" resultType="int">
+		select max(subject_seq) as "subjectSeq"
+		from open
+		where subject_id = #{subjectId}
+	</select>
 
 </mapper>

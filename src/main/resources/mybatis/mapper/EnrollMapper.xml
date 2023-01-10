@@ -70,29 +70,43 @@
 	</select>
 	
 	<select id="getOpenList" parameterType="OpenVO" resultType="OpenVO">
-		SELECT o.subject_id AS "subjectId", 
-				subject_seq AS "subjectSeq", 
-				subject_title AS "subjectTitle", 
-				o.course_id AS "courseId", 
-				start_day AS "startDay", 
-				end_day AS "endDay", 
-				start_time AS "startTime", 
-				end_time AS "endTime", 
-				recruit_start_day AS "recruitStartDay", 
-				recruit_end_day AS "recruitEndDay", 
-				recruit_people AS "recruitPeople" 
-		FROM OPEN o 
-		LEFT OUTER JOIN SUBJECT s 
-		ON o.subject_id = s.subject_id 
-		LEFT OUTER JOIN COURSE c 
-		ON o.course_id = c.course_id 
-		WHERE
 		<choose>
 			<when test="subCor != null and subCor.equals('subject')">
-				(subject_title = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') AND o.course_id is NULL
+				SELECT o.subject_id AS "subjectId", 
+						subject_seq AS "subjectSeq", 
+						subject_title AS "subjectTitle", 
+						o.course_id AS "courseId", 
+						course_title AS "courseTitle",
+						start_day AS "startDay", 
+						end_day AS "endDay", 
+						start_time AS "startTime", 
+						end_time AS "endTime", 
+						recruit_start_day AS "recruitStartDay", 
+						recruit_end_day AS "recruitEndDay", 
+						recruit_people AS "recruitPeople" 
+				FROM OPEN o 
+				LEFT OUTER JOIN SUBJECT s 
+				ON o.subject_id = s.subject_id 
+				LEFT OUTER JOIN COURSE c 
+				ON o.course_id = c.course_id 
+				WHERE
+				(o.subject_id=#{kw} OR
+				REPLACE(subject_title, ' ', '') LIKE '%'||#{kw}||'%') AND o.course_id is NULL
 			</when>
 			<when test="subCor != null and subCor.equals('course')">
-				course_title = #{kw} OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%'
+			    SELECT 
+			        o.course_id AS "courseId", 
+			        course_title AS "courseTitle",
+			        min(start_day) AS "startDay", 
+			        max(end_day) AS "endDay", 
+			        min(recruit_start_day) AS "recruitStartDay", 
+			        max(recruit_end_day) AS "recruitEndDay", 
+			        max(recruit_people) AS "recruitPeople" 
+			    FROM OPEN o 
+			    LEFT OUTER JOIN COURSE c 
+			    ON o.course_id = c.course_id 
+			    GROUP BY (o.course_id, course_title) 
+			    HAVING o.course_id=#{kw} OR replace(course_title, ' ', '') LIKE '%'||#{kw}||'%'
 			</when>
 		</choose>
 	</select>
@@ -106,6 +120,9 @@
 		SELECT  enroll_id AS "enrollId", 
 				e.subject_id AS "subjectId", 
 				e.subject_seq AS "subjectSeq", 
+				s.subject_title AS "subjectTitle", 
+				c.course_id AS "courseId", 
+                c.course_title AS "courseTitle", 
 				e.student_id AS "studentId", 
 				name AS "name", 
         		s.subject_title AS "subjectTitle", 
@@ -120,7 +137,7 @@
         		start_time AS "startTime", 
         		end_time AS "endTime", 
         		start_day AS "startDay", 
-        		end_day AS "endDay" 
+        		end_day AS "endDay"
 		FROM ENROLL e 
 		LEFT OUTER JOIN STUDENT t 
 		ON e.student_id = t.student_id 
@@ -128,39 +145,43 @@
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
         LEFT OUTER JOIN SUBJECT s 
         ON e.subject_id = s.subject_id 
-        WHERE NOT (e.del_yn ='Y')
-		<choose>
-			<when test="applyStartDay != null and applyEndDay != null">
-				e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
-			</when>
-			<when test="student != null and student.equals('sdName')">
-				name = #{keyword1}
-			</when>
-			<when test="student != null and student.equals('sdId')">
-				e.student_id = #{keyword1}
-			</when>
-			<when test="course != null and course.equals('sj')">
-				s.subject_title = #{keyword2}
-			</when>
-			<when test="state != null and state.equals('apply')">
-				e.state_cd = 'ERL01'
-			</when>
-			<when test="state != null and state.equals('applyCancel')">
-				e.state_cd = 'ERL02'
-			</when>
-			<when test="state != null and state.equals('expect')">
-				e.state_cd = 'ERL03'
-			</when>
-			<when test="state != null and state.equals('progress')">
-				e.state_cd = 'ERL04'
-			</when>
-			<when test="state != null and state.equals('cancel')">
-				e.state_cd = 'ERL05'
-			</when>
-			<when test="state != null and state.equals('complete')">
-				e.state_cd = 'ERL06'
-			</when>
-		</choose>
+        LEFT OUTER JOIN COURSE c 
+        ON c.course_id = o.course_id 
+		WHERE 1=1 AND NOT (e.del_yn ='Y') 
+		
+			<if test='applyStartDay != null and applyEndDay != null'>
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
+			</if>
+			<if test='student != null and student.equals("sdName")'>
+				AND name = #{keyword1} 
+			</if>
+			<if test='student != null and student.equals("sdId")'>
+				AND e.student_id = #{keyword1} 
+			</if>
+			<if test='course != null and course.equals("sj")'>
+				AND s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='course != null and course.equals("cs")'>
+				AND c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='state != null and state.equals("apply")'>
+				AND e.state_cd = 'ERL01' 
+			</if>
+			<if test='state != null and state.equals("applyCancel")'>
+				AND e.state_cd = 'ERL02' 
+			</if>
+			<if test='state != null and state.equals("expect")'>
+				AND e.state_cd = 'ERL03' 
+			</if>
+			<if test='state != null and state.equals("progress")'>
+				AND e.state_cd = 'ERL04' 
+			</if>
+			<if test='state != null and state.equals("cancel")'>
+				AND e.state_cd = 'ERL05' 
+			</if>
+			<if test='state != null and state.equals("complete")'>
+				AND e.state_cd = 'ERL06' 
+			</if>
 	</select>
 
 	<update id="clickCancel" parameterType="map">
@@ -207,21 +228,18 @@
 		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 'N', NULL, NULL)
 	</insert>
 	
-	<insert id="addCourse" parameterType="map">
-		INSERT INTO ENROLL 
-		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
-		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
-		del_yn, cancel_rs_cd, cancel_rs_etc) 
-		VALUES 
-		<foreach collection="list" item="item" separator=",">
-		( 'ENRL0' || #{maxEnrollId}, #{item.subjectId}, 
-			#{item.subjectSeq}, #{studentId}, 
-			'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 
-			'N', NULL, NULL
-		)
-		</foreach>
-	</insert>
+	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">
+		SELECT count(subject_id)
+		FROM open
+		WHERE course_id=#{courseId}
+	</select>
 	
-	
+	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
+		select 
+		    subject_id as "subjectId",
+		    subject_seq as "subjectSeq"
+		from open
+		where course_id = #{courseId}
+	</select>
 
 </mapper>

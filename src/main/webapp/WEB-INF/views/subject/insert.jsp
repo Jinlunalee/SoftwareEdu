@@ -27,9 +27,10 @@ function changeClassId(i) {
 /* Modal input 클래스 id, Num value, Set name 바꾸기  */
 function changeEverything(i) {
 	let number = (i+4).toString();
+	let numberMinusOne = (i+3).toString();
 	document.querySelector("#new-questions #question-inputNum-3").setAttribute("value", number); // questionNum 값 넣기
-	document.querySelector("#new-questions #question-inputNum-3").setAttribute("name", 'questionSet[' + number + '].questionNum'); // questionNum name값 넣기 (매핑을 위함)
-	document.querySelector("#new-questions #question-inputSet-3").setAttribute("name", 'questionSet[' + number + '].questionContent'); // questionContent name값 넣기 (매핑을 위함)
+	document.querySelector("#new-questions #question-inputNum-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionNum'); // questionNum name값 넣기 (매핑을 위함)
+	document.querySelector("#new-questions #question-inputSet-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionContent'); // questionContent name값 넣기 (매핑을 위함)
 	document.querySelector("#new-questions #question-inputNum-3").setAttribute("id", 'question-inputNum-' + number); // questionNum 아이디 바꾸기
 	document.querySelector("#new-questions #question-inputSet-3").setAttribute("id", 'question-inputSet-' + number); // questionContent 아이디 바꾸기
 }

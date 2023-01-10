@@ -1,10 +1,13 @@
 package com.mycompany.webapp.dto;
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import oracle.sql.DATE;
 
 @Getter
 @Setter
@@ -42,5 +45,12 @@ public class SubjectVO {
 	private String fileName;
 	private long fileSize;
 	private String fileContentType;
+	
+	
+	
+	private String sbjIdSeq;	// subjectId와 subjectSeq를 합쳐놓은 값
+	private int cntStd;   // 학생 수
+	private String sendDt;	// 전송시간
+	
 	
 	}

@@ -8,48 +8,61 @@
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
+	<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
 	</div>
 	<div class="card-body">
 		
-		<%-- 검색  --%>
+		<%-- 수강 검색  --%>
 		<div class="search">
 		<span>신청기간</span>
 		<form name="sc-form">
-			<input name="applyStartDay" class="input-date" type="date"> ~
-			<input name="applyEndDay"class="input-date" type="date"> 
+			<input type="date" name="applyStartDay" class="input-date"> ~
+			<input type="date" name="applyEndDay"class="input-date">
+			
+			<%-- 수강생 선택 --%>
 			<select name="student" class="select-box">
+				<option value="">수강생 선택</option>
 				<option value="sdName">수강생 명</option>
 				<option value="sdId">수강생 아이디</option>
 			</select>
-			<input name="keyword1" class="input-text" type="text" placeholder="수강생 명을 입력해 주세요">
+			<input type="text" name="keyword1" class="input-text"  placeholder="수강생 명을 입력해 주세요">
+			
+			<%-- 강좌 과정 선택 --%>
 			<select name="course" class="select-box">
+				<option value="">강좌/과정</option>
 				<option value="sj">강좌</option>
 				<option value="cs">과정</option>
 			</select>
-			<input name="keyword2" class="input-text" type="text" placeholder="강좌 명을 입력해 주세요">
-			<select name="state" class="select-box">
-				<option>수강상태</option>
-				<option value="applyCancel">수강신청취소</option>
-				<option value="expect">수강예정</option>
-				<option value="progress">수강 중</option>
-				<option value="cancel">수강취소</option>
-				<option value="apply">수강신청</option>
-				<option value="complete">수강완료</option>
-			</select>
+			<input type="text" name="keyword2" class="input-text"  placeholder="강좌 명을 입력해 주세요">
 			
+			<%-- 수강 상태 선택 --%>
+			<select name="state" class="select-box">
+				<option value="">수강 상태</option>
+				<option value="applyCancel">수강 신청 취소</option>
+				<option value="expect">수강 예정</option>
+				<option value="progress">수강 중</option>
+				<option value="cancel">수강 취소</option>
+				<option value="apply">수강 신청</option>
+				<option value="complete">수강 완료</option>
+			</select>
 			<input type="submit" onclick="search()" class="input-button" value="검색">
 			</form>
 		</div>
 		
-		<%-- 뷰 갯수 --%>
-		<div class="view">
-		<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
-			<select class="select-view">
-				<option>10개</option>
-				<option>30개</option>
-				<option>50개</option>
-			</select>
+		<div class="list_top">
+			<div class="cnt">
+			전체목록 <b class="basic_txt_color">${boardListSize}</b>개,
+			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+			<%-- 뷰 갯수 --%>
+			<div class="view">
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
+				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+					<option value="<c:url value="/enroll/boardList?pageNo=1"/>">선택</option>
+					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
+					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=30"/>">30개</option>
+					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=50"/>">50개</option>
+				</select>
+			</div>
 		</div>
 
 		<%-- 목록 --%>
@@ -64,133 +77,142 @@
 				<th>승인</th>
 			</tr>
 
-			<c:forEach var="searchList" items="${searchList}" varStatus="status">
+			<!-- 리스트 -->
+			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td>${searchList.regDt}</td>
-					<td>${searchList.name}</td>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${ls.studentId}', '${ls.subjectId}', '${ls.subjectSeq}');">${ls.subjectTitle}</a></td>
+					<td>${board.regDt}</td>
+					<td>${board.name}</td>
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">${board.subjectTitle}</a></td>
 					<div class="modal modal-${status.count}">
 						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${searchList.name}  |  ${searchList.studentId}  |  
-							<c:choose>
-								<c:when test="${searchList.stateCd eq 'ERL01'}">수강 신청</c:when>
-								<c:when test="${searchList.stateCd eq 'ERL02'}">수강 신청 취소</c:when>
-								<c:when test="${searchList.stateCd eq 'ERL03'}">수강 예정</c:when>
-								<c:when test="${searchList.stateCd eq 'ERL04'}">수강 중</c:when>
-								<c:when test="${searchList.stateCd eq 'ERL05'}">수강 취소</c:when>
-								<c:when test="${searchList.stateCd eq 'ERL06'}">수강 완료</c:when>
-							</c:choose>
+							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  
+								<c:choose>
+									<c:when test="${board.stateCd eq 'ERL01'}">수강 신청</c:when>
+									<c:when test="${board.stateCd eq 'ERL02'}">수강 신청 취소</c:when>
+									<c:when test="${board.stateCd eq 'ERL03'}">수강 예정</c:when>
+									<c:when test="${board.stateCd eq 'ERL04'}">수강 중</c:when>
+									<c:when test="${board.stateCd eq 'ERL05'}">수강 취소</c:when>
+									<c:when test="${board.stateCd eq 'ERL06'}">수강 완료</c:when>
+								</c:choose>
 							</li>
 							<br>
-							<li>강좌명 | ${searchList.subjectTitle}</li>
-							<li>강의 시간 | ${searchList.startTime} ~ ${searchList.endTime} </li>
-							<li>교육 기간 | ${searchList.startDay} ~ ${searchList.endDay} </li>
+							<li>강좌명 | ${board.subjectTitle}</li>
+							<li>강의 시간 | ${board.startTime} ~ ${board.endTime} </li>
+							<li>교육 기간 | ${board.startDay} ~ ${board.endDay} </li>
 							<span>진도율 | </span><span class="rt"></span>
-							<li>현재 완료 시간  | ${searchList.completeHours}</li>
+							<li>현재 완료 시간  | ${board.completeHours}</li>
 							완료한 시간 입력
-							<form action="<c:url value='/enroll/addhours/${searchList.studentId}/${searchList.subjectId}/${searchList.subjectSeq}'/>" method="post"/>
+							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
 								<input name="addHours" class="input-time" type="number">
-								<input type="submit" onclick="getHours(${searchList.enrollId})" class="input-time-btn"  value="입력">
+								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
 							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
-					<td>${searchList.subjectId}</td>
+					<td>${board.subjectId}</td>
 					<td>
-					
-					<%-- 수강 상태에 따른 현재 상태 --%>
-					<c:choose>
-					<c:when test="${searchList.stateCd eq 'ERL01'}">
-					<img src="<c:url value='/resources/images/register/ERL01.png'/>" />
-					</c:when>
-					<c:when test="${searchList.stateCd eq 'ERL02'}">
-					<img src="<c:url value='/resources/images/register/ERL02.png'/>" />
-					</c:when>
-					<c:when test="${searchList.stateCd eq 'ERL03'}">
-					<img src="<c:url value='/resources/images/register/ERL03.png'/>" />
-					</c:when>
-					<c:when test="${searchList.stateCd eq 'ERL04'}">
-					<img src="<c:url value='/resources/images/register/ERL04.png'/>" />
-					</c:when>
-					<c:when test="${searchList.stateCd eq 'ERL05'}">
-					<img src="<c:url value='/resources/images/register/ERL05.png'/>" />
-					</c:when>
-					<c:when test="${searchList.stateCd eq 'ERL06'}">
-					<img src="<c:url value='/resources/images/register/ERL06.png'/>" />
-					</c:when>
-					</c:choose>
+						<%-- 수강 상태에 따른 현재 상태 --%>
+						<c:choose>
+							<c:when test="${board.stateCd eq 'ERL01'}">
+								<img src="<c:url value='/resources/images/register/ERL01.png'/>" />
+							</c:when>
+							<c:when test="${board.stateCd eq 'ERL02'}">
+								<img src="<c:url value='/resources/images/register/ERL02.png'/>" />
+							</c:when>
+							<c:when test="${board.stateCd eq 'ERL03'}">
+								<img src="<c:url value='/resources/images/register/ERL03.png'/>" />
+							</c:when>
+							<c:when test="${board.stateCd eq 'ERL04'}">
+								<img src="<c:url value='/resources/images/register/ERL04.png'/>" />
+							</c:when>
+							<c:when test="${board.stateCd eq 'ERL05'}">
+								<img src="<c:url value='/resources/images/register/ERL05.png'/>" />
+							</c:when>
+							<c:when test="${board.stateCd eq 'ERL06'}">
+								<img src="<c:url value='/resources/images/register/ERL06.png'/>" />
+							</c:when>
+						</c:choose>
 					</td>
 					
 					<td>
-					<%-- 취소 버튼이 나오는 경우 --%>
-					<c:choose>
-					<c:when test="${searchList.stateCd eq 'ERL01' or searchList.stateCd eq 'ERL03' or searchList.stateCd eq 'ERL04'}">
-					<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
-					
-					<%-- 취소 사유 모달창 --%>
-					<div class="modal2 modal2-${status.count}">
-					<div class="modal-content2 modal-content2-${status.count}">
-					<span style="font-size: 1.2em;">수강 신청을 취소하시겠습니까?</span>
-					<form action="<c:url value='/enroll/cancel/${searchList.studentId}/${searchList.subjectId}/${searchList.subjectSeq}'/>" method="post" class="cacelform">
-						<select name="cancelRsCd" class="cancelrs">
-							<option>취소 사유</option>
-								<c:forEach var="cl" items="${cancelList}">
-									<option value="${cl.comnCd}">${cl.comnCdTitle}</option>	
-								</c:forEach>	
-						</select>
-						<input type="text" name="cancelRsEtc" class="cancelrs"  placeholder="기타 입력">
-						<input type="submit" value="확인" class="confirm">
-					</form>
-					
-					<div id="close-btn2">
-					<button class="close-btn2">닫기</button>
-					</div>
-					</div>
-					</div>
-					</c:when>
-					
-					<%-- 삭제 버튼 나오는 경우  --%>
-					<c:when test="${searchList.stateCd eq 'ERL02' or searchList.stateCd eq 'ERL05'}">
-					<form>
-						<input type="submit" onclick="del('${searchList.studentId}', '${searchList.subjectId}', '${searchList.subjectSeq}')" class="btn btn-secondary" value="삭제">
-					</form>
-					</c:when>
-					</c:choose>
+						<c:choose>
+							<%-- 취소 버튼이 나오는 경우 --%>
+							<c:when test="${board.stateCd eq 'ERL01' or board.stateCd eq 'ERL03' or board.stateCd eq 'ERL04'}">
+								<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
+								
+								<%-- 취소 사유 모달창 --%>
+								<div class="modal2 modal2-${status.count}">
+									<div class="modal-content2 modal-content2-${status.count}">
+										<span style="font-size: 1.2em;">수강 신청을 취소하시겠습니까?</span>
+										<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
+											<select name="cancelRsCd" class="cancelrs">
+												<option>취소 사유</option>
+												<c:forEach var="cancel" items="${cancelList}">
+													<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>	
+												</c:forEach>	
+											</select>
+											<input type="text" name="cancelRsEtc" class="cancelrs"  placeholder="기타 입력">
+											<input type="submit" value="확인" class="confirm">
+										</form>
+										
+										<div id="close-btn2">
+											<button class="close-btn2">닫기</button>
+										</div>
+									</div>
+								</div>
+							</c:when>
+						
+							<%-- 삭제 버튼 나오는 경우  --%>
+							<c:when test="${board.stateCd eq 'ERL02' or board.stateCd eq 'ERL05'}">
+								<form>
+									<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
+								</form>
+							</c:when>
+						</c:choose>
 					</td>
 					
 					<td>
-					<c:if test="${searchList.stateCd eq 'ERL01'}">
-						<form>
-						<input type="submit" class="btn btn-secondary" onclick="approval('${searchList.studentId}', '${searchList.subjectId}', '${searchList.subjectSeq}')" value="승인">
-						</form>
-					</c:if>
+						<c:if test="${board.stateCd eq 'ERL01'}">
+							<form>
+								<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
+							</form>
+						</c:if>
 					</td>
-					
 				</tr>	
 			</c:forEach>
+
+				<!-- paging -->
+				<tr>
+					<td colspan="4" class="text-center">
+						<div>
+							<a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=1">처음</a>
+							<c:if test="${pager.groupNo>1}">
+								<a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
+							</c:if>
+							
+							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
+									<a class="btn btn-outline-success btn-sm" href="boardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
+								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="btn btn-danger btn-sm" href="boardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+								<a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a>
+							</c:if>
+							<a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
+						</div>
+					</td>
+				</tr>		
 		</table>
 		<div class="down">
-		<a href="#">
-		<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
+			<a href="#">
+			<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
-		<div class="test">
-		<div id="paging">
-		<ul class="paging">
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">10</a></li>
-		</ul>
-		</div>
-		</div>
 	</div>
 	
 	<script>
@@ -273,12 +295,13 @@
 	<script>
 		function search() {
 			$.ajax({
-				type : 'GET',
+				type : 'POST',
 				url : 'searchlist',
+				async : false,
 				data : $("form[name=sc-form]").serialize(),
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-					}
+				}
 			})
 		}
 	</script>

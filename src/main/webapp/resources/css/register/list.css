@@ -10,7 +10,7 @@
 }
 
 .select-box {
-	width: 140px;
+	width: 150px;
     height: 45px;
     border-radius: 8px;
     margin: 0 10px;
@@ -228,4 +228,9 @@ tr {
 	position: absolute;
     top: 200px;
     left: 349px;
+}
+
+#applyperiod {
+	position : relative;
+	right: 400px;
 }
