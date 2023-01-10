@@ -2,6 +2,7 @@ package com.mycompany.webapp.controller;
 
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -224,9 +225,9 @@ public class SubjectController {
 	}
 	
 	// 개설 강좌 논리 삭제 (open)
-	@RequestMapping(value="/del/{subjectId}/{subjectSeq}/{fileId}")
+	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
-		logger.info("del/open:"+fileId);
+		logger.info("del/open/:"+subjectId+"/"+subjectSeq+"/"+fileId);
 		// enroll 논리 삭제
 		enrollService.clickDeleteEnrollByOpen(subjectId, subjectSeq);
 		// answer 논리 삭제
@@ -270,9 +271,8 @@ public class SubjectController {
 		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
 		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
-		logger.info("subject/insert:"+subject); // Seq가 0으로 찍힘
-		logger.info("subject/insert:"+questionVo); // surveyVO 받기
-		//surveyService.insertQuestion(questionVo);
+		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+questionVo);
 		
 		try {
 			MultipartFile mf = subject.getFile();
@@ -284,8 +284,16 @@ public class SubjectController {
 				file.setFileData(mf.getBytes());
 				
 				subjectService.insertFileData(subject, file);
+				
+				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				surveyService.insertQuestion(questionVo);
 			}else { // 첨부파일 없을 때
-				subjectService.insertSubject(subject);
+				//subjectService.insertSubject(subject);
+				
+				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				surveyService.insertQuestion(questionVo);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -296,13 +304,14 @@ public class SubjectController {
 	
 	// 개설 강좌 입력 폼 비동기 출력
 	@RequestMapping(value="/ajax", method=RequestMethod.GET)
-	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
+	@ResponseBody
+	public Map<String, Object> ajaxTest(String courseId, String subjectId) {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
 		return subjectService.infoSubjectCourse(courseId, subjectId);
 	}
 	
 	//개설강좌 폐강처리
-	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}/{fileId}")
+	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}")
 	public String closeSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
 		subjectService.closeSubject(subjectId, subjectSeq);
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)

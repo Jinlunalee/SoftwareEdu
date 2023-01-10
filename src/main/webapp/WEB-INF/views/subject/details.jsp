@@ -38,11 +38,9 @@
 						<c:set var="len" value="${fn:length(subject.fileName)}"/>
 						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
 						<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
-							<img class="detail_img" src='<c:url value="/file/${subject.fileId}"/>'><br>
+							<img class="detail_img" src='<c:url value="/subject/file/${subject.fileId}"/>'><br>
 						</c:if>
 					</c:if>
-					
-					<!-- img class="detail_img" src="<c:url value='/resources/images/subject/AI.jpg'/>"/-->
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> <fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/> 

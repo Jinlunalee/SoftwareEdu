@@ -79,7 +79,7 @@
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
 									<c:choose>
 										<c:when test="${board.comnCdTitle eq '모집예정'}">
-											<button	tton type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
+											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 											<button type="button" class="btn btn-secondary" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행중'}">
@@ -92,9 +92,9 @@
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="close('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
+											<button type="button" class="btn btn-secondary" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
 										</c:otherwise>
-								</c:choose>
+									</c:choose>
 								</div> 
 							</td>
 						</tr>
@@ -137,19 +137,18 @@
 		function del(subjectId, subjectSeq, fileId) {
 			if(confirm('수강 정보를 삭제하시겠습니까?')) {
 				alert('삭제');
-				alert(subjectId+'/'+subjectSeq+'/'+fileId);
-				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
+				//alert(subjectId+'/'+subjectSeq+'/'+fileId);
+				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
 				alert('취소');
 			}
 		}
 	
 		/*폐강*/
-		function close(subjectId, subjectSeq, fileId){
+		function closeCourse(subjectId, subjectSeq, fileId){
 			if(confirm('폐강하시겠습니까?')) {
 				alert('폐강');
-				alert(subjectId+'/'+subjectSeq+'/'+fileId);
-				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
+				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
 				alert('취소');
 			}

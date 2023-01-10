@@ -17,4 +17,5 @@ public interface ISurveyService {
 	void clickDeleteAnswer(String subjectId, int subjectSeq);
 	List<QuestionSetVO> selectSubjectQuestionSet(String subjectId, int subjectSeq);
 	void insertQuestion(QuestionVO questionVo);
+	int getMaxSubjectSeq(String subjectId);
 }

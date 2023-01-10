@@ -18,5 +18,6 @@ public interface ISurveyRepository {
 	void clickDeleteQuestion(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void clickDeleteAnswer(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	List<QuestionSetVO> selectSubjectQuestionSet(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
-	void insertQuestion(QuestionVO questionVo);
+	void insertQuestion(@Param("subjectId") String subjectId, @Param("subjectSeq") int SubjectSeq, @Param("questionSetVo") QuestionSetVO questionSetVo);
+	int getMaxSubjectSeq(String subjectId);
 }
