@@ -137,14 +137,14 @@
 					
 					<td>
 						<c:choose>
-							<%-- 취소 버튼이 나오는 경우 --%>
-							<c:when test="${board.stateCd eq 'ERL01' or board.stateCd eq 'ERL03' or board.stateCd eq 'ERL04'}">
+							<%-- 취소 버튼이 나오는 경우: (수강) 수강신청 & (강좌) 모집 마감 || (수강) 수강중 --%>
+							<c:when test="${(board.stateCd eq 'ERL01' and board.openStateCd eq 'OPN02') or (board.stateCd eq 'ERL04')}">
 								<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
 								
 								<%-- 취소 사유 모달창 --%>
 								<div class="modal2 modal2-${status.count}">
 									<div class="modal-content2 modal-content2-${status.count}">
-										<span style="font-size: 1.2em;">수강 신청을 취소하시겠습니까?</span>
+										<span style="font-size: 1.2em;">취소하시겠습니까?</span>
 										<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 											<select name="cancelRsCd" class="cancelrs">
 												<option>취소 사유</option>
@@ -163,8 +163,8 @@
 								</div>
 							</c:when>
 						
-							<%-- 삭제 버튼 나오는 경우  --%>
-							<c:when test="${board.stateCd eq 'ERL02' or board.stateCd eq 'ERL05'}">
+							<%-- 삭제 버튼 나오는 경우: 수강취소, 수강신청취소, 수강완료 --%>
+							<c:when test="${board.stateCd eq 'ERL02' or board.stateCd eq 'ERL05' or board.stateCd eq 'ERL06'}">
 								<form>
 									<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
 								</form>
@@ -173,7 +173,7 @@
 					</td>
 					
 					<td>
-						<c:if test="${board.stateCd eq 'ERL01'}">
+						<c:if test="${board.stateCd eq 'ERL01' and board.openStateCd eq 'OPN03'}">
 							<form>
 								<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
 							</form>

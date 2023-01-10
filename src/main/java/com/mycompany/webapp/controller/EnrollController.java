@@ -71,6 +71,11 @@ public class EnrollController {
 
 		// 해당 페이지의 행을 가져오기
 		List<EnrollVO> boardList = pagerService.selectEnrollListByPage(pager);
+		
+		// openStateCd가 안담겨서 확인 중
+		for(EnrollVO enrollVo : boardList) {
+			System.out.println(enrollVo.getOpenStateCd());
+		}
 
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);

@@ -45,5 +45,6 @@ public class EnrollVO {
 	private String keyword2;
 	private String hid;
 	
+	private String openStateCd;	// 수강한 강좌의 state_cd
 
 }
