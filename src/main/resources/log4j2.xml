@@ -6,6 +6,12 @@
     </Console>
   </Appenders>
   
+    <!-- SQL 로그 출력을 위한 설정 -->
+<!-- 	<Logger name="jdbc.sqltiming" level="info" additivity="false">
+      <AppenderRef ref="Out"/>
+    </Logger> -->
+    
+  
   <Loggers>
     <Logger name="com.mycompany.webapp" level="info" additivity="false">
       <AppenderRef ref="Out"/>

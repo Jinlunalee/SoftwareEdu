@@ -116,16 +116,60 @@
 		FROM ENROLL
 	</select>
 	
-	<select id="getSearchList" parameterType="EnrollVO" resultType="EnrollVO">
-		SELECT  enroll_id AS "enrollId", 
+	<select id="getSearchList" parameterType="map" resultType="EnrollVO">
+		SELECT rnum, 
+			"enrollId", 
+		    "subjectId", 
+		    "subjectSeq", 
+		    "subjectTitle", 
+		    "courseId", 
+		    "courseTitle", 
+		    "studentId", 
+		    "name", 
+		    "stateCd", 
+		    "completeHours", 
+		    "regId", 
+		    "regDt", 
+		    "modiId", 
+		    "modiDt", 
+		    "delYn", 
+		    "cancelRsEtc", 
+		    "startTime", 
+		    "endTime", 
+		    "startDay", 
+		    "endDay" 
+		FROM (
+			SELECT 
+			rownum as rnum,
+			"enrollId", 
+		    "subjectId", 
+		    "subjectSeq", 
+		    "subjectTitle", 
+		    "courseId", 
+		    "courseTitle", 
+		    "studentId", 
+		    "name",  
+		    "stateCd", 
+		    "completeHours", 
+		    "regId", 
+		    "regDt", 
+		    "modiId", 
+		    "modiDt", 
+		    "delYn", 
+		    "cancelRsEtc", 
+		    "startTime", 
+		    "endTime", 
+		    "startDay", 
+		    "endDay"
+		FROM (
+			SELECT  enroll_id AS "enrollId", 
 				e.subject_id AS "subjectId", 
 				e.subject_seq AS "subjectSeq", 
 				s.subject_title AS "subjectTitle", 
 				c.course_id AS "courseId", 
                 c.course_title AS "courseTitle", 
 				e.student_id AS "studentId", 
-				name AS "name", 
-        		s.subject_title AS "subjectTitle", 
+				name AS "name",  
 				e.state_cd AS "stateCd", 
 				complete_hours AS "completeHours", 
 				e.reg_id AS "regId", 
@@ -147,8 +191,59 @@
         ON e.subject_id = s.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
+		WHERE NOT (e.del_yn ='Y')  
+			<if test='applyStartDay != null and applyEndDay != null'>
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
+			</if>
+			<if test='student != null and student.equals("sdName")'>
+				AND name = #{keyword1} 
+			</if>
+			<if test='student != null and student.equals("sdId")'>
+				AND e.student_id = #{keyword1} 
+			</if>
+			<if test='course != null and course.equals("sj")'>
+				AND s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='course != null and course.equals("cs")'>
+				AND c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='state != null and state.equals("apply")'>
+				AND e.state_cd = 'ERL01' 
+			</if>
+			<if test='state != null and state.equals("applyCancel")'>
+				AND e.state_cd = 'ERL02' 
+			</if>
+			<if test='state != null and state.equals("expect")'>
+				AND e.state_cd = 'ERL03' 
+			</if>
+			<if test='state != null and state.equals("progress")'>
+				AND e.state_cd = 'ERL04' 
+			</if>
+			<if test='state != null and state.equals("cancel")'>
+				AND e.state_cd = 'ERL05' 
+			</if>
+			<if test='state != null and state.equals("complete")'>
+				AND e.state_cd = 'ERL06' 
+			</if>
+				)
+			WHERE rownum &lt;= #{endRowNo}
+			)
+			WHERE rnum &gt;= #{startRowNo}
+	</select>
+
+	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
+		SELECT count(*) 
+		FROM ENROLL e 
+		LEFT OUTER JOIN STUDENT t 
+		ON e.student_id = t.student_id 
+        LEFT OUTER JOIN OPEN o 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+        LEFT OUTER JOIN SUBJECT s 
+        ON e.subject_id = s.subject_id 
+        LEFT OUTER JOIN COURSE c 
+        ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
-			<if test='applyStartDay = null and applyEndDay = null'>
+			<if test='hid != null and hid.equals("a")'>
 				AND 1 = 1 
 			</if>
 			<if test='applyStartDay != null and applyEndDay != null'>
@@ -185,7 +280,11 @@
 				AND e.state_cd = 'ERL06' 
 			</if>
 	</select>
-
+	
+	
+	
+	
+	
 	<update id="clickCancel" parameterType="map">
 		UPDATE ENROLL 
 		SET state_cd = 'ERL05' 
@@ -227,7 +326,7 @@
 		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
 		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
 		del_yn, cancel_rs_cd, cancel_rs_etc) 
-		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL03', 0, 'mgr1', '20230102', NULL, NULL, 'N', NULL, NULL)
+		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL03', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
 	</insert>
 	
 	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">

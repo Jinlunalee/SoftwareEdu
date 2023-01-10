@@ -286,12 +286,14 @@ public class SubjectController {
 				
 				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
 				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(subject.getSubjectId()));
 				surveyService.insertQuestion(questionVo);
 			}else { // 첨부파일 없을 때
-				//subjectService.insertSubject(subject);
+				subjectService.insertSubject(subject);
 				
 				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
 				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(subject.getSubjectId()));
 				surveyService.insertQuestion(questionVo);
 			}
 		}catch (Exception e) {

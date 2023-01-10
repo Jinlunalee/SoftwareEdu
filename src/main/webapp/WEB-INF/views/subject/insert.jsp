@@ -169,7 +169,7 @@ function changeEverything(i) {
 									<div class="question">
 										<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
 										<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i-1}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
-										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" placeholder="문항을 입력해주세요.">
+										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요.">
 										<span id="surveyqn-input" class="serveyqn-input"></span>
 									</div>
 									<div class="answer">
@@ -209,42 +209,42 @@ function changeEverything(i) {
 	<script type="text/javascript">
 	/* 모달창 열기 */
 	const body = document.querySelector('body');
-    const modal = document.querySelector('.modal');
-    const btnOpenPopup = document.querySelector('.btn-open-popup');
+	const modal = document.querySelector('.modal');
+	const btnOpenPopup = document.querySelector('.btn-open-popup');
 
-    btnOpenPopup.addEventListener('click', () => {
-      modal.classList.toggle('show'); // class를 이용한 모달 on
+	btnOpenPopup.addEventListener('click', () => {
+		modal.classList.toggle('show'); // class를 이용한 모달 on
 
-      if (modal.classList.contains('show')) { // 모달이 on일 때
-        body.style.overflow = 'hidden'; // body의 스크롤을 막음
+		if (modal.classList.contains('show')) { // 모달이 on일 때
+		body.style.overflow = 'hidden'; // body의 스크롤을 막음
 		}
-    });
+	});
 
-    modal.addEventListener('click', (event) => {
+	modal.addEventListener('click', (event) => {
 		if (event.target === modal) {
-        modal.classList.toggle('show'); // class를 이용한 모달 on
+		modal.classList.toggle('show'); // class를 이용한 모달 on
 
 			if (!modal.classList.contains('show')) { // 모달이 off일 때
 			body.style.overflow = 'auto';  // body의 스크롤을 풂
 			}
 		}
-    });
-    
-    /* closeBtn 눌렀을 때 - 모달창 닫기, Modal 입력값 부모창에 저장*/
-    const closeBtn = modal.querySelector(".close-btn");
-    
-    $(closeBtn).click(function(){
+	});
+
+	/* closeBtn 눌렀을 때 - 모달창 닫기, Modal 입력값 부모창에 저장*/
+	const closeBtn = modal.querySelector(".close-btn");
+
+	$(closeBtn).click(function(){
 		modal.classList.remove('show'); // 모달창 닫기
 		saveInputQuestions(); // Modal 입력값을 부모창에 저장  
 	});
-    
-    /* Modal 입력값을 부모창에 저장 */
+
+	/* Modal 입력값을 부모창에 저장 */
 	function saveInputQuestions() {
 		console.log("connected!");
 		const hiddenInputs = document.getElementsByClassName("hidden-inputs"); // Modal에서 받은 항목명이 들어갈 hidden div
 		var questionNumber = $("#question-number-dropdown option:selected").val(); // 항목 개수
 		$(hiddenInputs).empty(); // 중복 방지
-	    /* Modal에서 받은 항목명을 hidden div에 저장  */
+		/* Modal에서 받은 항목명을 hidden div에 저장  */
 		for(var k=1; k<=questionNumber; k++) {
 			let questionInputNum = "#question-inputNum-" + k; // 가져올 Modal에 있는 항목순번 아이디 저장
 			let questionInputSet = "#question-inputSet-" + k; // 가져올 Modal에 있는 항목명 아이디 저장
@@ -256,6 +256,22 @@ function changeEverything(i) {
 			console.log(questionInputSet);
 			document.querySelector(hiddenQuestionInputSet).setAttribute("value", $(questionInputSet).val()); // Modal의 항목명에서 받은 value를 hidden div의 항목명에 넣기
 		};
-    }
-	</script>
+	}
+
+	/* Submit버튼 클릭 시, Question 3개 이상 입력하지 않았으면 alert */
+	const submitBtn = document.querySelector(".btn-submit-open-popup"); // submit 버튼 저장
+	submitBtn.addEventListener("click", checkInputMoreThanThree); // submit 버튼 클릭 시 checkInputMoreThanThree 함수 실행
+
+	function checkInputMoreThanThree() { // Question Input Null 확인해서 alert 해줌
+		const hiddenInputs = document.getElementsByClassName("hidden-inputs");
+
+		// hidden div 아래에 추가된 .serveyqn-input 개수 및 value 확인
+		let hiddenQnInputsCount = hiddenInputs[0].childElementCount/2;  // .serveyqn-input 개수
+		for (var i=1; i<=hiddenQnInputsCount; i++) { // .serveyqn-input 개수만큼 반복
+			if(!hiddenInputs[0].childNodes[i*2-1].value) { // hidden div 아래에 추가된 .serveqn-input의 value가 없다면
+				alert("만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."); // alert
+			}
+		}
+	}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

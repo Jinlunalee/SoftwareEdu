@@ -103,9 +103,8 @@ margin-top: 60px;
 		
 			<div class="card_check">
 				<img id="check_img"
-					src="<c:url value='/resources/images/json.png'/>" /> <br> <a>연수원_교육비
-					지원대상 교육과정을 수강하는<br>수강생 교육 정보<br> (이수율 포함)
-				</a>
+					src="<c:url value='/resources/images/json.png'/>" /> 
+					<br><a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -114,8 +113,7 @@ margin-top: 60px;
 
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>
-					(이수율 포함)</a>
+				<br> <a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -191,8 +189,28 @@ margin-top: 60px;
             type : "GET",
             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
 			success : function(data) {
+        		var str = "";
+        		
+        		str += "[";
+            	for (var i = 0; i < data.length; i++) {
+            		str += "{";
+            		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
+            		str += '"훈련기관아이디":' + '"' + "KOSA01" + '",';
+            		str += '"수강생,강좌정보":' + '"' + data[i].stdSbj + '",';
+            		str += '"수강생 이름":' + '"' + data[i].name + '",';
+            		str += '"이수율":' + '"' + data[i].rate + '"% ,';
+            		str += '"진행상태":' + '"' + data[i].stateCd + '",';
+            		str += '"전송시간":' + '"' + data[i].sendDt + '"';
 
-				$("#result").html(data);
+            		
+            		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 됨
+            			str += "}";
+            		} else { // 마지막이아닐때  (콤마가 들어가야 하니까)
+            			str += "},";
+            		}
+            	}
+            	str += "]";
+				$("#result").html(str);
 			}
 		});
 	}
