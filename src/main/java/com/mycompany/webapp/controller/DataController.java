@@ -55,17 +55,24 @@ public class DataController {
 		for (StudentVO vo : dataList) {
 			
 			// 3.1. 각 vo에서 데이터 추출
-			String studentId = vo.getStudentId();
+			String agentId = "KOSA01";
+			String stdSbj = vo.getStdSbj();
+
 			String name = vo.getName();
-			String supportYn = vo.getSupportYn();
-			String comnCdTitle = vo.getComnCdTitle();
+			String rate = vo.getRate();
+			String stateCd = vo.getStateCd();
+			String sendDt = vo.getSendDt();
+
+			
 			
 			// 3.2. HashMap으로 변환 (Key<String>, Value<String>)
 			HashMap<String, String> map = new HashMap();
-			map.put("수강생아이디", studentId);
+			map.put("훈련기관아이디", agentId);
+			map.put("수강생,강좌정보", stdSbj);
 			map.put("수강생이름", name);
-			map.put("강좌비지원여부", supportYn);
-			map.put("진행상황", comnCdTitle);
+			map.put("이수율", rate);
+			map.put("진행상태", stateCd);
+			map.put("전송시간", sendDt);
 			
 			
 			// 여기에 추가해야 할 것
@@ -94,18 +101,22 @@ public class DataController {
 		
 		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
 		for (StudentVO vo : dataList) {	
-			String studentId = vo.getStudentId();
+			String agetntId = vo.getAgentId();
+			String stdSbj = vo.getStdSbj();
 			String name = vo.getName();
-			String supportYn = vo.getSupportYn();
-			String comnCdTitle = vo.getComnCdTitle();
+			String rate = vo.getRate();
+			String stateCd = vo.getStateCd();
+			String sendDt = vo.getSendDt();
 		
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
         result += "<student>";
-        result += "<studentId>"+ studentId +"</studentId>";
+        result += "<agentId>" + "KOSA01" + "</agentId>";
+        result += "<stdSbj>"+ stdSbj +"</stdSbj>";
         result += "<name>" + name + "</name>";
-        result +=  "<supportYn>" + supportYn +"</suppotyYn>";
-        result +=  "<comnCdTitle>" + comnCdTitle +"</comnCdTitle>";
+        result +=  "<rate>" + rate +"</rate>";
+        result +=  "<stateCd>" + stateCd +"</stateCd>";
+        result +=  "<sendDt>" + sendDt + "<sendDt>";
         result +=  "</student>";
 //        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
