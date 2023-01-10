@@ -45,7 +45,7 @@
 				<option value="apply">수강 신청</option>
 				<option value="complete">수강 완료</option>
 			</select>
-			<input type="hidden" name="hid" value="">
+			<input type="hidden" name="hid" value="a">
 			<input type="submit" class="input-button" value="검색">
 			</form>
 		</div>
@@ -58,10 +58,10 @@
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
 				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/enroll/boardList?pageNo=1"/>">선택</option>
-					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option value="<c:url value="/enroll/boardList?pageNo=1&rowsPerPage=50"/>">50개</option>
+					<option value="<c:url value="/enroll/searchlist?pageNo=1"/>">선택</option>
+					<option value="<c:url value="/enroll/searchList?pageNo=1&rowsPerPage=10"/>">10개</option>
+					<option value="<c:url value="/enroll/searchList?pageNo=1&rowsPerPage=30"/>">30개</option>
+					<option value="<c:url value="/enroll/searchList?pageNo=1&rowsPerPage=50"/>">50개</option>
 				</select>
 			</div>
 		</div>
@@ -186,24 +186,24 @@
 				<tr>
 					<td colspan="4" class="text-center">
 						<div>
-							<a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=1">처음</a>
+							<a class="btn btn-outline-primary btn-sm" href="searchList?pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
+								<a class="btn btn-outline-info btn-sm" href="searchList?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm" href="boardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
+									<a class="btn btn-outline-success btn-sm" href="searchList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm" href="boardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
+									<a class="btn btn-danger btn-sm" href="searchList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
 								</c:if>
 							</c:forEach>
 							
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a>
+								<a class="btn btn-outline-info btn-sm" href="searchList?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a>
 							</c:if>
-							<a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
+							<a class="btn btn-outline-primary btn-sm" href="searchList?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
 						</div>
 					</td>
 				</tr>		

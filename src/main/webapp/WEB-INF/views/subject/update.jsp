@@ -57,7 +57,7 @@
 				<td> 
 					<input type="hidden" name="hours" id="hours" value="${subject.hours}">
 					<fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/>
-					<input type="date" name="startDay" id="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>" onclick="updateTime()"> 
+					<input type="date" name="startDay" id="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>" onchange="calcEndDay()"}>
 					~ 
 					<fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/>
 					<input type="date" name="endDay" id="endDay" value="<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>" readonly>
@@ -122,7 +122,6 @@
 		<div class="submit-btn">
 			<input type="hidden" name="fileId" value="${subject.fileId}">
 			<input type="hidden" name="courseId" value="${subject.courseId}">
-			<input type="hidden" name="catCourse" value>
 			<input type="hidden" name="state" id="state" value="${subject.state}">
 			<input type="submit" value="저장">
 		</div>

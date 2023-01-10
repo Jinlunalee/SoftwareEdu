@@ -1,11 +1,11 @@
 package com.mycompany.webapp.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 
 public interface IEnrollService {
@@ -22,5 +22,6 @@ public interface IEnrollService {
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
 	void addCourse(String studentId, String courseId);
-	List<EnrollVO> getSearchList(EnrollVO enroll);
+	List<EnrollVO> getSearchList(EnrollVO enroll, Pager pager);
+	int getCountSearchRow(EnrollVO enroll);
 }
