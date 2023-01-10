@@ -160,7 +160,7 @@ public class SubjectController {
 	
 	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
-	public String updateSubject(@PathVariable String subjectId, @PathVariable int subjectSeq,Model model) {
+	public String updateSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
@@ -241,7 +241,6 @@ public class SubjectController {
 			logger.info("del/uploadfile:"+fileId);
 			subjectService.clickDeleteUploadFile(fileId);
 		}
-
 		return "redirect:/subject/subjectlist";
 	}
 
@@ -319,5 +318,8 @@ public class SubjectController {
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
 		return "redirect:/subject/subjectlist";
 	}
-
+	
+	//모집마감된 강좌 추가모집
+	
+	
 }

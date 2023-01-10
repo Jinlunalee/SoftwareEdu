@@ -86,7 +86,7 @@
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '폐강'}">
-											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
+											<button type="button" class="btn btn-secondary" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행완료'}">
 										</c:when>

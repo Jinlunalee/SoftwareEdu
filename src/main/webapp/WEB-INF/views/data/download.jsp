@@ -251,7 +251,7 @@ margin-top: 60px;
             		str += '"강좌 종료 일자":' + '"' + data[i].endDay + '",';
             		str += '"강좌 비용":' + '"' + data[i].cost + '",';
             		str += '"전송 시간":' + '"' + data[i].sendDt + '",';
-            		str += '"수강 완료 된 연수생 수":' + '"' + data[i].cntStd + '"';
+            		str += '"수강 완료 된 연수생 수":' + '"' + data[i].cntStd + '명"';
 
             		/*
             		alert(
@@ -304,7 +304,7 @@ margin-top: 60px;
             		str += '<강좌 종료 일자>' + data[i].endDay +'</강좌 종료 일자>';
             		str += '<강좌 비용>' + data[i].cost + '</강좌 비용>';
             		str += '<전송 시간>' + data[i].sendDt + '</전송 시간>';
-            		str += '<수강 완료 된 연수생 수>' + data[i].cntStd + '</수강 완료 된 연수생 수>';
+            		str += '<수강 완료 된 연수생 수>' + data[i].cntStd + '명' + '</수강 완료 된 연수생 수>';
             		str += '</강좌 정보>';
 					
 					
