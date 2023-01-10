@@ -76,6 +76,22 @@ $(function(){
 				cost.empty();
 				support.empty();
 
+				// select option에 있는 모든value가져오기
+				let options = $('#subjectId').find('option').map(function(){
+					return this.value;
+				}).get();
+
+				//비활성화 되어있던 속성 제거 (초기화)
+				for(var i=0;i<options.length;i++){
+					//option의 0번부터 끝까지 초기화
+					$('#subjectId option:eq('+i+')').prop('disabled', false);
+
+					// $("select option[value="+options[i]).attr('disabled', false);
+					// $("select#subjectId").val(options[i]).removeAttr('disabled')
+					// $('#subjectId').val(options[i]).prop("disabled", false);
+					// $('#subjectId').val(options[i]).removeAttr('disabled');
+					// console.log("삭제"+$('#subjectId').val(options[i]).disabled);
+				}
 
 				if(courseId === ""){ //과정없을때 (선택안했을때)
 					printHours.append("("+result.subjectInfo.hours+"시간)");
@@ -111,21 +127,21 @@ $(function(){
 						console.log("result: "+result);//리스트 몇개 넘어오는지 확인
 						//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
 						console.log("개설되어있는 경우");
-						let ajaxCheckList = result.checkList; //과정안에 담겨있는 강좌 비활성화 시키기위한 강좌데이터 저장
-						
-						// select option에 있는 모든value가져오기
-						let options = $('#subjectId').find('option').map(function(){
-							return this.value;
-						}).get();
+
+						// 과정안에 담겨있는 강좌 데이터 저장
+						let ajaxCheckList = [];
+						for(var i=0;i<result.checkList.length;i++){
+							ajaxCheckList.push(result.checkList[i].subjectId);
+						}
 						console.log(options);
-
-
+						console.log(ajaxCheckList);
 
 						//ajaxCheckList랑 options비교해서 비활성화
 						for(var i=0;i<options.length;i++){
-							for(var j=0;j<ajaxCheckList[j];j++){
+							for(var j=0;j<ajaxCheckList.length;j++){
 								if(options[i] === ajaxCheckList[j]){
-									
+									console.log(ajaxCheckList[j]);
+									$("select option[value="+options[i]).attr('disabled', true);
 								}
 							}
 						}
@@ -179,7 +195,7 @@ $(function(){
 
 /*과정안에 들어있는 강좌 비활성화*/
 function disabledCourse(courseId, list){
-	list
+
 }
 
 // $(function(){

@@ -45,6 +45,7 @@
 				<option value="apply">수강 신청</option>
 				<option value="complete">수강 완료</option>
 			</select>
+			<input type="hidden" name="hid" value="">
 			<input type="submit" class="input-button" value="검색">
 			</form>
 		</div>
