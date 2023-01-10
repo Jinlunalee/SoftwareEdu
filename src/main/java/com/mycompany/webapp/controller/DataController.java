@@ -118,4 +118,11 @@ public class DataController {
 	public @ResponseBody List<SubjectVO> getjsonSbj() {
 		return studentService.getSbjDataList();
 	}
+	
+	
+	
+	@RequestMapping(value="/getxmlSbj")
+	public @ResponseBody List<SubjectVO> getxmlSbj() {
+		return studentService.getSbjDataList();
+	}
 }

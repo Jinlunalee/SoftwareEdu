@@ -147,10 +147,12 @@
         ON e.subject_id = s.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
-		WHERE 1=1 AND NOT (e.del_yn ='Y') 
-		
+		WHERE NOT (e.del_yn ='Y') 
+			<if test='applyStartDay = null and applyEndDay = null'>
+				AND 1 = 1 
+			</if>
 			<if test='applyStartDay != null and applyEndDay != null'>
-				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
 			</if>
 			<if test='student != null and student.equals("sdName")'>
 				AND name = #{keyword1} 

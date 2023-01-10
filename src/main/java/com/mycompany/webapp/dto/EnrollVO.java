@@ -43,7 +43,7 @@ public class EnrollVO {
 	private String state;
 	private String keyword1;
 	private String keyword2;
-	
+	private String hid;
 	
 
 }
