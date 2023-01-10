@@ -19,4 +19,7 @@ public interface IPagerService {
 	
 	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);
+	
+	int getCountSearchRow(EnrollVO enroll);
+	List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager);
 }

@@ -98,27 +98,5 @@ public class EnrollService implements IEnrollService{
 			enrollRepository.addEnroll(studentId, openVo.get(i).getSubjectId(), openVo.get(i).getSubjectSeq(), maxEnrollId);
 		}
 	}
-
-	@Override
-	public List<EnrollVO> getSearchList(EnrollVO enroll, Pager pager) {
-		String applyStartDay = enroll.getApplyStartDay();
-		String applyEndDay = enroll.getApplyEndDay();
-		String student = enroll.getStudent();
-		String course = enroll.getCourse();
-		String state = enroll.getState();
-		String keyword1 = enroll.getKeyword1();
-		String keyword2 = enroll.getKeyword2();
-		
-		int endRowNo = pager.getEndRowNo();
-		int startRowNo = pager.getStartRowNo();
-		
-		System.out.println("서비스 : " + enrollRepository.getSearchList(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2));
-		return enrollRepository.getSearchList(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
-	}
-	
-	public int getCountSearchRow(EnrollVO enroll) {
-		return enrollRepository.getCountSearchRow(enroll);
-	}
-	
 	
 }

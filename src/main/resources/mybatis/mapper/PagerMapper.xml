@@ -242,4 +242,168 @@
 		)
 		WHERE rnum &gt;= #{startRowNo}
 	</select>
+	
+	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
+		SELECT count(*) 
+		FROM ENROLL e 
+		LEFT OUTER JOIN STUDENT t 
+		ON e.student_id = t.student_id 
+        LEFT OUTER JOIN OPEN o 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+        LEFT OUTER JOIN SUBJECT s 
+        ON e.subject_id = s.subject_id 
+        LEFT OUTER JOIN COURSE c 
+        ON c.course_id = o.course_id 
+		WHERE NOT (e.del_yn ='Y') 
+			<if test='applyStartDay != null and applyEndDay != null'>
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
+			</if>
+			<if test='student != null and student.equals("sdName")'>
+				AND name = #{keyword1} 
+			</if>
+			<if test='student != null and student.equals("sdId")'>
+				AND e.student_id = #{keyword1} 
+			</if>
+			<if test='course != null and course.equals("sj")'>
+				AND s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='course != null and course.equals("cs")'>
+				AND c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+			</if>
+			<if test='state != null and state.equals("apply")'>
+				AND e.state_cd = 'ERL01' 
+			</if>
+			<if test='state != null and state.equals("applyCancel")'>
+				AND e.state_cd = 'ERL02' 
+			</if>
+			<if test='state != null and state.equals("expect")'>
+				AND e.state_cd = 'ERL03' 
+			</if>
+			<if test='state != null and state.equals("progress")'>
+				AND e.state_cd = 'ERL04' 
+			</if>
+			<if test='state != null and state.equals("cancel")'>
+				AND e.state_cd = 'ERL05' 
+			</if>
+			<if test='state != null and state.equals("complete")'>
+				AND e.state_cd = 'ERL06' 
+			</if>
+	</select>
+	
+	<select id="selectSearchListByPage" parameterType="map" resultType="EnrollVO">
+		SELECT rnum, 
+			"enrollId", 
+		    "subjectId", 
+		    "subjectSeq", 
+		    "subjectTitle", 
+		    "courseId", 
+		    "courseTitle", 
+		    "studentId", 
+		    "name", 
+		    "stateCd", 
+		    "completeHours", 
+		    "regId", 
+		    "regDt", 
+		    "modiId", 
+		    "modiDt", 
+		    "delYn", 
+		    "cancelRsEtc", 
+		    "startTime", 
+		    "endTime", 
+		    "startDay", 
+		    "endDay" 
+		FROM (
+			SELECT 
+			rownum as rnum,
+			"enrollId", 
+		    "subjectId", 
+		    "subjectSeq", 
+		    "subjectTitle", 
+		    "courseId", 
+		    "courseTitle", 
+		    "studentId", 
+		    "name",  
+		    "stateCd", 
+		    "completeHours", 
+		    "regId", 
+		    "regDt", 
+		    "modiId", 
+		    "modiDt", 
+		    "delYn", 
+		    "cancelRsEtc", 
+		    "startTime", 
+		    "endTime", 
+		    "startDay", 
+		    "endDay"
+		FROM (
+			SELECT  enroll_id AS "enrollId", 
+				e.subject_id AS "subjectId", 
+				e.subject_seq AS "subjectSeq", 
+				s.subject_title AS "subjectTitle", 
+				c.course_id AS "courseId", 
+                c.course_title AS "courseTitle", 
+				e.student_id AS "studentId", 
+				name AS "name",  
+				e.state_cd AS "stateCd", 
+				complete_hours AS "completeHours", 
+				e.reg_id AS "regId", 
+				e.reg_dt AS "regDt", 
+				e.modi_id AS "modiId", 
+				e.modi_dt AS "modiDt", 
+				e.del_yn AS "delYn", 
+				cancel_rs_etc AS "cancelRsEtc", 
+        		start_time AS "startTime", 
+        		end_time AS "endTime", 
+        		start_day AS "startDay", 
+        		end_day AS "endDay"
+		FROM ENROLL e 
+		LEFT OUTER JOIN STUDENT t 
+		ON e.student_id = t.student_id 
+        LEFT OUTER JOIN OPEN o 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+        LEFT OUTER JOIN SUBJECT s 
+        ON e.subject_id = s.subject_id 
+        LEFT OUTER JOIN COURSE c 
+        ON c.course_id = o.course_id 
+		WHERE NOT (e.del_yn ='Y') 
+			<if test="applyStartDay != '' and applyEndDay != ''">
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
+			</if>
+			<if test='student != null and student.equals("sdName")'>
+				AND name = #{keyword1} 
+			</if>
+			<if test='student != null and student.equals("sdId")'>
+				AND e.student_id = #{keyword1} 
+			</if>
+			<if test='course != null and course.equals("sj")'>
+				AND s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%' 
+			</if>
+			<if test='course != null and course.equals("cs")'>
+				AND c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%' 
+			</if>
+			<if test='state != null and state.equals("apply")'>
+				AND e.state_cd = 'ERL01' 
+			</if>
+			<if test='state != null and state.equals("applyCancel")'>
+				AND e.state_cd = 'ERL02' 
+			</if>
+			<if test='state != null and state.equals("expect")'>
+				AND e.state_cd = 'ERL03' 
+			</if>
+			<if test='state != null and state.equals("progress")'>
+				AND e.state_cd = 'ERL04' 
+			</if>
+			<if test='state != null and state.equals("cancel")'>
+				AND e.state_cd = 'ERL05' 
+			</if>
+			<if test='state != null and state.equals("complete")'>
+				AND e.state_cd = 'ERL06' 
+			</if>
+				)
+			WHERE rownum &lt;= #{endRowNo}
+			)
+			WHERE rnum &gt;= #{startRowNo}
+	</select>
+	
+	
 </mapper>

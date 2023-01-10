@@ -35,10 +35,10 @@
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/subject/subjectBoardList?pageNo=1"/>">선택</option>
-					<option value="<c:url value="/subject/subjectBoardList?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option value="<c:url value="/subject/subjectBoardList?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option value="<c:url value="/subject/subjectBoardList?pageNo=1&rowsPerPage=50"/>">50개</option>
+					<option value="<c:url value="/subject/subjectboardlist?pageNo=1"/>">선택</option>
+					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
+					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
+					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
 				</select>
 			</div>
 		</div>
@@ -86,7 +86,7 @@
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '폐강'}">
-											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
+											<button type="button" class="btn btn-secondary" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행완료'}">
 										</c:when>
@@ -108,20 +108,20 @@
 							<ul class="paging">
 								<li><a href="subjectBoardList?pageNo=1">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
-									<li><a href="subjectBoardList?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+									<li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
 								</c:if>
 								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
-										<li><a href="subjectBoardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<li><a href="subjectBoardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
 									</c:if>
 								</c:forEach>
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<li><a href="subjectBoardList?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+									<li><a href="subjectboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
 								</c:if>
-								<li><a href="subjectBoardList?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+								<li><a href="subjectboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
 							</ul>
 						</div>
 					</td>

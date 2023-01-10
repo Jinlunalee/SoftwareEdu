@@ -44,7 +44,7 @@ public class StudentController {
 	}
 
 	// paging 목록조회
-	@GetMapping("/boardList")
+	@GetMapping("/boardlist")
 	public String studentList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "student");
 		model.addAttribute("menuKOR", "수강생 관리");
