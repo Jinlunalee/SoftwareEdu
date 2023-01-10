@@ -14,8 +14,8 @@
 		
 		<%-- 수강 검색  --%>
 		<div class="search">
-		<span>신청기간</span>
-		<form name="sc-form">
+		<span id="applyperiod">신청기간</span>
+		<form name="sc-form" action="<c:url value='/enroll/searchlist'/>">
 			<input type="date" name="applyStartDay" class="input-date"> ~
 			<input type="date" name="applyEndDay"class="input-date">
 			
@@ -45,7 +45,7 @@
 				<option value="apply">수강 신청</option>
 				<option value="complete">수강 완료</option>
 			</select>
-			<input type="submit" onclick="search()" class="input-button" value="검색">
+			<input type="submit" class="input-button" value="검색">
 			</form>
 		</div>
 		

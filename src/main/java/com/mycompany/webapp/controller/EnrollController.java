@@ -172,7 +172,7 @@ public class EnrollController {
 	
 	// 수강 목록 검색 필터
 	@RequestMapping(value="/searchlist", method=RequestMethod.GET)
-	public String getSearchList(EnrollVO enroll, @RequestParam("student") String student, @RequestParam("course") String course, @RequestParam("state") String state, @RequestParam("keyword1") String keyword1, @RequestParam("keyword2") String keyword2, Model model) {
+	public String getSearchList(EnrollVO enroll, Model model) {
 		
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
@@ -182,11 +182,11 @@ public class EnrollController {
 		
 		enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
 		enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
-		enroll.setStudent(student);
-		enroll.setCourse(course);
-		enroll.setState(state);
-		enroll.setKeyword1(keyword1);
-		enroll.setKeyword2(keyword2);
+//		enroll.setStudent(student);
+//		enroll.setCourse(course);
+//		enroll.setState(state);
+//		enroll.setKeyword1(keyword1);
+//		enroll.setKeyword2(keyword2);
 		
 		System.out.println("jsp 값 확인 : " + enroll.toString());
 		List<EnrollVO> searchList = enrollService.getSearchList(enroll);
@@ -195,7 +195,7 @@ public class EnrollController {
 		return "enroll/search";
 	}
 	
-	//엑셀 파일 다운로드
+	// 수강 엑셀 파일 다운로드
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public void downloadEnroll(HttpServletResponse response) throws IOException {
 		Workbook workbook = new HSSFWorkbook();

@@ -147,8 +147,7 @@
         ON e.subject_id = s.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
-		WHERE 1=1 AND NOT (e.del_yn ='Y') 
-		
+		WHERE 1 = 1 AND NOT (e.del_yn ='Y') 
 			<if test='applyStartDay != null and applyEndDay != null'>
 				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
 			</if>
