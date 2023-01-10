@@ -377,7 +377,7 @@ $('input.timepicker').timepicker({
 });
 
 
-/*시수에 맞춰 endDay 설정해주기, startTime, endTime변환시*/
+/*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
 	const startDay = document.getElementById("startDay").value;
 		var startDay2 = new Date(startDay);
@@ -413,7 +413,7 @@ function calcEndDay(){
 
 			startDay2.setDate(startDay2.getDate() + days);
 			
-			endDay.val = '';
+			endDay.value = '';
 			endDay.value = startDay2.toJSON().substring(0,10);
 
 			//일수 출력
@@ -421,13 +421,6 @@ function calcEndDay(){
 		}
 }
 
-
-/*연수시작기간 수정시, 끝나는 기간도 같이 수정*/
-function updateTime(){
-	const startTime = document.getElementById("startTime");
-	// const endTime = document.getElementById("endTime");
-	
-}
 
 /*신청기간 지정*/
 function selectRecruitDay(){
@@ -446,6 +439,7 @@ function selectRecruitDay(){
 		recruitEndDay.value = ajaxRecruitEnd;
 		recruitEndDay.min = recruitStartDay.value;
 		recruitEndDay.max = ajaxStart;  //같은과정 연수 시작하기 전
+		console.log(recruitStartDay.max);
 
 		recruitStartDay.onchange();
 		recruitEndDay.onchange();
@@ -489,6 +483,4 @@ function inputState(){
 	}
 	console.log(state.value);
 }
-
-
 

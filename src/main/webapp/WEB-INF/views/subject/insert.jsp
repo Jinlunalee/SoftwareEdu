@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/details.css'/>" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
 <script type="text/javascript">
 /* 문항 개수를 입력 받아 추가 */
 const changeQuestionNumber = function(value) {
@@ -90,9 +92,9 @@ function changeEverything(i) {
 			<tr>
 				<td> 연수시간</td>
 				<td> <!-- 30분단위로 입력(초) -->
-					<input type="time" name="startTime" id="startTime" min="09:00" max="24:00" step="1800" onchange="calcEndDay()"> 
+					<input class="timepicker" name="startTime" id="startTime"> 
 					~ 
-					<input type="time" name="endTime" id="endTime" max="24:00" step="1800" onchange="calcEndDay()"> 
+					<input class="timepicker" name="endTime" id="endTime">
 				</td>
 			</tr>
 			<tr>
@@ -202,6 +204,7 @@ function changeEverything(i) {
 </div>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	<script type="text/javascript">
 	/* 모달창 열기 */
