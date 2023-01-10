@@ -67,7 +67,7 @@ public class SubjectController {
 	}
 	
 	// paging 개설 과정 목록 조회 (course)
-	@GetMapping("/courseBoardList")
+	@GetMapping("/courseboardlist")
 	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
@@ -105,7 +105,7 @@ public class SubjectController {
 	}
 	
 	// paging 강좌 목록 조회 (open)
-	@GetMapping("/subjectBoardList")
+	@GetMapping("/subjectboardlist")
 	public String subjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");

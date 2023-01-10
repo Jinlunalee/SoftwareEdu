@@ -30,10 +30,10 @@
 			<div class="view">
 			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-				<option value="<c:url value="/subject/courseBoardList?pageNo=1"/>">선택</option>
-				<option value="<c:url value="/subject/courseBoardList?pageNo=1&rowsPerPage=10"/>">10개</option>
-				<option value="<c:url value="/subject/courseBoardList?pageNo=1&rowsPerPage=30"/>">30개</option>
-				<option value="<c:url value="/subject/courseBoardList?pageNo=1&rowsPerPage=50"/>">50개</option>
+				<option value="<c:url value="/subject/courseboardlist?pageNo=1"/>">선택</option>
+				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
+				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
+				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
 			</select>
 			</div>
 		</div>
@@ -93,24 +93,24 @@
 					<td>
 						<div id="paging">
 							<ul class="paging">
-								<li><a href="courseBoardList?pageNo=1">처음</a></li>
+								<li><a href="courseboardlist?pageNo=1">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
-									<li><a href="courseBoardList?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+									<li><a href="courseboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
-										<li><a href="courseBoardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<li><a href="courseBoardList?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<li><a href="courseBoardList?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+									<li><a href="courseboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
 								</c:if>
-								<li><a href="courseBoardList?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+								<li><a href="courseboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
 							</ul>
 						</div>
 					</td>

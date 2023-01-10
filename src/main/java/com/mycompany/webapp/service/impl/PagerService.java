@@ -58,6 +58,30 @@ public class PagerService implements IPagerService {
 		return pagerRepository.selectEnrollListByPage(pager);
 	}
 
+	@Override
+	public int getCountSearchRow(EnrollVO enroll) {
+		// TODO Auto-generated method stub
+		return pagerRepository.getCountSearchRow(enroll);
+	}
+
+	@Override
+	public List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager) {
+		String applyStartDay = enroll.getApplyStartDay();
+		String applyEndDay = enroll.getApplyEndDay();
+		String student = enroll.getStudent();
+		String course = enroll.getCourse();
+		String state = enroll.getState();
+		String keyword1 = enroll.getKeyword1();
+		String keyword2 = enroll.getKeyword2();
+		
+		int endRowNo = pager.getEndRowNo();
+		int startRowNo = pager.getStartRowNo();
+		
+		return pagerRepository.selectSearchListByPage(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
+	}
+	
+	
+
 
 
 }
