@@ -1,7 +1,6 @@
 package com.mycompany.webapp.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
@@ -100,9 +100,24 @@ public class EnrollService implements IEnrollService{
 	}
 
 	@Override
-	public List<EnrollVO> getSearchList(EnrollVO enroll) {
-		System.out.println("서비스 : " + enrollRepository.getSearchList(enroll));
-		return enrollRepository.getSearchList(enroll);
+	public List<EnrollVO> getSearchList(EnrollVO enroll, Pager pager) {
+		String applyStartDay = enroll.getApplyStartDay();
+		String applyEndDay = enroll.getApplyEndDay();
+		String student = enroll.getStudent();
+		String course = enroll.getCourse();
+		String state = enroll.getState();
+		String keyword1 = enroll.getKeyword1();
+		String keyword2 = enroll.getKeyword2();
+		
+		int endRowNo = pager.getEndRowNo();
+		int startRowNo = pager.getStartRowNo();
+		
+		System.out.println("서비스 : " + enrollRepository.getSearchList(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2));
+		return enrollRepository.getSearchList(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
+	}
+	
+	public int getCountSearchRow(EnrollVO enroll) {
+		return enrollRepository.getCountSearchRow(enroll);
 	}
 	
 	

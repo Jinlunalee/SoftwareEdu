@@ -1,7 +1,6 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -9,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 
 @Mapper
@@ -28,7 +28,8 @@ public interface IEnrollRepository {
 	void addEnroll(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("maxEnrollId") int maxEnrollId);
 //	void addCourse(Map<String, Object> addCourse, String studnetId, String maxEnroll2);
 	int getMaxEnrollId();
-	List<EnrollVO> getSearchList(EnrollVO enroll);
+	List<EnrollVO> getSearchList(@Param("applyStartDay") String applyStartDay, @Param("applyEndDay") String applyEndDay, @Param("student") String student, @Param("course") String course, @Param("state") String state, @Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("keyword1") String keyword1, @Param("keyword2") String keyword2);
 	int getSubjectCountByCourse(String courseId);
 	List<OpenVO> getSubjectInfoByCourse(String courseId);
+	int getCountSearchRow(EnrollVO enroll);
 }

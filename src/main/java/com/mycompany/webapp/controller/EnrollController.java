@@ -84,6 +84,38 @@ public class EnrollController {
 		
 		return "enroll/list";
 	}
+	
+	// 수강 목록 검색 필터
+		@RequestMapping(value="/searchlist", method=RequestMethod.GET)
+		public String getSearchList(EnrollVO enroll, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+			
+			model.addAttribute("menu", "enroll");
+			model.addAttribute("menuKOR", "수강 관리");
+			
+			List<CommonCodeVO> cancelList = enrollService.getCancelList();
+			model.addAttribute("cancelList", cancelList);
+			
+			int totalRows = enrollService.getCountSearchRow(enroll);
+			
+			Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+			
+			enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
+			enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
+//			enroll.setStudent(student);
+//			enroll.setCourse(course);
+//			enroll.setState(state);
+//			enroll.setKeyword1(keyword1);
+//			enroll.setKeyword2(keyword2);
+			
+			System.out.println("jsp 값 확인 : " + enroll.toString());
+			List<EnrollVO> searchList = enrollService.getSearchList(enroll, pager);
+			//System.out.println("컨트롤러 결과 값 : " + searchList);
+			model.addAttribute("pager", pager);
+			model.addAttribute("boardList", searchList);
+			model.addAttribute("boardListSize", searchList.size());
+			
+			return "enroll/search";
+		}
 
 	
 	// 입력
@@ -168,31 +200,6 @@ public class EnrollController {
 		System.out.println(courseId);
 		enrollService.addCourse(studentId, courseId);
 		return "redirect:/enroll/list";
-	}
-	
-	// 수강 목록 검색 필터
-	@RequestMapping(value="/searchlist", method=RequestMethod.GET)
-	public String getSearchList(EnrollVO enroll, Model model) {
-		
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		
-		List<CommonCodeVO> cancelList = enrollService.getCancelList();
-		model.addAttribute("cancelList", cancelList);
-		
-		enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
-		enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
-//		enroll.setStudent(student);
-//		enroll.setCourse(course);
-//		enroll.setState(state);
-//		enroll.setKeyword1(keyword1);
-//		enroll.setKeyword2(keyword2);
-		
-		System.out.println("jsp 값 확인 : " + enroll.toString());
-		List<EnrollVO> searchList = enrollService.getSearchList(enroll);
-		//System.out.println("컨트롤러 결과 값 : " + searchList);
-		model.addAttribute("boardList", searchList);
-		return "enroll/search";
 	}
 	
 	// 수강 엑셀 파일 다운로드
