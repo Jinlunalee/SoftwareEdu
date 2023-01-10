@@ -99,7 +99,7 @@
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
     		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
-    		content = #{content}, file_id=#{fileId}
+    		content = #{content}, state_cd = #{state}, file_id=#{fileId}
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
@@ -223,5 +223,11 @@
 		set state_cd = 'OPN07' 
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
 	</update>
+	
+	<select id="selectSubjectByCourseId" parameterType="String" resultType="SubjectVO">
+		select subject_id as "subjectId"
+		from open 
+		where course_id = #{courseId}
+	</select>
 	
 </mapper>

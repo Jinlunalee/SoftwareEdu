@@ -36,4 +36,6 @@ public interface ISubjectRepository {
 	void clickDeleteUploadFile(String fileId);
 	
 	int closeSubject(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);//폐강버튼 눌렀을 때 
+	
+	List<SubjectVO> selectSubjectByCourseId(String courseId); // 한과정안에 동일한 강좌 못들어가도록하기위해 과정안의 강좌를 가져옴.
 }

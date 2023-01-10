@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
 <div class="card m-2">
 	<div class="card-header">  
@@ -39,31 +40,38 @@
 			<tbody>
 			<tr>
 				<td rowspan="8">
-					<c:if test="${!empty subject.fileName}">
-						<c:set var="len" value="${fn:length(subject.fileName)}"/>
-						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
-						<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
-							<img class="detail_img" src='<c:url value="/file/${subject.fileId}"/>'><br>
-						</c:if>
-					</c:if>
-					<!-- img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/-->
+					<c:choose>
+						<c:when test="${!empty subject.fileName}">
+							<c:set var="len" value="${fn:length(subject.fileName)}"/>
+							<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
+							<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
+								<img class="detail_img" src='<c:url value="/subject/file/${subject.fileId}"/>'><br>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<img class="detail_img" src="">
+						</c:otherwise>
+					</c:choose>					
 				</td>
 				<td> 연수기간(일수)</td>
 				<td> 
+					<input type="hidden" name="hours" id="hours" value="${subject.hours}">
 					<fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/>
-					<input type="date" name="startDay" id="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>"> 
+					<input type="date" name="startDay" id="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>" onclick="updateTime()"> 
 					~ 
 					<fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/>
-					<input type="date" name="endDay" id="endDay" value="<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>">
+					<input type="date" name="endDay" id="endDay" value="<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>" readonly>
+					<span id="printDay"></span>
+					<span id="printHours"></span>
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
 				<td> <fmt:parseDate value="${subject.startTime}" var="startTime" pattern="HHmm"/>
-					<input type="time" name="startTime" id="startTime" value="<fmt:formatDate value="${startTime}" pattern="HH:mm"/>"> 
+					<input class="timepicker" name="startTime" id="startTime" value="<fmt:formatDate value="${startTime}" pattern="HH:mm"/>"> 
 					~
 					<fmt:parseDate value="${subject.endTime}" var="endTime" pattern="HHmm"/>
-					<input type="time" name="endTime" id="endTime" value="<fmt:formatDate value="${endTime}" pattern="HH:mm"/>">
+					<input class="timepicker" name="endTime" id="endTime" value="<fmt:formatDate value="${endTime}" pattern="HH:mm"/>">
 				</td>
 			</tr>
 			<tr>
@@ -77,7 +85,7 @@
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td> ${subject.comnCdTitle}
+				<td> ${subject.level}
 					<c:if test="${not empty subject.levelEtc}">(${subject.levelEtc})</c:if>
 				</td>
 			</tr>
@@ -114,7 +122,7 @@
 		<div class="submit-btn">
 			<input type="hidden" name="fileId" value="${subject.fileId}">
 			<input type="hidden" name="courseId" value="${subject.courseId}">
-			<input type="hidden" name="catCourse">
+			<input type="hidden" name="catCourse" value>
 			<input type="hidden" name="state" id="state" value="${subject.state}">
 			<input type="submit" value="저장">
 		</div>
@@ -123,6 +131,7 @@
 </div>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

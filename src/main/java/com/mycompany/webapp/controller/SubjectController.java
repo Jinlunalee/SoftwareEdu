@@ -2,6 +2,7 @@ package com.mycompany.webapp.controller;
 
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -224,9 +225,9 @@ public class SubjectController {
 	}
 	
 	// 개설 강좌 논리 삭제 (open)
-	@RequestMapping(value="/del/{subjectId}/{subjectSeq}/{fileId}")
+	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
-		logger.info("del/open:"+fileId);
+		logger.info("del/open/:"+subjectId+"/"+subjectSeq+"/"+fileId);
 		// enroll 논리 삭제
 		enrollService.clickDeleteEnrollByOpen(subjectId, subjectSeq);
 		// answer 논리 삭제
@@ -296,13 +297,14 @@ public class SubjectController {
 	
 	// 개설 강좌 입력 폼 비동기 출력
 	@RequestMapping(value="/ajax", method=RequestMethod.GET)
-	public @ResponseBody List<SubjectVO> ajaxTest(String courseId, String subjectId) {
+	@ResponseBody
+	public Map<String, Object> ajaxTest(String courseId, String subjectId) {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
 		return subjectService.infoSubjectCourse(courseId, subjectId);
 	}
 	
 	//개설강좌 폐강처리
-	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}/{fileId}")
+	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}")
 	public String closeSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
 		subjectService.closeSubject(subjectId, subjectSeq);
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
