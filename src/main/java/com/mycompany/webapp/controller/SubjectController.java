@@ -314,6 +314,8 @@ public class SubjectController {
 	public String closeSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {
 		subjectService.closeSubject(subjectId, subjectSeq);
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
+		//개설강좌가 폐강 되면 수강생 수강취소도 함께
+		
 		return "redirect:/subject/subjectlist";
 	}
 	
