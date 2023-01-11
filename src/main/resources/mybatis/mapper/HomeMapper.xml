@@ -2,6 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.IHomeRepository">
 	
-
-
+	<select id="selectSubjectList" parameterType="String" resultType="SubjectVO">	
+		select 
+			open.subject_id as "subjectId", 
+			subject_seq as "subjectSeq",
+			subject_title as "subjectTitle",
+			support_yn as "supportYn", 
+			days as "days", 
+			hours as "hours", 
+			level_cd as "level", 
+			level_etc as "levelEtc", 
+			subject.cost as "cost",
+			open.course_id as "courseId", 
+			course.course_title as "courseTitle", 
+			start_time as "startTime",
+			end_time as "endTime",
+			start_day as "startDay",
+			end_day as "endDay", 
+			recruit_start_day as "recruitStartDay", 
+			recruit_end_day as "recruitEndDay",
+			recruit_people as "recruitPeople",
+			state_cd as "state",
+			comn_cd_title as "comnCdTitle",
+			file_id as "fileId",
+            subject.cat_cd as "catCd"
+		from open 
+				left join subject on open.subject_id = subject.subject_id
+        		left join course on open.course_id = course.course_id
+        		left join common_code on open.state_cd = common_code.comn_cd
+        where del_yn = 'N' AND subject.cat_cd=#{catSubject}
+        order by start_day, end_day
+	</select>
+	
+	
+	
+	
+	<select id="selectCourseList" parameterType="String" resultType="SubjectVO">
+		select DISTINCT
+			open.course_id as "courseId", 
+			course_title as "courseTitle",
+			min(start_day) over (partition by open.course_id) as "startDay",
+    		max(end_day) over (partition by open.course_id) as "endDay",
+			sum(cost) over (partition by open.course_id) as "cost",
+			recruit_start_day as "recruitStartDay", 
+			recruit_end_day as "recruitEndDay",
+			state_cd as "state",
+			comn_cd_title as "comnCdTitle"
+		from open 
+				left join subject on open.subject_id = subject.subject_id
+        		left join course on open.course_id = course.course_id
+        		left join common_code on open.state_cd = common_code.comn_cd
+        where open.course_id IS NOT NULL and del_yn = 'N' AND course.cat_cd = #{catCourse}
+	</select>
+	
+	
+	
 </mapper>

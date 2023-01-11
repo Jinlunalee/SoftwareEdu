@@ -1,7 +1,28 @@
 package com.mycompany.webapp.service.impl;
 
-import com.mycompany.webapp.service.IHomeService;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mycompany.webapp.dao.IHomeRepository;
+import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.IHomeService;
+@Service
 public class HomeService implements IHomeService {
+	@Autowired
+	IHomeRepository homeRepository;
+	
+	@Override
+	public List<SubjectVO> selectSubjectList(String catSubject) {
+
+		return homeRepository.selectSubjectList(catSubject); 
+	}
+
+	@Override
+	public List<SubjectVO> selectCourseList(String catCourse) {
+		return homeRepository.selectCourseList(catCourse); 
+	}
+
 
 }

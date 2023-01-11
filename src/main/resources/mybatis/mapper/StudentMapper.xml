@@ -15,7 +15,7 @@
 	
 	<select id="getDataList" resultType="StudentVO">
 
-        select
+	select
         student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
         name as "name",
         round(complete_hours/hours * 100) as "rate",
@@ -29,8 +29,7 @@
 	where subject.support_yn = 'Y' AND enroll.state_cd in('ERL04', 'ERL05' ,'ERL06')
 
 	<!-- 
-	
-	
+
 	  select
        	student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
      	name as "name",
@@ -42,17 +41,9 @@
 	left join open on open.subject_id = enroll.subject_id
     left join subject on subject.subject_id = enroll.subject_id
 	where subject.support_yn = 'Y' AND enroll.state_cd in('ERL04', 'ERL05' ,'ERL06')
-	
-	
-	
-	
+
 	 -->
-	
-	
-	
-	
-	
-	
+
 	</select>
 	
 	
