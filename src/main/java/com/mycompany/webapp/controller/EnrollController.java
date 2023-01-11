@@ -42,20 +42,20 @@ public class EnrollController {
 	@Autowired
 	IPagerService pagerService;
 	
-	//목록조회
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String getEnrollList(Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		
-		List<EnrollVO> boardList = enrollService.getEnrollList();
-		model.addAttribute("boardList", boardList);
-		
-		List<CommonCodeVO> cancelList = enrollService.getCancelList();
-		model.addAttribute("cancelList", cancelList);
-		
-		return "enroll/list";
-	}
+//	//목록조회
+//	@RequestMapping(value="/list", method=RequestMethod.GET)
+//	public String getEnrollList(Model model) {
+//		model.addAttribute("menu", "enroll");
+//		model.addAttribute("menuKOR", "수강 관리");
+//		
+//		List<EnrollVO> boardList = enrollService.getEnrollList();
+//		model.addAttribute("boardList", boardList);
+//		
+//		List<CommonCodeVO> cancelList = enrollService.getCancelList();
+//		model.addAttribute("cancelList", cancelList);
+//		
+//		return "enroll/list";
+//	}
 	
 	// paging 목록조회
 	@GetMapping("/boardlist")
