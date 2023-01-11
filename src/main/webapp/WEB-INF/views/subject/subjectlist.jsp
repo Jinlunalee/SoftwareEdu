@@ -23,8 +23,6 @@
         </div>
 		<!-- 검색끝 -->
 		
-		<div class="title">과정명:웹 개발자 과정</div>
-		
 		<!-- list top -->
 		<div class="list_top">
 			<div class="cnt">
@@ -56,6 +54,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
+					<th>입력날짜</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -76,6 +75,7 @@
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td>${board.cost}</td>
 							<td>${board.comnCdTitle}</td>
+							<td>${board.regDt}</td>
 							<td>
 								<div>
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
