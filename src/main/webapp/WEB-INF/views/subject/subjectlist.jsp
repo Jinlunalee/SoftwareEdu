@@ -48,6 +48,7 @@
 		<table class="list">
 			<thead>
 				<tr>
+					<th>분류</th>
 					<th>강좌아이디</th>
 					<th>과정명</th>
 					<th>강좌명</th>
@@ -63,6 +64,7 @@
 				<c:if test="${boardListSize ne 0}">
 					<c:forEach var="board" items="${boardList}">
 						<tr>
+							<td>${board.catSubjectTitle}</td>
 							<td>${board.subjectId}</td>
 							<td>${board.courseTitle}</td>
 							<td>
@@ -78,9 +80,9 @@
 								<div>
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
 									<c:choose>
-										<c:when test="${board.comnCdTitle eq '모집예정'}">
+										<c:when test="${board.comnCdTitle eq ('모집예정' or '모집중' or '모집마감') }">
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
+											<button type="button" class="btn btn-secondary" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행중'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>

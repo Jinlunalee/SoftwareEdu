@@ -3,5 +3,9 @@
 <mapper namespace="com.mycompany.webapp.dao.IHomeRepository">
 	
 
-
+	<select id="getComnCdTitle" parameterType="String" resultType="String">
+		select comn_cd_title
+		from common_code
+		where comn_cd=#{comnCd}
+	</select>
 </mapper>
