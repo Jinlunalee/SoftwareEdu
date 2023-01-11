@@ -33,13 +33,13 @@ public class PagerService implements IPagerService {
 	}
 
 	@Override
-	public int getCountOpenCourseRow() {
-		return pagerRepository.getCountOpenCourseRow();
+	public int getCountOpenCourseRow(String catCourse) {
+		return pagerRepository.getCountOpenCourseRow(catCourse);
 	}
 
 	@Override
-	public List<SubjectVO> selectOpenCourseListByPage(Pager pager) {
-		List<SubjectVO> boardList = pagerRepository.selectOpenCourseListByPage(pager);
+	public List<SubjectVO> selectOpenCourseListByPage(Pager pager, String catCourse) {
+		List<SubjectVO> boardList = pagerRepository.selectOpenCourseListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catCourse);
 		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
 		for(SubjectVO subjectVo : boardList) {
 			subjectVo.setCatCourseTitle(homeRepository.getComnCdTitle(subjectVo.getCatCourse()));
@@ -48,13 +48,13 @@ public class PagerService implements IPagerService {
 	}
 
 	@Override
-	public int getCountOpenSubjectRow() {
-		return pagerRepository.getCountOpenSubjectRow();
+	public int getCountOpenSubjectRow(String catSubject) {
+		return pagerRepository.getCountOpenSubjectRow(catSubject);
 	}
 
 	@Override
-	public List<SubjectVO> selectOpenSubjectListByPage(Pager pager) {
-		List<SubjectVO> boardList = pagerRepository.selectOpenSubjectListByPage(pager);
+	public List<SubjectVO> selectOpenSubjectListByPage(Pager pager, String catSubject) {
+		List<SubjectVO> boardList = pagerRepository.selectOpenSubjectListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catSubject);
 		// catSubject 공통코드로 catSubjectTitle 가져와서 set하기
 		for(SubjectVO subjectVo : boardList) {
 			subjectVo.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVo.getCatSubject()));
@@ -97,7 +97,13 @@ public class PagerService implements IPagerService {
 		int endRowNo = pager.getEndRowNo();
 		int startRowNo = pager.getStartRowNo();
 		
-		return pagerRepository.selectSearchListByPage(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
+		List<EnrollVO> boardList = pagerRepository.selectSearchListByPage(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
+		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
+		for(EnrollVO enrollVo : boardList) {
+			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
+		}
+		return boardList;
 	}
 	
 	
