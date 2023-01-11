@@ -255,11 +255,14 @@
 	
 	<script>
 		function del(studentId, subjectId, subjectSeq) {
-		
+			event.preventDefault();
 		if(confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
-				type : "GET", 
-				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
+				type : "GET",
+				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
+				success : function(data) {
+					document.location.href = document.location.href;
+				}
 			})
 			
 		} else {
@@ -270,9 +273,13 @@
 	
 	<script>
 			function approval(studentId, subjectId, subjectSeq) {
+				event.preventDefault();
 				if(confirm('수강 신청을 승인하시겠습니까?')) {
 					$.ajax({
-						url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq
+						url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
+						success : function(data) {
+							document.location.href = document.location.href;
+						}
 					})
 				}
 				else{
@@ -280,7 +287,7 @@
 			}
 	</script>
 	
-	<script>
+	<%--<script>
 			function getHours(enrollId) {
 				var ch = $(".ch");
 					$.ajax({
@@ -304,7 +311,7 @@
 				}
 			})
 		}
-	</script>
+	</script>  --%>
 </div>
 
 
