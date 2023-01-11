@@ -41,7 +41,8 @@
 		    "recruitStartDay", 
 		    "recruitEndDay",
 		    "state",
-		    "comnCdTitle"
+		    "comnCdTitle",
+		    "catCourse"
 		from (
 		    select 
 		        rownum as rnum,
@@ -53,7 +54,8 @@
 		        "recruitStartDay", 
 		        "recruitEndDay",
 		        "state",
-		        "comnCdTitle"
+		        "comnCdTitle",
+		        "catCourse"
 		    from (
 		        select DISTINCT
 					open.course_id as "courseId", 
@@ -64,7 +66,8 @@
 					recruit_start_day as "recruitStartDay", 
 					recruit_end_day as "recruitEndDay",
 					state_cd as "state",
-					comn_cd_title as "comnCdTitle"
+					comn_cd_title as "comnCdTitle",
+					course.cat_cd as "catCourse"
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
@@ -103,7 +106,8 @@
 		    "recruitPeople",
 		    "state",
 		    "comnCdTitle",
-		    "fileId"
+		    "fileId",
+		    "catSubject"
 		from (
 		    select
 		        rownum as rnum,
@@ -127,7 +131,8 @@
 		        "recruitPeople",
 		        "state",
 		        "comnCdTitle",
-				"fileId"
+				"fileId",
+				"catSubject"
 		    from (
 		        select 
 					open.subject_id as "subjectId", 
@@ -150,7 +155,8 @@
 					recruit_people as "recruitPeople",
 					state_cd as "state",
 					comn_cd_title as "comnCdTitle",
-					file_id as "fileId"
+					file_id as "fileId",
+					subject.cat_cd as "catSubject"
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id

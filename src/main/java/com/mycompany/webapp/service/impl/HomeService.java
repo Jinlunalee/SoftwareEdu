@@ -1,5 +1,4 @@
 package com.mycompany.webapp.service.impl;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +23,9 @@ public class HomeService implements IHomeService {
 		return homeRepository.selectCourseList(catCourse); 
 	}
 
+	@Override
+	public String getComnCdTitle(String comnCd) {
+		return homeRepository.getComnCdTitle(comnCd);
+	}
 
 }
