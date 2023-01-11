@@ -28,7 +28,7 @@
 		<!-- list top -->
 		<div class="list_top">
 			<div class="cnt">
-				전체목록 <b class="basic_txt_color">${boardListSize}</b>개, 
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
 				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 			</div>
 
@@ -110,20 +110,20 @@
 							<ul class="paging">
 								<li><a href="subjectBoardList?pageNo=1">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
-									<li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+									<li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">이전</a></li>
 								</c:if>
 								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
-										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">${i}</a></li>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">${i}</a></li>
 									</c:if>
 								</c:forEach>
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<li><a href="subjectboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+									<li><a href="subjectboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">다음</a></li>
 								</c:if>
-								<li><a href="subjectboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+								<li><a href="subjectboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">맨끝</a></li>
 							</ul>
 						</div>
 					</td>

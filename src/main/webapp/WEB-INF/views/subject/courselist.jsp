@@ -24,7 +24,7 @@
 		<!-- list top -->
 		<div class="list_top">
 			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${boardListSize}</b>개, 
+			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
 			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 			</div>
 			<div class="view">
@@ -97,22 +97,22 @@
 							<ul class="paging">
 								<li><a href="courseboardlist?pageNo=1">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
-									<li><a href="courseboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+									<li><a href="courseboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">이전</a></li>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
-										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">${i}</a></li>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+										<li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">${i}</a></li>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<li><a href="courseboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+									<li><a href="courseboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">다음</a></li>
 								</c:if>
-								<li><a href="courseboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+								<li><a href="courseboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">맨끝</a></li>
 							</ul>
 						</div>
 					</td>

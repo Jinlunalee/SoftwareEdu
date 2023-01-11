@@ -26,11 +26,22 @@
 		WHERE rnum &gt;= #{startRowNo}
 	</select>
 	
-	<select id="getCountOpenCourseRow" resultType="int">
-		SELECT count(distinct course_id) FROM open where course_id IS NOT NULL
+	<select id="getCountOpenCourseRow" parameterType="String" resultType="int">
+		SELECT count(distinct open.course_id)
+		FROM open
+		LEFT JOIN course ON open.course_id = course.course_id
+		WHERE open.course_id is not null
+		<choose>
+			<when test="catCourse != 'all'">
+				AND del_yn = 'N' AND course.cat_cd = #{catCourse}
+			</when>
+			<when test="catCourse = 'all'">
+				AND del_yn = 'N'
+			</when>
+		</choose>
 	</select>
 
-	<select id="selectOpenCourseListByPage" parameterType="Pager" resultType="SubjectVO">
+	<select id="selectOpenCourseListByPage" parameterType="map" resultType="SubjectVO">
 		select
 		    rnum,
 		    "courseId", 
@@ -73,17 +84,35 @@
 		        		left join course on open.course_id = course.course_id
 		        		left join common_code on open.state_cd = common_code.comn_cd
 		        where open.course_id IS NOT NULL
+     			<choose>
+					<when test="catCourse != 'all'">
+						AND del_yn = 'N' AND course.cat_cd = #{catCourse}
+					</when>
+					<when test="catCourse = 'all'">
+						AND del_yn = 'N'
+					</when>
+				</choose>
 		  )
 		  WHERE rownum &lt;= #{endRowNo}
 		)
 		WHERE rnum &gt;= #{startRowNo}
 	</select>	
 	
-	<select id="getCountOpenSubjectRow" resultType="int">
-		SELECT count(*) FROM open
+	<select id="getCountOpenSubjectRow" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM open
+		LEFT JOIN subject ON open.subject_id = subject.subject_id
+    	<choose>
+			<when test="catSubject != 'all'">
+				WHERE del_yn = 'N' AND subject.cat_cd=#{catSubject}
+			</when>
+			<when test="catSubject = 'all'">
+				WHERE del_yn = 'N'
+			</when>
+		</choose>
 	</select>
 
-	<select id="selectOpenSubjectListByPage" parameterType="Pager" resultType="SubjectVO">
+	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="SubjectVO">
 		select
 		    rnum, 
 		    "subjectId", 
@@ -161,6 +190,14 @@
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
 		        		left join common_code on open.state_cd = common_code.comn_cd
+		        <choose>
+					<when test="catSubject != 'all'">
+						WHERE del_yn = 'N' AND subject.cat_cd=#{catSubject}
+					</when>
+					<when test="catSubject = 'all'">
+						WHERE del_yn = 'N'
+					</when>
+				</choose>
 		  )
 		  WHERE rownum &lt;= #{endRowNo}
 		)
@@ -279,10 +316,10 @@
 				AND e.student_id = #{keyword1} 
 			</if>
 			<if test='course != null and course.equals("sj")'>
-				AND s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+				AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')
 			</if>
 			<if test='course != null and course.equals("cs")'>
-				AND c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%'
+				AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')
 			</if>
 			<if test='state != null and state.equals("apply")'>
 				AND e.state_cd = 'ERL01' 
@@ -325,7 +362,8 @@
 		    "startTime", 
 		    "endTime", 
 		    "startDay", 
-		    "endDay" 
+		    "endDay",
+		    "openStateCd"
 		FROM (
 			SELECT 
 			rownum as rnum,
@@ -348,7 +386,8 @@
 		    "startTime", 
 		    "endTime", 
 		    "startDay", 
-		    "endDay"
+		    "endDay",
+		    "openStateCd"
 		FROM (
 			SELECT  enroll_id AS "enrollId", 
 				e.subject_id AS "subjectId", 
@@ -369,7 +408,8 @@
         		start_time AS "startTime", 
         		end_time AS "endTime", 
         		start_day AS "startDay", 
-        		end_day AS "endDay"
+        		end_day AS "endDay",
+        		o.state_cd as "openStateCd"
 		FROM ENROLL e 
 		LEFT OUTER JOIN STUDENT t 
 		ON e.student_id = t.student_id 
