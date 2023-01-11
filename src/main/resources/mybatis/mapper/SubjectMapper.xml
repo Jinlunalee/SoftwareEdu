@@ -87,13 +87,6 @@
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
-	<select id="recruitTotalPeople" parameterType="map" resultType="int">
-		select count(*) 
-		from enroll 
-		where enroll.subject_id=#{subjectId} and enroll.subject_seq=#{subjectSeq} 
-			and enroll.state_cd=#{state}
-	</select>
-	
 	<update id="updateSubject" parameterType="SubjectVO">
 		update open
 		set 

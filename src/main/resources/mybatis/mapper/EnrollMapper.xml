@@ -181,4 +181,11 @@
 		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07')
 	</update>
 	
+	<select id="recruitTotalPeople" parameterType="map" resultType="int">
+		select count(*) 
+		from enroll 
+		where subject_id=#{subjectId} and subject_seq=#{subjectSeq} 
+			and state_cd=#{state}
+	</select>
+	
 </mapper>

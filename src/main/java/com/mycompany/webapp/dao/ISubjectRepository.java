@@ -14,7 +14,7 @@ public interface ISubjectRepository {
 	List<SubjectVO> selectSubjectList(); // 개설 강좌 목록 조회
 	
 	SubjectVO selectSubjectDetails(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); // 강좌 상세보기
-	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
+//	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
 	
 	int updateSubject(SubjectVO subject); // 과정/강좌 수정
 	int updateFileData(UploadfileVO file); // 과정/강좌 수정 첨부파일
@@ -32,8 +32,8 @@ public interface ISubjectRepository {
 	int checkOpenCourse(String courseId); // 강좌개설시, 같은 과정이 존재하는지 open테이블에서 확인(최초개설인지 개설되어있는 과정인지 확인)
 	
 	int updateRecruitSameCourse(SubjectVO subject); //같은 과정 신청일자 변경
-	void clickDeleteOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
-	void clickDeleteUploadFile(String fileId);
+	void clickDeleteOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); //논리 삭제
+	void clickDeleteUploadFile(String fileId); //논리 삭제
 	
 	int closeSubject(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);//폐강버튼 눌렀을 때 
 	

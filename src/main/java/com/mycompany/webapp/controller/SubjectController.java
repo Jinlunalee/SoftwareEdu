@@ -139,7 +139,7 @@ public class SubjectController {
 		model.addAttribute("questionSet", questionSet);
 
 		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
-		int totalPeople = subjectService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject에 있는 state가 아니라 enroll에 있는거 가져와야함
+		int totalPeople = enrollService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject의 상태에 따라 카운드할 수강생 상태가 달라짐
 		model.addAttribute("subject", subject);
 		model.addAttribute("totalPeople", totalPeople);
 		
