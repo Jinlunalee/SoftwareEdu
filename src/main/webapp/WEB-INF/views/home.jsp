@@ -83,9 +83,9 @@ height: 299px;
  
 <div class="main-first-row"> 
 	<div class="main-first-row-btn first-btn"><a href="<c:url value='/subject/subjectlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_course.jpg'/>" style="display:block;" />강좌</a></div>
-	<div class="main-first-row-btn second-btn"><a href="<c:url value='/student/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
-	<div class="main-first-row-btn third-btn"><a href="<c:url value='/enroll/list'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
-	<div class="main-first-row-btn fourth-btn"><a href="<c:url value='/survey/list'/>"><img id="first_image_forth" src="<c:url value='/resources/images/main/main_survey.jpg'/>" style="display:block;" />강의 만족도 조사</a></div>
+	<div class="main-first-row-btn second-btn"><a href="<c:url value='/student/boardlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
+	<div class="main-first-row-btn third-btn"><a href="<c:url value='/enroll/boardlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
+	<div class="main-first-row-btn fourth-btn"><a href="<c:url value='/survey/summary'/>"><img id="first_image_forth" src="<c:url value='/resources/images/main/main_survey.jpg'/>" style="display:block;" />강의 만족도 조사</a></div>
 	<div class="main-first-row-btn fifth-btn"><a href="<c:url value='/data/download'/>"><img id="first_image_fifth" src="<c:url value='/resources/images/main/main_download.png'/>" style="display:block;" />연계 자료</a></div>
 </div>
  

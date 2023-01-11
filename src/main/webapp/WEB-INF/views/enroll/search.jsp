@@ -258,7 +258,7 @@
 		
 		if(confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
-				type : "POST", 
+				type : "GET", 
 				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
 			})
 			

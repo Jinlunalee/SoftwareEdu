@@ -103,7 +103,7 @@
 							<li>현재 완료 시간  | ${board.completeHours}</li>
 							완료한 시간 입력
 							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
-								<input name="addHours" class="input-time" type="number">
+								<input type="number" name="addHours" class="input-time" >
 								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
 							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
@@ -258,7 +258,7 @@
 		
 		if(confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
-				type : "POST", 
+				type : "GET",
 				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
 			})
 			
@@ -280,7 +280,7 @@
 			}
 	</script>
 	
-	<script>
+	<%-- <script>
 			function getHours(enrollId) {
 				var ch = $(".ch");
 					$.ajax({
@@ -293,7 +293,7 @@
 	</script>
 	
 	<script>
-		function search() {
+		 function search() {
 			
 			$.ajax({
 				type : 'POST',
@@ -306,8 +306,8 @@
 					location.replace(url);
 				}
 			})
-		}
-	</script>
+		} 
+	</script> --%>
 </div>
 
 
