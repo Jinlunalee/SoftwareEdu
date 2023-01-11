@@ -47,8 +47,7 @@
 		SELECT comn_cd AS "comnCd", 
 		comn_cd_title AS "comnCdTitle" 
 		FROM COMMON_CODE 
-		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL05' 
-		OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
+		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
 	</select>
 	
 	<select id="getStudentList" parameterType="StudentVO" resultType="StudentVO">
