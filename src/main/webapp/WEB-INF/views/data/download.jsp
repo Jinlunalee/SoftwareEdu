@@ -65,8 +65,8 @@ img {
 }
 
 .box {
-	width: 400px;
-	height: 450px;
+	width: 500px;
+	height: 550px;
 	border: 1.5px solid #b1becc;
 	margin: 35px;
 	display: none;
@@ -296,7 +296,7 @@ margin-top: 60px;
 				for (var i = 0; i < data.length; i++) {
 					
 					
-					str += '<강좌 정보>';
+					str += '<강좌 정보>'+ '\n';
             		str += '<강좌아이디, 강좌시퀀스>' + data[i].sbjIdSeq + '</강좌아이디, 강좌시퀀스>';
             		str += '<강좌명>' + data[i].subjectTitle + '</강좌명>';
             		str += '<강좌 시수>' + data[i].hours + '</강좌 시수>';
@@ -304,7 +304,7 @@ margin-top: 60px;
             		str += '<강좌 종료 일자>' + data[i].endDay +'</강좌 종료 일자>';
             		str += '<강좌 비용>' + data[i].cost + '</강좌 비용>';
             		str += '<전송 시간>' + data[i].sendDt + '</전송 시간>';
-            		str += '<수강 완료 된 연수생 수>' + data[i].cntStd + '명' + '</수강 완료 된 연수생 수>';
+            		str += '<수강 완료 된 연수생 수>' + data[i].cntStd + '명' + '</수강 완료 된 연수생 수>' + '\n';
             		str += '</강좌 정보>';
 					
 					
