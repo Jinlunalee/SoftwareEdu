@@ -219,7 +219,7 @@ public class SubjectController {
 	public String deleteSubject(@PathVariable String subjectId ,SubjectVO subjectVo, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
-		return "redirect:/subject/subjectlist";
+		return "redirect:/subject/subjectboardlist";
 	}
 	
 	// 개설 강좌 논리 삭제 (open)
@@ -239,7 +239,7 @@ public class SubjectController {
 			logger.info("del/uploadfile:"+fileId);
 			subjectService.clickDeleteUploadFile(fileId);
 		}
-		return "redirect:/subject/subjectlist";
+		return "redirect:/subject/subjectboardlist";
 	}
 
 	// 개설 강좌 입력 (open)
@@ -298,7 +298,7 @@ public class SubjectController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/subject/subjectlist";
+		return "redirect:/subject/subjectboardlist";
 	}
 	
 	// 개설 강좌 입력 폼 비동기 출력
@@ -315,11 +315,8 @@ public class SubjectController {
 		subjectService.closeSubject(subjectId, subjectSeq);
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
 		//개설강좌가 폐강 되면 수강생 수강취소도 함께
-		
-		return "redirect:/subject/subjectlist";
-	}
-	
-	//모집마감된 강좌 추가모집
-	
+		logger.info("closeSubject:");
+		return "redirect:/subject/subjectboardlist";
+	}	
 	
 }

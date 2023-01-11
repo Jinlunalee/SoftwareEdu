@@ -177,9 +177,8 @@
 	<update id="updateEnrollCancel">
 		update enroll
 		set state_cd = 'ERL05'
-		where state_cd = 'ERL01'
-		and (subject_id IN (select subject_id from open where state_cd = 'OPN07')
-		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07'))
+		where subject_id IN (select subject_id from open where state_cd = 'OPN07')
+		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07')
 	</update>
 	
 </mapper>
