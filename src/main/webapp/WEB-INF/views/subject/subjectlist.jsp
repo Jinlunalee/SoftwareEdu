@@ -80,7 +80,7 @@
 								<div>
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
 									<c:choose>
-										<c:when test="${board.comnCdTitle eq ('모집예정' or '모집중' or '모집마감') }">
+										<c:when test="${(board.comnCdTitle eq '모집예정') or (board.comnCdTitle eq '모집중') or (board.comnCdTitle eq '추가모집중') or (board.comnCdTitle eq '모집마감') }">
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 											<button type="button" class="btn btn-secondary" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
 										</c:when>

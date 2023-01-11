@@ -40,7 +40,7 @@ public class PagerService implements IPagerService {
 	@Override
 	public List<SubjectVO> selectOpenCourseListByPage(Pager pager) {
 		List<SubjectVO> boardList = pagerRepository.selectOpenCourseListByPage(pager);
-		// catSubject 공통코드로 catSubjectTitle 가져와서 set하기
+		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
 		for(SubjectVO subjectVo : boardList) {
 			subjectVo.setCatCourseTitle(homeRepository.getComnCdTitle(subjectVo.getCatCourse()));
 		}
@@ -69,7 +69,13 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public List<EnrollVO> selectEnrollListByPage(Pager pager) {
-		return pagerRepository.selectEnrollListByPage(pager);
+		List<EnrollVO> boardList = pagerRepository.selectEnrollListByPage(pager);
+		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
+		for(EnrollVO enrollVo : boardList) {
+			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
+		}
+		return boardList;
 	}
 
 	@Override
