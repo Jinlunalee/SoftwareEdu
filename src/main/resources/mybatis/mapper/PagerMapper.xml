@@ -41,7 +41,8 @@
 		    "recruitStartDay", 
 		    "recruitEndDay",
 		    "state",
-		    "comnCdTitle"
+		    "comnCdTitle",
+		    "catCourse"
 		from (
 		    select 
 		        rownum as rnum,
@@ -53,7 +54,8 @@
 		        "recruitStartDay", 
 		        "recruitEndDay",
 		        "state",
-		        "comnCdTitle"
+		        "comnCdTitle",
+		        "catCourse"
 		    from (
 		        select DISTINCT
 					open.course_id as "courseId", 
@@ -64,7 +66,8 @@
 					recruit_start_day as "recruitStartDay", 
 					recruit_end_day as "recruitEndDay",
 					state_cd as "state",
-					comn_cd_title as "comnCdTitle"
+					comn_cd_title as "comnCdTitle",
+					course.cat_cd as "catCourse"
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
@@ -103,7 +106,8 @@
 		    "recruitPeople",
 		    "state",
 		    "comnCdTitle",
-		    "fileId"
+		    "fileId",
+		    "catSubject"
 		from (
 		    select
 		        rownum as rnum,
@@ -127,7 +131,8 @@
 		        "recruitPeople",
 		        "state",
 		        "comnCdTitle",
-				"fileId"
+				"fileId",
+				"catSubject"
 		    from (
 		        select 
 					open.subject_id as "subjectId", 
@@ -150,7 +155,8 @@
 					recruit_people as "recruitPeople",
 					state_cd as "state",
 					comn_cd_title as "comnCdTitle",
-					file_id as "fileId"
+					file_id as "fileId",
+					subject.cat_cd as "catSubject"
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
@@ -185,7 +191,10 @@
 		    "startTime", 
 		    "endTime", 
 		    "startDay", 
-		        "endDay" 
+		    "endDay",
+		    "openStateCd",
+		    "courseId",
+       		"courseTitle" 
 		FROM (
 		    SELECT
 		        rownum as rnum,
@@ -206,7 +215,10 @@
 		        "startTime", 
 		        "endTime", 
 		        "startDay", 
-		        "endDay" 
+		        "endDay",
+		        "openStateCd",
+		        "courseId",
+        		"courseTitle"
 		    FROM (
 		        SELECT  enroll_id AS "enrollId", 
 		                e.subject_id AS "subjectId", 
@@ -225,7 +237,10 @@
 		                start_time AS "startTime", 
 		                end_time AS "endTime", 
 		                start_day AS "startDay", 
-		                end_day AS "endDay" 
+		                end_day AS "endDay",
+		                o.state_cd as "openStateCd",
+                        o.course_id as "courseId",
+        				course_title as "courseTitle"
 		        FROM ENROLL e 
 		        LEFT OUTER JOIN STUDENT t 
 		        ON e.student_id = t.student_id 
@@ -233,6 +248,8 @@
 		        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
 		        LEFT OUTER JOIN SUBJECT s 
 		        ON e.subject_id = s.subject_id 
+		        LEFT OUTER JOIN course c
+				ON o.course_id = c.course_id
 		        WHERE NOT (e.del_yn ='Y')
 		  )
 		  WHERE rownum &lt;= #{endRowNo}

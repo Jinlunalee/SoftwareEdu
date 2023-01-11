@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.IPagerRepository;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.Pager;
@@ -17,6 +18,9 @@ public class PagerService implements IPagerService {
 
 	@Autowired
 	IPagerRepository pagerRepository;
+	
+	@Autowired
+	IHomeRepository homeRepository;
 	
 	@Override
 	public int getCountStudentRow() {
@@ -35,7 +39,12 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public List<SubjectVO> selectOpenCourseListByPage(Pager pager) {
-		return pagerRepository.selectOpenCourseListByPage(pager);
+		List<SubjectVO> boardList = pagerRepository.selectOpenCourseListByPage(pager);
+		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
+		for(SubjectVO subjectVo : boardList) {
+			subjectVo.setCatCourseTitle(homeRepository.getComnCdTitle(subjectVo.getCatCourse()));
+		}
+		return boardList;
 	}
 
 	@Override
@@ -45,7 +54,12 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public List<SubjectVO> selectOpenSubjectListByPage(Pager pager) {
-		return pagerRepository.selectOpenSubjectListByPage(pager);
+		List<SubjectVO> boardList = pagerRepository.selectOpenSubjectListByPage(pager);
+		// catSubject 공통코드로 catSubjectTitle 가져와서 set하기
+		for(SubjectVO subjectVo : boardList) {
+			subjectVo.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVo.getCatSubject()));
+		}
+		return boardList;
 	}
 
 	@Override
@@ -55,7 +69,13 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public List<EnrollVO> selectEnrollListByPage(Pager pager) {
-		return pagerRepository.selectEnrollListByPage(pager);
+		List<EnrollVO> boardList = pagerRepository.selectEnrollListByPage(pager);
+		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
+		for(EnrollVO enrollVo : boardList) {
+			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
+		}
+		return boardList;
 	}
 
 	@Override

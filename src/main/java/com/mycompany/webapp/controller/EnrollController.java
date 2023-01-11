@@ -71,7 +71,7 @@ public class EnrollController {
 
 		// 해당 페이지의 행을 가져오기
 		List<EnrollVO> boardList = pagerService.selectEnrollListByPage(pager);
-
+		
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);

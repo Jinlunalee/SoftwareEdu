@@ -4,7 +4,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.QuestionSetVO;
 import com.mycompany.webapp.dto.QuestionVO;
-import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
 import com.mycompany.webapp.service.ISurveyService;
@@ -52,19 +50,19 @@ public class SubjectController {
 	@Autowired
 	IPagerService pagerService;
 	
-	//개설 과정 목록조회 (course)
-	@RequestMapping(value="/courselist", method=RequestMethod.GET)
-	public String getCourseList(Model model) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-		
-		List<SubjectVO> boardList = subjectService.selectCourseList();
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size());
-		logger.info("courseList: " + boardList);
-		
-		return "subject/courselist";
-	}
+//	//개설 과정 목록조회 (course)
+//	@RequestMapping(value="/courselist", method=RequestMethod.GET)
+//	public String getCourseList(Model model) {
+//		model.addAttribute("menu", "subject");
+//		model.addAttribute("menuKOR", "강좌 관리");
+//		
+//		List<SubjectVO> boardList = subjectService.selectCourseList();
+//		model.addAttribute("boardList", boardList);
+//		model.addAttribute("boardListSize", boardList.size());
+//		logger.info("courseList: " + boardList);
+//		
+//		return "subject/courselist";
+//	}
 	
 	// paging 개설 과정 목록 조회 (course)
 	@GetMapping("/courseboardlist")
@@ -90,19 +88,19 @@ public class SubjectController {
 		return "subject/courselist";
 	}
 
-	// 개설 강좌 목록조회 (open)
-	@RequestMapping(value="/subjectlist", method=RequestMethod.GET)
-	public String getSubjectList(Model model) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-		
-		List<SubjectVO> boardList = subjectService.selectSubjectList();
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size());
-		logger.info("subjectlist: " + boardList);
-		
-		return "subject/subjectlist";
-	}
+//	// 개설 강좌 목록조회 (open)
+//	@RequestMapping(value="/subjectlist", method=RequestMethod.GET)
+//	public String getSubjectList(Model model) {
+//		model.addAttribute("menu", "subject");
+//		model.addAttribute("menuKOR", "강좌 관리");
+//		
+//		List<SubjectVO> boardList = subjectService.selectSubjectList();
+//		model.addAttribute("boardList", boardList);
+//		model.addAttribute("boardListSize", boardList.size());
+//		logger.info("subjectlist: " + boardList);
+//		
+//		return "subject/subjectlist";
+//	}
 	
 	// paging 강좌 목록 조회 (open)
 	@GetMapping("/subjectboardlist")
