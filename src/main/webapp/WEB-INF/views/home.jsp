@@ -82,6 +82,7 @@ height: 299px;
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
  
 <div class="main-first-row"> 
+
 	<div class="main-first-row-btn first-btn"><a href="<c:url value='/subject/subjectboardlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_course.jpg'/>" style="display:block;" />강좌</a></div>
 	<div class="main-first-row-btn second-btn"><a href="<c:url value='/student/boardlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_student.jpg'/>" style="display:block;" />수강생</a></div>
 	<div class="main-first-row-btn third-btn"><a href="<c:url value='/enroll/boardlist'/>"><img id="first_image" src="<c:url value='/resources/images/main/main_register.png'/>" style="display:block;" />수강</a></div>
