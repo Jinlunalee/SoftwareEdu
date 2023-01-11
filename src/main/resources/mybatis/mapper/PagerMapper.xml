@@ -196,9 +196,11 @@
 		        <choose>
 					<when test="catSubject != 'all'">
 						WHERE del_yn = 'N' AND subject.cat_cd=#{catSubject}
+						order by open.reg_dt desc
 					</when>
 					<when test="catSubject = 'all'">
 						WHERE del_yn = 'N'
+						order by open.reg_dt desc
 					</when>
 				</choose>
 		  )

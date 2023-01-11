@@ -155,8 +155,10 @@ public class SubjectService implements ISubjectService{
 		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)
 			logger.info("coursId O");
 			if(check == 0) { //최초개설
+				logger.info("최초개설");
 				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));// 신청일자를 가져올 필요없으므로 강좌에 대한 정보만 가져옴
 			}else { //개설되어있는 경우
+				logger.info("개설되어있는경우");
 				map.put("courseInfo", subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
 				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));//강좌에 대한 정보 가져오기
 				map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기

@@ -13,7 +13,9 @@
 	<div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
 	</div>
 	<div class="card-body">
-		<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
+		<c:if test="${not empty subject.courseTitle}">
+			<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
+		</c:if>
 		<div class="course_title">
 			<div class="main_title"><b class="basic_txt_color">${subject.subjectId}</b>  ${subject.subjectTitle}</div>
 			<div class="course_state">${subject.comnCdTitle}</div>
@@ -90,8 +92,25 @@
 		
 		<!-- button -->
 		<div class="submit-btn">
-			<input type="button" onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'" value="수정">
-	        <input type="button" onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')" value="삭제">
+			<c:choose>
+				<c:when
+					test="${(subject.comnCdTitle eq '모집예정') or (subject.comnCdTitle eq '모집중') or (subject.comnCdTitle eq '추가모집중') or (subject.comnCdTitle eq '모집마감') }">
+					<button type="button" class="btn btn-secondary"
+						onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+					<button type="button" class="btn btn-secondary"
+						onclick="closeCourse('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">폐강</button>
+				</c:when>
+				<c:when test="${subject.comnCdTitle eq '진행중'}">
+					<button type="button" class="btn btn-secondary"
+						onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+				</c:when>
+				<c:when test="${subject.comnCdTitle eq '폐강'}">
+					<button type="button" class="btn btn-secondary"
+						onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">삭제</button>
+				</c:when>
+				<c:when test="${subject.comnCdTitle eq '진행완료'}">
+				</c:when>
+			</c:choose>
 		</div> 
 		
 		<!-- modal -->
@@ -124,16 +143,21 @@
 
 	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	<script>
-	/*수강삭제*/
-	function del(subjectId, subjectSeq, fileId) {
-		if(confirm('수강 정보를 삭제하시겠습니까?')) {
-			alert('삭제');
-			alert(subjectId+'/'+subjectSeq+'/'+fileId);
-			location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'/'+fileId+'"/>'
-		} else {
-			alert('취소');
+		/*수강삭제*/
+		function del(subjectId, subjectSeq, fileId) {
+			if(confirm('수강 정보를 삭제하시겠습니까?')) {
+				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
+			} else {
+			}
 		}
-	}
+	
+		/*폐강*/
+		function closeCourse(subjectId, subjectSeq, fileId){
+			if(confirm('폐강하시겠습니까?')) {
+				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
+			} else {
+			}
+		}
 	/* 모달창 */
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
