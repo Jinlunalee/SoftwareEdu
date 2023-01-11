@@ -99,7 +99,7 @@
 		</div>
 	</div>
 </div>
-	
+	<!-- 
 	<script>
 		$("#modal_open_btn").click(function() {
 			$("#modal").attr("style", "display:block");
@@ -117,6 +117,8 @@
 			console.log('취소')
 		}
 	}
+	
+	 -->
 	</script>
 	<!-- <script>
 		function changeRowsPerPage(value) {
