@@ -195,10 +195,10 @@ margin-top: 60px;
             	for (var i = 0; i < data.length; i++) {
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"훈련기관아이디":' + '"' + "KOSA01" + '",';
+            		str += '"훈련기관ID":' + '"' + "KOSA01" + '",';
             		str += '"수강생,강좌정보":' + '"' + data[i].stdSbj + '",';
             		str += '"수강생 이름":' + '"' + data[i].name + '",';
-            		str += '"이수율":' + '"' + data[i].rate + '"% ,';
+            		str += '"이수율":' + '"' + data[i].rate + '",';
             		str += '"진행상태":' + '"' + data[i].stateCd + '",';
             		str += '"전송시간":' + '"' + data[i].sendDt + '"';
 
