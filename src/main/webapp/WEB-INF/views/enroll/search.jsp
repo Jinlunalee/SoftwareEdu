@@ -146,7 +146,7 @@
 										</div>
 									</div>
 							</c:when>
-							<c:when test="${(board.stateCdTitle eq '수강취소') and (board.stateCdTitle eq '수강신청취소')}">
+							<c:when test="${(board.stateCdTitle eq '수강취소') or (board.stateCdTitle eq '수강신청취소')}">
 								<form>
 									<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
 								</form>

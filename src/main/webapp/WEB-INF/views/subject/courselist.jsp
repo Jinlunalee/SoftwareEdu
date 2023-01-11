@@ -67,22 +67,18 @@
 							<td>
 								<div>
 									<c:choose>
-										<c:when test="${board.comnCdTitle eq '모집예정'}">
+										<c:when test="${(board.comnCdTitle eq '모집예정') or (board.comnCdTitle eq '모집중') or (board.comnCdTitle eq '추가모집중') or (board.comnCdTitle eq '모집마감') }">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">삭제</button>
+											<button type="button" class="btn btn-secondary" onclick="location.href=''">폐강</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행중'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '폐강'}">
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
+											<button type="button" class="btn btn-secondary" onclick="location.href=''">삭제</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행완료'}">
 										</c:when>
-										<c:otherwise>
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">폐강</button>
-										</c:otherwise>
 									</c:choose>
 								</div> 
 							</td>

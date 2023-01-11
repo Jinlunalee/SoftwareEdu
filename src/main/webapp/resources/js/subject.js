@@ -76,6 +76,11 @@ $(function(){
 				cost.empty();
 				support.empty();
 
+				ajaxRecruitStart = null; //초기화 안하면 과정을 바꿨을때 그대로 값이 남아있음
+				ajaxRecruitEnd = null;
+				ajaxStart = null;
+				ajaxEnd = null;
+
 				// select option에 있는 모든value가져오기
 				let options = $('#subjectId').find('option').map(function(){
 					return this.value;
@@ -109,7 +114,7 @@ $(function(){
 						support.append("※교육비 지원을 받는 강좌입니다.");
 					}
 				} else { //과정있을때 (1. 최조개설 2.개설되어있는 과정)
-					if(result.courseInfo === null) { //최초개설(과정에대한 정보가 없으면)
+					if(!result.courseInfo) { //최초개설(과정에대한 정보가 없으면)
 						console.log("최초개설");
 
 						printHours.append("("+result.subjectInfo.hours+"시간)");

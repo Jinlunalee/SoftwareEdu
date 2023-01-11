@@ -23,8 +23,6 @@
         </div>
 		<!-- 검색끝 -->
 		
-		<div class="title">과정명:웹 개발자 과정</div>
-		
 		<!-- list top -->
 		<div class="list_top">
 			<div class="cnt">
@@ -56,6 +54,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
+					<th>입력날짜</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -76,6 +75,7 @@
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td>${board.cost}</td>
 							<td>${board.comnCdTitle}</td>
+							<td>${board.regDt}</td>
 							<td>
 								<div>
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
@@ -92,10 +92,6 @@
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행완료'}">
 										</c:when>
-										<c:otherwise>
-											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
-										</c:otherwise>
 									</c:choose>
 								</div> 
 							</td>
@@ -138,21 +134,16 @@
 		/*수강삭제*/
 		function del(subjectId, subjectSeq, fileId) {
 			if(confirm('수강 정보를 삭제하시겠습니까?')) {
-				alert('삭제');
-				//alert(subjectId+'/'+subjectSeq+'/'+fileId);
 				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
-				alert('취소');
 			}
 		}
 	
 		/*폐강*/
 		function closeCourse(subjectId, subjectSeq, fileId){
 			if(confirm('폐강하시겠습니까?')) {
-				alert('폐강');
 				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
-				alert('취소');
 			}
 		}
 	</script>
