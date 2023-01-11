@@ -94,9 +94,11 @@ height: 299px;
 	<div class="main-second-row-btn level">
 		<div class="title"><a><img id="course_image" src="<c:url value='/resources/images/main/course.png'/>"/> 개설 강좌 분류별 보기</a></div>
 		<div class="level-content">
+
 			<div class="level-content-item"><a href="<c:url value='/subject/subjectboardlist?catSubject=SUB01'/>"><img id="second_image" src="<c:url value='/resources/images/main/main_programming.jpg'/>" style="display:block;"/>프로그래밍</a></div>
 			<div class="level-content-item"><a href="<c:url value='/subject/subjectboardlist?catSubject=SUB02'/>"><img id="second_image" src="<c:url value='/resources/images/main/main_bigdata.png'/>" style="display:block;"/>빅데이터</a></div>
 			<div class="level-content-item"><a href="<c:url value='/subject/subjectboardlist?catSubject=SUB03'/>"><img id="second_image" src="<c:url value='/resources/images/main/main_ai.jpg'/>" style="display:block;"/>AI</a></div>
+
 		</div>
 	</div>
 	<div class="main-second-row-btn regular">
