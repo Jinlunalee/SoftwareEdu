@@ -169,7 +169,7 @@
 		</table>
 		<div class="down">
 			<a href="#">
-			<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
+			<a href="<c:url value='#'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
@@ -201,7 +201,7 @@
 		};
 	</script>
 	
-	<script>
+	<%-- <script>
 		function rto(studentId, subjectId, subjectSeq) {
 			var ratioEl = $(".rt");
 			$.ajax({
@@ -211,7 +211,7 @@
 				}
 			});
 		}
-	</script>
+	</script> --%>
 	
 	<script>
 		function del(studentId, subjectId, subjectSeq) {

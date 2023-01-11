@@ -95,12 +95,12 @@ public class EnrollController {
 			List<CommonCodeVO> cancelList = enrollService.getCancelList();
 			model.addAttribute("cancelList", cancelList);
 			
+			enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
+			enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
+			
 			int totalRows = pagerService.getCountSearchRow(enroll);
 			
 			Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
-			
-			enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
-			enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
 			
 			List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
 			model.addAttribute("enroll", enroll);

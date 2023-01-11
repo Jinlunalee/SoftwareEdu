@@ -210,7 +210,7 @@
 	</select>
 	
 		<select id="getCountEnrollRow" resultType="int">
-		SELECT count(*) FROM enroll where del_yn = 'N'
+		SELECT count(*) FROM enroll WHERE NOT (del_yn='Y')
 	</select>
 
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
@@ -292,7 +292,8 @@
 		        ON e.subject_id = s.subject_id 
 		        LEFT OUTER JOIN course c
 				ON o.course_id = c.course_id
-		        WHERE NOT (e.del_yn ='Y')
+		        WHERE NOT (e.del_yn ='Y') 
+		        ORDER BY e.reg_dt DESC 
 		  )
 		  WHERE rownum &lt;= #{endRowNo}
 		)
@@ -311,37 +312,40 @@
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
-			<if test='applyStartDay != null and applyEndDay != null'>
-				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
+			<if test="applyStartDay != '' and applyEndDay != ''">
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
 			</if>
-			<if test='student != null and student.equals("sdName")'>
-				AND name = #{keyword1} 
+			<if test="applyStartDay != '' and applyEndDay == ''">
+				AND e.reg_dt = #{applyStartDay}   
 			</if>
-			<if test='student != null and student.equals("sdId")'>
-				AND e.student_id = #{keyword1} 
+			<if test='student != "" and student.equals("sdName")'>
+				AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
 			</if>
-			<if test='course != null and course.equals("sj")'>
-				AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')
+			<if test='student != "" and student.equals("sdId")'>
+				AND (e.student_id = #{keyword1} OR REPLACE(e.student_id, ' ', '') LIKE '%' || #{keyword1} || '%') 
 			</if>
-			<if test='course != null and course.equals("cs")'>
-				AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')
+			<if test='course != "" and course.equals("sj")'>
+				AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
 			</if>
-			<if test='state != null and state.equals("apply")'>
+			<if test='course != "" and course.equals("cs")'>
+				AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
+			</if>
+			<if test='state != "" and state.equals("apply")'>
 				AND e.state_cd = 'ERL01' 
 			</if>
-			<if test='state != null and state.equals("applyCancel")'>
+			<if test='state != "" and state.equals("applyCancel")'>
 				AND e.state_cd = 'ERL02' 
 			</if>
-			<if test='state != null and state.equals("expect")'>
+			<if test='state != "" and state.equals("expect")'>
 				AND e.state_cd = 'ERL03' 
 			</if>
-			<if test='state != null and state.equals("progress")'>
+			<if test='state != "" and state.equals("progress")'>
 				AND e.state_cd = 'ERL04' 
 			</if>
-			<if test='state != null and state.equals("cancel")'>
+			<if test='state != "" and state.equals("cancel")'>
 				AND e.state_cd = 'ERL05' 
 			</if>
-			<if test='state != null and state.equals("complete")'>
+			<if test='state != "" and state.equals("complete")'>
 				AND e.state_cd = 'ERL06' 
 			</if>
 	</select>
@@ -426,19 +430,22 @@
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
 			<if test="applyStartDay != '' and applyEndDay != ''">
-				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
+			</if>
+			<if test="applyStartDay != '' and applyEndDay == ''">
+				AND e.reg_dt = #{applyStartDay}   
 			</if>
 			<if test='student != "" and student.equals("sdName")'>
-				AND name = #{keyword1} 
+				AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
 			</if>
 			<if test='student != "" and student.equals("sdId")'>
-				AND e.student_id = #{keyword1} 
+				AND (e.student_id = #{keyword1} OR REPLACE(e.student_id, ' ', '') LIKE '%' || #{keyword1} || '%') 
 			</if>
 			<if test='course != "" and course.equals("sj")'>
-				AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%' )  
+				AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
 			</if>
 			<if test='course != "" and course.equals("cs")'>
-				AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%' )  
+				AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
 			</if>
 			<if test='state != "" and state.equals("apply")'>
 				AND e.state_cd = 'ERL01' 
@@ -458,8 +465,9 @@
 			<if test='state != "" and state.equals("complete")'>
 				AND e.state_cd = 'ERL06' 
 			</if>
+		ORDER BY e.reg_dt DESC 
 				)
-			WHERE rownum &lt;= #{endRowNo}
+			WHERE rownum &lt;= #{endRowNo} 
 			)
 			WHERE rnum &gt;= #{startRowNo}
 	</select>
