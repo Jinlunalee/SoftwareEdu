@@ -53,6 +53,19 @@
 			<div class="cnt">
 			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
 			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+			<div>
+			[검색 결과] &nbsp;
+			* 신청 기간 : ${enroll.applyStartDay} - ${enroll.applyEndDay} &nbsp; &nbsp; &nbsp; 
+			* 이름, 아이디 : ${enroll.keyword1} &nbsp; &nbsp; &nbsp;
+			* 강좌 명, 아이디 : ${enroll.keyword2} &nbsp; &nbsp; &nbsp;
+			* 수강 상태 :
+			<c:if test="${enroll.state eq 'applyCancel'}">수강 신청 취소</c:if>
+			<c:if test="${enroll.state eq 'expect'}">수강 예정</c:if>
+			<c:if test="${enroll.state eq 'progress'}">수강 중</c:if>
+			<c:if test="${enroll.state eq 'cancel'}">수강 취소</c:if>
+			<c:if test="${enroll.state eq 'apply'}">수강 신청</c:if>
+			<c:if test="${enroll.state eq 'complete'}">수강 완료</c:if>		
+			</div>
 			<%-- 뷰 갯수 --%>
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
@@ -173,7 +186,7 @@
 		</table>
 		<div class="down">
 			<a href="#">
-			<a href="<c:url value='/enroll/download'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
+			<a href="<c:url value='#'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
 		</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->

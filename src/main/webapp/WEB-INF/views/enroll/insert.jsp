@@ -50,7 +50,7 @@
 		</div>
 	
 		<div class="submit-btn">
-			<form>
+			<form action="<c:url value='/enroll/boardlist'/>">
 				<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
 				<input type="reset" onclick="location.href='<c:url value="/enroll/boardlist"/>'" value="취 소" class="btn">
 			</form>

@@ -21,7 +21,7 @@ public interface IEnrollRepository {
 	void addHours(@Param("addHours") int addHours, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	//int getHours(String enrollId);
 	List<CommonCodeVO> getCancelList();
-	void updateCancelRsCd(@Param("cancelRsC") String cancelRsCd, @Param("cancelRsEtc") String cancelRsEtc, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
+	void updateCancelRsCd(@Param("cancelRsCd") String cancelRsCd, @Param("cancelRsEtc") String cancelRsEtc, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	List<StudentVO> getStudentList(StudentVO studentVO);
 	void approval(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
