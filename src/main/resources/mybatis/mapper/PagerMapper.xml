@@ -136,7 +136,8 @@
 		    "state",
 		    "comnCdTitle",
 		    "fileId",
-		    "catSubject"
+		    "catSubject",
+		    "regDt"
 		from (
 		    select
 		        rownum as rnum,
@@ -161,7 +162,8 @@
 		        "state",
 		        "comnCdTitle",
 				"fileId",
-				"catSubject"
+				"catSubject",
+				"regDt"
 		    from (
 		        select 
 					open.subject_id as "subjectId", 
@@ -185,7 +187,8 @@
 					state_cd as "state",
 					comn_cd_title as "comnCdTitle",
 					file_id as "fileId",
-					subject.cat_cd as "catSubject"
+					subject.cat_cd as "catSubject",
+					open.reg_dt as "regDt"
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id

@@ -41,6 +41,7 @@ public class SubjectVO {
 	private String state; //강좌 상태 코드
 	
 	private String comnCdTitle; //공통코드명
+	private String regDt;// 강좌 등록 일자
 	
 	private MultipartFile file; //첨부파일 
 	private String fileId;
