@@ -184,7 +184,20 @@
 		select count(*) 
 		from enroll 
 		where subject_id=#{subjectId} and subject_seq=#{subjectSeq} 
-			and state_cd=#{state}
+		<choose>
+			<when test="state == 'OPN02'">
+				and state_cd = 'ERL01'
+			</when>
+			<when test="state == 'OPN03'">
+				and state_cd = 'ERL03'
+			</when>
+			<when test="state == 'OPN04'">
+				and state_cd = 'ERL04'
+			</when>
+			<when test="state == 'OPN05'">
+				and state_cd = 'ERL06'
+			</when>
+		</choose>
 	</select>
 	
 </mapper>
