@@ -124,14 +124,14 @@ public class EnrollController {
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 논리 삭제
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 진행률
@@ -145,7 +145,7 @@ public class EnrollController {
 	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 완료 시간 ajax
@@ -177,7 +177,7 @@ public class EnrollController {
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
 	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 수강 추가
@@ -185,7 +185,7 @@ public class EnrollController {
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		System.out.println(studentId);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 과정 추가
@@ -193,7 +193,7 @@ public class EnrollController {
 	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
 		System.out.println(courseId);
 		enrollService.addCourse(studentId, courseId);
-		return "redirect:/enroll/list";
+		return "redirect:/enroll/boardlist";
 	}
 	
 	// 수강 엑셀 파일 다운로드
