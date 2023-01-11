@@ -173,5 +173,12 @@
 		from open
 		where course_id = #{courseId}
 	</select>
-
+	
+	<update id="updateEnrollCancel">
+		update enroll
+		set state_cd = 'ERL05'
+		where subject_id IN (select subject_id from open where state_cd = 'OPN07')
+		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07')
+	</update>
+	
 </mapper>

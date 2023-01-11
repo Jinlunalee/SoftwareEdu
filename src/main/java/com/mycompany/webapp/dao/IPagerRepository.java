@@ -15,11 +15,11 @@ public interface IPagerRepository {
 	int getCountStudentRow();
 	List<StudentVO> selectStudentListByPage(Pager pager);
 	
-	int getCountOpenCourseRow();
-	List<SubjectVO> selectOpenCourseListByPage(Pager pager);
+	int getCountOpenCourseRow(@Param("catCourse") String catCourse);
+	List<SubjectVO> selectOpenCourseListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catCourse") String catCourse);
 	
-	int getCountOpenSubjectRow();
-	List<SubjectVO> selectOpenSubjectListByPage(Pager pager);
+	int getCountOpenSubjectRow(@Param("catSubject") String catSubject);
+	List<SubjectVO> selectOpenSubjectListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catSubject") String catSubject);
 	
 	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);

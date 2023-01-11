@@ -30,4 +30,6 @@ public interface IEnrollRepository {
 	int getMaxEnrollId();
 	int getSubjectCountByCourse(String courseId);
 	List<OpenVO> getSubjectInfoByCourse(String courseId);
+	
+	int updateEnrollCancel(); // 강좌가 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
 }

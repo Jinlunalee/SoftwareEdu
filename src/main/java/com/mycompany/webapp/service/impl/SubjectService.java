@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.controller.SubjectController;
+import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.ISubjectRepository;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
@@ -23,6 +24,9 @@ public class SubjectService implements ISubjectService{
 	
 	@Autowired
 	ISubjectRepository subjectRepository;
+	
+	@Autowired
+	IEnrollRepository enrollRepository;
 	
 	@Override
 	public List<SubjectVO> selectCourseList() {
@@ -213,10 +217,15 @@ public class SubjectService implements ISubjectService{
 	public void clickDeleteUploadFile(String fileId) {
 		subjectRepository.clickDeleteUploadFile(fileId);
 	}
-
+	
+	@Transactional
 	@Override
 	public int closeSubject(String subjectId, int subjectSeq) {
-		return subjectRepository.closeSubject(subjectId, subjectSeq);
+		logger.info("service/closeSubject");
+		subjectRepository.closeSubject(subjectId, subjectSeq); // 폐강처리
+		logger.info("setvice/updateEnrollCancel");
+		enrollRepository.updateEnrollCancel(); // 강좌 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
+		return 0;
 	}
 
 	@Override
