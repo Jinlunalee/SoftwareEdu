@@ -42,11 +42,6 @@ public class SubjectService implements ISubjectService{
 	public SubjectVO selectSubjectDetails(String subjectId, int subjectSeq) {
 		return subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
 	}
-
-	@Override
-	public int recruitTotalPeople(String subjectId, int subjectSeq, String state) {
-		return subjectRepository.recruitTotalPeople(subjectId, subjectSeq, state);
-	}
 	
 	@Transactional
 	@Override
@@ -221,7 +216,9 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int closeSubject(String subjectId, int subjectSeq) {
+		logger.info("service/closeSubject");
 		subjectRepository.closeSubject(subjectId, subjectSeq); // 폐강처리
+		logger.info("setvice/updateEnrollCancel");
 		enrollRepository.updateEnrollCancel(); // 강좌 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
 		return 0;
 	}

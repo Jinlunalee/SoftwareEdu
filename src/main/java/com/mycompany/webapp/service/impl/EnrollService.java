@@ -98,5 +98,10 @@ public class EnrollService implements IEnrollService{
 			enrollRepository.addEnroll(studentId, openVo.get(i).getSubjectId(), openVo.get(i).getSubjectSeq(), maxEnrollId);
 		}
 	}
+
+	@Override
+	public int recruitTotalPeople(String subjectId, int subjectSeq, String state) {
+		return enrollRepository.recruitTotalPeople(subjectId, subjectSeq, state);
+	}
 	
 }

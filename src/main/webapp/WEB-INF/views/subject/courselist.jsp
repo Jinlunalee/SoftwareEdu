@@ -69,7 +69,7 @@
 									<c:choose>
 										<c:when test="${board.comnCdTitle eq '모집예정'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="del()">삭제</button>
+											<button type="button" class="btn btn-secondary" onclick="location.href=''">삭제</button>
 										</c:when>
 										<c:when test="${board.comnCdTitle eq '진행중'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
@@ -95,7 +95,7 @@
 					<td>
 						<div id="paging">
 							<ul class="paging">
-								<li><a href="courseboardlist?pageNo=1">처음</a></li>
+								<li><a href="courseboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
 									<li><a href="courseboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">이전</a></li>
 								</c:if>
@@ -121,15 +121,5 @@
 		</table>
 	</div>
 </div>
-
-	<script>
-	function del() {
-		if(confirm('수강 정보를 삭제하시겠습니까?') == true) {
-			console.log('삭제')
-		} else {
-			console.log('취소')
-		}
-	}
-	</script>
 	
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

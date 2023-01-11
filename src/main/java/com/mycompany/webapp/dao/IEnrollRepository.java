@@ -32,4 +32,5 @@ public interface IEnrollRepository {
 	List<OpenVO> getSubjectInfoByCourse(String courseId);
 	
 	int updateEnrollCancel(); // 강좌가 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
+	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
 }

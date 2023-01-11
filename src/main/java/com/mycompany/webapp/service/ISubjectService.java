@@ -13,7 +13,6 @@ public interface ISubjectService {
 	List<SubjectVO> selectSubjectList();
 	
 	SubjectVO selectSubjectDetails(String subjectId, int subjectSeq);
-	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
 	
 	int updateSubject(SubjectVO subject); // 과정/강좌 수정
 	int updateFileData(SubjectVO subject, UploadfileVO file); // 과정/강좌 수정 첨부파일
