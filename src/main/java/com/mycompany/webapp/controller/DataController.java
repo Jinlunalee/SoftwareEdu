@@ -113,10 +113,10 @@ public class DataController {
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
         result += "<student>";
-        result += "<훈련기관아이디>" + "KOSA01" + "</훈련기관아이디>";
+        result += "<훈련기관ID>" + "KOSA01" + "</훈련기관ID>";
         result += "<수강생,강좌 정보>"+ stdSbj +"</수강생,강좌 정보>";
         result += "<수강생이름>" + name + "</수강생이름>";
-        result +=  "<이수율>" + rate +"%"+ "</이수율>";
+        result +=  "<이수율>" + rate + "</이수율>";
         result +=  "<진행상태>" + stateCd +"</진행상태>";
         result +=  "<전송시간>" + sendDt + "<전송시간>";
         result +=  "</student>";
