@@ -4,11 +4,11 @@
 
 	<select id="getStudent" resultType="StudentVO">
 		select 
-			name as "name",
-			student_id as "studentId",
-			email as "email",
-			birth as "birth",
-			position as "position"
+			name,
+			student_id,
+			email,
+			birth,
+			position
 		from student
 	</select>
 	
@@ -24,8 +24,7 @@
 	</select>
 	
 
-	
-	
+
 	
 	
 	
