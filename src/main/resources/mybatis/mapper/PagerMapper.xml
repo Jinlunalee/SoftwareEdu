@@ -3,11 +3,12 @@
 <mapper namespace="com.mycompany.webapp.dao.IPagerRepository">
 
 	<select id="getCountStudentRow" resultType="int">
+	/* getCountStudentRow */
 		SELECT count(*) FROM student
 	</select>
 
 	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
-	/*studentList*/
+	/* selectStudentListByPage */
 		SELECT
 			rnum,
 			name,
@@ -28,6 +29,7 @@
 	</select>
 	
 	<select id="getCountOpenCourseRow" parameterType="String" resultType="int">
+	/* getCountOpenCourseRow */
 		SELECT count(distinct open.course_id)
 		FROM open
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -43,6 +45,7 @@
 	</select>
 
 	<select id="selectOpenCourseListByPage" parameterType="map" resultType="SubjectVO">
+	/* selectOpenCourseListByPage */
 		select
 		    rnum,
 		    "courseId", 
@@ -100,6 +103,7 @@
 	</select>	
 	
 	<select id="getCountOpenSubjectRow" parameterType="String" resultType="int">
+	/* getCountOpenSubjectRow */
 		SELECT count(*)
 		FROM open
 		LEFT JOIN subject ON open.subject_id = subject.subject_id
@@ -114,6 +118,7 @@
 	</select>
 
 	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="SubjectVO">
+	/* selectOpenSubjectListByPage */
 		select
 		    rnum, 
 		    "subjectId", 
@@ -211,10 +216,12 @@
 	</select>
 	
 		<select id="getCountEnrollRow" resultType="int">
+		/* getCountEnrollRow */
 		SELECT count(*) FROM enroll WHERE NOT (del_yn='Y')
 	</select>
 
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
+	/* selectEnrollListByPage */
 		SELECT
 		    rnum,
 		    "enrollId", 
@@ -302,6 +309,7 @@
 	</select>
 	
 	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
+	/* getCountSearchRow */
 		SELECT count(*) 
 		FROM ENROLL e 
 		LEFT OUTER JOIN STUDENT t 
@@ -352,6 +360,7 @@
 	</select>
 	
 	<select id="selectSearchListByPage" parameterType="map" resultType="EnrollVO">
+	/* selectSearchListByPage */
 		SELECT rnum, 
 			"enrollId", 
 		    "subjectId", 

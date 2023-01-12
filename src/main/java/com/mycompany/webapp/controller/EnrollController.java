@@ -58,6 +58,7 @@ public class EnrollController {
 //	}
 	
 	// paging 목록조회
+
 	@GetMapping("/boardlist")
 	public String enrollList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "enroll");
