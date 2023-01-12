@@ -4,6 +4,11 @@
     <Console name="Out" target="SYSTEM_OUT">
       <PatternLayout pattern="%-5level: %logger{36}.%M() - %msg%n"/>
     </Console>
+    <Console name="console" target="SYSTEM_OUT">
+      <!-- <PatternLayout pattern="%-5level: %logger{36}.%M() - %msg%n"/> -->
+    </Console>
+    
+    
   </Appenders>
   
     <!-- SQL 로그 출력을 위한 설정 -->
@@ -13,9 +18,63 @@
     
   
   <Loggers>
-    <Logger name="com.mycompany.webapp" level="info" additivity="false">
+    <!-- <Logger name="com.mycompany.webapp" level="info" additivity="false">
       <AppenderRef ref="Out"/>
-    </Logger>
+    </Logger> -->
+    
+    <!-- SQL Logger -->
+
+	<logger name="jdbc.sqltiming" additivity="false">
+
+		<level value="warn" />
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+	
+
+	<logger name="jdbc.sqlonly" additivity="false"> 
+
+		<level value="info"/> 
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+	
+
+	<logger name="jdbc.audit" additivity="false"> 
+
+		<level value="warn"/>  
+
+		<appender-ref ref="console"/> 
+
+	</logger> 
+
+    
+
+	<logger name="jdbc.resultset" additivity="false">
+
+		<level value="warn" />
+
+		<appender-ref ref="console"/> 
+
+	</logger>
+
+     
+
+	<logger name="jdbc.resultsettable" additivity="false"> 
+
+		<level value="info"/>  
+
+		<appender-ref ref="console"/> 
+
+	</logger> 
+    
+    
+    
+    
     <Root level="error">
       <AppenderRef ref="Out"/>
     </Root>
