@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="selectSubjectList" resultType="SubjectVO">
-		/*selectCourseList*/
+		/*selectSubjectList*/
 		select 
 			open.subject_id, 
 			subject_seq,
@@ -91,7 +91,7 @@
 	</select>
 	
 	<update id="updateSubject" parameterType="SubjectVO">
-		/*selectCourseList*/
+		/*updateSubject*/
 		update open
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
@@ -101,7 +101,7 @@
 	</update>
 	
 	<update id="updateFileData" parameterType="UploadfileVO">
-		/*selectCourseList*/
+		/*updateFileData*/
 		update upload_file
 		set
 			file_name=#{fileName}, file_size=#{fileSize}, 
@@ -111,7 +111,7 @@
 	</update>
 	
 	<select id="getFile" parameterType="String" resultType="UploadfileVO">
-		/*selectCourseList*/
+		/*getFile*/
 		select 
 				file_id, 
 				file_name, 
@@ -123,13 +123,13 @@
 	</select>
 	
 	<select id="selectMaxFileId" resultType="String">
-		/*selectCourseList*/
+		/*selectMaxFileId*/
 		select max(file_id)
 		from upload_file
 	</select>
 	
 	<insert id="insertSubject" parameterType="SubjectVO">
-		/*selectCourseList*/
+		/*insertSubject*/
 		<choose>
 			<when test="fileId != null">
 				insert into open 
@@ -152,14 +152,14 @@
 	</insert>
 	
 	<insert id="insertFileData" parameterType="UploadfileVO">
-		/*selectCourseList*/
+		/*insertFileData*/
 		insert into upload_file 
 			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
 		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 	</insert>
 	
 	<select id="selectAllCourse" resultType="SubjectVO">
-		/*selectCourseList*/
+		/*selectAllCourse*/
 		select 
 			course_id, 
 			course_title
@@ -167,7 +167,7 @@
 	</select>
 	
 	<select id="selectAllSubject" resultType="SubjectVO">
-		/*selectCourseList*/
+		/*selectAllSubject*/
 		select 
 			subject_id, 
 			subject_title
@@ -175,7 +175,7 @@
 	</select>
 	
 	<select id="infoSubject" parameterType="String" resultType="SubjectVO">
-		/*selectCourseList*/
+		/*infoSubject*/
 		select 
 				subject_id,
 				subject_title, 
@@ -191,7 +191,7 @@
 	</select>
 	
 	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
-		/*selectCourseList*/
+		/*infoOpenCourse*/
 		select DISTINCT 
 						course_id, 
 						min(start_day) over (partition by course_id) as "startDay", 
@@ -203,36 +203,40 @@
 	</select>
 	
 	<select id="checkOpenCourse" parameterType="String" resultType="int">
-		/*selectCourseList*/
+		/*checkOpenCourse*/
 		select count(*) from open where course_id = #{courseId} and del_yn = 'N'
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
-		
+		/*updateRecruitSameCourse*/
 		update open
 		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
 		where course_id = #{courseId}
 	</update>
 	
 	<update id="clickDeleteOpen" parameterType="map">
+		/*clickDeleteOpen*/
 		update open
 		set del_yn = 'Y'
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
 	<update id="clickDeleteUploadFile" parameterType="map">
+		/*clickDeleteUploadFile*/
 		update upload_file
 		set del_yn = 'Y'
 		where file_id = #{fileId}
 	</update>
 	
 	<update id="closeSubject" parameterType="map">
+		/*closeSubject*/
 		update open 
 		set state_cd = 'OPN07' 
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
 	</update>
 	
 	<select id="selectSubjectByCourseId" parameterType="String" resultType="SubjectVO">
+		/*selectSubjectByCourseId*/
 		select subject_id
 		from open 
 		where course_id = #{courseId}
