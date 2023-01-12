@@ -5,6 +5,7 @@
 
 	<select id="getDataList" resultType="StudentVO">
 /* getDataList */
+<![CDATA[
 	select
         student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
         name,
@@ -33,7 +34,7 @@
 	where subject.support_yn = 'Y' AND enroll.state_cd in('ERL04', 'ERL05' ,'ERL06')
 
 	 -->
-
+]]>	
 	</select>
 	
 	
