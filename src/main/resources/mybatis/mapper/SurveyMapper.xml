@@ -1,85 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.ISurveyRepository">
-	<select id="getAnswerValue" parameterType="map" resultType="AnswerVO">
-		select	subject_id as "subjectId",
-				subject_seq as "subjectSeq",
-		        question_num as "questionNum",
-		        question_content as "questionContent",
-				answer_value as "answerValue",
-				count_answer_value as "countAnswerValue"
-		from (
-		    select
-		        case grouping(a.subject_id) when 1 THEN 'total' else a.subject_id end as subject_id,
-		        case grouping(a.subject_seq) when 1 THEN 99999 ELSE a.subject_seq end as subject_seq,
-		        case grouping(answer_value) when 1 then 99999 else answer_value end as answer_value,
-		        case grouping(a.question_num) when 1 then 99999 else a.question_num end as question_num,
-		        case grouping(question_content) when 1 then 'total' else question_content end as question_content,
-		        count(answer_value) as count_answer_value
-		    from    answer a
-		    left join question q
-		    on a.subject_id = q.subject_id and a.subject_seq = q.subject_seq and a.question_num = q.question_num
-		    where a.subject_id=#{subjectId} and a.subject_seq=#{subjectSeq}
-		    group by rollup((a.subject_id, a.subject_seq), answer_value, (a.question_num, question_content))
-		    )
-		where question_num=#{questionNum} and answer_value=#{answerValue}
-	</select>
-	
-	<select id="getCountQuestionNum" parameterType="map" resultType="int">
-		select count(question_num) as "countQuestionNum"
-		from (
-		    select
-		        case grouping(subject_id) when 1 THEN 'total' else subject_id end as subject_id,
-		        case grouping(subject_seq) when 1 THEN 99999 ELSE subject_seq end as subject_seq,
-		        case grouping(question_num) when 1 then 99999 else question_num end as question_num
-		    from    answer
-		    where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
-		    group by rollup((subject_id, subject_seq), question_num)
-		    )
-		where question_num!=99999
-	</select>
-	
-	<select id="selectSubjectListByFinishedState" resultType="map">
-		select 
-			o.subject_id as "subjectId", 
-		    subject_title as "subjectTitle",
-			subject_seq as "subjectSeq"
-		from open o
-		left join subject s
-		on o.subject_id = s.subject_id
-		where state_cd = 'OPN05'
-	</select>
-	
-	<update id="clickDeleteQuestion" parameterType="map">
-		update question
-		set del_yn = 'Y'
-		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
-	</update>
-	
-	<update id="clickDeleteAnswer" parameterType="map">
-		update answer
-		set del_yn = 'N'
-		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
-	</update>
-	
-	<select id="selectSubjectQuestionSet" parameterType="map" resultType="QuestionSetVO">
-		select
-			question_num as "questionNum", 
-			question_content as "questionContent"
-		from question
-		where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
-	</select>
-	
-	<insert id="insertQuestion" parameterType="map">
-		insert into question
-		    (subject_id, subject_seq, question_num, question_content, reg_id, reg_dt, del_yn)
-		values(#{subjectId}, #{subjectSeq}, #{questionSetVo.questionNum}, #{questionSetVo.questionContent}, 'mgr1', SYSDATE, 'N')
-	</insert>
-	
-	<select id="getMaxSubjectSeq" parameterType="String" resultType="int">
-		select max(subject_seq) as "subjectSeq"
-		from open
-		where subject_id = #{subjectId}
-	</select>
+   <select id="getAnswerValue" parameterType="map" resultType="AnswerVO">
+   /* getAnswerValue */
+      select
+			subject_id,
+            subject_seq,
+            question_num,
+            question_content,
+            answer_value,
+            count_answer_value
+      from (
+          select
+              case grouping(a.subject_id) when 1 THEN 'total' else a.subject_id end as subject_id,
+              case grouping(a.subject_seq) when 1 THEN 99999 ELSE a.subject_seq end as subject_seq,
+              case grouping(answer_value) when 1 then 99999 else answer_value end as answer_value,
+              case grouping(a.question_num) when 1 then 99999 else a.question_num end as question_num,
+              case grouping(question_content) when 1 then 'total' else question_content end as question_content,
+              count(answer_value) as count_answer_value
+          from    answer a
+          left join question q
+          on a.subject_id = q.subject_id and a.subject_seq = q.subject_seq and a.question_num = q.question_num
+          where a.subject_id=#{subjectId} and a.subject_seq=#{subjectSeq}
+          group by rollup((a.subject_id, a.subject_seq), answer_value, (a.question_num, question_content))
+          )
+      where question_num=#{questionNum} and answer_value=#{answerValue}
+   </select>
+   
+   <select id="getCountQuestionNum" parameterType="map" resultType="int">
+   /* getCountQuestionNum */
+      select count(question_num) as "countQuestionNum"
+      from (
+          select
+              case grouping(subject_id) when 1 THEN 'total' else subject_id end as subject_id,
+              case grouping(subject_seq) when 1 THEN 99999 ELSE subject_seq end as subject_seq,
+              case grouping(question_num) when 1 then 99999 else question_num end as question_num
+          from    answer
+          where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
+          group by rollup((subject_id, subject_seq), question_num)
+          )
+      where question_num!=99999
+   </select>
+   
+   <select id="selectSubjectListByFinishedState" resultType="map">
+   /* selectSubjectListByFinishedState */
+      select 
+         o.subject_id as "subjectId", 
+          subject_title as "subjectTitle",
+         subject_seq as "subjectSeq"
+      from open o
+      left join subject s
+      on o.subject_id = s.subject_id
+      where state_cd = 'OPN05'
+   </select>
+   
+   <update id="clickDeleteQuestion" parameterType="map">
+   /* clickDeleteQuestion */
+      update question
+      set del_yn = 'Y'
+      where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
+   </update>
+   
+   <update id="clickDeleteAnswer" parameterType="map">
+   /* clickDeleteAnswer */
+      update answer
+      set del_yn = 'N'
+      where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
+   </update>
+   
+   <select id="selectSubjectQuestionSet" parameterType="map" resultType="QuestionSetVO">
+   /* selectSubjectQuestionSet */
+      select
+         question_num, 
+         question_content
+      from question
+      where subject_id=#{subjectId} and subject_seq=#{subjectSeq}
+   </select>
+   
+   <insert id="insertQuestion" parameterType="map">
+   /* insertQuestion */
+      insert into question
+          (subject_id, subject_seq, question_num, question_content, reg_id, reg_dt, del_yn)
+      values(#{subjectId}, #{subjectSeq}, #{questionSetVo.questionNum}, #{questionSetVo.questionContent}, 'mgr1', SYSDATE, 'N')
+   </insert>
+   
+   <select id="getMaxSubjectSeq" parameterType="String" resultType="int">
+   /* getMaxSubjectSeq */
+      select max(subject_seq) as "subjectSeq"
+      from open
+      where subject_id = #{subjectId}
+   </select>
 
 </mapper>
