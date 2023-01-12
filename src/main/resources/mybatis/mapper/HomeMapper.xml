@@ -3,6 +3,7 @@
 <mapper namespace="com.mycompany.webapp.dao.IHomeRepository">
 
 	<select id="selectSubjectList" parameterType="String" resultType="SubjectVO">	
+	/* selectSubjectList */
 		select 
 			open.subject_id as "subjectId", 
 			subject_seq as "subjectSeq",
@@ -38,6 +39,7 @@
 	
 	
 	<select id="selectCourseList" parameterType="String" resultType="SubjectVO">
+	/* selectCourseList */
 		select DISTINCT
 			open.course_id as "courseId", 
 			course_title as "courseTitle",
@@ -59,6 +61,7 @@
 
 
 	<select id="getComnCdTitle" parameterType="String" resultType="String">
+	/* getComnCdTitle */
 		select comn_cd_title
 		from common_code
 		where comn_cd=#{comnCd}
