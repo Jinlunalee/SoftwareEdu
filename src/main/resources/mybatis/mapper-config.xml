@@ -3,6 +3,10 @@
                         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<settings>
+		<!-- 자동으로 카멜케이스 규칙으로 변환 -->  
+    	<setting name="mapUnderscoreToCamelCase" value="true"/> 
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.mycompany.webapp.dto.EnrollVO" alias="EnrollVO" />
 		<typeAlias type="com.mycompany.webapp.dto.SubjectVO" alias="SubjectVO" />

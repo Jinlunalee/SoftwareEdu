@@ -19,6 +19,10 @@ import com.mycompany.webapp.service.IStudentService;
 
 import oracle.sql.DATE;
 
+/**
+ * @author KOSA
+ *
+ */
 @Controller
 @RequestMapping("/data")
 public class DataController {
@@ -28,9 +32,14 @@ public class DataController {
 	
 	//통계
 	/**
-	2023. 1. 12.
+
+	 * 연계 자료 통계 조회
+	 * @date 2023. 1. 12.
 	 * @param model
 	 * @return
+	 * ------------------------------
+	 * 2023. 1. 13. modify.......
+
 	 */
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public String getDataList(Model model) {
