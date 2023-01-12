@@ -4,11 +4,11 @@
 
 	<select id="getStudent" resultType="StudentVO">
 		select 
-			name as "name",
-			student_id as "studentId",
-			email as "email",
-			birth as "birth",
-			position as "position"
+			name,
+			student_id,
+			email,
+			birth,
+			position
 		from student
 	</select>
 	
@@ -27,7 +27,7 @@
 
 	select
         student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
-        name as "name",
+        name,
         round(complete_hours/hours * 100) as "rate",
         SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as "sendDt",
         common_code.comn_cd_title as "stateCd"
@@ -62,11 +62,11 @@
  
    select
       open.subject_id || ',' || open.subject_seq as "sbjIdSeq",
-      subject.subject_title as "subjectTitle",
-      subject.hours as "hours",
-      open.start_day as "startDay", 
-      open.end_day as "endDay",
-      subject.cost as "cost",
+      subject.subject_title,
+      subject.hours,
+      open.start_day, 
+      open.end_day,
+      subject.cost,
       SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as "sendDt",
 
       (select count(*) from enroll e where e.subject_id = open.subject_id and state_cd = 'ERL06' and e.subject_seq= open.subject_seq) as "cntStd" 
