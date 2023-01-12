@@ -32,6 +32,6 @@
     <Logger name="jdbc.sqlonly" level="DEBUG" additivity="false"> 
         <AppenderRef ref="console" /> 
     </Logger>
-    
+
   </Loggers>
 </Configuration>

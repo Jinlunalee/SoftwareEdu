@@ -87,6 +87,14 @@ public class EnrollController {
 	}
 	
 	// 수강 목록 검색 필터
+		/**
+		2023. 1. 12.
+		 * @param enroll
+		 * @param pageNo
+		 * @param rowsPerPage
+		 * @param model
+		 * @return
+		 */
 		@RequestMapping(value="/searchlist", method=RequestMethod.GET)
 		public String getSearchList(EnrollVO enroll, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 			
