@@ -7,10 +7,11 @@
 	</select>
 
 	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
+	/*studentList*/
 		SELECT
 			rnum,
 			name,
-			student_id as "studentId", 
+			student_id, 
 			email, 
 			birth, 
 			position

@@ -107,9 +107,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
-								<form>
-									<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
-								</form>
+								<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
 							</c:when>
 							<c:when test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
 								<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
@@ -134,9 +132,7 @@
 									</div>
 							</c:when>
 							<c:when test="${(board.stateCdTitle eq '수강취소') or (board.stateCdTitle eq '수강신청취소')}">
-								<form>
-									<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
-								</form>
+								<button type="button" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary">삭제</button>
 							</c:when>
 							<c:when test="${board.stateCdTitle eq '수강완료'}">
 							</c:when>
@@ -180,9 +176,9 @@
 	</div>
 	
 	<script>
- 		function showModal(i){
- 			var openBtnClassName = ".modal-open-" + i;
- 			var modalClassName = ".modal-" + i; 
+		function showModal(i){
+			var openBtnClassName = ".modal-open-" + i;
+			var modalClassName = ".modal-" + i; 
 			$(openBtnClassName).click(function(){
 				$(modalClassName).fadeIn();
 			});
@@ -193,8 +189,8 @@
 		};
 		
 		function showModal2(i){
- 			var openBtnClassName = ".modal-open2-" + i;
- 			var modalClassName = ".modal2-" + i; 
+			var openBtnClassName = ".modal-open2-" + i;
+			var modalClassName = ".modal2-" + i; 
 			$(openBtnClassName).click(function(){
 				$(modalClassName).fadeIn();
 			});
@@ -219,31 +215,28 @@
 	
 	<script>
 		function del(studentId, subjectId, subjectSeq) {
-		
-		if(confirm('수강 정보를 삭제하시겠습니까?')) {
-			$.ajax({
-				type : "GET",
-				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
-			})
-			
-		} else {
-			return false;
-		}
+			if(confirm('수강 정보를 삭제하시겠습니까?')) {
+				$.ajax({
+					type : "GET",
+					url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq
+				})
+			} else {
+				return false;
+			}
 	}
 	</script>
 	
 	<script>
-			function approval(studentId, subjectId, subjectSeq) {
-				if(confirm('수강 신청을 승인하시겠습니까?')) {
-					$.ajax({
-						url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq
-					})
-				}
-				else{
-				}
+		function approval(studentId, subjectId, subjectSeq) {
+			if(confirm('수강 신청을 승인하시겠습니까?')) {
+				$.ajax({
+					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq
+				})
+			} else{
+				return false;
 			}
+		}
 	</script>
-	
 	<%-- <script>
 			function getHours(enrollId) {
 				var ch = $(".ch");
@@ -257,7 +250,7 @@
 	</script>
 	
 	<script>
-		 function search() {
+		function search() {
 			
 			$.ajax({
 				type : 'POST',

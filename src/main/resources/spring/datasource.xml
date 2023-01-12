@@ -8,8 +8,8 @@
 	<!-- Connection Pool -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
 		  destroy-method="close"> 
-		<!-- <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@kosa403.iptime.org:51521:xe"/> -->
+		<!-- property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@kosa403.iptime.org:51521:xe"/-->
 		
 		<!-- mybatis에서 만들어지는 SQL문을 로그로 출력해줌 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
@@ -24,5 +24,5 @@
 		
 	<!-- 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/spring" expected-type="javax.sql.DataSource"/>
-	-->
+	 -->
 </beans>
