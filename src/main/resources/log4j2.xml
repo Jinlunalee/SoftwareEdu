@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-  <Appenders>
-    <Console name="Out" target="SYSTEM_OUT">
-      <PatternLayout pattern="%-5level: %logger{36}.%M() - %msg%n"/>
-    </Console>
-  </Appenders>
+	<Appenders>
+		<Console name="Out" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%-5level: %logger{36}.%M() - %msg%n" />
+		</Console>
+		<Console name="console" target="SYSTEM_OUT">
+			<!-- <PatternLayout pattern="%d %5p [%c][%L LINE] %m%n" /> -->
+		</Console>
+		<!-- Query Loggers 쿼리 과정(파라미터까지) -->
+		<appender name="console-dblog"
+			class="org.apache.log4j.ConsoleAppender">
+			<PatternLayout pattern="%d %5p %m%n" />
+		</appender>
+	</Appenders>
+
+       
   
     <!-- SQL 로그 출력을 위한 설정 -->
-<!-- 	<Logger name="jdbc.sqltiming" level="info" additivity="false">
+	<!-- <Logger name="jdbc.sqltiming" level="info" additivity="false">
       <AppenderRef ref="Out"/>
-    </Logger> -->
-    
+    </Logger>
+     -->
+     
   
   <Loggers>
     <Logger name="com.mycompany.webapp" level="info" additivity="false">
       <AppenderRef ref="Out"/>
     </Logger>
-    <Root level="error">
-      <AppenderRef ref="Out"/>
+
+        
+    <Logger name="jdbc.sqlonly" level="DEBUG" additivity="false"> 
+        <AppenderRef ref="console" /> 
+    </Logger>
+
+    <Root level="INFO">
+        <AppenderRef ref="console" />
     </Root>
+    
   </Loggers>
 </Configuration>
