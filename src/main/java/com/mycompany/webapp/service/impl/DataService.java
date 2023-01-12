@@ -5,21 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.webapp.dao.IStudentRepository;
+import com.mycompany.webapp.dao.IDataRepository;
 import com.mycompany.webapp.dto.StudentVO;
-import com.mycompany.webapp.service.IStudentService;
+import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.IDataService;
 
 @Service
-public class StudentService implements IStudentService{
+public class DataService implements IDataService{
 	@Autowired
-	IStudentRepository studentRepository;
+	IDataRepository dataRepository;
 	
 	@Override
-	public List<StudentVO> getStudentList() {
-		return studentRepository.getStudentList();
+	public List<StudentVO> getDataList () {
+		return dataRepository.getDataList();
 	}
-
-
+	
+	@Override
+	public List<SubjectVO> getSbjDataList() {
+		return dataRepository.getSbjDataList();
+	}
 
 	
 	// 여기서부터 추가
