@@ -52,7 +52,7 @@ public class HomeController {
 	@RequestMapping(value="/courseboardlist",method=RequestMethod.GET)
 	public String getCourseList(Model model, @RequestParam String catCourse) {
 		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("menuKOR", "과정 관리");
 		
 		List<SubjectVO> courseList = homeService.selectCourseList(catCourse);
 		model.addAttribute("boardList", courseList);

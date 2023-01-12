@@ -27,6 +27,11 @@ public class DataController {
 	IStudentService studentService;
 	
 	//통계
+	/**
+	2023. 1. 12.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public String getDataList(Model model) {
 		model.addAttribute("menu", "data");
