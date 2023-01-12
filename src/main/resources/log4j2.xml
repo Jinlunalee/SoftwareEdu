@@ -33,9 +33,6 @@
         <AppenderRef ref="console" /> 
     </Logger>
 
-    <Root level="INFO">
-        <AppenderRef ref="console" />
-    </Root>
     
   </Loggers>
 </Configuration>

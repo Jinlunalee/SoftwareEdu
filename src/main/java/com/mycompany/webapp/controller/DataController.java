@@ -1,23 +1,17 @@
 package com.mycompany.webapp.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
-import com.mycompany.webapp.service.IStudentService;
-
-import oracle.sql.DATE;
+import com.mycompany.webapp.service.IDataService;
 
 /**
  * @author KOSA
@@ -28,7 +22,7 @@ import oracle.sql.DATE;
 public class DataController {
 	
 	@Autowired
-	IStudentService studentService;
+	IDataService dataService;
 	
 	//통계
 	/**
@@ -46,7 +40,7 @@ public class DataController {
 		model.addAttribute("menu", "data");
 		model.addAttribute("menuKOR", "연계 자료 관리");		
 		
-		List<StudentVO> dataList = studentService.getDataList();
+		List<StudentVO> dataList = dataService.getDataList();
 		
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("dataListSize", dataList.size());
@@ -104,7 +98,7 @@ public class DataController {
 		// jsonDataList가 완성. 문자열로 바꿔서 리턴.
 		String result = jsonDataList.toString();    */
 		
-		return studentService.getDataList();
+		return dataService.getDataList();
 	}	
 	
 	
@@ -113,11 +107,11 @@ public class DataController {
 	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String getxml(Model model) {
-		List<StudentVO> dataList = studentService.getDataList();
+		List<StudentVO> dataList = dataService.getDataList();
 		
 		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
 		for (StudentVO vo : dataList) {	
-			String agetntId = vo.getAgentId();
+			String agentId = vo.getAgentId();
 			String stdSbj = vo.getStdSbj();
 			String name = vo.getName();
 			String rate = vo.getRate();
@@ -143,13 +137,13 @@ public class DataController {
 	
 	@RequestMapping(value="/getjsonSbj")
 	public @ResponseBody List<SubjectVO> getjsonSbj() {
-		return studentService.getSbjDataList();
+		return dataService.getSbjDataList();
 	}
 	
 	
 	
 	@RequestMapping(value="/getxmlSbj")
 	public @ResponseBody List<SubjectVO> getxmlSbj() {
-		return studentService.getSbjDataList();
+		return dataService.getSbjDataList();
 	}
 }

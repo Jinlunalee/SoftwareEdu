@@ -5,10 +5,7 @@ import java.util.List;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
-public interface IStudentService {
-
-
-	List<StudentVO> getStudentList();
-
-
+public interface IDataService {
+	List<StudentVO> getDataList();
+	List<SubjectVO> getSbjDataList();
 }
