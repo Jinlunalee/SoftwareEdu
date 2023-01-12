@@ -29,7 +29,7 @@
    
    <select id="getCountQuestionNum" parameterType="map" resultType="int">
    /* getCountQuestionNum */
-      select count(question_num) as "countQuestionNum"
+      select count(question_num)
       from (
           select
               case grouping(subject_id) when 1 THEN 'total' else subject_id end as subject_id,
@@ -42,12 +42,12 @@
       where question_num!=99999
    </select>
    
-   <select id="selectSubjectListByFinishedState" resultType="map">
+   <select id="selectSubjectListByFinishedState" resultType="SubjectVO">
    /* selectSubjectListByFinishedState */
       select 
-         o.subject_id as "subjectId", 
-          subject_title as "subjectTitle",
-         subject_seq as "subjectSeq"
+         o.subject_id, 
+          subject_title,
+         subject_seq
       from open o
       left join subject s
       on o.subject_id = s.subject_id
