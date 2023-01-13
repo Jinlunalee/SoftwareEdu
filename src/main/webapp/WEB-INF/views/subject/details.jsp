@@ -45,11 +45,7 @@
 					</c:if>
 				</td>
 				<td> 연수기간(일수)</td>
-				<td> <fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/> 
-					<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>
-				~ <fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/> 
-					<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>
-				(${subject.days}일)
+				<td> ${subject.startDay} ~ ${subject.endDay} (${subject.days}일)
 				</td>
 			</tr>
 			<tr>

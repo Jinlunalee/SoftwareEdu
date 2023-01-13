@@ -69,12 +69,12 @@
 			course.course_title, 
 			subject.cat_cd as "cat", 
 			content,
-			start_time,
-			end_time,
-			start_day,
-			end_day, 
-			recruit_start_day,
-			recruit_end_day,
+			TO_CHAR(TO_TIMESTAMP(start_time, 'HH24:MI'),'HH24:MI') as start_time,
+			TO_CHAR(TO_TIMESTAMP(end_time, 'HH24:MI'),'HH24:MI') as end_time,
+			TO_CHAR(TO_DATE(start_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as start_day,
+			TO_CHAR(TO_DATE(end_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as end_day,
+			TO_CHAR(TO_DATE(recruit_start_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as recruit_start_day,
+			TO_CHAR(TO_DATE(recruit_end_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as recruit_end_day,
 			recruit_people,
 			state_cd as "state",
 			comn_cd_title,
@@ -136,7 +136,8 @@
 						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay}, 'YYYYMMDD',#{recruitEndDay},
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},TO_CHAR(TO_DATE(#{startDay},'YYYYMMDD'), 'YYYYMMDD')
+						,#{endDay},#{recruitStartDay}, 'YYYYMMDD',#{recruitEndDay},
 							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</when>
 			<otherwise>
@@ -144,7 +145,7 @@
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),#{endDay},#{recruitStartDay},#{recruitEndDay},
 							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</otherwise>
 		</choose>
