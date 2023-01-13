@@ -9,7 +9,7 @@
         student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
         student.name,
         round(complete_hours/hours * 100) as "rate",
-        SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as "sendDt",
+        to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt",
         common_code.comn_cd_title as "stateCd"
     from enroll
 
@@ -43,14 +43,13 @@
 /* getSbjDataList1 */ 
 
    select
-
       open.subject_id || ',' || open.subject_seq as sbj_id_seq,
       subject.subject_title,
       subject.hours,
       open.start_day, 
       open.end_day,
       subject.cost,
-      SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as send_dt,
+      to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt",
       (select count(*) from enroll e where e.subject_id = open.subject_id and state_cd = 'ERL06' and e.subject_seq= open.subject_seq) as cnt_std
    from open
    left join subject on open.subject_id=subject.subject_id  

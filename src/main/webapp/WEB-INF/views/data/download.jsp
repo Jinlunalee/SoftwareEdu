@@ -307,9 +307,7 @@ margin-top: 60px;
             		str += '<send_dt>' + data[i].sendDt + '</send_dt>';
             		str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
             		str += '</subject>';
-					
-					
-					
+		
 				}
 				
 				
