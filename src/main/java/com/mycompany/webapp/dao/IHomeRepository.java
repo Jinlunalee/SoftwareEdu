@@ -14,5 +14,8 @@ public interface IHomeRepository {
 	List<SubjectVO> selectCourseList(String catCourse);
 
 	String getComnCdTitle(@Param("comnCd") String comnCd);
+	
+	List<SubjectVO> searchSubject(SubjectVO subjectVo);
+	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
 
 }
