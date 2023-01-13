@@ -444,7 +444,7 @@
 				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
 			</if>
 			<if test="applyStartDay != '' and applyEndDay == ''">
-				AND e.reg_dt = #{applyStartDay}   
+				AND e.reg_dt BETWEEN #{applyStartDay} AND TO_CHAR(SYSDATE, 'YYYYMMDD')
 			</if>
 			<if test='student != "" and student.equals("sdName")'>
 				AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
