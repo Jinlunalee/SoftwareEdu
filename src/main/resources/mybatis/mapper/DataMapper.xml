@@ -5,18 +5,19 @@
 
 	<select id="getDataList" resultType="StudentVO">
 /* getDataList */
-	select
+    select
         student.student_id ||','|| SUBSTR(start_day, 1, 4) || ',' || enroll.subject_id ||','|| enroll.subject_seq ||','|| enroll_id as "stdSbj",
-        name,
+        student.name,
         round(complete_hours/hours * 100) as "rate",
         SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as "sendDt",
         common_code.comn_cd_title as "stateCd"
-	from enroll
+    from enroll
+
+    inner join student on enroll.student_id = student.student_id
+    inner join open on open.subject_id = enroll.subject_id and enroll.subject_seq= open.subject_seq
+    inner join subject on subject.subject_id = enroll.subject_id
     left join common_code on common_code.comn_cd = enroll.state_cd
-	left join student on enroll.student_id = student.student_id
-	left join open on open.subject_id = enroll.subject_id
-    left join subject on subject.subject_id = enroll.subject_id
-	where subject.support_yn = 'Y' AND enroll.state_cd in('ERL04', 'ERL05' ,'ERL06')
+    where subject.support_yn = 'Y' AND enroll.state_cd in('ERL04', 'ERL05' ,'ERL06')
 
 	<!-- 
 
@@ -42,11 +43,11 @@
 /* getSbjDataList */ 
    select
       open.subject_id || ',' || open.subject_seq as "sbjIdSeq",
-      subject.subject_title as "subjectTitle",
-      subject.hours as "hours",
-      open.start_day as "startDay", 
-      open.end_day as "endDay",
-      subject.cost as "cost",
+      subject.subject_title,
+      subject.hours,
+      open.start_day, 
+      open.end_day,
+      subject.cost,
       SYSDATE || ' ' || to_char(SYSDATE, 'hh24:mi:ss') as "sendDt",
 
       (select count(*) from enroll e where e.subject_id = open.subject_id and state_cd = 'ERL06' and e.subject_seq= open.subject_seq) as "cntStd" 
