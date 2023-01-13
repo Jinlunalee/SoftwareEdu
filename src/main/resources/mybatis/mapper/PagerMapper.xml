@@ -9,6 +9,7 @@
 
 	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
 		/*selectStudentListByPage*/
+		
 		SELECT
 			rnum,
 			name,
@@ -23,9 +24,10 @@
 		    FROM student
 		    ORDER BY student_id
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]> = #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
+		WHERE rnum <![CDATA[ > ]]> = #{startRowNo}
+		
 	</select>
 	
 	<select id="getCountOpenCourseRow" parameterType="String" resultType="int">
@@ -97,9 +99,9 @@
 					</when>
 				</choose>
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>	
 	
 	<select id="getCountOpenSubjectRow" parameterType="String" resultType="int">
@@ -210,9 +212,9 @@
 					</when>
 				</choose>
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 
@@ -304,9 +306,9 @@
 		        WHERE NOT (e.del_yn ='Y') 
 		        ORDER BY e.reg_dt DESC 
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
@@ -478,9 +480,9 @@
 			</if>
 		ORDER BY e.reg_dt DESC 
 				)
-			WHERE rownum &lt;= #{endRowNo} 
+			WHERE rownum <![CDATA[ < ]]>= #{endRowNo} 
 			)
-			WHERE rnum &gt;= #{startRowNo}
+			WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 	

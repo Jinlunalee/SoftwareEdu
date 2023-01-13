@@ -148,7 +148,6 @@
 							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</otherwise>
 		</choose>
-		
 	</insert>
 	
 	<insert id="insertFileData" parameterType="UploadfileVO">
