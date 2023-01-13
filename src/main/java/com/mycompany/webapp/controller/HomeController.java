@@ -98,9 +98,10 @@ public class HomeController {
 //			break;
 //	}
 		logger.info("---------------openSubjectSearchPopController--------------");
-		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
-		model.addAttribute("boardList", openSubjectList);
-		System.out.println(subjectVo);
+//		if()
+//		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
+//		model.addAttribute("boardList", openSubjectList);
+//		System.out.println(subjectVo);
 		logger.info("---------------openSubjectSearchPopController--------------");
 	}
 	

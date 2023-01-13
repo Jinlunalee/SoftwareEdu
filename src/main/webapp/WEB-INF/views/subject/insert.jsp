@@ -193,7 +193,7 @@ function changeEverything(i) {
 		
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt"> <textarea name="content" cols="60" rows="10"></textarea> </p>
+			<p class="txt"> <textarea name="content" id="content" cols="60" rows="10"></textarea> </p>
 		</div>
 		<div class="submit-btn">
 			<input type="hidden" name="state" id="state" value="">

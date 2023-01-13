@@ -2,7 +2,7 @@
 
 const submenuNames = {
     subject : [
-        '과정 목록', '강좌 목록', '개설 과정 목록', '개설 강좌 목록'
+        '개설 과정 목록', '개설 강좌 목록', '과정 목록', '강좌 목록'
     ],
     student : [
         '수강생 목록'
@@ -20,7 +20,7 @@ const submenuNames = {
 
 const submenuLinks = {
     subject : [
-        '', '', 'http://localhost/SoftwareEducation/subject/courseboardlist?catCourse=all', 'http://localhost/SoftwareEducation/subject/subjectboardlist?catSubject=all'
+        'http://localhost/SoftwareEducation/subject/courseboardlist?catCourse=all', 'http://localhost/SoftwareEducation/subject/subjectboardlist?catSubject=all', '', ''
     ],
     student : [
         'http://localhost/SoftwareEducation/student/boardlist', ''

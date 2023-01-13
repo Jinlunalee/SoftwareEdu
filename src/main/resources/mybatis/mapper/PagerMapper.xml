@@ -10,7 +10,12 @@
 	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
 		/*selectStudentListByPage*/
 		<include refid="paging-header" /> 
-		    SELECT name, student_id, email, birth, position
+		    SELECT
+		    	name,
+				student_id, 
+				email, 
+				to_char(to_date(birth), 'YYYY/MM/DD') as birth, 	
+            	position
 		    FROM student
 		    ORDER BY student_id
 		<include refid="paging-footer" /> 

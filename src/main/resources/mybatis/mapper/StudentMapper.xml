@@ -3,14 +3,18 @@
 <mapper namespace="com.mycompany.webapp.dao.IStudentRepository">
 	
 	<select id="getStudentList" resultType="StudentVO">
-	    /* getStudentList */
-		select 
-			name,
-			student_id,
-			email,
-			birth,
-			position
-		from student
+	       /* getStudentList */
+ 
+
+        select 
+            name,
+            student_id,
+            email,
+            to_char(to_date(birth), 'YYYY/MM/DD'),
+            common_code.comn_cd_title
+        from student
+        left join common_code on student.position = common_code.comn_cd
+
 	</select>
 	
 
