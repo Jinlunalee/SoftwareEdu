@@ -186,7 +186,7 @@
 				level_etc, 
 				cost
 		from subject 
-		where subject_id= #{subjectId} and del_yn = 'N'
+		where subject_id= #{subjectId}
 	</select>
 	
 	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
@@ -205,14 +205,14 @@
 		/*checkOpenCourse*/
 		select count(*) 
 		from open 
-		where course_id = #{courseId} and del_yn = 'N' and state_cd = 'OPN07'
+		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		/*updateRecruitSameCourse*/
 		update open
 		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
-		where course_id = #{courseId}
+		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</update>
 	
 	<update id="clickDeleteOpen" parameterType="map">
@@ -240,7 +240,7 @@
 		/*selectSubjectByCourseId*/
 		select subject_id
 		from open 
-		where course_id = #{courseId}
+		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
 </mapper>

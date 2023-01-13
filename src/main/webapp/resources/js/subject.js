@@ -153,12 +153,12 @@ $(function(){
 						//과정 정보 입력
 						let date = parse(result.courseInfo.endDay);
 						startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
+						startDay.attr('min', date);
 						ajaxEnd = date;
 
 						//startDay의 min을 endDay로 지정 (과정이 개설되어있는경우에만 필요) -- 아직안됨
-						console.log("endDay: "+ date);
-						startDay.attr('value', date);
-						console.log("startDay"+startDay.val());
+						// startDay.attr('value', date);
+						
 
 						date = parse(result.courseInfo.startDay);
 						ajaxStart = date;
@@ -197,154 +197,12 @@ $(function(){
 	});
 });
 
-/*과정안에 들어있는 강좌 비활성화*/
-function disabledCourse(courseId, list){
-
-}
-
-// $(function(){
-// 	$('#subjectId, #courseId').on('change',function(){
-// 		const courseId = $('#courseId').val();
-// 		const subjectId = $('#subjectId').val();
-// 		$.ajax({
-// 			type: "get",
-// 			url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
-// 			data: {
-// 				// subjectId: subjectId,
-// 			},
-// 			success: function(result) {
-// 				console.log("subjectId: "+subjectId);
-// 				console.log("courseId:"+courseId);
-
-// 				let startTime = $('#startTime');
-// 				let endTime = $('#endTime');
-// 				let startDay = $('#startDay');
-// 				let endDay = $('#endDay');
-// 				let recruitStartDay = $('#recruitStartDay');
-// 				let recruitEndDay = $('#recruitEndDay');
-// 				let printHours = $('#printHours');
-// 				let printDay = $('#printDay');
-// 				let hours = $('#hours');
-// 				let level = $('#level');
-// 				let cost = $('#cost');
-// 				let support = $('.support');
-
-// 				startTime.val('');
-// 				endTime.val('');
-// 				startDay.val('');
-// 				endDay.val('');
-// 				recruitStartDay.val('');
-// 				recruitStartDay.removeAttr('max'); //연수시작이 바뀌면 selectRecruitDay 실행으로 max생김
-// 				recruitEndDay.val('');
-// 				recruitEndDay.removeAttr('max'); 
-// 				recruitEndDay.removeAttr('min');
-// 				printHours.empty();
-// 				printDay.empty();
-// 				level.empty();
-// 				cost.empty();
-// 				support.empty();
-
-
-// 				if(courseId === ""){ //과정없을때 (선택안했을때)
-// 					printHours.append("("+result[0].hours+"시간)");
-// 					hours.val(result[0].hours);
-
-// 					if(!result[0].levelEtc){//난이도 기타값이 null일때
-// 						level.append(result[0].level);
-// 					}else{
-// 						level.append(result[0].level+"("+result[0].levelEtc+")");
-// 					}
-
-// 					cost.append(result[0].cost+"원");
-
-// 					if(result[0].supportYn === 'Y'){
-// 						support.append("※교육비 지원을 받는 강좌입니다.");
-// 					}
-// 				} else { //과정있을때 (1. 최조개설 2.개설되어있는 과정)
-// 					if(!result[0].recruitStartDay) { //신청일자가 존재하지 않음 -> 최초개설
-// 						console.log("최초개설")
-// 						printHours.append("("+result[0].hours+"시간)");
-// 						hours.val(result[0].hours);
-// 						if(!result[0].levelEtc){//난이도 기타값이 null일때
-// 							level.append(result[0].level);
-// 						}else{
-// 							level.append(result[0].level+"("+result[0].levelEtc+")");
-// 						}
-// 						cost.append(result[0].cost+"원");
-// 						if(result[0].supportYn === 'Y'){
-// 							support.append("※교육비 지원을 받는 강좌입니다.");
-// 						}
-// 					}else { //개설되어있는 경우
-// 						console.log("result: "+result);//리스트 몇개 넘어오는지 확인
-// 						//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
-// 						console.log("개설되어있는 경우");
-
-// 						//과정 정보 입력
-// 						let date = parse(result[0].endDay);
-// 						startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
-// 						ajaxEnd = date;
-
-// 						//startDay의 min을 endDay로 지정 (과정이 개설되어있는경우에만 필요) -- 아직안됨
-// 						console.log("endDay: "+ date);
-// 						startDay.attr('value', date);
-// 						console.log("startDay"+startDay.val());
-
-// 						date = parse(result[0].startDay);
-// 						ajaxStart = date;
-
-// 						date = parse(result[0].recruitStartDay);
-// 						recruitStartDay.val(date);
-// 						ajaxRecruitStart = date;
-
-// 						date = parse(result[0].recruitEndDay);
-// 						recruitEndDay.val(date);
-// 						ajaxRecruitEnd = date;
-
-// 						startDay.change();
-
-// 						//강좌 정보 입력
-// 						console.log('result[1].hours:'+result[1].hours);
-// 						printHours.append("("+result[1].hours+"시간)");
-// 						hours.val(result[1].hours);
-// 						if(!result[1].levelEtc){//난이도 기타값이 null일때
-// 							level.append(result[1].level);
-// 						}else{
-// 							level.append(result[1].level+"("+result[1].levelEtc+")");
-// 						}
-// 						cost.append(result[1].cost+"원");
-// 						if(result[1].supportYn === 'Y'){
-// 							support.append("※교육비 지원을 받는 강좌입니다.");
-// 						}
-// 					}
-// 				}
-// 			},
-// 			error: function(){
-// 				console.log("fail");
-// 			}
-// 		})
-
-// 	});
-// });
-
 /*날짜format*/
 function parse(str){
 	let y = str.substring(0,4);
 	let m = str.substring(4,6);
 	let d = str.substring(6);
 	return y+'-'+m+'-'+d;
-}
-
-/*첨부파일 이미지 미리보기*/
-function previewImg(input) {
-	if(input.files && input.files[0]){
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			document.querySelector('.detail_img').src = e.target.result;
-		};
-		reader.readAsDataURL(input.files[0]);
-	}else {
-		document.querySelector('.detail_img').src = "";
-	}
 }
 
 /*select 두개 연계 (필요X)*/
@@ -368,7 +226,7 @@ function courseChange(e){
 }
 
 /*jquery timepicker 사용해서 30분단위로 보이도록 커스텀*/
-$('input.timepicker').timepicker({
+$('input#startTime').timepicker({
 	timeFormat: 'HH:mm',
 	interval: 30,
 	startTime: '09:00',
@@ -377,23 +235,34 @@ $('input.timepicker').timepicker({
 	dynamic: false,
 	dropdown: true,
 	scrollbar: true,
-	change: calcEndDay
+	change: calcEndDay,
+	change: function(time){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
+		$('input#endTime').timepicker({
+			timeFormat: 'HH:mm',
+			interval: 30,
+			startTime: '09:00',
+			minTime: time,
+			maxTime: '11:00pm',
+			dynamic: false,
+			dropdown: true,
+			scrollbar: true,
+			change: calcEndDay
+		});
+	}
 });
-
 
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
-	const startDay = document.getElementById("startDay").value;
-		var startDay2 = new Date(startDay);
-		const startTime = document.getElementById("startTime").value;
-		const endTime = document.getElementById("endTime").value;
-		const printDay = document.getElementById("printDay");
+	let startDay = document.getElementById("startDay").value;
+		let startDay2 = new Date(startDay);
+		let startTime = document.getElementById("startTime").value;
+		let endTime = document.getElementById("endTime").value;
+		let printDay = document.getElementById("printDay");
 		let endDay = document.getElementById("endDay");
 
 		printDay.innerHTML = ''; //비울때는 =
 
 		if(startTime !== '' && endTime !== ''){
-			console.log('start');
 			let hours = document.getElementById("hours").value;
 
 			let startHour = parseInt(startTime.substring(0,2));
@@ -425,8 +294,7 @@ function calcEndDay(){
 		}
 }
 
-
-/*신청기간 지정*/
+/*신청기간 지정 - 처음에 입력했을때*/
 function selectRecruitDay(){
 	console.log("change startDay");
 	const startDay = document.getElementById("startDay").value;
@@ -434,7 +302,6 @@ function selectRecruitDay(){
 	let recruitEndDay = document.getElementById("recruitEndDay");
 
 	if(ajaxRecruitStart){// 같은 과정이 있으면 그 과정의 신청기간을 들고와서 입력해줌
-
 		//신청시작일자
 		recruitStartDay.value = ajaxRecruitStart;
 		recruitStartDay.max = ajaxStart; //같은과정 연수 시작하기 전
@@ -466,17 +333,32 @@ function selectRecruitDay(){
 
 }
 
+/*신청기간이 변경 */
+function MinMaxChange(startDay, recruitStartDay, recruitEndDay){
+	recruitStartDay.max = startDay;
+	
+	recruitEndDay.max = startDay;
+	recruitEndDay.min = recruitStartDay.value;
+}
+
 /*오늘날짜와 기간들 비교해서 모집상태 입력*/
 function inputState(){
+	console.log("change recruitStartDay, EndDay");
+
 	const date = new Date();
 	const today = parseInt(date.toJSON().substring(0,10).replaceAll('-',''));
 
-	let recruitStartDay = parseInt(document.getElementById('recruitStartDay').value.replaceAll('-',''));
-	let recruitEndDay = parseInt(document.getElementById('recruitEndDay').value.replaceAll('-',''));
+	let startDay = document.getElementById("startDay").value;
+	let recruitStartDay = document.getElementById('recruitStartDay');
+	let recruitEndDay = document.getElementById('recruitEndDay');
 	let state = document.getElementById('state');
 
+	MinMaxChange(startDay,recruitStartDay,recruitEndDay); //신청기간 MINMAX 변경
+
+	recruitStartDay = parseInt(recruitStartDay.value.replaceAll('-',''));
+	recruitEndDay = parseInt(recruitEndDay.value.replaceAll('-',''));
+
 	state.value = ''; //원래있던 상태 초기화
-	console.log(state.value);
 
 	if(today < recruitStartDay) { //현재날짜가 모집시작일 보다 작으면
 		state.value = 'OPN01'; //모집예정
@@ -485,6 +367,5 @@ function inputState(){
 	}else{
 		state.value = 'OPN03'; //모집마감
 	}
-	console.log(state.value);
+	// console.log(state.value);
 }
-
