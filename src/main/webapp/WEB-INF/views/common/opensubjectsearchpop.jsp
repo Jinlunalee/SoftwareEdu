@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="subject-name-warp">
-        <span>작가 선택</span>
+        <span>개설 강좌 선택</span>
     </div>
     <div class="content-wrap">
             <!-- 게시물 표 영역 -->
@@ -19,7 +19,7 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <form id="searchForm" action="<c:url value='/common/opensubjectsearchpop'/>" method="get">
+                    <form id="searchForm" action="<c:url value='/common/opensubjectsearchpop2'/>" method="get">
                         <div class="search-input">
                             강좌아이디 : <input type="text" name="subjectId">
                             강좌명 : <input type="text" name="subjectTitle">
@@ -27,13 +27,13 @@
                             상태 : <input type="text" name="state">
                             분류 : <input type="text" name="catSubject">
                             등록년도 : <input type="text" name="regYear">
-                            <button class='btn search-btn'>검 색</button>
+                            <button class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>
                 </div>
 
                 <!-- 게시물 O -->
-                <c:if test="${board != 'empty'}">
+                <c:if test="${boardCheck != 'empty'}">
                     <div class="table-exist">
                         <table class="table">
                             <thead>
@@ -62,30 +62,30 @@
 
                                 </tr>
                             </thead>
-                            <c:forEach items="${board}" var="boardList">
+                            <c:forEach items="${boardList}" var="board">
                             <tr>
-                                <td><c:out value="${board.subjectId}"></c:out> </td>
-                                <td><c:out value="${board.subjectTitle}"></c:out></td>
-                                <td><c:out value="${board.courseId}"></c:out> </td>
-                                <td><c:out value="${board.courseTitle}"></c:out> </td>
-                                <td><c:out value="${board.supportYn}"></c:out> </td>
-                                <td><c:out value="${board.level}"></c:out> </td>
-                                <td><c:out value="${board.days}"></c:out> </td>
-                                <td><c:out value="${board.hours}"></c:out> </td>
-                                <td><c:out value="${board.startDay}"></c:out> </td>
-                                <td><c:out value="${board.endDay}"></c:out> </td>
-                                <td><c:out value="${board.recruitStartDay}"></c:out> </td>
-                                <td><c:out value="${board.recruitEndDay}"></c:out> </td>
-                                <td><c:out value="${board.state}"></c:out> </td>
-                                <td><c:out value="${board.catSubject}"></c:out> </td>
-                                <td><c:out value="${board.regDt}"></c:out> </td>
+                                <td>${board.subjectId}</td>
+                                <td>${board.subjectTitle}</td>
+                                <td>${board.courseId}</td>
+                                <td>${board.courseTitle}</td>
+                                <td>${board.supportYn}</td>
+                                <td>${board.level}</td>
+                                <td>${board.days}</td>
+                                <td>${board.hours}</td>
+                                <td>${board.startDay}</td>
+                                <td>${board.endDay}</td>
+                                <td>${board.recruitStartDay}</td>
+                                <td>${board.recruitEndDay}</td>
+                                <td>${board.state}</td>
+                                <td>${board.catSubject}</td>
+                                <td>${board.regDt}</td>
                             </tr>
                             </c:forEach>
                         </table>
                     </div>                			
                 </c:if>
                 <!-- 게시물 x -->
-                <c:if test="${board == 'empty'}">
+                <c:if test="${boardCheck == 'empty'}">
                     <div class="table-empty">
                         개설된 강좌가 없습니다.
                     </div>

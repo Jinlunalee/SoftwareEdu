@@ -71,38 +71,34 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/common/opensubjectsearchpop")
-	public void openSubjectSearchPop(@RequestParam(required = false) SubjectVO subjectVo, Model model) throws Exception{
+	public void openSubjectSearchPop(Model model) throws Exception{
 		
-//		searchType = 검색할 것
-//				SCHT001	강좌
-//				SCHT002	과정
-//				SCHT003	개설강좌
-//				SCHT004	개설과정
-//				SCHT005	수강생
-		
-//		List<Map<String, String>> searchParam: key = 변수명, value = 검색값
-//		{변수명, 검색값}, {변수명, 검색값}, {변수명, 검색값}, {변수명, 검색값}, {변수명, 검색값}
-//				
-//		switch(searchType) {
-//		case "SCHT0001" : // 강좌 리스트 검색,
-//			model.addAttribute("board", homeService.searchSubject(searchParam));
-//			model.addAttribute("columnName", homeService.getColumnName(searchType, searchParam));
-// 			break;
-//		case "SCHT0002" : // 과정 리스트 검색 매퍼,
-//			break;
-//		case "SCHT0003" : // 개설 강좌 리스트 검색 매퍼,
-//			break;
-//		case "SCHT0004" : // 개설 과정 리스트 검색 매퍼,
-//			break;
-//		case "SCHT0005" : // 수강생 리스트 검색 매퍼,
-//			break;
-//	}
 		logger.info("---------------openSubjectSearchPopController--------------");
+	}
+	
+	/**
+	 * @description	개설강좌 검색 팝업
+	 * @date	2023. 1. 13.
+	 * @author	Jin Lee
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/opensubjectsearchpop2")
+	public String openSubjectSearchPop2(SubjectVO subjectVo, Model model) throws Exception{
 //		if()
-//		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
+		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
+		
+		if(!openSubjectList.isEmpty()) {
+			model.addAttribute("boardList",openSubjectList);	// 작가 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 작가 존재하지 않을 경우
+		}
+		
 //		model.addAttribute("boardList", openSubjectList);
 //		System.out.println(subjectVo);
-		logger.info("---------------openSubjectSearchPopController--------------");
+		System.out.println(openSubjectList);
+		
+		logger.info("---------------openSubjectSearchPopController2--------------");
+		return "common/opensubjectsearchpop";
 	}
 	
 }
