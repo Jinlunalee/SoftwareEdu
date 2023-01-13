@@ -73,7 +73,7 @@
 			end_time,
 			start_day,
 			end_day, 
-			recruit_start_day, 
+			recruit_start_day,
 			recruit_end_day,
 			recruit_people,
 			state_cd as "state",
@@ -96,7 +96,7 @@
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
     		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
-    		content = #{content}, state_cd = #{state}, file_id=#{fileId}
+    		content = #{content}, state_cd = #{state}, file_id=#{fileId}, modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
@@ -104,8 +104,8 @@
 		/*updateFileData*/
 		update upload_file
 		set
-			file_name=#{fileName}, file_size=#{fileSize}, 
-			file_content_type=#{fileContentType}, file_data=#{fileData}
+			file_name=#{fileName}, file_size=#{fileSize}, file_content_type=#{fileContentType}, file_data=#{fileData},
+			modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
 		where 
 			file_id=#{fileId}
 	</update>
@@ -136,7 +136,7 @@
 						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay},#{recruitEndDay},
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},#{startDay},#{endDay},#{recruitStartDay}, 'YYYYMMDD',#{recruitEndDay},
 							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</when>
 			<otherwise>
@@ -187,7 +187,7 @@
 				level_etc, 
 				cost
 		from subject 
-		where subject_id= #{subjectId}
+		where subject_id= #{subjectId} and del_yn = 'N'
 	</select>
 	
 	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
@@ -199,12 +199,14 @@
 						recruit_start_day, 
 						recruit_end_day
 		from open
-		where course_id = #{courseId}
+		where course_id = #{courseId} and del_yn = 'N'
 	</select>
 	
 	<select id="checkOpenCourse" parameterType="String" resultType="int">
 		/*checkOpenCourse*/
-		select count(*) from open where course_id = #{courseId} and del_yn = 'N'
+		select count(*) 
+		from open 
+		where course_id = #{courseId} and del_yn = 'N' and state_cd = 'OPN07'
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">

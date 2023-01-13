@@ -1,12 +1,11 @@
 /*파일 누르면 이름 들어가게*/
 $(function(){
 	$("#file").on('change',function(){
-		console.log("change");
 		var fileName = $("#file").val();
+		fileName = fileName.substring(12);
 		$(".insert_FileUpload").val(fileName);
 	});
 });
-
 /*이미지 미리보기 기능 만들기 */
 function previewImg(input) {
 	//input 태그에 파일이 있는 경우
