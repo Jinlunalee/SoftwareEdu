@@ -4,7 +4,6 @@
 
 	<select id="getEnrollList" resultType="EnrollVO">
 	/* getEnrollList */
-	<![CDATA[
 		SELECT  enroll_id,
 				e.subject_id,
 				e.subject_seq,
@@ -31,40 +30,32 @@
         LEFT OUTER JOIN SUBJECT s 
         ON e.subject_id = s.subject_id 
         WHERE NOT (e.del_yn ='Y')
-    ]]>	
 	</select>
 	
 	<select id="getRatio" parameterType="map" resultType="string">
 	/* getRatio */
-	<![CDATA[
 		SELECT ROUND(complete_hours/hours * 100) 
 		FROM ENROLL e, SUBJECT s 
 		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
-	]]>	
 	</select>
 	
 	<select id="getHours" parameterType="string" resultType="int">
 	/* getHours */
-	<![CDATA[
 		SELECT complete_hours 
 		FROM ENROLL 
 		WHERE enroll_id = #{enrollId}
-	]]>	
 	</select>
 	
 	<select id="getCancelList" resultType="CommonCodeVO">
 	/* getCancelList */
-	<![CDATA[
 		SELECT comn_cd, 
 		comn_cd_title 
 		FROM COMMON_CODE 
 		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
-	]]>	
 	</select>
 	
 	<select id="getStudentList" parameterType="StudentVO" resultType="StudentVO">
 	/* getStudentList */
-	<![CDATA[
 		SELECT student_id, 
 				name, 
 				birth, 
@@ -80,12 +71,10 @@
 				student_id = #{keyword}
 			</when>
 		</choose>
-	]]>	
 	</select>
 	
 	<select id="getOpenList" parameterType="OpenVO" resultType="OpenVO">
 	/* getOpenList */
-	<![CDATA[
 		<choose>
 			<when test="subCor != null and subCor.equals('subject')">
 				SELECT o.subject_id, 
@@ -125,115 +114,91 @@
 			    HAVING o.course_id=#{kw} OR replace(course_title, ' ', '') LIKE '%'||#{kw}||'%'
 			</when>
 		</choose>
-	]]>	
 	</select>
 	
 	<select id="getMaxEnrollId" resultType="int">
 	/* getMaxEnrollId */
-	<![CDATA[
 		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
 		FROM ENROLL
-	]]>	
 	</select>
 	
 	<update id="clickCancel" parameterType="map">
 	/* clickCancel */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET state_cd = 'ERL05' 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<update id="clickDelete" parameterType="map">
 	/* clickDelete */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET del_yn = 'Y' 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<update id="clickDeleteEnrollByOpen" parameterType="map">
 	/* clickDeleteEnrollByOpen */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET del_yn = 'Y' 
 		WHERE subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<update id="addHours" parameterType="map">
 	/* addHours */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET complete_hours = complete_hours + #{addHours} 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<update id="updateCancelRsCd" parameterType="map">
 	/* updateCancelRsCd */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET cancel_rs_cd = #{cancelRsCd}, cancel_rs_etc = #{cancelRsEtc} 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<update id="approval" parameterType="map">
 	/* approval */
-	<![CDATA[
 		UPDATE ENROLL 
 		SET state_cd = 'ERL03' 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
-	]]>	
 	</update>
 	
 	<insert id="addEnroll" parameterType="map">
 	/* addEnroll */
-	<![CDATA[
 		INSERT INTO ENROLL 
 		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
 		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
 		del_yn, cancel_rs_cd, cancel_rs_etc) 
 		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
-	]]>	
 	</insert>
 	
 	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">
 	/* getSubjectCountByCourse */
-	<![CDATA[
 		SELECT count(subject_id)
 		FROM open
 		WHERE course_id=#{courseId}
-	]]>	
 	</select>
 	
 	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
 	/* getSubjectInfoByCourse */
-	<![CDATA[
 		select 
 		    subject_id, 
 		    subject_seq 
 		from open
 		where course_id = #{courseId}
-	]]>	
 	</select>
 	
 	<update id="updateEnrollCancel">
 	/* updateEnrollCancel */
-	<![CDATA[
 		update enroll
 		set state_cd = 'ERL05'
 		where subject_id IN (select subject_id from open where state_cd = 'OPN07')
 		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07')
-	]]>	
 	</update>
 	
 	<select id="recruitTotalPeople" parameterType="map" resultType="int">
 	/* recruitTotalPeople */
-	<![CDATA[
 		select count(*) 
 		from enroll 
 		where subject_id=#{subjectId} and subject_seq=#{subjectSeq} 
@@ -251,7 +216,6 @@
 				and state_cd = 'ERL06'
 			</when>
 		</choose>
-	]]>	
 	</select>
 	
 </mapper>

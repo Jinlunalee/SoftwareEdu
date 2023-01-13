@@ -4,14 +4,12 @@
 
 	<select id="getCountStudentRow" resultType="int">
 		/*getCountStudentRow*/
-		<![CDATA[
 		SELECT count(*) FROM student
-		]]>
 	</select>
 
 	<select id="selectStudentListByPage" parameterType="Pager" resultType="StudentVO">
 		/*selectStudentListByPage*/
-		<![CDATA[
+		
 		SELECT
 			rnum,
 			name,
@@ -26,15 +24,14 @@
 		    FROM student
 		    ORDER BY student_id
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]> = #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
-		]]>
+		WHERE rnum <![CDATA[ > ]]> = #{startRowNo}
+		
 	</select>
 	
 	<select id="getCountOpenCourseRow" parameterType="String" resultType="int">
 		/*getCountOpenCourseRow*/
-		<![CDATA[
 		SELECT count(distinct open.course_id)
 		FROM open
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -47,12 +44,10 @@
 				AND del_yn = 'N'
 			</when>
 		</choose>
-		]]>
 	</select>
 
 	<select id="selectOpenCourseListByPage" parameterType="map" resultType="SubjectVO">
 		/*selectOpenCourseListByPage*/
-		<![CDATA[
 		select
 		    rnum,
 		    "courseId", 
@@ -104,15 +99,13 @@
 					</when>
 				</choose>
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
-		]]>
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>	
 	
 	<select id="getCountOpenSubjectRow" parameterType="String" resultType="int">
 		/*getCountOpenSubjectRow*/
-		<![CDATA[
 		SELECT count(*)
 		FROM open
 		LEFT JOIN subject ON open.subject_id = subject.subject_id
@@ -124,12 +117,10 @@
 				WHERE del_yn = 'N'
 			</when>
 		</choose>
-		]]>
 	</select>
 
 	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="SubjectVO">
 		/*selectOpenSubjectListByPage*/
-		<![CDATA[
 		select
 		    rnum, 
 		    "subjectId", 
@@ -221,23 +212,19 @@
 					</when>
 				</choose>
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
-		]]>
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 
 	<select id="getCountEnrollRow" resultType="int">
 		/*getCountEnrollRow*/
-		<![CDATA[
 		SELECT count(*) FROM enroll WHERE NOT (del_yn='Y')
-		]]>
 	</select>
 
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
 		/*selectEnrollListByPage*/
-		<![CDATA[
 		SELECT
 		    rnum,
 		    "enrollId", 
@@ -319,15 +306,13 @@
 		        WHERE NOT (e.del_yn ='Y') 
 		        ORDER BY e.reg_dt DESC 
 		  )
-		  WHERE rownum &lt;= #{endRowNo}
+		  WHERE rownum <![CDATA[ < ]]>= #{endRowNo}
 		)
-		WHERE rnum &gt;= #{startRowNo}
-		]]>
+		WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
 		/*getCountSearchRow*/
-		<![CDATA[
 		SELECT count(*) 
 		FROM ENROLL e 
 		LEFT OUTER JOIN STUDENT t 
@@ -375,12 +360,10 @@
 			<if test='state != "" and state.equals("complete")'>
 				AND e.state_cd = 'ERL06' 
 			</if>
-			]]>
 	</select>
 	
 	<select id="selectSearchListByPage" parameterType="map" resultType="EnrollVO">
 		/*selectSearchListByPage*/
-		<![CDATA[
 		SELECT rnum, 
 			"enrollId", 
 		    "subjectId", 
@@ -497,10 +480,9 @@
 			</if>
 		ORDER BY e.reg_dt DESC 
 				)
-			WHERE rownum &lt;= #{endRowNo} 
+			WHERE rownum <![CDATA[ < ]]>= #{endRowNo} 
 			)
-			WHERE rnum &gt;= #{startRowNo}
-			]]>
+			WHERE rnum <![CDATA[ > ]]>= #{startRowNo}
 	</select>
 	
 	

@@ -4,7 +4,6 @@
 	
 	<select id="selectCourseList" resultType="SubjectVO">
 		/*selectCourseList*/
-		<![CDATA[
 		select DISTINCT
 			open.course_id, 
 			course_title,
@@ -20,12 +19,10 @@
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
         where open.course_id IS NOT NULL and del_yn = 'N'
-        ]]>
 	</select>
 	
 	<select id="selectSubjectList" resultType="SubjectVO">
 		/*selectSubjectList*/
-		<![CDATA[
 		select 
 			open.subject_id, 
 			subject_seq,
@@ -54,12 +51,10 @@
         		left join common_code on open.state_cd = common_code.comn_cd
         where del_yn = 'N'
         order by start_day, end_day
-        ]]>
 	</select>
 
 	<select id="selectSubjectDetails" parameterType="map" resultType="SubjectVO">
 		/*selectSubjectDetails*/
-		<![CDATA[
 		select 
 			open.subject_id, 
 			subject_seq,
@@ -93,36 +88,30 @@
         		left join common_code on open.state_cd = common_code.comn_cd
         		left join upload_file on open.file_id = upload_file.file_id
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
-        ]]>
 	</select>
 	
 	<update id="updateSubject" parameterType="SubjectVO">
 		/*updateSubject*/
-		<![CDATA[
 		update open
 		set 
     		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
     		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
     		content = #{content}, state_cd = #{state}, file_id=#{fileId}
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
-		]]>
 	</update>
 	
 	<update id="updateFileData" parameterType="UploadfileVO">
 		/*updateFileData*/
-		<![CDATA[
 		update upload_file
 		set
 			file_name=#{fileName}, file_size=#{fileSize}, 
 			file_content_type=#{fileContentType}, file_data=#{fileData}
 		where 
 			file_id=#{fileId}
-			]]>
 	</update>
 	
 	<select id="getFile" parameterType="String" resultType="UploadfileVO">
 		/*getFile*/
-		<![CDATA[
 		select 
 				file_id, 
 				file_name, 
@@ -131,20 +120,16 @@
 				file_data
 		from upload_file
 		where file_id = #{fileId}
-		]]>
 	</select>
 	
 	<select id="selectMaxFileId" resultType="String">
 		/*selectMaxFileId*/
-		<![CDATA[
 		select max(file_id)
 		from upload_file
-		]]>
 	</select>
 	
 	<insert id="insertSubject" parameterType="SubjectVO">
 		/*insertSubject*/
-		<![CDATA[
 		<choose>
 			<when test="fileId != null">
 				insert into open 
@@ -163,41 +148,33 @@
 							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</otherwise>
 		</choose>
-		]]>
 	</insert>
 	
 	<insert id="insertFileData" parameterType="UploadfileVO">
 		/*insertFileData*/
-		<![CDATA[
 		insert into upload_file 
 			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
 		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
-		]]>
 	</insert>
 	
 	<select id="selectAllCourse" resultType="SubjectVO">
 		/*selectAllCourse*/
-		<![CDATA[
 		select 
 			course_id, 
 			course_title
 		from course
-		]]>
 	</select>
 	
 	<select id="selectAllSubject" resultType="SubjectVO">
 		/*selectAllSubject*/
-		<![CDATA[
 		select 
 			subject_id, 
 			subject_title
 		from subject
-		]]>
 	</select>
 	
 	<select id="infoSubject" parameterType="String" resultType="SubjectVO">
 		/*infoSubject*/
-		<![CDATA[
 		select 
 				subject_id,
 				subject_title, 
@@ -210,12 +187,10 @@
 				cost
 		from subject 
 		where subject_id= #{subjectId}
-		]]>
 	</select>
 	
 	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
 		/*infoOpenCourse*/
-		<![CDATA[
 		select DISTINCT 
 						course_id, 
 						min(start_day) over (partition by course_id) as "startDay", 
@@ -224,59 +199,46 @@
 						recruit_end_day
 		from open
 		where course_id = #{courseId}
-		]]>
 	</select>
 	
 	<select id="checkOpenCourse" parameterType="String" resultType="int">
 		/*checkOpenCourse*/
-		<![CDATA[
 		select count(*) from open where course_id = #{courseId} and del_yn = 'N'
-		]]>
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		/*updateRecruitSameCourse*/
-		<![CDATA[
 		update open
 		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
 		where course_id = #{courseId}
-		]]>
 	</update>
 	
 	<update id="clickDeleteOpen" parameterType="map">
 		/*clickDeleteOpen*/
-		<![CDATA[
 		update open
 		set del_yn = 'Y'
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
-		]]>
 	</update>
 	
 	<update id="clickDeleteUploadFile" parameterType="map">
 		/*clickDeleteUploadFile*/
-		<![CDATA[
 		update upload_file
 		set del_yn = 'Y'
 		where file_id = #{fileId}
-		]]>
 	</update>
 	
 	<update id="closeSubject" parameterType="map">
 		/*closeSubject*/
-		<![CDATA[
 		update open 
 		set state_cd = 'OPN07' 
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
-		]]>
 	</update>
 	
 	<select id="selectSubjectByCourseId" parameterType="String" resultType="SubjectVO">
 		/*selectSubjectByCourseId*/
-		<![CDATA[
 		select subject_id
 		from open 
 		where course_id = #{courseId}
-		]]>
 	</select>
 	
 </mapper>

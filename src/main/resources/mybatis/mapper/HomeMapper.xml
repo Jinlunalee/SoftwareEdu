@@ -4,7 +4,6 @@
 
 	<select id="selectSubjectList" parameterType="String" resultType="SubjectVO">	
 	/* selectSubjectList */
-	<![CDATA[
 		select 
 			open.subject_id as "subjectId", 
 			subject_seq as "subjectSeq",
@@ -34,7 +33,6 @@
         		left join common_code on open.state_cd = common_code.comn_cd
         where del_yn = 'N' AND subject.cat_cd=#{catSubject}
         order by start_day, end_day
-    ]]>	
 	</select>
 	
 	
@@ -42,7 +40,6 @@
 	
 	<select id="selectCourseList" parameterType="String" resultType="SubjectVO">
 	/* selectCourseList */
-	<![CDATA[
 		select DISTINCT
 			open.course_id as "courseId", 
 			course_title as "courseTitle",
@@ -58,7 +55,6 @@
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
         where open.course_id IS NOT NULL and del_yn = 'N' AND course.cat_cd = #{catCourse}
-    ]]>	
 	</select>
 	
 	
@@ -66,11 +62,9 @@
 
 	<select id="getComnCdTitle" parameterType="String" resultType="String">
 	/* getComnCdTitle */
-	<![CDATA[
 		select comn_cd_title
 		from common_code
 		where comn_cd=#{comnCd}
-	]]>	
 	</select>
 
 </mapper>
