@@ -11,21 +11,21 @@
 		/*selectStudentListByPage*/
 		
 		SELECT
-			rnum,
+            rnum,
 			name,
 			student_id, 
 			email, 
-			birth, 
-			position
+			to_char(to_date(birth), 'YYYY/MM/DD') as "birth", 	
+            position
 		FROM (
 		  SELECT ROWNUM as rnum, name, student_id, email, birth, position
 		  FROM (
 		    SELECT name, student_id, email, birth, position
-		    FROM student
+		    FROM student	    
 		    ORDER BY student_id
-		  )
-		  WHERE rownum <![CDATA[ < ]]> = #{endRowNo}
-		)
+		  )		  
+            WHERE rownum <![CDATA[ < ]]> = #{endRowNo}
+		)  
 		WHERE rnum <![CDATA[ > ]]> = #{startRowNo}
 		
 	</select>
