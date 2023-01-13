@@ -30,6 +30,7 @@ public class StudentVO {
 	private String agentId;
 	private String stdSbj;
 	private String rate;
+	private String completeHours;
 
 	
 	

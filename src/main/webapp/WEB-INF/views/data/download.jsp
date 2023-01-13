@@ -65,10 +65,10 @@ img {
 }
 
 .box {
-	width: 500px;
+	width: 600px;
 	height: 550px;
 	border: 1.5px solid #b1becc;
-	margin: 35px;
+	margin: 10px;
 	display: none;
 }
 
@@ -104,7 +104,7 @@ margin-top: 60px;
 			<div class="card_check">
 				<img id="check_img"
 					src="<c:url value='/resources/images/json.png'/>" /> 
-					<br><a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
+					<br><a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -113,7 +113,7 @@ margin-top: 60px;
 
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
+				<br> <a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -125,7 +125,7 @@ margin-top: 60px;
 		<div class="second_card">
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="third_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -135,7 +135,7 @@ margin-top: 60px;
 			
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="forth_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -198,8 +198,7 @@ margin-top: 60px;
             		str += '"agent_id":' + '"' + "KOSA01" + '",';
             		str += '"std_sbj":' + '"' + data[i].stdSbj + '",';
             		str += '"name":' + '"' + data[i].name + '",';
-            		str += '"rate":' + '"' + data[i].rate + '",';
-            		str += '"state_cd":' + '"' + data[i].stateCd + '",';
+            		str += '"complete_hours":' + '"' + data[i].completeHours + '",';
             		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
             		
@@ -251,8 +250,8 @@ margin-top: 60px;
             		str += '"start_day":' + '"' + data[i].startDay + '",';
             		str += '"end_day":' + '"' + data[i].endDay + '",';
             		str += '"cost":' + '"' + data[i].cost + '",';
-            		str += '"send_dt":' + '"' + data[i].sendDt + '",';
-            		str += '"cnt_std":' + '"' + data[i].cntStd + '명"';
+            		str += '"cnt_std":' + '"' + data[i].cntStd + '명",';
+            		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
             		/*
             		alert(
