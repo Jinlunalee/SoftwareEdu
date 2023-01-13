@@ -244,4 +244,10 @@
 		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
+	<select id="searchSubject" parameterType="SubjectVO" resultType="SubjectVO">
+		select subject_id, subject_title, support_yn, cat_cd as cat_subject, days, hours, level_cd, level_etc, cost, reg_year
+		from subject
+			
+	</select>
+	
 </mapper>

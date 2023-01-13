@@ -40,8 +40,9 @@ public class SubjectVO {
 	private int recruitPeople; // 모집인원
 	private String state; //강좌 상태 코드
 	
-	private String comnCdTitle; //공통코드명
+	private String comnCdTitle; // 강좌 상태 코드명
 	private String regDt;// 강좌 등록 일자
+	private int regYear;//등록년도
 	
 	private MultipartFile file; //첨부파일 
 	private String fileId;
