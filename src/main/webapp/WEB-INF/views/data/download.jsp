@@ -65,10 +65,10 @@ img {
 }
 
 .box {
-	width: 500px;
+	width: 600px;
 	height: 550px;
 	border: 1.5px solid #b1becc;
-	margin: 35px;
+	margin: 10px;
 	display: none;
 }
 
@@ -104,7 +104,7 @@ margin-top: 60px;
 			<div class="card_check">
 				<img id="check_img"
 					src="<c:url value='/resources/images/json.png'/>" /> 
-					<br><a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
+					<br><a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -113,7 +113,7 @@ margin-top: 60px;
 
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 지원대상 교육과정을 수강하는<br>수강생 교육 정보<br>(이수율 포함)</a>
+				<br> <a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -125,7 +125,7 @@ margin-top: 60px;
 		<div class="second_card">
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="third_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -135,7 +135,7 @@ margin-top: 60px;
 			
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br> (이수율 포함)</a>
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="forth_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -195,12 +195,11 @@ margin-top: 60px;
             	for (var i = 0; i < data.length; i++) {
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"훈련기관ID":' + '"' + "KOSA01" + '",';
-            		str += '"수강생,강좌정보":' + '"' + data[i].stdSbj + '",';
-            		str += '"수강생 이름":' + '"' + data[i].name + '",';
-            		str += '"이수율":' + '"' + data[i].rate + '",';
-            		str += '"진행상태":' + '"' + data[i].stateCd + '",';
-            		str += '"전송시간":' + '"' + data[i].sendDt + '"';
+            		str += '"agent_id":' + '"' + "KOSA01" + '",';
+            		str += '"std_sbj":' + '"' + data[i].stdSbj + '",';
+            		str += '"name":' + '"' + data[i].name + '",';
+            		str += '"complete_hours":' + '"' + data[i].completeHours + '",';
+            		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
             		
             		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 됨
@@ -245,14 +244,14 @@ margin-top: 60px;
             		
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"강좌아이디, 강좌시퀀스":' + '"' + data[i].sbjIdSeq + '",';
-            		str += '"강좌명":' + '"' + data[i].subjectTitle + '",';
-            		str += '"강좌 시수":' + '"' + data[i].hours + '",';
-            		str += '"강좌 시작 일자":' + '"' + data[i].startDay + '",';
-            		str += '"강좌 종료 일자":' + '"' + data[i].endDay + '",';
-            		str += '"강좌 비용":' + '"' + data[i].cost + '",';
-            		str += '"전송 시간":' + '"' + data[i].sendDt + '",';
-            		str += '"수강 완료 된 연수생 수":' + '"' + data[i].cntStd + '명"';
+            		str += '"sbjId_seq":' + '"' + data[i].sbjIdSeq + '",';
+            		str += '"subject_title":' + '"' + data[i].subjectTitle + '",';
+            		str += '"hours":' + '"' + data[i].hours + '",';
+            		str += '"start_day":' + '"' + data[i].startDay + '",';
+            		str += '"end_day":' + '"' + data[i].endDay + '",';
+            		str += '"cost":' + '"' + data[i].cost + '",';
+            		str += '"cnt_std":' + '"' + data[i].cntStd + '명",';
+            		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
             		/*
             		alert(
@@ -297,19 +296,17 @@ margin-top: 60px;
 				for (var i = 0; i < data.length; i++) {
 					
 					
-					str += '<강좌 정보>';
-            		str += '<강좌아이디, 강좌시퀀스>' + data[i].sbjIdSeq + '</강좌아이디, 강좌시퀀스>';
-            		str += '<강좌명>' + data[i].subjectTitle + '</강좌명>';
-            		str += '<강좌 시수>' + data[i].hours + '</강좌 시수>';
-            		str += '<강좌 시작 일자>' + data[i].startDay +'</강좌 시작 일자>';
-            		str += '<강좌 종료 일자>' + data[i].endDay +'</강좌 종료 일자>';
-            		str += '<강좌 비용>' + data[i].cost + '</강좌 비용>';
-            		str += '<전송 시간>' + data[i].sendDt + '</전송 시간>';
-            		str += '<수강 완료 된 연수생 수>' + data[i].cntStd + '명' + '</수강 완료 된 연수생 수>';
-            		str += '</강좌 정보>';
-					
-					
-					
+					str += '<subject>';
+            		str += '<sbjId_seq>' + data[i].sbjIdSeq + '</sbjId_seq>';
+            		str += '<subject_title>' + data[i].subjectTitle + '</subject_title>';
+            		str += '<hours>' + data[i].hours + '</hours>';
+            		str += '<start_day>' + data[i].startDay +'</start_day>';
+            		str += '<end_day>' + data[i].endDay +'</end_day>';
+            		str += '<cost>' + data[i].cost + '</cost>';
+            		str += '<send_dt>' + data[i].sendDt + '</send_dt>';
+            		str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
+            		str += '</subject>';
+		
 				}
 				
 				

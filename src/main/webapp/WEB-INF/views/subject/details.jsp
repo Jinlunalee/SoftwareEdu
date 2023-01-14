@@ -45,11 +45,7 @@
 					</c:if>
 				</td>
 				<td> 연수기간(일수)</td>
-				<td> <fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/> 
-					<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>
-				~ <fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/> 
-					<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>
-				(${subject.days}일)
+				<td> ${subject.startDay} ~ ${subject.endDay} (${subject.days}일)
 				</td>
 			</tr>
 			<tr>
@@ -87,7 +83,7 @@
 		<!-- 교육 소개 -->
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt">${subject.content}</p>
+			<p class="txt" style="white-space:pre;">${subject.content}</p>
 		</div>
 		
 		<!-- button -->
@@ -142,6 +138,7 @@
 </div>
 
 	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
 		/*수강삭제*/
 		function del(subjectId, subjectSeq, fileId) {
@@ -158,6 +155,7 @@
 			} else {
 			}
 		}
+		
 	/* 모달창 */
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');

@@ -42,8 +42,8 @@
 
 			<table class="list">
 				<tr>
+                    <th>수강생 아이디</th>
 					<th>수강생명</th>
-					<th>수강생 아이디</th>
 					<th>이메일</th>
 					<th>생년월일</th>
 					<th>구분</th>
@@ -55,8 +55,8 @@
 				<c:if test="${boardListSize ne 0}">  	
 					<c:forEach var="board" items="${boardList}" varStatus="status"> 
 						<tr>
+                            <td>${board.studentId}</td>
 							<td>${board.name}</td>
-							<td>${board.studentId}</td>
 							<td>${board.email}</td>
 							<td>${board.birth}</td>
 							<td>${board.position}</td>

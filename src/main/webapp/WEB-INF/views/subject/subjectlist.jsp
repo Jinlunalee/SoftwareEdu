@@ -55,7 +55,7 @@
 					<th>교육비</th>
 					<th>상태</th>
 					<th>입력날짜</th>
-					<th></th>
+					<th>처리</th>
 				</tr>
 			</thead>
 			

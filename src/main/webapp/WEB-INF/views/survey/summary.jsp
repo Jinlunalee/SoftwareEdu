@@ -6,6 +6,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/common/searchpop.css'/>" />
+
 <div class="card m-2">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
@@ -20,8 +22,16 @@
 						<option value="${subjectList.subjectId}/${subjectList.subjectSeq}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
 					</c:forEach>
 				</select>
-				<div>
+
+				<!-- 검색 팝업 입력창 및 버튼 -->
+				<div class="search-popup">
+					<input id="subjectName-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
+					<input id="subjectId-input" name="subjectId" type="hidden">
+					<input id="subjectSeq-input" name="subjectSeq" type="hidden">
+					<button class="open-subject-popup-btn">검색</button>
 				</div>
+
+
 			</div>
 			<div class="charts">
 				<div class="charts-grid">
@@ -69,5 +79,6 @@
 	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
