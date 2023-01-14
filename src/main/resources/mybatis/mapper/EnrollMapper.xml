@@ -36,14 +36,16 @@
 	/* getRatio */
 		SELECT ROUND(complete_hours/hours * 100) 
 		FROM ENROLL e, SUBJECT s 
-		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
+		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} 
+		AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
+		AND NOT (e.del_yn ='Y')
 	</select>
 	
 	<select id="getHours" parameterType="string" resultType="int">
 	/* getHours */
 		SELECT complete_hours 
 		FROM ENROLL 
-		WHERE enroll_id = #{enrollId}
+		WHERE enroll_id = #{enrollId} AND NOT (e.del_yn ='Y')
 	</select>
 	
 	<select id="getCancelList" resultType="CommonCodeVO">
@@ -94,9 +96,8 @@
 				ON o.subject_id = s.subject_id 
 				LEFT OUTER JOIN COURSE c 
 				ON o.course_id = c.course_id 
-				WHERE
-				(o.subject_id=#{kw} OR
-				REPLACE(subject_title, ' ', '') LIKE '%'||#{kw}||'%') AND o.course_id is NULL
+				WHERE (o.subject_id = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') 
+				AND o.course_id is NULL
 			</when>
 			<when test="subCor != null and subCor.equals('course')">
 			    SELECT 
@@ -111,7 +112,7 @@
 			    LEFT OUTER JOIN COURSE c 
 			    ON o.course_id = c.course_id 
 			    GROUP BY (o.course_id, course_title) 
-			    HAVING o.course_id=#{kw} OR replace(course_title, ' ', '') LIKE '%'||#{kw}||'%'
+			    HAVING o.course_id = #{kw} OR replace(course_title, ' ', '') LIKE '%' || #{kw} ||'%'
 			</when>
 		</choose>
 	</select>
@@ -120,6 +121,43 @@
 	/* getMaxEnrollId */
 		SELECT MAX((SUBSTR(enroll_id, 5, 4))) 
 		FROM ENROLL
+	</select>
+	
+	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">
+	/* getSubjectCountByCourse */
+		SELECT count(subject_id)
+		FROM open
+		WHERE course_id=#{courseId}
+	</select>
+	
+	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
+	/* getSubjectInfoByCourse */
+		select 
+		    subject_id, 
+		    subject_seq 
+		from open
+		where course_id = #{courseId}
+	</select>
+	
+	<select id="recruitTotalPeople" parameterType="map" resultType="int">
+	/* recruitTotalPeople */
+		select count(*) 
+		from enroll 
+		where subject_id=#{subjectId} and subject_seq=#{subjectSeq} 
+		<choose>
+			<when test="state == 'OPN02'">
+				and state_cd = 'ERL01'
+			</when>
+			<when test="state == 'OPN03'">
+				and state_cd = 'ERL03'
+			</when>
+			<when test="state == 'OPN04'">
+				and state_cd = 'ERL04'
+			</when>
+			<when test="state == 'OPN05'">
+				and state_cd = 'ERL06'
+			</when>
+		</choose>
 	</select>
 	
 	<update id="clickCancel" parameterType="map">
@@ -164,31 +202,6 @@
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>
 	
-	<insert id="addEnroll" parameterType="map">
-	/* addEnroll */
-		INSERT INTO ENROLL 
-		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
-		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
-		del_yn, cancel_rs_cd, cancel_rs_etc) 
-		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
-	</insert>
-	
-	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">
-	/* getSubjectCountByCourse */
-		SELECT count(subject_id)
-		FROM open
-		WHERE course_id=#{courseId}
-	</select>
-	
-	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
-	/* getSubjectInfoByCourse */
-		select 
-		    subject_id, 
-		    subject_seq 
-		from open
-		where course_id = #{courseId}
-	</select>
-	
 	<update id="updateEnrollCancel">
 	/* updateEnrollCancel */
 		update enroll
@@ -197,25 +210,13 @@
 		and subject_seq IN (select subject_seq from open where state_cd = 'OPN07')
 	</update>
 	
-	<select id="recruitTotalPeople" parameterType="map" resultType="int">
-	/* recruitTotalPeople */
-		select count(*) 
-		from enroll 
-		where subject_id=#{subjectId} and subject_seq=#{subjectSeq} 
-		<choose>
-			<when test="state == 'OPN02'">
-				and state_cd = 'ERL01'
-			</when>
-			<when test="state == 'OPN03'">
-				and state_cd = 'ERL03'
-			</when>
-			<when test="state == 'OPN04'">
-				and state_cd = 'ERL04'
-			</when>
-			<when test="state == 'OPN05'">
-				and state_cd = 'ERL06'
-			</when>
-		</choose>
-	</select>
+	<insert id="addEnroll" parameterType="map">
+	/* addEnroll */
+		INSERT INTO ENROLL 
+		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
+		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
+		del_yn, cancel_rs_cd, cancel_rs_etc) 
+		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
+	</insert>
 	
 </mapper>

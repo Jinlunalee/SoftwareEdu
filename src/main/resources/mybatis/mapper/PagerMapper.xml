@@ -240,6 +240,7 @@
 		    "modiId", 
 		    "modiDt", 
 		    "delYn", 
+		    "cancelRsCd", 
 		    "cancelRsEtc", 
 		    "startTime", 
 		    "endTime", 
@@ -264,6 +265,7 @@
 		        "modiId", 
 		        "modiDt", 
 		        "delYn", 
+		        "cancelRsCd", 
 		        "cancelRsEtc", 
 		        "startTime", 
 		        "endTime", 
@@ -286,6 +288,7 @@
 		                e.modi_id AS "modiId", 
 		                e.modi_dt AS "modiDt", 
 		                e.del_yn AS "delYn", 
+		                cancel_rs_cd AS "cancelRsCd", 
 		                cancel_rs_etc AS "cancelRsEtc", 
 		                start_time AS "startTime", 
 		                end_time AS "endTime", 
@@ -325,10 +328,10 @@
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
 			<if test="applyStartDay != '' and applyEndDay != ''">
-				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay} 
 			</if>
-			<if test="applyStartDay != '' and applyEndDay == ''">
-				AND e.reg_dt = #{applyStartDay}   
+			<if test="applyStartDay != '' and applyEndDay = ''">
+				AND e.reg_dt = #{applyStartDay}
 			</if>
 			<if test='student != "" and student.equals("sdName")'>
 				AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
@@ -380,6 +383,7 @@
 		    "modiId", 
 		    "modiDt", 
 		    "delYn", 
+		    "cancelRsCd", 
 		    "cancelRsEtc", 
 		    "startTime", 
 		    "endTime", 
@@ -404,6 +408,7 @@
 		    "modiId", 
 		    "modiDt", 
 		    "delYn", 
+		    "cancelRsCd", 
 		    "cancelRsEtc", 
 		    "startTime", 
 		    "endTime", 
@@ -426,6 +431,7 @@
 				e.modi_id AS "modiId", 
 				e.modi_dt AS "modiDt", 
 				e.del_yn AS "delYn", 
+				cancel_rs_cd AS "cancelRsCd", 
 				cancel_rs_etc AS "cancelRsEtc", 
         		start_time AS "startTime", 
         		end_time AS "endTime", 
@@ -443,10 +449,10 @@
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
 			<if test="applyStartDay != '' and applyEndDay != ''">
-				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
+				AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}
 			</if>
-			<if test="applyStartDay != '' and applyEndDay == ''">
-				AND e.reg_dt BETWEEN #{applyStartDay} AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+			<if test="applyStartDay != '' and applyEndDay = ''">
+				AND e.reg_dt = #{applyStartDay}
 			</if>
 			<if test='student != "" and student.equals("sdName")'>
 				AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 

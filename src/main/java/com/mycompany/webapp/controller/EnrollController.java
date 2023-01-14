@@ -104,12 +104,18 @@ public class EnrollController {
 			List<CommonCodeVO> cancelList = enrollService.getCancelList();
 			model.addAttribute("cancelList", cancelList);
 			
+			String applyStartDay = enroll.getApplyStartDay();
+			String applyEndDay = enroll.getApplyEndDay();
+			
 			enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
 			enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
 			
 			int totalRows = pagerService.getCountSearchRow(enroll);
 			
 			Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+			
+			enroll.setApplyStartDay(applyStartDay);
+			enroll.setApplyEndDay(applyEndDay);
 			
 			List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
 			model.addAttribute("enroll", enroll);
@@ -136,21 +142,47 @@ public class EnrollController {
 		return "redirect:/enroll/boardlist";
 	}
 	
-	// 논리 삭제
+	
+	/**
+	 * @description	논리 삭제
+	 * @date	2023. 1. 13.
+	 * @author	user
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
 	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/boardlist";
 	}
 	
-	// 진행률
+	/**
+	 * @description	진도율
+	 * @date	2023. 1. 13.
+	 * @author	user
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/ratio/{studentId}/{subjectId}/{subjectSeq}")
 	public String getRatio(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		return enrollService.getRatio(studentId, subjectId, subjectSeq);
 	}
 	
-	// 수강 완료한 시간 입력
+	/**
+	 * @description 수강 완료한 시간 입력
+	 * @date	2023. 1. 13.
+	 * @author	user
+	 * @param enroll
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
 		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
