@@ -107,8 +107,8 @@
 					<td>${board.stateCdTitle} 
 					<!-- 현재 상태 옆에 진도율 -->
 					<c:if test="${board.stateCdTitle eq '수강중'}">
-					<span id="getBoardRatio" onclick="rtoLoad('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
-					(<span class="boardRatio">
+					<span id="getBoardRatio" onclick="rtoLoad('${status.count}', '${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
+					(<span class="boardRatio-${status.count}">
 					</c:if>
 					</td>
 					
@@ -191,9 +191,9 @@
 	</div>
 	
 	<script>
-	window.onload = function(){
+	$(document).ready(function(){
 		$("#getBoardRatio").trigger('click');
-	};
+	});
 	</script>
 	
 	<script>
@@ -235,17 +235,15 @@
 	</script>
 	
 	<script>
-		function rtoLoad(studentId, subjectId, subjectSeq) {
-			console.log(studentId);
-			console.log(subjectId);
-			console.log(subjectSeq);
-			var boardRatioEl = $(".boardRatio");
-			$.ajax({
-				url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
-				success: function(data) {
-					boardRatioEl.text(data + '%)');
-				}
-			});
+		function rtoLoad(i, studentId, subjectId, subjectSeq) {
+			var boardRatioEl = ".boardRatio-" + i;
+			console.log(boardRatioEl);
+				$.ajax({
+					url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
+					success: function(data) {
+						$("boardRatioEl").text(data + '%)');
+					}
+				});
 		}
 	</script>
 	
