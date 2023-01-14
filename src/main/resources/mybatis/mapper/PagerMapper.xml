@@ -228,10 +228,10 @@
     <!-- 수강 검색 쿼리 -->
     /*enroll-search*/
 		<if test="applyStartDay != '' and applyEndDay != ''">
-			AND e.reg_dt BETWEEN #{applyStartDay} AND #{applyEndDay}  
+			AND e.reg_dt BETWEEN TO_DATE(#{applyStartDay}) AND TO_DATE(#{applyEndDay})  
 		</if>
-		<if test="applyStartDay != '' and applyEndDay == ''">
-			AND e.reg_dt = #{applyStartDay}   
+		<if test="applyStartDay != '' and applyEndDay = ''">
+			AND e.reg_dt BETWEEN TO_DATE(#{applyStartDay}) AND TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) 
 		</if>
 		<if test='student != "" and student.equals("sdName")'>
 			AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 

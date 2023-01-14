@@ -207,8 +207,9 @@ public class EnrollController {
 	
 	// 수강 추가 강좌 과정 ajax
 	@RequestMapping(value="/openlist")
-	public @ResponseBody List<OpenVO> getOpenList(@RequestParam("subcor") String subCor, @RequestParam("kw") String kw) {
+	public @ResponseBody List<OpenVO> getOpenList(@RequestParam("openState") String openState, @RequestParam("subCor") String subCor, @RequestParam("kw") String kw) {
 		OpenVO openVO = new OpenVO();
+		openVO.setOpenState(openState);
 		openVO.setSubCor(subCor);
 		openVO.setKw(kw);
 		return enrollService.getOpenList(openVO);

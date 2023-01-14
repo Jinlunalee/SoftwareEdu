@@ -80,7 +80,6 @@
 		<choose>
 			<when test="subCor != null and subCor.equals('subject')">
 				SELECT o.subject_id, 
-						subject_seq, 
 						subject_title, 
 						o.course_id, 
 						course_title, 
@@ -96,8 +95,9 @@
 				ON o.subject_id = s.subject_id 
 				LEFT OUTER JOIN COURSE c 
 				ON o.course_id = c.course_id 
-				WHERE (o.subject_id = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') 
-				AND o.course_id is NULL
+				WHERE o.course_id is NULL 
+				<include refid="subjectKeyword"/>
+				<include refid="stateOpen"/>
 			</when>
 			<when test="subCor != null and subCor.equals('course')">
 			    SELECT 
@@ -112,10 +112,34 @@
 			    LEFT OUTER JOIN COURSE c 
 			    ON o.course_id = c.course_id 
 			    GROUP BY (o.course_id, course_title) 
-			    HAVING o.course_id = #{kw} OR replace(course_title, ' ', '') LIKE '%' || #{kw} ||'%'
+			    HAVING (o.course_id = #{kw} OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%')
 			</when>
 		</choose>
 	</select>
+	
+	
+	<sql id="stateOpen">
+		<if test="openState != null and openState.equals('recruitExpecting')">
+			AND o.state_cd = 'OPN01'
+		</if>
+		<if test="openState != null and openState.equals('recruitOngoing')">
+			AND o.state_cd = 'OPN02'
+		</if>
+		<if test="openState != null and openState.equals('recruitEnd')">
+			AND o.state_cd = 'OPN03'
+		</if>
+		<if test="openState != null and openState.equals('ongoing')">
+			AND o.state_cd = 'OPN04'
+		</if>
+		<if test="openState != null and openState.equals('completion')">
+			AND o.state_cd = 'OPN07'
+		</if>
+	</sql>
+	<sql id="subjectKeyword">
+		<if test="kw != null">
+		AND (o.subject_id = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') 
+		</if>
+	</sql>
 	
 	<select id="getMaxEnrollId" resultType="int">
 	/* getMaxEnrollId */
