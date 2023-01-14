@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.IHomeRepository;
+import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 @Service
@@ -31,9 +32,15 @@ public class HomeService implements IHomeService {
 	}
 
 	@Override
+	public List<CommonCodeVO> getComnCdList(String comnCdType) {
+		return homeRepository.getComnCdList(comnCdType);
+	}
+
+	@Override
 	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
 		return homeRepository.searchOpenSubject(subjectVo);
 	}
+
 
 //	@Override
 //	public List<SubjectVO> searchSubject(List<Map<String, Object>> searchParam) {

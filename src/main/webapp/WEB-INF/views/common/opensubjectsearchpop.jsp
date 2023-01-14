@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>검색 팝업</title>
-<link rel="stylesheet" href="<c:url value='/resources/css/common/searchpop.css'/>" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="<c:url value='/resources/css/common/searchpop.css'/>"/>
 </head>
 <body>
     <div class="subject-name-warp">
@@ -19,78 +20,52 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <form id="searchForm" action="<c:url value='/common/opensubjectsearchpop2'/>" method="get">
+                    <form id="search-form">
                         <div class="search-input">
-                            강좌아이디 : <input type="text" name="subjectId">
-                            강좌명 : <input type="text" name="subjectTitle">
-                            난이도 : <input type="text" name="level">
-                            상태 : <input type="text" name="state">
-                            분류 : <input type="text" name="catSubject">
-                            등록년도 : <input type="text" name="regYear">
-                            <button class='btn search-btn open-subject-search-btn'>검 색</button>
+                            <select name="subject" onchange="putNameonInput(this.value)" >
+                                <option value="subjectId">강좌아이디</option>
+                                <option value="subjectTitle">강좌명</option>
+                            </select>
+                            <input type="text" id="subject-input" name="subjectId">
+                            난이도 : 
+                            <select name="level">
+                                <option value="">전체</option>
+                                <c:forEach items="${levelList}" var="level">
+                                    <option value="${level.comnCd}">${level.comnCdTitle}</option>
+                                </c:forEach>
+                            </select>
+                            상태 : 
+                            <select name="state">
+                                <option value="">전체</option>
+                                <c:forEach items="${stateList}" var="state">
+                                    <option value="${state.comnCd}">${state.comnCdTitle}</option>
+                                </c:forEach>
+                            </select>
+                            분류 : 
+                            <select name="catSubject">
+                                <option value="">전체</option>
+                                <c:forEach items="${catSubjectList}" var="catSubject">
+                                    <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
+                                </c:forEach>
+                            </select>
+                            </select>
+                            등록년도 :
+                            <select name="regYear">
+                                <option value="0">전체</option>
+                                <c:forEach var="i" begin="2019" end="2020">
+                                    <option value="${i}">${i}</option>
+                                </c:forEach>
+                            </select>
+                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>
                 </div>
 
-                <!-- 게시물 O -->
-                <c:if test="${boardCheck != 'empty'}">
-                    <div class="table-exist">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td class="th-column-1">강좌아이디</td>
-                                    <td class="th-column-2">강좌명</td>
-                                    <td class="th-column-3">과정아이디</td>
-                                    <td class="th-column-4">과정명</td>
-                                    <td class="th-column-5">지원여부</td>
-                                    <c:if test="board.level ne 'LEV04">
-                                        <td class="th-column-6">난이도</td>
-                                    </c:if>
-                                    <c:if test="board.level eq 'LEV04">
-                                        <td class="th-column-6">난이도 기타</td>
-                                    </c:if>
-                                    <td class="th-column-7">수강일수</td>
-                                    <td class="th-column-8">수강시수</td>
-                                    <td class="th-column-9">시작일자</td>
-                                    <td class="th-column-10">종료일자</td>
-                                    <td class="th-column-11">모집시작일자</td>
-                                    <td class="th-column-12">모집종료일자</td>
-                                    <td class="th-column-13">모집인원</td>
-                                    <td class="th-column-14">상태</td>
-                                    <td class="th-column-15">분류</td>
-                                    <td class="th-column-16">등록일자</td>
+                <!-- 리스트 영역 -->
+                <div class="list-wrap">
+                    
+                </div>
 
-                                </tr>
-                            </thead>
-                            <c:forEach items="${boardList}" var="board">
-                            <tr>
-                                <td>${board.subjectId}</td>
-                                <td>${board.subjectTitle}</td>
-                                <td>${board.courseId}</td>
-                                <td>${board.courseTitle}</td>
-                                <td>${board.supportYn}</td>
-                                <td>${board.level}</td>
-                                <td>${board.days}</td>
-                                <td>${board.hours}</td>
-                                <td>${board.startDay}</td>
-                                <td>${board.endDay}</td>
-                                <td>${board.recruitStartDay}</td>
-                                <td>${board.recruitEndDay}</td>
-                                <td>${board.state}</td>
-                                <td>${board.catSubject}</td>
-                                <td>${board.regDt}</td>
-                            </tr>
-                            </c:forEach>
-                        </table>
-                    </div>                			
-                </c:if>
-                <!-- 게시물 x -->
-                <c:if test="${boardCheck == 'empty'}">
-                    <div class="table-empty">
-                        개설된 강좌가 없습니다.
-                    </div>
-                </c:if>
-                
                 <form id="moveForm" action="/admin/authorPop" method="get">
                     <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                     <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -99,5 +74,6 @@
             </div>
 
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>
 </body>
 </html>

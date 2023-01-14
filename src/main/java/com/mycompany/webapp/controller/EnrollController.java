@@ -97,7 +97,6 @@ public class EnrollController {
 		 */
 		@RequestMapping(value="/searchlist", method=RequestMethod.GET)
 		public String getSearchList(EnrollVO enroll, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
-			
 			model.addAttribute("menu", "enroll");
 			model.addAttribute("menuKOR", "수강 관리");
 			

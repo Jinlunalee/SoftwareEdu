@@ -1,18 +1,16 @@
 package com.mycompany.webapp.service;
 
 import java.util.List;
-import java.util.Map;
 
+import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.SubjectVO;
-
-
-import org.apache.ibatis.annotations.Param;
 public interface IHomeService {
 	List<SubjectVO> selectSubjectList(String catSubject);
 	
 	List<SubjectVO> selectCourseList(String catCourse);
 
 	String getComnCdTitle(String comnCd);
+	List<CommonCodeVO> getComnCdList (String comnCdType);
 	
 //	List<SubjectVO> searchSubject(List<Map<String, Object>> searchParam);
 //	List<SubjectVO> searchCourse();
