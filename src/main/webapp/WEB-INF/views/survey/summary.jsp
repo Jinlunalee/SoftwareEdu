@@ -25,9 +25,10 @@
 
 				<!-- 검색 팝업 입력창 및 버튼 -->
 				<div class="search-popup">
-					<input id="subjectName-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
+					<input id="subjecTitle-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
 					<input id="subjectId-input" name="subjectId" type="hidden">
 					<input id="subjectSeq-input" name="subjectSeq" type="hidden">
+					<input id="regDt-input" name="regDt" type="hidden">
 					<button class="open-subject-popup-btn">검색</button>
 				</div>
 
