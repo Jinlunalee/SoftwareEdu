@@ -74,6 +74,10 @@ public class PagerService implements IPagerService {
 		for(EnrollVO enrollVo : boardList) {
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
 			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
+			
+			if(enrollVo.getCancelRsCd() != null) {
+			enrollVo.setCancelRsTitle(homeRepository.getComnCdTitle(enrollVo.getCancelRsCd()));
+			}
 		}
 		return boardList;
 	}
@@ -102,6 +106,10 @@ public class PagerService implements IPagerService {
 		for(EnrollVO enrollVo : boardList) {
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
 			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
+			
+			if(enrollVo.getCancelRsCd() != null) {
+				enrollVo.setCancelRsTitle(homeRepository.getComnCdTitle(enrollVo.getCancelRsCd()));
+			}
 		}
 		return boardList;
 	}

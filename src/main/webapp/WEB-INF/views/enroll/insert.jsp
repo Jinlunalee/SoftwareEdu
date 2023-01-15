@@ -13,12 +13,12 @@
 		<div class="wrap">
 			<div class="search-box">
 				<div class="search-content">
-					<span class="name">수강생 명</span> &nbsp; &nbsp;
+					<span class="name">수강생</span> &nbsp; &nbsp;
 					
 					<form id="form" name="search-form" class="search">
 						<select name="type" class="sc">
-							<option selected value="">수강생 명 / 아이디</option>
-							<option value="name">수강생 명</option>
+							<option selected value="">이름/아이디</option>
+							<option value="name">이름</option>
 							<option value="studentId">아이디 </option>
 						</select>
 						<input type="text" name="keyword" class="search-in">
@@ -35,8 +35,16 @@
 				<div class="search-content">
 				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
 				<form id="form" name="search-subject-course" class="search2">
-					<select name="subcor" class="sc2">
-						<option selected value="">강좌 / 과정</option>
+					<select name="openState" class="sc2">
+						<option selected value="">개설상태</option>
+						<option value="recruitExpecting">모집예정</option>
+						<option value="recruitOngoing">모집중</option>
+						<option value="recruitEnd">모집마감</option>
+						<option value="ongoing">진행중</option>
+						<option value="completion">진행완료</option>
+					</select>
+					<select name="subCor" class="sc2">
+						<option selected value="">강좌/과정</option>
 						<option value="subject">강좌</option>
 						<option value="course">과정</option>
 					</select>
@@ -116,22 +124,18 @@
 				$(".subject-result").empty();
 				
 				// 강좌/과정 선택 값 확인
-				var selected = $("select[name=subcor]").val();
+				var selected = $("select[name=subCor]").val();
 
 				// 강좌를 선택했을 때
 				if(selected==='subject') {
 					// 테이블 태그 만들기
-					var td = $("<table class='tb'/>");
+					var td = $("<table border = '1' class='tb'/>");
 					// 컬럼명 만들기
 					var rowTitle = $("<tr/>").append(
 							$("<td/>").text("선택"),
-							$("<td/>").text("강좌 아이디"),
-							$("<td/>").text("강좌 시퀀스 "),
-							$("<td/>").text("강좌 제목"),
-							$("<td/>").text("시작 일자"),
-							$("<td/>").text("종료 일자"),
-							$("<td/>").text("모집 시작일"),
-							$("<td/>").text("모집 마감일"),
+							$("<td/>").text("강좌 명 (아이디)"),
+							$("<td/>").text("강좌 기간"),
+							$("<td/>").text("모집 기간"),
 							$("<td/>").text("모집 인원")
 							)
 						td.append(rowTitle);
@@ -139,7 +143,6 @@
 					for(var i in result) {
 						var $check = `<input class="check-subject" name="check-subject" type="checkbox" value="` + result[i].subjectId + `/` + result[i].subjectSeq + `" onclick='checkOnlyOne(this); saveCheckSubject(this.value);'>`;
 						var $subjectId = result[i].subjectId;
-						var $subjectSeq = result[i].subjectSeq;
 						var $subjectTitle = result[i].subjectTitle;
 						var $startDay = result[i].startDay;
 						var $endDay = result[i].endDay;
@@ -149,13 +152,9 @@
 													
 						var row = $("<tr/>").append(
 								$("<td/>").append($check),
-								$("<td/>").text($subjectId),
-								$("<td/>").text($subjectSeq),
-								$("<td/>").text($subjectTitle),
-								$("<td/>").text($startDay),
-								$("<td/>").text($endDay),
-								$("<td/>").text($recruitStartDay),
-								$("<td/>").text($recruitEndDay),
+								$("<td/>").text($subjectTitle + ' (' + $subjectId + ')'),
+								$("<td/>").text($startDay + ' ~ ' + $endDay),
+								$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
 								$("<td/>").text($recruitPeople)
 							);
 						td.append(row);
@@ -165,16 +164,13 @@
 				// 과정을 선택했을 때
 				} else if(selected==='course'){
 					// 테이블 태그 만들기
-					var td = $("<table class='tb'/>");
+					var td = $("<table border = '1' class='tb'/>");
 					// 컬럼명 만들기
 					var rowTitle = $("<tr/>").append(
 							$("<td/>").text("선택"),
-							$("<td/>").text("과정 아이디"),
-							$("<td/>").text("과정 제목"),
-							$("<td/>").text("시작 일자"),
-							$("<td/>").text("종료 일자"),
-							$("<td/>").text("모집 시작일"),
-							$("<td/>").text("모집 마감일"),
+							$("<td/>").text("과정명 (아이디)"),
+							$("<td/>").text("과정 기간"),
+							$("<td/>").text("모집 기간"),
 							$("<td/>").text("모집 인원")
 							)
 						td.append(rowTitle);
@@ -191,12 +187,9 @@
 													
 						var row = $("<tr/>").append(
 								$("<td/>").append($check),
-								$("<td/>").text($courseId),
-								$("<td/>").text($courseTitle),
-								$("<td/>").text($startDay),
-								$("<td/>").text($endDay),
-								$("<td/>").text($recruitStartDay),
-								$("<td/>").text($recruitEndDay),
+								$("<td/>").text($courseTitle + ' (' + $courseId + ')'),
+								$("<td/>").text($startDay + ' ~ ' + $endDay),
+								$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
 								$("<td/>").text($recruitPeople)
 							);
 						td.append(row);

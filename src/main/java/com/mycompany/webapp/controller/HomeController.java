@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
-import com.mycompany.webapp.service.impl.HomeService;
-
-import lombok.extern.log4j.Log4j2;
+import com.mycompany.webapp.service.IPagerService;
 
 @RequestMapping
 @Controller
@@ -26,7 +26,9 @@ public class HomeController {
 	@Autowired
 	IHomeService homeService;
 	
-
+	@Autowired
+	IPagerService pagerService;
+	
 	@RequestMapping("/")
 	public String home() {
 		logger.info("실행");
@@ -62,6 +64,53 @@ public class HomeController {
 	}
 	
 	
+	/**
+	 * @description	개설강좌 검색 팝업
+	 * @date	2023. 1. 13.
+	 * @author	Jin Lee
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/opensubjectsearchpop")
+	public void openSubjectSearchPop(Model model) throws Exception{
+		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
+		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	개설강좌 검색 팝업
+	 * @date	2023. 1. 13.
+	 * @author	Jin Lee
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/opensubjectsearchpop2", produces = "application/text; charset=UTF-8")
+	public String openSubjectSearchPop2(SubjectVO subjectVo, Model model) throws Exception{
+		System.out.println(subjectVo);
+		
+		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
+		
+		// ajax로 구현할 것
+		if(!openSubjectList.isEmpty()) {
+			model.addAttribute("boardList",openSubjectList);	// 작가 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 작가 존재하지 않을 경우
+		}
+		
+		return "redirect:/common/result";
+	}
+	
+	/**
+	 * @description	개설강좌 검색 결과 전달
+	 * @date	2023. 1. 15.
+	 * @author	Jin Lee
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(value="/common/result", produces = "application/text; charset=UTF-8")
+	public String openResult(Model model) {
+		System.out.println("여기로 왔음");
+		return "common/opensubjectsearchpop-result";
+	}
 	
 }
 

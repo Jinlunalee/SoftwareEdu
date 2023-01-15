@@ -5,28 +5,28 @@
 	<select id="selectSubjectList" parameterType="String" resultType="SubjectVO">	
 	/* selectSubjectList */
 		select 
-			open.subject_id as "subjectId", 
-			subject_seq as "subjectSeq",
-			subject_title as "subjectTitle",
-			support_yn as "supportYn", 
-			days as "days", 
-			hours as "hours", 
+			open.subject_id, 
+			subject_seq,
+			subject_title,
+			support_yn, 
+			days, 
+			hours, 
 			level_cd as "level", 
-			level_etc as "levelEtc", 
-			subject.cost as "cost",
-			open.course_id as "courseId", 
-			course.course_title as "courseTitle", 
-			start_time as "startTime",
-			end_time as "endTime",
-			start_day as "startDay",
-			end_day as "endDay", 
-			recruit_start_day as "recruitStartDay", 
-			recruit_end_day as "recruitEndDay",
-			recruit_people as "recruitPeople",
-			state_cd as "state",
-			comn_cd_title as "comnCdTitle",
-			file_id as "fileId",
-            subject.cat_cd as "catCd"
+			level_etc, 
+			subject.cost,
+			open.course_id, 
+			course.course_title, 
+			start_time,
+			end_time,
+			start_day,
+			end_day, 
+			recruit_start_day, 
+			recruit_end_day,
+			recruit_people,
+			state_cd as state,
+			comn_cd_title,
+			file_id,
+            subject.cat_cd
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
@@ -41,15 +41,15 @@
 	<select id="selectCourseList" parameterType="String" resultType="SubjectVO">
 	/* selectCourseList */
 		select DISTINCT
-			open.course_id as "courseId", 
-			course_title as "courseTitle",
-			min(start_day) over (partition by open.course_id) as "startDay",
-    		max(end_day) over (partition by open.course_id) as "endDay",
-			sum(cost) over (partition by open.course_id) as "cost",
-			recruit_start_day as "recruitStartDay", 
-			recruit_end_day as "recruitEndDay",
-			state_cd as "state",
-			comn_cd_title as "comnCdTitle"
+			open.course_id, 
+			course_title,
+			min(start_day) over (partition by open.course_id) as start_day,
+    		max(end_day) over (partition by open.course_id) as end_day,
+			sum(cost) over (partition by open.course_id) as cost,
+			recruit_start_day,
+			recruit_end_day,
+			state_cd as state,
+			comn_cd_title
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
@@ -62,9 +62,101 @@
 
 	<select id="getComnCdTitle" parameterType="String" resultType="String">
 	/* getComnCdTitle */
-		select comn_cd_title
-		from common_code
-		where comn_cd=#{comnCd}
+		SELECT comn_cd_title
+		FROM common_code
+		WHERE comn_cd=#{comnCd}
 	</select>
 
+	<select id="getComnCdList" parameterType="String" resultType="CommonCodeVO">
+	/*getComnCdList*/
+		SELECT * 
+		FROM common_code
+		WHERE comn_cd_type = #{comnCoType} AND use_yn='Y'
+	</select>
+
+	<select id="searchSubject" parameterType="SubjectVO" resultType="SubjectVO">
+	/*searchSubject*/
+		SELECT
+		    subject_id,
+		    subject_title,
+		    support_yn,
+		    cat_cd as cat_subject,
+		    days,
+		    hours,
+		    level_cd as "level",
+		    level_etc,
+		    cost,
+		    reg_year
+		FROM subject
+		<where>
+			<if test='subjectId != ""'>
+				AND subject_id = #{subjectId}  
+			</if>
+			<if test='subjectTitle != ""'>
+				AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{keyword2}||'%') 
+			</if>
+			<if test='catSubject != ""'>
+				AND cat_cd = #{catSubject} 
+			</if>
+			<if test='level != ""'>
+				AND level_cd = #{level} 
+			</if>
+			<if test='regYear != ""'>
+				AND reg_year = #{regYear} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchOpenSubject" parameterType="SubjectVO" resultType="SubjectVO">
+	/*searchOpenSubject*/
+		SELECT
+		    open.subject_id, 
+		    subject_seq,
+		    subject_title,
+		    support_yn, 
+		    days, 
+		    hours, 
+		    level_cd as "level", 
+		    level_etc, 
+		    subject.cost,
+		    open.course_id, 
+		    course.course_title, 
+		    start_time,
+		    end_time,
+		    start_day,
+		    end_day, 
+		    recruit_start_day, 
+		    recruit_end_day,
+		    recruit_people,
+		    state_cd as state,
+		    comn_cd_title,
+		    file_id,
+		    subject.cat_cd as cat_subject,
+		    subject.reg_year,
+		    reg_dt
+		FROM open
+		INNER JOIN subject ON open.subject_id = subject.subject_id
+		LEFT JOIN course ON open.course_id = course.course_id
+		LEFT JOIN common_code ON open.state_cd = common_code.comn_cd
+		WHERE del_yn = 'N'
+		<if test="subjectId != null and !subjectId.equals('') ">
+			AND subject.subject_id = #{subjectId}
+		</if>
+		<if test="subjectTitle != null and !subjectTitle.equals('')">
+			AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
+		</if>
+		<if test="catSubject != null and !catSubject.equals('')">
+			AND subject.cat_cd = #{catSubject} 
+		</if>
+		<if test="level != null and !level.equals('') ">
+			AND level_cd = #{level} 
+		</if>
+		<if test="regYear != 0">
+			AND subject.reg_year = #{regYear} 
+		</if>
+		<if test="state != null and !state.equals('')">
+			AND state_cd = #{state}
+		</if>
+		ORDER BY start_day, end_day
+	</select>
 </mapper>

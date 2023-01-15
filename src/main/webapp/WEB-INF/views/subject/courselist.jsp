@@ -50,7 +50,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
-					<th></th>
+					<th>처리</th>
 				</tr>
 			</thead>
 			<tbody>

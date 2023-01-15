@@ -263,7 +263,7 @@ public class SubjectController {
 	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
 		
 		//time,date format
-		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
+//		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
 		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
 		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
 		subject.setRecruitEndDay(subject.getRecruitEndDay().replaceAll("-", ""));

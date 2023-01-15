@@ -56,31 +56,27 @@
 				<td> 연수기간(일수)</td>
 				<td> 
 					<input type="hidden" name="hours" id="hours" value="${subject.hours}">
-					<fmt:parseDate value="${subject.startDay}" var="start" pattern="yyyyMMdd"/>
-					<input type="date" name="startDay" id="startDay" value="<fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/>" onchange="calcEndDay()"}>
+					<input type="date" name="startDay" id="startDay" value="${subject.startDay}" onchange="calcEndDay()"}>
 					~ 
-					<fmt:parseDate value="${subject.endDay}" var="end" pattern="yyyyMMdd"/>
-					<input type="date" name="endDay" id="endDay" value="<fmt:formatDate value="${end}" pattern="yyyy-MM-dd"/>" readonly>
+					<input type="date" name="endDay" id="endDay" value="${subject.endDay}" readonly>
 					<span id="printDay"></span>
 					<span id="printHours"></span>
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
-				<td> <fmt:parseDate value="${subject.startTime}" var="startTime" pattern="HHmm"/>
-					<input class="timepicker" name="startTime" id="startTime" value="<fmt:formatDate value="${startTime}" pattern="HH:mm"/>"> 
+				<td>
+					<input class="timepicker" name="startTime" id="startTime" value="${subject.startTime}"> 
 					~
-					<fmt:parseDate value="${subject.endTime}" var="endTime" pattern="HHmm"/>
-					<input class="timepicker" name="endTime" id="endTime" value="<fmt:formatDate value="${endTime}" pattern="HH:mm"/>">
+					<input class="timepicker" name="endTime" id="endTime" value="${subject.endTime}">
 				</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
-				<td> <fmt:parseDate value="${subject.recruitStartDay}" var="recruitStart" pattern="yyyyMMdd"/>
-					<input type="date" name="recruitStartDay" id="recruitStartDay" value="<fmt:formatDate value="${recruitStart}" pattern="yyyy-MM-dd"/>" onchange="inputState()"> 
+				<td> 
+					<input type="date" name="recruitStartDay" id="recruitStartDay" value="${subject.recruitStartDay}" onchange="inputState()"> 
 					~ 
-					<fmt:parseDate value="${subject.recruitEndDay}" var="recruitEnd" pattern="yyyyMMdd"/>
-					<input type="date" name="recruitEndDay" id="recruitEndDay" value="<fmt:formatDate value="${recruitEnd}" pattern="yyyy-MM-dd"/>" onchange="inputState()">
+					<input type="date" name="recruitEndDay" id="recruitEndDay" value="${subject.recruitEndDay}" onchange="inputState()">
 				</td>
 			</tr>
 			<tr>

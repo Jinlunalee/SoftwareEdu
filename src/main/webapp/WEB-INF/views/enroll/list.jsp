@@ -68,22 +68,21 @@
 		<%-- 목록 --%>
 		<table class="list">
 			<tr>
-				<th>수강아이디</th>
-				<th>신청일자</th>	
-				<th>수강생 명</th>
-				<th>강좌 명</th>
-				<th>과정 명</th>
-				<th>현재 상태</th>
-				<th></th>
+				<th>강좌 명 (과정 명)</th>
+				<th>수강생 명 (아이디)</th>
+				<th>신청일자</th>
+				<th>현재 상태 (진도율)</th>
+				<th>취소 사유</th>
+				<th>처리</th>
 			</tr>
 
 			<!-- 리스트 -->
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td>${board.enrollId}</td>
-					<td>${board.regDt}</td>
-					<td>${board.name}</td>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">${board.subjectTitle}</a></td>
+					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">${board.subjectTitle} 
+					<c:if test="${not empty board.courseTitle}">
+					(${board.courseTitle})
+					</c:if></a></td>
 					<div class="modal modal-${status.count}">
 						<div class="modal-content modal-content-${status.count}">
 							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  ${board.stateCdTitle}</li>
@@ -101,9 +100,25 @@
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
 					</div>
-					<td>${board.courseTitle}
+					<td>${board.name} (${board.studentId})</td>
+					<td>${board.regDt}</td>
+					
+					
+					<td>${board.stateCdTitle} 
+					<!-- 현재 상태 옆에 진도율 -->
+					<c:if test="${board.stateCdTitle eq '수강중'}">
+					<span id="getBoardRatio" onclick="rtoLoad('${status.count}', '${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
+					(<span class="boardRatio-${status.count}">
+					</c:if>
 					</td>
-					<td>${board.stateCdTitle}</td>
+					
+					<td>
+					<c:if test="${board.stateCdTitle eq '수강취소'}">
+						${board.cancelRsTitle}
+					</c:if>
+					</td>
+					
+					<!-- 버튼 -->
 					<td>
 						<c:choose>
 							<c:when test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
@@ -176,6 +191,12 @@
 	</div>
 	
 	<script>
+	$(document).ready(function(){
+		$("#getBoardRatio").trigger('click');
+	});
+	</script>
+	
+	<script>
 		function showModal(i){
 			var openBtnClassName = ".modal-open-" + i;
 			var modalClassName = ".modal-" + i; 
@@ -201,7 +222,7 @@
 		};
 	</script>
 	
-	<%-- <script>
+	<script>
 		function rto(studentId, subjectId, subjectSeq) {
 			var ratioEl = $(".rt");
 			$.ajax({
@@ -211,7 +232,20 @@
 				}
 			});
 		}
-	</script> --%>
+	</script>
+	
+	<script>
+		function rtoLoad(i, studentId, subjectId, subjectSeq) {
+			var boardRatioEl = ".boardRatio-" + i;
+			console.log(boardRatioEl);
+				$.ajax({
+					url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
+					success: function(data) {
+						$("boardRatioEl").text(data + '%)');
+					}
+				});
+		}
+	</script>
 	
 	<script>
 		function del(studentId, subjectId, subjectSeq) {
