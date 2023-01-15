@@ -55,6 +55,7 @@
 <script>
 	$(document).ready(function() {
 	});
+	/* 완료된 강좌 선택 시 */
 	const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
 		if(subject){
 			let subjectArr = subject.split('/');
@@ -77,29 +78,28 @@
 		}
 	}
 
-	// 완료된 강좌 선택 시
+	/* 검색 버튼 누를 시 검색 팝업 실행 */
 	$('.open-subject-popup-btn').on("click", function(e){
 		//버튼 창 전환 방지
 		e.preventDefault();
 
 		// 팝업창 실행
 		let popupUrl = "/SoftwareEducation/common/opensubjectsearchpop";
-		let popupOption = "width = 800px, height=550px, top=300px, left=300px, scrollbars=yes";
+		let popupOption = "width = 1200px, height=550px, top=300px, left=300px, scrollbars=yes";
 
 		window.open(popupUrl,"검색 팝업", popupOption);
 	});
 
-	$('.open-subject-search-btn').on("click", function(){
+	// $('.open-subject-search-btn').on("click", function(){
 
-		// 팝업창 실행
-		let popupUrl = "/SoftwareEducation/common/opensubjectsearchpop2"+encodeURI(str);
-		let popupOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+	// 	// 팝업창 실행
+	// 	let popupUrl = "/SoftwareEducation/common/opensubjectsearchpop2"+encodeURI(str);
+	// 	let popupOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
 
-		window.open(popupUrl,"검색 팝업", popupOption);
-	});
+	// 	window.open(popupUrl,"검색 팝업", popupOption);
+	// });
 	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

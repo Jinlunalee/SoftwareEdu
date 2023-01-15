@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 <div id="result-list">
     <!-- 게시물 O -->
     <c:if test="${boardCheck != 'empty'}">

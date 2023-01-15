@@ -12,17 +12,22 @@ function showList() { // 검색 결과 리스트 출력 함수
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
     }
     let searchUrl = String(formInputs).substring(1);
-    console.log(searchUrl);
     $.ajax({
         url : "opensubjectsearchpop2?" + searchUrl,
-        type : "GET",
-        success : function(data) {
-            console.log(data);
-            console.log("working!");
-            var html = jQuery('<div>').html(result);
-            var contents = html.find("div#result-list").html();
-            $(".list-wrap").html(contents);
-        }
+        type : "POST",
+        contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
+        // success : function(result) {
+        //     console.log(result);
+        //     console.log("working!");
+        //     var html = jQuery('<div>').html(result);
+        //     var contents = html.find("div#result-list").html();
+        //     $(".list-wrap").html(contents);
+        // }
+    }).done(function(result){
+        console.log(result);
+        var html = jQuery('<div>').html(result);
+        var contents = html.find("div#result-list").html();
+        $(".list-wrap").html(contents);
     })
 }
 
