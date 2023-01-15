@@ -96,21 +96,7 @@ public class HomeController {
 			model.addAttribute("boardCheck", "empty");	// 작가 존재하지 않을 경우
 		}
 		
-		return "redirect:/common/result";
-	}
-	
-	/**
-	 * @description	개설강좌 검색 결과 전달
-	 * @date	2023. 1. 15.
-	 * @author	Jin Lee
-	 * @param model
-	 * @return
-	 */
-	@GetMapping(value="/common/result", produces = "application/text; charset=UTF-8")
-	public String openResult(Model model) {
-		System.out.println("여기로 왔음");
 		return "common/opensubjectsearchpop-result";
 	}
-	
 }
 
