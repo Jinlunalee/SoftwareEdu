@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.dao.IEnrollRepository;
+import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.ISubjectRepository;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
@@ -26,6 +27,9 @@ public class SubjectService implements ISubjectService{
 	@Autowired
 	IEnrollRepository enrollRepository;
 	
+	@Autowired
+	IHomeRepository homeRepository;
+	
 	@Override
 	public List<SubjectVO> selectCourseList() {
 		return subjectRepository.selectCourseList();
@@ -35,10 +39,13 @@ public class SubjectService implements ISubjectService{
 	public List<SubjectVO> selectSubjectList() {
 		return subjectRepository.selectSubjectList();
 	}
-
+	
+	@Transactional
 	@Override
 	public SubjectVO selectSubjectDetails(String subjectId, int subjectSeq) {
-		return subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
+		SubjectVO subjectVo = subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
+		subjectVo.setLevelTitle(homeRepository.getComnCdTitle(subjectVo.getLevel()));
+		return subjectVo;
 	}
 	
 	@Transactional
