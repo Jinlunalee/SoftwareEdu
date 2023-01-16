@@ -27,7 +27,7 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a class="move" onclick="moveOutside(this.name); return false;" href="${board.subjectId}/${board.subjectSeq}/${board.regDt}" value="${board.subjectId}/${board.subjectSeq}/${board.regDt}" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regDt}/${board.state}">
+                            <a class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regYear}/${board.levelTitle}/${board.days}/${board.hours}">
                                 ${board.subjectTitle}
                             </a>
                         </td>

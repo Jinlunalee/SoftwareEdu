@@ -43,26 +43,31 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
 }
 
 /* ㅇㅇ명 클릭했을 시 팝업창 닫기 및 선택값 반영하기  */
-function moveOutside(value){
+function moveOutside(event, value){
+    event.preventDefault();
+
     console.log(value);
     let valueArr = value.split('/');
     let valueId = valueArr[0];
-    let valueTitle = valueArr[2];
-    if(valueArr[3]) {
-        let regDt = valueArr[3];
-    }
-
+    console.log(valueId.substring(0,4));
     // find()함수로 반영할 곳을 찾아서 값 반영하기
-    if(valueArr[3]) {
-        $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + regDt);
+    if(valueId.substring(0,4)==='SUBJ') {
+        let valueTitle = valueArr[2];
+        let reg = valueArr[3];
+        $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + reg);
         $(opener.document).find("#subject-input").val(value);
+        $(opener.document).find("#subjectId-input").val(valueId);
         console.log("it's subject");
     }
-    if(!valueArr[3]) {
+    if(valueId.substring(0,4)==='CRSE') {
+        let valueTitle = valueArr[2];
         $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  강좌명 : " + valueTitle);
         $(opener.document).find("#course-input").val(value);
+        $(opener.document).find("#courseId-input").val(valueId);
         console.log("it's course");
     }
 
     window.close();
+
+    return false;
 }

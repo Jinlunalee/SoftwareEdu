@@ -28,11 +28,11 @@ var ajaxRecruitEnd;
 var ajaxStart;
 var ajaxEnd;
 
-/*강좌변화에 따라 비동기로 데이터 출력*/
-$(function(){
-	$('#subjectId, #courseId').on('change',function(){
-		const courseId = $('#courseId').val();
-		const subjectId = $('#subjectId').val();
+/*강좌변화후 #select-btn 버튼 클릭 시 비동기 데이터 출력*/
+const selected = function() {
+		const courseId = document.getElementById('courseId-input').value;
+		const subjectId = document.getElementById('subjectId-input').value;
+		console.log(courseId , subjectId);
 		$.ajax({
 			type: "get",
 			url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
@@ -193,9 +193,7 @@ $(function(){
 				console.log("fail");
 			}
 		})
-
-	});
-});
+};
 
 /*날짜format*/
 function parse(str){

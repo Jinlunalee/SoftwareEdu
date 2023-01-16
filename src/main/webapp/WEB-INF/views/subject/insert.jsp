@@ -44,28 +44,36 @@ function changeEverything(i) {
 	</div>
 	<div class="card-body">
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
-			<div class="sub_title">정기과정명 | 
-				<div class="search-popup">
-					<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
-					<input id="course-input" name="course" type="hidden">
-					<button class="course-popup-btn btn btn-outline-secondary">검색</button>
-				</div>
-			</div>
-		
-			<div class="course_title">
-				<div class="main_title"><b>강좌명</b> 
-					<div class="search-popup">
-						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
-						<input id="subject-input" name="subject" type="hidden">
-						<button class="subject-popup-btn btn btn-outline-secondary">검색</button>
-					</div>
-					<!-- <select class="select_smallCourse" name="subjectId" id="subjectId">
-						<option value="">선택안함</option>
-						<c:forEach var="subject" items="${allSubjectList}">
-							<option value="${subject.subjectId}">${subject.subjectTitle}</option>
-						</c:forEach>
-					</select> -->
-				</div>
+			<div>
+				<table class="subject_course_title">
+					<tr>
+						<div class="subject-table">
+							<th style="width:5%">강좌명</th>
+							<td style="width:30%">
+								<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+								<input id="subject-input" name="subject" type="hidden">
+								<input id="subjectId-input" name="subjectId" type="hidden">
+							</td>
+							<td style="width:10%">
+								<button class="subject-popup-btn btn btn-outline-secondary">검색</button>
+							</td>
+						</div>
+						<div class="course-table">
+							<th style="width:5%">과정명</th>
+							<td style="width:30%">
+								<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
+								<input id="course-input" name="course" type="hidden">
+								<input id="courseId-input" name="courseId" type="hidden">
+							</td>
+							<td style="width:10%">
+								<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+							</td>
+							<td style="width:10%">
+								<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected()">선택 완료</button>
+							</td>
+						</div>
+					</tr>
+				</table>
 			</div>
 			<table class="list">
 				<colgroup>
