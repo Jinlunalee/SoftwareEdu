@@ -6,7 +6,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/common/searchpop.css'/>" />
 
 <div class="card m-2">
 	<div class="card-header">
@@ -16,24 +15,17 @@
 	<div class="card-body">
 		<div class="content-grid">
 			<div class="course-id-dropdown">
-				<!-- <select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
-					<option value="">완료된 강좌명 및 강좌순번을 선택하세요.</option>
-					<c:forEach var="subjectList" items="${subjectList}">
-						<option value="${subjectList.subjectId}/${subjectList.subjectSeq}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
-					</c:forEach>
-				</select> -->
-
 				<!-- 검색 팝업 입력창 및 버튼 -->
 				<div class="search-popup">
-					<input id="subjectTitle-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
+					<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
 					<input id="subject-input" name="subject" type="hidden">
 					<input id="state-input" name="state" type="hidden">
-					<button class="open-subject-popup-btn">검색</button>
-					<button type="button" id="summary-btn" onclick="viewSummary()">통계 조회하기</button>
+					<button class="open-subject-popup-btn btn btn-outline-secondary">검색</button>
+					<button type="button" id="summary-btn" class="btn btn-outline-secondary" onclick="viewSummary()">통계 조회하기</button>
 				</div>
-
-
 			</div>
+
+			<!-- 차트 테이블 -->
 			<div class="charts">
 				<div class="charts-grid">
 					<div id="chart-table" class="chart-item chart-table">
@@ -86,19 +78,9 @@
 		}
 	}
 
-	/* 검색 버튼 누를 시 검색 팝업 실행 */
-	$('.open-subject-popup-btn').on("click", function(e){
-		//버튼 창 전환 방지
-		e.preventDefault();
-
-		// 팝업창 실행
-		let popupUrl = "/SoftwareEducation/common/opensubjectsearchpop";
-		let popupOption = "width = 1200px, height=550px, top=300px, left=300px, scrollbars=yes";
-
-		window.open(popupUrl,"검색 팝업", popupOption);
-	});
 	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

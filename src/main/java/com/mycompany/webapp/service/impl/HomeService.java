@@ -37,6 +37,15 @@ public class HomeService implements IHomeService {
 	}
 
 	@Override
+	public List<SubjectVO> searchSubject(SubjectVO subjectVo) {
+		List<SubjectVO> boardList = homeRepository.searchSubject(subjectVo);
+		for(SubjectVO subjectVoReturn : boardList) {
+			subjectVoReturn.setLevelTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevel()));
+			subjectVoReturn.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubject()));
+		}
+		return boardList;
+	}
+	@Override
 	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
 		List<SubjectVO> boardList = homeRepository.searchOpenSubject(subjectVo);
 		// level, state, catSubject 공통코드로 가져와서 set 하기
@@ -48,27 +57,5 @@ public class HomeService implements IHomeService {
 		return boardList;
 	}
 
-
-//	@Override
-//	public List<SubjectVO> searchSubject(List<Map<String, Object>> searchParam) {
-//		SubjectVO subjectVo = new SubjectVO();
-//		subjectVo.setSubjectId(searchParam.get("subjectId"));
-//		subjectVo.setSubjectTitle(searchParam.get("subjectTitle"));
-//		subjectVo.setCatSubject(searchParam.get("catSubject"));
-//		subjectVo.setDays(searchParam.get("days"));
-//		subjectVo.setHours(searchParam.get("hours"));
-//		subjectVo.setLevel(searchParam.get("level"));
-//		subjectVo.setLevelEtc(searchParam.get("levelEtc"));
-//		subjectVo.setCost(searchParam.get("cost"));
-//		subjectVo.setRegYear(searchParam.get("regYear"));
-//		return homeRepository.searchSubject(subjectVo);
-//	}
-
-//	@Override
-//	public List<String> getColumnName(String searchType, List<Map<String, Object>> searchParam) {
-//		List<String> list = new ArrayList<>();
-//		
-//		return null;
-//	}
 
 }

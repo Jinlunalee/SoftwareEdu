@@ -12,7 +12,7 @@ public interface IHomeService {
 	String getComnCdTitle(String comnCd);
 	List<CommonCodeVO> getComnCdList (String comnCdType);
 	
-//	List<SubjectVO> searchSubject(List<Map<String, Object>> searchParam);
+	List<SubjectVO> searchSubject(SubjectVO subjectVo);
 //	List<SubjectVO> searchCourse();
 	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
 //	List<SubjectVO> searchOpenSubject();

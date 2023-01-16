@@ -12,8 +12,11 @@ function showList() { // 검색 결과 리스트 출력 함수
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
     }
     let searchUrl = String(formInputs).substring(1);
+    const pathArr = location.pathname.split('/');
+    const path = pathArr[3];
+    console.log(path + "-result?" + searchUrl);
     $.ajax({
-        url : "opensubjectsearchpop2?" + searchUrl,
+        url : path + "-result?" + searchUrl,
         type : "POST",
         contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
     }).done(function(result){

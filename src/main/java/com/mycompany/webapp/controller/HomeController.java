@@ -70,33 +70,72 @@ public class HomeController {
 	 * @author	Jin Lee
 	 * @throws Exception
 	 */
-	@GetMapping(value="/common/opensubjectsearchpop")
-	public void openSubjectSearchPop(Model model) throws Exception{
+	@GetMapping(value="/common/searchpop-opensubject")
+	public void searchPopOpenSubject(Model model) throws Exception{
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
 		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
 	}
 	
 	/**
-	 * @description	개설강좌 검색 팝업
+	 * @description	개설강좌 검색 팝업 : 결과
 	 * @date	2023. 1. 13.
 	 * @author	Jin Lee
 	 * @throws Exception
 	 */
-	@PostMapping(value="/common/opensubjectsearchpop2", produces = "application/text; charset=UTF-8")
-	public String openSubjectSearchPop2(SubjectVO subjectVo, Model model) throws Exception{
+	@PostMapping(value="/common/searchpop-opensubject-result", produces = "application/text; charset=UTF-8")
+	public String searchPopOpenSubjectResult(SubjectVO subjectVo, Model model) throws Exception{
 		System.out.println(subjectVo);
 		
 		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
 		
 		// ajax로 구현할 것
 		if(!openSubjectList.isEmpty()) {
-			model.addAttribute("boardList",openSubjectList);	// 작가 존재 경우
+			model.addAttribute("boardList",openSubjectList);	// 존재 경우
 		} else {
-			model.addAttribute("boardCheck", "empty");	// 작가 존재하지 않을 경우
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
 		
-		return "common/opensubjectsearchpop-result";
+		return "common/searchpop-opensubject-result";
 	}
+	
+	/**
+	 * @description	강좌 검색 팝업
+	 * @date	2023. 1. 16.
+	 * @author	Jin Lee
+	 * @param model
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/searchpop-subject")
+	public void searchPopSubject(Model model) throws Exception{
+		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
+		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	강좌 검색 팝업 : 결과
+	 * @date	2023. 1. 16.
+	 * @author	Jin Lee
+	 * @param subjectVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/searchpop-subject-result", produces = "application/text; charset=UTF-8")
+	public String searchPopSubjectResult(SubjectVO subjectVo, Model model) throws Exception{
+		System.out.println(subjectVo);
+		
+		List<SubjectVO> openSubjectList = homeService.searchSubject(subjectVo);
+		
+		// ajax로 구현할 것
+		if(!openSubjectList.isEmpty()) {
+			model.addAttribute("boardList",openSubjectList);	//  존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
+		}
+		
+		return "common/searchpop-subject-result";
+	}
+	
 }
 

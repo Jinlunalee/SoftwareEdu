@@ -89,19 +89,19 @@
 		    reg_year
 		FROM subject
 		<where>
-			<if test='subjectId != ""'>
-				AND subject_id = #{subjectId}  
+			<if test="subjectId != null and !subjectId.equals('') ">
+				AND subject_id = #{subjectId}
 			</if>
-			<if test='subjectTitle != ""'>
-				AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{keyword2}||'%') 
+			<if test="subjectTitle != null and !subjectTitle.equals('')">
+				AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
 			</if>
-			<if test='catSubject != ""'>
+			<if test="catSubject != null and !catSubject.equals('')">
 				AND cat_cd = #{catSubject} 
 			</if>
-			<if test='level != ""'>
+			<if test="level != null and !level.equals('') ">
 				AND level_cd = #{level} 
 			</if>
-			<if test='regYear != ""'>
+			<if test="regYear != 0">
 				AND reg_year = #{regYear} 
 			</if>
 		</where>
@@ -159,4 +159,6 @@
 		</if>
 		ORDER BY start_day, end_day
 	</select>
+	
+	
 </mapper>
