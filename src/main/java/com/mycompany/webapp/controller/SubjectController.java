@@ -80,7 +80,7 @@ public class SubjectController {
 		List<SubjectVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourse);
 				
 		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catCourse);
+		model.addAttribute("catId", catCourse); 
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
@@ -174,15 +174,7 @@ public class SubjectController {
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String updateSubject(SubjectVO subject) {
 		logger.info("subject/update:"+subject);
-		
-		//time,date format
-		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
-		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
-		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
-		subject.setRecruitEndDay(subject.getRecruitEndDay().replaceAll("-", ""));
-		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
-		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
-				
+					
 		try {
 			MultipartFile mf = subject.getFile();
 			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
@@ -261,14 +253,6 @@ public class SubjectController {
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
-		
-		//time,date format
-//		subject.setStartDay(subject.getStartDay().replaceAll("-", ""));
-		subject.setEndDay(subject.getEndDay().replaceAll("-", ""));
-		subject.setRecruitStartDay(subject.getRecruitStartDay().replaceAll("-", ""));
-		subject.setRecruitEndDay(subject.getRecruitEndDay().replaceAll("-", ""));
-		subject.setStartTime(subject.getStartTime().replaceAll(":", ""));
-		subject.setEndTime(subject.getEndTime().replaceAll(":", ""));
 		
 		logger.info("subject/insert:"+subject);
 		logger.info("subject/insert:"+questionVo);

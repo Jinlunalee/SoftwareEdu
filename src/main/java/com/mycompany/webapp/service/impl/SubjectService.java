@@ -1,6 +1,5 @@
 package com.mycompany.webapp.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mycompany.webapp.controller.SubjectController;
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.ISubjectRepository;
 import com.mycompany.webapp.dto.SubjectVO;

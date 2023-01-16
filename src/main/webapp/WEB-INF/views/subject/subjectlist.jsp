@@ -73,7 +73,7 @@
 							</td>
 							<td>${board.startDay}~${board.endDay}</td>
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
-							<td>${board.cost}</td>
+							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 							<td>${board.comnCdTitle}</td>
 							<td>${board.regDt}</td>
 							<td>
