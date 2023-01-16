@@ -29,7 +29,7 @@
 				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
 				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 			</div>
-
+			<input type="hidden" class="selectPager" value="${pager.rowsPerPage}">
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
@@ -54,7 +54,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
-					<th>입력날짜</th>
+					<th>개설날짜</th>
 					<th>처리</th>
 				</tr>
 			</thead>
@@ -146,5 +146,11 @@
 			} else {
 			}
 		}
+		function selectPagerCount(){
+			let selectPager = document.querySelector('.selectPager');
+			console.log(selectPager);
+			
+		}
+
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
