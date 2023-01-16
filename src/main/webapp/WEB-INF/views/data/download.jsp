@@ -10,6 +10,17 @@ img {
 	height: 20px;
 }
 
+.card {
+overflow-x: scroll;
+
+}
+.card{
+   -ms-overflow-style: none;
+}
+.card::-webkit-scrollbar{
+  display:none;
+}
+
 .card_check {
 	margin: 15px;
 }
@@ -42,7 +53,7 @@ img {
 }
 
 .card-body {
-	width: 100%;
+	width: 1250px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
