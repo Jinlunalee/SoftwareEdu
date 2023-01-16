@@ -7,8 +7,8 @@
 
 <div class="card m-2">
 	<div class="card-header"> 
-	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
+		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+		<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
 	</div>
 	<div class="card-body">
 		
@@ -63,17 +63,18 @@
 		
 		<div class="list_top">
 			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
-			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
-			<%-- 뷰 갯수 --%>
-			<div class="view">
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
-				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/enroll/boardlist?pageNo=1"/>">선택</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
-				</select>
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
+				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+				<%-- 뷰 갯수 --%>
+				<div class="view">
+					<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
+					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+						<option value="<c:url value="/enroll/boardlist?pageNo=1"/>">선택</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
+					</select>
+				</div>
 			</div>
 		</div>
 
@@ -93,39 +94,19 @@
 			<!-- 리스트 -->
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">${board.subjectTitle} 
-					<c:if test="${not empty board.courseTitle}">
-					(${board.courseTitle})
-					</c:if></a></td>
-					<div class="modal modal-${status.count}">
-						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  ${board.stateCdTitle}</li>
-							<c:if test="${not empty board.cancelRsEtc}">
-							<li>※ 취소 상세 사유 | ${board.cancelRsEtc}</li>
+					<td>
+						<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle} 
+							<c:if test="${not empty board.courseTitle}">
+							(${board.courseTitle})
 							</c:if>
-							<br>
-							<li>강좌 | ${board.subjectTitle} | ${board.subjectId} | ${board.openStateCdTitle}</li>
-							<li>강의 시간 | ${board.startTime} ~ ${board.endTime} </li>
-							<li>교육 기간 | ${board.startDay} ~ ${board.endDay} </li>
-							<span>진도율 | <span class="rt"></span></span>
-							<li>현재 완료 시간  | ${board.completeHours}</li>
-							완료한 시간 입력
-							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
-								<input type="number" name="addHours" class="input-time" >
-								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
-							</form>
-							<li>취소 상세 사유 | ${board.cancelRsEtc}</li>
-							<div id="close-btn"><button class="close-btn">닫기</button></div>
-						</div>
-					</div>
+						</a>
+					</td>
 					<td>${board.name} (${board.studentId})</td>
 					<td>${board.regDt}</td>
 					
 					<!-- 현재 상태 옆에 진도율 -->
 					<td>${board.stateCdTitle} 
 					<c:if test="${board.stateCdTitle eq '수강중'}">
-					<%-- <span id="getBoardRatio-${status.count}" onclick="rtoLoad('${status.count}', '${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
-					(<span class="boardRatio-${status.count}"> --%>
 					(${board.ratio}%)
 					</c:if>
 					</td>

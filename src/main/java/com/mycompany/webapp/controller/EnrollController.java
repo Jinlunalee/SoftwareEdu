@@ -2,7 +2,6 @@ package com.mycompany.webapp.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +27,7 @@ import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 
 @Controller
@@ -152,10 +151,12 @@ public class EnrollController {
 	 * @param subjectSeq
 	 * @return
 	 */
-	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
-		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+
+	@RequestMapping(value="/addhours", method=RequestMethod.POST)
+	public String addHours(EnrollVO enroll) {
+		System.out.println(enroll);
+		enrollService.addHours(enroll.getAddHours(), enroll.getEnrollId());
+		return "redirect:/enroll/details/" + enroll.getEnrollId();
 	}
 
 	// 수강 추가 수강생 ajax
@@ -229,6 +230,24 @@ public class EnrollController {
 
 		workbook.write(response.getOutputStream());
 		workbook.close();
+	}
+
+	/**
+	 * @description	수강 상세 페이지
+	 * @date	2023. 1. 16.
+	 * @author	Jin Lee
+	 * @param enrollId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
+	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
+		enrollVo.setRatio(enrollService.getRatioUsingEnrollId(enrollId));
+		model.addAttribute("enroll", enrollVo);
+		return "enroll/details";
 	}
 
 }

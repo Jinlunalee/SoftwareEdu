@@ -194,7 +194,8 @@
         		end_time, 
         		start_day, 
         		end_day,
-        		o.state_cd as open_state_cd
+        		o.state_cd as open_state_cd,
+        		ROUND(complete_hours/s.hours * 100) AS "ratio" 
 		FROM ENROLL e 
 		LEFT OUTER JOIN STUDENT t 
 		ON e.student_id = t.student_id 

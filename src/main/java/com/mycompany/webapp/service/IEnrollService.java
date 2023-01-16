@@ -14,8 +14,9 @@ public interface IEnrollService {
 	List<EnrollVO> getEnrollList();
 	void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq);
 	void clickDelete(String studentId, String subjectId, int subjectSeq);
+	int getRatioUsingEnrollId(String enrollId);
 	void clickDeleteEnrollByOpen(String subjectId, int subjectSeq);
-	void addHours(EnrollVO enroll, String studentId, String subjectId, int subjectSeq);
+	void addHours(int addHours, String enrollId);
 	List<CommonCodeVO> getCancelList();
 	List<StudentVO> getStudentList(StudentVO studentVO);
 	void approval(String studentId, String subjectId, int subjectSeq);
@@ -23,4 +24,5 @@ public interface IEnrollService {
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
 	void addCourse(String studentId, String courseId);
 	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
+	EnrollVO getEnrollDetails(String enrollId); // 수강 상세 정보 가져오기
 }

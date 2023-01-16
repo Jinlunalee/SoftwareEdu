@@ -16,8 +16,9 @@ public interface IEnrollRepository {
 	List<EnrollVO> getEnrollList();
 	void clickCancel(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void clickDelete(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	int getRatioUsingEnrollId(@Param("enrollId") String enrollId);
 	void clickDeleteEnrollByOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
-	void addHours(@Param("addHours") int addHours, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
+	void addHours(@Param("addHours") int addHours, @Param("enrollId") String enrollId);
 	List<CommonCodeVO> getCancelList();
 	void updateCancelRsCd(@Param("cancelRsCd") String cancelRsCd, @Param("cancelRsEtc") String cancelRsEtc, @Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	List<StudentVO> getStudentList(StudentVO studentVO);
@@ -30,4 +31,5 @@ public interface IEnrollRepository {
 	List<OpenVO> getSubjectInfoByCourse(String courseId);
 	int updateEnrollCancel(); // 강좌가 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
 	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
+	EnrollVO getEnrollDetails(String enrollId); // 수강 상세 정보 가져오기
 }

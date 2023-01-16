@@ -184,6 +184,7 @@
 
 		<%-- 목록 --%>
 		<table class="list">
+
 			<tr>
 				<th>강좌 명 (과정 명)</th>
 				<th>수강생 명 (아이디)</th>
@@ -198,45 +199,22 @@
 			<!-- 리스트 -->
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">
-					${board.subjectTitle} 
+					<td>
+					<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
 					<!-- 과정명  --> 
 					<c:if test="${not empty board.courseTitle}">(${board.courseTitle})</c:if>
 					</a>
 					</td>
-					<!-- 모달창 -->
-					<div class="modal modal-${status.count}">
-						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  ${board.stateCdTitle}</li>
-							<c:if test="${not empty board.cancelRsEtc}">
-							<li>※ 취소 상세 사유 | ${board.cancelRsEtc}</li>
-							</c:if>
-							<br>
-							<li>강좌 | ${board.subjectTitle} | ${board.subjectId} | ${board.openStateCdTitle}</li>
-							<li>강의 시간 | ${board.startTime} ~ ${board.endTime} </li>
-							<li>교육 기간 | ${board.startDay} ~ ${board.endDay} </li>
-							<span>진도율 | <span class="rt"></span></span>
-							<li>현재 완료 시간  | ${board.completeHours}</li>
-							완료한 시간 입력
-							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
-								<input name="addHours" class="input-time" type="number">
-								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
-							</form>
-							
-							<div id="close-btn"><button class="close-btn">닫기</button></div>
-							
-						</div>
-					</div>
+					
 					<!-- 수강생 명 -->
 					<td>${board.name} (${board.studentId})</td>
 					<!-- 신청일자 -->
 					<td>${board.regDt}</td>
 					
-					<td>${board.stateCdTitle} 
 					<!-- 현재 상태 옆에 진도율 -->
+					<td>${board.stateCdTitle} 
 					<c:if test="${board.stateCdTitle eq '수강중'}">
-					<span id="getBoardRatio" onclick="rtoLoad('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
-					(<span class="boardRatio">
+					(${board.ratio}%)
 					</c:if>
 					</td>
 					

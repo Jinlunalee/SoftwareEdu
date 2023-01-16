@@ -16,20 +16,20 @@
 	<div class="card-body">
 		<div class="content-grid">
 			<div class="course-id-dropdown">
-				<select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
+				<!-- <select class="course-id-select" name="serveyqn-select" onchange="changeSelect(this.value)">
 					<option value="">완료된 강좌명 및 강좌순번을 선택하세요.</option>
 					<c:forEach var="subjectList" items="${subjectList}">
 						<option value="${subjectList.subjectId}/${subjectList.subjectSeq}">강좌명  : ${subjectList.subjectTitle} | 강좌순번 : ${subjectList.subjectSeq}</option>
 					</c:forEach>
-				</select>
+				</select> -->
 
 				<!-- 검색 팝업 입력창 및 버튼 -->
 				<div class="search-popup">
-					<input id="subjecTitle-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
-					<input id="subjectId-input" name="subjectId" type="hidden">
-					<input id="subjectSeq-input" name="subjectSeq" type="hidden">
-					<input id="regDt-input" name="regDt" type="hidden">
+					<input id="subjectTitle-input" type="readonly" placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
+					<input id="subject-input" name="subject" type="hidden">
+					<input id="state-input" name="state" type="hidden">
 					<button class="open-subject-popup-btn">검색</button>
+					<button type="button" id="summary-btn" onclick="viewSummary()">통계 조회하기</button>
 				</div>
 
 
@@ -56,28 +56,82 @@
 <script>
 	$(document).ready(function() {
 	});
-	/* 완료된 강좌 선택 시 */
-	const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
+	/* 통계 조회 버튼 누를 시 통계 테이블 보여주기 */
+	const viewSummary = function() {
+		let subject = document.getElementById('subject-input').value;
+		console.log(subject);
 		if(subject){
 			let subjectArr = subject.split('/');
 			let subjectId = subjectArr[0];
 			let subjectSeq = subjectArr[1];
-			$.ajax({
-				url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
-				type : "GET",
-				success : function(data){
-					console.log(data);
-					showTableChart(data); // subject에 따른 table chart 보여주기
-					showBarChart(data); // subject에 따른 bar chart 보여주기
-				},
-				error:function(){
-					alert("well well well");
-				}
-			});
+			let state = subjectArr[4];
+			if(state==='OPN05'){
+				$.ajax({
+					url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
+					type : "GET",
+					success : function(data){
+						console.log(data);
+						showTableChart(data); // subject에 따른 table chart 보여주기
+						showBarChart(data); // subject에 따른 bar chart 보여주기
+					},
+					error:function(){
+						alert("요청에 실패했습니다. 관리자에게 문의하세요.");
+					}
+				});
+			} else {
+				alert("완료된 강의를 선택해주세요.");
+			}
 		} else {
-			// subject가 비어있을 때, 즉 "선택하세요."를 선택했을 때
+			alert("강의를 선택해주세요.");
 		}
 	}
+
+	const changeInput = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
+		// let subject = document.getElementById('subject-input').value;
+		// console.log(subject);
+		// if(subject){
+		// 	let subjectArr = subject.split('/');
+		// 	let subjectId = subjectArr[0];
+		// 	let subjectSeq = subjectArr[1];
+		// 	$.ajax({
+		// 		url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
+		// 		type : "GET",
+		// 		success : function(data){
+		// 			console.log(data);
+		// 			showTableChart(data); // subject에 따른 table chart 보여주기
+		// 			showBarChart(data); // subject에 따른 bar chart 보여주기
+		// 		},
+		// 		error:function(){
+		// 			alert("완료된 강의를 선택해주세요.");
+		// 		}
+		// 	});
+		// } else {
+		// 	console.log("완료된 강의를 선택해주세요.");
+		// }
+	}
+
+	// const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
+	// 	if(subject){
+	// 		let subjectArr = subject.split('/');
+	// 		let subjectId = subjectArr[0];
+	// 		let subjectSeq = subjectArr[1];
+	// 		console.log(subject);
+	// 		$.ajax({
+	// 			url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
+	// 			type : "GET",
+	// 			success : function(data){
+	// 				console.log(data);
+	// 				showTableChart(data); // subject에 따른 table chart 보여주기
+	// 				showBarChart(data); // subject에 따른 bar chart 보여주기
+	// 			},
+	// 			error:function(){
+	// 				alert("완료된 강의를 선택해주세요.");
+	// 			}
+	// 		});
+	// 	} else {
+	// 		console.log("완료된 강의를 선택해주세요.");
+	// 	}
+	// }
 
 	/* 검색 버튼 누를 시 검색 팝업 실행 */
 	$('.open-subject-popup-btn').on("click", function(e){
@@ -90,15 +144,6 @@
 
 		window.open(popupUrl,"검색 팝업", popupOption);
 	});
-
-	// $('.open-subject-search-btn').on("click", function(){
-
-	// 	// 팝업창 실행
-	// 	let popupUrl = "/SoftwareEducation/common/opensubjectsearchpop2"+encodeURI(str);
-	// 	let popupOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
-
-	// 	window.open(popupUrl,"검색 팝업", popupOption);
-	// });
 	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
