@@ -21,6 +21,7 @@
 			<div class="course_state">${subject.comnCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
+		<div class="list-wrap">
 		<table class="list">
 			<colgroup>
 				<col width="50%">
@@ -79,6 +80,7 @@
 			</tr>
 			</tbody>
 		</table>
+		</div>
 		
 		<!-- 교육 소개 -->
 		<div class="course_intro">

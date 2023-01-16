@@ -1,49 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/course/course.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
-
-<div class="card m-2">
-	<div class="card-header"> 
-	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	<div><span> > 강좌 관리 > </span><span class="submenu-title">개설 강좌 목록</span></div>
-	</div>
-	<div class="card-body">
-		<!-- 검색 시작 -->
-		<div class="search">
-			<select class="select-box">
-				<option>강좌명</option>
-				<option>강좌아이디</option>
-			</select>
-			<input class="input-text" type="text" placeholder="강좌명 / 강좌아이디를 입력해 주세요">
-			<input class="input-button" type="button" value="검색">
-        </div>
-		<!-- 검색끝 -->
-		
-		<!-- list top -->
-		<div class="list_top">
-			<div class="cnt">
-				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
-			</div>
-			<input type="hidden" class="selectPager" value="${pager.rowsPerPage}">
-			<div class="view">
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
-				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/subject/subjectboardlist?pageNo=1"/>">선택</option>
-					<option name="10" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option name="30" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option name="50" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
-				</select>
-			</div>
-		</div>
-		<!-- // list top -->
-		
-		<!-- list table -->
-		<table class="list">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="page-list">
+	<div>
+		<table class="table">
+			<table class="list">
 			<thead>
 				<tr>
 					<th>분류</th>
@@ -58,7 +18,6 @@
 					<th>처리</th>
 				</tr>
 			</thead>
-			
 			<tbody>
 				<c:if test="${boardListSize ne 0}">
 					<c:forEach var="board" items="${boardList}">
@@ -127,35 +86,3 @@
 		</table>
 	</div>
 </div>
-
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
-	<script type="text/javascript">
-		/*수강삭제*/
-		function del(subjectId, subjectSeq, fileId) {
-			if(confirm('수강 정보를 삭제하시겠습니까?')) {
-				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
-			} else {
-			}
-		}
-	
-		/*폐강*/
-		function closeCourse(subjectId, subjectSeq, fileId){
-			if(confirm('폐강하시겠습니까?')) {
-				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
-			} else {
-			}
-		}
-		/*페이지 수 선택 유지*/
-		// $(function(){
-		// 	$('.select-view').on('change',function(){
-		// 		// alert(($(this).val())); // 선택한 value값 가져오기
-		// 		let selectPager = $('.selectPager'); //들고온 pager 개수 
-		// 		alert(selectPager.val());
-		// 		if(selectPager === 10){
-		// 			$('.select-view[value="10"]').attr('selected', true);
-		// 		}
-		// 	});
-		// });
-	</script>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>

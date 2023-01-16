@@ -1,4 +1,4 @@
-// subject에 따른 table chart 보여주기
+/* subject에 따른 table chart 보여주기 */
 function showTableChart(data) {
   const questionCount = data.length/5; // 항목 수
 
@@ -44,7 +44,7 @@ function showTableChart(data) {
 }
 
   
-// subject에 따른 bar chart 보여주기
+/* subject에 따른 bar chart 보여주기 */
 function showBarChart(data) {
   const questionCount = data.length/5; // 항목 수
 

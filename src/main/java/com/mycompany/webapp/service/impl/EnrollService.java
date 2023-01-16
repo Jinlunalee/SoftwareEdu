@@ -28,21 +28,20 @@ public class EnrollService implements IEnrollService{
 	}
 	
 	@Override
-	public String getRatio(String studentId, String subjectId, String subjectSeq) {
-		return enrollRepository.getRatio(studentId, subjectId, subjectSeq);
-	}
-
-	
-	@Override
-	public void clickCancel(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
+	public void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq) {
 		String cancelRsCd = enroll.getCancelRsCd();
 		String cancelRsEtc = enroll.getCancelRsEtc();
 		enrollRepository.updateCancelRsCd(cancelRsCd, cancelRsEtc, studentId, subjectId, subjectSeq);
 		enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
 	}
-	
+
 	@Override
-	public void clickDelete(String studentId, String subjectId, String subjectSeq) {
+	public int getRatioUsingEnrollId(String enrollId) {
+		return enrollRepository.getRatioUsingEnrollId(enrollId);
+	}
+
+	@Override
+	public void clickDelete(String studentId, String subjectId, int subjectSeq) {
 		enrollRepository.clickDelete(studentId, subjectId, subjectSeq);
 	}
 	
@@ -57,10 +56,6 @@ public class EnrollService implements IEnrollService{
 		enrollRepository.addHours(addHours, enrollId);
 	}
 	
-//	public int getHours(String enrollId) {
-//		return enrollRepository.getHours(enrollId);
-//	}
-	
 	@Override
 	public List<CommonCodeVO> getCancelList() {
 		return enrollRepository.getCancelList();
@@ -72,7 +67,7 @@ public class EnrollService implements IEnrollService{
 	}
 	
 	@Override
-	public void approval(String studentId, String subjectId, String subjectSeq) {
+	public void approval(String studentId, String subjectId, int subjectSeq) {
 		enrollRepository.approval(studentId, subjectId, subjectSeq);
 	}
 	

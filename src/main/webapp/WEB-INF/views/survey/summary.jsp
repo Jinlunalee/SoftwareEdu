@@ -86,53 +86,6 @@
 		}
 	}
 
-	const changeInput = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
-		// let subject = document.getElementById('subject-input').value;
-		// console.log(subject);
-		// if(subject){
-		// 	let subjectArr = subject.split('/');
-		// 	let subjectId = subjectArr[0];
-		// 	let subjectSeq = subjectArr[1];
-		// 	$.ajax({
-		// 		url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
-		// 		type : "GET",
-		// 		success : function(data){
-		// 			console.log(data);
-		// 			showTableChart(data); // subject에 따른 table chart 보여주기
-		// 			showBarChart(data); // subject에 따른 bar chart 보여주기
-		// 		},
-		// 		error:function(){
-		// 			alert("완료된 강의를 선택해주세요.");
-		// 		}
-		// 	});
-		// } else {
-		// 	console.log("완료된 강의를 선택해주세요.");
-		// }
-	}
-
-	// const changeSelect = function(subject){ // subject : 화면에서 select로 고른 개설된 강좌의 정보
-	// 	if(subject){
-	// 		let subjectArr = subject.split('/');
-	// 		let subjectId = subjectArr[0];
-	// 		let subjectSeq = subjectArr[1];
-	// 		console.log(subject);
-	// 		$.ajax({
-	// 			url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
-	// 			type : "GET",
-	// 			success : function(data){
-	// 				console.log(data);
-	// 				showTableChart(data); // subject에 따른 table chart 보여주기
-	// 				showBarChart(data); // subject에 따른 bar chart 보여주기
-	// 			},
-	// 			error:function(){
-	// 				alert("완료된 강의를 선택해주세요.");
-	// 			}
-	// 		});
-	// 	} else {
-	// 		console.log("완료된 강의를 선택해주세요.");
-	// 	}
-	// }
-
 	/* 검색 버튼 누를 시 검색 팝업 실행 */
 	$('.open-subject-popup-btn').on("click", function(e){
 		//버튼 창 전환 방지

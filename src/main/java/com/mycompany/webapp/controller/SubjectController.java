@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -127,6 +128,34 @@ public class SubjectController {
 		
 		return "subject/subjectlist";
 	}
+	
+	//paging 강좌 목록 조회 - ajax
+	@PostMapping("/ajaxsubjectboardlist")
+	public String ajaxSubjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, 
+			@RequestParam(defaultValue="all") String catSubject, Model model) {
+		// 값이 잘 넘어왔는지 확인 
+		logger.info(pageNo + rowsPerPage + catSubject);
+
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountOpenSubjectRow(catSubject);
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<SubjectVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubject);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("catId", catSubject);
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		
+		return "subject/subjectlist-result";
+	}
+	
+	
 
 	// 개설 강좌 상세조회 (open)
 	@RequestMapping(value="/details/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
