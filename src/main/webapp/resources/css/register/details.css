@@ -36,3 +36,7 @@
     background-color: #e4effa;
     padding-left:10px;
 }
+
+.add-hours-table .add-hours-input {
+    width: 80%;
+}

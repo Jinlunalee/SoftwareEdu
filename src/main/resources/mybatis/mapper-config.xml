@@ -10,6 +10,7 @@
 	<typeAliases>
 		<typeAlias type="com.mycompany.webapp.dto.EnrollVO" alias="EnrollVO" />
 		<typeAlias type="com.mycompany.webapp.dto.SubjectVO" alias="SubjectVO" />
+		<typeAlias type="com.mycompany.webapp.dto.CourseVO" alias="CourseVO" />
 		<typeAlias type="com.mycompany.webapp.dto.StudentVO" alias="StudentVO" />
 		<typeAlias type="com.mycompany.webapp.dto.CommonCodeVO" alias="CommonCodeVO" />
 		<typeAlias type="com.mycompany.webapp.dto.QuestionVO" alias="QuestionVO" />

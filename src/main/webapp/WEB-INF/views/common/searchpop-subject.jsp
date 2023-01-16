@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="subject-name-warp">
-        <span>개설 강좌 선택</span>
+        <span>강좌 선택</span>
     </div>
     <div class="content-wrap">
             <!-- 게시물 표 영역 -->
@@ -32,13 +32,6 @@
                                 <option value="">전체</option>
                                 <c:forEach items="${levelList}" var="level">
                                     <option value="${level.comnCd}">${level.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            상태 : 
-                            <select name="state">
-                                <option value="">전체</option>
-                                <c:forEach items="${stateList}" var="state">
-                                    <option value="${state.comnCd}">${state.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
                             분류 : 
@@ -65,12 +58,6 @@
                 <div class="list-wrap">
                     
                 </div>
-
-                <form id="moveForm" action="/admin/authorPop" method="get">
-                    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-                    <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-                </form>               		
             </div>
 
 </div>

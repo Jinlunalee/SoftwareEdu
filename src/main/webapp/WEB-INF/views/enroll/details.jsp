@@ -94,18 +94,18 @@
 
 		<table class="enroll-detail-table add-hours-table">
 			<tr>
-				<th style="width:30%;">현재 수강 완료 시간</th>
+				<th style="width:20%;">현재 수강 완료 시간</th>
 				<th style="width:20%;">진도율</th>
-				<th style="width:50%;">추가 수강 시간</th>
+				<th style="width:60%;">추가 수강 시간</th>
 			</tr>
 			<tr>
 				<td>${enroll.completeHours}</td>
-				<td>${enroll.ratio}%</td>
+				<td><span id="ratio">${enroll.ratio}</span>%</td>
 				<td>
 					<form class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
 						<input name="enrollId" value="${enroll.enrollId}" type="hidden">
-						<input class="add-hours-input" name="addHours" type="number" placeholder="추가할 시간을 입력하세요.">
-						<input class="add-hours-submit btn btn-outline-secondary" type="submit" value="추가">
+						<input id="add-hours-input" class="add-hours-input" name="addHours" type="number" placeholder="추가할 시간을 입력하세요.">
+						<input id="add-hours-submit" class="add-hours-submit btn btn-outline-secondary" type="submit" value="추가">
 					</form>
 				</td>
 			</tr>
@@ -114,7 +114,18 @@
 
 	</div>
 	<script>
-
+		window.onload = function () {
+			const ratio = document.getElementById('ratio').innerText;
+			console.log(ratio);
+			console.log(typeof ratio)
+			const addHoursInput = document.getElementById('add-hours-input');
+			const addHoursSubmit = document.getElementById('add-hours-submit');
+			if(ratio>=100) {
+				addHoursInput.setAttribute("readonly", true);
+				addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다.");
+				addHoursSubmit.setAttribute("type","button");
+			}
+		}
 	</script>
 </div>
 

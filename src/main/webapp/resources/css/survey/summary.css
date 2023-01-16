@@ -46,3 +46,23 @@
 .title-img {
 	width:45px;
 }
+
+/* 검색 버튼 클릭 */
+.open-subject-search-btn {
+    margin-left: 20px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
+}
+#subjectTitle-input {
+    width: 60%;
+    text-align: center;
+    height: 45px;
+    border-radius: 8px;
+    margin: 0 10px;
+    padding: 3px 20px 0 20px;
+    border: 1px solid #e8e8e8;
+}

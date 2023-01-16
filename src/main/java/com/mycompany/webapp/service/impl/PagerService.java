@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.IPagerRepository;
 import com.mycompany.webapp.dto.EnrollVO;
@@ -26,6 +27,9 @@ public class PagerService implements IPagerService {
 	
 	@Autowired
 	IHomeRepository homeRepository;
+	
+	@Autowired
+	IEnrollRepository enrollRepository;
 	
 	@Override
 	public int getCountStudentRow() {
@@ -101,7 +105,9 @@ public class PagerService implements IPagerService {
 		List<EnrollVO> boardList = pagerRepository.selectEnrollListByPage(pager);
 		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
 		for(EnrollVO enrollVo : boardList) {
+			enrollVo.setRatio(enrollRepository.getRatioUsingEnrollId(enrollVo.getEnrollId()));	// 진도율 set
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
 			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
 			
 			if(enrollVo.getCancelRsCd() != null) {
