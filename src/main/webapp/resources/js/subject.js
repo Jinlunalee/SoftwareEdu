@@ -369,18 +369,7 @@ function inputState(){
 }
 
 /*검색 눌렀을때 갯수 고정*/
-let selectPager = document.querySelector('.select-view'); // select box 
-selectPager.addEventListener('change', showSelectList); // select box가 변했을 때 
+// let selectPager = document.querySelector('.select-view'); // select box 
+// selectPager.addEventListener('change', showSelectList); // select box가 변했을 때 
 
-function showSelectList() { // 검색 결과 리스트 출력
-	let rowsPerPage = this.value; // 선택한 value값 가져오기
-	console.log(rowsPerPage);
-	$.ajax({
-		url: "ajaxsubjectboardlist?rowsPerPage=" + rowsPerPage,
-		type: "POST"
-	}).done(function (result) {
-		var html = $('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
-		var contents = html.find('div#page-list').html(); //
-		$('.list-wrap').html(contents);
-	})
-}
+

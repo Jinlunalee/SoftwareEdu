@@ -83,14 +83,29 @@ overflow-x: scroll;
 	display: none;
 }
 
-a {
-	
+#studentInfo{
+    color: slategrey;
 }
+
 
 .second_card {
-margin-top: 60px;
+    margin-top: 60px;
 }
 
+.card_info{
+    text-align: center;
+    margin: 10px;
+    width: 600px;
+    height: 120px;
+    border: 2px solid #95b3d4;
+    display: none;
+
+}
+#first_info{
+    font-size: 12px;
+    color: slategrey;
+
+}
 
 </style>
 
@@ -126,7 +141,8 @@ margin-top: 60px;
 				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
 				<br> <a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
-					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" /><br>
+
 				</button>
 			</div>
 		</div>
@@ -158,11 +174,60 @@ margin-top: 60px;
 		<div class="vl"></div>
 
 		<div class="card_right">
+		
+		  <div class ="card_info" id="show_info1">
+		      <a id="first_info" class="first_info">
+                * agent_id : 훈련기관ID<br>
+                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
+                * name : 수강생 이름<br>
+                * complete_hours : 수강완료시수<br>
+                * send_dt : 전송시간<br>
+		      </a>
+		  </div>
+		  
+		  <div class ="card_info" id="show_info2">
+              <a id="first_info" class="first_info">
+                * agent_id : 훈련기관ID<br>
+                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
+                * name : 수강생 이름<br>
+                * complete_hours : 수강완료시수<br>
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
+          
+          <div class ="card_info" id="show_info3">
+              <a id="first_info" class="first_info">
+                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
+                * subject_title : 강좌 이름<br>
+                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * cnt_std : 수강 완료 된 수강생 수<br>
+                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
+                * end_day : 강좌 마감 일자<br>
+                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
+          
+          <div class ="card_info" id="show_info4">
+              <a id="first_info" class="first_info">
+                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
+                * subject_title : 강좌 이름<br>
+                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * cnt_std : 수강 완료 된 수강생 수<br>
+                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
+                * end_day : 강좌 마감 일자<br>
+                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
 
 
 			<div class="box" id="show_JSON" style="overflow:scroll;">
 				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" /><br>
+
 				<div id="result">
+
+
 				</div>
 			</div>
 
@@ -204,6 +269,7 @@ margin-top: 60px;
         		
         		str += "[";
             	for (var i = 0; i < data.length; i++) {
+            		
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
             		str += '"agent_id":' + '"' + "KOSA01" + '",';
@@ -248,11 +314,10 @@ margin-top: 60px;
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success : function(data) {
 
-        		var str = "";
+        		var str = "";   
         		
         		str += "[";
             	for (var i = 0; i < data.length; i++) {
-            		
             		str += "{";
             		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
             		str += '"sbjId_seq":' + '"' + data[i].sbjIdSeq + '",';
@@ -316,13 +381,9 @@ margin-top: 60px;
             		str += '<cost>' + data[i].cost + '</cost>';
             		str += '<send_dt>' + data[i].sendDt + '</send_dt>';
             		str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
-            		str += '</subject>';
-		
+            		str += '</subject>';		
 				}
-				
-				
-				
-				
+			
 				$("#result4").text(str);			
 			}
 		});
@@ -337,10 +398,10 @@ margin-top: 60px;
 
 	$(function() {
 		$("#first_btn").click(function() {
-			$("#show_JSON").toggle();
-			$("#show_XML").hide();
-			$("#show_JSON2").hide();
-			$("#show_XML2").hide();
+			$("#show_JSON, #show_info1").toggle();
+			$("#show_XML, #show_info2").hide();
+			$("#show_JSON2, #show_info3").hide();
+			$("#show_XML2, #show_info4").hide();
 			
 			getJson();
 		});
@@ -348,10 +409,10 @@ margin-top: 60px;
 
 	$(function() {
 		$("#second_btn").click(function() {
-			$("#show_XML").toggle();
-			$("#show_JSON").hide();
-			$("#show_XML2").hide();
-			$("#show_JSON2").hide();
+			$("#show_XML, #show_info2").toggle();
+			$("#show_JSON, #show_info1").hide();
+			$("#show_XML2, #show_info4").hide();
+			$("#show_JSON2, #show_info3").hide();
 			
 			getXml();
 		});
@@ -359,10 +420,10 @@ margin-top: 60px;
 
 	$(function() {
 		$("#third_btn").click(function() {
-			$("#show_JSON2").toggle();
-			$("#show_JSON").hide();
-			$("#show_XML").hide();
-			$("#show_XML2").hide();
+			$("#show_JSON2, #show_info3").toggle();
+			$("#show_JSON, #show_info1").hide();
+			$("#show_XML, #show_info2").hide();
+			$("#show_XML2, #show_info4").hide();
 			
 			getJsonSbj();
 		});
@@ -371,10 +432,10 @@ margin-top: 60px;
 	
 	$(function() {
 		$("#forth_btn").click(function() {
-			$("#show_XML2").toggle();
-			$("#show_JSON").hide();
-			$("#show_JSON2").hide();
-			$("#show_XML").hide();
+			$("#show_XML2, #show_info4").toggle();
+			$("#show_JSON, #show_info1").hide();
+			$("#show_JSON2, #show_info3").hide();
+			$("#show_XML, #show_info2").hide();
 			
 			getXmlSbj();
 		});

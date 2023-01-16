@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script> 
 <div id="page-list">
-	<div>
-		<table class="table">
-			<table class="list">
+		<table class="list">
 			<thead>
 				<tr>
 					<th>분류</th>
@@ -83,6 +84,5 @@
 						</div>
 					</td>
 				</tr>
-		</table>
-	</div>
+	</table>
 </div>
