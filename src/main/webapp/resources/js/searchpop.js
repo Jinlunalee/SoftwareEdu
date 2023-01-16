@@ -41,3 +41,39 @@ function putNameonInput(value) { // 강좌명/강좌아이디 선택에 따라 i
         subjectInput.setAttribute("name", 'subjectTitle');
     }
 }
+
+/* 강좌명 선택했을 시 팝업창 닫기 및 선택값 반영하기  */
+$(".move").on("click", function(event){
+    event.preventDefault(); // 왜 안 먹지?!?!?!?!?!?!?!?!?
+
+    let subject = $(this).attr("href");
+    let subjectTitle = $(this).attr("name");
+    let subjectArr = subject.split('/');
+    console.log(subjectArr);
+    let subjectId = subjectArr[0];
+    let subjectSeq = subjectArr[1];
+    let regDt = subjectArr[2];
+    $(opener.document).find("#subjectTitle-input").val(subjectTitle);
+    $(opener.document).find("#subjectId-input").val(subjectId);
+    $(opener.document).find("#subjectSeq-input").val(subjectSeq);
+    $(opener.document).find("#regDt-input").val(regDt);
+
+    window.close();
+
+});
+
+// function moveOutside(subject, subjectTitle, event){
+
+//     event.preventDefault();
+
+//     let subjectArr = subject.split('/');
+//     let subjectId = subjectArr[0];
+//     let subjectSeq = subjectArr[1];
+//     let regDt = subjectArr[2];
+//     $(opener.document).find("#subjectTitle-input").val(subjectTitle);
+//     $(opener.document).find("#subjectId-input").val(subjectId);
+//     $(opener.document).find("#subjectSeq-input").val(subjectSeq);
+//     $(opener.document).find("#regDt-input").val(regDt);
+
+//     window.close();
+// }
