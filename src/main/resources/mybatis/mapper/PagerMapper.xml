@@ -129,7 +129,8 @@
 		                e.reg_dt,
 		                e.modi_id,
 		                e.modi_dt,
-		                e.del_yn,
+		                e.del_yn, 
+		                cancel_rs_cd, 
 		                cancel_rs_etc,
 		                start_time,
 		                end_time,
@@ -186,6 +187,7 @@
 				e.modi_id, 
 				e.modi_dt, 
 				e.del_yn, 
+				cancel_rs_cd, 
 				cancel_rs_etc, 
         		start_time, 
         		end_time, 
@@ -236,13 +238,13 @@
 			AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
 		</if>
 		<if test='student != null and student.equals("sdId")'>
-			AND (e.student_id = #{keyword1} OR REPLACE(e.student_id, ' ', '') LIKE '%' || #{keyword1} || '%') 
+			AND (e.student_id = #{keyword1} OR REPLACE(UPPER(e.student_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%') 
 		</if>
 		<if test='course != null and course.equals("sj")'>
-			AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
+			AND (s.subject_title = #{keyword2} OR REPLACE(UPPER(s.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='course != null and course.equals("cs")'>
-			AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
+			AND (c.course_title = #{keyword2} OR REPLACE(UPPER(c.course_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='state != null and state.equals("apply")'>
 			AND e.state_cd = 'ERL01' 

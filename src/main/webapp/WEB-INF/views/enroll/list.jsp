@@ -73,7 +73,9 @@
 				<th>신청일자</th>
 				<th>현재 상태 (진도율)</th>
 				<th>취소 사유</th>
-				<th>처리</th>
+				<th>취소</th>
+				<th>삭제</th>
+				<th>승인</th>
 			</tr>
 
 			<!-- 리스트 -->
@@ -112,19 +114,15 @@
 					</c:if>
 					</td>
 					
-					<td>
+					<td> <!-- 취소 사유 -->
 					<c:if test="${board.stateCdTitle eq '수강취소'}">
 						${board.cancelRsTitle}
 					</c:if>
 					</td>
 					
 					<!-- 버튼 -->
-					<td>
-						<c:choose>
-							<c:when test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
-								<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
-							</c:when>
-							<c:when test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
+					<td> <!-- 취소 버튼 -->
+					<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
 								<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
 									<%-- 취소 사유 모달창 --%>
 									<div class="modal2 modal2-${status.count}">
@@ -145,13 +143,19 @@
 											</div>
 										</div>
 									</div>
-							</c:when>
-							<c:when test="${(board.stateCdTitle eq '수강취소') or (board.stateCdTitle eq '수강신청취소')}">
-								<button type="button" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary">삭제</button>
-							</c:when>
-							<c:when test="${board.stateCdTitle eq '수강완료'}">
-							</c:when>
-						</c:choose>
+							</c:if>
+					</td>
+					
+					<td> <!-- 삭제 버튼 -->
+					<c:if test="${board.stateCdTitle eq '수강취소'}">
+						<button type="button" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary">삭제</button>
+					</c:if>
+					</td> 
+					
+					<td> <!-- 승인 버튼 -->
+					<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
+						<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
+					</c:if>
 					</td>
 				</tr>	
 			</c:forEach>
@@ -180,7 +184,7 @@
 							<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
 						</div>
 					</td>
-				</tr>		
+				</tr>
 		</table>
 		<div class="down">
 			<a href="#">
@@ -264,7 +268,10 @@
 		function approval(studentId, subjectId, subjectSeq) {
 			if(confirm('수강 신청을 승인하시겠습니까?')) {
 				$.ajax({
-					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq
+					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
+					success : function(data) {
+						document.location.href = document.location.href;
+					}
 				})
 			} else{
 				return false;
