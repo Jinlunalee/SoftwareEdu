@@ -374,7 +374,7 @@ overflow-x: scroll;
 	$(function() {
 		$("#second_btn").click(function() {
 			$("#show_XML").toggle();
-			$("#show_JSON").hide();
+			$("#show_JSON, #show_info1").hide();
 			$("#show_XML2").hide();
 			$("#show_JSON2").hide();
 			
@@ -385,7 +385,7 @@ overflow-x: scroll;
 	$(function() {
 		$("#third_btn").click(function() {
 			$("#show_JSON2").toggle();
-			$("#show_JSON").hide();
+			$("#show_JSON, #show_info1").hide();
 			$("#show_XML").hide();
 			$("#show_XML2").hide();
 			
@@ -397,7 +397,7 @@ overflow-x: scroll;
 	$(function() {
 		$("#forth_btn").click(function() {
 			$("#show_XML2").toggle();
-			$("#show_JSON").hide();
+			$("#show_JSON, #show_info1").hide();
 			$("#show_JSON2").hide();
 			$("#show_XML").hide();
 			
