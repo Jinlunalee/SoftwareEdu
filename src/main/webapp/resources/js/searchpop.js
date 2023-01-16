@@ -16,15 +16,7 @@ function showList() { // 검색 결과 리스트 출력 함수
         url : "opensubjectsearchpop2?" + searchUrl,
         type : "POST",
         contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
-        // success : function(result) {
-        //     console.log(result);
-        //     console.log("working!");
-        //     var html = jQuery('<div>').html(result);
-        //     var contents = html.find("div#result-list").html();
-        //     $(".list-wrap").html(contents);
-        // }
     }).done(function(result){
-        console.log(result);
         var html = jQuery('<div>').html(result);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
@@ -43,37 +35,16 @@ function putNameonInput(value) { // 강좌명/강좌아이디 선택에 따라 i
 }
 
 /* 강좌명 선택했을 시 팝업창 닫기 및 선택값 반영하기  */
-$(".move").on("click", function(event){
-    event.preventDefault(); // 왜 안 먹지?!?!?!?!?!?!?!?!?
-
-    let subject = $(this).attr("href");
-    let subjectTitle = $(this).attr("name");
+function moveOutside(subject){
+    console.log(subject);
     let subjectArr = subject.split('/');
-    console.log(subjectArr);
     let subjectId = subjectArr[0];
-    let subjectSeq = subjectArr[1];
-    let regDt = subjectArr[2];
-    $(opener.document).find("#subjectTitle-input").val(subjectTitle);
-    $(opener.document).find("#subjectId-input").val(subjectId);
-    $(opener.document).find("#subjectSeq-input").val(subjectSeq);
-    $(opener.document).find("#regDt-input").val(regDt);
+    let subjectTitle = subjectArr[2];
+    let regDt = subjectArr[3];
+
+    // find()함수로 반영할 곳을 찾아서 값 반영하기
+    $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + subjectId + "  |  강좌명 : " + subjectTitle + "  |  등록일자 : " + regDt);
+    $(opener.document).find("#subject-input").val(subject);
 
     window.close();
-
-});
-
-// function moveOutside(subject, subjectTitle, event){
-
-//     event.preventDefault();
-
-//     let subjectArr = subject.split('/');
-//     let subjectId = subjectArr[0];
-//     let subjectSeq = subjectArr[1];
-//     let regDt = subjectArr[2];
-//     $(opener.document).find("#subjectTitle-input").val(subjectTitle);
-//     $(opener.document).find("#subjectId-input").val(subjectId);
-//     $(opener.document).find("#subjectSeq-input").val(subjectSeq);
-//     $(opener.document).find("#regDt-input").val(regDt);
-
-//     window.close();
-// }
+}

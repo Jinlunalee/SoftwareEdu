@@ -94,9 +94,15 @@
 		/*updateSubject*/
 		update open
 		set 
-    		start_day =#{startDay}, end_day=#{endDay}, start_time = #{startTime}, end_time = #{endTime}, 
-    		recruit_start_day=#{recruitStartDay} , recruit_end_day = #{recruitEndDay}, recruit_people = #{recruitPeople},
-    		content = #{content}, state_cd = #{state}, file_id=#{fileId}, modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
+    		start_day = TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+    		end_day = TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+    		start_time = TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'), 
+    		end_time = TO_CHAR(TO_TIMESTAMP(#{endTime},'HH24:MI'),'HH24MI'), 
+    		recruit_start_day = TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+    		recruit_end_day = TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+    		recruit_people = #{recruitPeople},
+    		content = #{content}, state_cd = #{state}, file_id=#{fileId}, 
+    		modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
@@ -136,17 +142,28 @@
 						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},#{startTime},#{endTime},TO_CHAR(TO_DATE(#{startDay},'YYYYMMDD'), 'YYYYMMDD')
-						,#{endDay},#{recruitStartDay}, 'YYYYMMDD',#{recruitEndDay},
-							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},
+						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
+						TO_CHAR(TO_TIMESTAMP(#{endTime},'HH24:MI'),'HH24MI'),
+						TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+						TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+						TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+						TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+						#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</when>
 			<otherwise>
 				insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},#{startTime},#{endTime},TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),#{endDay},#{recruitStartDay},#{recruitEndDay},
-							#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
+						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},
+						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
+						TO_CHAR(TO_TIMESTAMP(#{endTime},'HH24:MI'),'HH24MI'),
+						TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+						TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+						TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
+						TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+						#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
 			</otherwise>
 		</choose>
 	</insert>
@@ -212,7 +229,10 @@
 	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
 		/*updateRecruitSameCourse*/
 		update open
-		set recruit_start_day=#{recruitStartDay} , recruit_end_day=#{recruitEndDay} ,state_cd=#{state}
+		set 
+			recruit_start_day = TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+			recruit_end_day = TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
+			state_cd=#{state}
 		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</update>
 	

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <div id="result-list">
     <!-- 게시물 O -->
     <c:if test="${boardCheck != 'empty'}">
@@ -34,7 +35,7 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a class="move"  href="${board.subjectId}/${board.subjectSeq}/${board.regDt}" name="${board.subjectTitle}">
+                            <a class="move" onclick="moveOutside(this.name); return false;" href="${board.subjectId}/${board.subjectSeq}/${board.regDt}" value="${board.subjectId}/${board.subjectSeq}/${board.regDt}" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regDt}/${board.state}">
                                 ${board.subjectTitle}
                             </a>
                         </td>
@@ -69,4 +70,3 @@
         </div>
     </c:if>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>

@@ -39,13 +39,11 @@
 		        select DISTINCT
 					open.course_id,
 					course_title,
-					min(start_day) over (partition by open.course_id) as start_day,
-		    		max(end_day) over (partition by open.course_id) as end_day,
+					TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
+					TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
 					sum(cost) over (partition by open.course_id) as cost,
-					recruit_start_day, 
-					recruit_end_day,
-					state_cd as state,
-					comn_cd_title,
+					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
 					course.cat_cd as cat_course
 				from open 
 						left join subject on open.subject_id = subject.subject_id
@@ -84,12 +82,12 @@
 					subject.cost,
 					open.course_id,
 					course.course_title,
-					start_time,
-					end_time,
-					start_day,
-					end_day,
-					recruit_start_day,
-					recruit_end_day,
+					TO_CHAR(TO_TIMESTAMP(start_time, 'HH24:MI'),'HH24:MI') as start_time,
+					TO_CHAR(TO_TIMESTAMP(end_time, 'HH24:MI'),'HH24:MI') as end_time,
+					TO_CHAR(TO_DATE(start_day), 'YYYY-MM-DD') as start_day,
+					TO_CHAR(TO_DATE(end_day), 'YYYY-MM-DD') as end_day,
+					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
 					recruit_people,
 					state_cd as state,
 					comn_cd_title,
@@ -131,7 +129,8 @@
 		                e.reg_dt,
 		                e.modi_id,
 		                e.modi_dt,
-		                e.del_yn,
+		                e.del_yn, 
+		                cancel_rs_cd, 
 		                cancel_rs_etc,
 		                start_time,
 		                end_time,
@@ -188,6 +187,7 @@
 				e.modi_id, 
 				e.modi_dt, 
 				e.del_yn, 
+				cancel_rs_cd, 
 				cancel_rs_etc, 
         		start_time, 
         		end_time, 
@@ -238,13 +238,13 @@
 			AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
 		</if>
 		<if test='student != null and student.equals("sdId")'>
-			AND (e.student_id = #{keyword1} OR REPLACE(e.student_id, ' ', '') LIKE '%' || #{keyword1} || '%') 
+			AND (e.student_id = #{keyword1} OR REPLACE(UPPER(e.student_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%') 
 		</if>
 		<if test='course != null and course.equals("sj")'>
-			AND (s.subject_title = #{keyword2} OR REPLACE(s.subject_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
+			AND (s.subject_title = #{keyword2} OR REPLACE(UPPER(s.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='course != null and course.equals("cs")'>
-			AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || #{keyword2} || '%')   
+			AND (c.course_title = #{keyword2} OR REPLACE(UPPER(c.course_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='state != null and state.equals("apply")'>
 			AND e.state_cd = 'ERL01' 
