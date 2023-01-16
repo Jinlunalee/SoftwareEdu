@@ -141,11 +141,11 @@
         				course_title,
         				ROUND(complete_hours/s.hours * 100) AS "ratio"
 		        FROM ENROLL e 
-		        LEFT OUTER JOIN STUDENT t 
+		        INNER JOIN STUDENT t 
 		        ON e.student_id = t.student_id 
-		        LEFT OUTER JOIN OPEN o 
+		        INNER JOIN OPEN o 
 		        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-		        LEFT OUTER JOIN SUBJECT s 
+		        INNER JOIN SUBJECT s 
 		        ON e.subject_id = s.subject_id 
 		        LEFT OUTER JOIN course c
 				ON o.course_id = c.course_id
@@ -158,11 +158,11 @@
 		/*getCountSearchRow*/
 		SELECT count(*) 
 		FROM ENROLL e 
-		LEFT OUTER JOIN STUDENT t 
+		INNER JOIN STUDENT t 
 		ON e.student_id = t.student_id 
-        LEFT OUTER JOIN OPEN o 
+        INNER JOIN OPEN o 
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        LEFT OUTER JOIN SUBJECT s 
+        INNER JOIN SUBJECT s 
         ON e.subject_id = s.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
@@ -197,11 +197,11 @@
         		o.state_cd as open_state_cd,
         		ROUND(complete_hours/s.hours * 100) AS "ratio" 
 		FROM ENROLL e 
-		LEFT OUTER JOIN STUDENT t 
+		INNER JOIN STUDENT t 
 		ON e.student_id = t.student_id 
-        LEFT OUTER JOIN OPEN o 
+        INNER JOIN OPEN o 
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        LEFT OUTER JOIN SUBJECT s 
+        INNER JOIN SUBJECT s 
         ON e.subject_id = s.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 

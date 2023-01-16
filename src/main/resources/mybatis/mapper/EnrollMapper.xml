@@ -94,7 +94,7 @@
 				ON o.subject_id = s.subject_id 
 				LEFT OUTER JOIN COURSE c 
 				ON o.course_id = c.course_id 
-				WHERE o.course_id is NULL 
+				WHERE o.course_id is NULL AND NOT(o.state_cd ='OPN07') 
 				<include refid="subjectKeyword"/>
 				<include refid="stateOpen"/>
 			</when>
@@ -131,7 +131,7 @@
 			AND o.state_cd = 'OPN04'
 		</if>
 		<if test="openState != null and openState.equals('completion')">
-			AND o.state_cd = 'OPN07'
+			AND o.state_cd = 'OPN05'
 		</if>
 	</sql>
 	<sql id="subjectKeyword">
@@ -245,34 +245,34 @@
 	<select id="getEnrollDetails" parameterType="String" resultType="EnrollVO">
 	/*getEnrollDetails*/
 		SELECT
-		    enroll_id,
-		    enroll.state_cd,
-		    complete_hours,
-		    enroll.reg_dt,
-		    enroll.subject_id,
-		    enroll.subject_seq,
-		    subject.subject_title,
-		    open.course_id,
-		    course.course_title,
-		    level_cd,
-		    days,
-		    hours,
-		    start_day,
-		    end_day,
-		    recruit_start_day,
-		    recruit_end_day,
-		    recruit_people,
-		    open.state_cd as open_state_cd,
-		    subject.cat_cd as cat_subject_cd,
-		    enroll.student_id,
-		    name,
-		    birth,
-		    gender_cd,
-		    email,
-		    phone,
-		    add_do_cd,
-		    add_etc,
-		    position as position_cd
+		    enroll_id, 
+		    enroll.state_cd, 
+		    complete_hours, 
+		    enroll.reg_dt, 
+		    enroll.subject_id, 
+		    enroll.subject_seq, 
+		    subject.subject_title, 
+		    open.course_id, 
+		    course.course_title, 
+		    level_cd, 
+		    days, 
+		    hours, 
+		    start_day, 
+		    end_day, 
+		    recruit_start_day, 
+		    recruit_end_day, 
+		    recruit_people, 
+		    open.state_cd as open_state_cd, 
+		    subject.cat_cd as cat_subject_cd, 
+		    enroll.student_id, 
+		    name, 
+		    birth, 
+		    gender_cd, 
+		    email, 
+		    phone, 
+		    add_do_cd, 
+		    add_etc, 
+		    position as position_cd 
 		FROM enroll
 		INNER JOIN subject
 		ON enroll.subject_id = subject.subject_id

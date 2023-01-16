@@ -22,7 +22,7 @@
 				<td>${enroll.stateCd}</td>
 				<th>수강 완료 시간</th>
 				<td>${enroll.completeHours}</td>
-				<th>수강 등록 시간</th>
+				<th>수강 등록일</th>
 				<td>${enroll.regDt}</td>
 			</tr>
 		</table>
@@ -75,7 +75,6 @@
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
 			</tr>
-			<tr>
 			<tr>
 				<th>강좌일수</th>
 				<td>${enroll.days}</td>
