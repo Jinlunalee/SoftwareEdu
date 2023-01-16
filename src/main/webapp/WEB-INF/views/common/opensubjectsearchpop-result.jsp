@@ -12,10 +12,10 @@
                         <td class="th-column-3">과정아이디</td>
                         <td class="th-column-4">과정명</td>
                         <td class="th-column-5">지원여부</td>
-                        <c:if test="board.level ne 'LEV04">
+                        <c:if test="${board.level ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
-                        <c:if test="board.level eq 'LEV04">
+                        <c:if test="${board.level eq 'LEV04'}">
                             <td class="th-column-6">난이도 기타</td>
                         </c:if>
                         <td class="th-column-7">수강일수</td>
@@ -33,19 +33,29 @@
                 <c:forEach items="${boardList}" var="board">
                     <tr>
                         <td>${board.subjectId}</td>
-                        <td>${board.subjectTitle}</td>
+                        <td>
+                            <a class="move"  href="${board.subjectId}/${board.subjectSeq}/${board.regDt}" name="${board.subjectTitle}">
+                                ${board.subjectTitle}
+                            </a>
+                        </td>
                         <td>${board.courseId}</td>
                         <td>${board.courseTitle}</td>
                         <td>${board.supportYn}</td>
-                        <td>${board.level}</td>
+                        <c:if test="${board.level ne 'LEV04'}">
+                            <td>${board.levelTitle}</td>
+                        </c:if>
+                        <c:if test="${board.level eq 'LEV04'}">
+                            <td>${board.levelEtc}</td>
+                        </c:if>
                         <td>${board.days}</td>
                         <td>${board.hours}</td>
                         <td>${board.startDay}</td>
                         <td>${board.endDay}</td>
                         <td>${board.recruitStartDay}</td>
                         <td>${board.recruitEndDay}</td>
-                        <td>${board.state}</td>
-                        <td>${board.catSubject}</td>
+                        <td>${board.recruitPeople}</td>
+                        <td>${board.comnCdTitle}</td>
+                        <td>${board.catSubjectTitle}</td>
                         <td>${board.regDt}</td>
                     </tr>
                 </c:forEach>
@@ -59,3 +69,4 @@
         </div>
     </c:if>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>

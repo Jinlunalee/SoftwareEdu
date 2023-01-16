@@ -91,7 +91,8 @@
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td class="readonly_txt"> <input type="text" name="cost" value="${subject.cost}" readonly> 원 <br>
+				<td class="readonly_txt"> 
+					<input type="text" name="costFormat" value="$<fmt:formatNumber value="${subject.cost}" type="number"/>" style="text-align: right;" readonly> 원 <br>
 					<c:if test="${subject.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
 				</td>
 			</tr>

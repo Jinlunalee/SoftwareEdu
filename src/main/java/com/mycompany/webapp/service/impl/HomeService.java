@@ -38,7 +38,14 @@ public class HomeService implements IHomeService {
 
 	@Override
 	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
-		return homeRepository.searchOpenSubject(subjectVo);
+		List<SubjectVO> boardList = homeRepository.searchOpenSubject(subjectVo);
+		// level, state, catSubject 공통코드로 가져와서 set 하기
+		for(SubjectVO subjectVoReturn : boardList) {
+			subjectVoReturn.setLevelTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevel()));
+			subjectVoReturn.setComnCdTitle(homeRepository.getComnCdTitle(subjectVoReturn.getState()));
+			subjectVoReturn.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubject()));
+		}
+		return boardList;
 	}
 
 

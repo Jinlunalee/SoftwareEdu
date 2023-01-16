@@ -1,7 +1,12 @@
 package com.mycompany.webapp.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.omg.CORBA.BAD_INV_ORDER;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +20,7 @@ import com.mycompany.webapp.service.IPagerService;
 
 @Service
 public class PagerService implements IPagerService {
+	static final Logger logger = LoggerFactory.getLogger(SubjectService.class);
 
 	@Autowired
 	IPagerRepository pagerRepository;
@@ -43,6 +49,30 @@ public class PagerService implements IPagerService {
 		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
 		for(SubjectVO subjectVo : boardList) {
 			subjectVo.setCatCourseTitle(homeRepository.getComnCdTitle(subjectVo.getCatCourse()));
+		}
+		
+		//기간에 따라 상태 표현
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
+		int today = Integer.parseInt(formatter.format(new Date()));
+		for(int i=0;i<boardList.size();i++) {
+			int startDay = Integer.parseInt(boardList.get(i).getStartDay().replaceAll("-", ""));
+			int endDay = Integer.parseInt(boardList.get(i).getEndDay().replaceAll("-", ""));
+			int recruitStartDay = Integer.parseInt(boardList.get(i).getRecruitStartDay().replaceAll("-", ""));
+			int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
+			
+			if(today < recruitStartDay) {
+				boardList.get(i).setComnCdTitle("모집예정");//모집예정 
+			}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
+				boardList.get(i).setComnCdTitle("모집중");
+			}else { //모집마감 1. 진행중  2.진행완료
+				if(startDay < today && today < endDay) { //진행중
+					boardList.get(i).setComnCdTitle("진행중");
+				}else if(endDay < today){ //진행완료
+					boardList.get(i).setComnCdTitle("진행완료");
+				}else { //모집마감
+					boardList.get(i).setComnCdTitle("모집마감");
+				}
+			}
 		}
 		return boardList;
 	}
