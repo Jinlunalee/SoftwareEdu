@@ -131,14 +131,15 @@
 		                e.modi_dt,
 		                e.del_yn, 
 		                cancel_rs_cd, 
-		                cancel_rs_etc,
+		                cancel_rs_etc, 
 		                start_time,
 		                end_time,
 		                start_day,
 		                end_day,
 		                o.state_cd as open_state_cd,
                         o.course_id,
-        				course_title
+        				course_title,
+        				ROUND(complete_hours/s.hours * 100) AS "ratio"
 		        FROM ENROLL e 
 		        LEFT OUTER JOIN STUDENT t 
 		        ON e.student_id = t.student_id 

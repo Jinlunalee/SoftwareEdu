@@ -32,22 +32,6 @@
         WHERE NOT (e.del_yn ='Y')
 	</select>
 	
-	<select id="getRatio" parameterType="map" resultType="string">
-	/* getRatio */
-		SELECT ROUND(complete_hours/hours * 100) 
-		FROM ENROLL e, SUBJECT s 
-		WHERE e.subject_id = s.subject_id AND student_id = #{studentId} 
-		AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
-		AND NOT (e.del_yn ='Y')
-	</select>
-	
-	<select id="getHours" parameterType="string" resultType="int">
-	/* getHours */
-		SELECT complete_hours 
-		FROM ENROLL 
-		WHERE enroll_id = #{enrollId} AND NOT (e.del_yn ='Y')
-	</select>
-	
 	<select id="getCancelList" resultType="CommonCodeVO">
 	/* getCancelList */
 		SELECT comn_cd, 
@@ -70,7 +54,7 @@
 				name = #{keyword}
 			</when>
 			<when test="type != null and type.equals('studentId')">
-				student_id = #{keyword}
+				UPPER(student_id) = UPPER(#{keyword})
 			</when>
 		</choose>
 	</select>
@@ -112,7 +96,7 @@
 			    LEFT OUTER JOIN COURSE c 
 			    ON o.course_id = c.course_id 
 			    GROUP BY (o.course_id, course_title) 
-			    HAVING (o.course_id = #{kw} OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%')
+			    HAVING (UPPER(o.course_id) = UPPER(#{kw}) OR REPLACE(course_title, ' ', '') LIKE '%' || #{kw} || '%')
 			</when>
 		</choose>
 	</select>
@@ -137,7 +121,7 @@
 	</sql>
 	<sql id="subjectKeyword">
 		<if test="kw != null">
-		AND (o.subject_id = #{kw} OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') 
+		AND (UPPER(o.subject_id) = UPPER(#{kw}) OR REPLACE(subject_title, ' ', '') LIKE '%' || #{kw} || '%') 
 		</if>
 	</sql>
 	

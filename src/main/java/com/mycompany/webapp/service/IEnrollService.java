@@ -12,18 +12,15 @@ import com.mycompany.webapp.dto.StudentVO;
 
 public interface IEnrollService {
 	List<EnrollVO> getEnrollList();
-	String getRatio(String studentId, String subjectId, String subjectSeq);
-	void clickCancel(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
-	void clickDelete(String studentId, String subjectId, String subjectSeq);
+	void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq);
+	void clickDelete(String studentId, String subjectId, int subjectSeq);
 	void clickDeleteEnrollByOpen(String subjectId, int subjectSeq);
-	void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
-//	int getHours(String enrollId);
+	void addHours(EnrollVO enroll, String studentId, String subjectId, int subjectSeq);
 	List<CommonCodeVO> getCancelList();
 	List<StudentVO> getStudentList(StudentVO studentVO);
-	void approval(String studentId, String subjectId, String subjectSeq);
+	void approval(String studentId, String subjectId, int subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
 	void addCourse(String studentId, String courseId);
-	
 	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
 }
