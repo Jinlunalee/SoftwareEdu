@@ -18,3 +18,21 @@
     border: 1px solid #e9ebf0;
     padding-left:10px;
 }
+
+.add-hours-table .add-hours-form {
+    display:flex;
+}
+
+.add-hours-table .add-hours-form .add-hours-input, .add-hours-submit {
+    height: 25px;
+}
+
+.add-hours-table .add-hours-form .add-hours-submit {
+    font-size:10px;
+}
+
+.add-hours-table th {
+    border: 1px solid #e9ebf0;
+    background-color: #e4effa;
+    padding-left:10px;
+}

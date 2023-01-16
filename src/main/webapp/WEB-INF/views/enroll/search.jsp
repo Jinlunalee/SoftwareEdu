@@ -194,24 +194,6 @@
 					<c:if test="${not empty board.courseTitle}">(${board.courseTitle})</c:if>
 					</a>
 					</td>
-					<!-- 모달창 -->
-					<div class="modal modal-${status.count}">
-						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  ${board.stateCdTitle}</li>
-							<br>
-							<li>강좌 | ${board.subjectTitle} | ${board.subjectId} | ${board.openStateCdTitle}</li>
-							<li>강의 시간 | ${board.startTime} ~ ${board.endTime} </li>
-							<li>교육 기간 | ${board.startDay} ~ ${board.endDay} </li>
-							<span>진도율 | <span class="rt"></span></span>
-							<li>현재 완료 시간  | ${board.completeHours}</li>
-							완료한 시간 입력
-							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
-								<input name="addHours" class="input-time" type="number">
-								<input type="submit"  class="input-time-btn"  value="입력">
-							</form>
-							<div id="close-btn"><button class="close-btn">닫기</button></div>
-						</div>
-					</div>
 					<!-- 수강생 명 -->
 					<td>${board.name} (${board.studentId})</td>
 					<!-- 신청일자 -->

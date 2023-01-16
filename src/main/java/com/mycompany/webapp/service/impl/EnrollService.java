@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.IEnrollRepository;
+import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
-import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
 
@@ -19,6 +19,9 @@ public class EnrollService implements IEnrollService{
 	@Autowired
 	IEnrollRepository enrollRepository;
 	
+	@Autowired
+	IHomeRepository homeRepository;
+	
 	@Override
 	public List<EnrollVO> getEnrollList() {
 		return enrollRepository.getEnrollList();
@@ -27,6 +30,11 @@ public class EnrollService implements IEnrollService{
 	@Override
 	public String getRatio(String studentId, String subjectId, String subjectSeq) {
 		return enrollRepository.getRatio(studentId, subjectId, subjectSeq);
+	}
+	
+	@Override
+	public String getRatioUsingEnrollId(String enrollId) {
+		return enrollRepository.getRatioUsingEnrollId(enrollId);
 	}
 	
 	@Override
@@ -105,7 +113,14 @@ public class EnrollService implements IEnrollService{
 
 	@Override
 	public EnrollVO getEnrollDetails(String enrollId) {
-		return enrollRepository.getEnrollDetails(enrollId);
+		EnrollVO enrollVo = enrollRepository.getEnrollDetails(enrollId);
+		enrollVo.setPositionCdTitle(homeRepository.getComnCdTitle(enrollVo.getPositionCd())); // 수강생 구분
+		enrollVo.setGenderCdTitle(homeRepository.getComnCdTitle(enrollVo.getGenderCd())); // 수강생 성별
+		enrollVo.setAddDoCdTitle(homeRepository.getComnCdTitle(enrollVo.getAddDoCd())); // 수강생 주소
+		enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd())); // 강좌 상태
+		enrollVo.setCatSubjectCdTitle(homeRepository.getComnCdTitle(enrollVo.getCatSubjectCd())); // 강좌 분류
+		enrollVo.setLevelCdTitle(homeRepository.getComnCdTitle(enrollVo.getLevelCd())); // 강좌 난이도
+		return enrollVo;
 	}
 	
 }

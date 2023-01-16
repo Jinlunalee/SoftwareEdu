@@ -15,6 +15,7 @@ import com.mycompany.webapp.dto.StudentVO;
 public interface IEnrollRepository {
 	List<EnrollVO> getEnrollList();
 	String getRatio(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
+	String getRatioUsingEnrollId(@Param("enrollId") String enrollId);
 	void clickCancel(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	void clickDelete(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") String subjectSeq);
 	void clickDeleteEnrollByOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);

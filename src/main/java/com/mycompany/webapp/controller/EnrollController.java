@@ -2,7 +2,6 @@ package com.mycompany.webapp.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +27,7 @@ import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
+import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 
 @Controller
@@ -282,6 +281,7 @@ public class EnrollController {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
+		enrollVo.setRatio(enrollService.getRatioUsingEnrollId(enrollId));
 		model.addAttribute("enroll", enrollVo);
 		return "enroll/details";
 	}
