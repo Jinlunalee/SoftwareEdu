@@ -34,9 +34,9 @@
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 					<option value="<c:url value="/subject/subjectboardlist?pageNo=1"/>">선택</option>
-					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
+					<option name="10" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
+					<option name="30" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
+					<option name="50" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
 				</select>
 			</div>
 		</div>
@@ -146,11 +146,17 @@
 			} else {
 			}
 		}
-		function selectPagerCount(){
-			let selectPager = document.querySelector('.selectPager');
-			console.log(selectPager);
-			
-		}
-
+		/*페이지 수 선택 유지*/
+		$(function(){
+			$('.select-view').on('change',function(){
+				event.preventDefault();
+				// alert(($(this).val())); // 선택한 value값 가져오기
+				let selectPager = $('.selectPager'); //들고온 pager 개수 
+				alert(selectPager.val());
+				if(selectPager === 10){
+					$('.select-view[value="10"]').attr('selected', true);
+				}
+			});
+		});
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

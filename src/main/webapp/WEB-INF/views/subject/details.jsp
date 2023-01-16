@@ -58,7 +58,7 @@
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td> ${subject.level} 
+				<td> ${subject.levelTitle} 
 					<c:if test="${not empty subject.levelEtc}">(${subject.levelEtc})</c:if>
 				</td>
 			</tr>
@@ -119,13 +119,6 @@
 					<div class="question">
 						<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
 						${question.questionNum}. ${question.questionContent}
-					</div>
-					<div class="answer">
-						<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
-						<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
-						<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
-						<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족
-						<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
 					</div>
 				</div>
 				</c:forEach>

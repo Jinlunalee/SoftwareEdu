@@ -172,13 +172,6 @@ function changeEverything(i) {
 										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요.">
 										<span id="surveyqn-input" class="serveyqn-input"></span>
 									</div>
-									<div class="answer">
-										<input class="answer-item answer-5" type="radio" name="check${i}" value="5" onclick="return(false)">매우 만족
-										<input class="answer-item answer-4" type="radio" name="check${i}" value="4" onclick="return(false)">만족
-										<input class="answer-item answer-3" type="radio" name="check${i}" value="3" onclick="return(false)">보통
-										<input class="answer-item answer-2" type="radio" name="check${i}" value="2" onclick="return(false)">불만족
-										<input class="answer-item answer-1" type="radio" name="check${i}" value="1" onclick="return(false)">매우 불만족
-									</div>
 								</div>
 							</c:forEach>
 						</div>
