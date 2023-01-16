@@ -181,9 +181,45 @@ overflow-x: scroll;
                 * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
                 * name : 수강생 이름<br>
                 * complete_hours : 수강완료시수<br>
-                * send_dt : 전송시수<br>
+                * send_dt : 전송시간<br>
 		      </a>
 		  </div>
+		  
+		  <div class ="card_info" id="show_info2">
+              <a id="first_info" class="first_info">
+                * agent_id : 훈련기관ID<br>
+                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
+                * name : 수강생 이름<br>
+                * complete_hours : 수강완료시수<br>
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
+          
+          <div class ="card_info" id="show_info3">
+              <a id="first_info" class="first_info">
+                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
+                * subject_title : 강좌 이름<br>
+                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * cnt_std : 수강 완료 된 수강생 수<br>
+                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
+                * end_day : 강좌 마감 일자<br>
+                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
+          
+          <div class ="card_info" id="show_info4">
+              <a id="first_info" class="first_info">
+                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
+                * subject_title : 강좌 이름<br>
+                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * cnt_std : 수강 완료 된 수강생 수<br>
+                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
+                * end_day : 강좌 마감 일자<br>
+                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                * send_dt : 전송시간<br>
+              </a>
+          </div>
 
 
 			<div class="box" id="show_JSON" style="overflow:scroll;">
@@ -363,9 +399,9 @@ overflow-x: scroll;
 	$(function() {
 		$("#first_btn").click(function() {
 			$("#show_JSON, #show_info1").toggle();
-			$("#show_XML").hide();
-			$("#show_JSON2").hide();
-			$("#show_XML2").hide();
+			$("#show_XML, #show_info2").hide();
+			$("#show_JSON2, #show_info3").hide();
+			$("#show_XML2, #show_info4").hide();
 			
 			getJson();
 		});
@@ -373,10 +409,10 @@ overflow-x: scroll;
 
 	$(function() {
 		$("#second_btn").click(function() {
-			$("#show_XML").toggle();
+			$("#show_XML, #show_info2").toggle();
 			$("#show_JSON, #show_info1").hide();
-			$("#show_XML2").hide();
-			$("#show_JSON2").hide();
+			$("#show_XML2, #show_info4").hide();
+			$("#show_JSON2, #show_info3").hide();
 			
 			getXml();
 		});
@@ -384,10 +420,10 @@ overflow-x: scroll;
 
 	$(function() {
 		$("#third_btn").click(function() {
-			$("#show_JSON2").toggle();
+			$("#show_JSON2, #show_info3").toggle();
 			$("#show_JSON, #show_info1").hide();
-			$("#show_XML").hide();
-			$("#show_XML2").hide();
+			$("#show_XML, #show_info2").hide();
+			$("#show_XML2, #show_info4").hide();
 			
 			getJsonSbj();
 		});
@@ -396,10 +432,10 @@ overflow-x: scroll;
 	
 	$(function() {
 		$("#forth_btn").click(function() {
-			$("#show_XML2").toggle();
+			$("#show_XML2, #show_info4").toggle();
 			$("#show_JSON, #show_info1").hide();
-			$("#show_JSON2").hide();
-			$("#show_XML").hide();
+			$("#show_JSON2, #show_info3").hide();
+			$("#show_XML, #show_info2").hide();
 			
 			getXmlSbj();
 		});
