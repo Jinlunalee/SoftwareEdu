@@ -13,7 +13,6 @@ import com.mycompany.webapp.dto.StudentVO;
 public interface IEnrollService {
 	List<EnrollVO> getEnrollList();
 	String getRatio(String studentId, String subjectId, String subjectSeq);
-	String getRatioUsingEnrollId(String enrollId);
 	void clickCancel(EnrollVO enroll, String studentId, String subjectId, String subjectSeq);
 	void clickDelete(String studentId, String subjectId, String subjectSeq);
 	void clickDeleteEnrollByOpen(String subjectId, int subjectSeq);

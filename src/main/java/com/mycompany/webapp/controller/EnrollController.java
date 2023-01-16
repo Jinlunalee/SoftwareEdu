@@ -281,7 +281,6 @@ public class EnrollController {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
-		enrollVo.setRatio(enrollService.getRatioUsingEnrollId(enrollId));
 		model.addAttribute("enroll", enrollVo);
 		return "enroll/details";
 	}
