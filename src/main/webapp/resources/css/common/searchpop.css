@@ -1,19 +1,4 @@
 @charset "UTF-8";
-/* 검색 버튼 클릭 */
-.open-subject-search-btn {
-    margin-left: 20px;
-    width: 14%;
-    height: 38px;
-    font-weight: 600;
-    background-color: #dfe8f5;
-    font-size: 15px;
-    cursor:pointer;
-}
-#subjectTitle-input {
-    width: 80%;
-    text-align: center;
-}
-
 /* 전체 wrap */
 .wrapper{
 	width:100%;

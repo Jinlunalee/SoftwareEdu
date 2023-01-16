@@ -14,13 +14,43 @@
 		
 		<%-- 수강 검색  --%>
 		<div class="search">
-		<span id="applyperiod">신청기간</span>
 		<form name="sc-form" action="<c:url value='/enroll/searchlist'/>">
+		<%--신청 기간 --%>
+			<div class="apply-period">
+			<span id="applyperiod">신청기간</span>
 			<input type="date" name="applyStartDay" class="input-date" value="${enroll.applyStartDay}"> ~
 			<input type="date" name="applyEndDay"class="input-date" value="${enroll.applyEndDay}">
+			</div>
+			
+			<%-- 강좌 과정 선택 --%>
+			<div class="select-subcor">
+			<span id="selectsubcor">강좌 과정 구분</span>
+			<select name="course" class="select-box">
+				<c:if test="${enroll.course eq ''}">
+				<option value="">강좌/과정</option>
+				<option value="sj">강좌</option>
+				<option value="cs">과정</option>
+				</c:if>
+				
+				<c:if test="${enroll.course eq 'sj'}">
+				<option value="">강좌/과정</option>
+				<option selected="selected" value="sj">강좌</option>
+				<option value="cs">과정</option>
+				</c:if>
+				
+				<c:if test="${enroll.course eq 'cs'}">
+				<option value="">강좌/과정</option>
+				<option value="sj">강좌</option>
+				<option selected="selected" value="cs">과정</option>
+				</c:if>
+			</select>
+			<input type="text" name="keyword2" class="input-text" value="${enroll.keyword2}">
+			</div>
 			
 			<%-- 수강생 선택 --%>
-			<select name="student" class="select-box">
+			<div class="selectstudent">
+			<span>수강생 구분</span>
+			<select name="student" class="select-box select-stu">
 				<c:if test="${enroll.student eq ''}">
 				<option value="">이름/아이디</option>
 				<option value="sdName">수강생 명</option>
@@ -40,36 +70,16 @@
 				</c:if>
 				
 			</select>
-			<input type="text" name="keyword1" class="input-text" value="${enroll.keyword1}">
-			
-			<%-- 강좌 과정 선택 --%>
-			<select name="course" class="select-box">
-				<c:if test="${enroll.course eq ''}">
-				<option value="">강좌/과정</option>
-				<option value="sj">강좌</option>
-				<option value="cs">과정</option>
-				</c:if>
-				
-				<c:if test="${enroll.course eq 'sj'}">
-				<option value="">강좌/과정</option>
-				<option selected="selected" value="sj">강좌</option>
-				<option value="cs">과정</option>
-				</c:if>
-				
-				<c:if test="${enroll.course eq 'cs'}">
-				<option value="">강좌/과정</option>
-				<option value="sj">강좌</option>
-				<option selected="selected" value="cs">과정</option>
-				</c:if>
-				
-			</select>
-			<input type="text" name="keyword2" class="input-text" value="${enroll.keyword2}">
+			<input type="text" name="keyword1" class="input-text input-student" value="${enroll.keyword1}">
+			</div>
 			
 			<%-- 수강 상태 선택 --%>
+			<div class="state">
+			<span>수강 상태</span>
 			<select name="state" class="select-box">
 				<c:if test="${enroll.state eq ''}">
 				<option value="">수강 상태</option>
-				<option value="applyCancel">수강 신청 취소</option>
+				<!-- <option value="applyCancel">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -79,7 +89,7 @@
 				
 				<c:if test="${enroll.state eq 'applyCancel'}">
 				<option value="">수강 상태</option>
-				<option selected="selected" value="applyCancel">수강 신청 취소</option>
+				<!-- <option selected="selected" value="applyCancel">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -89,7 +99,7 @@
 				
 				<c:if test="${enroll.state eq 'expect'}">
 				<option value="">수강 상태</option>
-				<option value="applyCancel">수강 신청 취소</option>
+				<!-- <option value="applyCancel">수강 신청 취소</option> -->
 				<option selected="selected" value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -99,7 +109,7 @@
 				
 				<c:if test="${enroll.state eq 'progress'}">
 				<option value="">수강 상태</option>
-				<option value="progress">수강 신청 취소</option>
+				<!-- <option value="progress">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option selected="selected" value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -109,7 +119,7 @@
 				
 				<c:if test="${enroll.state eq 'cancel'}">
 				<option value="">수강 상태</option>
-				<option value="applyCancel">수강 신청 취소</option>
+				<!-- <option value="applyCancel">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option selected="selected" value="cancel">수강 취소</option>
@@ -119,7 +129,7 @@
 				
 				<c:if test="${enroll.state eq 'apply'}">
 				<option value="">수강 상태</option>
-				<option value="applyCancel">수강 신청 취소</option>
+				<!-- <option value="applyCancel">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -129,7 +139,7 @@
 				
 				<c:if test="${enroll.state eq 'complete'}">
 				<option value="">수강 상태</option>
-				<option value="applyCancel">수강 신청 취소</option>
+				<!-- <option value="applyCancel">수강 신청 취소</option> -->
 				<option value="expect">수강 예정</option>
 				<option value="progress">수강 중</option>
 				<option value="cancel">수강 취소</option>
@@ -140,6 +150,7 @@
 			</select>
 			<input type="submit" class="input-button" value="검색">
 			</form>
+			</div>
 		</div>
 		
 		<div class="list_top">
@@ -188,22 +199,22 @@
 			<!-- 리스트 -->
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">
-					${board.subjectTitle} 
+					<td>
+					<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
 					<!-- 과정명  --> 
 					<c:if test="${not empty board.courseTitle}">(${board.courseTitle})</c:if>
 					</a>
 					</td>
+					
 					<!-- 수강생 명 -->
 					<td>${board.name} (${board.studentId})</td>
 					<!-- 신청일자 -->
 					<td>${board.regDt}</td>
 					
-					<td>${board.stateCdTitle} 
 					<!-- 현재 상태 옆에 진도율 -->
+					<td>${board.stateCdTitle} 
 					<c:if test="${board.stateCdTitle eq '수강중'}">
-					<span id="getBoardRatio" onclick="rtoLoad('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"></span>
-					(<span class="boardRatio">
+					(${board.ratio}%)
 					</c:if>
 					</td>
 					
@@ -290,11 +301,7 @@
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
 	</div>
-	<!-- <script>
-		$(document).ready(function(){
-			$("#getBoardRatio").trigger('click');
-		});
-	</script> -->
+
 	<script>
  		function showModal(i){
  			var openBtnClassName = ".modal-open-" + i;
@@ -319,30 +326,6 @@
 				$(".modal2").fadeOut();
 			});
 		};
-	</script>
-	
-	<script>
-		function rto(studentId, subjectId, subjectSeq) {
-			var ratioEl = $(".rt");
-			$.ajax({
-				url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
-				success: function(data) {
-					ratioEl.text(data + '%');
-				}
-			});
-		}
-	</script>
-	
-	<script>
-		function rtoLoad(studentId, subjectId, subjectSeq) {
-			var boardRatioEl = $(".boardRatio");
-			$.ajax({
-				url: "ratio/" + studentId + "/" + subjectId + "/" + subjectSeq,
-				success: function(data) {
-					boardRatioEl.text(data + '%)');
-				}
-			});
-		}
 	</script>
 	
 	<script>
@@ -378,23 +361,6 @@
 				}
 			}
 	</script>
-	
-	<%--
-
-	
-	<script>
-		function search() {
-			$.ajax({
-				type : 'POST',
-				url : 'searchlist',
-				async : false,
-				data : $("form[name=sc-form]").serialize(),
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success : function(result){
-				}
-			})
-		}
-	</script>  --%>
 </div>
 
 

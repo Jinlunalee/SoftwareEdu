@@ -40,28 +40,32 @@ function changeEverything(i) {
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div><span> > 강좌 관리 ></span> <span class="submenu-title">강좌 개설</span> </div>
+	<div><span> > 강좌 관리 ></span> <span class="submenu-title">강좌 개설</span> </div>
 	</div>
 	<div class="card-body">
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
 			<div class="sub_title">정기과정명 | 
-				<select class="select_course" name="courseId" id="courseId">
-					<option value="">선택안함</option>
-					<c:forEach var="course" items="${allCourseList}">
-						<option value="${course.courseId}">${course.courseTitle}</option>
-					</c:forEach>
-				</select> 
+				<div class="search-popup">
+					<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
+					<input id="course-input" name="course" type="hidden">
+					<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+				</div>
 			</div>
 		
 			<div class="course_title">
-			<div class="main_title"><b>강좌명</b> 
-				<select class="select_smallCourse" name="subjectId" id="subjectId">
-					<option value="">선택안함</option>
-					<c:forEach var="subject" items="${allSubjectList}">
-						<option value="${subject.subjectId}">${subject.subjectTitle}</option>
-					</c:forEach>
-				</select>
-			</div>
+				<div class="main_title"><b>강좌명</b> 
+					<div class="search-popup">
+						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="subject-input" name="subject" type="hidden">
+						<button class="subject-popup-btn btn btn-outline-secondary">검색</button>
+					</div>
+					<!-- <select class="select_smallCourse" name="subjectId" id="subjectId">
+						<option value="">선택안함</option>
+						<c:forEach var="subject" items="${allSubjectList}">
+							<option value="${subject.subjectId}">${subject.subjectTitle}</option>
+						</c:forEach>
+					</select> -->
+				</div>
 			</div>
 			<table class="list">
 				<colgroup>
@@ -199,7 +203,10 @@ function changeEverything(i) {
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
 	<script type="text/javascript">
+	
 	/* 모달창 열기 */
 	const body = document.querySelector('body');
 	const modal = document.querySelector('.modal');
