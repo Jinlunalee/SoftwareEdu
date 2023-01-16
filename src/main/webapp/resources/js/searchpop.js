@@ -26,28 +26,43 @@ function showList() { // 검색 결과 리스트 출력 함수
     })
 }
 
-/* 강좌명/강좌아이디 선택에 따른 input name 설정 */
+/* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
 let subjectInput = document.getElementById('subject-input'); // input 태그
+let courseInput = document.getElementById('course-input'); // input 태그
 
-function putNameonInput(value) { // 강좌명/강좌아이디 선택에 따라 iput 이름 설정
+function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택에 따라 iput 이름 설정
     if(value==='subjectId') {
         subjectInput.setAttribute("name", 'subjectId');
-    } else {
+    } else if(value==='subjectTitle') {
         subjectInput.setAttribute("name", 'subjectTitle');
+    } else if(value==='courseId') {
+        courseInput.setAttribute("name", 'courseId');
+    } else {
+        courseInput.setAttribute("name", 'courseTitle');
     }
 }
 
-/* 강좌명 선택했을 시 팝업창 닫기 및 선택값 반영하기  */
-function moveOutside(subject){
-    console.log(subject);
-    let subjectArr = subject.split('/');
-    let subjectId = subjectArr[0];
-    let subjectTitle = subjectArr[2];
-    let regDt = subjectArr[3];
+/* ㅇㅇ명 클릭했을 시 팝업창 닫기 및 선택값 반영하기  */
+function moveOutside(value){
+    console.log(value);
+    let valueArr = value.split('/');
+    let valueId = valueArr[0];
+    let valueTitle = valueArr[2];
+    if(valueArr[3]) {
+        let regDt = valueArr[3];
+    }
 
     // find()함수로 반영할 곳을 찾아서 값 반영하기
-    $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + subjectId + "  |  강좌명 : " + subjectTitle + "  |  등록일자 : " + regDt);
-    $(opener.document).find("#subject-input").val(subject);
+    if(valueArr[3]) {
+        $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + regDt);
+        $(opener.document).find("#subject-input").val(value);
+        console.log("it's subject");
+    }
+    if(!valueArr[3]) {
+        $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  강좌명 : " + valueTitle);
+        $(opener.document).find("#course-input").val(value);
+        console.log("it's course");
+    }
 
     window.close();
 }

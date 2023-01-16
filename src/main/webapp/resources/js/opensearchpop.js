@@ -21,3 +21,15 @@ $('.subject-popup-btn').on("click", function(e){
 
     window.open(popupUrl,"검색 팝업", popupOption);
 });
+
+/* course 검색 버튼 누를 시 검색 팝업 실행 */
+$('.course-popup-btn').on("click", function(e){
+    //버튼 창 전환 방지
+    e.preventDefault();
+
+    // 팝업창 실행
+    let popupUrl = "/SoftwareEducation/common/searchpop-course";
+    let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
+
+    window.open(popupUrl,"검색 팝업", popupOption);
+});

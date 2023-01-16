@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
+import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IHomeRepository {
@@ -17,6 +18,7 @@ public interface IHomeRepository {
 	List<CommonCodeVO> getComnCdList (String comnCdType);
 	
 	List<SubjectVO> searchSubject(SubjectVO subjectVo);
+	List<CourseVO> searchCourse(CourseVO courseVo);
 	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
 
 }

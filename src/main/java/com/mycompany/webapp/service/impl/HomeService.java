@@ -1,13 +1,12 @@
 package com.mycompany.webapp.service.impl;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
+import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 @Service
@@ -45,6 +44,16 @@ public class HomeService implements IHomeService {
 		}
 		return boardList;
 	}
+
+	@Override
+	public List<CourseVO> searchCourse(CourseVO courseVo) {
+		List<CourseVO> boardList = homeRepository.searchCourse(courseVo);
+		for(CourseVO courseVoReturn : boardList) {
+			courseVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(courseVoReturn.getCatCourseCd()));
+		}
+		return boardList;
+	}
+	
 	@Override
 	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
 		List<SubjectVO> boardList = homeRepository.searchOpenSubject(subjectVo);
@@ -56,6 +65,7 @@ public class HomeService implements IHomeService {
 		}
 		return boardList;
 	}
+
 
 
 }

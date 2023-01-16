@@ -45,12 +45,11 @@ function changeEverything(i) {
 	<div class="card-body">
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
 			<div class="sub_title">정기과정명 | 
-				<select class="select_course" name="courseId" id="courseId">
-					<option value="">선택안함</option>
-					<c:forEach var="course" items="${allCourseList}">
-						<option value="${course.courseId}">${course.courseTitle}</option>
-					</c:forEach>
-				</select>
+				<div class="search-popup">
+					<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
+					<input id="course-input" name="course" type="hidden">
+					<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+				</div>
 			</div>
 		
 			<div class="course_title">
@@ -59,7 +58,6 @@ function changeEverything(i) {
 						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
 						<button class="subject-popup-btn btn btn-outline-secondary">검색</button>
-						<!-- <button type="button" id="summary-btn" class="btn btn-outline-secondary" onclick="viewSummary()">통계 조회하기</button> -->
 					</div>
 					<!-- <select class="select_smallCourse" name="subjectId" id="subjectId">
 						<option value="">선택안함</option>

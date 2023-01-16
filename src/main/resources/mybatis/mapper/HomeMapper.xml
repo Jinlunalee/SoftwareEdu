@@ -107,6 +107,26 @@
 		</where>
 	</select>
 	
+	<select id="searchCourse" parameterType="CourseVO" resultType="CourseVO">
+	/*searchCourse*/
+		SELECT
+		    course_id,
+		    course_title,
+		    cat_cd as cat_course_cd
+		FROM course
+		<where>
+			<if test="courseId != null and !courseId.equals('') ">
+				AND course_id = #{courseId}
+			</if>
+			<if test="courseTitle != null and !courseTitle.equals('')">
+				AND (course_title = #{courseTitle} OR REPLACE (course_title, ' ', '') LIKE '%'||#{courseTitle}||'%')
+			</if>
+			<if test="catCourseCd != null and !catCourseCd.equals('')">
+				AND cat_cd = #{catCourseCd} 
+			</if>
+		</where>
+	</select>
+	
 	<select id="searchOpenSubject" parameterType="SubjectVO" resultType="SubjectVO">
 	/*searchOpenSubject*/
 		SELECT
