@@ -29,20 +29,20 @@
 				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
 				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 			</div>
-			<input type="hidden" class="selectPager" value="${pager.rowsPerPage}">
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
-				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/subject/subjectboardlist?pageNo=1"/>">선택</option>
-					<option name="10" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option name="30" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option name="50" value="<c:url value="/subject/subjectboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
+				<select class="select-view" onchange="listCount(this.value)">
+					<option value="">선택</option>
+					<option value="10">10개</option>
+					<option value="30">30개</option>
+					<option value="50">50개</option>
 				</select>
 			</div>
 		</div>
 		<!-- // list top -->
 		
 		<!-- list table -->
+		<div id="list-wrap">
 		<table class="list">
 			<thead>
 				<tr>
@@ -125,6 +125,7 @@
 					</td>
 				</tr>
 		</table>
+		</div>
 	</div>
 </div>
 
@@ -146,16 +147,22 @@
 			} else {
 			}
 		}
-		/*페이지 수 선택 유지*/
-		// $(function(){
-		// 	$('.select-view').on('change',function(){
-		// 		// alert(($(this).val())); // 선택한 value값 가져오기
-		// 		let selectPager = $('.selectPager'); //들고온 pager 개수 
-		// 		alert(selectPager.val());
-		// 		if(selectPager === 10){
-		// 			$('.select-view[value="10"]').attr('selected', true);
-		// 		}
-		// 	});
-		// });
+
+		/*페이지 수 선택 유지 - ajax*/
+		function listCount(obj) { // 검색 결과 리스트 출력
+			let strRowsPerPage = obj;
+			console.log(strRowsPerPage);
+			$.ajax({
+				url: "ajaxsubjectboardlist?strRowsPerPage="+strRowsPerPage,
+				type: "POST"
+			}).done(function (result) {
+				console.log('success');
+				var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
+				var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
+				$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
+			}).fail(function(){
+				console.log('fail');
+			});
+		}
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
