@@ -7,8 +7,8 @@
 
 <div class="card m-2">
 	<div class="card-header"> 
-	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
+		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
+		<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회</span></div>
 	</div>
 	<div class="card-body">
 		
@@ -51,17 +51,18 @@
 		
 		<div class="list_top">
 			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
-			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
-			<%-- 뷰 갯수 --%>
-			<div class="view">
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
-				<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-					<option value="<c:url value="/enroll/boardlist?pageNo=1"/>">선택</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-					<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
-				</select>
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
+				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+				<%-- 뷰 갯수 --%>
+				<div class="view">
+					<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강 추가</button>
+					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
+						<option value="<c:url value="/enroll/boardlist?pageNo=1"/>">선택</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
+						<option value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
+					</select>
+				</div>
 			</div>
 		</div>
 
@@ -188,8 +189,8 @@
 		</table>
 		<div class="down">
 			<a href="#">
-			<a href="<c:url value='#'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
-		</a>
+				<a href="<c:url value='#'/>"><img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
+			</a>
 		</div>
 		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
 	</div>

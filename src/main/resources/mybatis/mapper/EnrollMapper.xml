@@ -209,7 +209,7 @@
 	/* addHours */
 		UPDATE ENROLL 
 		SET complete_hours = complete_hours + #{addHours} 
-		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+		WHERE enroll_id = #{enrollId}
 	</update>
 	
 	<update id="updateCancelRsCd" parameterType="map">
@@ -242,5 +242,48 @@
 		del_yn, cancel_rs_cd, cancel_rs_etc) 
 		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
 	</insert>
+	
+	<select id="getEnrollDetails" parameterType="String" resultType="EnrollVO">
+	/*getEnrollDetails*/
+		SELECT
+		    enroll_id,
+		    enroll.state_cd,
+		    complete_hours,
+		    enroll.reg_dt,
+		    enroll.subject_id,
+		    enroll.subject_seq,
+		    subject.subject_title,
+		    open.course_id,
+		    course.course_title,
+		    level_cd,
+		    days,
+		    hours,
+		    start_day,
+		    end_day,
+		    recruit_start_day,
+		    recruit_end_day,
+		    recruit_people,
+		    open.state_cd as open_state_cd,
+		    subject.cat_cd as cat_subject,
+		    enroll.student_id,
+		    name,
+		    birth,
+		    gender_cd,
+		    email,
+		    phone,
+		    add_do_cd,
+		    add_etc,
+		    position as position_cd
+		FROM enroll
+		INNER JOIN subject
+		ON enroll.subject_id = subject.subject_id
+		INNER JOIN student
+		ON enroll.student_id = student.student_id
+		LEFT JOIN open
+		ON enroll.subject_id = open.subject_id and enroll.subject_seq = open.subject_seq
+		LEFT JOIN course
+		ON open.course_id = course.course_id
+		WHERE enroll_id=#{enrollId}
+	</select>
 	
 </mapper>

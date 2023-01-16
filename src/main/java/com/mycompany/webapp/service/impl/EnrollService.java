@@ -49,9 +49,8 @@ public class EnrollService implements IEnrollService{
 	}
 	
 	@Override
-	public void addHours(EnrollVO enroll, String studentId, String subjectId, String subjectSeq) {
-		int addHours = enroll.getAddHours();
-		enrollRepository.addHours(addHours, studentId, subjectId, subjectSeq);
+	public void addHours(int addHours, String enrollId) {
+		enrollRepository.addHours(addHours, enrollId);
 	}
 	
 //	public int getHours(String enrollId) {
@@ -102,6 +101,11 @@ public class EnrollService implements IEnrollService{
 	@Override
 	public int recruitTotalPeople(String subjectId, int subjectSeq, String state) {
 		return enrollRepository.recruitTotalPeople(subjectId, subjectSeq, state);
+	}
+
+	@Override
+	public EnrollVO getEnrollDetails(String enrollId) {
+		return enrollRepository.getEnrollDetails(enrollId);
 	}
 	
 }

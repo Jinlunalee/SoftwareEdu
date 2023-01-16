@@ -173,6 +173,7 @@
 
 		<%-- 목록 --%>
 		<table class="list">
+
 			<tr>
 				<th>강좌 명 (과정 명)</th>
 				<th>수강생 명 (아이디)</th>
@@ -206,7 +207,7 @@
 							완료한 시간 입력
 							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
 								<input name="addHours" class="input-time" type="number">
-								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
+								<input type="submit"  class="input-time-btn"  value="입력">
 							</form>
 							<div id="close-btn"><button class="close-btn">닫기</button></div>
 						</div>
@@ -396,17 +397,8 @@
 			}
 	</script>
 	
-	<%--<script>
-			function getHours(enrollId) {
-				var ch = $(".ch");
-					$.ajax({
-						url : "gethours" + enrollId,
-						success: function(data) {
-						ch.text(data + '시간');
-					}
-					})
-			}
-	</script>
+	<%--
+
 	
 	<script>
 		function search() {

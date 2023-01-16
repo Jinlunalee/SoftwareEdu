@@ -182,10 +182,11 @@ public class EnrollController {
 	 * @param subjectSeq
 	 * @return
 	 */
-	@RequestMapping(value="/addhours/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String addHours(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable String subjectSeq) {
-		enrollService.addHours(enroll, studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+	@RequestMapping(value="/addhours", method=RequestMethod.POST)
+	public String addHours(EnrollVO enroll) {
+		System.out.println(enroll);
+		enrollService.addHours(enroll.getAddHours(), enroll.getEnrollId());
+		return "redirect:/enroll/details/" + enroll.getEnrollId();
 	}
 	
 	// 완료 시간 ajax
@@ -266,6 +267,23 @@ public class EnrollController {
  
         workbook.write(response.getOutputStream());
         workbook.close();
+	}
+	
+	/**
+	 * @description	수강 상세 페이지
+	 * @date	2023. 1. 16.
+	 * @author	Jin Lee
+	 * @param enrollId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
+	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
+		model.addAttribute("enroll", enrollVo);
+		return "enroll/details";
 	}
 	
 }
