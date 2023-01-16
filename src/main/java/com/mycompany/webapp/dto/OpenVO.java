@@ -21,6 +21,7 @@ public class OpenVO {
 	private String recruitEndDay;
 	private int recruitPeople;
 	
+	private String openState;
 	private String subCor;
 	private String kw;
 }

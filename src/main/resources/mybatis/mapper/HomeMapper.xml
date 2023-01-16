@@ -67,6 +67,13 @@
 		WHERE comn_cd=#{comnCd}
 	</select>
 
+	<select id="getComnCdList" parameterType="String" resultType="CommonCodeVO">
+	/*getComnCdList*/
+		SELECT * 
+		FROM common_code
+		WHERE comn_cd_type = #{comnCoType} AND use_yn='Y'
+	</select>
+
 	<select id="searchSubject" parameterType="SubjectVO" resultType="SubjectVO">
 	/*searchSubject*/
 		SELECT
@@ -132,22 +139,22 @@
 		LEFT JOIN course ON open.course_id = course.course_id
 		LEFT JOIN common_code ON open.state_cd = common_code.comn_cd
 		WHERE del_yn = 'N'
-		<if test='subjectId != ""'>
-			AND subject_id = #{subjectId}
+		<if test="subjectId != null and !subjectId.equals('') ">
+			AND subject.subject_id = #{subjectId}
 		</if>
-		<if test='subjectTitle != ""'>
+		<if test="subjectTitle != null and !subjectTitle.equals('')">
 			AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
 		</if>
-		<if test='catSubject != ""'>
-			AND cat_cd = #{catSubject} 
+		<if test="catSubject != null and !catSubject.equals('')">
+			AND subject.cat_cd = #{catSubject} 
 		</if>
-		<if test='level != ""'>
+		<if test="level != null and !level.equals('') ">
 			AND level_cd = #{level} 
 		</if>
-		<if test='regYear != ""'>
-			AND reg_year = #{regYear} 
+		<if test="regYear != 0">
+			AND subject.reg_year = #{regYear} 
 		</if>
-		<if test='state != ""'>
+		<if test="state != null and !state.equals('')">
 			AND state_cd = #{state}
 		</if>
 		ORDER BY start_day, end_day

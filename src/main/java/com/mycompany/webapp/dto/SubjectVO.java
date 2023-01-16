@@ -22,7 +22,8 @@ public class SubjectVO {
 	private String catSubjectTitle;//강좌 분류명
 	private int days; //일수
 	private int hours; //시수
-	private String level; //레벨
+	private String level; //레벨 코드
+	private String levelTitle; // 레벨 코드명
 	private String levelEtc; // 기타
 	private int cost; //수강비
 	

@@ -27,8 +27,8 @@ public class EnrollVO {
 	private String modiDt;
 	private String delYn;
 	private String cancelRsCd;
+	private String cancelRsTitle;
 	private String cancelRsEtc;
-	
 	private String startTime;
 	private String endTime;
 	private String startDay;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.IHomeRepository;
+import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 @Service
@@ -31,9 +32,22 @@ public class HomeService implements IHomeService {
 	}
 
 	@Override
-	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
-		return homeRepository.searchOpenSubject(subjectVo);
+	public List<CommonCodeVO> getComnCdList(String comnCdType) {
+		return homeRepository.getComnCdList(comnCdType);
 	}
+
+	@Override
+	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
+		List<SubjectVO> boardList = homeRepository.searchOpenSubject(subjectVo);
+		// level, state, catSubject 공통코드로 가져와서 set 하기
+		for(SubjectVO subjectVoReturn : boardList) {
+			subjectVoReturn.setLevelTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevel()));
+			subjectVoReturn.setComnCdTitle(homeRepository.getComnCdTitle(subjectVoReturn.getState()));
+			subjectVoReturn.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubject()));
+		}
+		return boardList;
+	}
+
 
 //	@Override
 //	public List<SubjectVO> searchSubject(List<Map<String, Object>> searchParam) {
