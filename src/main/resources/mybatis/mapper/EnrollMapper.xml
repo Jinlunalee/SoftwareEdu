@@ -40,6 +40,14 @@
 		AND e.subject_id = #{subjectId} AND subject_seq = #{subjectSeq} 
 		AND NOT (e.del_yn ='Y')
 	</select>
+		
+	<select id="getRatioUsingEnrollId" parameterType="String" resultType="string">
+	/* getRatioUsingEnrollId */
+		SELECT ROUND(complete_hours/hours * 100) 
+		FROM ENROLL e, SUBJECT s 
+		WHERE e.subject_id = s.subject_id AND enroll_id = #{enrollId} 
+		AND NOT (e.del_yn ='Y')
+	</select>
 	
 	<select id="getHours" parameterType="string" resultType="int">
 	/* getHours */
@@ -264,7 +272,7 @@
 		    recruit_end_day,
 		    recruit_people,
 		    open.state_cd as open_state_cd,
-		    subject.cat_cd as cat_subject,
+		    subject.cat_cd as cat_subject_cd,
 		    enroll.student_id,
 		    name,
 		    birth,

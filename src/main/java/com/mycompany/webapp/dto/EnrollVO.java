@@ -36,6 +36,7 @@ public class EnrollVO {
 	
 	private int progress;
 	private int addHours;
+	private String ratio;	// 진도율 
 	
 	private String applyStartDay;
 	private String applyEndDay;
@@ -55,7 +56,8 @@ public class EnrollVO {
 	private String recruitStartDay;	// 개설 강좌 모집시작일자
 	private String recruitEndDay;	// 개설 강좌 모집종료일자
 	private String recruitPeople;	// 개설 강좌 모집인원 
-	private String catSubject;	// 강좌 분류
+	private String catSubjectCd;	// 강좌 분류
+	private String catSubjectCdTitle;	// 강좌 분류
 	private String birth;	// 수강생 생년월일
     private String genderCd;	// 수강생 성별 공통코드
     private String genderCdTitle;	// 수강생 성별 공통코드명

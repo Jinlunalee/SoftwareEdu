@@ -82,27 +82,13 @@
 			<!-- 리스트 -->
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td><a class="modal-open modal-open-${status.count}" onclick="showModal(${status.count}); rto('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}');">${board.subjectTitle} 
-					<c:if test="${not empty board.courseTitle}">
-					(${board.courseTitle})
-					</c:if></a></td>
-					<div class="modal modal-${status.count}">
-						<div class="modal-content modal-content-${status.count}">
-							<li style="text-align: center;">${board.name}  |  ${board.studentId}  |  ${board.stateCdTitle}</li>
-							<br>
-							<li>강좌 | ${board.subjectTitle} | ${board.subjectId} | ${board.openStateCdTitle}</li>
-							<li>강의 시간 | ${board.startTime} ~ ${board.endTime} </li>
-							<li>교육 기간 | ${board.startDay} ~ ${board.endDay} </li>
-							<span>진도율 | <span class="rt"></span></span>
-							<li>현재 완료 시간  | ${board.completeHours}</li>
-							완료한 시간 입력
-							<form action="<c:url value='/enroll/addhours/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post"/>
-								<input type="number" name="addHours" class="input-time" >
-								<input type="submit" onclick="getHours(${board.enrollId})" class="input-time-btn"  value="입력">
-							</form>
-							<div id="close-btn"><button class="close-btn">닫기</button></div>
-						</div>
-					</div>
+					<td>
+						<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle} 
+							<c:if test="${not empty board.courseTitle}">
+							(${board.courseTitle})
+							</c:if>
+						</a>
+					</td>
 					<td>${board.name} (${board.studentId})</td>
 					<td>${board.regDt}</td>
 					
