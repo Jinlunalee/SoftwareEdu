@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.ISubjectRepository;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.ISubjectService;
@@ -233,6 +234,11 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public List<SubjectVO> selectSubjectByCourseId(String courseId) {
 		return subjectRepository.selectSubjectByCourseId(courseId);
+	}
+
+	@Override
+	public List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year) {
+		return subjectRepository.selectOpenSubjectByCourseIdAndYear(courseId, year);
 	}
 	
 }
