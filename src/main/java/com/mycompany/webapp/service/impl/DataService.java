@@ -2,6 +2,8 @@ package com.mycompany.webapp.service.impl;
 
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,27 +20,20 @@ public class DataService implements IDataService{
 	@Autowired
 	IDataRepository dataRepository;
 	
-	Gson gson = new Gson();
-
-
-
+	// @Expose를 사용하기 위해, new Gson()이 아닌 new GsonBuilder()사용 : @Expose처리된 필드는 직렬화에서 배제시킬 수 있음.
+	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	
 	@Override
 	public String getDataGson() {
-		gson.toJson(dataRepository.getDataList());
-
 		List<StudentVO> dataList = dataRepository.getDataList();
 		
 		String jsonStr = gson.toJson(dataList);		
 		
 		return jsonStr;
 	}
-
-			
 	
 	@Override
 	public String getSbjDataGson() {
-		gson.toJson(dataRepository.getSbjDataList());
-
 		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList();
 		
 		String jsonStr2 = gson.toJson(sbjdataList);		
