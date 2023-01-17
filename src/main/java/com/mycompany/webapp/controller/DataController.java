@@ -95,6 +95,8 @@ public class DataController {
 	}
 	*/
 	
+	
+	
 	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
 	public @ResponseBody String getjsonSbj(){
 		
