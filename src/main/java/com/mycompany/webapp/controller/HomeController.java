@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.CourseVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
+import com.mycompany.webapp.service.ISubjectService;
 
 @RequestMapping
 @Controller
@@ -28,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	IPagerService pagerService;
+	
+	@Autowired
+	ISubjectService subjectService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -176,5 +182,20 @@ public class HomeController {
 		return "common/searchpop-opensubject-result";
 	}
 	
+	/**
+	 * @description	작성 해에 courseId에 등록된 강좌 리스트 가져오기
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param courseId
+	 * @param year
+	 * @return
+	 */
+	@GetMapping(value="/common/selectOpenSubjectByCourseIdAndYear")
+	@ResponseBody
+	public List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year) {
+		List<OpenVO> boardList = subjectService.selectOpenSubjectByCourseIdAndYear(courseId, year);
+		logger.info("getSubjectListFromCourseId: " + boardList);
+		return boardList;
+	}
 }
 

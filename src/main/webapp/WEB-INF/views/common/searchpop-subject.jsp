@@ -17,7 +17,7 @@
     <div class="content-wrap">
             <!-- 게시물 표 영역 -->
             <div class="table-wrap">
-
+                
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
                     <form id="search-form">
@@ -52,6 +52,9 @@
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>
+                    <!-- 과정에 이미 포함된 강좌 넘어온 값 -->
+                    <div id="unavailable-pop" type="hidden">
+                    </div>
                 </div>
 
                 <!-- 리스트 영역 -->

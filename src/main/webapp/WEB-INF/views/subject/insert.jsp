@@ -55,9 +55,11 @@ function changeEverything(i) {
 								<input id="subjectId-input" name="subjectId" type="hidden">
 							</td>
 							<td style="width:10%">
-								<button class="subject-popup-btn btn btn-outline-secondary">검색</button>
+								<button type="button" class="subject-popup-btn btn btn-outline-secondary">검색</button>
 							</td>
 						</div>
+						<!-- 과정에 이미 포함된 강좌 넘어온 값 -->
+						<input type="hidden" id="subjectId-string">
 						<div class="course-table">
 							<th style="width:5%">과정명</th>
 							<td style="width:30%">
