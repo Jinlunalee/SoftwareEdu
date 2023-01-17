@@ -35,6 +35,7 @@ public class DataController {
 	 * 2023. 1. 13. modify.......
 
 	 */
+	
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public String getDataList(Model model) {
 		model.addAttribute("menu", "data");
@@ -50,55 +51,10 @@ public class DataController {
 	
 	
 	
-	@RequestMapping(value="/getjson")
-	public @ResponseBody List<StudentVO> getjson(){
-	/*	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	 * public String getjson(Model model) {
-			
-		// 1. 조회
-		List<StudentVO> dataList = studentService.getDataList();
+	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public @ResponseBody String getjson(){
 		
-		// 2. JSON배열 선언
-		JSONArray jsonDataList = new JSONArray();
-		
-		// 3. 조회 결과의 사이즈만큼 루프, 각 데이터는 vo라는 이름으로 사용
-		for (StudentVO vo : dataList) {
-			
-			// 3.1. 각 vo에서 데이터 추출
-			String agentId = "KOSA01";
-			String stdSbj = vo.getStdSbj();
-
-			String name = vo.getName();
-			String rate = vo.getRate();
-			String stateCd = vo.getStateCd();
-			String sendDt = vo.getSendDt();
-
-			
-			
-			// 3.2. HashMap으로 변환 (Key<String>, Value<String>)
-			HashMap<String, String> map = new HashMap();
-			map.put("훈련기관아이디", agentId);
-			map.put("수강생,강좌정보", stdSbj);
-			map.put("수강생이름", name);
-			map.put("이수율", rate);
-			map.put("진행상태", stateCd);
-			map.put("전송시간", sendDt);
-			
-			
-			// 여기에 추가해야 할 것
-			//수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
-			// 강좌비 지원여부는 제외하기 그냥 어차피 지금도 매퍼에서 그 조건으로 조회해서 가지고 오는 거라서
-			
-			
-			// 3.3. 변환된 HashMap을 JSON배열에 추가
-			jsonDataList.put(map);
-			
-			// 3.1 ~ 3.3이 반복.
-		}
-		// jsonDataList가 완성. 문자열로 바꿔서 리턴.
-		String result = jsonDataList.toString();    */
-		
-		return dataService.getDataList();
+		return dataService.getDataGson();
 	}	
 	
 	
@@ -132,11 +88,22 @@ public class DataController {
 		
 	return result;
 	}
-	
+/*	
 	@RequestMapping(value="/getjsonSbj")
 	public @ResponseBody List<SubjectVO> getjsonSbj() {
 		return dataService.getSbjDataList();
 	}
+	*/
+	
+	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
+	public @ResponseBody String getjsonSbj(){
+		
+		return dataService.getSbjDataGson();
+	}	
+	
+	
+	
+	
 	
 	
 	
