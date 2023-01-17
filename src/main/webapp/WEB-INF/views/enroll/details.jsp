@@ -19,7 +19,7 @@
 				<th>수강 아이디</th>
 				<td>${enroll.enrollId}</td>
 				<th>수강 상태</th>
-				<td>${enroll.stateCd}</td>
+				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
 				<th>수강 완료 시간</th>
 				<td>${enroll.completeHours}</td>
 				<th>수강 등록일</th>
@@ -115,14 +115,21 @@
 	<script>
 		window.onload = function () {
 			const ratio = document.getElementById('ratio').innerText;
+			const stateCd = document.getElementById('stateCdTitle').innerText;
+			console.log(stateCdTitle);
+			console.log(typeof stateCdTitle);
 			console.log(ratio);
-			console.log(typeof ratio)
+			console.log(typeof ratio);
 			const addHoursInput = document.getElementById('add-hours-input');
 			const addHoursSubmit = document.getElementById('add-hours-submit');
 			if(ratio>=100) {
 				addHoursInput.setAttribute("readonly", true);
 				addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다.");
 				addHoursSubmit.setAttribute("type","button");
+			} else if(stateCd === '수강신청' || stateCd === '수강예정' || stateCd === '수강취소' || stateCd === '수강완료') {
+				addHoursInput.setAttribute("readonly", true);
+				addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다.");
+				addHoursSubmit.setAttribute("type", "button");
 			}
 		}
 	</script>
