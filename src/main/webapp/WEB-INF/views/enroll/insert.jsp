@@ -32,7 +32,27 @@
 	
 		<div class="wrap">
 			<div class="search-box">
-				<div class="search-content">
+				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
+				<div class="search2">
+					<select name="subCor" class="sc2" onchange="changeSubCor(this.value);">
+						<option selected value="">강좌/과정</option>
+						<option value="subject">강좌</option>
+						<option value="course">과정</option>
+					</select>
+					<div class="search-popup" id="search-popup-subject">
+						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="subject-input" name="subject" type="hidden">
+						<input id="state-input" name="state" type="hidden">
+						<button class="open-subject-popup-btn btn btn-outline-secondary">검색</button>
+					</div>
+					<div class="search-popup" id="search-popup-course" style="display:none;">
+						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="course-input" name="subject" type="hidden">
+						<input id="state-input" name="state" type="hidden">
+						<button class="open-course-popup-btn btn btn-outline-secondary">검색</button>
+					</div>
+				</div>
+				<!-- <div class="search-content">
 				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
 				<form id="form" name="search-subject-course" class="search2">
 					<select name="openState" class="sc2">
@@ -51,7 +71,7 @@
 					<input type="text" name="kw" class="search-in">
 					<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
 				</form>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="subject-result"></div>
@@ -64,6 +84,7 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
 </div>
 
 <script>
@@ -72,6 +93,22 @@
 	var subjectSeq;
 	var courseId;
 		
+
+	/* 강좌/과정 선택에 따른 검색창 보여주기 */
+	function changeSubCor(value) {
+		const searchPopupSubject = document.getElementById('search-popup-subject');
+		const searchPopupCourse = document.getElementById('search-popup-course');
+		if(value==='subject') {
+			searchPopupSubject.removeAttribute("style");
+			searchPopupCourse.setAttribute("style", "display:none;");
+		} else if (value==='course') {
+			searchPopupCourse.removeAttribute("style");
+			searchPopupSubject.setAttribute("style", "display:none;");
+		} else {
+
+		}
+	}
+
 	// student 정보 가져오기
 	function getStudentList() {
 		$.ajax({

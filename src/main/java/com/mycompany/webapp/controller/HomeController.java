@@ -183,6 +183,44 @@ public class HomeController {
 	}
 	
 	/**
+	 * @description	개설과정 검색 팝업
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param model
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/searchpop-opencourse")
+	public void searchPopOpenCourse(Model model) throws Exception{
+		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		model.addAttribute("catCourseList", homeService.getComnCdList("CRS"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	개설과정 검색 팝업 : 결과
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param courseVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/searchpop-opencourse-result", produces = "application/text; charset=UTF-8")
+	public String searchPopOpenCourseResult(CourseVO courseVo, Model model) throws Exception{
+		System.out.println(courseVo);
+		
+		List<CourseVO> openCourseList = homeService.searchOpenCourse(courseVo);
+		
+		// ajax로 구현할 것
+		if(!openCourseList.isEmpty()) {
+			model.addAttribute("boardList",openCourseList);	// 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
+		}
+		
+		return "common/searchpop-opencourse-result";
+	}
+	
+	/**
 	 * @description	작성 해에 courseId에 등록된 강좌 리스트 가져오기
 	 * @date	2023. 1. 17.
 	 * @author	Jin Lee
