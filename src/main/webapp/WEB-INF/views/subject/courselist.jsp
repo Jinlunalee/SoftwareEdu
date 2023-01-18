@@ -42,9 +42,9 @@
 		<table class="list">
 			<thead>
 				<tr>
-					<th>분류</th>
 					<th>과정아이디</th>
 					<th>과정명</th>
+					<th>분류</th>
 					<th>연수기간</th>
 					<th>신청기간</th>
 					<th>교육비</th>
@@ -56,9 +56,9 @@
 				<c:if test="${boardListSize ne 0}">
 					<c:forEach var="board" items="${boardList}">
 						<tr>
-							<td>${board.catCourseTitle}</td>
 							<td>${board.courseId}</td>
 							<td>${board.courseTitle}</td>
+							<td>${board.catCourseTitle}</td>
 							<td>${board.startDay}~${board.endDay}</td>
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
