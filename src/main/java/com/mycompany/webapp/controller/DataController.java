@@ -59,7 +59,7 @@ public class DataController {
 	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	public @ResponseBody String getjson(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
 		
-		// 파라메터 잘 받아왔는지 테스트...
+		// 파라메터 잘 받아왔는지 테스트
 		// System.out.println("eslee" + startDay + ", " + endDay);
 		
 		String resultJsonStr = dataService.getDataGson(startDay, endDay);
