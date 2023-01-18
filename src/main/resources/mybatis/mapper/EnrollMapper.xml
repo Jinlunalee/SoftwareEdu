@@ -272,7 +272,8 @@
 		    phone, 
 		    add_do_cd, 
 		    add_etc, 
-		    position as position_cd 
+		    position_cd,
+		    cancel_rs_etc 
 		FROM enroll
 		INNER JOIN subject
 		ON enroll.subject_id = subject.subject_id

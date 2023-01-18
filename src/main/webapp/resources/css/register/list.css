@@ -186,8 +186,8 @@ tr {
 
 .confirm{
 	position: relative;
-    top: -34px;
-    left: 335px;
+    top: 102px;
+    left: -70px;
     width: 50px;
     height: 30px;
     border-radius: 8px;
@@ -274,4 +274,8 @@ tr {
 	width: 170px;
 	position: relative;
     right: 3px;
+}
+
+.input-cancel{
+	display: inline;
 }

@@ -13,13 +13,15 @@
 	<div class="card-body">
 		<table class="enroll-detail-table enroll-table">
 			<tr>
-				<th class="info enroll-info" colspan='8'>수강 정보</th>
+				<th class="info enroll-info" colspan='10'>수강 정보</th>
 			</tr>
 			<tr>
 				<th>수강 아이디</th>
 				<td>${enroll.enrollId}</td>
 				<th>수강 상태</th>
 				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
+				<th>취소 상세 사유</th>
+				<td>${enroll.cancelRsEtc}</td>
 				<th>수강 완료 시간</th>
 				<td>${enroll.completeHours}</td>
 				<th>수강 등록일</th>
