@@ -21,8 +21,8 @@ public class DataService implements IDataService{
 	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 	
 	@Override
-	public String getDataGson() {
-		List<StudentVO> dataList = dataRepository.getDataList();
+	public String getDataGson(String startDay, String endDay) {
+		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
 		
 		String jsonStr = gson.toJson(dataList);		
 		
@@ -52,7 +52,7 @@ public class DataService implements IDataService{
 	
 	@Override
 	public List<StudentVO> getDataList() {
-		return dataRepository.getDataList();
+		return dataRepository.getDataList("", "");
 	}
 	
 	@Override
