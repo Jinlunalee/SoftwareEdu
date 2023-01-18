@@ -32,8 +32,8 @@
 	
 		<div class="wrap">
 			<div class="search-box">
-				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
 				<div class="search2">
+					<span class="name2">강좌 / 과정</span> &nbsp; &nbsp;
 					<select name="subCor" class="sc2" onchange="changeSubCor(this.value);">
 						<option selected value="">강좌/과정</option>
 						<option value="subject">강좌</option>
@@ -43,15 +43,22 @@
 						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
 						<input id="state-input" name="state" type="hidden">
-						<button class="open-subject-popup-btn btn btn-outline-secondary">검색</button>
+						<button class="open-subject-popup-btn btn3 btn-outline-secondary">검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
 						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="course-input" name="subject" type="hidden">
 						<input id="state-input" name="state" type="hidden">
-						<button class="open-course-popup-btn btn btn-outline-secondary">검색</button>
+						<button class="open-course-popup-btn btn3 btn-outline-secondary">검색</button>
+					</div>
+					<div class="submit-btn">
+						<form action="<c:url value='/enroll/boardlist'/>">
+							<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
+							<input type="reset" onclick="location.href='<c:url value="/enroll/boardlist"/>'" value="취 소" class="btn">
+						</form>
 					</div>
 				</div>
+			</div>
 				<!-- <div class="search-content">
 				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
 				<form id="form" name="search-subject-course" class="search2">
@@ -72,16 +79,9 @@
 					<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
 				</form>
 				</div> -->
-			</div>
+			
 
 			<div class="subject-result"></div>
-		</div>
-	
-		<div class="submit-btn">
-			<form action="<c:url value='/enroll/boardlist'/>">
-				<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
-				<input type="reset" onclick="location.href='<c:url value="/enroll/boardlist"/>'" value="취 소" class="btn">
-			</form>
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>

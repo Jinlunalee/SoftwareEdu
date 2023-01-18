@@ -35,7 +35,7 @@ input {
 
 .submit-btn {
 	text-align: center;
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 .a li::before {
@@ -115,11 +115,12 @@ table > tr {
 
 .search2 {
 	display: inline;
+	position: relative;
+	top: 5px;
 }
 
 .sc2{
 	position: relative;
-    bottom: 10px;
     height: 40px;
     border-radius: 8px;
 }
@@ -151,4 +152,30 @@ li{
 .check-subject {
 	width: 20px;
     height: 20px;
+}
+
+.search-popup{
+	display: inline;
+}
+
+#subjectTitle-input, #courseTitle-input{
+	height: 40px;
+    width: 60%;
+}
+
+.btn2{
+	background-color: #003964;
+	color: #fff;
+	width: 100px;
+    height: 40px;
+    border-radius: 8px;
+}
+.btn3{
+	background-color: #003964;
+	color: #fff;
+	width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    position: relative;
+    bottom: 2px;
 }
