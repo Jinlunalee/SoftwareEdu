@@ -2,14 +2,11 @@ package com.mycompany.webapp.service.impl;
 
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.mycompany.webapp.dao.IDataRepository;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;

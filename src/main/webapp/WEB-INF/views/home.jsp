@@ -42,12 +42,6 @@ height: 100px;
 
 
 
-
-
-
-
-
-
  #second_image {
  width: 180px; 
  height: 100px; 

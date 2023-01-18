@@ -41,7 +41,7 @@
 	
 	
 	
-	<select id="getSbjDataList" resultType="SubjectVO">
+    <select id="getSbjDataList" resultType="SubjectVO">
 /* getSbjDataList1 */ 
 
    select
@@ -56,8 +56,19 @@
    from open
    left join subject on open.subject_id=subject.subject_id  
    where subject.support_yn = 'Y' and to_date(end_day)  <![CDATA[ < ]]> SYSDATE
-	
-	</select>
+   <include refid="data-search" />
+
+    </select>
+        <sql id="data-search">
+    <!-- 수강 검색 쿼리 -->
+    /*data-search*/
+        <if test="startDay != '' and endDay != ''">
+            AND open.reg_dt BETWEEN TO_DATE(#{startDay}) AND TO_DATE(#{endDay})  
+        </if>
+        <if test="startDay != '' and endDay == ''">
+            AND open.reg_dt BETWEEN TO_DATE(#{startDay}) AND TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) 
+        </if>
+       </sql>
 	
 	
 	

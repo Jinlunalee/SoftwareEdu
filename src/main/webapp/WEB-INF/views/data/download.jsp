@@ -43,7 +43,7 @@ overflow-x: scroll;
 	border-left: 1.5px dotted #bdc3c8;
 	height: 550px;
 	position: absolute;
-	left: 600px;
+	left: 620px;
 	margin-left: 3px;
 	margin-right: 3px;
 	margin-left: 3px;
@@ -73,6 +73,8 @@ overflow-x: scroll;
 	float: right;
 	height: 600px;
 	font-size: 15px;
+	position: relative;
+    top: -80px;
 }
 
 .box {
@@ -104,7 +106,43 @@ overflow-x: scroll;
 #first_info{
     font-size: 12px;
     color: slategrey;
+}
 
+
+.input-date {
+    width: 170px;
+    height: 45px;
+    border-radius: 8px;
+    margin: 0 10px;
+    padding: 3px 20px 0 20px;
+    border: 1px solid #e8e8e8;
+}
+
+.input-button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    line-height: 45px;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #003964;
+    position: relative;
+    left: 270px;
+    bottom: 41px;
+}
+.search {
+    width: 620px;
+    text-align: center;
+    background-color: #f7f7f7;
+    padding-top: 12px;
+    height: 70px;
+    position: relative;
+    left: -500px
+}
+
+.data-period{
+    position: relative;
+    left: -20px;
 }
 
 </style>
@@ -122,7 +160,22 @@ overflow-x: scroll;
 	</div>
 	<div class="card-body">
 		<br>
-
+        <%-- 연계자료 기간으로 검색  --%>
+        <div class="search">
+        <form name="sc-form" action="<c:url value='//download'/>">
+        <%--연계자료 기간 --%>
+            <div class="data-period">
+            <span id="dataperiod">기간별 자료</span>
+            <input type="date" name="startDay" class="input-date"> ~
+            <input type="date" name="endDay"class="input-date">
+            </div>
+            <input type="submit" class="input-button" value="검색">
+         </form>
+         </div>
+         
+         
+         
+            
 		<div class="card_left" style="width: 50%">
 		<div class="first_card">
 		
@@ -395,8 +448,7 @@ overflow-x: scroll;
 	
 	
 	
-	
-	
+
 	
 	
 
