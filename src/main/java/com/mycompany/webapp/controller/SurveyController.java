@@ -1,21 +1,30 @@
 package com.mycompany.webapp.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.AnswerVO;
+import com.mycompany.webapp.dto.QuestionSetVO;
 import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IEnrollService;
@@ -187,4 +196,72 @@ public class SurveyController {
 		System.out.println(result);
 		return result;
 	}*/	
+	
+	
+	
+	
+	/**
+	 * @Description : 만족도 조사 통계 엑셀파일 다운로드
+	 * @author KOSA
+	 * @date 2023. 1. 17.
+	 * @param response
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @param openDt
+	 * @throws Exception
+	 */
+	@GetMapping("/downloadexcel")
+	@ResponseBody
+	public void downloadExcel(String subjectId, String subjectSeq, String openDt, HttpServletResponse response) throws Exception {
+		logger.info("downloadExcel:"+subjectId+subjectSeq+openDt);
+		int subjectSeqInt = Integer.parseInt(subjectSeq);
+		
+		Workbook workbook = new HSSFWorkbook();//xls파일로 저장하기위해 생성
+		Sheet sheet = workbook.createSheet("강좌 만족도 조사 문항"); // 하나의 sheet 생성
+		Sheet sheet2 = workbook.createSheet("강좌 만족도");
+		int rowNo = 0; // row number 카운팅
+
+		//sheet1
+		Row headerRow = sheet.createRow(rowNo++);
+		headerRow.createCell(0).setCellValue("subject_id");
+		headerRow.createCell(1).setCellValue("subject_seq");
+		headerRow.createCell(2).setCellValue("question_num");
+		headerRow.createCell(3).setCellValue("question_content");
+		
+		List<QuestionSetVO> questionList = surveyService.selectSubjectQuestionSet(subjectId, subjectSeqInt);
+		for(QuestionSetVO question : questionList) {
+			Row row = sheet.createRow(rowNo++);
+			row.createCell(0).setCellValue(subjectId);
+			row.createCell(1).setCellValue(subjectSeqInt);
+			row.createCell(2).setCellValue(question.getQuestionNum());
+			row.createCell(3).setCellValue(question.getQuestionContent());
+		}
+		
+		rowNo = 0;
+		
+		//sheet2
+		//상단 헤더row
+		Row headerRow2 = sheet2.createRow(rowNo++);
+//		headerRow2.createCell(0).setCellValue("answer_id");
+		headerRow2.createCell(1).setCellValue("subject_id");
+		headerRow2.createCell(2).setCellValue("subject_seq");
+		headerRow2.createCell(3).setCellValue("question_num");
+		headerRow2.createCell(4).setCellValue("answer_value");
+		
+		List<AnswerVO> answerList = surveyService.selectAnswerList(subjectId, subjectSeqInt);
+		for(AnswerVO answer : answerList) {
+			Row row2 = sheet2.createRow(rowNo++);
+//			row.createCell(0).setCellValue(answer.);
+			row2.createCell(1).setCellValue(answer.getSubjectId());
+			row2.createCell(2).setCellValue(answer.getSubjectSeq());
+			row2.createCell(3).setCellValue(answer.getQuestionNum());
+			row2.createCell(4).setCellValue(answer.getAnswerValue());
+		}
+		
+		response.setContentType("ms-vnd/excel");
+		response.setHeader("Content-Disposition", "attachment;filename=summary.xls");
+		
+		workbook.write(response.getOutputStream());
+		workbook.close();
+	}
 }

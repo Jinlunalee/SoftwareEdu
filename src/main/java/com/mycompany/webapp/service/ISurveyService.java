@@ -18,4 +18,6 @@ public interface ISurveyService {
 	List<QuestionSetVO> selectSubjectQuestionSet(String subjectId, int subjectSeq);
 	void insertQuestion(QuestionVO questionVo);
 	int getMaxSubjectSeq(String subjectId);
+	
+	List<AnswerVO> selectAnswerList(String subjectId, int subjectSeq); //해당 강좌에 대한 답변정보
 }

@@ -89,8 +89,8 @@ public class SubjectController {
 
 		return "subject/courselist";
 	}
-
-	//	// 개설 강좌 목록조회 (open)
+	
+	// 개설 강좌 목록조회 (open)
 	//	@RequestMapping(value="/subjectlist", method=RequestMethod.GET)
 	//	public String getSubjectList(Model model) {
 	//		model.addAttribute("menu", "subject");
@@ -307,7 +307,8 @@ public class SubjectController {
 	}	
 
 	/**
-	 * @ paging 강좌 목록 조회 - ajax
+	 * @Description : paging 강좌 목록 조회 - ajax
+	 * @author KOSA
 	 * @date 2023. 1. 16.
 	 * @param strPageNo
 	 * @param strRowsPerPage
@@ -316,9 +317,12 @@ public class SubjectController {
 	 * @return
 	 */
 	@PostMapping("/ajaxsubjectboardlist")
-	public String ajaxSubjectList(@RequestParam(defaultValue="1") String strPageNo, String strRowsPerPage, 
+	public String ajaxSubjectList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
 			@RequestParam(defaultValue="all") String catSubject, Model model) {
-
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("check", "subject");
+		
 		logger.info("strRowPerPage:"+strRowsPerPage);
 		
 		int pageNo = Integer.parseInt(strPageNo);
@@ -339,11 +343,45 @@ public class SubjectController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
 
-		// 값이 잘 넘어왔는지 확인 
-		logger.info("넘ㅇ어왕ㄲ을까용?");
-		logger.info("roswPerPAge:"+rowsPerPage);
-		logger.info("boardListSize/ajax: " + boardList.size());
-
-		return "subject/subjectlist-result";
+		return "subject/boardlist-result";
 	}
+	
+	/**
+	 * @Description : paging 개설 과정 목록 조회 (course) - ajax
+	 * @author KOSA
+	 * @date 2023. 1. 17.
+	 * @param strPageNo
+	 * @param strRowsPerPage
+	 * @param catSubject
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/ajaxcourseboardlist")
+	public String ajaxCourseList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
+			@RequestParam(defaultValue="all") String catCourse, Model model) {
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		
+		int pageNo = Integer.parseInt(strPageNo);
+		int rowsPerPage = Integer.parseInt(strRowsPerPage);
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountOpenCourseRow(catCourse);
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<SubjectVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourse);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("catId", catCourse); 
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("OpenCourseBoardList: " + boardList);
+		
+		return "subject/boardlist-result";
+	}
+	
 }

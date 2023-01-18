@@ -41,6 +41,11 @@
 						</div>
 					</div>
 				</div>
+				<div class="down">
+					<button type="button" onclick="downloadExcel()">
+						<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" />
+					</button>
+				</div>		
 			</div>
 		</div>
 	</div>
@@ -56,6 +61,7 @@
 			let subjectArr = subject.split('/');
 			let subjectId = subjectArr[0];
 			let subjectSeq = subjectArr[1];
+			let openDt = subjectArr[3];
 			let state = subjectArr[4];
 			if(state==='OPN05'){
 				$.ajax({
@@ -77,7 +83,20 @@
 			alert("강의를 선택해주세요.");
 		}
 	}
-
+	/*버튼 누르면 엑셀 다운로드 받기*/
+	function downloadExcel(){
+		let subject = document.getElementById('subject-input').value;
+		console.log(subject);
+		if(subject){
+			let subjectArr = subject.split('/');
+			let subjectId = subjectArr[0];
+			let subjectSeq = subjectArr[1];
+			let openDt = subjectArr[3];
+			location.href = '<c:url value="/survey/downloadexcel?subjectId='+ subjectId + '&subjectSeq=' + subjectSeq + '&openDt=' + openDt+'"/>';
+		}else{
+			alert('강의를 선택해주세요');
+		}
+	}
 	</script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>

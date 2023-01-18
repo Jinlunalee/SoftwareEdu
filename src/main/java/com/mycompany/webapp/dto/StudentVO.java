@@ -18,7 +18,8 @@ public class StudentVO {
 	private String phone;		// 수강생 전화번호
 	private String addDoCd;		// 수강생 주소 도 코드  *얘 수정
 	private String addEtc;		// 수강생 주소 기타  * 얘 수정
-	private String position;		// 수강생 지위
+	private String position;
+	//	private String positionCd;		// 수강생 지위
 	private int cntStd;		//전체수강생 수 * 얘 수정
 	
 	private String supportYn;  // 교육비 지원 여부

@@ -53,6 +53,8 @@ public class SurveyService implements ISurveyService {
 		List<QuestionSetVO> questionSetList = questionVo.getQuestionSet();
 		
 		for(QuestionSetVO questionSetVo : questionSetList) {
+			
+			
 			System.out.println(questionSetVo.getQuestionNum());
 			System.out.println(questionSetVo.getQuestionContent()); // questionSetVo.getQuestionContent()가 "test1,test1" 와 같은 형식으로 나옴.. 왜인지 모르겠지만 일단 해결해보자
 			String[] questionContentArr = questionSetVo.getQuestionContent().split(","); // , 기준으로 split으로 자름
@@ -65,6 +67,11 @@ public class SurveyService implements ISurveyService {
 	@Override
 	public int getMaxSubjectSeq(String subjectId) {
 		return surveyRepository.getMaxSubjectSeq(subjectId);
+	}
+
+	@Override
+	public List<AnswerVO> selectAnswerList(String subjectId, int subjectSeq) {
+		return surveyRepository.selectAnswerList(subjectId, subjectSeq);
 	}
 
 }

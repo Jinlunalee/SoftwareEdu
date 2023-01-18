@@ -368,8 +368,36 @@ function inputState(){
 	// console.log(state.value);
 }
 
-/*검색 눌렀을때 갯수 고정*/
-// let selectPager = document.querySelector('.select-view'); // select box 
-// selectPager.addEventListener('change', showSelectList); // select box가 변했을 때 
+//*페이지별 개수 선택 유지(subject) - ajax*/
+function listCount(obj) { // 검색 결과 리스트 출력
+	let strRowsPerPage = obj;
+	console.log(strRowsPerPage);
+	$.ajax({
+		url: "ajaxsubjectboardlist?strRowsPerPage="+strRowsPerPage,
+		type: "POST"
+	}).done(function (result) {
+		console.log('success');
+		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
+		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
+		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
+	}).fail(function(){
+		console.log('fail');
+	});
+}
 
-
+//*페이지별 개수 선택 유지(course) - ajax*/
+function listCount2(obj) { // 검색 결과 리스트 출력
+	let strRowsPerPage = obj;
+	console.log(strRowsPerPage);
+	$.ajax({
+		url: "ajaxcourseboardlist?strRowsPerPage="+strRowsPerPage,
+		type: "POST"
+	}).done(function (result) {
+		console.log('success');
+		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
+		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
+		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
+	}).fail(function(){
+		console.log('fail');
+	});
+}

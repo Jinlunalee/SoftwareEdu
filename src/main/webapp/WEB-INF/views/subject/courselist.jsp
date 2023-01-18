@@ -18,28 +18,27 @@
 				<option>과정아이디</option>
 			</select>
 			<input class="input-text" type="text" placeholder="과정명 / 과정아이디를 입력해 주세요">
-			<input class="input-button" type="button" value="검색">
+			<input class="input-button" type="button" value="검색" style="position: static;">
         </div>
         
-		<!-- list top -->
-		<div class="list_top">
-			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
-			</div>
-			<div class="view">
+        <div class="view">
 			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
-			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-				<option value="<c:url value="/subject/courseboardlist?pageNo=1"/>">선택</option>
-				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-				<option value="<c:url value="/subject/courseboardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
+			<select class="select-view" onchange="listCount2(this.value)">
+				<option value="">선택</option>
+				<option value="10">10개</option>
+				<option value="30">30개</option>
+				<option value="50">50개</option>
 			</select>
-			</div>
 		</div>
-		<!-- // list top -->
 		
 		<!-- list table -->
+		<div id="list-wrap">
+			<div class="list_top">
+				<div class="cnt">
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+				</div>
+			</div>
 		<table class="list">
 			<thead>
 				<tr>
@@ -115,7 +114,10 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
 	</div>
 </div>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

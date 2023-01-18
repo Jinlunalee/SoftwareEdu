@@ -90,5 +90,12 @@
       from open
       where subject_id = #{subjectId}
    </select>
+   
+   <select id="selectAnswerList" parameterType="map" resultType="AnswerVO">
+	/* selectAnswerList */
+	   select answer_id, subject_id, subject_seq, question_num, answer_value 
+	   from answer
+	   where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
+   </select>
 
 </mapper>
