@@ -20,5 +20,6 @@ public interface IHomeRepository {
 	List<SubjectVO> searchSubject(SubjectVO subjectVo);
 	List<CourseVO> searchCourse(CourseVO courseVo);
 	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
+	List<CourseVO> searchOpenCourse(CourseVO courseVo);
 
 }

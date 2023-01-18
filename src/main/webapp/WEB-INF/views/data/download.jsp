@@ -265,7 +265,7 @@ overflow-x: scroll;
             type : "GET",
             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
 			success : function(data) {
-        		var str = "";
+        /*		var str = "";
         		
         		str += "[";
             	for (var i = 0; i < data.length; i++) {
@@ -279,15 +279,18 @@ overflow-x: scroll;
             		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
             		
-            		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 됨
+            		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 돼서
             			str += "}";
-            		} else { // 마지막이아닐때  (콤마가 들어가야 하니까)
+            		} else { // 마지막이아닐때
             			str += "},";
             		}
             	}
-            	str += "]";
-				$("#result").html(str);
-			}
+            	str += "]";   
+                console.log(data);         */
+				$("#result").html(data);
+
+			} 
+		
 		});
 	}
 
@@ -313,7 +316,7 @@ overflow-x: scroll;
 //             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success : function(data) {
-
+            	/*
         		var str = "";   
         		
         		str += "[";
@@ -329,7 +332,7 @@ overflow-x: scroll;
             		str += '"cnt_std":' + '"' + data[i].cntStd + '명",';
             		str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
-            		/*
+            	
             		alert(
            				data[i].sbjIdSeq + '\n' +
                    		data[i].subjectTitle + '\n' +
@@ -340,7 +343,7 @@ overflow-x: scroll;
                    		data[i].sendDt
                    		data[i].cntStd
             		);
-            		*/
+            		
             		
             		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 됨
             			str += "}";
@@ -349,9 +352,10 @@ overflow-x: scroll;
             		}
             	}
             	str += "]";
-            	
-// alert(str);
-				 $("#result3").text(str);
+            	*/
+// alert(str);    
+
+				 $("#result3").text(data);
 			}
 		});
 	}
@@ -428,8 +432,7 @@ overflow-x: scroll;
 			getJsonSbj();
 		});
 	});
-	
-	
+		
 	$(function() {
 		$("#forth_btn").click(function() {
 			$("#show_XML2, #show_info4").toggle();

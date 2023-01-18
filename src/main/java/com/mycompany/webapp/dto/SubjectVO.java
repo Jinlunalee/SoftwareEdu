@@ -1,20 +1,20 @@
 package com.mycompany.webapp.dto;
 
-import java.util.Date;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.annotations.Expose;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import oracle.sql.DATE;
 
 @Getter
 @Setter
 @ToString
 public class SubjectVO {
-	
+
 	private String subjectId; //강좌아이디
+	@Expose
 	private String subjectTitle; //강좌명
 	private int subjectSeq;
 	private String supportYn; //지원여부
@@ -23,6 +23,7 @@ public class SubjectVO {
 	private String catSubjectCd;//강좌 분류 코드
 	private String catSubjectCdTitle;//강좌 분류 코드명
 	private int days; //일수
+	@Expose
 	private int hours; //시수
 	private String level;
 	private String levelTitle;
@@ -42,7 +43,9 @@ public class SubjectVO {
 	private String content; //개설 강좌 내용
 	private String startTime; //개설 강좌 시작 시간
 	private String endTime; //개설 강좌 종료 시간
+	@Expose
 	private String startDay; //개설 강좌 시작 일자
+	@Expose
 	private String endDay; //개설 강좌 종료 일자
 	private String recruitStartDay; //모집 시작 일자
 	private String recruitEndDay; //모집 마감 일자
@@ -62,8 +65,11 @@ public class SubjectVO {
 	private long fileSize;
 	private String fileContentType;
 	
+	@Expose
 	private String sbjIdSeq;	// subjectId와 subjectSeq를 합쳐놓은 값
+	@Expose
 	private int cntStd;   // 학생 수
+	@Expose
 	private String sendDt;	// 전송시간
 	
 	

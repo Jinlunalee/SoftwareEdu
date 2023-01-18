@@ -270,4 +270,13 @@
 			
 	</select>
 	
+	<select id="selectOpenSubjectByCourseIdAndYear" parameterType="map" resultType="OpenVO">
+	/*selectOpenSubjectByCourseIdAndYear*/
+		SELECT *
+		FROM open
+		WHERE course_id = #{courseId}
+		AND substr(reg_dt,1,4) = #{year}
+		AND del_yn = 'N' AND state_cd != 'OPN07'
+	</select>
+	
 </mapper>

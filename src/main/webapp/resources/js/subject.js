@@ -204,24 +204,24 @@ function parse(str){
 }
 
 /*select 두개 연계 (필요X)*/
-function courseChange(e){
-	var course1 = ["AI가 대신 만들어주는 앱", "자바 기초"];
-	var course2 = ["한번에 끝내는 HTML","두번만에 끝내는 CSS", "세번해도 안끝나는 JS"];
-	var target = document.querySelector(".select_smallCourse");
+// function courseChange(e){
+// 	var course1 = ["AI가 대신 만들어주는 앱", "자바 기초"];
+// 	var course2 = ["한번에 끝내는 HTML","두번만에 끝내는 CSS", "세번해도 안끝나는 JS"];
+// 	var target = document.querySelector(".select_smallCourse");
 
-	if(e.value == "a") var d = course1;
-	else if(e.value == "b") var d = course2;
+// 	if(e.value == "a") var d = course1;
+// 	else if(e.value == "b") var d = course2;
 
-	target.options.length = 0;
+// 	target.options.length = 0;
 
-	for(x in d) {
-		var opt = document.createElement("option");
-		console.log(d[x]);
-		opt.value = d[x];
-		opt.innerHTML = d[x];
-		target.appendChild(opt);
-	}
-}
+// 	for(x in d) {
+// 		var opt = document.createElement("option");
+// 		console.log(d[x]);
+// 		opt.value = d[x];
+// 		opt.innerHTML = d[x];
+// 		target.appendChild(opt);
+// 	}
+// }
 
 /*jquery timepicker 사용해서 30분단위로 보이도록 커스텀*/
 $('input#startTime').timepicker({

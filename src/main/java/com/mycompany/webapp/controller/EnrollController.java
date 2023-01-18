@@ -41,7 +41,14 @@ public class EnrollController {
 	@Autowired
 	IPagerService pagerService;
 
-	// paging 목록조회
+	/**
+	 * @description	수강 목록
+	 * @date	2023. 1. 17.
+	 * @param pageNo
+	 * @param rowsPerPage
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/boardlist")
 	public String enrollList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "enroll");
@@ -49,6 +56,7 @@ public class EnrollController {
 
 		// 페이징 대상이 되는 전체 행수
 		int totalRows = pagerService.getCountEnrollRow();
+		int rowsPerPages = rowsPerPage;
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
@@ -57,6 +65,7 @@ public class EnrollController {
 		List<EnrollVO> boardList = pagerService.selectEnrollListByPage(pager);
 
 		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("rowsPerPages", rowsPerPages);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
@@ -69,9 +78,9 @@ public class EnrollController {
 		return "enroll/list";
 	}
 
-	// 수강 목록 검색 필터
 	/**
-		2023. 1. 12.
+	 * @description	수강 검색
+	 * @date	2023. 1. 17.
 	 * @param enroll
 	 * @param pageNo
 	 * @param rowsPerPage
@@ -93,6 +102,7 @@ public class EnrollController {
 		enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
 
 		int totalRows = pagerService.getCountSearchRow(enroll);
+		int rowsPerPages = rowsPerPage;
 
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
 
@@ -101,6 +111,7 @@ public class EnrollController {
 
 		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
 		logger.info("EnrollSearchList : " + searchList);
+		model.addAttribute("rowsPerPages", rowsPerPages);
 		model.addAttribute("enroll", enroll);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", searchList);
@@ -108,9 +119,29 @@ public class EnrollController {
 
 		return "enroll/search";
 	}
+	
+	/**
+	 * @description	수강 상세
+	 * @date	2023. 1. 17.
+	 * @param enrollId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
+	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
+		model.addAttribute("menu", "enroll");
+		model.addAttribute("menuKOR", "수강 관리");
+		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
+		model.addAttribute("enroll", enrollVo);
+		return "enroll/details";
+	}
 
-
-	// 입력
+	/**
+	 * @description	수강 추가
+	 * @date	2023. 1. 17.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
 	public String insertEnroll(Model model) {
 		model.addAttribute("menu", "enroll");
@@ -118,18 +149,24 @@ public class EnrollController {
 		return "enroll/insert";
 	}
 
-	// 취소 누르면 수강 취소 상태
+	/**
+	 * @description	취소 버튼 누르면 수강 취소 상태로 됨
+	 * @date	2023. 1. 17.
+	 * @param enroll
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/boardlist";
 	}
 
-
 	/**
 	 * @description	논리 삭제
-	 * @date	2023. 1. 13.
-	 * @author	user
+	 * @date	2023. 1. 17.
 	 * @param studentId
 	 * @param subjectId
 	 * @param subjectSeq
@@ -142,16 +179,11 @@ public class EnrollController {
 	}
 
 	/**
-	 * @description 수강 완료한 시간 입력
-	 * @date	2023. 1. 13.
-	 * @author	user
+	 * @description	수강 완료 시간 입력
+	 * @date	2023. 1. 17.
 	 * @param enroll
-	 * @param studentId
-	 * @param subjectId
-	 * @param subjectSeq
 	 * @return
 	 */
-
 	@RequestMapping(value="/addhours", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll) {
 		System.out.println(enroll);
@@ -159,7 +191,13 @@ public class EnrollController {
 		return "redirect:/enroll/details/" + enroll.getEnrollId();
 	}
 
-	// 수강 추가 수강생 ajax
+	/**
+	 * @description	수강 입력 수강생 목록 ajax
+	 * @date	2023. 1. 17.
+	 * @param type
+	 * @param keyword
+	 * @return
+	 */
 	@RequestMapping(value="/studentlist")
 	public @ResponseBody List<StudentVO> getStudentList(@RequestParam("type") String type, @RequestParam("keyword") String keyword) {
 		StudentVO studentVO = new StudentVO();
@@ -168,7 +206,14 @@ public class EnrollController {
 		return enrollService.getStudentList(studentVO);
 	}
 
-	// 수강 추가 강좌 과정 ajax
+	/**
+	 * @description	수강 입력 강좌 과정 목록 ajax
+	 * @date	2023. 1. 17.
+	 * @param openState
+	 * @param subCor
+	 * @param kw
+	 * @return
+	 */
 	@RequestMapping(value="/openlist")
 	public @ResponseBody List<OpenVO> getOpenList(@RequestParam("openState") String openState, @RequestParam("subCor") String subCor, @RequestParam("kw") String kw) {
 		OpenVO openVO = new OpenVO();
@@ -178,14 +223,28 @@ public class EnrollController {
 		return enrollService.getOpenList(openVO);
 	}
 
-	// 승인하면 수강 예정 상태
+	/**
+	 * @description	승인 버튼 누르면 수강 예정 상태로 됨
+	 * @date	2023. 1. 17.
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
 	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/boardlist";
 	}
 
-	// 수강 추가
+	/**
+	 * @description	수강 입력
+	 * @date	2023. 1. 17.
+	 * @param studentId
+	 * @param subjectId
+	 * @param subjectSeq
+	 * @return
+	 */
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		System.out.println(studentId);
@@ -193,7 +252,13 @@ public class EnrollController {
 		return "redirect:/enroll/boardlist";
 	}
 
-	// 과정 추가
+	/**
+	 * @description	수강 입력에서 과정 입력
+	 * @date	2023. 1. 17.
+	 * @param studentId
+	 * @param courseId
+	 * @return
+	 */
 	@RequestMapping(value="/addcourse/{studentId}/{courseId}", method=RequestMethod.POST)
 	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
 		System.out.println(courseId);
@@ -201,11 +266,16 @@ public class EnrollController {
 		return "redirect:/enroll/boardlist";
 	}
 
-	// 수강 엑셀 파일 다운로드
+	/**
+	 * @description	수강 목록 엑셀 다운로드
+	 * @date	2023. 1. 17.
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public void downloadEnroll(HttpServletResponse response) throws IOException {
 		Workbook workbook = new HSSFWorkbook();
-		Sheet sheet = workbook.createSheet("테스트");
+		Sheet sheet = workbook.createSheet("수강 목록");
 		int rowNo = 0;
 
 		Row headerRow = sheet.createRow(rowNo++);
@@ -214,7 +284,7 @@ public class EnrollController {
 		headerRow.createCell(2).setCellValue("강좌 시퀀스");
 		headerRow.createCell(3).setCellValue("수강생 아이디");
 		headerRow.createCell(4).setCellValue("수강 완료 시간");
-
+		
 		List<EnrollVO> list = enrollService.getEnrollList();
 		for (EnrollVO enroll : list) {
 			Row row = sheet.createRow(rowNo++);
@@ -226,27 +296,10 @@ public class EnrollController {
 		}
 
 		response.setContentType("ms-vnd/excel");
-		response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=enrollList.xls");
 
 		workbook.write(response.getOutputStream());
 		workbook.close();
-	}
-
-	/**
-	 * @description	수강 상세 페이지
-	 * @date	2023. 1. 16.
-	 * @author	Jin Lee
-	 * @param enrollId
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/details/{enrollId}", method=RequestMethod.GET)
-	public String getEnrollDetails(@PathVariable String enrollId, Model model) {
-		model.addAttribute("menu", "enroll");
-		model.addAttribute("menuKOR", "수강 관리");
-		EnrollVO enrollVo = enrollService.getEnrollDetails(enrollId);
-		model.addAttribute("enroll", enrollVo);
-		return "enroll/details";
 	}
 
 }

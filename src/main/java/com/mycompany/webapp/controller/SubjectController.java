@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.QuestionSetVO;
 import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 import com.mycompany.webapp.service.IEnrollService;
-import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
 import com.mycompany.webapp.service.ISurveyService;
@@ -295,7 +295,7 @@ public class SubjectController {
 		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
 		return subjectService.infoSubjectCourse(courseId, subjectId);
 	}
-
+	
 	//개설강좌 폐강처리
 	@RequestMapping(value="/closesubject/{subjectId}/{subjectSeq}")
 	public String closeSubject(@PathVariable String subjectId, @PathVariable int subjectSeq, @RequestParam(value="fileId", required=false) String fileId) {

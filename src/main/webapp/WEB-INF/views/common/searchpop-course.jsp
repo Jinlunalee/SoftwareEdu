@@ -34,7 +34,6 @@
                                     <option value="${catCourse.comnCd}">${catCourse.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
-                            </select>
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>

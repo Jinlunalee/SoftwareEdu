@@ -180,5 +180,55 @@
 		ORDER BY start_day, end_day
 	</select>
 	
+	<select id="searchOpenCourse" parameterType="CourseVO" resultType="CourseVO">
+	/*searchOpenCourse*/
+		select DISTINCT
+		    open.course_id,
+		    course_title,
+		    TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
+		    TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
+		    sum(cost) over (partition by open.course_id) as cost,
+		    TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+		    TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
+		    course.cat_cd as cat_course_cd,
+		    subject.reg_year
+		from open 
+		        left join subject on open.subject_id = subject.subject_id
+		        left join course on open.course_id = course.course_id
+		        left join common_code on open.state_cd = common_code.comn_cd
+		where open.course_id IS NOT NULL AND del_yn = 'N'
+		and open.state_cd in <![CDATA[('OPN02','OPN03','OPN04')]]>
+			<if test="courseId != null and !courseId.equals('') ">
+				AND open.course_id = #{courseId}
+			</if>
+			<if test="courseTitle != null and !courseTitle.equals('')">
+				AND (course_title = #{courseTitle} OR REPLACE (course_title, ' ', '') LIKE '%'||#{courseTitle}||'%')
+			</if>
+			<if test="catCourseCd != null and !catCourseCd.equals('')">
+				AND course.cat_cd = #{catCourseCd} 
+			</if>
+			<if test="regYear != 0">
+				AND subject.reg_year = #{regYear} 
+			</if>
+			<if test="stateCd != null and !stateCd.equals('')">
+			AND open.state_cd = #{stateCd}
+			</if>
+	</select>
 	
+<!-- 			select DISTINCT
+		    open.course_id,
+		    course_title,
+		    TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
+		    TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
+		    sum(cost) over (partition by open.course_id) as cost,
+		    TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+		    TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
+		    course.cat_cd as cat_course_cd,
+            subject.reg_year,
+            TO_CHAR(max(open.state_cd) over (partition by open.course_id)) as state_cd
+		from open 
+		        left join subject on open.subject_id = subject.subject_id
+		        left join course on open.course_id = course.course_id
+		        left join common_code on open.state_cd = common_code.comn_cd
+		where open.course_id IS NOT NULL AND del_yn = 'N'; -->
 </mapper>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 
@@ -34,4 +35,5 @@ public interface ISubjectService {
 	int closeSubject(String subjectId, int subjectSeq); //폐깡처리
 	
 	List<SubjectVO> selectSubjectByCourseId(String courseId);
+	List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year); // 
 }

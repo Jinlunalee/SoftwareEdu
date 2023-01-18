@@ -3,9 +3,18 @@ $(document).ready(function() {
 
 /* 검색조건 입력 후 버튼 클릭 시 검색 결과 리스트 출력 */
 const searchBtn = document.getElementById('search-btn'); // 검색 버튼
+searchBtn.addEventListener('click', bringValue);
 searchBtn.addEventListener('click', showList);
 
-function showList() { // 검색 결과 리스트 출력 함수
+/* 부모창에서 작성 해에 courseId에 등록된 강좌 리스트 가져오기 */
+function bringValue() {
+    const unavailablePop = document.getElementById('unavailable-pop'); // pop에 있는 hidden div
+    const subjectIdString = opener.document.getElementById('subjectId-string'); // 부모창에 있는 hidden input
+    $(subjectIdString).clone().appendTo(unavailablePop);
+}
+
+/* 검색 결과 리스트 출력 함수 */
+function showList() {
     const searchForm = document.getElementById('search-form'); // 검색 폼
     let formInputs = '';
     for(var i=1; i<searchForm.length-1; i++) {
@@ -23,8 +32,28 @@ function showList() { // 검색 결과 리스트 출력 함수
         var html = jQuery('<div>').html(result);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
+        if(path.substring(10,20)==='subject') {
+            disableSubjectList();
+        } else if (path.substring(10,20)==='course') {
+            
+        }
     })
+    
 }
+
+/* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
+function disableSubjectList() {
+    const subjectIdString = document.getElementById('subjectId-string').value;
+    const subjectIdArr = subjectIdString.split('/');
+    for(var i=0; i<subjectIdArr.length; i++) {
+        let id = String(subjectIdArr[i]);
+        let boardSubjectId = document.getElementById(id);
+        boardSubjectId.removeAttribute("onclick");
+        boardSubjectId.setAttribute("onclick", 'alert("이미 과정에 동일 강좌를 개설하였습니다.")');
+    }
+}
+
+
 
 /* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
 let subjectInput = document.getElementById('subject-input'); // input 태그
@@ -42,6 +71,9 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     }
 }
 
+
+
+
 /* ㅇㅇ명 클릭했을 시 팝업창 닫기 및 선택값 반영하기  */
 function moveOutside(event, value){
     event.preventDefault();
@@ -50,7 +82,7 @@ function moveOutside(event, value){
     let valueArr = value.split('/');
     let valueId = valueArr[0];
     console.log(valueId.substring(0,4));
-    // find()함수로 반영할 곳을 찾아서 값 반영하기
+    // find()함수로 반영할 곳을 찾아서 값 반영하기 - 강좌일 경우
     if(valueId.substring(0,4)==='SUBJ') {
         let valueTitle = valueArr[2];
         let reg = valueArr[3];
@@ -58,16 +90,73 @@ function moveOutside(event, value){
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
         console.log("it's subject");
+        window.close();
     }
+    // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
         $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  강좌명 : " + valueTitle);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
-        console.log("it's course");
+        
+        setUnavailableSubjectId(valueId); // 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+        // checkUnavailableSubjectId(); // insert.jsp에 set한 강좌리스트값이랑 선택된 강좌값이랑 비교 후 일치하면 강좌값 reset
     }
-
+    // 팝업창 닫기
     window.close();
-
     return false;
+}
+
+/* 작성 해에 courseId에 등록된 강좌 리스트 insert.jsp에 반영하기 */
+function setUnavailableSubjectId(valueId) {
+    const now = new Date();
+    const year = String(now.getFullYear());
+    console.log(valueId, year);
+    // 작성 해에 courseId에 등록된 강좌 리스트 가져오기
+    $.ajax({
+        url: 'selectOpenSubjectByCourseIdAndYear?courseId=' + valueId + '&year=' + year,
+        type: 'GET',
+        async : false,
+        success: function(result) {
+            console.log(result);
+            const count = Object.keys(result).length;
+            console.log(count);
+
+            // 강좌 리스트에 담긴 만큼 반복해서 insert.jsp #subjectId-string의 value에 반영하기
+            let subjectIdString = '';
+            for(var i=0; i<count; i++) {
+                subjectIdString += "/" + result[i].subjectId;
+            }
+            subjectIdString = String(subjectIdString).substring(1);
+            console.log(subjectIdString);
+            $(opener.document).find("#subjectId-string").val(subjectIdString);
+            
+            checkUnavailableSubjectId(result, count);
+        },
+        error : function () {
+            console.log("error");
+        }
+    })
+}
+
+/* insert.jsp에 set한 강좌리스트값이랑 선택된 강좌값이랑 비교 후 일치하면 강좌값 reset */
+function checkUnavailableSubjectId(result, count) {
+    console.log("checkUnavailableSubjectId")
+    console.log(result);
+    console.log(count);
+    const subjectIdInput = opener.document.getElementById('subjectId-input');  // insert.jsp에 선택된 subjectId
+    const subjectTitleInput = opener.document.getElementById('subjectTitle-input');
+    const subjectInput = opener.document.getElementById('subject-input');
+    for(var i=0; i<count; i++) {
+        console.log("for");
+        if(result[i].subjectId===subjectIdInput.value) { // 강좌리스트에 insert.jsp에 선택된 subjectId가 있을 경우
+            console.log("if");
+            console.log(result[i].subjectId);
+            subjectIdInput.removeAttribute("value");
+            subjectTitleInput.value=null;
+            subjectTitleInput.setAttribute("placeholder", "강좌를 다시 선택해주세요.");
+            subjectInput.removeAttribute("value");
+            alert("해당 과정에는 이미 선택하신 강좌가 존재합니다.\n강좌를 다시 선택해주세요.");
+        }
+    }
 }

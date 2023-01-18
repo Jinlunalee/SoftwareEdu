@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.CourseVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
+import com.mycompany.webapp.service.ISubjectService;
 
 @RequestMapping
 @Controller
@@ -28,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	IPagerService pagerService;
+	
+	@Autowired
+	ISubjectService subjectService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -176,5 +182,58 @@ public class HomeController {
 		return "common/searchpop-opensubject-result";
 	}
 	
+	/**
+	 * @description	개설과정 검색 팝업
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param model
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/searchpop-opencourse")
+	public void searchPopOpenCourse(Model model) throws Exception{
+		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		model.addAttribute("catCourseList", homeService.getComnCdList("CRS"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	개설과정 검색 팝업 : 결과
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param courseVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/searchpop-opencourse-result", produces = "application/text; charset=UTF-8")
+	public String searchPopOpenCourseResult(CourseVO courseVo, Model model) throws Exception{
+		System.out.println(courseVo);
+		
+		List<CourseVO> openCourseList = homeService.searchOpenCourse(courseVo);
+		
+		// ajax로 구현할 것
+		if(!openCourseList.isEmpty()) {
+			model.addAttribute("boardList",openCourseList);	// 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
+		}
+		
+		return "common/searchpop-opencourse-result";
+	}
+	
+	/**
+	 * @description	작성 해에 courseId에 등록된 강좌 리스트 가져오기
+	 * @date	2023. 1. 17.
+	 * @author	Jin Lee
+	 * @param courseId
+	 * @param year
+	 * @return
+	 */
+	@GetMapping(value="/common/selectOpenSubjectByCourseIdAndYear")
+	@ResponseBody
+	public List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year) {
+		List<OpenVO> boardList = subjectService.selectOpenSubjectByCourseIdAndYear(courseId, year);
+		logger.info("getSubjectListFromCourseId: " + boardList);
+		return boardList;
+	}
 }
 
