@@ -6,7 +6,7 @@
 
 
 
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>" />
 
 <div class="card m-2">
 	<div class="card-header">
