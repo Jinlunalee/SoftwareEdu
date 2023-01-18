@@ -21,6 +21,7 @@ public class EnrollVO {
 	private String stateCd;	// 수강상태 공통코드
 	private String stateCdTitle;	// 수강상태 공통코드명
 	private int completeHours;
+	private String enroll_dt; //
 	private String regId;
 	private String regDt;
 	private String modiId;

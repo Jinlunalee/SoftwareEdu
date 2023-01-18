@@ -173,28 +173,6 @@ public class SubjectService implements ISubjectService{
 		logger.info("service/infoSubjectCourse/list: " + map);
 		return map;
 	}
-//	public List<SubjectVO> infoSubjectCourse(String courseId, String subjectId) {
-//		List<SubjectVO> list = new ArrayList<>(); //이렇게 초기화해주기 꼭 
-//		int check = subjectRepository.checkOpenCourse(courseId); //과정 개설 여부 확인
-//		
-//		logger.info("service/infoSubjectCourse/check : " + check);
-//		
-//		if("".equals(courseId)) { // 과정 입력 X
-//			logger.info("coursId X");
-//			list.add(subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
-//		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)
-//			logger.info("coursId O");
-//			if(check == 0) { //최초개설
-//				list.add(subjectRepository.infoSubject(subjectId));// 신청일자를 가져올 필요없으므로 강좌에 대한 정보만 가져옴
-//			}else { //개설되어있는 경우
-//				list.add(subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
-//				list.add(subjectRepository.infoSubject(subjectId)); //강좌에 대한 정보 가져오기
-////				list.add(subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
-//			}
-//		}
-//		logger.info("service/infoSubjectCourse/list: " + list);
-//		return list;
-////	}
 		
 		////////////////////////////////////
 //		VO로 데이터 전송

@@ -27,11 +27,27 @@
                                 <option value="courseTitle">과정명</option>
                             </select>
                             <input type="text" id="course-input" name="courseId">
+                            상태 : 
+                            <select name="stateCd">
+                                <option value="">전체</option>
+                                <c:forEach items="${stateList}" var="state">
+                                    <c:if test="${(state.comnCd eq 'OPN02') or (state.comnCd eq 'OPN03') or (state.comnCd eq 'OPN04')}">
+                                    <option value="${state.comnCd}">${state.comnCdTitle}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
                             분류 : 
                             <select name="catCourseCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${catCourseList}" var="catCourse">
                                     <option value="${catCourse.comnCd}">${catCourse.comnCdTitle}</option>
+                                </c:forEach>
+                            </select>
+                            등록년도 :
+                            <select name="regYear">
+                                <option value="0">전체</option>
+                                <c:forEach var="i" begin="2019" end="2020">
+                                    <option value="${i}">${i}</option>
                                 </c:forEach>
                             </select>
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>

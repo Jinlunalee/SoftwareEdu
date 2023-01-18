@@ -16,7 +16,7 @@ public interface IHomeService {
 	List<SubjectVO> searchSubject(SubjectVO subjectVo);
 	List<CourseVO> searchCourse(CourseVO courseVo);
 	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
-//	List<SubjectVO> searchOpenSubject();
+	List<CourseVO> searchOpenCourse(CourseVO courseVo);
 	
 //	List<String> getColumnName(String searchType, List<Map<String, Object>> searchParam);
 }
