@@ -36,9 +36,6 @@ public class DataController {
 	 * 2023. 1. 13. modify.......
 
 	 */
-	
-	
-	
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public String getDataList(Model model) {
 		model.addAttribute("menu", "data");
@@ -128,27 +125,17 @@ public class DataController {
 		return resultJsonSbjStr;
 	}	
 	
-	
-	
-/*	
-	
-	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
-		
-		List<StudentVO> dataList = dataService.getDataList(startDay, endDay);	
-			String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
-			return result;
-	}
-*/	
 
+	
+	
+// 수정중 2023.01.19  오후 2시 20분 
 	@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	public @ResponseBody String getxmlSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
+	public @ResponseBody List<SubjectVO> getxmlSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
 		
  
 		List<SubjectVO> sbjDataList = dataService.getSbjDataList(startDay, endDay);
-		String resultXmlStr = "";
+//		String resultXmlStr = "";
 						
-		return resultXmlStr;
+		return sbjDataList;
 	}
 }

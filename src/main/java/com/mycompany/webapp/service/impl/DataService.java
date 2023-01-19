@@ -51,7 +51,7 @@ public class DataService implements IDataService{
 	 */
 
 
-	// xml
+	// 학생xml
 	@Override
 	public List<StudentVO> getDataList(String startDay, String endDay) {
 

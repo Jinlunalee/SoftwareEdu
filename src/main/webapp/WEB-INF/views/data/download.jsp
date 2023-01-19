@@ -41,7 +41,7 @@ overflow-x: scroll;
 
 .vl {
 	border-left: 1.5px dotted #bdc3c8;
-	height: 550px;
+	height: 700px;
 	position: absolute;
 	left: 620px;
 	margin-left: 3px;
@@ -202,7 +202,8 @@ overflow-x: scroll;
 		<div class="second_card">
 			<div class="card_check">
 				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
+				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료
+				<br>(검색조건은 강좌시작일)<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="third_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -426,10 +427,10 @@ overflow-x: scroll;
 					str += '<send_dt>' + data[i].sendDt + '</send_dt>';
 					str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
 					str += '</subject>';   
-				
+
+	                $("#result4").text(str);
 				}
 
-				$("#result4").text(str);
 			}
 		});
 	}
