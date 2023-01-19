@@ -272,7 +272,7 @@
 		    phone, 
 		    add_do_cd, 
 		    add_etc, 
-		    position_cd,
+		    position,
 		    cancel_rs_etc 
 		FROM enroll
 		INNER JOIN subject
