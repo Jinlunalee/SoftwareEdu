@@ -67,6 +67,6 @@ public class EnrollVO {
     private String addDoCd;	// 수강생 주소 공통코드
     private String addDoCdTitle;	// 수강생 주소 공통코드명
     private String addEtc;	// 수강생 주소 기타
-    private String positionCd;	// 수강생 구분 공통코드
+    private String position;	// 수강생 구분 공통코드
     private String positionCdTitle;	// 수강생 구분 공통코드명
 }
