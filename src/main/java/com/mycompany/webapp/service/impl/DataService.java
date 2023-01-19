@@ -51,7 +51,7 @@ public class DataService implements IDataService{
 	 */
 
 
-	// xml
+	// 학생xml
 	@Override
 	public List<StudentVO> getDataList(String startDay, String endDay) {
 
@@ -63,7 +63,7 @@ public class DataService implements IDataService{
 	@Override
 	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
 	
-		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
+//		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
 		/* 
 		String result = "";
 	
@@ -83,6 +83,7 @@ public class DataService implements IDataService{
 	
 		}
 		*/
+		System.out.println("dataservice : " + dataRepository.getSbjDataList(startDay, endDay));
 		return dataRepository.getSbjDataList(startDay, endDay);
 	}
 

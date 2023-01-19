@@ -36,9 +36,6 @@ public class DataController {
 	 * 2023. 1. 13. modify.......
 
 	 */
-	
-	
-	
 	@RequestMapping(value="/download", method=RequestMethod.GET)
 	public String getDataList(Model model) {
 		model.addAttribute("menu", "data");
@@ -109,46 +106,30 @@ public class DataController {
 	
 	
 	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
-	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
-		
-		
+	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay){
 		
 		String resultJsonSbjStr = dataService.getDataGson(startDay, endDay);
-	
-//		String startDay = vo.getStartDay();
-//		String endDay = vo.getEndDay();
-//		
-//		vo.setStartDay(vo.getStartDay().replaceAll("-", ""));
-//		vo.setEndDay(vo.getEndDay().replaceAll("-", ""));
-//		
-//		vo.setStartDay(startDay);
-//		vo.setEndDay(endDay);
-		
 		
 		return resultJsonSbjStr;
 	}	
 	
-	
-	
-/*	
-	
-	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
-		
-		List<StudentVO> dataList = dataService.getDataList(startDay, endDay);	
-			String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
-			return result;
-	}
-*/	
 
+	
+	
+// 수정중 2023.01.19  오후 2시 30분 
 	@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	public @ResponseBody String getxmlSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
+	public @ResponseBody List<SubjectVO> getxmlSbj(SubjectVO subjectVo, @RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay) {
 		
- 
+		
+		
+		
+		startDay.replaceAll("-", "");
+		endDay.replaceAll("-", "");
+		
 		List<SubjectVO> sbjDataList = dataService.getSbjDataList(startDay, endDay);
-		String resultXmlStr = "";
-						
-		return resultXmlStr;
+		
+//		String resultXmlStr = "";
+						System.out.println("controller : " + sbjDataList);
+		return sbjDataList;
 	}
 }

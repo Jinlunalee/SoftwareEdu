@@ -98,7 +98,7 @@
 						</div>
 					</td>
 				</tr>			
-			</table>  <!-- 얘가 74번째 줄로 들어가야 하는 거 아닌가? -->
+			</table>
 		</div>
 	</div>
 </div>
@@ -119,44 +119,7 @@
 		}
 
 	</script>
-	<!-- 
-	<script>
-		$("#modal_open_btn").click(function() {
-			$("#modal").attr("style", "display:block");
-		});
 
-		$("#modal_close_btn").click(function() {
-			$("#modal").attr("style", "display:none");
-		});
-	</script>
-	<script>
-	function del() {
-		if(confirm('수강생 정보를 삭제하시겠습니까?') == true) {
-			console.log('삭제')
-		} else {
-			console.log('취소')
-		}
-	}
-	
-	 -->
-	</script>
-	<!-- <script>
-		function changeRowsPerPage(value) {
-			var pageNo = "${pager.pageNo}";
-			console.log("pageNo: "+ pageNo);
-			console.log("rowsPerPage: " + value);
-			$.ajax({
-				url : "boardList?pageNo=" + pageNo + "&rowsPerPage=" + value, 
-				type : "GET",
-				success : function() {
-					
-					console.log("RowsPerPage is working");
-					
-				}
-			})
-		}
-	</script> -->
-</div>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

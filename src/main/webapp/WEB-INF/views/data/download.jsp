@@ -11,14 +11,15 @@ img {
 }
 
 .card {
-overflow-x: scroll;
+	overflow-x: scroll;
+}
 
+.card {
+	-ms-overflow-style: none;
 }
-.card{
-   -ms-overflow-style: none;
-}
-.card::-webkit-scrollbar{
-  display:none;
+
+.card::-webkit-scrollbar {
+	display: none;
 }
 
 .card_check {
@@ -41,7 +42,7 @@ overflow-x: scroll;
 
 .vl {
 	border-left: 1.5px dotted #bdc3c8;
-	height: 550px;
+	height: 700px;
 	position: absolute;
 	left: 620px;
 	margin-left: 3px;
@@ -74,7 +75,7 @@ overflow-x: scroll;
 	height: 600px;
 	font-size: 15px;
 	position: relative;
-    top: -80px;
+	top: -80px;
 }
 
 .box {
@@ -85,66 +86,64 @@ overflow-x: scroll;
 	display: none;
 }
 
-#studentInfo{
-    color: slategrey;
+#studentInfo {
+	color: slategrey;
 }
-
 
 .second_card {
-    margin-top: 60px;
+	margin-top: 60px;
 }
 
-.card_info{
-    text-align: center;
-    margin: 10px;
-    width: 600px;
-    height: 120px;
-    border: 2px solid #95b3d4;
-    display: none;
-
-}
-#first_info{
-    font-size: 12px;
-    color: slategrey;
+.card_info {
+	text-align: center;
+	margin: 10px;
+	width: 600px;
+	height: 120px;
+	border: 2px solid #95b3d4;
+	display: none;
 }
 
+#first_info {
+	font-size: 12px;
+	color: slategrey;
+}
 
 .input-date {
-    width: 170px;
-    height: 45px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
+	width: 170px;
+	height: 45px;
+	border-radius: 8px;
+	margin: 0 10px;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
 }
 
 .input-button {
-    display: inline-block;
-    width: 80px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: relative;
-    left: 270px;
-    bottom: 41px;
+	display: inline-block;
+	width: 80px;
+	height: 45px;
+	line-height: 45px;
+	border-radius: 8px;
+	color: #fff;
+	background-color: #003964;
+	position: relative;
+	left: 270px;
+	bottom: 41px;
 }
+
 .search {
-    width: 620px;
-    text-align: center;
-    background-color: #f7f7f7;
-    padding-top: 12px;
-    height: 70px;
-    position: relative;
-    left: -500px
+	width: 620px;
+	text-align: center;
+	background-color: #f7f7f7;
+	padding-top: 12px;
+	height: 70px;
+	position: relative;
+	left: -500px
 }
 
-.data-period{
-    position: relative;
-    left: -20px;
+.data-period {
+	position: relative;
+	left: -20px;
 }
-
 </style>
 
 
@@ -154,153 +153,154 @@ overflow-x: scroll;
 			src="<c:url value='/resources/images/home_small.png'/>" />
 		<div>
 			> 연계 자료 관리 > <span class="submenu-title">연계 자료 조회 </span>
-		</div> 
+		</div>
 	</div>
 	<div class="card-body">
 		<br>
-        <%-- 연계자료 기간으로 검색  --%>
-        <div class="search">
-        <form name="sc-form" action="<c:url value='/download/getjsonSbj'/>">
-        <%--연계자료 기간 --%>
-            <div class="data-period" >
-            <span id="dataperiod">기간별 자료</span>
-            <input type="date" name="startDay" id="input_startDay" class="input-date" onclick = "getJson" value="${startDay}"> ~
-            <input type="date" name="endDay" id="input_endDay" class="input-date" value="${endDay}">
-            </div>
-         </form>
-         </div>
-         
-         
-         
-            
+		<%-- 연계자료 기간으로 검색  --%>
+		<div class="search">
+			<form name="sc-form" >
+				<%--연계자료 기간 --%>
+				<div class="data-period">
+					<span id="dataperiod">기간별 자료</span> <input type="date"
+						name="startDay" id="input_startDay" class="input-date"
+						onclick="getJson" value="${startDay}"> ~ <input
+						type="date" name="endDay" id="input_endDay" class="input-date"
+						value="${endDay}">
+				</div>
+			</form>
+		</div>
+
+
+
+
 		<div class="card_left" style="width: 50%">
-		<div class="first_card">
-		
-		
-			<div class="card_check">
-				<img id="check_img"
-					src="<c:url value='/resources/images/json.png'/>" /> 
-					<br><a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보  (검색조건은 std_sbj에 있는 강좌 교육일로)<br>(수강 완료 시수 포함)</a>
-				<button type="button" class="btn btn-outline-secondary"
-					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
-				</button>
-			</div>
+			<div class="first_card">
 
 
-			<div class="card_check">
-				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
-				<button type="button" class="btn btn-outline-secondary"
-					id="second_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" /><br>
-
-				</button>
-			</div>
-		</div>
-
-
-
-		<div class="second_card">
-			<div class="card_check">
-				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
-				<button type="button" class="btn btn-outline-secondary"
-					id="third_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
-				</button>
-			</div>
-			
-			
-			
-			<div class="card_check">
-				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" />
-				<br> <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)</a>
-				<button type="button" class="btn btn-outline-secondary"
-					id="forth_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
-				</button>
-			</div>			
-			</div>
-		</div>
-		
-		
-		<div class="vl"></div>
-
-		<div class="card_right">
-		
-		  <div class ="card_info" id="show_info1">
-		      <a id="first_info" class="first_info">
-                * agent_id : 훈련기관ID<br>
-                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-                * name : 수강생 이름<br>
-                * complete_hours : 수강완료시수<br>
-                * send_dt : 전송시간<br>
-		      </a>
-		  </div>
-		  
-		  <div class ="card_info" id="show_info2">
-              <a id="first_info" class="first_info">
-                * agent_id : 훈련기관ID<br>
-                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-                * name : 수강생 이름<br>
-                * complete_hours : 수강완료시수<br>
-                * send_dt : 전송시간<br>
-              </a>
-          </div>
-          
-          <div class ="card_info" id="show_info3">
-              <a id="first_info" class="first_info">
-                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
-                * subject_title : 강좌 이름<br>
-                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-                * cnt_std : 수강 완료 된 수강생 수<br>
-                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
-                * end_day : 강좌 마감 일자<br>
-                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-                * send_dt : 전송시간<br>
-              </a>
-          </div>
-          
-          <div class ="card_info" id="show_info4">
-              <a id="first_info" class="first_info">
-                * sbjId_seq : 강좌아이디, 강좌시퀀스 &emsp; &emsp; &emsp; &emsp;
-                * subject_title : 강좌 이름<br>
-                * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-                * cnt_std : 수강 완료 된 수강생 수<br>
-                * start_day : 강좌 시작 일자 &emsp; &emsp; &emsp; &emsp;
-                * end_day : 강좌 마감 일자<br>
-                * cost : 교육비 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-                * send_dt : 전송시간<br>
-              </a>
-          </div>
+				<div class="card_check">
+					<img id="check_img"
+						src="<c:url value='/resources/images/json.png'/>" /> <br>
+					<a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보 (검색조건은 std_sbj에
+						있는 강좌 교육일로)<br>(수강 완료 시수 포함)
+					</a>
+					<button type="button" class="btn btn-outline-secondary"
+						id="first_btn">
+						연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					</button>
+				</div>
 
 
-			<div class="box" id="show_JSON" style="overflow:scroll;">
-				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" /><br>
+				<div class="card_check">
+					<img id="check_img"
+						src="<c:url value='/resources/images/xml.png'/>" /> <br> <a>연수원_교육비
+						지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)
+					</a>
+					<button type="button" class="btn btn-outline-secondary"
+						id="second_btn">
+						연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" /><br>
 
-				<div id="result">
-
-
+					</button>
 				</div>
 			</div>
 
-			<div class="box" id="show_XML" style="overflow:scroll;">
-				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
-				<div id="resultXml">
-				</div>			
+
+
+			<div class="second_card">
+				<div class="card_check">
+					<img id="check_img"
+						src="<c:url value='/resources/images/json.png'/>" /> <br> <a>연수원_교육비
+						환급 대상 교육과정 최종 검증용 연계자료 <br>(검색조건은 강좌시작일)<br>(수강 완료 시수
+						포함)
+					</a>
+					<button type="button" class="btn btn-outline-secondary"
+						id="third_btn">
+						연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					</button>
+				</div>
+
+
+
+				<div class="card_check">
+					<img id="check_img"
+						src="<c:url value='/resources/images/xml.png'/>" /> <br> <a>연수원_교육비
+						환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)
+					</a>
+					<button type="button" class="btn btn-outline-secondary"
+						id="forth_btn">
+						연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="vl"></div>
+
+		<div class="card_right">
+
+			<div class="card_info" id="show_info1">
+				<a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
+					* std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
+					* name : 수강생 이름<br> * complete_hours : 수강완료시수<br> *
+					send_dt : 전송시간<br>
+				</a>
+			</div>
+
+			<div class="card_info" id="show_info2">
+				<a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
+					* std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
+					* name : 수강생 이름<br> * complete_hours : 수강완료시수<br> *
+					send_dt : 전송시간<br>
+				</a>
+			</div>
+
+			<div class="card_info" id="show_info3">
+				<a id="first_info" class="first_info"> * sbjId_seq : 강좌아이디,
+					강좌시퀀스 &emsp; &emsp; &emsp; &emsp; * subject_title : 강좌 이름<br>
+					* hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; *
+					cnt_std : 수강 완료 된 수강생 수<br> * start_day : 강좌 시작 일자 &emsp;
+					&emsp; &emsp; &emsp; * end_day : 강좌 마감 일자<br> * cost : 교육비
+					&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; * send_dt : 전송시간<br>
+				</a>
+			</div>
+
+			<div class="card_info" id="show_info4">
+				<a id="first_info" class="first_info"> * sbjId_seq : 강좌아이디,
+					강좌시퀀스 &emsp; &emsp; &emsp; &emsp; * subject_title : 강좌 이름<br>
+					* hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; *
+					cnt_std : 수강 완료 된 수강생 수<br> * start_day : 강좌 시작 일자 &emsp;
+					&emsp; &emsp; &emsp; * end_day : 강좌 마감 일자<br> * cost : 교육비
+					&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; * send_dt : 전송시간<br>
+				</a>
 			</div>
 
 
-			<div class="box" id="show_JSON2" style="overflow:scroll;">
-				<img id="check_img" src="<c:url value='/resources/images/json.png'/>" /><br>
-				<div id="result3">
-				</div>	
-			</div>		
-				
-				
-			<div class="box" id="show_XML2" style="overflow:scroll;">
-				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
-				<div id="result4">
-				</div>		
+			<div class="box" id="show_JSON" style="overflow: scroll;">
+				<img id="check_img"
+					src="<c:url value='/resources/images/json.png'/>" /><br>
+
+				<div id="result"></div>
 			</div>
-			
+
+			<div class="box" id="show_XML" style="overflow: scroll;">
+				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
+				<div id="resultXml"></div>
+			</div>
+
+
+			<div class="box" id="show_JSON2" style="overflow: scroll;">
+				<img id="check_img"
+					src="<c:url value='/resources/images/json.png'/>" /><br>
+				<div id="result3"></div>
+			</div>
+
+
+			<div class="box" id="show_XML2" style="overflow: scroll;">
+				<img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
+				<div id="result4"></div>
+			</div>
+
 		</div>
 	</div>
 </div>
@@ -411,6 +411,7 @@ overflow-x: scroll;
              },
 			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
+				console.log(data);
 
 				var str = "";
 				for (var i = 0; i < data.length; i++) {
@@ -426,11 +427,13 @@ overflow-x: scroll;
 					str += '<send_dt>' + data[i].sendDt + '</send_dt>';
 					str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
 					str += '</subject>';   
-				
+					
+	                $("#result4").text(str);
 				}
-
-				$("#result4").text(str);
-			}
+			},
+             error : function(){
+            	 console.log("error");
+             }
 		});
 	}
 
