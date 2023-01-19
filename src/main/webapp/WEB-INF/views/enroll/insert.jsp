@@ -46,7 +46,7 @@
 						<button class="open-subject-popup-btn btn3 btn-outline-secondary">검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
-						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요." onchange="getOpenList()">
 						<input id="course-input" name="subject" type="hidden">
 						<input id="state-input" name="state" type="hidden">
 						<button class="open-course-popup-btn btn3 btn-outline-secondary">검색</button>
@@ -149,6 +149,12 @@
 
 	// subject/course 정보 가져오기
 	function getOpenList() {
+		const courseInput = document.getElementById('course-input');
+		const stateInput = document.getElementById('state-input'); 
+		console.log('aaaaaaaaaa');
+		console.log(courseInput);
+		console.log(stateInput);
+
 		$.ajax({
 			type : 'GET',
 			url : 'openlist', 
