@@ -27,9 +27,9 @@
 			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
 			<select class="select-view" onchange="listCount(this.value)">
 				<option value="">선택</option>
-				<option value="10">10개</option>
-				<option value="30">30개</option>
-				<option value="50">50개</option>
+				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
+				<option value="30" ${rowsPerPage eq '30'?"selected":""}>30개</option>
+				<option value="50" ${rowsPerPage eq '50'?"selected":""}>50개</option>
 			</select>
 		</div>
 

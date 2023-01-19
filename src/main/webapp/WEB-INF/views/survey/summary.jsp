@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				<div class="down">
-					<button type="button" onclick="downloadExcel()">
+					<button class="downBtn" type="button" onclick="downloadExcel()">
 						<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>" />
 					</button>
 				</div>		

@@ -6,8 +6,8 @@
 <div id="page-list">
 	<div class="list_top">
 		<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 페이지<b
-				class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 		</div>
 	</div>
 	
@@ -15,7 +15,7 @@
 		<thead>
 			<tr>
 				<c:choose>
-				<c:when test="${check eq 'subject'}">
+				<c:when test="${menu eq 'subject'}">
 					<th>강좌아이디</th>
 					<th>과정명</th>
 					<th>강좌명</th>
@@ -45,7 +45,7 @@
 				<c:forEach var="board" items="${boardList}">
 					<tr>
 						<c:choose>
-							<c:when test="${check eq 'subject'}">
+							<c:when test="${menu eq 'subject'}">
 								<td>${board.subjectId}</td>
 								<td>${board.courseTitle}</td>
 								<td><span> 

@@ -85,6 +85,7 @@ public class SubjectController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
 		logger.info("OpenCourseBoardList: " + boardList);
 
 		return "subject/courselist";
@@ -124,6 +125,7 @@ public class SubjectController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
 		logger.info("boardList: " + boardList);
 
 		return "subject/subjectlist";
@@ -321,7 +323,6 @@ public class SubjectController {
 			@RequestParam(defaultValue="all") String catSubject, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
-		model.addAttribute("check", "subject");
 		
 		logger.info("strRowPerPage:"+strRowsPerPage);
 		

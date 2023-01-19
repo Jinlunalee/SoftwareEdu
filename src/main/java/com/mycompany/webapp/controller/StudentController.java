@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,17 +32,17 @@ public class StudentController {
 	IPagerService pagerService;
 	
 	//목록조회
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String getStudentList(Model model) {
-		model.addAttribute("menu", "student");
-		model.addAttribute("menuKOR", "수강생 관리");
-		
-		List<StudentVO> boardList = studentService.getStudentList();
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size());
-		logger.info("boardList: " + boardList);
-		return "student/list";
-	}
+//	@RequestMapping(value="/list", method=RequestMethod.GET)
+//	public String getStudentList(Model model) {
+//		model.addAttribute("menu", "student");
+//		model.addAttribute("menuKOR", "수강생 관리");
+//		
+//		List<StudentVO> boardList = studentService.getStudentList();
+//		model.addAttribute("boardList", boardList);
+//		model.addAttribute("boardListSize", boardList.size());
+//		logger.info("boardList: " + boardList);
+//		return "student/list";
+//	}
 
 	// paging 목록조회
 	@GetMapping("/boardlist")
@@ -62,9 +63,10 @@ public class StudentController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
 		logger.info("boardList: " + boardList);
-		System.out.println("boardList.size: " +boardList.size());
-		System.out.println("pager.endPageNo: " + pager.getEndPageNo());
+		logger.info("boardList.size: " +boardList.size());
+		logger.info("pager.endPageNo: " + pager.getEndPageNo());
 		
 		return "student/list";
 	}
@@ -116,5 +118,42 @@ public class StudentController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertStudent(StudentVO studentVo) {
 		return "redirect:/student/details"+studentVo.getStudentId();
+	}
+	
+	/**
+	 * @Description :paging 수강생 목록 조회 - ajax
+	 * @author KOSA
+	 * @date 2023. 1. 19.
+	 * @param strPageNo
+	 * @param strRowsPerPage
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/ajaxstudentlist")
+	public String ajaxStudentList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, Model model) {
+		model.addAttribute("menu", "student");
+		model.addAttribute("menuKOR", "수강생 관리");
+		
+		int pageNo = Integer.parseInt(strPageNo);
+		int rowsPerPage = Integer.parseInt(strRowsPerPage);		
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountStudentRow();
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<StudentVO> boardList = pagerService.selectStudentListByPage(pager);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		logger.info("boardList: " + boardList);
+		logger.info("boardList.size: " +boardList.size());
+		logger.info("pager.endPageNo: " + pager.getEndPageNo());
+		
+		return "student/studentlist-result";
 	}
 }

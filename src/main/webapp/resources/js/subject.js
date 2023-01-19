@@ -369,16 +369,17 @@ function inputState(){
 }
 
 //*페이지별 개수 선택 유지(subject) - ajax*/
-function listCount(obj) { // 검색 결과 리스트 출력
-	let strRowsPerPage = obj;
-	console.log(strRowsPerPage);
+function listCount(RowsPerPage) { // 검색 결과 리스트 출력
+	console.log(RowsPerPage);
 	$.ajax({
-		url: "ajaxsubjectboardlist?strRowsPerPage="+strRowsPerPage,
+		url: "ajaxsubjectboardlist?strRowsPerPage="+RowsPerPage,
 		type: "POST"
 	}).done(function (result) {
 		console.log('success');
 		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
-		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
+		console.log(html);
+		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택/끼워넣을 jsp
+		console.log(contents);
 		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
 	}).fail(function(){
 		console.log('fail');
@@ -386,11 +387,10 @@ function listCount(obj) { // 검색 결과 리스트 출력
 }
 
 //*페이지별 개수 선택 유지(course) - ajax*/
-function listCount2(obj) { // 검색 결과 리스트 출력
-	let strRowsPerPage = obj;
-	console.log(strRowsPerPage);
+function listCount2(RowsPerPage) { // 검색 결과 리스트 출력
+	console.log(RowsPerPage);
 	$.ajax({
-		url: "ajaxcourseboardlist?strRowsPerPage="+strRowsPerPage,
+		url: "ajaxcourseboardlist?strRowsPerPage="+RowsPerPage,
 		type: "POST"
 	}).done(function (result) {
 		console.log('success');

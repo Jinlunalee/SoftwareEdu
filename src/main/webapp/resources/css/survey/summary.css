@@ -66,3 +66,14 @@
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
 }
+.down {
+    float: right;
+}
+.downBtn {
+	border: 0;
+    background-color: transparent;
+}
+.excelimg {
+	width: 140px;
+    height: 37px;
+}
