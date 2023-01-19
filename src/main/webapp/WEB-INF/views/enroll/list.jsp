@@ -26,7 +26,8 @@
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span> <select name="course" class="select-box">
+					<span id="selectsubcor">강좌 과정 구분</span>
+					<select name="course" class="select-box">
 						<option value="">강좌/과정</option>
 						<option value="sj">강좌</option>
 						<option value="cs">과정</option>
@@ -47,7 +48,8 @@
 
 				<%-- 수강 상태 선택 --%>
 				<div class="state">
-					<span>수강 상태</span> <select name="state" class="select-box">
+					<span>수강 상태</span>
+					<select name="state" class="select-box">
 						<option value="">수강 상태</option>
 						<option value="expect">수강 예정</option>
 						<option value="progress">수강 중</option>
@@ -62,9 +64,6 @@
 
 		<div class="list_top">
 			<div class="cnt">
-				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-				페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
-				
 				<%-- 뷰 갯수 --%>
 				<div class="view">
 					<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강추가</button>
@@ -74,6 +73,8 @@
 						<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
 					</select>
 				</div>
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+				페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
 			</div>
 		</div>
 

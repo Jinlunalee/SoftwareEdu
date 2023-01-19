@@ -64,7 +64,6 @@
 
 	<div class="list_top">
 		<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
 			<%-- 뷰 갯수 --%>
 			<div class="view">
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강추가</button>
@@ -74,6 +73,8 @@
 					<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=50&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">50개</option>
 				</select>
 			</div>
+			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+			페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
 		</div>
 	</div>
 

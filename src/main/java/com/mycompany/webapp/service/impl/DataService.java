@@ -53,36 +53,38 @@ public class DataService implements IDataService{
 
 	// 학생xml
 	@Override
-	public List<StudentVO> getDataList(String startDay, String endDay) {
+	public String getDataList(String startDay, String endDay) {
+			List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
+		
+		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
+		for (StudentVO vo : dataList) {	
+			String agentId = vo.getAgentId();
+			String stdSbj = vo.getStdSbj();
+			String name = vo.getName();
+			String completeHours = vo.getCompleteHours();
+			String sendDt = vo.getSendDt();
+		
+			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
+			// +=로 문자열을 이어붙이기
+        result += "<student>";
+        result += "<agent_id>" + "KOSA01" + "</agent_id>";
+        result += "<std_sbj>"+ stdSbj +"</std_sbj>";
+        result += "<name>" + name + "</name>";
+        result +=  "<complete_hours>" + completeHours + "</complete_hours>";
+        result +=  "<send_dt>" + sendDt + "<send_dt>";
+        result +=  "</student>"; 
+//        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
+//        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
+		}
 
 
-		return dataRepository.getDataList(startDay, endDay);
+		return result;
 	}
 
 	// 강좌 xml
 	@Override
 	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
 	
-//		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
-		/* 
-		String result = "";
-	
-		for (SubjectVO vo : sbjdataList) {
-
-			result += "<subject>";
-			result += "<sbjId_seq>" + vo.getSbjIdSeq() + "</sbjId_seq>";
-			result += "<subject_title>" + vo.getSubjectTitle()
-			+ "</subject_title>";
-			result += "<hours>" + vo.getHours() + "</hours>";
-			result += "<start_day>" + vo.getStartDay() + "</start_day>";
-			result += "<end_day>" + vo.getEndDay() + "</end_day>";
-			result += "<cost>" + vo.getCost() + "</cost>";
-			result += "<send_dt>" + vo.getSendDt() + "</send_dt>";
-			result += "<cnt_std>" + vo.getCntStd() + "명" + "</cnt_std>";
-			result += "</subject>"; 
-	
-		}
-		*/
 		System.out.println("dataservice : " + dataRepository.getSbjDataList(startDay, endDay));
 		return dataRepository.getSbjDataList(startDay, endDay);
 	}
