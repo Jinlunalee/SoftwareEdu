@@ -366,7 +366,7 @@ img {
 	               sDay : startDay,
 	               eDay : endDay
 	            },
-			contentType : "application/xml; charset:UTF-8",
+			contentType : "application/text; charset:UTF-8", 
 			success : function(data) {
 
 				$("#resultXml").text(data);
@@ -409,7 +409,7 @@ img {
                 sDay : startDay,
                 eDay : endDay
              },
-			contentType : "application/xml; charset:UTF-8",
+			//contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
 				console.log(data);
 
