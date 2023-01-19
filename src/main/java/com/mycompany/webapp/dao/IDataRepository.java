@@ -12,7 +12,7 @@ import com.mycompany.webapp.dto.SubjectVO;
 public interface IDataRepository {
 
 	List<StudentVO> getDataList(@Param("startDay")String startDay, @Param("endDay")String endDay);  // 연계자료 목록 조회
-	List<SubjectVO> getSbjDataList();
+	List<SubjectVO> getSbjDataList(@Param("startDay")String startDay, @Param("endDay")String endDay);
 	
 	// 밑에 추가
 	/*

@@ -72,9 +72,9 @@ public class DataController {
 	
 	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
-	public String getxml(Model model) {
+	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
 		
-		List<StudentVO> dataList = dataService.getDataList();
+		List<StudentVO> dataList = dataService.getDataList(startDay, endDay);
 		
 		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
 		for (StudentVO vo : dataList) {	
@@ -109,26 +109,46 @@ public class DataController {
 	
 	
 	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
-	public @ResponseBody String getjsonSbj(SubjectVO vo){
-		
-		String startDay = vo.getStartDay();
-		String endDay = vo.getEndDay();
-		
-		vo.setStartDay(vo.getStartDay().replaceAll("-", ""));
-		vo.setEndDay(vo.getEndDay().replaceAll("-", ""));
-		
-		vo.setStartDay(startDay);
-		vo.setEndDay(endDay);
+	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
 		
 		
-		return dataService.getSbjDataGson();
+		
+		String resultJsonSbjStr = dataService.getDataGson(startDay, endDay);
+	
+//		String startDay = vo.getStartDay();
+//		String endDay = vo.getEndDay();
+//		
+//		vo.setStartDay(vo.getStartDay().replaceAll("-", ""));
+//		vo.setEndDay(vo.getEndDay().replaceAll("-", ""));
+//		
+//		vo.setStartDay(startDay);
+//		vo.setEndDay(endDay);
+		
+		
+		return resultJsonSbjStr;
 	}	
 	
 	
 	
+/*	
 	
-	@RequestMapping(value="/getxmlSbj")
-	public @ResponseBody List<SubjectVO> getxmlSbj() {
-		return dataService.getSbjDataList();
+	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
+		
+		List<StudentVO> dataList = dataService.getDataList(startDay, endDay);	
+			String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
+			return result;
+	}
+*/	
+
+	@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public @ResponseBody String getxmlSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
+		
+ 
+		List<SubjectVO> sbjDataList = dataService.getSbjDataList(startDay, endDay);
+		String resultXmlStr = "";
+						
+		return resultXmlStr;
 	}
 }

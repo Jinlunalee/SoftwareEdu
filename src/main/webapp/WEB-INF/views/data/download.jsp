@@ -355,12 +355,17 @@ overflow-x: scroll;
 
 	function getXml() {
 		
-		
+	      var startDay = $('#input_startDay').val();
+	      var endDay = $('#input_endDay').val();
 		
 		$.ajax({
 			url : "getxml",
 			async : true,
 			type : "GET",
+	        data : { // Ajax쓸때 컨트롤러로 넘겨줄 파라메터 정의.
+	               sDay : startDay,
+	               eDay : endDay
+	            },
 			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
 
@@ -370,13 +375,18 @@ overflow-x: scroll;
 	}
 
 	function getJsonSbj() {
-		
+        var startDay = $('#input_startDay').val();
+        var endDay = $('#input_endDay').val();
 		
 		
 		$.ajax({
 			type : "GET",
 			url : "getjsonSbj",
-			// data : input이 필요할 때 쓰는 것. 여기에는 input이 없으므로 적을 필요가 없음
+			// data : input이 필요할 때 쓰는 것 startDay, endDay input이 있으므로 적어주기
+            data : { // Ajax쓸때 컨트롤러로 넘겨줄 파라메터 정의.
+                   sDay : startDay,
+                   eDay : endDay
+                },
 			async : true,
 			//             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -388,10 +398,17 @@ overflow-x: scroll;
 	}
 
 	function getXmlSbj() {
+        var startDay = $('#input_startDay').val();
+        var endDay = $('#input_endDay').val();
+		
 		$.ajax({
 			url : "getxmlSbj",
 			async : true,
 			type : "GET",
+            data : { // Ajax쓸때 컨트롤러로 넘겨줄 파라메터 정의.
+                sDay : startDay,
+                eDay : endDay
+             },
 			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
 
@@ -408,7 +425,8 @@ overflow-x: scroll;
 					str += '<cost>' + data[i].cost + '</cost>';
 					str += '<send_dt>' + data[i].sendDt + '</send_dt>';
 					str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
-					str += '</subject>';
+					str += '</subject>';   
+				
 				}
 
 				$("#result4").text(str);

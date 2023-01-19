@@ -16,66 +16,74 @@ import com.mycompany.webapp.service.IDataService;
 public class DataService implements IDataService{
 	@Autowired
 	IDataRepository dataRepository;
-	
+
 	// @Expose를 사용하기 위해, new Gson()이 아닌 new GsonBuilder()사용 : @Expose처리된 필드는 직렬화에서 배제시킬 수 있음.
 	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-	
+
+
+	//1번 json
 	@Override
 	public String getDataGson(String startDay, String endDay) {
 		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
-		
+
 		String jsonStr = gson.toJson(dataList);		
-		
+
 		return jsonStr;
 	}
-	
+
+
+	//2번 json
 	@Override
-	public String getSbjDataGson() {
-		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList();
-		
+	public String getSbjDataGson(String startDay, String endDay) {
+		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);
+
 		String jsonStr2 = gson.toJson(sbjdataList);		
-		
+
 		return jsonStr2;
 	}
-	
-	
-	
-	
-	
-			
-/*			일단 주석처리하고
+
+
+	/*			일단 주석처리하고
 	@Override
 	public List<StudentVO> getDataList () {
 		return dataRepository.getDataList();
 	}
-	*/
-	
+	 */
+
+
+	// xml
 	@Override
-	public List<StudentVO> getDataList() {
-		return dataRepository.getDataList("", "");
-	}
-	
-	@Override
-	public List<SubjectVO> getSbjDataList() {
-		return dataRepository.getSbjDataList();
+	public List<StudentVO> getDataList(String startDay, String endDay) {
+
+
+		return dataRepository.getDataList(startDay, endDay);
 	}
 
-//  여기에 6번
+	// 강좌 xml
+	@Override
+	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
 	
+		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
+		/* 
+		String result = "";
 	
-	// 여기서부터 추가
-	/*
-	public List<StudentVO> getStudentList(Pager pager) {
-		return IStudentRepository.selectByPage(pager);
-	}
+		for (SubjectVO vo : sbjdataList) {
+
+			result += "<subject>";
+			result += "<sbjId_seq>" + vo.getSbjIdSeq() + "</sbjId_seq>";
+			result += "<subject_title>" + vo.getSubjectTitle()
+			+ "</subject_title>";
+			result += "<hours>" + vo.getHours() + "</hours>";
+			result += "<start_day>" + vo.getStartDay() + "</start_day>";
+			result += "<end_day>" + vo.getEndDay() + "</end_day>";
+			result += "<cost>" + vo.getCost() + "</cost>";
+			result += "<send_dt>" + vo.getSendDt() + "</send_dt>";
+			result += "<cnt_std>" + vo.getCntStd() + "명" + "</cnt_std>";
+			result += "</subject>"; 
 	
-	public Board getBoard(int bno) {
-		return boardDao.selectByBno(bno);
-	}
-	
-	public int getTotalBoardNum() {
-		return .count();
+		}
+		*/
+		return dataRepository.getSbjDataList(startDay, endDay);
 	}
 
-*/
 }

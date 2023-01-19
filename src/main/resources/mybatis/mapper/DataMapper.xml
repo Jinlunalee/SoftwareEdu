@@ -31,7 +31,7 @@
         </if>   
 	</select>
 
-	<select id="getSbjDataList" resultType="SubjectVO">
+	<select id="getSbjDataList" parameterType="map" resultType="SubjectVO">
 		/* getSbjDataList1 */
 
 		select
@@ -48,7 +48,16 @@
 		left join subject on open.subject_id=subject.subject_id
 		where subject.support_yn = 'Y' and to_date(end_day)  <![CDATA[ < ]]>
 		SYSDATE
-
+        <if test="startDay != '' and endDay != ''">
+            AND open.start_day BETWEEN TO_DATE(#{startDay}) AND TO_DATE(#{endDay})
+        </if>     
+        <!--  sysdate로 쓰는 것도 가능  -->
+        <if test="startDay != '' and endDay == ''">
+            AND open.start_day <![CDATA[ >= ]]> TO_DATE(#{startDay})
+        </if>   
+        <if test="startDay == '' and endDay != ''">
+            AND open.start_day <![CDATA[ <= ]]> TO_DATE(#{endDay})
+        </if> 
 	</select>
 
 </mapper>
