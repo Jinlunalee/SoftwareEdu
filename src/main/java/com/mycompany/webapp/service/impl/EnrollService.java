@@ -106,7 +106,7 @@ public class EnrollService implements IEnrollService{
 	public EnrollVO getEnrollDetails(String enrollId) {
 		EnrollVO enrollVo = enrollRepository.getEnrollDetails(enrollId);
 		enrollVo.setRatio(enrollRepository.getRatioUsingEnrollId(enrollId));
-		enrollVo.setPositionCdTitle(homeRepository.getComnCdTitle(enrollVo.getPositionCd())); // 수강생 구분
+		enrollVo.setPositionCdTitle(homeRepository.getComnCdTitle(enrollVo.getPosition())); // 수강생 구분
 		enrollVo.setGenderCdTitle(homeRepository.getComnCdTitle(enrollVo.getGenderCd())); // 수강생 성별
 		enrollVo.setAddDoCdTitle(homeRepository.getComnCdTitle(enrollVo.getAddDoCd())); // 수강생 주소
 		enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd())); // 강좌 상태
