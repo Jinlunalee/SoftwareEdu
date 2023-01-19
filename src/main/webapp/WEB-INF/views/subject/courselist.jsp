@@ -2,7 +2,7 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/course.css'/>" />
 
 <div class="card m-2">
