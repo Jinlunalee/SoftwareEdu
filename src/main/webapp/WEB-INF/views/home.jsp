@@ -1,4 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>	
+
+<%@ include file="/WEB-INF/views/common/header-main.jsp" %>
+
+
 <style>
 .main-first-row { text-align: center;}
 
@@ -71,9 +75,8 @@ height: 299px;
   
 </style>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>
 
-<%@ include file="/WEB-INF/views/common/header-main.jsp" %>
  
 <div class="main-first-row"> 
 

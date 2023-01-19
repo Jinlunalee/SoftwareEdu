@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
