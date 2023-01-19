@@ -349,10 +349,7 @@ img {
 				        console.log(data);         */
 
 				$("#result").html(data);
-			},
-            error : function(data){
-                alert("error" + data);
-            }
+			}
 		});
 	}
 
@@ -373,10 +370,7 @@ img {
 			success : function(data) {
 
 				$("#resultXml").text(data);
-			},
-            error : function(data){
-                alert("error" + data);
-            }
+			}
 		});
 	}
 
@@ -399,10 +393,7 @@ img {
 			success : function(data) {console.log(data);
 
 				$("#result3").text(data);
-			},
-            error : function(data){
-                alert("error" + data);
-            }
+			}
 		});
 	}
 
