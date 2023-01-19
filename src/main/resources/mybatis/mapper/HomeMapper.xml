@@ -57,9 +57,6 @@
         where open.course_id IS NOT NULL and del_yn = 'N' AND course.cat_cd = #{catCourse}
 	</select>
 	
-	
-
-
 	<select id="getComnCdTitle" parameterType="String" resultType="String">
 	/* getComnCdTitle */
 		SELECT comn_cd_title
