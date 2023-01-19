@@ -34,49 +34,6 @@ public class DataController {
     * @return
     * ------------------------------
     * 2023. 1. 13. modify.......
-
-<<<<<<< HEAD
-	
-	
-	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
-	public @ResponseBody String getjson(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
-		
-		// 파라메터 잘 받아왔는지 테스트
-		// System.out.println("eslee" + startDay + ", " + endDay);
-		
-		String resultJsonStr = dataService.getDataGson(startDay, endDay);
-		
-		return resultJsonStr;
-	}	
-	
-	
-	
-	
-	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
-
-		
-	return dataService.getDataList(startDay, endDay);
-	}
-/*	
-	@RequestMapping(value="/getjsonSbj")
-	public @ResponseBody List<SubjectVO> getjsonSbj() {
-		return dataService.getSbjDataList();
-	}
-	*/
-	
-	
-	
-	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8" )
-	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay){
-		
-		String resultJsonSbjStr = dataService.getSbjDataGson(startDay, endDay);
-		
-		return resultJsonSbjStr;
-	}	
-	
-=======
     */
    @RequestMapping(value="/download", method=RequestMethod.GET)
    public String getDataList(Model model) {
@@ -89,12 +46,6 @@ public class DataController {
       
       return "data/download";
    }
-   
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
-
-   
-
-   
    
    @RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
    public @ResponseBody String getjson(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
