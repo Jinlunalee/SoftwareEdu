@@ -25,18 +25,21 @@
 			<input class="input-button" type="button" value="검색">
 		</div>
 
-		<div class="list_top">
-			<div class="cnt">
-			전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
-			페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
-				<div class="view">
-					<button type="button" class="btn btn-outline-secondary">수강생추가</button>
-					<select class="select-view" onchange="if(this.value) location.href=(this.value);">
-						<option value="<c:url value="/student/boardlist?pageNo=1"/>">선택</option>
-						<option value="<c:url value="/student/boardlist?pageNo=1&rowsPerPage=10"/>">10개</option>
-						<option value="<c:url value="/student/boardlist?pageNo=1&rowsPerPage=30"/>">30개</option>
-						<option value="<c:url value="/student/boardlist?pageNo=1&rowsPerPage=50"/>">50개</option>
-					</select>
+		<div class="view">
+			<button type="button" class="btn btn-outline-secondary">수강생추가</button>
+			<select class="select-view" onchange="listCount(this.value)">
+				<option value="">선택</option>
+				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
+				<option value="30" ${rowsPerPage eq '30'?"selected":""}>30개</option>
+				<option value="50" ${rowsPerPage eq '50'?"selected":""}>50개</option>
+			</select>
+		</div>
+
+		<div id = "list-wrap">
+			<div class="list_top">
+				<div class="cnt">
+					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
+					페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 				</div>
 			</div>
 
@@ -74,7 +77,7 @@
 				<tr>
 					<td colspan="4" class="text-center">
 						<div>
-							<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=1">처음</a>
+							<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a>
 							<c:if test="${pager.groupNo>1}">
 								<a class="btn btn-outline-info btn-sm" href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
 							</c:if>
@@ -99,6 +102,23 @@
 		</div>
 	</div>
 </div>
+	<script type="text/javascript">
+		function listCount(RowsPerPage){
+			console.log(RowsPerPage);
+			$.ajax({
+				url : "ajaxstudentlist?strRowsPerPage="+RowsPerPage,
+				type : "POST"
+			}).done(function(result){
+				console.log('success');
+				var html = $('<div>').html(result);
+				var contents = html.find('div#page-list').html();
+				$('#list-wrap').html(contents);
+			}).fail(function(){
+				console.log('fail');
+			});
+		}
+
+	</script>
 	<!-- 
 	<script>
 		$("#modal_open_btn").click(function() {
