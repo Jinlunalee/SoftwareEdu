@@ -63,7 +63,7 @@ public class DataService implements IDataService{
 	@Override
 	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
 	
-		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
+//		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
 		/* 
 		String result = "";
 	

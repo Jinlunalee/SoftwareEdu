@@ -108,19 +108,7 @@ public class DataController {
 	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
 	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
 		
-		
-		
 		String resultJsonSbjStr = dataService.getDataGson(startDay, endDay);
-	
-//		String startDay = vo.getStartDay();
-//		String endDay = vo.getEndDay();
-//		
-//		vo.setStartDay(vo.getStartDay().replaceAll("-", ""));
-//		vo.setEndDay(vo.getEndDay().replaceAll("-", ""));
-//		
-//		vo.setStartDay(startDay);
-//		vo.setEndDay(endDay);
-		
 		
 		return resultJsonSbjStr;
 	}	
@@ -128,7 +116,7 @@ public class DataController {
 
 	
 	
-// 수정중 2023.01.19  오후 2시 20분 
+// 수정중 2023.01.19  오후 2시 30분 
 	@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	public @ResponseBody List<SubjectVO> getxmlSbj(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
 		
