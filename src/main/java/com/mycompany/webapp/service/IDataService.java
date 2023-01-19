@@ -6,7 +6,7 @@ import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IDataService {
-	String getDataGson();
+	String getDataGson(String startDay, String endDay);
 	List<StudentVO> getDataList();
 	List<SubjectVO> getSbjDataList();
 	String getSbjDataGson();

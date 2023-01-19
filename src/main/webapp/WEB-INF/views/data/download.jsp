@@ -121,7 +121,7 @@ overflow-x: scroll;
 .input-button {
     display: inline-block;
     width: 80px;
-    height: 40px;
+    height: 45px;
     line-height: 45px;
     border-radius: 8px;
     color: #fff;
@@ -147,8 +147,6 @@ overflow-x: scroll;
 
 </style>
 
- 
-
 
 <div class="card m-2">
 	<div class="card-header">
@@ -162,14 +160,13 @@ overflow-x: scroll;
 		<br>
         <%-- 연계자료 기간으로 검색  --%>
         <div class="search">
-        <form name="sc-form" action="<c:url value='//download'/>">
+        <form name="sc-form" action="<c:url value='/download/getjsonSbj'/>">
         <%--연계자료 기간 --%>
-            <div class="data-period">
+            <div class="data-period" >
             <span id="dataperiod">기간별 자료</span>
-            <input type="date" name="startDay" class="input-date"> ~
-            <input type="date" name="endDay"class="input-date">
+            <input type="date" name="startDay" id="input_startDay" class="input-date" onclick = "getJson" value="${startDay}"> ~
+            <input type="date" name="endDay" id="input_endDay" class="input-date" value="${endDay}">
             </div>
-            <input type="submit" class="input-button" value="검색">
          </form>
          </div>
          
@@ -183,7 +180,7 @@ overflow-x: scroll;
 			<div class="card_check">
 				<img id="check_img"
 					src="<c:url value='/resources/images/json.png'/>" /> 
-					<br><a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)</a>
+					<br><a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보  (검색조건은 std_sbj에 있는 강좌 교육일로)<br>(수강 완료 시수 포함)</a>
 				<button type="button" class="btn btn-outline-secondary"
 					id="first_btn">연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
 				</button>
@@ -308,149 +305,116 @@ overflow-x: scroll;
 	</div>
 </div>
 <script>
+	
 	$(document).ready(function() {
 		//$("#first_btn").click();
 	});
 	function getJson() {
-		$.ajax({
-			url : "getjson", 
-			async : true,
-            type : "GET",
-            contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
-			success : function(data) {
-        /*		var str = "";
-        		
-        		str += "[";
-            	for (var i = 0; i < data.length; i++) {
-            		
-            		str += "{";
-            		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"agent_id":' + '"' + "KOSA01" + '",';
-            		str += '"std_sbj":' + '"' + data[i].stdSbj + '",';
-            		str += '"name":' + '"' + data[i].name + '",';
-            		str += '"complete_hours":' + '"' + data[i].completeHours + '",';
-            		str += '"send_dt":' + '"' + data[i].sendDt + '"';
-
-            		
-            		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 돼서
-            			str += "}";
-            		} else { // 마지막이아닐때
-            			str += "},";
-            		}
-            	}
-            	str += "]";   
-                console.log(data);         */
-				$("#result").html(data);
-
-			} 
 		
+		var startDay = $('#input_startDay').val();
+		var endDay = $('#input_endDay').val();
+		
+		$.ajax({
+			url : "getjson",
+			async : true,
+			type : "GET",
+			data : { // Ajax쓸때 컨트롤러로 넘겨줄 파라메터 정의.
+				sDay : startDay,
+				eDay : endDay
+			},
+			contentType : "application/json; charset:UTF-8", // 한글이 물음표로 깨져서 나오는 현상 방지
+			success : function(data) {
+				
+				/*		var str = "";
+						
+						str += "[";
+				    	for (var i = 0; i < data.length; i++) {
+				    		
+				    		str += "{";
+				    		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
+				    		str += '"agent_id":' + '"' + "KOSA01" + '",';
+				    		str += '"std_sbj":' + '"' + data[i].stdSbj + '",';
+				    		str += '"name":' + '"' + data[i].name + '",';
+				    		str += '"complete_hours":' + '"' + data[i].completeHours + '",';
+				    		str += '"send_dt":' + '"' + data[i].sendDt + '"';
+
+				    		
+				    		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 돼서
+				    			str += "}";
+				    		} else { // 마지막이아닐때
+				    			str += "},";
+				    		}
+				    	}
+				    	str += "]";   
+				        console.log(data);         */
+
+				$("#result").html(data);
+			}
 		});
 	}
 
 	function getXml() {
+		
+		
+		
 		$.ajax({
-			url : "getxml", 
+			url : "getxml",
 			async : true,
-            type : "GET",
-            contentType: "application/xml; charset:UTF-8",
+			type : "GET",
+			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
-	
-				$("#resultXml").text(data);			
+
+				$("#resultXml").text(data);
 			}
 		});
 	}
 
 	function getJsonSbj() {
+		
+		
+		
 		$.ajax({
 			type : "GET",
 			url : "getjsonSbj",
 			// data : input이 필요할 때 쓰는 것. 여기에는 input이 없으므로 적을 필요가 없음
 			async : true,
-//             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            success : function(data) {
-            	/*
-        		var str = "";   
-        		
-        		str += "[";
-            	for (var i = 0; i < data.length; i++) {
-            		str += "{";
-            		// 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-            		str += '"sbjId_seq":' + '"' + data[i].sbjIdSeq + '",';
-            		str += '"subject_title":' + '"' + data[i].subjectTitle + '",';
-            		str += '"hours":' + '"' + data[i].hours + '",';
-            		str += '"start_day":' + '"' + data[i].startDay + '",';
-            		str += '"end_day":' + '"' + data[i].endDay + '",';
-            		str += '"cost":' + '"' + data[i].cost + '",';
-            		str += '"cnt_std":' + '"' + data[i].cntStd + '명",';
-            		str += '"send_dt":' + '"' + data[i].sendDt + '"';
+			//             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
+			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			success : function(data) {
 
-            	
-            		alert(
-           				data[i].sbjIdSeq + '\n' +
-                   		data[i].subjectTitle + '\n' +
-                   		data[i].hours + '\n' +
-                   		data[i].startDay + '\n' +
-                   		data[i].endDay + '\n' +
-                   		data[i].cost + '\n' +
-                   		data[i].sendDt
-                   		data[i].cntStd
-            		);
-            		
-            		
-            		if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 됨
-            			str += "}";
-            		} else { // 마지막이아닐때  (콤마가 들어가야 하니까)
-            			str += "},";
-            		}
-            	}
-            	str += "]";
-            	*/
-// alert(str);    
-
-				 $("#result3").text(data);
+				$("#result3").text(data);
 			}
 		});
 	}
-	
-	
-	
-	
-	
+
 	function getXmlSbj() {
 		$.ajax({
-			url : "getxmlSbj", 
+			url : "getxmlSbj",
 			async : true,
-            type : "GET",
-            contentType: "application/xml; charset:UTF-8",
+			type : "GET",
+			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
-	
-				var str="";
+
+				var str = "";
 				for (var i = 0; i < data.length; i++) {
-					
-					
+
 					str += '<subject>';
-            		str += '<sbjId_seq>' + data[i].sbjIdSeq + '</sbjId_seq>';
-            		str += '<subject_title>' + data[i].subjectTitle + '</subject_title>';
-            		str += '<hours>' + data[i].hours + '</hours>';
-            		str += '<start_day>' + data[i].startDay +'</start_day>';
-            		str += '<end_day>' + data[i].endDay +'</end_day>';
-            		str += '<cost>' + data[i].cost + '</cost>';
-            		str += '<send_dt>' + data[i].sendDt + '</send_dt>';
-            		str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
-            		str += '</subject>';		
+					str += '<sbjId_seq>' + data[i].sbjIdSeq + '</sbjId_seq>';
+					str += '<subject_title>' + data[i].subjectTitle
+							+ '</subject_title>';
+					str += '<hours>' + data[i].hours + '</hours>';
+					str += '<start_day>' + data[i].startDay + '</start_day>';
+					str += '<end_day>' + data[i].endDay + '</end_day>';
+					str += '<cost>' + data[i].cost + '</cost>';
+					str += '<send_dt>' + data[i].sendDt + '</send_dt>';
+					str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
+					str += '</subject>';
 				}
-			
-				$("#result4").text(str);			
+
+				$("#result4").text(str);
 			}
 		});
 	}
-	
-	
-	
-
-	
-	
 
 	$(function() {
 		$("#first_btn").click(function() {
@@ -458,7 +422,7 @@ overflow-x: scroll;
 			$("#show_XML, #show_info2").hide();
 			$("#show_JSON2, #show_info3").hide();
 			$("#show_XML2, #show_info4").hide();
-			
+
 			getJson();
 		});
 	});
@@ -469,7 +433,7 @@ overflow-x: scroll;
 			$("#show_JSON, #show_info1").hide();
 			$("#show_XML2, #show_info4").hide();
 			$("#show_JSON2, #show_info3").hide();
-			
+
 			getXml();
 		});
 	});
@@ -480,18 +444,18 @@ overflow-x: scroll;
 			$("#show_JSON, #show_info1").hide();
 			$("#show_XML, #show_info2").hide();
 			$("#show_XML2, #show_info4").hide();
-			
+
 			getJsonSbj();
 		});
 	});
-		
+
 	$(function() {
 		$("#forth_btn").click(function() {
 			$("#show_XML2, #show_info4").toggle();
 			$("#show_JSON, #show_info1").hide();
 			$("#show_JSON2, #show_info3").hide();
 			$("#show_XML, #show_info2").hide();
-			
+
 			getXmlSbj();
 		});
 	});
