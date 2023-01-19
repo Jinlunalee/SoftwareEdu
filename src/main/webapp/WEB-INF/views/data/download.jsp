@@ -348,7 +348,7 @@ img {
 				    	str += "]";   
 				        console.log(data);         */
 
-				$("#result").html(data);
+				$("#result").html(JSON.stringify(data));
 			}
 		});
 	}
@@ -392,7 +392,7 @@ img {
 			contentType : 'application/json; charset=UTF-8',
 			success : function(data) {console.log(data);
 
-				$("#result3").text(data);
+				$("#result3").text(JSON.stringify(data));
 			}
 		});
 	}
@@ -427,7 +427,7 @@ img {
 					str += '</subject>';  
 				}
 				
-				$("#result4").text(str);
+				$("#result4").text(JSON.stringify(str));
 			},
              error : function(data){
             	 alert("error" + data);
