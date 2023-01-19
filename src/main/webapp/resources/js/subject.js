@@ -378,7 +378,7 @@ function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 		console.log('success');
 		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
 		console.log(html);
-		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택/끼워넣을 jsp
+		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택해서 변수에 저장/끼워넣을 jsp
 		console.log(contents);
 		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
 	}).fail(function(){
