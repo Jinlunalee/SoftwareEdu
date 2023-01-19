@@ -55,6 +55,7 @@ public class DataService implements IDataService{
 	@Override
 	public List<StudentVO> getDataList(String startDay, String endDay) {
 
+		
 
 		return dataRepository.getDataList(startDay, endDay);
 	}

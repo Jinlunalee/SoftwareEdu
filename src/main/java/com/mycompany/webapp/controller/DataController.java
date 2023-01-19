@@ -70,7 +70,7 @@ public class DataController {
 	@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
-		
+	
 		List<StudentVO> dataList = dataService.getDataList(startDay, endDay);
 		
 		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
