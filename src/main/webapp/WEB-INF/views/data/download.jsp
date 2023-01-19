@@ -411,6 +411,7 @@ img {
              },
 			contentType : "application/xml; charset:UTF-8",
 			success : function(data) {
+				console.log(data);
 
 				var str = "";
 				for (var i = 0; i < data.length; i++) {
@@ -429,7 +430,10 @@ img {
 					
 	                $("#result4").text(str);
 				}
-			} 
+			},
+             error : function(){
+            	 console.log("error");
+             }
 		});
 	}
 

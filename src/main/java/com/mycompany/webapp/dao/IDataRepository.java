@@ -12,12 +12,6 @@ import com.mycompany.webapp.dto.SubjectVO;
 public interface IDataRepository {
 
 	List<StudentVO> getDataList(@Param("startDay")String startDay, @Param("endDay")String endDay);  // 연계자료 목록 조회
-	List<SubjectVO> getSbjDataList(@Param("startDay")String startDay, @Param("endDay")String endDay);
-	
-	// 밑에 추가
-	/*
-	public List<StudentVO> selectByPage(Pager pager);
-	public int count();
-	public StudentVO selectByBno(int bno);
-	*/
+	List<SubjectVO> getSbjDataList(@Param("startDay")String startDay, @Param("endDay")String endDay);  //연계자료 강좌정보  조회
+
 }

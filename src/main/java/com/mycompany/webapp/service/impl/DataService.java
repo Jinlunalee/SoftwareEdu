@@ -83,6 +83,7 @@ public class DataService implements IDataService{
 	
 		}
 		*/
+		System.out.println("dataservice : " + dataRepository.getSbjDataList(startDay, endDay));
 		return dataRepository.getSbjDataList(startDay, endDay);
 	}
 
