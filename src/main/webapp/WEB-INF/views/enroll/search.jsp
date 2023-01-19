@@ -7,7 +7,7 @@
 
 <div class="card m-2">
 	<div class="card-header">
-		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>" />
+		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 		<div>
 			> 수강 관리 > <span class="submenu-title">수강 목록 조회</span>
 		</div>
@@ -19,22 +19,20 @@
 			<form name="sc-form" action="<c:url value='/enroll/searchlist'/>">
 				<%--신청 기간 --%>
 				<div class="apply-period">
-					<span id="applyperiod">신청기간</span> <input type="date"
-						name="applyStartDay" class="input-date"
-						value="${enroll.applyStartDay}"> ~ <input type="date"
-						name="applyEndDay" class="input-date"
-						value="${enroll.applyEndDay}">
+					<span id="applyperiod">신청기간</span>
+					<input type="date" name="applyStartDay" class="input-date" value="${enroll.applyStartDay}"> ~ 
+					<input type="date" name="applyEndDay" class="input-date" value="${enroll.applyEndDay}">
 				</div>
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span> <select name="course"
-						class="select-box">
+					<span id="selectsubcor">강좌 과정 구분</span>
+					<select name="course" class="select-box">
 						<option value="">강좌/과정</option>
 						<option value="sj" ${enroll.course eq 'sj' ? "selected" : ""}>강좌</option>
 						<option value="cs" ${enroll.course eq 'cs' ? "selected" : ""}>과정</option>
-					</select> <input type="text" name="keyword2" class="input-text"
-						value="${enroll.keyword2}">
+					</select>
+					<input type="text" name="keyword2" class="input-text" value="${enroll.keyword2}">
 				</div>
 
 				<%-- 수강생 선택 --%>
@@ -92,37 +90,46 @@
 			<th>승인</th>
 		</tr>
 
-		<!-- 리스트 -->
+		<%-- 리스트 --%>
 		<c:forEach var="board" items="${boardList}" varStatus="status">
 			<tr>
-				<td><a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
-				<!-- 과정명  --> 
-				<c:if test="${not empty board.courseTitle}">(${board.courseTitle})</c:if></a>
+				<td>
+					<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
+				
+					<%-- 과정명  --%> 
+					<c:if test="${not empty board.courseTitle}">
+						(${board.courseTitle})
+					</c:if></a>
 				</td>
 
-				<!-- 수강생 명 -->
+				<%-- 수강생 명 --%>
 				<td>${board.name}(${board.studentId})</td>
+				
 				<!-- 신청일자 -->
 				<td>${board.regDt}</td>
 
-				<!-- 현재 상태 옆에 진도율 -->
+				<%-- 현재 상태 옆에 진도율 --%>
 				<td>
-				${board.stateCdTitle}
-				<c:if test="${board.stateCdTitle eq '수강중'}">(${board.ratio}%)</c:if>
+					${board.stateCdTitle}
+					<c:if test="${board.stateCdTitle eq '수강중'}">
+						(${board.ratio}%)
+					</c:if>
 				</td>
 
-				<td><c:if test="${board.stateCdTitle eq '수강취소'}">
-						${board.cancelRsTitle}
-					</c:if></td>
-
-				<!-- 버튼  -->
 				<td>
-					<!-- 취소 버튼 --> <c:if
-						test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-						<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
+					<c:if test="${board.stateCdTitle eq '수강취소'}">
+						${board.cancelRsTitle}
+					</c:if>
+				</td>
+
+				<%-- 버튼  --%>
+				<td>
+					<%-- 취소 버튼 --%>
+					<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
+						<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
 						<%-- 취소 사유 모달창 --%>
-						<div class="modal2 modal2-${status.count}">
-							<div class="modal-content2 modal-content2-${status.count}">
+						<div class="modal modal-${status.count}">
+							<div class="modal-content modal-content-${status.count}">
 								<span style="font-size: 1.2em;">취소하시겠습니까?</span>
 								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 									<select id="selectCancel" name="cancelRsCd" class="cancelrs"  onchange="cancel(); this.onclick=null;">
@@ -135,8 +142,8 @@
 									<span id="cancelRsEtc"></span>
 									<input type="submit" value="확인" class="confirm">
 								</form>
-								<div id="close-btn2">
-									<button class="close-btn2">닫기</button>
+								<div id="close-btn">
+									<button class="close-btn">닫기</button>
 								</div>
 							</div>
 						</div>
@@ -144,18 +151,17 @@
 				</td>
 
 				<td>
-					<!-- 삭제 버튼 --> <c:if test="${board.stateCdTitle eq '수강취소'}">
+					<%-- 삭제 버튼 --%>
+					<c:if test="${board.stateCdTitle eq '수강취소'}">
 						<form>
-							<input type="submit"
-								onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"
-								class="btn btn-secondary" value="삭제">
+							<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
 						</form>
 					</c:if>
 				</td>
 
 				<td>
-					<!-- 승인 버튼 --> <c:if
-						test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
+					<%-- 승인 버튼 --%>
+					<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
 						<form>
 							<input type="submit" class="btn btn-secondary"
 								onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"
@@ -166,47 +172,43 @@
 			</tr>
 		</c:forEach>
 
-		<!-- paging -->
+		<%-- paging --%>
 		<tr>
 			<td colspan="4" class="text-center">
 				<div>
-					<a class="btn btn-outline-primary btn-sm"
-						href="searchlist?pageNo=1&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">처음</a>
+					<a class="btn btn-outline-primary btn-sm" href="searchlist?pageNo=1&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">처음</a>
 					<c:if test="${pager.groupNo>1}">
-						<a class="btn btn-outline-info btn-sm"
-							href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">이전</a>
+						<a class="btn btn-outline-info btn-sm" href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">이전</a>
 					</c:if>
 
-					<c:forEach var="i" begin="${pager.startPageNo}"
-						end="${pager.endPageNo}">
+					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 						<c:if test="${pager.pageNo != i}">
-							<a class="btn btn-outline-success btn-sm"
-								href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
+							<a class="btn btn-outline-success btn-sm" href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
 						</c:if>
 						<c:if test="${pager.pageNo == i}">
-							<a class="btn btn-danger btn-sm"
-								href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
+							<a class="btn btn-danger btn-sm" href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
 						</c:if>
 					</c:forEach>
 
 					<c:if test="${pager.groupNo<pager.totalGroupNo}">
-						<a class="btn btn-outline-info btn-sm"
-							href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">다음</a>
+						<a class="btn btn-outline-info btn-sm" href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">다음</a>
 					</c:if>
-					<a class="btn btn-outline-primary btn-sm"
-						href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">맨끝</a>
+					<a class="btn btn-outline-primary btn-sm" href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">맨끝</a>
 				</div>
 			</td>
 		</tr>
 	</table>
-	<div class="down">
-		<a href="#"> <a href="<c:url value='#'/>"><img
-				class="excelimg"
-				src="<c:url value='/resources/images/register/exceldown.png'/>" /></a>
-		</a>
+	
+		<div class="down">
+			<a href="<c:url value='/enroll/download'/>">
+				<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
+			</a>
+		</div>
+		
 	</div>
-	<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
+	
 </div>
+
 	<script>
  		function showModal(i){
  			var openBtnClassName = ".modal-open-" + i;
@@ -220,20 +222,6 @@
 			});
 		};
 		
-		function showModal2(i){
- 			var openBtnClassName = ".modal-open2-" + i;
- 			var modalClassName = ".modal2-" + i; 
-			$(openBtnClassName).click(function(){
-				$(modalClassName).fadeIn();
-			});
-
-			$(".close-btn2").click(function(){
-				$(".modal2").fadeOut();
-			});
-		};
-	</script>
-
-	<script>
 		function del(studentId, subjectId, subjectSeq) {
 			event.preventDefault();
 		if(confirm('수강 정보를 삭제하시겠습니까?')) {
@@ -242,49 +230,43 @@
 				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
 				success : function(data) {
 					document.location.href = document.location.href;
-				}
-			})
+					}
+				})
 			
-		} else {
+		}else {
 			return false;
-		}
-	}
-	</script>
-
-	<script>
-			function approval(studentId, subjectId, subjectSeq) {
-				event.preventDefault();
-				if(confirm('수강 신청을 승인하시겠습니까?')) {
-					$.ajax({
-						url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
-						success : function(data) {
-							document.location.href = document.location.href;
-						}
-					})
-				}
-				else{
-				}
 			}
-	</script>
-	
-	<script>
-	function cancel(){
-		var selectCancel = document.getElementById('selectCancel');
-		var cancel = selectCancel.options[selectCancel.selectedIndex].text;
-		
-		if(cancel === '관리자 기타'){
-			var createInput = document.createElement("input");
-			createInput.setAttribute("type", "text");
-			createInput.setAttribute("name", "cancelRsEtc");
-			createInput.setAttribute("class", "input-cancel");
-			document.querySelector("#cancelRsEtc").append(createInput);
-		}else if(cancel !== '관리자 기타'){
-				$('#cancelRsEtc').empty();		
 		}
-	}
-	</script>
+		
+		function approval(studentId, subjectId, subjectSeq) {
+			event.preventDefault();
+			if(confirm('수강 신청을 승인하시겠습니까?')) {
+				$.ajax({
+					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
+					success : function(data) {
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			else{
+			}
+		}
 
-</div>
+		function cancel(){
+			var selectCancel = document.getElementById('selectCancel');
+			var cancel = selectCancel.options[selectCancel.selectedIndex].text;
+		
+			if(cancel === '관리자 기타'){
+				var createInput = document.createElement("input");
+				createInput.setAttribute("type", "text");
+				createInput.setAttribute("name", "cancelRsEtc");
+				createInput.setAttribute("class", "input-cancel");
+				document.querySelector("#cancelRsEtc").append(createInput);
+			}else if(cancel !== '관리자 기타'){
+					$('#cancelRsEtc').empty();		
+			}
+		}
+	</script>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

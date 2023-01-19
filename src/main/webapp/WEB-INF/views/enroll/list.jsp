@@ -3,17 +3,17 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>"/>
 
 <div class="card m-2">
 	<div class="card-header">
-		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>" />
+		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 		<div>
 			> 수강 관리 > <span class="submenu-title">수강 목록 조회</span>
 		</div>
 	</div>
 	<div class="card-body">
-
+	
 		<%-- 수강 검색  --%>
 		<div class="search">
 			<form name="sc-form" action="<c:url value='/enroll/searchlist'/>">
@@ -26,12 +26,12 @@
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span> <select name="course"
-						class="select-box">
+					<span id="selectsubcor">강좌 과정 구분</span> <select name="course" class="select-box">
 						<option value="">강좌/과정</option>
 						<option value="sj">강좌</option>
 						<option value="cs">과정</option>
-					</select> <input type="text" name="keyword2" class="input-text">
+					</select>
+					<input type="text" name="keyword2" class="input-text">
 				</div>
 
 				<%-- 수강생 선택 --%>
@@ -90,39 +90,41 @@
 				<th>승인</th>
 			</tr>
 
-			<!-- 리스트 -->
+			<%-- 리스트 --%>
 			<c:forEach var="board" items="${boardList}" varStatus="status">
 				<tr>
-					<td><a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
+					<td>
+						<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
 							<c:if test="${not empty board.courseTitle}">
-							(${board.courseTitle})
-							</c:if></a>
+								(${board.courseTitle})
+							</c:if>
+						</a>
 					</td>
 					<td>${board.name}(${board.studentId})</td>
 					<td>${board.regDt}</td>
 
-					<!-- 현재 상태 옆에 진도율 -->
+					<%-- 현재 상태 옆에 진도율 --%>
 					<td>${board.stateCdTitle}
-					<c:if test="${board.stateCdTitle eq '수강중'}">
-					(${board.ratio}%)
-					</c:if>
+						<c:if test="${board.stateCdTitle eq '수강중'}">
+						(${board.ratio}%)
+						</c:if>
 					</td>
 
 					<td>
-						<!-- 취소 사유 -->
+						<%-- 취소 사유 --%>
 						<c:if test="${board.stateCdTitle eq '수강취소'}">
 						${board.cancelRsTitle}
 						</c:if>
 					</td>
 
-					<!-- 버튼 -->
+					<%-- 버튼 --%>
 					<td>
-						<!-- 취소 버튼 -->
+						<%-- 취소 버튼 --%>
 						<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-							<button class="btn btn-secondary modal-open modal-open2-${status.count}" onclick="showModal2(${status.count});">취소</button>
+							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
 							<%-- 취소 사유 모달창 --%>
-							<div class="modal2 modal2-${status.count}">
-								<div class="modal-content2 modal-content2-${status.count}">
+							<div class="modal modal-${status.count}">
+								<div class="modal-content modal-content-${status.count}">
 									<span style="font-size: 1.2em;">취소하시겠습니까?</span>
 									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 										<select id="selectCancel" name="cancelRsCd" class="cancelrs" onchange="cancel(); this.onclick=null;">
@@ -131,12 +133,11 @@
 												<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 											</c:forEach>
 										</select>
-										<!-- <input type="text" name="cancelRsEtc"  placeholder="기타 입력"> -->
 										<span id="cancelRsEtc"></span>
 										<input type="submit" value="확인" class="confirm">
 									</form>
-									<div id="close-btn2">
-										<button class="close-btn2">닫기</button>
+									<div id="close-btn">
+										<button class="close-btn">닫기</button>
 									</div>
 								</div>
 							</div>
@@ -144,14 +145,14 @@
 					</td>
 
 					<td>
-						<!-- 삭제 버튼 -->
+						<%-- 삭제 버튼 --%>
 						<c:if test="${board.stateCdTitle eq '수강취소'}">
 							<button type="button" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary">삭제</button>
 						</c:if>
 					</td>
 
 					<td>
-						<!-- 승인 버튼 -->
+						<%-- 승인 버튼 --%>
 						<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
 							<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
 						</c:if>
@@ -159,7 +160,7 @@
 				</tr>
 			</c:forEach>
 
-			<!-- paging -->
+			<%-- paging --%>
 			<tr>
 				<td colspan="4" class="text-center">
 					<div>
@@ -185,13 +186,16 @@
 				</td>
 			</tr>
 		</table>
+		
 		<div class="down">
 			<a href="<c:url value='/enroll/download'/>">
-			<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/></a>
+			<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
 			</a>
 		</div>
-		<!-- <button class="custom-btn btn-12"><span>Click!</span><span>Read More</span></button>  -->
+		
 	</div>
+
+</div>
 
 	<script>
 		function showModal(i){
@@ -206,20 +210,6 @@
 			});
 		};
 		
-		function showModal2(i){
-			var openBtnClassName = ".modal-open2-" + i;
-			var modalClassName = ".modal2-" + i; 
-			$(openBtnClassName).click(function(){
-				$(modalClassName).fadeIn();
-			});
-
-			$(".close-btn2").click(function(){
-				$(".modal2").fadeOut();
-			});
-		};
-	</script>
-
-	<script>
 		function del(studentId, subjectId, subjectSeq) {
 			if(confirm('수강 정보를 삭제하시겠습니까?')) {
 				$.ajax({
@@ -232,10 +222,8 @@
 			} else {
 				return false;
 			}
-	}
-	</script>
+		}
 
-	<script>
 		function approval(studentId, subjectId, subjectSeq) {
 			if(confirm('수강 신청을 승인하시겠습니까?')) {
 				$.ajax({
@@ -248,26 +236,22 @@
 				return false;
 			}
 		}
-	</script>
-	
-	<script>
-	function cancel(){
-		var selectCancel = document.getElementById('selectCancel');
-		var cancel = selectCancel.options[selectCancel.selectedIndex].text;
-		
-		if(cancel === '관리자 기타'){
-			var createInput = document.createElement("input");
-			createInput.setAttribute("type", "text");
-			createInput.setAttribute("name", "cancelRsEtc");
-			createInput.setAttribute("class", "input-cancel");
-			document.querySelector("#cancelRsEtc").append(createInput);
-		}else if(cancel !== '관리자 기타'){
-				$('#cancelRsEtc').empty();		
-		}
-	}
-	</script>
 
-</div>
+		function cancel(){
+			var selectCancel = document.getElementById('selectCancel');
+			var cancel = selectCancel.options[selectCancel.selectedIndex].text;
+		
+			if(cancel === '관리자 기타'){
+				var createInput = document.createElement("input");
+				createInput.setAttribute("type", "text");
+				createInput.setAttribute("name", "cancelRsEtc");
+				createInput.setAttribute("class", "input-cancel");
+				document.querySelector("#cancelRsEtc").append(createInput);
+			}else if(cancel !== '관리자 기타'){
+				$('#cancelRsEtc').empty();		
+			}
+		}
+	</script>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

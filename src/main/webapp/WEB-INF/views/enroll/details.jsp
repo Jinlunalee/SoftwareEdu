@@ -10,11 +10,13 @@
 		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 		<div> > 수강 관리 > <span class="submenu-title">수강 목록 조회 > 수강 상세 페이지</span></div>
 	</div>
+	
 	<div class="card-body">
 		<table class="enroll-detail-table enroll-table">
 			<tr>
 				<th class="info enroll-info" colspan='10'>수강 정보</th>
 			</tr>
+			
 			<tr>
 				<th>수강 아이디</th>
 				<td>${enroll.enrollId}</td>
@@ -33,6 +35,7 @@
 			<tr>
 				<th class="info student-info" colspan='8'>수강생 정보</th>
 			</tr>
+			
 			<tr>
 				<th>수강생 아이디</th>
 				<td>${enroll.studentId}</td>
@@ -43,6 +46,7 @@
 				<th>수강생 성별</th>
 				<td>${enroll.genderCdTitle}</td>
 			</tr>
+			
 			<tr>
 				<th>수강생 생년월일</th>
 				<td>${enroll.birth}</td>
@@ -59,6 +63,7 @@
 			<tr>
 				<th class="info open-info" colspan='8'>개설 강좌 정보</th>
 			</tr>
+			
 			<tr>
 				<th>강좌 아이디</th>
 				<td>${enroll.subjectId}</td>
@@ -67,6 +72,7 @@
 				<th>강좌 상태</th>
 				<td>${enroll.openStateCdTitle}</td>
 			</tr>
+			
 			<tr>
 				<th>과정 아이디</th>
 				<td>${enroll.courseId}</td>
@@ -77,6 +83,7 @@
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
 			</tr>
+			
 			<tr>
 				<th>강좌일수</th>
 				<td>${enroll.days}</td>
@@ -85,6 +92,7 @@
 				<th>강좌 기간</th>
 				<td colspan='3'>${enroll.startDay} ~ ${enroll.endDay}</td>
 			</tr>
+			
 			<tr>
 				<th>강좌 모집 기간</th>
 				<td colspan='5'>${enroll.recruitStartDay} ~ ${enroll.recruitEndDay}</td>
@@ -99,6 +107,7 @@
 				<th style="width:20%;">진도율</th>
 				<th style="width:60%;">추가 수강 시간</th>
 			</tr>
+			
 			<tr>
 				<td>${enroll.completeHours}</td>
 				<td><span id="ratio">${enroll.ratio}</span>%</td>
@@ -114,6 +123,9 @@
 		</table>
 
 	</div>
+	
+</div>
+
 	<script>
 		window.onload = function () {
 			const ratio = document.getElementById('ratio').innerText;
@@ -135,6 +147,5 @@
 			}
 		}
 	</script>
-</div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
