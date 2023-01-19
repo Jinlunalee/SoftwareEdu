@@ -88,13 +88,12 @@ public class DataController {
    
    
 // 수정중 2023.01.19  오후 2시 30분 
-   @RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
-   public @ResponseBody List<SubjectVO> getxmlSbj(SubjectVO subjectVo, @RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay) {
-      List<SubjectVO> sbjDataList = dataService.getSbjDataList(startDay, endDay);
+   @RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+   public @ResponseBody String getxmlSbj(SubjectVO subjectVo, @RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay) {
       
 //      String resultXmlStr = "";
-      System.out.println("controller : " + sbjDataList);
+
       
-      return sbjDataList;
+      return dataService.getSbjDataList(startDay, endDay);
    }
 }

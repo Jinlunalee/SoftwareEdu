@@ -366,7 +366,7 @@ img {
                   sDay : startDay,
                   eDay : endDay
                },
-         contentType : "application/text; charset:UTF-8", 
+         contentType : "application/json; charset:UTF-8", 
          success : function(data) {
 
             $("#resultXml").text(data);
@@ -389,7 +389,7 @@ img {
                 },
          async : true,
          //             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
-         contentType : 'application/json; charset=UTF-8',
+         contentType : "application/json; charset=UTF-8",
          success : function(data) {console.log(data);
 
             $("#result3").text(JSON.stringify(data));
@@ -411,23 +411,9 @@ img {
              },
          contentType : "application/json; charset:UTF-8",
          success : function(data) {
-            var str = "";
+
             
-            for (var i = 0; i < data.length; i++) {
-               str += '<subject>';
-               str += '<sbjId_seq>' + data[i].sbjIdSeq + '</sbjId_seq>';
-               str += '<subject_title>' + data[i].subjectTitle
-                     + '</subject_title>';
-               str += '<hours>' + data[i].hours + '</hours>';
-               str += '<start_day>' + data[i].startDay + '</start_day>';
-               str += '<end_day>' + data[i].endDay + '</end_day>';
-               str += '<cost>' + data[i].cost + '</cost>';
-               str += '<send_dt>' + data[i].sendDt + '</send_dt>';
-               str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
-               str += '</subject>';  
-            }
-            
-            $("#result4").text(JSON.stringify(str));
+            $("#result4").text(data);
          },
              error : function(data){
                 alert("error" + data);

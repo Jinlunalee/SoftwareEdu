@@ -81,10 +81,36 @@ public class DataService implements IDataService{
 
 	// 강좌 xml
 	@Override
-	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
+	public String getSbjDataList (String startDay, String endDay) {
+		List<SubjectVO> sbjDataList = dataRepository.getSbjDataList(startDay, endDay);
 	
-		System.out.println("dataservice : " + dataRepository.getSbjDataList(startDay, endDay));
-		return dataRepository.getSbjDataList(startDay, endDay);
+        String result= ""; 
+        
+        for (SubjectVO vo : sbjDataList) {
+        	String sbjIdSeq = vo.getSbjIdSeq();
+        	String subjectTitle = vo.getSubjectTitle();
+        	int hours = vo.getHours();
+        	String sDay = vo.getStartDay();
+        	String eDay = vo.getEndDay();
+        	int cost = vo.getCost();
+        	String sendDt = vo.getSendDt();
+        	int cntStd = vo.getCntStd();
+        	
+        	
+           result += "<subject>";
+           result += "<sbjId_seq>" + sbjIdSeq + "</sbjId_seq>";
+           result += "<subject_title>" + subjectTitle
+                 + "</subject_title>";
+           result += "<hours>" + hours + "</hours>";
+           result += "<start_day>" + sDay + "</start_day>";
+           result += "<end_day>" + eDay + "</end_day>";
+           result += "<cost>" + cost + "</cost>";
+           result += "<send_dt>" + sendDt + "</send_dt>";
+           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>";
+           result += "</subject>";  
+        }
+
+		return result;
 	}
 
 }
