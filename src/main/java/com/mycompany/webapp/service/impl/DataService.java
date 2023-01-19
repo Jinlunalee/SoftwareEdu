@@ -63,26 +63,6 @@ public class DataService implements IDataService{
 	@Override
 	public List<SubjectVO> getSbjDataList(String startDay, String endDay) {
 	
-//		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);   
-		/* 
-		String result = "";
-	
-		for (SubjectVO vo : sbjdataList) {
-
-			result += "<subject>";
-			result += "<sbjId_seq>" + vo.getSbjIdSeq() + "</sbjId_seq>";
-			result += "<subject_title>" + vo.getSubjectTitle()
-			+ "</subject_title>";
-			result += "<hours>" + vo.getHours() + "</hours>";
-			result += "<start_day>" + vo.getStartDay() + "</start_day>";
-			result += "<end_day>" + vo.getEndDay() + "</end_day>";
-			result += "<cost>" + vo.getCost() + "</cost>";
-			result += "<send_dt>" + vo.getSendDt() + "</send_dt>";
-			result += "<cnt_std>" + vo.getCntStd() + "명" + "</cnt_std>";
-			result += "</subject>"; 
-	
-		}
-		*/
 		System.out.println("dataservice : " + dataRepository.getSbjDataList(startDay, endDay));
 		return dataRepository.getSbjDataList(startDay, endDay);
 	}

@@ -53,7 +53,7 @@ public class DataController {
 
 	
 	
-	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	public @ResponseBody String getjson(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
 		
 		// 파라메터 잘 받아왔는지 테스트
@@ -105,10 +105,10 @@ public class DataController {
 	
 	
 	
-	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8" )
+	@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8" )
 	public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay){
 		
-		String resultJsonSbjStr = dataService.getDataGson(startDay, endDay);
+		String resultJsonSbjStr = dataService.getSbjDataGson(startDay, endDay);
 		
 		return resultJsonSbjStr;
 	}	
@@ -119,17 +119,11 @@ public class DataController {
 // 수정중 2023.01.19  오후 2시 30분 
 	@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	public @ResponseBody List<SubjectVO> getxmlSbj(SubjectVO subjectVo, @RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay) {
-		
-		
-		
-		
-		/*startDay.replaceAll("-", "");
-		endDay.replaceAll("-", "");*/
-		
 		List<SubjectVO> sbjDataList = dataService.getSbjDataList(startDay, endDay);
 		
 //		String resultXmlStr = "";
-						System.out.println("controller : " + sbjDataList);
+		System.out.println("controller : " + sbjDataList);
+		
 		return sbjDataList;
 	}
 }

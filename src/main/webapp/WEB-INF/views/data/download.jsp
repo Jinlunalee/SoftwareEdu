@@ -164,7 +164,7 @@ img {
 				<div class="data-period">
 					<span id="dataperiod">기간별 자료</span> <input type="date"
 						name="startDay" id="input_startDay" class="input-date"
-						onclick="getJson" value="${startDay}"> ~ <input
+						value="${startDay}"> ~ <input
 						type="date" name="endDay" id="input_endDay" class="input-date"
 						value="${endDay}">
 				</div>
@@ -348,7 +348,7 @@ img {
 				    	str += "]";   
 				        console.log(data);         */
 
-				$("#result").html(data);
+				$("#result").html(JSON.stringify(data));
 			}
 		});
 	}
@@ -389,10 +389,10 @@ img {
                 },
 			async : true,
 			//             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
-			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-			success : function(data) {
+			contentType : 'application/json; charset=UTF-8',
+			success : function(data) {console.log(data);
 
-				$("#result3").text(data);
+				$("#result3").text(JSON.stringify(data));
 			}
 		});
 	}
@@ -409,13 +409,11 @@ img {
                 sDay : startDay,
                 eDay : endDay
              },
-			//contentType : "application/xml; charset:UTF-8",
+			contentType : "application/json; charset:UTF-8",
 			success : function(data) {
-				console.log(data);
-
 				var str = "";
+				
 				for (var i = 0; i < data.length; i++) {
-
 					str += '<subject>';
 					str += '<sbjId_seq>' + data[i].sbjIdSeq + '</sbjId_seq>';
 					str += '<subject_title>' + data[i].subjectTitle
@@ -426,13 +424,13 @@ img {
 					str += '<cost>' + data[i].cost + '</cost>';
 					str += '<send_dt>' + data[i].sendDt + '</send_dt>';
 					str += '<cnt_std>' + data[i].cntStd + '명' + '</cnt_std>';
-					str += '</subject>';   
-					
-	                $("#result4").text(str);
+					str += '</subject>';  
 				}
+				
+				$("#result4").text(JSON.stringify(str));
 			},
-             error : function(){
-            	 console.log("error");
+             error : function(data){
+            	 alert("error" + data);
              }
 		});
 	}
