@@ -3,11 +3,6 @@
 <%@ include file="/WEB-INF/views/common/header-main.jsp" %>
 
 
-<style>
-.main-first-row { text-align: center;}
-
-</style>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/main.css"/>
 
  
