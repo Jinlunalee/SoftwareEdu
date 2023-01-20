@@ -19,22 +19,4 @@ public class StudentService implements IStudentService{
 		return studentRepository.getStudentList();
 	}
 
-
-
-	
-	// 여기서부터 추가
-	/*
-	public List<StudentVO> getStudentList(Pager pager) {
-		return IStudentRepository.selectByPage(pager);
-	}
-	
-	public Board getBoard(int bno) {
-		return boardDao.selectByBno(bno);
-	}
-	
-	public int getTotalBoardNum() {
-		return .count();
-	}
-
-*/
 }

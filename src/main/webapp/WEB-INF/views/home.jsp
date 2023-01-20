@@ -7,15 +7,15 @@
 .main-first-row { text-align: center;}
 
  #first_image {
-position: relative;
- top: -51px;
- right: 80px; 
- bottom: 300px;
- left: 66px; 
- border-radius: 50%;
- border: 4px solid white;
- width: 100px;
-height: 100px;
+	position: relative;
+	top: -51px;
+	right: 80px; 
+	bottom: 300px;
+	left: 66px; 
+	border-radius: 50%;
+	border: 4px solid white;
+	width: 100px;
+	height: 100px;
  } 
 
 
@@ -44,33 +44,31 @@ height: 100px;
     height: 100px;
 }
 
-
-
  #second_image {
- width: 180px; 
- height: 100px; 
- margin: 10px;
+    width: 180px; 
+    height: 100px; 
+    margin: 10px;
 
  }
  
  #course_image {
- width: 40px;
- height: 40px;
+    width: 40px;
+    height: 40px;
  }
  #category_image{
- width: 40px;
- height: 40px;
+    width: 40px;
+    height: 40px;
  }
 .regular-content-item {
-justify-content: center;
+    justify-content: center;
 }
 .level-content-item{
-width: 180px; 
-height: 299px;
+    width: 180px; 
+    height: 299px;
 
 }
  a{
-  text-align: center;
+    text-align: center;
   }
   
 </style>
