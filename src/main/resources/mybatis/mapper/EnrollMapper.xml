@@ -249,6 +249,7 @@
 		    enroll.state_cd, 
 		    complete_hours, 
 		    enroll.reg_dt, 
+		    enroll_dt, 
 		    enroll.subject_id, 
 		    enroll.subject_seq, 
 		    subject.subject_title, 
@@ -272,7 +273,7 @@
 		    phone, 
 		    add_do_cd, 
 		    add_etc, 
-		    position,
+		    position_cd, 
 		    cancel_rs_etc 
 		FROM enroll
 		INNER JOIN subject
