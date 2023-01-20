@@ -248,6 +248,7 @@ public class EnrollController {
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		System.out.println(studentId);
+		logger.info("addEnroll: "+studentId+subjectId+subjectSeq);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
 		return "redirect:/enroll/boardlist";
 	}
