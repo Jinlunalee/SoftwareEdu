@@ -53,7 +53,7 @@
 					</div>
 					<div class="submit-btn">
 						<form action="<c:url value='/enroll/boardlist'/>">
-							<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
+							<input type="submit" onclick="addEnroll2()" value="저 장" class="btn">
 							<input type="reset" onclick="location.href='<c:url value="/enroll/boardlist"/>'" value="취 소" class="btn">
 						</form>
 					</div>
@@ -257,9 +257,40 @@
 		courseId = value;
 	}
 
+	/*수강 추가 처리하기 22*/
+	function addEnroll2(){
+		alert(studentId);
+
+		let selected = $("select[name=subCor]").val();
+		let subjectInput = $("#subject-input").val();
+		let stateInput = $("#state-input").val();
+		let subjectArr = subjectInput.split('/');
+		let subjectId = subjectArr[0];
+		let subjectSeq = subjectArr[1];
+
+		console.log(subjectInput);
+		console.log(stateInput);
+		console.log(subjectId);
+		console.log(subjectSeq);
+
+		if(selected === "subject"){ //강좌인 경우
+			alert(selected);
+			$.ajax({
+				type : 'POST',
+				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(result){
+					alert("success");
+				}
+			})
+		}else{
+
+		}
+
+	}
+
 	// 수강 추가 처리하기
 	function addEnroll(){
-		
 		// 강좌일 경우
 		if(studentId && subjectId && subjectSeq) {
 			console.log(studentId, subjectId, subjectSeq);

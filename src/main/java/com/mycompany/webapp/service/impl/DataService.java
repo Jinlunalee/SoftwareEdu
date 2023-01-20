@@ -21,7 +21,7 @@ public class DataService implements IDataService{
 	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 
-	//1번 json
+	// 학생 정보 json
 	@Override
 	public String getDataGson(String startDay, String endDay) {
 		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
@@ -32,7 +32,7 @@ public class DataService implements IDataService{
 	}
 
 
-	//2번 json
+	// 강좌 정보 json
 	@Override
 	public String getSbjDataGson(String startDay, String endDay) {
 		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);
@@ -43,7 +43,7 @@ public class DataService implements IDataService{
 	}
 
 
-	/*			일단 주석처리하고
+	/*			
 	@Override
 	public List<StudentVO> getDataList () {
 		return dataRepository.getDataList();
@@ -51,7 +51,7 @@ public class DataService implements IDataService{
 	 */
 
 
-	// 학생xml
+	// 학생 xml
 	@Override
 	public String getDataList(String startDay, String endDay) {
 			List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);

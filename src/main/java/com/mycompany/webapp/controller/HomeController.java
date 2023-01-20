@@ -43,6 +43,13 @@ public class HomeController {
 	}
 	
 	
+	/**
+	 * @description 강좌 목록
+	 * @date		2023. 1. 20.
+	 * @param model
+	 * @param catSubject
+	 * @return
+	 */
 	@RequestMapping(value="/boardlist",method=RequestMethod.GET)
 	public String getSubjectList(Model model, @RequestParam String catSubject) {
 		model.addAttribute("menu", "subject");
@@ -57,6 +64,13 @@ public class HomeController {
 	
 	
 	
+	/**
+	 * @description 과정 목록
+	 * @date		2023. 1. 20.
+	 * @param model
+	 * @param catCourse
+	 * @return
+	 */
 	@RequestMapping(value="/courseboardlist",method=RequestMethod.GET)
 	public String getCourseList(Model model, @RequestParam String catCourse) {
 		model.addAttribute("menu", "subject");
