@@ -268,7 +268,7 @@
 		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY/MM/DD') AS "recruitStartDay", 
 		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY/MM/DD') AS "recruitEndDay", 
 		    recruit_people, 
-		    open.state_cd as open_state_cd, 
+		    open.state_cd AS "openStateCd", 
 		    subject.cat_cd as cat_subject_cd, 
 		    enroll.student_id, 
 		    name, 

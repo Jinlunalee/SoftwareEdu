@@ -121,6 +121,7 @@ public class EnrollService implements IEnrollService{
 		enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd())); // 강좌 상태
 		enrollVo.setCatSubjectCdTitle(homeRepository.getComnCdTitle(enrollVo.getCatSubjectCd())); // 강좌 분류
 		enrollVo.setLevelCdTitle(homeRepository.getComnCdTitle(enrollVo.getLevelCd())); // 강좌 난이도
+		enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
 		return enrollVo;
 	}
 	

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/details.css'/>"/>
 
@@ -12,26 +11,24 @@
 	</div>
 	
 	<div class="card-body">
-		<table class="enroll-detail-table enroll-table">
+		<table class="enroll-detail-table enroll-table all-table">
 			<tr>
-				<th class="info enroll-info" colspan='10'>수강 정보</th>
+				<th class="info enroll-info" colspan='8'>수강 정보</th>
 			</tr>
 			
 			<tr>
 				<th>수강 아이디</th>
 				<td>${enroll.enrollId}</td>
+				<th>수강 등록일</th>
+				<td>${enroll.enrollDt}</td>
 				<th>수강 상태</th>
 				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
 				<th>취소 상세 사유</th>
 				<td>${enroll.cancelRsEtc}</td>
-				<th>수강 완료 시간</th>
-				<td>${enroll.completeHours}</td>
-				<th>수강 등록일</th>
-				<td>${enroll.enrollDt}</td>
 			</tr>
 		</table>
 
-		<table class="enroll-detail-table student-table">
+		<table class="enroll-detail-table student-table all-table">
 			<tr>
 				<th class="info student-info" colspan='8'>수강생 정보</th>
 			</tr>
@@ -41,25 +38,23 @@
 				<td>${enroll.studentId}</td>
 				<th>수강생 이름</th>
 				<td>${enroll.name}</td>
-				<th>수강생 구분</th>
-				<td>${enroll.positionCdTitle}</td>
+				<th>수강생 생년월일</th>
+				<td>${enroll.birth}</td>
 				<th>수강생 성별</th>
 				<td>${enroll.genderCdTitle}</td>
 			</tr>
 			
 			<tr>
-				<th>수강생 생년월일</th>
-				<td>${enroll.birth}</td>
+				<th>수강생 구분</th>
+				<td>${enroll.positionCdTitle}</td>
 				<th>수강생 연락처</th>
 				<td>${enroll.phone}</td>
 				<th>수강생 주소</th>
-				<td>${enroll.addDoCdTitle}</td>
-				<th>수강생 상세주소</th>
-				<td>${enroll.addEtc}</td>
+				<td colspan='3'>${enroll.addDoCdTitle} ${enroll.addEtc}</td>
 			</tr>
 		</table>
 
-		<table class="enroll-detail-table student-table">
+		<table class="enroll-detail-table student-table all-table">
 			<tr>
 				<th class="info open-info" colspan='8'>개설 강좌 정보</th>
 			</tr>
@@ -68,9 +63,29 @@
 				<th>강좌 아이디</th>
 				<td>${enroll.subjectId}</td>
 				<th>강좌명</th>
-				<td colspan='3'>${enroll.subjectTitle}</td>
+				<td colspan='2'>${enroll.subjectTitle}</td>
+				<th>강좌 기간</th>
+				<td colspan='2'>${enroll.startDay} ~ ${enroll.endDay}</td>
+			</tr>
+			
+			<tr>
+				<th>강좌 일수</th>
+				<td>${enroll.days}</td>
+				<th>강좌 시수</th>
+				<td>${enroll.hours}</td>
 				<th>강좌 상태</th>
 				<td>${enroll.openStateCdTitle}</td>
+				<th>강좌 모집인원</th>
+				<td>${enroll.recruitPeople}</td>
+			</tr>
+			
+			<tr>
+				<th>강좌 분류</th>
+				<td colspan='2'>${enroll.catSubjectCdTitle}</td>
+				<th>강좌 난이도</th>
+				<td>${enroll.levelCdTitle}</td>
+				<th>강좌 모집 기간</th>
+				<td colspan='2'>${enroll.recruitStartDay} ~ ${enroll.recruitEndDay}</td>
 			</tr>
 			
 			<tr>
@@ -78,34 +93,15 @@
 				<td>${enroll.courseId}</td>
 				<th>과정명</th>
 				<td>${enroll.courseTitle}</td>
-				<th>강좌 분류</th>
-				<td>${enroll.catSubjectCdTitle}</td>
-				<th>강좌 난이도</th>
-				<td>${enroll.levelCdTitle}</td>
-			</tr>
-			
-			<tr>
-				<th>강좌일수</th>
-				<td>${enroll.days}</td>
-				<th>강좌시수</th>
-				<td>${enroll.hours}</td>
-				<th>강좌 기간</th>
-				<td colspan='3'>${enroll.startDay} ~ ${enroll.endDay}</td>
-			</tr>
-			
-			<tr>
-				<th>강좌 모집 기간</th>
-				<td colspan='5'>${enroll.recruitStartDay} ~ ${enroll.recruitEndDay}</td>
-				<th>강좌 모집인원</th>
-				<td>${enroll.recruitPeople}</td>
+				
 			</tr>
 		</table>
 
-		<table class="enroll-detail-table add-hours-table">
-			<tr>
-				<th style="width:20%;">현재 수강 완료 시간</th>
-				<th style="width:20%;">진도율</th>
-				<th style="width:60%;">추가 수강 시간</th>
+		<table class="enroll-detail-table add-hours-table all-table">
+			<tr class="hours-ratio">
+				<th style="width:20%; background-color: #053863;">현재 수강 완료 시간</th>
+				<th style="width:20%; background-color: #053863;">진도율</th>
+				<th style="width:60%; background-color: #053863;">추가 수강 시간</th>
 			</tr>
 			
 			<tr>

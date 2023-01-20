@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>"/>
 
