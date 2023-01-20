@@ -17,6 +17,8 @@
       <br>
       <%-- 연계자료 기간으로 검색  --%>
       <div class="search">
+      <%-- 수강생: std_sbj의 강좌 시작일이 기준 --%>
+      <%-- 강좌: 강좌 시작일이 기준 --%>
          <form name="sc-form" >
             <%--연계자료 기간 --%>
             <div class="data-period">
@@ -38,10 +40,9 @@
 
             <div class="card_check">
                <img id="check_img"
-                  src="<c:url value='/resources/images/json.png'/>" /> <br>
-               <a>연수원_교육비 지원대상 교육과정을 수강 완료한<br>수강생 교육 정보 (검색조건은 std_sbj에
-                  있는 강좌 교육일로)<br>(수강 완료 시수 포함)
-               </a>
+                  src="<c:url value='/resources/images/json.png'/>" /><br>
+               <a>연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보 <br>(수강 완료 시수 포함)
+               </a>  <%-- (검색조건은 std_sbj에 있는 강좌 교육일로) --%>
                <button type="button" class="btn btn-outline-secondary"
                   id="first_btn">
                   연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
@@ -51,8 +52,8 @@
 
             <div class="card_check">
                <img id="check_img"
-                  src="<c:url value='/resources/images/xml.png'/>" /> <br> <a>연수원_교육비
-                  지원대상 교육과정을 수강 완료한<br>수강생 교육 정보<br>(수강 완료 시수 포함)
+                  src="<c:url value='/resources/images/xml.png'/>" /><br>
+                  <a>연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보  <br>(수강 완료 시수 포함)
                </a>
                <button type="button" class="btn btn-outline-secondary"
                   id="second_btn">
@@ -67,10 +68,9 @@
          <div class="second_card">
             <div class="card_check">
                <img id="check_img"
-                  src="<c:url value='/resources/images/json.png'/>" /> <br> <a>연수원_교육비
-                  환급 대상 교육과정 최종 검증용 연계자료 <br>(검색조건은 강좌시작일)<br>(수강 완료 시수
-                  포함)
-               </a>
+                  src="<c:url value='/resources/images/json.png'/>" /><br> 
+                  <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료 <br>(수강 완료 시수 포함)
+               </a> <%--검색조건은 강좌시작일 --%>
                <button type="button" class="btn btn-outline-secondary"
                   id="third_btn">
                   연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
@@ -81,8 +81,8 @@
 
             <div class="card_check">
                <img id="check_img"
-                  src="<c:url value='/resources/images/xml.png'/>" /> <br> <a>연수원_교육비
-                  환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)
+                  src="<c:url value='/resources/images/xml.png'/>" /><br> 
+                  <a>연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료<br>(수강 완료 시수 포함)
                </a>
                <button type="button" class="btn btn-outline-secondary"
                   id="forth_btn">
@@ -182,29 +182,7 @@
          },
          contentType : "application/json; charset:UTF-8", // 한글이 물음표로 깨져서 나오는 현상 방지
          success : function(data) {
-            
-            /*      var str = "";
-                  
-                  str += "[";
-                   for (var i = 0; i < data.length; i++) {
-                      
-                      str += "{";
-                      // 큰따옴표가 나왔으면 좋겠어서 문자열을 표현하는 ' '로 감싸줌 
-                      str += '"agent_id":' + '"' + "KOSA01" + '",';
-                      str += '"std_sbj":' + '"' + data[i].stdSbj + '",';
-                      str += '"name":' + '"' + data[i].name + '",';
-                      str += '"complete_hours":' + '"' + data[i].completeHours + '",';
-                      str += '"send_dt":' + '"' + data[i].sendDt + '"';
 
-                      
-                      if (i == data.length - 1) { // ,로 연결이 되어야 하는데 마지막일 때는 들어가면 안 돼서
-                         str += "}";
-                      } else { // 마지막이아닐때
-                         str += "},";
-                      }
-                   }
-                   str += "]";   
-                    console.log(data);         */
 
             $("#result").html(JSON.stringify(data));
          }
