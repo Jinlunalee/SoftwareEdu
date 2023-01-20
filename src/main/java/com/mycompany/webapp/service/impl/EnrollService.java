@@ -105,8 +105,44 @@ public class EnrollService implements IEnrollService{
 	@Override
 	public EnrollVO getEnrollDetails(String enrollId) {
 		EnrollVO enrollVo = enrollRepository.getEnrollDetails(enrollId);
+		
+		StringBuilder enrollDt = new StringBuilder(enrollVo.getEnrollDt().substring(0, 8));
+		enrollDt.insert(4, "/");
+		enrollDt.insert(7, "/");
+		enrollVo.setEnrollDt(enrollDt.toString());
+		
+		StringBuilder birth = new StringBuilder(enrollVo.getBirth());
+		birth.insert(4, "/");
+		birth.insert(7, "/");
+		enrollVo.setBirth(birth.toString());
+		
+		StringBuilder phone = new StringBuilder(enrollVo.getPhone());
+		phone.insert(3,  "-");
+		phone.insert(8,  "-");
+		enrollVo.setPhone(phone.toString());
+		
+		StringBuilder startDay = new StringBuilder(enrollVo.getStartDay());
+		startDay.insert(4, "/");
+		startDay.insert(7, "/");
+		enrollVo.setStartDay(startDay.toString());
+		
+		StringBuilder endDay = new StringBuilder(enrollVo.getEndDay());
+		endDay.insert(4, "/");
+		endDay.insert(7, "/");
+		enrollVo.setEndDay(endDay.toString());
+		
+		StringBuilder recruitStartDay = new StringBuilder(enrollVo.getRecruitStartDay());
+		recruitStartDay.insert(4, "/");
+		recruitStartDay.insert(7, "/");
+		enrollVo.setRecruitStartDay(recruitStartDay.toString());
+		
+		StringBuilder recruitEndDay = new StringBuilder(enrollVo.getRecruitEndDay());
+		recruitEndDay.insert(4, "/");
+		recruitEndDay.insert(7, "/");
+		enrollVo.setRecruitEndDay(recruitEndDay.toString());
+		
 		enrollVo.setRatio(enrollRepository.getRatioUsingEnrollId(enrollId));
-		enrollVo.setPositionCdTitle(homeRepository.getComnCdTitle(enrollVo.getPosition())); // 수강생 구분
+		enrollVo.setPositionCdTitle(homeRepository.getComnCdTitle(enrollVo.getPositionCd())); // 수강생 구분
 		enrollVo.setGenderCdTitle(homeRepository.getComnCdTitle(enrollVo.getGenderCd())); // 수강생 성별
 		enrollVo.setAddDoCdTitle(homeRepository.getComnCdTitle(enrollVo.getAddDoCd())); // 수강생 주소
 		enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd())); // 강좌 상태

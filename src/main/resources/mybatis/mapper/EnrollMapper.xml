@@ -237,9 +237,10 @@
 	/* addEnroll */
 		INSERT INTO ENROLL 
 		(enroll_id, subject_id, subject_seq, student_id, state_cd, 
-		complete_hours, reg_id, reg_dt, modi_id, modi_dt, 
+		complete_hours, enroll_dt, reg_id, reg_dt, modi_id, modi_dt, 
 		del_yn, cancel_rs_cd, cancel_rs_etc) 
-		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), NULL, NULL, 'N', NULL, NULL)
+		VALUES ('ENRL0' || #{maxEnrollId}, #{subjectId}, #{subjectSeq}, #{studentId}, 'ERL01', 0, 
+		TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS') ,'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), NULL, NULL, 'N', NULL, NULL)
 	</insert>
 	
 	<select id="getEnrollDetails" parameterType="String" resultType="EnrollVO">
@@ -249,6 +250,7 @@
 		    enroll.state_cd, 
 		    complete_hours, 
 		    enroll.reg_dt, 
+		    enroll_dt, 
 		    enroll.subject_id, 
 		    enroll.subject_seq, 
 		    subject.subject_title, 
@@ -272,7 +274,7 @@
 		    phone, 
 		    add_do_cd, 
 		    add_etc, 
-		    position,
+		    position_cd, 
 		    cancel_rs_etc 
 		FROM enroll
 		INNER JOIN subject

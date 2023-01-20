@@ -104,10 +104,10 @@
 				</td>
 
 				<%-- 수강생 명 --%>
-				<td>${board.name}(${board.studentId})</td>
+				<td>${board.name} (${board.studentId})</td>
 				
 				<!-- 신청일자 -->
-				<td>${board.regDt}</td>
+				<td>${board.enrollDt}</td>
 
 				<%-- 현재 상태 옆에 진도율 --%>
 				<td>

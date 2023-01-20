@@ -27,7 +27,7 @@
 				<th>수강 완료 시간</th>
 				<td>${enroll.completeHours}</td>
 				<th>수강 등록일</th>
-				<td>${enroll.regDt}</td>
+				<td>${enroll.enrollDt}</td>
 			</tr>
 		</table>
 
