@@ -27,13 +27,11 @@ public class DataController {
    
    //통계
    /**
-
-    * 연계 자료 통계 조회
+    * @description 연계 자료 조회 페이지
     * @date 2023. 1. 12.
     * @param model
     * @return
     * ------------------------------
-    * 2023. 1. 13. modify.......
     */
    @RequestMapping(value="/download", method=RequestMethod.GET)
    public String getDataList(Model model) {
@@ -47,7 +45,16 @@ public class DataController {
       return "data/download";
    }
    
-   @RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
+   
+
+   /**
+    * @description 학생 정보 json 형식 
+	* @date		2023. 1. 20.
+	* @param startDay
+	* @param endDay
+	* @return
+ */
+@RequestMapping(value="/getjson", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
    public @ResponseBody String getjson(@RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay){
       
       // 파라메터 잘 받아왔는지 테스트
@@ -59,15 +66,22 @@ public class DataController {
    }   
    
    
-   
-   
-   @RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+
+   /**
+    * @description 학생 정보 xml형식
+    * @date		2023. 1. 20.
+	* @param model
+	* @param startDay
+	* @param endDay
+	* @return
+ */
+@RequestMapping(value="/getxml", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
    @ResponseBody
    public String getxml(Model model, @RequestParam("sDay") String startDay,@RequestParam("eDay") String endDay) {
    
    return dataService.getDataList(startDay, endDay);
    }
-/*   
+   /*   
    @RequestMapping(value="/getjsonSbj")
    public @ResponseBody List<SubjectVO> getjsonSbj() {
       return dataService.getSbjDataList();
@@ -76,7 +90,14 @@ public class DataController {
    
    
    
-   @RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8" )
+   /**
+    * @description 강좌 정보 json
+	* @date		2023. 1. 20.
+	* @param startDay
+	* @param endDay
+	* @return
+ */
+@RequestMapping(value="/getjsonSbj", method=RequestMethod.GET, produces = "application/json; charset=UTF-8" )
    public @ResponseBody String getjsonSbj(@RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay){
       
       String resultJsonSbjStr = dataService.getSbjDataGson(startDay, endDay);
@@ -84,16 +105,20 @@ public class DataController {
       return resultJsonSbjStr;
    }   
    
+  
 
-   
-   
-// 수정중 2023.01.19  오후 2시 30분 
-   @RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
+   /**
+    * @description 강좌 정보 xml
+	* @date		2023. 1. 20.
+	* @param subjectVo
+	* @param startDay
+	* @param endDay
+	* @return
+ */
+@RequestMapping(value="/getxmlSbj", method=RequestMethod.GET, produces = "application/text; charset=UTF-8")
    public @ResponseBody String getxmlSbj(SubjectVO subjectVo, @RequestParam("sDay") String startDay, @RequestParam("eDay") String endDay) {
       
-//      String resultXmlStr = "";
 
-      
       return dataService.getSbjDataList(startDay, endDay);
    }
 }
