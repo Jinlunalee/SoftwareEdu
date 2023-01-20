@@ -128,15 +128,22 @@
 					for(var i in result) {
 						var $studentId = result[i].studentId;
 						var $name = result[i].name;
+						var $genderTitle = result[i].genderTitle;
 						var $birth = result[i].birth;
 						var $email = result[i].email;
 						var $phone = result[i].phone;
+						var $addDoTitle = result[i].addDoTitle;
+						var $addEtc = result[i].addEtc;
+						var $positionTitle = result[i].positionTitle;
 						
 						var li = $("<ul class='stu'/>").append(
 								$("<li/>").text(' ' + '이름 : ' + $name),
+								$("<li/>").text(' ' + '성별 : ' + $genderTitle),
 								$("<li/>").text(' ' + '생년월일 : ' + $birth),
 								$("<li/>").text(' ' + '이메일 : ' + $email),
-								$("<li/>").text(' ' + '전화번호 : ' + $phone)
+								$("<li/>").text(' ' + '전화번호 : ' + $phone),
+								$("<li/>").text(' ' + '주소 : ' + $addDoTitle + ' ' + $addEtc),
+								$("<li/>").text(' ' + '직위 : ' + $positionTitle)
 						);
 						ul.append(li);
 					}

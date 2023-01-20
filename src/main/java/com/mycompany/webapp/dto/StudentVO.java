@@ -32,7 +32,7 @@ public class StudentVO {
 	
 	private String addEtc;		// 수강생 주소 기타  * 얘 수정
 
-	private String position;
+	private String positionCd;
 	//	private String positionCd;		// 수강생 지위
 
 	private int cntStd;		//전체수강생 수 * 얘 수정
@@ -62,5 +62,11 @@ public class StudentVO {
 	private String type; // 검색 타입
 	
 	private String keyword; // 검색 내용
+	
+	private String addDoTitle;
+	
+	private String genderTitle;
+	
+	private String positionTitle;
 	
 }

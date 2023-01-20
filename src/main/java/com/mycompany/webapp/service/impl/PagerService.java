@@ -105,10 +105,6 @@ public class PagerService implements IPagerService {
 		List<EnrollVO> boardList = pagerRepository.selectEnrollListByPage(pager);
 		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
 		for(EnrollVO enrollVo : boardList) {
-			StringBuilder enrollDt = new StringBuilder(enrollVo.getEnrollDt().substring(0, 8));
-			enrollDt.insert(4, "/");
-			enrollDt.insert(7, "/");
-			enrollVo.setEnrollDt(enrollDt.toString());
 			enrollVo.setRatio(enrollRepository.getRatioUsingEnrollId(enrollVo.getEnrollId()));	// 진도율 set
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
 			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
@@ -143,10 +139,6 @@ public class PagerService implements IPagerService {
 		List<EnrollVO> boardList = pagerRepository.selectSearchListByPage(applyStartDay, applyEndDay, student, course, state, endRowNo, startRowNo, keyword1, keyword2);
 		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
 		for(EnrollVO enrollVo : boardList) {
-			StringBuilder enrollDt = new StringBuilder(enrollVo.getEnrollDt().substring(0, 8));
-			enrollDt.insert(4, "/");
-			enrollDt.insert(7, "/");
-			enrollVo.setEnrollDt(enrollDt.toString());
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
 			enrollVo.setOpenStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getOpenStateCd()));
 			
