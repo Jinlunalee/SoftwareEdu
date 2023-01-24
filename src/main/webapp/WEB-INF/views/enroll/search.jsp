@@ -200,7 +200,8 @@
 	</table>
 	
 		<div class="down">
-			<a href="<c:url value='/enroll/download'/>">
+			<a href="<c:url value='/enroll/enrollsearchexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}
+			&course=${enroll.course}&keyword2=${enroll.keyword2}&student=${enroll.student}&keyword1=${enroll.keyword1}&state=${enroll.state}'/>">
 				<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
 			</a>
 		</div>

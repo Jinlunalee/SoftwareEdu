@@ -19,7 +19,6 @@ function showList() {
     let formInputs = '';
     for(var i=1; i<searchForm.length-1; i++) {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
-        alert(formInputs);
     }
     let searchUrl = String(formInputs).substring(1);
     const pathArr = location.pathname.split('/');

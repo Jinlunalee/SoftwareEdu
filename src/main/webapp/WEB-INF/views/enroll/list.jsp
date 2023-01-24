@@ -188,9 +188,9 @@
 		</table>
 		
 		<div class="down">
-			<a href="<c:url value='/enroll/download'/>">
-			<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
-			</a>
+				<a href="<c:url value='/enroll/enrollexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}'/>">
+					<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
+				</a>
 		</div>
 		
 	</div>
