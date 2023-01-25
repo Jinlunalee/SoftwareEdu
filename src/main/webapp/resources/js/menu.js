@@ -20,19 +20,19 @@ const submenuNames = {
 
 const submenuLinks = {
     subject : [
-        'http://localhost/subject/courseboardlist?catCourse=all', 'http://localhost/subject/subjectboardlist?catSubject=all', '', ''
+        'http://192.168.0.47/subject/courseboardlist?catCourse=all', 'http://192.168.0.47/subject/subjectboardlist?catSubject=all', '', ''
     ],
     student : [
-        'http://localhost/student/boardlist', ''
+        'http://192.168.0.47/student/boardlist', ''
     ],
     enroll : [
-        'http://localhost/enroll/boardlist'
+        'http://192.168.0.47/enroll/boardlist'
     ],
     survey : [
-        'http://localhost/survey/summary'
+        'http://192.168.0.47/survey/summary'
     ],
     data : [
-        'http://localhost/data/download'
+        'http://192.168.0.47/data/download'
     ]
 }
 
