@@ -4,7 +4,7 @@ $('.open-subject-popup-btn').on("click", function(e){
     e.preventDefault();
 
     // 팝업창 실행
-    let popupUrl = "/SoftwareEducation/common/searchpop-opensubject";
+    let popupUrl = "/common/searchpop-opensubject";
     let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
 
     window.open(popupUrl,"검색 팝업", popupOption);
@@ -16,7 +16,7 @@ $('.open-course-popup-btn').on("click", function(e){
     e.preventDefault();
 
     // 팝업창 실행
-    let popupUrl = "/SoftwareEducation/common/searchpop-opencourse";
+    let popupUrl = "/common/searchpop-opencourse";
     let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
 
     window.open(popupUrl,"검색 팝업", popupOption);
@@ -28,7 +28,7 @@ $('.subject-popup-btn').on("click", function(e){
     e.preventDefault();
 
     // 팝업창 실행
-    let popupUrl = "/SoftwareEducation/common/searchpop-subject";
+    let popupUrl = "/common/searchpop-subject";
     let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
 
     window.open(popupUrl,"검색 팝업", popupOption);
@@ -40,7 +40,7 @@ $('.course-popup-btn').on("click", function(e){
     e.preventDefault();
 
     // 팝업창 실행
-    let popupUrl = "/SoftwareEducation/common/searchpop-course";
+    let popupUrl = "/common/searchpop-course";
     let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
 
     window.open(popupUrl,"검색 팝업", popupOption);

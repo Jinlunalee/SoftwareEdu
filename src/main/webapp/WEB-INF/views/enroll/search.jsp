@@ -214,9 +214,11 @@
  		function showModal(i){
  			var openBtnClassName = ".modal-open-" + i;
  			var modalClassName = ".modal-" + i; 
-			$(openBtnClassName).click(function(){
+			function click() {
 				$(modalClassName).fadeIn();
-			});
+			}
+			
+			click();
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();

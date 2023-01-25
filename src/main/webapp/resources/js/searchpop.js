@@ -22,7 +22,9 @@ function showList() {
     }
     let searchUrl = String(formInputs).substring(1);
     const pathArr = location.pathname.split('/');
-    const path = pathArr[3];
+    console.log(location.pathname);
+    console.log(pathArr);
+    const path = pathArr[2];
     console.log(path + "-result?" + searchUrl);
     $.ajax({
         url : path + "-result?" + searchUrl,
