@@ -20,19 +20,19 @@ const submenuNames = {
 
 const submenuLinks = {
     subject : [
-        'http://localhost/subject/courseboardlist?catCourse=all', 'http://localhost/subject/subjectboardlist?catSubject=all', '', ''
+        '/subject/courseboardlist?catCourse=all', '/subject/subjectboardlist?catSubject=all', '', ''
     ],
     student : [
-        'http://localhost/student/boardlist', ''
+        '/student/boardlist', ''
     ],
     enroll : [
-        'http://localhost/enroll/boardlist'
+        '/enroll/boardlist'
     ],
     survey : [
-        'http://localhost/survey/summary'
+        '/survey/summary'
     ],
     data : [
-        'http://localhost/data/download'
+        '/data/download'
     ]
 }
 
