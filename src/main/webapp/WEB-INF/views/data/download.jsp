@@ -100,16 +100,16 @@
          <div class="card_info" id="show_info1">
             <a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-               * name : 수강생 이름<br> * complete_hours : 수강완료시수<br> *
-               send_dt : 전송시간<br>
+               * name : 수강생 이름  &emsp; &emsp; &emsp; * state_cd : 진행상태(ERL06)<br> * complete_hours : 수강완료시수<br> 
+               * send_dt : 전송시간<br>
             </a>
          </div>
 
          <div class="card_info" id="show_info2">
             <a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
                * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-               * name : 수강생 이름<br> * complete_hours : 수강완료시수<br> *
-               send_dt : 전송시간<br>
+               * name : 수강생 이름 &emsp; &emsp; &emsp; * state_cd : 진행상태(ERL06) <br> * complete_hours : 수강완료시수<br> 
+               * send_dt : 전송시간<br>
             </a>
          </div>
 
@@ -184,7 +184,7 @@
          success : function(data) {
 
 
-            $("#result").html(JSON.stringify(data));
+            $("#result").text(JSON.stringify(data, null, 4));
          }
       });
    }
@@ -205,7 +205,7 @@
          contentType : "application/json; charset:UTF-8", 
          success : function(data) {
 
-            $("#resultXml").text(data);
+            $("#resultXml").text(data, null, 4);
          }
       });
    }
@@ -228,7 +228,7 @@
          contentType : "application/json; charset=UTF-8",
          success : function(data) {console.log(data);
 
-            $("#result3").text(JSON.stringify(data));
+            $("#result3").text(JSON.stringify(data, null, 4));
          }
       });
    }

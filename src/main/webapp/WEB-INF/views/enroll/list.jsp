@@ -121,14 +121,14 @@
 					<td>
 						<%-- 취소 버튼 --%>
 						<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
+							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count})">취소</button>
 							<%-- 취소 사유 모달창 --%>
 							<div class="modal modal-${status.count}">
 								<div class="modal-content modal-content-${status.count}">
 									<span style="font-size: 1.2em;">취소하시겠습니까?</span>
-									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
+									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform" onSubmit="checkForm()">
 										<select id="selectCancel" name="cancelRsCd" class="cancelrs" onchange="cancel(); this.onclick=null;">
-											<option>취소 사유</option>
+											<option value="">취소 사유 선택</option>
 											<c:forEach var="cancel" items="${cancelList}">
 												<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 											</c:forEach>
@@ -200,14 +200,17 @@
 	<script>
 		function showModal(i){
 			var openBtnClassName = ".modal-open-" + i;
-			var modalClassName = ".modal-" + i; 
-			$(openBtnClassName).click(function(){
+			var modalClassName = ".modal-" + i;
+			function click() {
 				$(modalClassName).fadeIn();
-			});
+			}
+			
+			click();
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
+			
 		};
 		
 		function del(studentId, subjectId, subjectSeq) {
@@ -249,6 +252,14 @@
 				document.querySelector("#cancelRsEtc").append(createInput);
 			}else if(cancel !== '관리자 기타'){
 				$('#cancelRsEtc').empty();		
+			}
+		}
+		
+		function checkForm() {
+			
+			if($('select[name=cancelRsCd]').val() === "") {
+				alert("취소 사유를 선택해 주세요.");
+				event.preventDefault();
 			}
 		}
 	</script>

@@ -31,8 +31,14 @@ public class EnrollService implements IEnrollService{
 	public void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq) {
 		String cancelRsCd = enroll.getCancelRsCd();
 		String cancelRsEtc = enroll.getCancelRsEtc();
-		enrollRepository.updateCancelRsCd(cancelRsCd, cancelRsEtc, studentId, subjectId, subjectSeq);
-		enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
+		if(cancelRsEtc != null) {
+			enrollRepository.updateCancelRsCdEtc(cancelRsCd, cancelRsEtc, studentId, subjectId, subjectSeq);
+			enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
+		}else {
+			enrollRepository.updateCancelRsCd(cancelRsCd, studentId, subjectId, subjectSeq);
+			enrollRepository.clickCancel(studentId, subjectId, subjectSeq);
+		}
+		
 	}
 
 	@Override

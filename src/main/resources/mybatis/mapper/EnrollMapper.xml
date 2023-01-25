@@ -218,6 +218,13 @@
 	<update id="updateCancelRsCd" parameterType="map">
 	/* updateCancelRsCd */
 		UPDATE ENROLL 
+		SET cancel_rs_cd = #{cancelRsCd} 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="updateCancelRsCdEtc" parameterType="map">
+	/* updateCancelRsCd */
+		UPDATE ENROLL 
 		SET cancel_rs_cd = #{cancelRsCd}, cancel_rs_etc = #{cancelRsEtc} 
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
 	</update>

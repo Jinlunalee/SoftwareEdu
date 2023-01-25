@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.mycompany.webapp.dao.IDataRepository;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
@@ -19,7 +21,7 @@ public class DataService implements IDataService{
 	IDataRepository dataRepository;
 
 	// @Expose를 사용하기 위해, new Gson()이 아닌 new GsonBuilder()사용 : @Expose처리된 필드는 직렬화에서 배제시킬 수 있음.
-	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
 
 
 	// 학생 정보 json
@@ -28,7 +30,7 @@ public class DataService implements IDataService{
 		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
 
 		String jsonStr = gson.toJson(dataList);		
-
+		System.out.println(jsonStr);
 		return jsonStr;
 	}
 
@@ -64,16 +66,18 @@ public class DataService implements IDataService{
 			String name = vo.getName();
 			String completeHours = vo.getCompleteHours();
 			String sendDt = vo.getSendDt();
+			String stateCd = vo.getStateCd();
 		
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
-        result += "<student>";
-        result += "<agent_id>" + "KOSA01" + "</agent_id>";
-        result += "<std_sbj>"+ stdSbj +"</std_sbj>";
-        result += "<name>" + name + "</name>";
-        result +=  "<complete_hours>" + completeHours + "</complete_hours>";
-        result +=  "<send_dt>" + sendDt + "<send_dt>";
-        result +=  "</student>"; 
+        result += "<student>" + "\n";
+        result += "<agent_id>" + "KOSA01" + "</agent_id>" + "\n";
+        result += "<std_sbj>"+ stdSbj +"</std_sbj>" + "\n";
+        result += "<name>" + name + "</name>" + "\n";
+        result += "<complete_hours>" + completeHours + "</complete_hours>" + "\n";
+        result += "<send_dt>" + sendDt + "<send_dt>" + "\n";
+        result += "<state_cd>" + stateCd + "<state_cd>" + "\n";
+        result +=  "</student>" + "\n" + "\n"; 
 //        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
 		}
@@ -98,17 +102,17 @@ public class DataService implements IDataService{
         	int cntStd = vo.getCntStd();
         	
         	
-           result += "<subject>";
-           result += "<sbjId_seq>" + sbjIdSeq + "</sbjId_seq>";
+           result += "<subject>" + "\n";
+           result += "<sbjId_seq>" + sbjIdSeq + "</sbjId_seq>" + "\n";
            result += "<subject_title>" + subjectTitle
-                 + "</subject_title>";
-           result += "<hours>" + hours + "</hours>";
-           result += "<start_day>" + sDay + "</start_day>";
-           result += "<end_day>" + eDay + "</end_day>";
-           result += "<cost>" + cost + "</cost>";
-           result += "<send_dt>" + sendDt + "</send_dt>";
-           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>";
-           result += "</subject>";  
+                 + "</subject_title>" + "\n";
+           result += "<hours>" + hours + "</hours>" + "\n";
+           result += "<start_day>" + sDay + "</start_day>" + "\n";
+           result += "<end_day>" + eDay + "</end_day>" + "\n";
+           result += "<cost>" + cost + "</cost>" + "\n";
+           result += "<send_dt>" + sendDt + "</send_dt>" + "\n";
+           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>" + "\n";
+           result += "</subject>" + "\n" + "\n";  
         }
 
 		return result;

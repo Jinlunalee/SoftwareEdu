@@ -142,3 +142,7 @@ img {
    position: relative;
    left: -20px;
 }
+
+#result, #resultXml, #result3, #result4  {
+    white-space: pre;
+} 
