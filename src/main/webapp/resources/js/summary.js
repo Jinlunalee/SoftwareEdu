@@ -1,6 +1,5 @@
 /* subject에 따른 table chart 보여주기 */
 function showTableChart(data) {
-  const questionCount = data.length/5; // 항목 수
 
   // 답변 값 총합의 변수 만듦
   let fiveStarSum=0;
@@ -10,13 +9,23 @@ function showTableChart(data) {
   let oneStarSum=0;
 
   // 답변 값 총합 구하기
-  for(let i=0; i<questionCount; i++) {
-    fiveStarSum += data[5*i+5-1].countAnswerValue;
-    fourStarSum += data[5*i+4-1].countAnswerValue;
-    threeStarSum += data[5*i+3-1].countAnswerValue;
-    twoStarSum += data[5*i+2-1].countAnswerValue;
-    oneStarSum += data[5*i+1-1].countAnswerValue;
+  for(let i=0; i<data.length; i++) {
+    if(data[i]!==null){
+      if(data[i].answerValue==5){
+        fiveStarSum += data[i].countAnswerValue;
+      } else if(data[i].answerValue==4){
+        fourStarSum += data[i].countAnswerValue;
+      } else if(data[i].answerValue==3){
+        threeStarSum += data[i].countAnswerValue;
+      } else if(data[i].answerValue==2){
+        twoStarSum += data[i].countAnswerValue;
+      } else if(data[i].answerValue==1){
+        oneStarSum += data[i].countAnswerValue;
+      }
+    }
   }
+
+  console.log(fiveStarSum, fourStarSum, threeStarSum,  twoStarSum,  oneStarSum);
 
   // table chart 실행
   var tableOptions = {
@@ -46,27 +55,49 @@ function showTableChart(data) {
   
 /* subject에 따른 bar chart 보여주기 */
 function showBarChart(data) {
-  const questionCount = data.length/5; // 항목 수
+  const questionCount = data.length/5;
 
   // 답변 값의 배열 만듦
-  let fiveStarArr = new Array();
-  let fourStarArr = new Array();
-  let threeStarArr = new Array();
-  let twoStarArr = new Array();
-  let oneStarArr = new Array();
+  let fiveStarArr = new Array(questionCount);
+  let fourStarArr = new Array(questionCount);
+  let threeStarArr = new Array(questionCount);
+  let twoStarArr = new Array(questionCount);
+  let oneStarArr = new Array(questionCount);
+
+  // 배열에 0 넣어놓기
+  for(let k=0; k<questionCount; k++) {
+    fiveStarArr[k] = 0;
+    fourStarArr[k] = 0;
+    threeStarArr[k] = 0;
+    twoStarArr[k] = 0;
+    oneStarArr[k] = 0;
+  }
 
   // 문항 제목
   let titleArr = new Array();
 
   // 배열에 for문으로 데이터 입력
-  for(let i=0; i<questionCount; i++) {
-    fiveStarArr.push(data[i*5+4].countAnswerValue);
-    fourStarArr.push(data[i*5+3].countAnswerValue);
-    threeStarArr.push(data[i*5+2].countAnswerValue);
-    twoStarArr.push(data[i*5+1].countAnswerValue);
-    oneStarArr.push(data[i*5].countAnswerValue);
-    titleArr.push(data[i*5].questionContent);
+  for(let i=0; i<data.length; i++) {
+    console.log(i, data[i]);
+    if(data[i]!==null){
+      if(data[i].answerValue==5){
+        fiveStarArr[data[i].questionNum-1] += parseInt(data[i].countAnswerValue);
+      } else if(data[i].answerValue==4){
+        fourStarArr[data[i].questionNum-1] += parseInt(data[i].countAnswerValue);
+      } else if(data[i].answerValue==3){
+        threeStarArr[data[i].questionNum-1] += parseInt(data[i].countAnswerValue);
+      } else if(data[i].answerValue==2){
+        twoStarArr[data[i].questionNum-1] += parseInt(data[i].countAnswerValue);
+      } else if(data[i].answerValue==1){
+        oneStarArr[data[i].questionNum-1] += parseInt(data[i].countAnswerValue);
+      }
+      titleArr.push(data[i].questionContent);
+    }
   }
+
+  // title 배열 중복 제거 --> uniqueTitleArr
+  let set = new Set(titleArr);
+  let uniqueTitleArr = [...set];
 
   // table chart 실행
   var barOptions = {
@@ -102,7 +133,7 @@ function showBarChart(data) {
       colors: ['#fff']
     },
     xaxis: {
-      categories: titleArr
+      categories: uniqueTitleArr
     },
     tooltip: {
       y: {
