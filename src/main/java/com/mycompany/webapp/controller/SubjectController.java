@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.QuestionSetVO;
@@ -67,21 +68,21 @@ public class SubjectController {
 
 	// paging 개설 과정 목록 조회 (course)
 	@GetMapping("/courseboardlist")
-	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catCourse) {
+	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catCourseCd) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenCourseRow(catCourse);
+		int totalRows = pagerService.getCountOpenCourseRow(catCourseCd);
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<SubjectVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourse);
+		List<OpenVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourseCd);
 
 		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catCourse); 
+		model.addAttribute("catId", catCourseCd); 
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
@@ -107,21 +108,21 @@ public class SubjectController {
 
 	// paging 강좌 목록 조회 (open)
 	@GetMapping("/subjectboardlist")
-	public String subjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catSubject) {
+	public String subjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catSubjectCd) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenSubjectRow(catSubject);
+		int totalRows = pagerService.getCountOpenSubjectRow(catSubjectCd);
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<SubjectVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubject);
+		List<OpenVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubjectCd);
 
 		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catSubject);
+		model.addAttribute("catId", catSubjectCd);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
@@ -141,12 +142,12 @@ public class SubjectController {
 		List<QuestionSetVO> questionSet = surveyService.selectSubjectQuestionSet(subjectId, subjectSeq);
 		model.addAttribute("questionSet", questionSet);
 
-		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
-		int totalPeople = enrollService.recruitTotalPeople(subjectId, subjectSeq, subject.getState());//subject의 상태에 따라 카운드할 수강생 상태가 달라짐
-		model.addAttribute("subject", subject);
+		OpenVO openVo = subjectService.selectSubjectDetails(subjectId, subjectSeq);
+		int totalPeople = enrollService.recruitTotalPeople(subjectId, subjectSeq, openVo.getOpenStateCd());//subject의 상태에 따라 카운드할 수강생 상태가 달라짐
+		model.addAttribute("open", openVo);
 		model.addAttribute("totalPeople", totalPeople);
 
-		logger.info("details/subject: "+ subject);
+		logger.info("details/subject: "+ openVo);
 		logger.info("details/subject: "+ totalPeople);
 		logger.info("details/subject: "+ questionSet);
 
@@ -167,19 +168,19 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 
-		SubjectVO subject = subjectService.selectSubjectDetails(subjectId, subjectSeq);
-		model.addAttribute("subject", subject);
+		OpenVO openVo = subjectService.selectSubjectDetails(subjectId, subjectSeq);
+		model.addAttribute("open", openVo);
 
 		return "subject/update";
 	}
 
 	// 개설 강좌 수정 (open)
 	@RequestMapping(value="/update/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String updateSubject(SubjectVO subject) {
-		logger.info("subject/update:"+subject);
+	public String updateSubject(OpenVO openVo) {
+		logger.info("subject/update:"+openVo);
 
 		try {
-			MultipartFile mf = subject.getFile();
+			MultipartFile mf = openVo.getFile();
 			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
 				UploadfileVO file = new UploadfileVO();
 				file.setFileName(mf.getOriginalFilename());
@@ -187,15 +188,15 @@ public class SubjectController {
 				file.setFileContentType(mf.getContentType());
 				file.setFileData(mf.getBytes());
 
-				subjectService.updateFileData(subject, file);
+				subjectService.updateFileData(openVo, file);
 			}else { // 첨부파일 없을 때
-				subjectService.updateSubject(subject);
+				subjectService.updateSubject(openVo);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "redirect:/subject/details/"+subject.getSubjectId()+"/"+subject.getSubjectSeq();
+		return "redirect:/subject/details/"+openVo.getSubjectId()+"/"+openVo.getSubjectSeq();
 	}
 
 	// 이미지 첨부파일 보여주기
@@ -212,12 +213,12 @@ public class SubjectController {
 	}
 
 	// 개설 강좌 삭제 (open)
-	@RequestMapping(value="/delete/{subjectId}")
-	public String deleteSubject(@PathVariable String subjectId ,SubjectVO subjectVo, Model model) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-		return "redirect:/subject/subjectboardlist";
-	}
+//	@RequestMapping(value="/delete/{subjectId}")
+//	public String deleteSubject(@PathVariable String subjectId ,SubjectVO subjectVo, Model model) {
+//		model.addAttribute("menu", "subject");
+//		model.addAttribute("menuKOR", "강좌 관리");
+//		return "redirect:/subject/subjectboardlist";
+//	}
 
 	// 개설 강좌 논리 삭제 (open)
 	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
@@ -245,7 +246,7 @@ public class SubjectController {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 
-		List<SubjectVO> allCourseList = subjectService.selectAllCourse();
+		List<CourseVO> allCourseList = subjectService.selectAllCourse();
 		List<SubjectVO> allSubjectList = subjectService.selectAllSubject();
 		model.addAttribute("allCourseList", allCourseList);
 		model.addAttribute("allSubjectList", allSubjectList);
@@ -255,13 +256,13 @@ public class SubjectController {
 
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(SubjectVO subject, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
+	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
 
-		logger.info("subject/insert:"+subject);
+		logger.info("subject/insert:"+openVo);
 		logger.info("subject/insert:"+questionVo);
 
 		try {
-			MultipartFile mf = subject.getFile();
+			MultipartFile mf = openVo.getFile();
 			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
 				UploadfileVO file = new UploadfileVO();
 				file.setFileName(mf.getOriginalFilename());
@@ -269,18 +270,18 @@ public class SubjectController {
 				file.setFileContentType(mf.getContentType());
 				file.setFileData(mf.getBytes());
 
-				subjectService.insertFileData(subject, file);
+				subjectService.insertFileData(openVo, file);
 
 				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
-				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
-				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
+				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
 				surveyService.insertQuestion(questionVo);
 			}else { // 첨부파일 없을 때
-				subjectService.insertSubject(subject);
+				subjectService.insertSubject(openVo);
 
 				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
-				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(subject.getSubjectId()));
-				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(subject.getSubjectId()));
+				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
+				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
 				surveyService.insertQuestion(questionVo);
 			}
 		}catch (Exception e) {
@@ -320,9 +321,10 @@ public class SubjectController {
 	 */
 	@PostMapping("/ajaxsubjectboardlist")
 	public String ajaxSubjectList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
-			@RequestParam(defaultValue="all") String catSubject, Model model) {
+			@RequestParam(defaultValue="all") String catSubjectCd, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("check", "openSubject");
 		
 		logger.info("strRowPerPage:"+strRowsPerPage);
 		
@@ -330,16 +332,16 @@ public class SubjectController {
 		int rowsPerPage = Integer.parseInt(strRowsPerPage);
 		
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenSubjectRow(catSubject);
+		int totalRows = pagerService.getCountOpenSubjectRow(catSubjectCd);
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<SubjectVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubject);
+		List<OpenVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubjectCd);
 
 		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catSubject);
+		model.addAttribute("catId", catSubjectCd);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
@@ -359,7 +361,7 @@ public class SubjectController {
 	 */
 	@PostMapping("/ajaxcourseboardlist")
 	public String ajaxCourseList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
-			@RequestParam(defaultValue="all") String catCourse, Model model) {
+			@RequestParam(defaultValue="all") String catCourseCd, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
@@ -367,16 +369,16 @@ public class SubjectController {
 		int rowsPerPage = Integer.parseInt(strRowsPerPage);
 		
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenCourseRow(catCourse);
+		int totalRows = pagerService.getCountOpenCourseRow(catCourseCd);
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<SubjectVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourse);
+		List<OpenVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourseCd);
 
 		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catCourse); 
+		model.addAttribute("catId", catCourseCd); 
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수

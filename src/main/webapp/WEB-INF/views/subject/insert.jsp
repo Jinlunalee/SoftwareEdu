@@ -121,7 +121,11 @@ function changeEverything(i) {
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td><span name="level" id="level"></span></td>
+				<td>
+					<!-- <span name="levelCd" id="levelCd"></span> -->
+					<span name="levelCdTitle" id="levelCdTitle"></span>
+					<input type="hidden" name="levelCd" id="levelCd" value="">
+				</td>
 			</tr>
 			<tr>
 				<td> 모집인원</td>
@@ -203,7 +207,7 @@ function changeEverything(i) {
 			<p class="txt"> <textarea name="content" id="content" cols="60" rows="10"></textarea> </p>
 		</div>
 		<div class="submit-btn">
-			<input type="hidden" name="state" id="state" value="">
+			<input type="hidden" name="openStateCd" id="openStateCd" value="">
 			<input type="submit" class="btn-submit-open-popup" value="저장">
 		</div>
 		</form>		

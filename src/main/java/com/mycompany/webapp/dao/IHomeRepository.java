@@ -7,19 +7,20 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IHomeRepository {
 	
-	List<SubjectVO> selectSubjectList(String catSubject);
-	List<SubjectVO> selectCourseList(String catCourse);
+	List<OpenVO> selectSubjectList(String catSubjectCd);
+	List<OpenVO> selectCourseList(String catCourseCd);
 
 	String getComnCdTitle(@Param("comnCd") String comnCd);
 	List<CommonCodeVO> getComnCdList (String comnCdType);
 	
 	List<SubjectVO> searchSubject(SubjectVO subjectVo);
 	List<CourseVO> searchCourse(CourseVO courseVo);
-	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
-	List<CourseVO> searchOpenCourse(CourseVO courseVo);
+	List<OpenVO> searchOpenSubject(OpenVO openVo);
+	List<OpenVO> searchOpenCourse(OpenVO openVo);
 
 }
