@@ -184,7 +184,7 @@
          success : function(data) {
 
 
-            $("#result").html(JSON.stringify(data));
+            $("#result").text(JSON.stringify(data, null, 4));
          }
       });
    }
@@ -205,7 +205,7 @@
          contentType : "application/json; charset:UTF-8", 
          success : function(data) {
 
-            $("#resultXml").text(data);
+            $("#resultXml").text(data, null, 4);
          }
       });
    }
@@ -228,7 +228,7 @@
          contentType : "application/json; charset=UTF-8",
          success : function(data) {console.log(data);
 
-            $("#result3").text(JSON.stringify(data));
+            $("#result3").text(JSON.stringify(data, null, 4));
          }
       });
    }
