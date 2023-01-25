@@ -18,7 +18,10 @@ public class DataService implements IDataService{
 	IDataRepository dataRepository;
 
 	// @Expose를 사용하기 위해, new Gson()이 아닌 new GsonBuilder()사용 : @Expose처리된 필드는 직렬화에서 배제시킬 수 있음.
-	Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	Gson gson = new GsonBuilder()
+			.setPrettyPrinting()
+			.excludeFieldsWithoutExposeAnnotation()
+			.create();
 
 
 	// 학생 정보 json
