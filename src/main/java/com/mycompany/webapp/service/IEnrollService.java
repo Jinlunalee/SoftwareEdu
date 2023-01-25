@@ -22,7 +22,7 @@ public interface IEnrollService {
 	void approval(String studentId, String subjectId, int subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(String studentId, String subjcetId, int subjectSeq);
-	void addCourse(String studentId, String courseId);
+	void addCourse(String studentId, String courseId, String courseOpenYear);
 	int recruitTotalPeople(String subjectId, int subjectSeq, String state);
 	EnrollVO getEnrollDetails(String enrollId); // 수강 상세 정보 가져오기
 }

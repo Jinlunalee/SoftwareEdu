@@ -260,10 +260,10 @@ public class EnrollController {
 	 * @param courseId
 	 * @return
 	 */
-	@RequestMapping(value="/addcourse/{studentId}/{courseId}", method=RequestMethod.POST)
-	public String addCourse(@PathVariable String studentId, @PathVariable String courseId) {
+	@RequestMapping(value="/addcourse/{studentId}/{courseId}/{courseOpenYear}", method=RequestMethod.POST)
+	public String addCourse(@PathVariable String studentId, @PathVariable String courseId, @PathVariable String courseOpenYear) {
 		System.out.println(courseId);
-		enrollService.addCourse(studentId, courseId);
+		enrollService.addCourse(studentId, courseId, courseOpenYear);
 		return "redirect:/enroll/boardlist";
 	}
 

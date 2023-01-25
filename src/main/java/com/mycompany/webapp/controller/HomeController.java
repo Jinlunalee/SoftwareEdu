@@ -223,6 +223,7 @@ public class HomeController {
 		System.out.println(courseVo);
 		
 		List<CourseVO> openCourseList = homeService.searchOpenCourse(courseVo);
+		logger.info("subjectlist: " + openCourseList);	
 		
 		// ajax로 구현할 것
 		if(!openCourseList.isEmpty()) {

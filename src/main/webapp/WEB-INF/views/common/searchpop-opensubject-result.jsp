@@ -35,7 +35,7 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regDt}/${board.state}">
+                            <a class="${board.state}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regDt}/${board.state}">
                                 ${board.subjectTitle}
                             </a>
                         </td>

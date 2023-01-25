@@ -27,8 +27,8 @@ public interface IEnrollRepository {
 	void addEnroll(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("maxEnrollId") int maxEnrollId);
 //	void addCourse(Map<String, Object> addCourse, String studnetId, String maxEnroll2);
 	int getMaxEnrollId();
-	int getSubjectCountByCourse(String courseId);
-	List<OpenVO> getSubjectInfoByCourse(String courseId);
+	int getSubjectCountByCourse(@Param("courseId") String courseId, @Param("courseOpenYear") String courseOpenYear);
+	List<OpenVO> getSubjectInfoByCourse(@Param("courseId") String courseId, @Param("courseOpenYear") String courseOpenYear);
 	int updateEnrollCancel(); // 강좌가 폐강시 해당 강좌 듣는 수강생도 수강취소 처리
 	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
 	EnrollVO getEnrollDetails(String enrollId); // 수강 상세 정보 가져오기
