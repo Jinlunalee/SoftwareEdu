@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 @Service
@@ -17,14 +18,13 @@ public class HomeService implements IHomeService {
 	IHomeRepository homeRepository;
 	
 	@Override
-	public List<SubjectVO> selectSubjectList(String catSubject) {
-
-		return homeRepository.selectSubjectList(catSubject); 
+	public List<OpenVO> selectSubjectList(String catSubjectCd) {
+		return homeRepository.selectSubjectList(catSubjectCd); 
 	}
 
 	@Override
-	public List<SubjectVO> selectCourseList(String catCourse) {
-		return homeRepository.selectCourseList(catCourse); 
+	public List<OpenVO> selectCourseList(String catCourseCd) {
+		return homeRepository.selectCourseList(catCourseCd); 
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public class HomeService implements IHomeService {
 	public List<SubjectVO> searchSubject(SubjectVO subjectVo) {
 		List<SubjectVO> boardList = homeRepository.searchSubject(subjectVo);
 		for(SubjectVO subjectVoReturn : boardList) {
-			subjectVoReturn.setLevelTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevel()));
-			subjectVoReturn.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubject()));
+			subjectVoReturn.setLevelCdTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevelCd()));
+			subjectVoReturn.setCatSubjectCdTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubjectCd()));
 		}
 		return boardList;
 	}
@@ -57,25 +57,25 @@ public class HomeService implements IHomeService {
 	}
 	
 	@Override
-	public List<SubjectVO> searchOpenSubject(SubjectVO subjectVo) {
-		List<SubjectVO> boardList = homeRepository.searchOpenSubject(subjectVo);
+	public List<OpenVO> searchOpenSubject(OpenVO openVo) {
+		List<OpenVO> boardList = homeRepository.searchOpenSubject(openVo);
 		// level, state, catSubject 공통코드로 가져와서 set 하기
-		for(SubjectVO subjectVoReturn : boardList) {
-			subjectVoReturn.setLevelTitle(homeRepository.getComnCdTitle(subjectVoReturn.getLevel()));
-			subjectVoReturn.setComnCdTitle(homeRepository.getComnCdTitle(subjectVoReturn.getState()));
-			subjectVoReturn.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVoReturn.getCatSubject()));
+		for(OpenVO openVoReturn : boardList) {
+			openVoReturn.setLevelCdTitle(homeRepository.getComnCdTitle(openVoReturn.getLevelCd()));
+			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
+			openVoReturn.setCatSubjectCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatSubjectCd()));
 		}
 		return boardList;
 	}
 
 	@Override
-	public List<CourseVO> searchOpenCourse(CourseVO courseVo) {
-		List<CourseVO> boardList = homeRepository.searchOpenCourse(courseVo);
+	public List<OpenVO> searchOpenCourse(OpenVO openVo) {
+		List<OpenVO> boardList = homeRepository.searchOpenCourse(openVo);
 		
 		
-		for(CourseVO courseVoReturn : boardList) {
+		for(OpenVO openVoReturn : boardList) {
 			// state, catSubject 공통코드로 가져와서 set 하기
-			courseVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(courseVoReturn.getCatCourseCd()));
+			openVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatCourseCd()));
 			
 			//기간에 따라 상태 표현
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
@@ -87,21 +87,21 @@ public class HomeService implements IHomeService {
 				int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
 				
 				if(today < recruitStartDay) {
-					boardList.get(i).setStateCd("OPN01");//모집예정 
+					boardList.get(i).setOpenStateCd("OPN01");//모집예정 
 				}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
-					boardList.get(i).setStateCd("OPN02");
+					boardList.get(i).setOpenStateCd("OPN02");
 				}else { //모집마감 1. 진행중  2.진행완료
 					if(startDay < today && today < endDay) { //진행중
-						boardList.get(i).setStateCd("OPN04");
+						boardList.get(i).setOpenStateCd("OPN04");
 					}else if(endDay < today){ //진행완료
-						boardList.get(i).setStateCd("OPN05");
+						boardList.get(i).setOpenStateCd("OPN05");
 					}else { //모집마감
-						boardList.get(i).setStateCd("OPN03");
+						boardList.get(i).setOpenStateCd("OPN03");
 					}
 				}
 			}
 			
-			courseVoReturn.setStateCdTitle(homeRepository.getComnCdTitle(courseVoReturn.getStateCd()));
+			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
 			// 여기에서 상태 검색 적용어떻게 하지?
 
 		}

@@ -27,20 +27,20 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a id="${board.subjectId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regYear}/${board.levelTitle}/${board.days}/${board.hours}">
+                            <a id="${board.subjectId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regYear}/${board.levelCdTitle}/${board.days}/${board.hours}">
                                 ${board.subjectTitle}
                             </a>
                         </td>
                         <td>${board.supportYn}</td>
-                        <c:if test="${board.level ne 'LEV04'}">
-                            <td>${board.levelTitle}</td>
+                        <c:if test="${board.levelCd ne 'LEV04'}">
+                            <td>${board.levelCdTitle}</td>
                         </c:if>
-                        <c:if test="${board.level eq 'LEV04'}">
+                        <c:if test="${board.levelCd eq 'LEV04'}">
                             <td>${board.levelEtc}</td>
                         </c:if>
                         <td>${board.days}</td>
                         <td>${board.hours}</td>
-                        <td>${board.catSubjectTitle}</td>
+                        <td>${board.catSubjectCdTitle}</td>
                         <td>${board.regYear}</td>
                     </tr>
                 </c:forEach>

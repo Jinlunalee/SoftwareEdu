@@ -80,8 +80,8 @@
    <insert id="insertQuestion" parameterType="map">
    /* insertQuestion */
       insert into question
-          (subject_id, subject_seq, question_num, question_content, reg_id, reg_dt, del_yn)
-      values(#{subjectId}, #{subjectSeq}, #{questionSetVo.questionNum}, #{questionSetVo.questionContent}, 'mgr1', SYSDATE, 'N')
+          (subject_id, subject_seq, question_num, question_content, question_dt, reg_id, reg_dt, del_yn)
+      values(#{subjectId}, #{subjectSeq}, #{questionSetVo.questionNum}, #{questionSetVo.questionContent}, TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), 'N')
    </insert>
    
    <select id="getMaxSubjectSeq" parameterType="String" resultType="int">

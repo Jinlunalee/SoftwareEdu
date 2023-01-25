@@ -31,7 +31,7 @@
         </if>   
 	</select>
 
-	<select id="getSbjDataList" parameterType="map" resultType="SubjectVO">
+	<select id="getSbjDataList" parameterType="map" resultType="OpenVO">
 		/* getSbjDataList1 */
 
 		select
@@ -41,7 +41,7 @@
 			open.start_day,
 			open.end_day,
 			subject.cost,
-			to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt",
+			to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as send_dt,
 			(select count(*) from enroll e where e.subject_id = open.subject_id and
 			state_cd = 'ERL06' and e.subject_seq= open.subject_seq) as cnt_std
 		from open

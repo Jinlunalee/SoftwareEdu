@@ -14,12 +14,12 @@
 	<div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
 	</div>
 	<div class="card-body">
-		<c:if test="${not empty subject.courseTitle}">
-			<div class="sub_title">정기과정명 | ${subject.courseTitle} </div>
+		<c:if test="${not empty open.courseTitle}">
+			<div class="sub_title">정기과정명 | ${open.courseTitle} </div>
 		</c:if>
 		<div class="course_title">
-			<div class="main_title"><b class="basic_txt_color">${subject.subjectId}</b>  ${subject.subjectTitle}</div>
-			<div class="course_state">${subject.comnCdTitle}</div>
+			<div class="main_title"><b class="basic_txt_color">${open.subjectId}</b>  ${open.subjectTitle}</div>
+			<div class="course_state">${open.openStateCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
 		<div class="list-wrap">
@@ -38,41 +38,41 @@
 			<tbody>
 			<tr>
 				<td rowspan="7">
-					<c:if test="${!empty subject.fileName}">
-						<c:set var="len" value="${fn:length(subject.fileName)}"/>
-						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(subject.fileName, len-4, len))}"/>
+					<c:if test="${!empty open.fileName}">
+						<c:set var="len" value="${fn:length(open.fileName)}"/>
+						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(open.fileName, len-4, len))}"/>
 						<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
-							<img class="detail_img" src='<c:url value="/subject/file/${subject.fileId}"/>'><br>
+							<img class="detail_img" src='<c:url value="/subject/file/${open.fileId}"/>'><br>
 						</c:if>
 					</c:if>
 				</td>
 				<td> 연수기간(일수)</td>
-				<td> ${subject.startDay} ~ ${subject.endDay} (${subject.days}일)
+				<td> ${open.startDay} ~ ${open.endDay} (${open.days}일)
 				</td>
 			</tr>
 			<tr>
 				<td> 연수시간</td>
-				<td> ${subject.startTime} ~ ${subject.endTime}</td>
+				<td> ${open.startTime} ~ ${open.endTime}</td>
 			</tr>
 			<tr>
 				<td> 신청기간 </td>
-				<td> ${subject.recruitStartDay} ~ ${subject.recruitEndDay} </td>
+				<td> ${open.recruitStartDay} ~ ${open.recruitEndDay} </td>
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td> ${subject.levelTitle} 
-					<c:if test="${not empty subject.levelEtc}">(${subject.levelEtc})</c:if>
+				<td> ${open.levelCdTitle} 
+					<c:if test="${not empty open.levelEtc}">(${open.levelEtc})</c:if>
 				</td>
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> ${totalPeople}/${subject.recruitPeople} </td>
+				<td> ${totalPeople}/${open.recruitPeople} </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>
-				<td> <fmt:formatNumber value="${subject.cost}" type="number"/>
-					<c:if test="${subject.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
-					<c:if test="${subject.supportYn eq 'N'}">* 교육비 지원하지않는 강좌입니다.</c:if>
+				<td> <fmt:formatNumber value="${open.cost}" type="number"/>
+					<c:if test="${open.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
+					<c:if test="${open.supportYn eq 'N'}">* 교육비 지원하지않는 강좌입니다.</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -86,28 +86,28 @@
 		<!-- 교육 소개 -->
 		<div class="course_intro">
 			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt" style="white-space:pre;">${subject.content}</p>
+			<p class="txt" style="white-space:pre;">${open.content}</p>
 		</div>
 		
 		<!-- button -->
 		<div class="submit-btn">
 			<c:choose>
 				<c:when
-					test="${(subject.comnCdTitle eq '모집예정') or (subject.comnCdTitle eq '모집중') or (subject.comnCdTitle eq '추가모집중') or (subject.comnCdTitle eq '모집마감') }">
+					test="${(open.openStateCdTitle eq '모집예정') or (open.openStateCdTitle eq '모집중') or (open.openStateCdTitle eq '추가모집중') or (open.openStateCdTitle eq '모집마감') }">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+						onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
 					<button type="button" class="btn btn-secondary"
-						onclick="closeCourse('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">폐강</button>
+						onclick="closeCourse('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">폐강</button>
 				</c:when>
-				<c:when test="${subject.comnCdTitle eq '진행중'}">
+				<c:when test="${open.openStateCdTitle eq '진행중'}">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='<c:url value="/subject/update/${subject.subjectId}/${subject.subjectSeq}"/>'">수정</button>
+						onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
 				</c:when>
-				<c:when test="${subject.comnCdTitle eq '폐강'}">
+				<c:when test="${open.openStateCdTitle eq '폐강'}">
 					<button type="button" class="btn btn-secondary"
-						onclick="del('${subject.subjectId}', '${subject.subjectSeq}', '${subject.fileId}')">삭제</button>
+						onclick="del('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">삭제</button>
 				</c:when>
-				<c:when test="${subject.comnCdTitle eq '진행완료'}">
+				<c:when test="${open.openStateCdTitle eq '진행완료'}">
 				</c:when>
 			</c:choose>
 		</div> 

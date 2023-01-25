@@ -28,7 +28,7 @@
 					<td>${board.name}</td>
 					<td>${board.email}</td>
 					<td>${board.birth}</td>
-					<td>${board.position}</td>
+					<td>${board.positionTitle}</td>
 					<td>
 						<form>
 							<button type="button" class="btn btn-secondary">수정</button>
