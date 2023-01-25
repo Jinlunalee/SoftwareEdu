@@ -11,7 +11,8 @@
             enroll.subject_seq ||','|| enroll_id as "stdSbj",
             student.name,
             enroll.complete_hours,
-            to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt"
+            to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt",
+            enroll.state_cd
         from enroll
         inner join student on enroll.student_id = student.student_id
         inner join open on open.subject_id = enroll.subject_id and

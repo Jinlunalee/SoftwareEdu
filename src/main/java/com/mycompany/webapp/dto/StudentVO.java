@@ -32,41 +32,40 @@ public class StudentVO {
 	
 	private String addEtc;		// 수강생 주소 기타  * 얘 수정
 
-	private String positionCd;
-	//	private String positionCd;		// 수강생 지위
+	private String positionCd;	// 수강생 지위
+	//	private String positionCd;		
 
-	private int cntStd;		//전체수강생 수 * 얘 수정
+	private int cntStd;		//	전체수강생 수 
 	
 	private String supportYn;  // 교육비 지원 여부
 	
 	private String comnCdTitle; // 공통코드명  
 	
-	private String stateCd;
-	
-	// 위의 공통코드를 얘로 수정해야 함 
-	//  카멜표기법, _표기법 섞여있으니까 하나로 통일하기
 	@Expose
-	private String sendDt;
+	private String stateCd;	// 개설강좌 상태코드
 	
 	@Expose
-	private String agentId;
+	private String sendDt;	// 전송시간
 	
 	@Expose
-	private String stdSbj;
-	
-	private String rate;
+	private String agentId;	// 기관 아이디
 	
 	@Expose
-	private String completeHours;
+	private String stdSbj;	//	수강생, 강좌 정보
+	
+	private String rate;	// 진행율
+	
+	@Expose
+	private String completeHours;	// 수강 완료 시수
 	
 	private String type; // 검색 타입
 	
 	private String keyword; // 검색 내용
 	
-	private String addDoTitle;
+	private String addDoTitle;	//	수강생 주소 도
 	
-	private String genderTitle;
+	private String genderTitle;		// 수강생 성별
 	
-	private String positionTitle;
+	private String positionTitle;	// 수강생 지위(ex.직장인, 학생)
 	
 }

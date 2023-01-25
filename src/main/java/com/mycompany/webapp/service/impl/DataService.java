@@ -63,6 +63,7 @@ public class DataService implements IDataService{
 			String name = vo.getName();
 			String completeHours = vo.getCompleteHours();
 			String sendDt = vo.getSendDt();
+			String stateCd = vo.getStateCd();
 		
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
@@ -70,8 +71,9 @@ public class DataService implements IDataService{
         result += "<agent_id>" + "KOSA01" + "</agent_id>";
         result += "<std_sbj>"+ stdSbj +"</std_sbj>";
         result += "<name>" + name + "</name>";
-        result +=  "<complete_hours>" + completeHours + "</complete_hours>";
-        result +=  "<send_dt>" + sendDt + "<send_dt>";
+        result += "<complete_hours>" + completeHours + "</complete_hours>";
+        result += "<send_dt>" + sendDt + "<send_dt>";
+        result += "<state_cd>" + stateCd + "<state_cd>";
         result +=  "</student>"; 
 //        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
