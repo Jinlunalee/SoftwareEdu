@@ -29,7 +29,7 @@ public class DataService implements IDataService{
 		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
 
 		String jsonStr = gson.toJson(dataList);		
-		System.out.println(jsonStr);
+//		System.out.println(jsonStr);
 		return jsonStr;
 	}
 

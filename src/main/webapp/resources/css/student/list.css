@@ -44,6 +44,7 @@
 }
 
 .select-view {
+	font-size: 13px;
 	width: 100px;
     height: 34px;
 	border-radius: 8px;
@@ -63,11 +64,19 @@
     text-align: center;
     border-top: 2px solid #bababa;
     margin-bottom: 20px;
+    font-size: 13px
 }
 
 tr {
 	border-bottom: 1px solid #e8e8e8;
 	height: 40px;
+}
+th {
+	font-weight: 500;
+    font-size: 0.963rem;
+}
+td {
+	color: #666;
 }
 
 .down {
@@ -224,12 +233,37 @@ tr {
   	list-style: none;
 }
 
+.btn-secondary{
+	font-size: 11px;
+}
+.btn-outline-primary{
+	color: #29608a;
+    border-color: #29608a;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #4f6985;
+    border-color: #29608a;
+}
+
+.btn-outline-secondary {
+	font-size: 14px;  	
+}
+
 .close-btn2{
 	position: absolute;
     top: 200px;
     left: 349px;
 }
 
+.list_top .cnt {
+    color: #666;
+    float: left;
+    margin: 5px 10px;
+    }
+.cnt {
+	font-size: 12px;
+}
 #applyperiod {
 	position : relative;
 	right: 400px;
