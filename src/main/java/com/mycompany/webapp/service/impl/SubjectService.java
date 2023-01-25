@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.ISubjectRepository;
+import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
@@ -32,53 +33,53 @@ public class SubjectService implements ISubjectService{
 	IHomeRepository homeRepository;
 	
 	@Override
-	public List<SubjectVO> selectCourseList() {
+	public List<OpenVO> selectCourseList() {
 		return subjectRepository.selectCourseList();
 	}
 
 	@Override
-	public List<SubjectVO> selectSubjectList() {
+	public List<OpenVO> selectSubjectList() {
 		return subjectRepository.selectSubjectList();
 	}
 	
 	@Transactional
 	@Override
-	public SubjectVO selectSubjectDetails(String subjectId, int subjectSeq) {
-		SubjectVO subjectVo = subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
-		subjectVo.setLevelTitle(homeRepository.getComnCdTitle(subjectVo.getLevel()));
-		return subjectVo;
+	public OpenVO selectSubjectDetails(String subjectId, int subjectSeq) {
+		OpenVO openVo = subjectRepository.selectSubjectDetails(subjectId, subjectSeq);
+		openVo.setLevelCdTitle(homeRepository.getComnCdTitle(openVo.getLevelCd()));
+		return openVo;
 	}
 	
 	@Transactional
 	@Override
-	public int insertSubject(SubjectVO subject) {
-		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
-		subjectRepository.insertSubject(subject);
+	public int insertSubject(OpenVO openVo) {
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		subjectRepository.insertSubject(openVo);
 		if(check > 0) { // 같은 과정 존재
-			subjectRepository.updateRecruitSameCourse(subject);
+			subjectRepository.updateRecruitSameCourse(openVo);
 		}
 		return 0;
 	}
 	
 	@Transactional
 	@Override
-	public int insertFileData(SubjectVO subject, UploadfileVO file) {
-		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+	public int insertFileData(OpenVO openVo, UploadfileVO file) {
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
 		if(check > 0) { // 같은 과정 존재
-			subjectRepository.updateRecruitSameCourse(subject);
+			subjectRepository.updateRecruitSameCourse(openVo);
 		}
 		String maxFileId = subjectRepository.selectMaxFileId();
 		String maxFileId1 = maxFileId.substring(0,4);
 		String maxFileId2 = String.format("%04d", Integer.parseInt(maxFileId.substring(4))+1); //4자리수 맞추기
 		logger.info("maxFileID: "+maxFileId1+maxFileId2);
 		
-		subject.setFileId(maxFileId1+maxFileId2);
+		openVo.setFileId(maxFileId1+maxFileId2);
 		file.setFileId(maxFileId1+maxFileId2);
 		
 		if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
 			subjectRepository.insertFileData(file);
 		}
-		subjectRepository.insertSubject(subject);
+		subjectRepository.insertSubject(openVo);
 		return 0;
 	}
 	
@@ -88,7 +89,7 @@ public class SubjectService implements ISubjectService{
 	}
 	
 	@Override
-	public List<SubjectVO> selectAllCourse() {
+	public List<CourseVO> selectAllCourse() {
 		return subjectRepository.selectAllCourse();
 	}
 
@@ -99,48 +100,48 @@ public class SubjectService implements ISubjectService{
 	
 	@Transactional
 	@Override
-	public int updateSubject(SubjectVO subject) {
-		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
-		subjectRepository.updateSubject(subject);
+	public int updateSubject(OpenVO openVo) {
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		subjectRepository.updateSubject(openVo);
 		if(check > 0) { // 같은 과정 존재
-			subjectRepository.updateRecruitSameCourse(subject);
+			subjectRepository.updateRecruitSameCourse(openVo);
 		}
 		return 0;
 	}
 	
 	@Transactional
 	@Override
-	public int updateFileData(SubjectVO subject, UploadfileVO file) {
-		logger.info("service/updatefiledate/:" + subject.getFileId() + file.getFileId());
-		logger.info("service/update/subject:" +subject);
+	public int updateFileData(OpenVO openVo, UploadfileVO file) {
+		logger.info("service/updatefiledate/:" + openVo.getFileId() + file.getFileId());
+		logger.info("service/update/subject:" +openVo);
 		logger.info("service/update/subject:" +file);
 		
-		int check = subjectRepository.checkOpenCourse(subject.getCourseId()); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
 		if(check > 0) { // 같은 과정 존재
-			subjectRepository.updateRecruitSameCourse(subject);
+			subjectRepository.updateRecruitSameCourse(openVo);
 		}
 		
-		if(subject.getFileId() == null || subject.getFileId() == null || subject.getFileId().equals("")) { //그전에 파일이 없다가 나중에 추가
+		if(openVo.getFileId() == null || openVo.getFileId() == null || openVo.getFileId().equals("")) { //그전에 파일이 없다가 나중에 추가
 			String maxFileId = subjectRepository.selectMaxFileId();
 			String maxFileId1 = maxFileId.substring(0,4);
 			String maxFileId2 = String.format("%04d", Integer.parseInt(maxFileId.substring(4))+1); //4자리수 맞추기
 			logger.info("maxFileID: "+maxFileId1+maxFileId2);
 			
-			subject.setFileId(maxFileId1+maxFileId2);
+			openVo.setFileId(maxFileId1+maxFileId2);
 			file.setFileId(maxFileId1+maxFileId2);
 			
 			if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {//첨부파일있을때 
 				subjectRepository.insertFileData(file);	
 				logger.info("insert filedata:"+file);
 			}
-			logger.info("update subject:"+subject);
-			subjectRepository.updateSubject(subject);//fk때문에 나중에 입력되어야 함
+			logger.info("update subject:"+openVo);
+			subjectRepository.updateSubject(openVo);//fk때문에 나중에 입력되어야 함
 		}else { //파일 있다가 수정
 			if(file != null && file.getFileName() != null && !file.getFileName().equals("")) {
-				file.setFileId(subject.getFileId());
+				file.setFileId(openVo.getFileId());
 				subjectRepository.updateFileData(file);
 			}
-			subjectRepository.updateSubject(subject);
+			subjectRepository.updateSubject(openVo);
 		}
 		
 		return 0;
@@ -155,21 +156,27 @@ public class SubjectService implements ISubjectService{
 		
 		logger.info("service/infoSubjectCourse/check : " + check);
 		
+		SubjectVO subjectInfo = subjectRepository.infoSubject(subjectId);
+		subjectInfo.setLevelCdTitle(homeRepository.getComnCdTitle(subjectInfo.getLevelCd())); //level에대한 코드 코드명으로 변경
 		if("".equals(courseId)) { // 과정 입력 X
 			logger.info("coursId X");
-			map.put("subjectInfo", subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
+//			map.put("subjectInfo", subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
+			map.put("subjectInfo", subjectInfo); // 강좌에 대한 정보만 가져옴
 		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)
 			logger.info("coursId O");
 			if(check == 0) { //최초개설
 				logger.info("최초개설");
-				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));// 신청일자를 가져올 필요없으므로 강좌에 대한 정보만 가져옴
+//				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));// 신청일자를 가져올 필요없으므로 강좌에 대한 정보만 가져옴
+				map.put("subjectInfo", subjectInfo); // 강좌에 대한 정보만 가져옴
 			}else { //개설되어있는 경우
 				logger.info("개설되어있는경우");
 				map.put("courseInfo", subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
-				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));//강좌에 대한 정보 가져오기
+//				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));//강좌에 대한 정보 가져오기
+				map.put("subjectInfo", subjectInfo); //강좌에 대한 정보 가져오기
 				map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
 			}
 		}
+		
 		logger.info("service/infoSubjectCourse/list: " + map);
 		return map;
 	}
@@ -210,7 +217,7 @@ public class SubjectService implements ISubjectService{
 	}
 
 	@Override
-	public List<SubjectVO> selectSubjectByCourseId(String courseId) {
+	public List<OpenVO> selectSubjectByCourseId(String courseId) {
 		return subjectRepository.selectSubjectByCourseId(courseId);
 	}
 

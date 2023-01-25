@@ -69,27 +69,27 @@
 								<a href="<c:url value='/subject/details/${board.subjectId}/${board.subjectSeq}'/>">${board.subjectTitle}</a>
 								</span>
 							</td>
-							<td>${board.catSubjectTitle}</td>
+							<td>${board.catSubjectCdTitle}</td>
 							<td>${board.startDay}~${board.endDay}</td>
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
-							<td>${board.comnCdTitle}</td>
-							<td>${board.regDt}</td>
+							<td>${board.openStateCdTitle}</td>
+							<td>${board.openDt}</td>
 							<td>
 								<div>
 									<!-- 모집상태에 따라 나오는 버튼 변경 -->
 									<c:choose>
-										<c:when test="${(board.comnCdTitle eq '모집예정') or (board.comnCdTitle eq '모집중') or (board.comnCdTitle eq '추가모집중') or (board.comnCdTitle eq '모집마감') }">
+										<c:when test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 											<button type="button" class="btn btn-secondary" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '진행중'}">
+										<c:when test="${board.openStateCdTitle eq '진행중'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '폐강'}">
+										<c:when test="${board.openStateCdTitle eq '폐강'}">
 											<button type="button" class="btn btn-secondary" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '진행완료'}">
+										<c:when test="${board.openStateCdTitle eq '진행완료'}">
 										</c:when>
 									</c:choose>
 								</div> 
@@ -103,7 +103,7 @@
 					<td>
 						<div id="paging">
 							<ul class="paging">
-								<li><a href="subjectBoardList?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">처음</a></li>
+								<li><a href="subjectboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">처음</a></li>
 								<c:if test="${pager.groupNo>1}">
 									<li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">이전</a></li>
 								</c:if>

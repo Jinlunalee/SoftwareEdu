@@ -122,19 +122,19 @@
 	
 	
 	<sql id="stateOpen">
-		<if test="openState != null and openState.equals('recruitExpecting')">
+		<if test="openStateCd != null and openStateCd.equals('recruitExpecting')">
 			AND o.state_cd = 'OPN01'
 		</if>
-		<if test="openState != null and openState.equals('recruitOngoing')">
+		<if test="openStateCd != null and openStateCd.equals('recruitOngoing')">
 			AND o.state_cd = 'OPN02'
 		</if>
-		<if test="openState != null and openState.equals('recruitEnd')">
+		<if test="openStateCd != null and openStateCd.equals('recruitEnd')">
 			AND o.state_cd = 'OPN03'
 		</if>
-		<if test="openState != null and openState.equals('ongoing')">
+		<if test="openStateCd != null and openStateCd.equals('ongoing')">
 			AND o.state_cd = 'OPN04'
 		</if>
-		<if test="openState != null and openState.equals('completion')">
+		<if test="openStateCd != null and openStateCd.equals('completion')">
 			AND o.state_cd = 'OPN05'
 		</if>
 	</sql>
@@ -216,6 +216,13 @@
 	</update>
 	
 	<update id="updateCancelRsCd" parameterType="map">
+	/* updateCancelRsCd */
+		UPDATE ENROLL 
+		SET cancel_rs_cd = #{cancelRsCd} 
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId} AND subject_seq = #{subjectSeq}
+	</update>
+	
+	<update id="updateCancelRsCdEtc" parameterType="map">
 	/* updateCancelRsCd */
 		UPDATE ENROLL 
 		SET cancel_rs_cd = #{cancelRsCd}, cancel_rs_etc = #{cancelRsEtc} 

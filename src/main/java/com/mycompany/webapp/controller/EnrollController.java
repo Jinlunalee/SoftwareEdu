@@ -217,7 +217,7 @@ public class EnrollController {
 	@RequestMapping(value="/openlist")
 	public @ResponseBody List<OpenVO> getOpenList(@RequestParam("openState") String openState, @RequestParam("subCor") String subCor, @RequestParam("kw") String kw) {
 		OpenVO openVO = new OpenVO();
-		openVO.setOpenState(openState);
+		openVO.setOpenStateCd(openState);
 		openVO.setSubCor(subCor);
 		openVO.setKw(kw);
 		return enrollService.getOpenList(openVO);

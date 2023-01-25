@@ -13,6 +13,7 @@ import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dao.IPagerRepository;
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
@@ -42,16 +43,16 @@ public class PagerService implements IPagerService {
 	}
 
 	@Override
-	public int getCountOpenCourseRow(String catCourse) {
-		return pagerRepository.getCountOpenCourseRow(catCourse);
+	public int getCountOpenCourseRow(String catCourseCd) {
+		return pagerRepository.getCountOpenCourseRow(catCourseCd);
 	}
 
 	@Override
-	public List<SubjectVO> selectOpenCourseListByPage(Pager pager, String catCourse) {
-		List<SubjectVO> boardList = pagerRepository.selectOpenCourseListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catCourse);
+	public List<OpenVO> selectOpenCourseListByPage(Pager pager, String catCourseCd) {
+		List<OpenVO> boardList = pagerRepository.selectOpenCourseListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catCourseCd);
 		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
-		for(SubjectVO subjectVo : boardList) {
-			subjectVo.setCatCourseTitle(homeRepository.getComnCdTitle(subjectVo.getCatCourse()));
+		for(OpenVO openVo : boardList) {
+			openVo.setCatCourseCdTitle(homeRepository.getComnCdTitle(openVo.getCatCourseCd()));
 		}
 		
 		//기간에 따라 상태 표현
@@ -64,16 +65,16 @@ public class PagerService implements IPagerService {
 			int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
 			
 			if(today < recruitStartDay) {
-				boardList.get(i).setComnCdTitle("모집예정");//모집예정 
+				boardList.get(i).setOpenStateCdTitle("모집예정");//모집예정 
 			}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
-				boardList.get(i).setComnCdTitle("모집중");
+				boardList.get(i).setOpenStateCdTitle("모집중");
 			}else { //모집마감 1. 진행중  2.진행완료
 				if(startDay < today && today < endDay) { //진행중
-					boardList.get(i).setComnCdTitle("진행중");
+					boardList.get(i).setOpenStateCdTitle("진행중");
 				}else if(endDay < today){ //진행완료
-					boardList.get(i).setComnCdTitle("진행완료");
+					boardList.get(i).setOpenStateCdTitle("진행완료");
 				}else { //모집마감
-					boardList.get(i).setComnCdTitle("모집마감");
+					boardList.get(i).setOpenStateCdTitle("모집마감");
 				}
 			}
 		}
@@ -81,16 +82,16 @@ public class PagerService implements IPagerService {
 	}
 
 	@Override
-	public int getCountOpenSubjectRow(String catSubject) {
-		return pagerRepository.getCountOpenSubjectRow(catSubject);
+	public int getCountOpenSubjectRow(String catSubjectCd) {
+		return pagerRepository.getCountOpenSubjectRow(catSubjectCd);
 	}
 
 	@Override
-	public List<SubjectVO> selectOpenSubjectListByPage(Pager pager, String catSubject) {
-		List<SubjectVO> boardList = pagerRepository.selectOpenSubjectListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catSubject);
+	public List<OpenVO> selectOpenSubjectListByPage(Pager pager, String catSubjectCd) {
+		List<OpenVO> boardList = pagerRepository.selectOpenSubjectListByPage(pager.getEndRowNo(), pager.getStartRowNo(), catSubjectCd);
 		// catSubject 공통코드로 catSubjectTitle 가져와서 set하기
-		for(SubjectVO subjectVo : boardList) {
-			subjectVo.setCatSubjectTitle(homeRepository.getComnCdTitle(subjectVo.getCatSubject()));
+		for(OpenVO openVo : boardList) {
+			openVo.setCatSubjectCdTitle(homeRepository.getComnCdTitle(openVo.getCatSubjectCd()));
 		}
 		return boardList;
 	}

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.EnrollVO;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
@@ -15,11 +16,11 @@ public interface IPagerRepository {
 	int getCountStudentRow();
 	List<StudentVO> selectStudentListByPage(Pager pager);
 	
-	int getCountOpenCourseRow(@Param("catCourse") String catCourse);
-	List<SubjectVO> selectOpenCourseListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catCourse") String catCourse);
+	int getCountOpenCourseRow(@Param("catCourseCd") String catCourseCd);
+	List<OpenVO> selectOpenCourseListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catCourseCd") String catCourseCd);
 	
-	int getCountOpenSubjectRow(@Param("catSubject") String catSubject);
-	List<SubjectVO> selectOpenSubjectListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catSubject") String catSubject);
+	int getCountOpenSubjectRow(@Param("catSubjectCd") String catSubjectCd);
+	List<OpenVO> selectOpenSubjectListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catSubjectCd") String catSubjectCd);
 	
 	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);
