@@ -20,7 +20,8 @@ public class SurveyService implements ISurveyService {
 	
 	@Override
 	public AnswerVO getAnswerValue(String subjectId, int subjectSeq, int questionNum, int answerValue) {
-		return surveyRepository.getAnswerValue(subjectId, subjectSeq, questionNum, answerValue);
+		AnswerVO answerVo = surveyRepository.getAnswerValue(subjectId, subjectSeq, questionNum, answerValue);
+		return answerVo;
 	}
 
 	@Override

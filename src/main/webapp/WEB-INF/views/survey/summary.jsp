@@ -61,8 +61,8 @@
 			let subjectArr = subject.split('/');
 			let subjectId = subjectArr[0];
 			let subjectSeq = subjectArr[1];
-			let openDt = subjectArr[3];
-			let state = subjectArr[4];
+			let openDt = subjectArr[4];
+			let state = subjectArr[5];
 			if(state==='OPN05'){
 				$.ajax({
 					url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
