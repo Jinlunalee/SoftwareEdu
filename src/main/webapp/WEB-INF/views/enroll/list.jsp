@@ -121,7 +121,7 @@
 					<td>
 						<%-- 취소 버튼 --%>
 						<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
+							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count})">취소</button>
 							<%-- 취소 사유 모달창 --%>
 							<div class="modal modal-${status.count}">
 								<div class="modal-content modal-content-${status.count}">
@@ -200,14 +200,17 @@
 	<script>
 		function showModal(i){
 			var openBtnClassName = ".modal-open-" + i;
-			var modalClassName = ".modal-" + i; 
-			$(openBtnClassName).click(function(){
+			var modalClassName = ".modal-" + i;
+			function click() {
 				$(modalClassName).fadeIn();
-			});
+			}
+			
+			click();
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
 			});
+			
 		};
 		
 		function del(studentId, subjectId, subjectSeq) {
