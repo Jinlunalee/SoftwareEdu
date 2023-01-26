@@ -56,6 +56,8 @@
 	text-align: end;
     margin-top: 15px;
     margin-bottom: 10px;
+    position: relative;
+    top: 10px;
 }
 
 .list {
@@ -277,7 +279,7 @@ td {
 
 #list-wrap {
 	position: relative;
-	bottom: 30px;
+	bottom: 20px;
 }
 .text-center {
     text-align: center!important;

@@ -60,7 +60,7 @@
 
 .view {
 	position: relative;
-	top: 25px;
+	top: 26px;
 	text-align: end;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -72,11 +72,17 @@
     border-top: 2px solid #bababa;
     margin-bottom: 20px;
     font-size: 13px;
+    position: relative;
+    bottom: 20px;
 }
 
 tr {
 	border-bottom: 1px solid #e8e8e8;
 	height: 40px;
+}
+th {
+    font-weight: 500;
+    font-size: 0.963rem;
 }
 td {
     color: #666;
@@ -90,7 +96,7 @@ td {
 	width: 140px;
     height: 37px;
     position: relative;
-    bottom: 15px;
+    bottom: 30px;
 }
 
 .modal {
@@ -255,6 +261,8 @@ td {
 }
 
 .cnt {
+	position: relative;
+	bottom: 20px;
 	color: #666;
     font-size: 12px;
 }
