@@ -28,12 +28,12 @@
 		FROM open
 		LEFT JOIN course ON open.course_id = course.course_id
 		WHERE open.course_id is not null AND del_yn = 'N'
-		<if test="catCourse != 'all'">
-			AND course.cat_cd = #{catCourse}
+		<if test="catCourseCd != 'all'">
+			AND course.cat_cd = #{catCourseCd}
 		</if>
 	</select>
 
-	<select id="selectOpenCourseListByPage" parameterType="map" resultType="SubjectVO">
+	<select id="selectOpenCourseListByPage" parameterType="map" resultType="OpenVO">
 		/*selectOpenCourseListByPage*/
 		<include refid="paging-header" /> 
 		        select DISTINCT
@@ -44,14 +44,14 @@
 					sum(cost) over (partition by open.course_id) as cost,
 					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
 					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
-					course.cat_cd as cat_course
+					course.cat_cd as cat_course_cd
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
 		        		left join common_code on open.state_cd = common_code.comn_cd
 		        where open.course_id IS NOT NULL AND del_yn = 'N'
-				<if test="catCourse != 'all'">
-					AND course.cat_cd = #{catCourse}
+				<if test="catCourseCd != 'all'">
+					AND course.cat_cd = #{catCourseCd}
 				</if>
 		<include refid="paging-footer" /> 
 	</select>	
@@ -62,12 +62,12 @@
 		FROM open
 		LEFT JOIN subject ON open.subject_id = subject.subject_id
 		WHERE del_yn = 'N' 
-		<if test="catSubject != 'all'">
-			AND subject.cat_cd=#{catSubject}
+		<if test="catSubjectCd != 'all'">
+			AND subject.cat_cd=#{catSubjectCd}
 		</if>
 	</select>
 
-	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="SubjectVO">
+	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="OpenVO">
 		/*selectOpenSubjectListByPage1*/
 		<include refid="paging-header" /> 
 		        select 
@@ -77,7 +77,7 @@
 					support_yn,
 					days,
 					hours,
-					level_cd as "level",
+					level_cd,
 					level_etc,
 					subject.cost,
 					open.course_id,
@@ -89,20 +89,20 @@
 					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
 					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
 					recruit_people,
-					state_cd as state,
-					comn_cd_title,
+					state_cd as open_state_cd,
+					comn_cd_title as open_state_cd_title,
 					file_id,
-					subject.cat_cd as cat_subject,
-					open.reg_dt
+					subject.cat_cd as cat_subject_cd,
+					open.open_dt
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
 		        		left join common_code on open.state_cd = common_code.comn_cd
 		        WHERE del_yn = 'N' 
-				<if test="catSubject != 'all'">
-					AND subject.cat_cd=#{catSubject}
+				<if test="catSubjectCd != 'all'">
+					AND subject.cat_cd=#{catSubjectCd}
 				</if>
-				order by open.reg_dt desc
+				order by open.open_dt desc
 		<include refid="paging-footer" /> 
 	</select>
 	

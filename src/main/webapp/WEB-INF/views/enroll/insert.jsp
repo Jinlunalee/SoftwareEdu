@@ -39,13 +39,14 @@
 					<div class="search-popup" id="search-popup-subject">
 						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
-						<input id="state-input" name="state" type="hidden">
+						<!-- <input id="state-input" name="state" type="hidden"> -->
 						<button class="open-subject-popup-btn btn3 btn-outline-secondary">검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
 						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
 						<input id="course-input" name="subject" type="hidden">
-						<input id="state-input" name="state" type="hidden">
+						<input id="courseYear-input" name="openYear" type="hidden">
+						<!-- <input id="state-input" name="state" type="hidden"> -->
 						<button class="open-course-popup-btn btn3 btn-outline-secondary">검색</button>
 					</div>
 					<div class="submit-btn">
@@ -151,174 +152,196 @@
 		})
 	}
 
-	// subject/course 정보 가져오기
-	function getOpenList() {
-		$.ajax({
-			type : 'GET',
-			url : 'openlist', 
-			dataType : 'json',
-			data : $("form[name=search-subject-course]").serialize(),
-			async : false,
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-			success : function(result){
+	// // subject/course 정보 가져오기
+	// function getOpenList() {
+	// 	$.ajax({
+	// 		type : 'GET',
+	// 		url : 'openlist', 
+	// 		dataType : 'json',
+	// 		data : $("form[name=search-subject-course]").serialize(),
+	// 		async : false,
+	// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+	// 		success : function(result){
 				
-				$(".subject-result").empty();
+	// 			$(".subject-result").empty();
 				
-				// 강좌/과정 선택 값 확인
-				var selected = $("select[name=subCor]").val();
+	// 			// 강좌/과정 선택 값 확인
+	// 			var selected = $("select[name=subCor]").val();
 
-				// 강좌를 선택했을 때
-				if(selected==='subject') {
-					// 테이블 태그 만들기
-					var td = $("<table border = '1' class='tb'/>");
-					// 컬럼명 만들기
-					var rowTitle = $("<tr/>").append(
-							$("<td/>").text("선택"),
-							$("<td/>").text("강좌 명 (아이디)"),
-							$("<td/>").text("강좌 기간"),
-							$("<td/>").text("모집 기간"),
-							$("<td/>").text("모집 인원")
-							)
-						td.append(rowTitle);
-					// result에 담긴만큼 객체 만들어서 추가하기
-					for(var i in result) {
-						var $check = `<input class="check-subject" name="check-subject" type="checkbox" value="` + result[i].subjectId + `/` + result[i].subjectSeq + `" onclick='checkOnlyOne(this); saveCheckSubject(this.value);'>`;
-						var $subjectId = result[i].subjectId;
-						var $subjectTitle = result[i].subjectTitle;
-						var $startDay = result[i].startDay;
-						var $endDay = result[i].endDay;
-						var $recruitStartDay = result[i].recruitStartDay;
-						var $recruitEndDay = result[i].recruitEndDay;
-						var $recruitPeople = result[i].recruitPeople;
+	// 			// 강좌를 선택했을 때
+	// 			if(selected==='subject') {
+	// 				// 테이블 태그 만들기
+	// 				var td = $("<table border = '1' class='tb'/>");
+	// 				// 컬럼명 만들기
+	// 				var rowTitle = $("<tr/>").append(
+	// 						$("<td/>").text("선택"),
+	// 						$("<td/>").text("강좌 명 (아이디)"),
+	// 						$("<td/>").text("강좌 기간"),
+	// 						$("<td/>").text("모집 기간"),
+	// 						$("<td/>").text("모집 인원")
+	// 						)
+	// 					td.append(rowTitle);
+	// 				// result에 담긴만큼 객체 만들어서 추가하기
+	// 				for(var i in result) {
+	// 					var $check = `<input class="check-subject" name="check-subject" type="checkbox" value="` + result[i].subjectId + `/` + result[i].subjectSeq + `" onclick='checkOnlyOne(this); saveCheckSubject(this.value);'>`;
+	// 					var $subjectId = result[i].subjectId;
+	// 					var $subjectTitle = result[i].subjectTitle;
+	// 					var $startDay = result[i].startDay;
+	// 					var $endDay = result[i].endDay;
+	// 					var $recruitStartDay = result[i].recruitStartDay;
+	// 					var $recruitEndDay = result[i].recruitEndDay;
+	// 					var $recruitPeople = result[i].recruitPeople;
 													
-						var row = $("<tr/>").append(
-								$("<td/>").append($check),
-								$("<td/>").text($subjectTitle + ' (' + $subjectId + ')'),
-								$("<td/>").text($startDay + ' ~ ' + $endDay),
-								$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
-								$("<td/>").text($recruitPeople)
-							);
-						td.append(row);
-						$(".subject-result").append(td);
-					};
+	// 					var row = $("<tr/>").append(
+	// 							$("<td/>").append($check),
+	// 							$("<td/>").text($subjectTitle + ' (' + $subjectId + ')'),
+	// 							$("<td/>").text($startDay + ' ~ ' + $endDay),
+	// 							$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
+	// 							$("<td/>").text($recruitPeople)
+	// 						);
+	// 					td.append(row);
+	// 					$(".subject-result").append(td);
+	// 				};
 
-				// 과정을 선택했을 때
-				} else if(selected==='course'){
-					// 테이블 태그 만들기
-					var td = $("<table border = '1' class='tb'/>");
-					// 컬럼명 만들기
-					var rowTitle = $("<tr/>").append(
-							$("<td/>").text("선택"),
-							$("<td/>").text("과정명 (아이디)"),
-							$("<td/>").text("과정 기간"),
-							$("<td/>").text("모집 기간"),
-							$("<td/>").text("모집 인원")
-							)
-						td.append(rowTitle);
-					// result에 담긴만큼 객체 만들어서 추가하기
-					for(var i in result) {
-						var $check = `<input class="check-subject" name="check-subject" type="checkbox" value="` + result[i].courseId + `" onclick='checkOnlyOne(this); saveCheckCourse(this.value);'>`;
-						var $courseId = result[i].courseId;
-						var $courseTitle = result[i].courseTitle;
-						var $startDay = result[i].startDay;
-						var $endDay = result[i].endDay;
-						var $recruitStartDay = result[i].recruitStartDay;
-						var $recruitEndDay = result[i].recruitEndDay;
-						var $recruitPeople = result[i].recruitPeople;
+	// 			// 과정을 선택했을 때
+	// 			} else if(selected==='course'){
+	// 				// 테이블 태그 만들기
+	// 				var td = $("<table border = '1' class='tb'/>");
+	// 				// 컬럼명 만들기
+	// 				var rowTitle = $("<tr/>").append(
+	// 						$("<td/>").text("선택"),
+	// 						$("<td/>").text("과정명 (아이디)"),
+	// 						$("<td/>").text("과정 기간"),
+	// 						$("<td/>").text("모집 기간"),
+	// 						$("<td/>").text("모집 인원")
+	// 						)
+	// 					td.append(rowTitle);
+	// 				// result에 담긴만큼 객체 만들어서 추가하기
+	// 				for(var i in result) {
+	// 					var $check = `<input class="check-subject" name="check-subject" type="checkbox" value="` + result[i].courseId + `" onclick='checkOnlyOne(this); saveCheckCourse(this.value);'>`;
+	// 					var $courseId = result[i].courseId;
+	// 					var $courseTitle = result[i].courseTitle;
+	// 					var $startDay = result[i].startDay;
+	// 					var $endDay = result[i].endDay;
+	// 					var $recruitStartDay = result[i].recruitStartDay;
+	// 					var $recruitEndDay = result[i].recruitEndDay;
+	// 					var $recruitPeople = result[i].recruitPeople;
 													
-						var row = $("<tr/>").append(
-								$("<td/>").append($check),
-								$("<td/>").text($courseTitle + ' (' + $courseId + ')'),
-								$("<td/>").text($startDay + ' ~ ' + $endDay),
-								$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
-								$("<td/>").text($recruitPeople)
-							);
-						td.append(row);
-						$(".subject-result").append(td);
-					};
-				}
-			}
-		}) // ajax 끝
-	}
+	// 					var row = $("<tr/>").append(
+	// 							$("<td/>").append($check),
+	// 							$("<td/>").text($courseTitle + ' (' + $courseId + ')'),
+	// 							$("<td/>").text($startDay + ' ~ ' + $endDay),
+	// 							$("<td/>").text($recruitStartDay + ' ~ ' + $recruitEndDay),
+	// 							$("<td/>").text($recruitPeople)
+	// 						);
+	// 					td.append(row);
+	// 					$(".subject-result").append(td);
+	// 				};
+	// 			}
+	// 		}
+	// 	}) // ajax 끝
+	// }
 	
-	// 하나만 선택하기
-	function checkOnlyOne(target) {
-		document.querySelectorAll(`input[type=checkbox]`).forEach(el => el.checked = false);
-		target.checked = true;
-	}
+	// // 하나만 선택하기
+	// function checkOnlyOne(target) {
+	// 	document.querySelectorAll(`input[type=checkbox]`).forEach(el => el.checked = false);
+	// 	target.checked = true;
+	// }
 
-	// 체크된 강좌 저장
-	function saveCheckSubject(value) {
-		let checkSubjectArr = value.split('/');
-		let checkSubjectId = checkSubjectArr[0];
-		let checkSubjectSeq = checkSubjectArr[1];
-		subjectId = checkSubjectId;
-		subjectSeq = checkSubjectSeq;
-	}
+	// // 체크된 강좌 저장
+	// function saveCheckSubject(value) {
+	// 	let checkSubjectArr = value.split('/');
+	// 	let checkSubjectId = checkSubjectArr[0];
+	// 	let checkSubjectSeq = checkSubjectArr[1];
+	// 	subjectId = checkSubjectId;
+	// 	subjectSeq = checkSubjectSeq;
+	// }
 	
-	// 체크된 과정 저장
-	function saveCheckCourse(value) {
-		courseId = value;
-	}
+	// // 체크된 과정 저장
+	// function saveCheckCourse(value) {
+	// 	courseId = value;
+	// }
 
-	/*수강 추가 처리하기 22*/
+	/*검색 팝업에 맞춰 수강 추가 처리하기*/
 	function addEnroll2(){
 		alert(studentId);
 
+		// 강좌/과정 선택 값 확인
 		let selected = $("select[name=subCor]").val();
-		let subjectInput = $("#subject-input").val();
-		let stateInput = $("#state-input").val();
-		let subjectArr = subjectInput.split('/');
-		let subjectId = subjectArr[0];
-		let subjectSeq = subjectArr[1];
-
-		console.log(subjectInput);
-		console.log(stateInput);
-		console.log(subjectId);
-		console.log(subjectSeq);
 
 		if(selected === "subject"){ //강좌인 경우
 			alert(selected);
+			let subjectInput = $("#subject-input").val();
+			let subjectArr = subjectInput.split('/');
+			let subjectId = subjectArr[0];
+			let subjectSeq = subjectArr[1];
+			console.log(subjectInput);
+			console.log(subjectId);
+			console.log(subjectSeq);
+	
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-					alert("success");
+					alert("subject success");
+				},
+				error : function(result) {
+					alert(result);
 				}
 			})
-		}else{
+		}else if(selected === "course") { //과정인 경우
+			alert(selected);
 
+			let courseInput = $("#course-input").val();
+			let courseArr = courseInput.split('/');
+			let courseId = courseArr[0];
+			let courseOpenYear = courseArr[3];
+			console.log(courseInput);
+			console.log(courseId);
+			console.log(courseOpenYear);
+	
+			$.ajax({
+				type : 'POST',
+				url : 'addcourse/' + studentId + '/' + courseId + '/' + courseOpenYear,
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(result){
+					alert("course success");
+				},
+				error : function(result) {
+					alert(result);
+				}
+			})
 		}
 
 	}
 
 	// 수강 추가 처리하기
-	function addEnroll(){
-		// 강좌일 경우
-		if(studentId && subjectId && subjectSeq) {
-			console.log(studentId, subjectId, subjectSeq);
-			$.ajax({
-				type : 'POST',
-				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success : function(result){
-				}
-			})
-		}
-		// 과정일 경우
-		else if(studentId && courseId){
-			console.log(studentId, courseId);
-			$.ajax({
-				type : 'POST',
-				url : 'addcourse/' + studentId + '/' + courseId,
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success : function(result){
-					console.log("course is in process")
-				}
-			})
-		}
-	}
+	// function addEnroll(){
+	// 	// 강좌일 경우
+	// 	if(studentId && subjectId && subjectSeq) {
+	// 		console.log(studentId, subjectId, subjectSeq);
+	// 		$.ajax({
+	// 			type : 'POST',
+	// 			url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
+	// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	// 			success : function(result){
+	// 			}
+	// 		})
+	// 	}
+	// 	// 과정일 경우
+	// 	else if(studentId && courseId){
+	// 		console.log(studentId, courseId);
+	// 		$.ajax({
+	// 			type : 'POST',
+	// 			url : 'addcourse/' + studentId + '/' + courseId,
+	// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	// 			success : function(result){
+	// 				console.log("course is in process")
+	// 			}
+	// 		})
+	// 	}
+	// }
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

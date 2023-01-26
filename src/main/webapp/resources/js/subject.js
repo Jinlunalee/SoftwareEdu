@@ -56,7 +56,8 @@ const selected = function() {
 				let printHours = $('#printHours');
 				let printDay = $('#printDay');
 				let hours = $('#hours');
-				let level = $('#level');
+				let levelCd = $('#levelCd');
+				let levelCdTitle = $('#levelCdTitle');
 				let cost = $('#cost');
 				let support = $('.support');
 
@@ -71,7 +72,7 @@ const selected = function() {
 				recruitEndDay.removeAttr('min');
 				printHours.empty();
 				printDay.empty();
-				level.empty();
+				levelCd.empty();
 				cost.empty();
 				support.empty();
 
@@ -102,9 +103,14 @@ const selected = function() {
 					hours.val(result.subjectInfo.hours);
 
 					if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-						level.append(result.subjectInfo.level);
+						// levelCd.append(result.subjectInfo.levelCd);
+						levelCdTitle.append(result.subjectInfo.levelCdTitle);
+						levelCd.val(result.subjectInfo.levelCd);
 					}else{
-						level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+						// levelCd.append(result.subjectInfo.levelCd+"("+result.subjectInfo.levelEtc+")");
+						levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
+						levelCd.val(result.subjectInfo.levelCd);
+
 					}
 
 					cost.append(result.subjectInfo.cost+"원");
@@ -119,9 +125,13 @@ const selected = function() {
 						printHours.append("("+result.subjectInfo.hours+"시간)");
 						hours.val(result.subjectInfo.hours);
 						if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-							level.append(result.subjectInfo.level);
+							// level.append(result.subjectInfo.levelCd);
+							levelCdTitle.append(result.subjectInfo.levelCdTitle);
+							levelCd.val(result.subjectInfo.levelCd);
 						}else{
-							level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+							// level.append(result.subjectInfo.levelCd+"("+result.subjectInfo.levelEtc+")");
+							levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
+							levelCd.val(result.subjectInfo.levelCd);
 						}
 						cost.append(result.subjectInfo.cost+"원");
 						if(result.subjectInfo.supportYn === 'Y'){
@@ -178,9 +188,13 @@ const selected = function() {
 						printHours.append("("+result.subjectInfo.hours+"시간)");
 						hours.val(result.subjectInfo.hours);
 						if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-							level.append(result.subjectInfo.level);
+							// level.append(result.subjectInfo.level);
+							levelCdTitle.append(result.subjectInfo.levelCdTitle);
+							levelCd.val(result.subjectInfo.levelCd);
 						}else{
-							level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+							// level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+							levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
+							levelCd.val(result.subjectInfo.levelCd);
 						}
 						cost.append(result.subjectInfo.cost+"원");
 						if(result.subjectInfo.supportYn === 'Y'){
@@ -349,7 +363,7 @@ function inputState(){
 	let startDay = document.getElementById("startDay").value;
 	let recruitStartDay = document.getElementById('recruitStartDay');
 	let recruitEndDay = document.getElementById('recruitEndDay');
-	let state = document.getElementById('state');
+	let state = document.getElementById('openStateCd');
 
 	MinMaxChange(startDay,recruitStartDay,recruitEndDay); //신청기간 MINMAX 변경
 
@@ -377,9 +391,7 @@ function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 	}).done(function (result) {
 		console.log('success');
 		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
-		console.log(html);
 		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택해서 변수에 저장/끼워넣을 jsp
-		console.log(contents);
 		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
 	}).fail(function(){
 		console.log('fail');

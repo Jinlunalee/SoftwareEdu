@@ -98,12 +98,12 @@ public class EnrollService implements IEnrollService{
 	}
 
 	@Override
-	public void addCourse(String studentId, String courseId) {
+	public void addCourse(String studentId, String courseId, String courseOpenYear) {
 		// course에 담긴 subject 갯수 가져오기
-		int subjectCount = enrollRepository.getSubjectCountByCourse(courseId);
+		int subjectCount = enrollRepository.getSubjectCountByCourse(courseId, courseOpenYear);
 		
 		// open테이블에서 정보 가져오기
-		List<OpenVO> openVo = enrollRepository.getSubjectInfoByCourse(courseId);
+		List<OpenVO> openVo = enrollRepository.getSubjectInfoByCourse(courseId, courseOpenYear);
 		
 		// 갯수만큼 enrollId +1 해주고, addEnroll 해주기
 		for(int i=0; i<subjectCount; i++) {

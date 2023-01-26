@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mycompany.webapp.dao.IDataRepository;
+import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IDataService;
@@ -29,7 +30,7 @@ public class DataService implements IDataService{
 		List<StudentVO> dataList = dataRepository.getDataList(startDay, endDay);
 
 		String jsonStr = gson.toJson(dataList);		
-		System.out.println(jsonStr);
+//		System.out.println(jsonStr);
 		return jsonStr;
 	}
 
@@ -37,7 +38,7 @@ public class DataService implements IDataService{
 	// 강좌 정보 json
 	@Override
 	public String getSbjDataGson(String startDay, String endDay) {
-		List<SubjectVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);
+		List<OpenVO> sbjdataList = dataRepository.getSbjDataList(startDay, endDay);
 
 		String jsonStr2 = gson.toJson(sbjdataList);		
 
@@ -86,11 +87,11 @@ public class DataService implements IDataService{
 	// 강좌 xml
 	@Override
 	public String getSbjDataList (String startDay, String endDay) {
-		List<SubjectVO> sbjDataList = dataRepository.getSbjDataList(startDay, endDay);
+		List<OpenVO> sbjDataList = dataRepository.getSbjDataList(startDay, endDay);
 	
         String result= ""; 
         
-        for (SubjectVO vo : sbjDataList) {
+        for (OpenVO vo : sbjDataList) {
         	String sbjIdSeq = vo.getSbjIdSeq();
         	String subjectTitle = vo.getSubjectTitle();
         	int hours = vo.getHours();

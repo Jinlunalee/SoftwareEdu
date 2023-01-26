@@ -58,25 +58,25 @@
 						<tr>
 							<td>${board.courseId}</td>
 							<td>${board.courseTitle}</td>
-							<td>${board.catCourseTitle}</td>
+							<td>${board.catCourseCdTitle}</td>
 							<td>${board.startDay}~${board.endDay}</td>
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
-							<td>${board.comnCdTitle}</td>
+							<td>${board.openStateCdTitle}</td>
 							<td>
 								<div>
 									<c:choose>
-										<c:when test="${(board.comnCdTitle eq '모집예정') or (board.comnCdTitle eq '모집중') or (board.comnCdTitle eq '추가모집중') or (board.comnCdTitle eq '모집마감') }">
+										<c:when test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">폐강</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '진행중'}">
+										<c:when test="${board.openStateCdTitle eq '진행중'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '폐강'}">
+										<c:when test="${board.openStateCdTitle eq '폐강'}">
 											<button type="button" class="btn btn-secondary" onclick="location.href=''">삭제</button>
 										</c:when>
-										<c:when test="${board.comnCdTitle eq '진행완료'}">
+										<c:when test="${board.openStateCdTitle eq '진행완료'}">
 										</c:when>
 									</c:choose>
 								</div> 

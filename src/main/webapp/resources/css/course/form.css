@@ -4,47 +4,56 @@
 	border: none;
 }
 
-.insert_form td{
-	height:35px;
-}
-.insert_form input, select:not(.select_course) {
+.insert_form td {
 	height: 35px;
-    border-radius: 8px;
-    margin: 5px 10px 5px 0;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
-    width: auto;
 }
+
+.insert_form input, select:not (.select_course ) {
+	height: 35px;
+	border-radius: 8px;
+	margin: 5px 10px 5px 0;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
+	width: auto;
+}
+
 .insert_form td .support {
 	color: cornflowerblue;
-    font-size: 12px;
+	font-size: 12px;
 }
+
 .insert_form textarea {
 	border-color: #e8e8e8;
 }
+
 .filebox {
 	display: flex;
 }
+
 .filebox .insert_FileUpload {
 	width: 67%;
-    display: inline-block;
+	display: inline-block;
 }
+
 .filebox label { /*label 스타일 변경*/
 	display: inline-block;
-    background-color: #1A54CD;
-    color: #FFFFFF;
-    padding: 5px 10px;
-    cursor: pointer;
-    vertical-align: middle;
+	background-color: #1A54CD;
+	color: #FFFFFF;
+	padding: 5px 10px;
+	cursor: pointer;
+	vertical-align: middle;
+	height: 35px;
 }
+
 .filebox input[type="file"] { /* 기존 디자인 없애기 */
 	position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
+	width: 0;
+	height: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
 }
+
 .readonly_txt {
-	color : #666;
+	color: #666;
 }

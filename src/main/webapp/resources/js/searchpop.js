@@ -37,15 +37,18 @@ function showList() {
         var html = jQuery('<div>').html(result);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
-        if(path.substring(10,20)==='subject') {
-            disableSubjectList();
-        } else if (path.substring(10,20)==='course') {
-            
+        if(path.substring(10,25)==='subject') {
+            disableSubjectList(); // 강좌 개설에서 과정에 이미 담긴 강좌는 개설하지 못하게 하기
+        } else if (path.substring(10,25)==='course') {
+        	
+        } else if (path.substring(10,25)==='opencourse') {
+            disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+        } else if (path.substring(10,25)==='opensubject') {
+            disableListByState();
         } else if (path.substring(10, 7) === 'student') {
         	
         }
-    })
-    
+       })
 }
 
 /* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
@@ -60,7 +63,21 @@ function disableSubjectList() {
     }
 }
 
-
+/* 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게 OPN02, OPN03, OPN04 : OK / OPN01, 0PN05, OPN07*/
+function disableListByState() {
+    for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
+        document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
+        document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 수강 신청하실 수 없습니다.")');
+    }
+    for(var k=0; k<document.getElementsByClassName('OPN05').length; k++) {
+        document.getElementsByClassName('OPN05')[k].removeAttribute("onclick");
+        document.getElementsByClassName('OPN05')[k].setAttribute("onclick", 'alert("진행완료인 과정은 수강 신청하실 수 없습니다.")');
+    }
+    for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
+        document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
+        document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 수강 신청하실 수 없습니다.")');
+    }
+}
 
 /* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
 let subjectInput = document.getElementById('subject-input'); // input 태그
@@ -107,12 +124,13 @@ function moveOutside(event, value){
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
+        let valueYear = valueArr[3];
         $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  강좌명 : " + valueTitle);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
+        $(opener.document).find("#courseYear-input").val(valueYear);
         
         setUnavailableSubjectId(valueId); // 작성 해에 courseId에 등록된 강좌 리스트 반영하기
-        // checkUnavailableSubjectId(); // insert.jsp에 set한 강좌리스트값이랑 선택된 강좌값이랑 비교 후 일치하면 강좌값 reset
     }
     
     if(valueId.substring(0,4) === 'STDT') {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.IHomeRepository">
 
-	<select id="selectSubjectList" parameterType="String" resultType="SubjectVO">	
+	<select id="selectSubjectList" parameterType="String" resultType="OpenVO">	
 	/* selectSubjectList */
 		select 
 			open.subject_id, 
@@ -11,7 +11,7 @@
 			support_yn, 
 			days, 
 			hours, 
-			level_cd as "level", 
+			level_cd, 
 			level_etc, 
 			subject.cost,
 			open.course_id, 
@@ -23,22 +23,22 @@
 			recruit_start_day, 
 			recruit_end_day,
 			recruit_people,
-			state_cd as state,
-			comn_cd_title,
+			state_cd as open_state_cd,
+			comn_cd_title as open_state_cd_title,
 			file_id,
-            subject.cat_cd
+            subject.cat_cd as cat_subject_cd
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
-        where del_yn = 'N' AND subject.cat_cd=#{catSubject}
+        where del_yn = 'N' AND subject.cat_cd=#{catSubjectCd}
         order by start_day, end_day
 	</select>
 	
 	
 	
 	
-	<select id="selectCourseList" parameterType="String" resultType="SubjectVO">
+	<select id="selectCourseList" parameterType="String" resultType="OpenVO">
 	/* selectCourseList */
 		select DISTINCT
 			open.course_id, 
@@ -48,13 +48,13 @@
 			sum(cost) over (partition by open.course_id) as cost,
 			recruit_start_day,
 			recruit_end_day,
-			state_cd as state,
-			comn_cd_title
+			state_cd as open_state_cd,
+			comn_cd_title as open_state_cd_title
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
         		left join common_code on open.state_cd = common_code.comn_cd
-        where open.course_id IS NOT NULL and del_yn = 'N' AND course.cat_cd = #{catCourse}
+        where open.course_id IS NOT NULL and del_yn = 'N' AND course.cat_cd = #{catCourseCd}
 	</select>
 	
 	<select id="getComnCdTitle" parameterType="String" resultType="String">
@@ -68,7 +68,7 @@
 	/*getComnCdList*/
 		SELECT * 
 		FROM common_code
-		WHERE comn_cd_type = #{comnCoType} AND use_yn='Y'
+		WHERE comn_cd_type = #{comnCdType} AND use_yn='Y'
 	</select>
 
 	<select id="searchSubject" parameterType="SubjectVO" resultType="SubjectVO">
@@ -77,10 +77,10 @@
 		    subject_id,
 		    subject_title,
 		    support_yn,
-		    cat_cd as cat_subject,
+		    cat_cd as cat_subject_cd,
 		    days,
 		    hours,
-		    level_cd as "level",
+		    level_cd,
 		    level_etc,
 		    cost,
 		    reg_year
@@ -92,11 +92,11 @@
 			<if test="subjectTitle != null and !subjectTitle.equals('')">
 				AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
 			</if>
-			<if test="catSubject != null and !catSubject.equals('')">
-				AND cat_cd = #{catSubject} 
+			<if test="catSubjectCd != null and !catSubjectCd.equals('')">
+				AND cat_cd = #{catSubjectCd} 
 			</if>
-			<if test="level != null and !level.equals('') ">
-				AND level_cd = #{level} 
+			<if test="levelCd != null and !levelCd.equals('') ">
+				AND level_cd = #{levelCd} 
 			</if>
 			<if test="regYear != 0">
 				AND reg_year = #{regYear} 
@@ -124,7 +124,7 @@
 		</where>
 	</select>
 	
-	<select id="searchOpenSubject" parameterType="SubjectVO" resultType="SubjectVO">
+	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenSubject*/
 		SELECT
 		    open.subject_id, 
@@ -133,7 +133,7 @@
 		    support_yn, 
 		    days, 
 		    hours, 
-		    level_cd as "level", 
+		    level_cd, 
 		    level_etc, 
 		    subject.cost,
 		    open.course_id, 
@@ -145,12 +145,12 @@
 		    recruit_start_day, 
 		    recruit_end_day,
 		    recruit_people,
-		    state_cd as state,
-		    comn_cd_title,
+		    state_cd as open_state_cd,
+		    comn_cd_title as open_state_cd_title,
 		    file_id,
-		    subject.cat_cd as cat_subject,
+		    subject.cat_cd as cat_subject_cd,
 		    subject.reg_year,
-		    reg_dt
+		    open_dt
 		FROM open
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -162,22 +162,22 @@
 		<if test="subjectTitle != null and !subjectTitle.equals('')">
 			AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
 		</if>
-		<if test="catSubject != null and !catSubject.equals('')">
-			AND subject.cat_cd = #{catSubject} 
+		<if test="catSubjectCd != null and !catSubjectCd.equals('')">
+			AND subject.cat_cd = #{catSubjectCd} 
 		</if>
-		<if test="level != null and !level.equals('') ">
-			AND level_cd = #{level} 
+		<if test="levelCd != null and !levelCd.equals('') ">
+			AND level_cd = #{levelCd} 
 		</if>
 		<if test="regYear != 0">
 			AND subject.reg_year = #{regYear} 
 		</if>
-		<if test="state != null and !state.equals('')">
-			AND state_cd = #{state}
+		<if test="openStateCd != null and !openStateCd.equals('')">
+			AND state_cd = #{openStateCd}
 		</if>
 		ORDER BY start_day, end_day
 	</select>
 	
-	<select id="searchOpenCourse" parameterType="CourseVO" resultType="CourseVO">
+	<select id="searchOpenCourse" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenCourse*/
 		select DISTINCT
 		    open.course_id,
@@ -207,8 +207,8 @@
 			<if test="regYear != 0">
 				AND subject.reg_year = #{regYear} 
 			</if>
-			<if test="stateCd != null and !stateCd.equals('')">
-			AND open.state_cd = #{stateCd}
+			<if test="openStateCd != null and !openStateCd.equals('')">
+			AND open.state_cd = #{openStateCd}
 			</if>
 	</select>
 	

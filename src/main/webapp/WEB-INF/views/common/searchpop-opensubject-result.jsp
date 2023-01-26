@@ -13,10 +13,10 @@
                         <td class="th-column-3">과정아이디</td>
                         <td class="th-column-4">과정명</td>
                         <td class="th-column-5">지원여부</td>
-                        <c:if test="${board.level ne 'LEV04'}">
+                        <c:if test="${board.levelCd ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
-                        <c:if test="${board.level eq 'LEV04'}">
+                        <c:if test="${board.levelCd eq 'LEV04'}">
                             <td class="th-column-6">난이도 기타</td>
                         </c:if>
                         <td class="th-column-7">수강일수</td>
@@ -35,17 +35,17 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.regDt}/${board.state}">
+                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}">
                                 ${board.subjectTitle}
                             </a>
                         </td>
                         <td>${board.courseId}</td>
                         <td>${board.courseTitle}</td>
                         <td>${board.supportYn}</td>
-                        <c:if test="${board.level ne 'LEV04'}">
-                            <td>${board.levelTitle}</td>
+                        <c:if test="${board.levelCd ne 'LEV04'}">
+                            <td>${board.levelCdTitle}</td>
                         </c:if>
-                        <c:if test="${board.level eq 'LEV04'}">
+                        <c:if test="${board.levelCd eq 'LEV04'}">
                             <td>${board.levelEtc}</td>
                         </c:if>
                         <td>${board.days}</td>
@@ -55,9 +55,9 @@
                         <td>${board.recruitStartDay}</td>
                         <td>${board.recruitEndDay}</td>
                         <td>${board.recruitPeople}</td>
-                        <td>${board.comnCdTitle}</td>
-                        <td>${board.catSubjectTitle}</td>
-                        <td>${board.regDt}</td>
+                        <td>${board.openStateCdTitle}</td>
+                        <td>${board.catSubjectCdTitle}</td>
+                        <td>${board.openDt}</td>
                     </tr>
                 </c:forEach>
             </table>

@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.ISubjectRepository">
 	
-	<select id="selectCourseList" resultType="SubjectVO">
+	<select id="selectCourseList" resultType="OpenVO">
 		/*selectCourseList*/
 		select DISTINCT
 			open.course_id, 
 			course_title,
-			min(start_day) over (partition by open.course_id) as "startDay",
-    		max(end_day) over (partition by open.course_id) as "endDay",
-			sum(cost) over (partition by open.course_id) as "cost",
+			min(start_day) over (partition by open.course_id) as start_day,
+    		max(end_day) over (partition by open.course_id) as end_day,
+			sum(cost) over (partition by open.course_id) as cost,
 			recruit_start_day, 
 			recruit_end_day,
-			state_cd as "state",
-			comn_cd_title
+			state_cd as open_state_cd,
+			comn_cd_title as open_state_cd_title
 		from open 
 				left join subject on open.subject_id = subject.subject_id
         		left join course on open.course_id = course.course_id
@@ -21,7 +21,7 @@
         where open.course_id IS NOT NULL and del_yn = 'N'
 	</select>
 	
-	<select id="selectSubjectList" resultType="SubjectVO">
+	<select id="selectSubjectList" resultType="OpenVO">
 		/*selectSubjectList*/
 		select 
 			open.subject_id, 
@@ -30,7 +30,7 @@
 			support_yn, 
 			days, 
 			hours, 
-			level_cd as "level", 
+			level_cd, 
 			level_etc, 
 			subject.cost,
 			open.course_id, 
@@ -42,8 +42,8 @@
 			recruit_start_day, 
 			recruit_end_day,
 			recruit_people,
-			state_cd as "state",
-			comn_cd_title,
+			state_cd as open_state_cd,
+			comn_cd_title as open_state_cd_title,
 			file_id
 		from open 
 				left join subject on open.subject_id = subject.subject_id
@@ -53,7 +53,7 @@
         order by start_day, end_day
 	</select>
 
-	<select id="selectSubjectDetails" parameterType="map" resultType="SubjectVO">
+	<select id="selectSubjectDetails" parameterType="map" resultType="OpenVO">
 		/*selectSubjectDetails*/
 		select 
 			open.subject_id, 
@@ -62,12 +62,12 @@
 			support_yn, 
 			days, 
 			hours, 
-			level_cd as "level", 
+			level_cd, 
 			level_etc, 
 			subject.cost,
 			open.course_id, 
 			course.course_title, 
-			subject.cat_cd as "cat", 
+			subject.cat_cd as cat_subject_cd, 
 			content,
 			TO_CHAR(TO_TIMESTAMP(start_time, 'HH24:MI'),'HH24:MI') as start_time,
 			TO_CHAR(TO_TIMESTAMP(end_time, 'HH24:MI'),'HH24:MI') as end_time,
@@ -76,8 +76,8 @@
 			TO_CHAR(TO_DATE(recruit_start_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as recruit_start_day,
 			TO_CHAR(TO_DATE(recruit_end_day,'YYYY-MM-DD'), 'YYYY-MM-DD') as recruit_end_day,
 			recruit_people,
-			state_cd as "state",
-			comn_cd_title,
+			state_cd as open_state_cd,
+			comn_cd_title as open_state_cd_title,
 			upload_file.file_id, 
 			file_name, 
 			file_size, 
@@ -90,7 +90,7 @@
         where open.subject_id = #{subjectId} and subject_seq=#{subjectSeq}
 	</select>
 	
-	<update id="updateSubject" parameterType="SubjectVO">
+	<update id="updateSubject" parameterType="OpenVO">
 		/*updateSubject*/
 		update open
 		set 
@@ -101,8 +101,8 @@
     		recruit_start_day = TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
     		recruit_end_day = TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
     		recruit_people = #{recruitPeople},
-    		content = #{content}, state_cd = #{state}, file_id=#{fileId}, 
-    		modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
+    		content = #{content}, state_cd = #{openStateCd}, file_id=#{fileId}, 
+    		modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS')
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	
@@ -111,7 +111,7 @@
 		update upload_file
 		set
 			file_name=#{fileName}, file_size=#{fileSize}, file_content_type=#{fileContentType}, file_data=#{fileData},
-			modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD')
+			modi_id='mgr2', modi_dt=TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS')
 		where 
 			file_id=#{fileId}
 	</update>
@@ -134,13 +134,13 @@
 		from upload_file
 	</select>
 	
-	<insert id="insertSubject" parameterType="SubjectVO">
+	<insert id="insertSubject" parameterType="OpenVO">
 		/*insertSubject*/
 		<choose>
 			<when test="fileId != null">
 				insert into open 
 						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
-                		recruit_people, state_cd, reg_id, reg_dt, del_yn)
+                		recruit_people, state_cd, course_open_year, open_dt, reg_id, reg_dt, del_yn)
 				values 
 						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},
 						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
@@ -149,12 +149,13 @@
 						TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
 						TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
 						TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
-						#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
+						#{recruitPeople},#{openStateCd}, TO_CHAR(SYSDATE, 'YYYY'), TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'),
+						'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), 'N')
 			</when>
 			<otherwise>
 				insert into open 
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
-                		recruit_people, state_cd, reg_id, reg_dt, del_yn)
+                		recruit_people, state_cd, course_open_year, open_dt, reg_id, reg_dt, del_yn)
 				values 
 						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},
 						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
@@ -163,7 +164,8 @@
 						TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
 						TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'), 
 						TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
-						#{recruitPeople},#{state}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
+						#{recruitPeople},#{openStateCd}, TO_CHAR(SYSDATE, 'YYYY'), TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'),
+						'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), 'N')
 			</otherwise>
 		</choose>
 	</insert>
@@ -172,10 +174,10 @@
 		/*insertFileData*/
 		insert into upload_file 
 			(file_id, file_name, file_size, file_content_type, file_data, reg_id, reg_dt, del_yn)
-		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD'), 'N')
+		values(#{fileId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileData}, 'mgr1', TO_CHAR(SYSDATE, 'YYYYMMDD/HH24MISS'), 'N')
 	</insert>
 	
-	<select id="selectAllCourse" resultType="SubjectVO">
+	<select id="selectAllCourse" resultType="CourseVO">
 		/*selectAllCourse*/
 		select 
 			course_id, 
@@ -197,22 +199,23 @@
 				subject_id,
 				subject_title, 
 				support_yn, 
-				cat_cd as "catSubject", 
+				cat_cd as cat_subject_cd, 
 				days, 
 				hours, 
-				level_cd as "level", 
+				level_cd, 
 				level_etc, 
-				cost
+				cost,
+				reg_year
 		from subject 
 		where subject_id= #{subjectId}
 	</select>
 	
-	<select id="infoOpenCourse" parameterType="String" resultType="SubjectVO">
+	<select id="infoOpenCourse" parameterType="String" resultType="OpenVO">
 		/*infoOpenCourse*/
 		select DISTINCT 
 						course_id, 
-						min(start_day) over (partition by course_id) as "startDay", 
-						max(end_day) over (partition by course_id) as "endDay", 
+						min(start_day) over (partition by course_id) as start_day, 
+						max(end_day) over (partition by course_id) as end_day, 
 						recruit_start_day, 
 						recruit_end_day
 		from open
@@ -226,13 +229,13 @@
 		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
-	<update id="updateRecruitSameCourse" parameterType="SubjectVO">
+	<update id="updateRecruitSameCourse" parameterType="OpenVO">
 		/*updateRecruitSameCourse*/
 		update open
 		set 
 			recruit_start_day = TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'),
 			recruit_end_day = TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
-			state_cd=#{state}
+			state_cd=#{openStateCd}
 		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</update>
 	
@@ -257,17 +260,11 @@
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
 	</update>
 	
-	<select id="selectSubjectByCourseId" parameterType="String" resultType="SubjectVO">
+	<select id="selectSubjectByCourseId" parameterType="String" resultType="OpenVO">
 		/*selectSubjectByCourseId*/
 		select subject_id
 		from open 
 		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
-	</select>
-	
-	<select id="searchSubject" parameterType="SubjectVO" resultType="SubjectVO">
-		select subject_id, subject_title, support_yn, cat_cd as cat_subject, days, hours, level_cd, level_etc, cost, reg_year
-		from subject
-			
 	</select>
 	
 	<select id="selectOpenSubjectByCourseIdAndYear" parameterType="map" resultType="OpenVO">

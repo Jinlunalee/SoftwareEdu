@@ -52,11 +52,11 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value="/boardlist",method=RequestMethod.GET)
-	public String getSubjectList(Model model, @RequestParam String catSubject) {
+	public String getSubjectList(Model model, @RequestParam String catSubjectCd) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
-		List<SubjectVO> subjectList = homeService.selectSubjectList(catSubject);
+		List<OpenVO> subjectList = homeService.selectSubjectList(catSubjectCd);
 		model.addAttribute("boardList", subjectList);
 		model.addAttribute("subjectListSize", subjectList.size());
 		logger.info("subjectlist: " + subjectList);	
@@ -73,11 +73,11 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value="/courseboardlist",method=RequestMethod.GET)
-	public String getCourseList(Model model, @RequestParam String catCourse) {
+	public String getCourseList(Model model, @RequestParam String catCourseCd) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "과정 관리");
 		
-		List<SubjectVO> courseList = homeService.selectCourseList(catCourse);
+		List<OpenVO> courseList = homeService.selectCourseList(catCourseCd);
 		model.addAttribute("boardList", courseList);
 		model.addAttribute("courseListSize", courseList.size());
 		logger.info("courselist: " + courseList);	
@@ -182,10 +182,10 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@PostMapping(value="/common/searchpop-opensubject-result", produces = "application/text; charset=UTF-8")
-	public String searchPopOpenSubjectResult(SubjectVO subjectVo, Model model) throws Exception{
-		System.out.println(subjectVo);
+	public String searchPopOpenSubjectResult(OpenVO openVo, Model model) throws Exception{
+		System.out.println(openVo);
 		
-		List<SubjectVO> openSubjectList = homeService.searchOpenSubject(subjectVo);
+		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
 		
 		// ajax로 구현할 것
 		if(!openSubjectList.isEmpty()) {
@@ -214,16 +214,17 @@ public class HomeController {
 	 * @description	개설과정 검색 팝업 : 결과
 	 * @date	2023. 1. 17.
 	 * @author	Jin Lee
-	 * @param courseVo
+	 * @param openVo
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
 	@PostMapping(value="/common/searchpop-opencourse-result", produces = "application/text; charset=UTF-8")
-	public String searchPopOpenCourseResult(CourseVO courseVo, Model model) throws Exception{
-		System.out.println(courseVo);
+	public String searchPopOpenCourseResult(OpenVO openVo, Model model) throws Exception{
+		System.out.println(openVo);
 		
-		List<CourseVO> openCourseList = homeService.searchOpenCourse(courseVo);
+		List<OpenVO> openCourseList = homeService.searchOpenCourse(openVo);
+		logger.info("subjectlist: " + openCourseList);
 		
 		// ajax로 구현할 것
 		if(!openCourseList.isEmpty()) {
