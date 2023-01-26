@@ -228,4 +228,25 @@
 		        left join course on open.course_id = course.course_id
 		        left join common_code on open.state_cd = common_code.comn_cd
 		where open.course_id IS NOT NULL AND del_yn = 'N'; -->
+		
+	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
+	/*searchStudentList*/
+		SELECT student_id, 
+				name, 
+				gender_cd, 
+				TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY/MM/DD') AS "birth", 
+				email, 
+				REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+				add_do_cd, 
+				add_etc,
+				position_cd 
+		FROM STUDENT 
+		WHERE 1=1 
+		<if test="studentId != null and !studentId.equals('')">
+			AND (student_id = #{studentId} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{studentId}) || '%')
+		</if>
+		<if test="name != null and !name.equals('')">
+			AND name = #{name}
+		</if>
+	</select>
 </mapper>

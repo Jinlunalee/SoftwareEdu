@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
+import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IHomeRepository {
@@ -21,5 +22,7 @@ public interface IHomeRepository {
 	List<CourseVO> searchCourse(CourseVO courseVo);
 	List<SubjectVO> searchOpenSubject(SubjectVO subjectVo);
 	List<CourseVO> searchOpenCourse(CourseVO courseVo);
+	
+	List<StudentVO> searchStudentList(StudentVO studentVo);
 
 }

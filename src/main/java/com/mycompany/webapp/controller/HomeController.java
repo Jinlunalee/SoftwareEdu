@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
@@ -248,6 +249,24 @@ public class HomeController {
 		List<OpenVO> boardList = subjectService.selectOpenSubjectByCourseIdAndYear(courseId, year);
 		logger.info("getSubjectListFromCourseId: " + boardList);
 		return boardList;
+	}
+	
+	@GetMapping(value="/common/searchpop-student")
+	public void searchPopStudent() throws Exception{
+		
+	}
+	
+	@PostMapping(value="/common/searchpop-student-result", produces = "application/text; charset=UTF-8")
+	public String searchPopStudentResult(StudentVO studentVo, Model model) throws Exception{		
+		List<StudentVO> studentList = homeService.searchStudentList(studentVo);
+		
+		if(!studentList.isEmpty()) {
+			model.addAttribute("studentList", studentList);
+		} else {
+			model.addAttribute("boardCheck", "empty");
+		}
+		
+		return "common/searchpop-student-result";
 	}
 }
 

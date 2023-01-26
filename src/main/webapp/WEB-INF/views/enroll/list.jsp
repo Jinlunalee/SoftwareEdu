@@ -226,7 +226,7 @@
 				return false;
 			}
 		}
-
+		
 		function approval(studentId, subjectId, subjectSeq) {
 			if(confirm('수강 신청을 승인하시겠습니까?')) {
 				$.ajax({
@@ -256,7 +256,6 @@
 		}
 		
 		function checkForm() {
-			
 			if($('select[name=cancelRsCd]').val() === "") {
 				alert("취소 사유를 선택해 주세요.");
 				event.preventDefault();
