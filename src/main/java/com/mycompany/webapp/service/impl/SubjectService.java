@@ -169,20 +169,6 @@ public class SubjectService implements ISubjectService{
 		logger.info("service/infoSubjectCourse/list: " + map);
 		return map;
 	}
-		////////////////////////////////////
-//		VO로 데이터 전송
-//		SubjectVO subject = null;
-//		logger.info("service/infoSubjectCourse/courseId : " + courseId.getClass().getName());
-//		
-//		if("none".equals(courseId)) {
-//			return subjectRepository.infoSubject(subjectId);
-//		}else { //coursId 있는경우
-//			subject = subjectRepository.infoSubject(subjectId);
-//			subjectRepository.infoOpenCourse(courseId);
-//			logger.info("service/infoSubjectCourse/subject: " + subject);
-//			return subject;
-//		}
-
 
 	@Override
 	public void clickDeleteOpen(String subjectId, int subjectSeq) {

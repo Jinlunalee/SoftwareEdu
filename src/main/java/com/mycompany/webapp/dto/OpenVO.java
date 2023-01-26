@@ -47,7 +47,6 @@ public class OpenVO {
 	private String recruitEndDay; //모집 종료 일자
 	private int recruitPeople; //모집 인원
 	private String content;//개설 강좌 내용
-//	private String openState;
 	private String openStateCd;//개설 상태 코드
 	private String openStateCdTitle; //개설 상태 코드명
 	private String courseOpenYear; //과정 개설 년도

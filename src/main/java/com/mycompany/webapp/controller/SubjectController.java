@@ -52,20 +52,6 @@ public class SubjectController {
 	@Autowired
 	IPagerService pagerService;
 
-	//	//개설 과정 목록조회 (course)
-	//	@RequestMapping(value="/courselist", method=RequestMethod.GET)
-	//	public String getCourseList(Model model) {
-	//		model.addAttribute("menu", "subject");
-	//		model.addAttribute("menuKOR", "강좌 관리");
-	//		
-	//		List<SubjectVO> boardList = subjectService.selectCourseList();
-	//		model.addAttribute("boardList", boardList);
-	//		model.addAttribute("boardListSize", boardList.size());
-	//		logger.info("courseList: " + boardList);
-	//		
-	//		return "subject/courselist";
-	//	}
-
 	// paging 개설 과정 목록 조회 (course)
 	@GetMapping("/courseboardlist")
 	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catCourseCd) {
@@ -91,20 +77,6 @@ public class SubjectController {
 
 		return "subject/courselist";
 	}
-	
-	// 개설 강좌 목록조회 (open)
-	//	@RequestMapping(value="/subjectlist", method=RequestMethod.GET)
-	//	public String getSubjectList(Model model) {
-	//		model.addAttribute("menu", "subject");
-	//		model.addAttribute("menuKOR", "강좌 관리");
-	//		
-	//		List<SubjectVO> boardList = subjectService.selectSubjectList();
-	//		model.addAttribute("boardList", boardList);
-	//		model.addAttribute("boardListSize", boardList.size());
-	//		logger.info("subjectlist: " + boardList);
-	//		
-	//		return "subject/subjectlist";
-	//	}
 
 	// paging 강좌 목록 조회 (open)
 	@GetMapping("/subjectboardlist")
@@ -211,14 +183,6 @@ public class SubjectController {
 		headers.setContentDispositionFormData("attachment", file.getFileName(), Charset.forName("UTF-8"));
 		return new ResponseEntity<byte[]>(file.getFileData(), headers, HttpStatus.OK);
 	}
-
-	// 개설 강좌 삭제 (open)
-//	@RequestMapping(value="/delete/{subjectId}")
-//	public String deleteSubject(@PathVariable String subjectId ,SubjectVO subjectVo, Model model) {
-//		model.addAttribute("menu", "subject");
-//		model.addAttribute("menuKOR", "강좌 관리");
-//		return "redirect:/subject/subjectboardlist";
-//	}
 
 	// 개설 강좌 논리 삭제 (open)
 	@RequestMapping(value="/del/{subjectId}/{subjectSeq}")
@@ -400,7 +364,6 @@ public class SubjectController {
 	@ResponseBody
 	public int ajaxCheckHoliday(String startDay, String endDay) {
 		logger.info("checkHoliday:"+startDay+endDay);
-		logger.info("checkHoliday/count:"+subjectService.checkHoliday(startDay, endDay));
 		return subjectService.checkHoliday(startDay, endDay);
 	}
 	

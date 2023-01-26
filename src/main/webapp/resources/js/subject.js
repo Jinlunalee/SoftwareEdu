@@ -274,17 +274,14 @@ function calcEndDay(){
 
 		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
 
-		startDay2.setDate(startDay2.getDate() + days); 
+		startDay2.setDate(startDay2.getDate() + days); //시수계산한 날짜를 더해 endDay
 
 		//휴일체크
 		let resultDay = checkHoliday(startDay, startDay2.toJSON().substring(0, 10));
-		console.log(resultDay);
 
 		// 휴일인만큼 날짜 더하기
 		startDay2.setDate(startDay2.getDate() + resultDay); 
 		days += resultDay;
-		console.log(days);
-		console.log(typeof days);
 
 		endDay.value = '';
 		endDay.value = startDay2.toJSON().substring(0, 10);
@@ -306,7 +303,6 @@ function checkHoliday(startDay, endDay){
 		async: false,
 	}).done(function(result){
 		console.log('success');
-		console.log(result);
 		resultData = result;
 
 	}).fail(function(){
