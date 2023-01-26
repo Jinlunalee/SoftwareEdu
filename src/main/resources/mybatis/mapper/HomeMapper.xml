@@ -212,6 +212,27 @@
 			</if>
 	</select>
 	
+	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
+	   /*searchStudentList*/
+	      SELECT student_id, 
+	            name, 
+	            gender_cd, 
+	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY/MM/DD') AS "birth", 
+	            email, 
+	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+	            add_do_cd, 
+	            add_etc,
+	            position_cd 
+	      FROM STUDENT 
+	      WHERE 1=1 
+	      <if test="studentId != null and !studentId.equals('')">
+	         AND (student_id = #{studentId} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{studentId}) || '%')
+	      </if>
+	      <if test="name != null and !name.equals('')">
+	         AND name = #{name}
+	      </if>
+   </select>
+	
 <!-- 			select DISTINCT
 		    open.course_id,
 		    course_title,

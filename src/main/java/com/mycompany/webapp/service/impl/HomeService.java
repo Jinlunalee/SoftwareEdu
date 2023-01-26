@@ -10,6 +10,7 @@ import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
+import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 @Service
@@ -106,6 +107,11 @@ public class HomeService implements IHomeService {
 
 		}
 		return boardList;
+	}
+
+	@Override
+	public List<StudentVO> searchStudentList(StudentVO studentVo) {
+		return homeRepository.searchStudentList(studentVo);
 	}
 
 

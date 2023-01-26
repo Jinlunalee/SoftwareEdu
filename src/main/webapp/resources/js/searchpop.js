@@ -42,6 +42,8 @@ function showList() {
             disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='opensubject') {
             disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+        } else if (path.substring(10,25)==='student'){
+            // 강좌/과정이 선택되어 있을 시 이미 해당 강좌 수강중인 학생은 튕기게
         }
     })
     
@@ -78,6 +80,7 @@ function disableListByState() {
 /* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
 let subjectInput = document.getElementById('subject-input'); // input 태그
 let courseInput = document.getElementById('course-input'); // input 태그
+let studentInput = document.getElementById('student-input');
 
 function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택에 따라 iput 이름 설정
     if(value==='subjectId') {
@@ -86,9 +89,14 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
         subjectInput.setAttribute("name", 'subjectTitle');
     } else if(value==='courseId') {
         courseInput.setAttribute("name", 'courseId');
-    } else {
+    } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
+    } else if(value === 'studentId') {
+        studentInput.setAttribute("name", 'studentId');
+    } else{
+        studentInput.setAttribute("name", 'name');
     }
+
 }
 
 
@@ -122,6 +130,13 @@ function moveOutside(event, value){
         $(opener.document).find("#courseYear-input").val(valueYear);
         
         setUnavailableSubjectId(valueId); // 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+    }
+    // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
+    if(valueId.substring(0,4)==='STDT') {
+        let valueTitle = valueArr[1];
+        $(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
+        $(opener.document).find("#student-input").val(value);
+        $(opener.document).find("#studentId-input").val(valueId);
     }
     // 팝업창 닫기
     window.close();

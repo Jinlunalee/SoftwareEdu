@@ -16,17 +16,13 @@
 					<span class="name">수강생</span> &nbsp; &nbsp;
 					
 					<form id="form" name="search-form" class="search">
-						<select name="type" class="sc">
-							<option selected value="">이름/아이디</option>
-							<option value="name">이름</option>
-							<option value="studentId">아이디 </option>
-						</select>
-						<input type="text" name="keyword" class="search-in">
-						<input type="button" onclick="getStudentList()" class="btn btn2" value="검색">
+						<input id="studentTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 수강생을 검색하세요.">
+						<input id="student-input" name="student" type="hidden">
+						<input id="studentId-input" name="studentId" type="hidden">
+						<input type="button" class="student-popup-btn btn btn2" value="검색">
 					</form>
 				</div>
 			</div>
-			
 			<div class="student-result"></div>
 		</div>
 	

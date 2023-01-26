@@ -9,12 +9,13 @@
 
 .wrap {
 	padding: 17px;
-    width: 100%;;
-    height: 500%;
-    border: 1px solid #bababa;
-    border-radius: 10px;
-    margin: auto;
-    margin-top: 15px;
+	width: 100%;
+	;
+	height: 500%;
+	border: 1px solid #bababa;
+	border-radius: 10px;
+	margin: auto;
+	margin-top: 15px;
 }
 
 .search-box {
@@ -65,52 +66,52 @@ input {
 	left: 10px;
 }
 
-.search{
+.search {
 	display: inline;
 }
 
-.search-in{
+.search-in {
 	width: 30%;
 	height: 40px;
 	position: relative;
 	bottom: 10px;
 }
 
-.btn{
+.btn {
 	background-color: #003964;
 	color: #fff;
 }
 
-.btn{
+.btn {
 	position: relative;
-    bottom: 10px;
+	bottom: 10px;
 }
 
-.name{
+.name {
 	position: relative;
-    bottom: 10px;
+	bottom: 10px;
 }
 
-.sel{
+.sel {
 	position: relative;
-    bottom: 10px;
-    height: 30px;
+	bottom: 10px;
+	height: 30px;
 }
 
-.sc{
+.sc {
 	position: relative;
-    bottom: 10px;
-    height: 40px;
-    border-radius: 8px;
+	bottom: 10px;
+	height: 40px;
+	border-radius: 8px;
 }
 
-.rs2{
-	margin-top :40px;
+.rs2 {
+	margin-top: 40px;
 }
 
-table > tr {
+table>tr {
 	font-size: 14px;
-    text-align: center;
+	text-align: center;
 }
 
 .search2 {
@@ -119,13 +120,13 @@ table > tr {
 	top: 5px;
 }
 
-.sc2{
+.sc2 {
 	position: relative;
-    height: 40px;
-    border-radius: 8px;
+	height: 40px;
+	border-radius: 8px;
 }
 
-.tb{
+.tb {
 	width: 100%;
 	margin: 0px auto;
 	margin-top: 20px;
@@ -134,48 +135,51 @@ table > tr {
 
 .tb tr {
 	border-bottom: 1px solid #e8e8e8;
-    height: 40px;
+	height: 40px;
 }
 
-li::before{
+li::before {
 	content: url("https://www.moe.go.kr/img/2021Renewal/common/list_bul_1.svg");
 }
 
-li{
-	list-style : none;
+li {
+	list-style: none;
 }
 
-.stu{
+.stu {
 	margin-top: 15px;
 }
 
 .check-subject {
 	width: 20px;
-    height: 20px;
+	height: 20px;
 }
 
-.search-popup{
+.search-popup {
 	display: inline;
 }
 
-#subjectTitle-input, #courseTitle-input{
+#subjectTitle-input,
+#courseTitle-input,
+#studentTitle-input {
 	height: 40px;
-    width: 60%;
+	width: 60%;
 }
 
-.btn2{
+.btn2 {
 	background-color: #003964;
 	color: #fff;
 	width: 100px;
-    height: 40px;
-    border-radius: 8px;
+	height: 40px;
+	border-radius: 8px;
 }
-.btn3{
+
+.btn3 {
 	background-color: #003964;
 	color: #fff;
 	width: 100px;
-    height: 40px;
-    border-radius: 8px;
-    position: relative;
-    bottom: 2px;
+	height: 40px;
+	border-radius: 8px;
+	position: relative;
+	bottom: 2px;
 }
