@@ -22,7 +22,9 @@
 					</form>
 				</div>
 			</div>
-			<div class="student-result"></div>
+
+			<div id="student-list"></div>
+			
 		</div>
 	
 		<div class="wrap">

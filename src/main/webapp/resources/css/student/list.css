@@ -2,7 +2,7 @@
 
 .input-text {
 	width: 450px;
-    height: 45px;
+    height: 39px;
     border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
@@ -11,7 +11,7 @@
 
 .select-box {
 	width: 150px;
-    height: 45px;
+    height: 39px;
     border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
@@ -29,9 +29,8 @@
 
 .input-button {
 	display: inline-block;
-    width: 100px;
-    height: 45px;
-    line-height: 47px;
+    width: 77px;
+    height: 39px;
     border-radius: 8px;
     color: #fff;
     background-color: #003964;
@@ -40,7 +39,7 @@
 .search {
 	text-align: center;
 	background-color: #f7f7f7;
-	padding: 15px;
+	padding: 10px;
 }
 
 .select-view {
@@ -272,4 +271,14 @@ td {
 .btn-outline-success {
     color: #29608a;
     border-color: #29608a;
+}
+
+#list-wrap {
+	position: relative;
+	bottom: 30px;
+}
+.text-center {
+    text-align: center!important;
+    position: relative;
+    left: 120px
 }

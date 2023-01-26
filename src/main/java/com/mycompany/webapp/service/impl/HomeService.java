@@ -112,7 +112,16 @@ public class HomeService implements IHomeService {
 
 	@Override
 	public List<StudentVO> searchStudentList(StudentVO studentVo) {
-		return homeRepository.searchStudentList(studentVo);
+		
+		List<StudentVO> searchStudentList = homeRepository.searchStudentList(studentVo);
+		
+		for(StudentVO student : searchStudentList) {
+			student.setGenderTitle(homeRepository.getComnCdTitle(student.getGenderCd()));
+			student.setAddDoTitle(homeRepository.getComnCdTitle(student.getAddDoCd()));
+			student.setPositionTitle(homeRepository.getComnCdTitle(student.getPositionCd()));
+		}
+		
+		return searchStudentList;
 	}
 
 

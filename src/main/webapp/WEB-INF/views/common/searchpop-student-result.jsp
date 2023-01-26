@@ -23,17 +23,17 @@
                     <tr>
                         <td>${student.name}</td>
                         <td>
-                            <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}">
+                            <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}/${student.birth}/${student.genderTitle}/${student.email}/${student.phone}/${student.addDoTitle}/${student.addEtc}/${student.positionTitle}">
                                 ${student.studentId}
                             </a>
                         </td>
                         <td>${student.birth}</td>
-                        <td>${student.genderCd}</td>
+                        <td>${student.genderTitle}</td>
                         <td>${student.email}</td>
                         <td>${student.phone}</td>
-                        <td>${student.addDoCd}</td>
+                        <td>${student.addDoTitle}</td>
                         <td>${student.addEtc}</td>
-                        <td>${student.positionCd}</td>
+                        <td>${student.positionTitle}</td>
                     </tr>
                 </c:forEach>
             </table>
