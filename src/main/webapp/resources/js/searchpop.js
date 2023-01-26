@@ -43,28 +43,27 @@ function showList() {
         $(".list-wrap").html(contents);
         
         if(path.substring(10,25)==='subject') {
-            const subjectInsert = 'SubjectInsert'
+            const subjectInsert = 'SubjectInsert';
             disableHiddenBringValueList(subjectInsert); // 강좌 개설 : 과정에 이미 담긴 강좌는 개설하지 못하게 하기
 
         } else if (path.substring(10,25)==='course') {
             
         } else if (path.substring(10,25)==='opencourse') {
-            const enrollInsert = 'EnrollInsert'
+            const enrollInsert = 'EnrollInsert';
             const opnArr = ['OPN01', 'OPN05', 'OPN07'];
             disableListByState(enrollInsert, opnArr); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
             disableHiddenBringValueList(enrollInsert); // 수강 추가 : 수강생이 이미 수강했거나 수강하는 강좌는 팝업띄워서 안눌리게 하기
 
         } else if (path.substring(10,25)==='opensubject') {
-            const enrollInsert = 'EnrollInsert'
+            const enrollInsert = 'EnrollInsert';
             const opnArr = ['OPN01', 'OPN05', 'OPN07'];
             disableListByState(enrollInsert, opnArr); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
             disableHiddenBringValueList(enrollInsert); // 수강 추가 : 수강생이 이미 수강했거나 수강하는 강좌는 팝업띄워서 안눌리게 하기
 
         } else if (path.substring(10,25)==='student'){
-            // 수강 추가에서 강좌/과정이 선택되어 있을 시 팝업띄워서 안눌리게 하기
 
         } else if (path.substring(10,30)==='opensubjectDone') {
-            const survey = 'Survey'
+            const survey = 'Survey';
             const opnArr = ['OPN01', 'OPN02', 'OPN03', 'OPN04', 'OPN07'];
             disableListByState(survey, opnArr); // 만족도 조사 : 완료된 강좌만 선택할 수 있게
         }
@@ -167,7 +166,6 @@ function moveOutside(event, value){
         $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + reg);
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
-        // 강좌 타이틀 클릭 시, 들었던 수강생 선택 못하도록 리스트 반영하기
     }
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
@@ -200,6 +198,10 @@ function moveOutside(event, value){
 		ul.append(li);
 		$(opener.document).find("#student-list").html(ul);
         
+        opener.document.getElementById('subject-btn').removeAttribute("disabled"); // 수강생 선택하면 강좌 검색 버튼 활성화
+        opener.document.getElementById('course-btn').removeAttribute("disabled"); // 수강생 선택하면 과정 검색 버튼 활성화
+        // 강좌/과정 검색 리셋
+
         setUnavailableSubjectId('studentNameClicked', valueId); // 수강생 이름 클릭 시, 수강생이 수강했거나 수강하고 있는 개설강좌 리스트 반영하기
     }
     // 팝업창 닫기

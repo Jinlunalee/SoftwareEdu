@@ -41,17 +41,17 @@
 						<option value="course">과정</option>
 					</select>
 					<div class="search-popup" id="search-popup-subject">
-						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="subjectTitle-input" readonly placeholder="수강생 선택 후 검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button class="open-subject-popup-btn btn3 btn-outline-secondary">검색</button>
+						<button id="subject-btn" class="open-subject-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
-						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
+						<input id="courseTitle-input" readonly placeholder="수강생 선택 후 검색 버튼을 눌러 과정을 검색하세요.">
 						<input id="course-input" name="subject" type="hidden">
 						<input id="courseYear-input" name="openYear" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button class="open-course-popup-btn btn3 btn-outline-secondary">검색</button>
+						<button id="course-btn" class="open-course-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
 					</div>
 					<div class="submit-btn">
 						<form action="<c:url value='/enroll/boardlist'/>">
