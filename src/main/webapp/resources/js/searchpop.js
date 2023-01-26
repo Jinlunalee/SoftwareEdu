@@ -110,6 +110,15 @@ function moveOutside(event, value){
     console.log(value);
     let valueArr = value.split('/');
     let valueId = valueArr[0];
+    
+    let studentBirth = valueArr[2] + "/" + valueArr[3] + "/" + valueArr[4];
+    let studentGenderTitle = valueArr[5];
+    let studentEmail = valueArr[6];
+    let studentPhone = valueArr[7];
+    let studentAddDoTitle = valueArr[8];
+    let studentAddEtc = valueArr[9];
+    let studentPositionTitle = valueArr[10];
+    
     console.log(valueId.substring(0,4));
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 강좌일 경우
     if(valueId.substring(0,4)==='SUBJ') {
@@ -138,6 +147,19 @@ function moveOutside(event, value){
     	$(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
+        
+        var ul = $("<ul/>");
+        var li = $("<ul class='stu'/>").append(
+				$("<li/>").text(' ' + '이름 : ' + valueTitle),
+				$("<li/>").text(' ' + '성별 : ' + studentGenderTitle),
+				$("<li/>").text(' ' + '생년월일 : ' + studentBirth),
+				$("<li/>").text(' ' + '이메일 : ' + studentEmail),
+				$("<li/>").text(' ' + '전화번호 : ' + studentPhone),
+				$("<li/>").text(' ' + '주소 : ' + studentAddDoTitle + ' ' + studentAddEtc),
+				$("<li/>").text(' ' + '직위 : ' + studentPositionTitle)
+		);
+		ul.append(li);
+		$(opener.document).find("#student-list").html(ul);
         window.close();
     }
     // 팝업창 닫기
