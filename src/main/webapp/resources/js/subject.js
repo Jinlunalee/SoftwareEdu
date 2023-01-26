@@ -244,44 +244,56 @@ $('input#startTime').timepicker({
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
 	let startDay = document.getElementById("startDay").value;
-		let startDay2 = new Date(startDay);
-		let startTime = document.getElementById("startTime").value;
-		let endTime = document.getElementById("endTime").value;
-		let printDay = document.getElementById("printDay");
-		let endDay = document.getElementById("endDay");
+	let startDay2 = new Date(startDay);
+	let startTime = document.getElementById("startTime").value;
+	let endTime = document.getElementById("endTime").value;
+	let printDay = document.getElementById("printDay");
+	let endDay = document.getElementById("endDay");
 
-		printDay.innerHTML = ''; //비울때는 =
+	printDay.innerHTML = ''; //비울때는 =
 
-		if(startTime !== '' && endTime !== ''){
-			let hours = document.getElementById("hours").value;
+	if (startTime !== '' && endTime !== '') {
+		let hours = document.getElementById("hours").value;
 
-			let startHour = parseInt(startTime.substring(0,2));
-			let startMin = parseInt(startTime.substring(3))
-			let endHour = parseInt(endTime.substring(0,2));
-			let endMin = parseInt(endTime.substring(3));
+		let startHour = parseInt(startTime.substring(0, 2));
+		let startMin = parseInt(startTime.substring(3))
+		let endHour = parseInt(endTime.substring(0, 2));
+		let endMin = parseInt(endTime.substring(3));
 
-			let diffHour = endHour - startHour;
-			let diffMin = 0;
-			if(endMin < startMin){
-				diffMin = (endMin - startMin) + 60;
-				diffHour = diffHour - 1;
-			}else{
-				diffMin = endMin - startMin;
-			}
-			diffMin = Math.ceil(diffMin/60 * 100) / 100; //소수점 두자리 변환
-
-			let diffTime = diffHour+diffMin; // 시작시간과 끝시간 계산
-
-			let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
-
-			startDay2.setDate(startDay2.getDate() + days);
-			
-			endDay.value = '';
-			endDay.value = startDay2.toJSON().substring(0,10);
-
-			//일수 출력
-			printDay.innerText += "("+days+"일)"; //추가해주는거라 +=
+		let diffHour = endHour - startHour;
+		let diffMin = 0;
+		if (endMin < startMin) {
+			diffMin = (endMin - startMin) + 60;
+			diffHour = diffHour - 1;
+		} else {
+			diffMin = endMin - startMin;
 		}
+		diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
+
+		let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+
+		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
+
+		startDay2.setDate(startDay2.getDate() + days);
+
+		endDay.value = '';
+		endDay.value = startDay2.toJSON().substring(0, 10);
+
+		//일수 출력
+		printDay.innerText += "(" + days + "일)"; //추가해주는거라 +=
+	}
+}
+
+/*기간내에 휴일 확인*/
+function checkHoliday(){
+	$.ajax({
+		url:
+	}).done(function(result){
+		console.log('success');
+		
+	}).fail(function(){
+		console.log('fail');
+	});
 }
 
 /*신청기간 지정 - 처음에 입력했을때*/
@@ -360,7 +372,7 @@ function inputState(){
 	// console.log(state.value);
 }
 
-//*페이지별 개수 선택 유지(subject) - ajax*/
+/*페이지별 개수 선택 유지(subject) - ajax*/
 function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({
@@ -376,7 +388,7 @@ function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 	});
 }
 
-//*페이지별 개수 선택 유지(course) - ajax*/
+/*페이지별 개수 선택 유지(course) - ajax*/
 function listCount2(RowsPerPage) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({

@@ -242,20 +242,18 @@ public class SurveyController {
 		//sheet2
 		//상단 헤더row
 		Row headerRow2 = sheet2.createRow(rowNo++);
-//		headerRow2.createCell(0).setCellValue("answer_id");
-		headerRow2.createCell(1).setCellValue("subject_id");
-		headerRow2.createCell(2).setCellValue("subject_seq");
-		headerRow2.createCell(3).setCellValue("question_num");
-		headerRow2.createCell(4).setCellValue("answer_value");
+		headerRow2.createCell(0).setCellValue("subject_id");
+		headerRow2.createCell(1).setCellValue("subject_seq");
+		headerRow2.createCell(2).setCellValue("question_num");
+		headerRow2.createCell(3).setCellValue("answer_value");
 		
 		List<AnswerVO> answerList = surveyService.selectAnswerList(subjectId, subjectSeqInt);
 		for(AnswerVO answer : answerList) {
 			Row row2 = sheet2.createRow(rowNo++);
-//			row.createCell(0).setCellValue(answer.);
-			row2.createCell(1).setCellValue(answer.getSubjectId());
-			row2.createCell(2).setCellValue(answer.getSubjectSeq());
-			row2.createCell(3).setCellValue(answer.getQuestionNum());
-			row2.createCell(4).setCellValue(answer.getAnswerValue());
+			row2.createCell(0).setCellValue(answer.getSubjectId());
+			row2.createCell(1).setCellValue(answer.getSubjectSeq());
+			row2.createCell(2).setCellValue(answer.getQuestionNum());
+			row2.createCell(3).setCellValue(answer.getAnswerValue());
 		}
 		
 		response.setContentType("ms-vnd/excel");
