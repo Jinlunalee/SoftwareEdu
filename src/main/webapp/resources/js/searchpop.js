@@ -50,12 +50,14 @@ function showList() {
             
         } else if (path.substring(10,25)==='opencourse') {
             const enrollInsert = 'EnrollInsert'
-            disableListByState(enrollInsert); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
+            const opnArr = ['OPN01', 'OPN05', 'OPN07'];
+            disableListByState(enrollInsert, opnArr); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
             disableHiddenBringValueList(enrollInsert); // 수강 추가 : 수강생이 이미 수강했거나 수강하는 강좌는 팝업띄워서 안눌리게 하기
 
         } else if (path.substring(10,25)==='opensubject') {
             const enrollInsert = 'EnrollInsert'
-            disableListByState(enrollInsert); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
+            const opnArr = ['OPN01', 'OPN05', 'OPN07'];
+            disableListByState(enrollInsert, opnArr); // 수강 추가 : 모집 중, 모집 마감, 진행중만 선택할 수 있게
             disableHiddenBringValueList(enrollInsert); // 수강 추가 : 수강생이 이미 수강했거나 수강하는 강좌는 팝업띄워서 안눌리게 하기
 
         } else if (path.substring(10,25)==='student'){
@@ -63,14 +65,14 @@ function showList() {
 
         } else if (path.substring(10,30)==='opensubjectDone') {
             const survey = 'Survey'
-            disableListByState(survey); // 만족도 조사 : 완료된 강좌만 선택할 수 있게
+            const opnArr = ['OPN01', 'OPN02', 'OPN03', 'OPN04', 'OPN07'];
+            disableListByState(survey, opnArr); // 만족도 조사 : 완료된 강좌만 선택할 수 있게
         }
     })
 }
 
 /* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
 function disableHiddenBringValueList(value) {
-    console.log(value);
     if(value==='SubjectInsert') {
         const subjectIdString = document.getElementById('subjectId-string').value;
         const subjectIdArr = subjectIdString.split('/');
@@ -99,40 +101,20 @@ function disableHiddenBringValueList(value) {
 }
 
 /* 상태에 따라 선택 못하게 하기 ( OPN01 모집 예정, OPN02 모집 중 , OPN03 모집 마감, OPN04 진행중, 0PN05 진행완료, OPN07 폐강 ) */
-function disableListByState(value) {
+function disableListByState(value, opnArr) {
     if(value==='EnrollInsert') { // 수강 추가
-        for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
-            document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
-            document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 수강 신청하실 수 없습니다.")');
-        }
-        for(var k=0; k<document.getElementsByClassName('OPN05').length; k++) {
-            document.getElementsByClassName('OPN05')[k].removeAttribute("onclick");
-            document.getElementsByClassName('OPN05')[k].setAttribute("onclick", 'alert("진행완료인 과정은 수강 신청하실 수 없습니다.")');
-        }
-        for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
-            document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
-            document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 수강 신청하실 수 없습니다.")');
+        for(var k=0; k<opnArr.length; k++) { // 'OPN01', 'OPN05', 'OPN07'
+            for(var i=0; i<document.getElementsByClassName(opnArr[k]).length; i++) {
+                document.getElementsByClassName(opnArr[k])[i].removeAttribute("onclick");
+                document.getElementsByClassName(opnArr[k])[i].setAttribute("onclick", 'alert("모집중/모집마감/진행중이 아닌 과정은 수강 신청하실 수 없습니다.")');
+            }
         }
     } else if(value==='Survey') { // 만족도 조사
-        for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
-            document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
-            document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
-        }
-        for(var k=0; k<document.getElementsByClassName('OPN02').length; k++) {
-            document.getElementsByClassName('OPN02')[k].removeAttribute("onclick");
-            document.getElementsByClassName('OPN02')[k].setAttribute("onclick", 'alert("모집중인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
-        }
-        for(var j=0; j<document.getElementsByClassName('OPN03').length; j++) {
-            document.getElementsByClassName('OPN03')[j].removeAttribute("onclick");
-            document.getElementsByClassName('OPN03')[j].setAttribute("onclick", 'alert("모집마감인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
-        }
-        for(var j=0; j<document.getElementsByClassName('OPN04').length; j++) {
-            document.getElementsByClassName('OPN04')[j].removeAttribute("onclick");
-            document.getElementsByClassName('OPN04')[j].setAttribute("onclick", 'alert("진행중인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
-        }
-        for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
-            document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
-            document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        for(var k=0; k<opnArr.length; k++) { // 'OPN01', 'OPN02', 'OPN03', 'OPN04', 'OPN07'
+            for(var i=0; i<document.getElementsByClassName(opnArr[k]).length; i++) {
+                document.getElementsByClassName(opnArr[k])[i].removeAttribute("onclick");
+                document.getElementsByClassName(opnArr[k])[i].setAttribute("onclick", 'alert("진행완료가 아닌 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+            }
         }
     }
 }
