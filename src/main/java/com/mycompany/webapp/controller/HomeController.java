@@ -198,6 +198,45 @@ public class HomeController {
 	}
 	
 	/**
+	 * @description	완료 개설강좌 검색 팝업
+	 * @date	2023. 1. 26.
+	 * @author	Jin Lee
+	 * @param model
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/searchpop-opensubjectDone")
+	public void searchPopOpenSubjectDone(Model model) throws Exception{
+		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
+		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	완료 개설강좌 검색 팝업 : 결과
+	 * @date	2023. 1. 26.
+	 * @author	Jin Lee
+	 * @param openVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/searchpop-opensubjectDone-result", produces = "application/text; charset=UTF-8")
+	public String searchPopOpenSubjectResultDone(OpenVO openVo, Model model) throws Exception{
+		System.out.println(openVo);
+		
+		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
+		
+		// ajax로 구현할 것
+		if(!openSubjectList.isEmpty()) {
+			model.addAttribute("boardList",openSubjectList);	// 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
+		}
+		logger.info("openSubjectlist: " + openSubjectList);	
+		return "common/searchpop-opensubjectDone-result";
+	}
+	
+	/**
 	 * @description	개설과정 검색 팝업
 	 * @date	2023. 1. 17.
 	 * @author	Jin Lee
