@@ -287,7 +287,7 @@ function calcEndDay(){
 /*기간내에 휴일 확인*/
 function checkHoliday(){
 	$.ajax({
-		url:
+		url: 
 	}).done(function(result){
 		console.log('success');
 		
