@@ -14,10 +14,10 @@
 }
 
 .basic_txt_color {
-	color:#666;
+   color:#666;
 }
 .course_state {
-	color: #FFFFFF;
+   color: #FFFFFF;
     border-radius: 40px;
     background-color: #1A54CD;
     margin: 10px;
@@ -25,29 +25,29 @@
     display: inline-block;
 }
 .list {
-	width: 95%;
+   width: 95%;
     border-top: 2px solid #bababa;
     margin-bottom: 20px;
 }
 tr {
-	height: 40px;
+   height: 40px;
 }
 table .detail_img {
-	max-width:90%;
+   max-width:90%;
 }
 .course_intro {
-	display: flex;
+   display: flex;
     align-items: center;
     border:1px solid #e8e8e8;
     border-radius: 20px;
-   	padding: 20px 0px;
+      padding: 20px 0px;
     margin-bottom: 40px;
     
 }
 .course_intro .txt {
-	color:#666;
-	padding: 0 0 0 30px;
-	line-height: 28px;
+   color:#666;
+   padding: 0 0 0 30px;
+   line-height: 28px;
     border-left: 1px dotted #e1e1e1;
     min-height: 100px;
     display: inline-flex;

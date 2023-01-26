@@ -72,7 +72,8 @@ const selected = function() {
 				recruitEndDay.removeAttr('min');
 				printHours.empty();
 				printDay.empty();
-				levelCd.empty();
+				levelCd.val('');
+				levelCdTitle.empty();
 				cost.empty();
 				support.empty();
 
