@@ -40,7 +40,7 @@ function showList() {
         if(path.substring(10,25)==='subject') {
             disableSubjectList(); // 강좌 개설에서 과정에 이미 담긴 강좌는 개설하지 못하게 하기
         } else if (path.substring(10,25)==='course') {
-        	
+        
         } else if (path.substring(10,25)==='opencourse') {
             disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='opensubject') {

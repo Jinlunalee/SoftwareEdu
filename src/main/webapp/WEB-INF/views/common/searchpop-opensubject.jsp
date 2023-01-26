@@ -28,21 +28,21 @@
                             </select>
                             <input type="text" id="subject-input" name="subjectId">
                             난이도 : 
-                            <select name="level">
+                            <select name="levelCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${levelList}" var="level">
                                     <option value="${level.comnCd}">${level.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
                             상태 : 
-                            <select name="state">
+                            <select name="openStateCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${stateList}" var="state">
                                     <option value="${state.comnCd}">${state.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
                             분류 : 
-                            <select name="catSubject">
+                            <select name="catSubjectCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${catSubjectList}" var="catSubject">
                                     <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
@@ -52,7 +52,7 @@
                             등록년도 :
                             <select name="regYear">
                                 <option value="0">전체</option>
-                                <c:forEach var="i" begin="2019" end="2020">
+                                <c:forEach var="i" begin="2019" end="2023">
                                     <option value="${i}">${i}</option>
                                 </c:forEach>
                             </select>
