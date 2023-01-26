@@ -121,7 +121,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("subjectlist: " + subjectList);	
 		return "common/searchpop-subject-result";
 	}
 	
@@ -158,7 +158,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("courselist: " + courseList);	
 		return "common/searchpop-course-result";
 	}
 	
@@ -193,8 +193,47 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("openSubjectlist: " + openSubjectList);	
 		return "common/searchpop-opensubject-result";
+	}
+	
+	/**
+	 * @description	완료 개설강좌 검색 팝업
+	 * @date	2023. 1. 26.
+	 * @author	Jin Lee
+	 * @param model
+	 * @throws Exception
+	 */
+	@GetMapping(value="/common/searchpop-opensubjectDone")
+	public void searchPopOpenSubjectDone(Model model) throws Exception{
+		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
+		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+	}
+	
+	/**
+	 * @description	완료 개설강좌 검색 팝업 : 결과
+	 * @date	2023. 1. 26.
+	 * @author	Jin Lee
+	 * @param openVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(value="/common/searchpop-opensubjectDone-result", produces = "application/text; charset=UTF-8")
+	public String searchPopOpenSubjectResultDone(OpenVO openVo, Model model) throws Exception{
+		System.out.println(openVo);
+		
+		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
+		
+		// ajax로 구현할 것
+		if(!openSubjectList.isEmpty()) {
+			model.addAttribute("boardList",openSubjectList);	// 존재 경우
+		} else {
+			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
+		}
+		logger.info("openSubjectlist: " + openSubjectList);	
+		return "common/searchpop-opensubjectDone-result";
 	}
 	
 	/**
@@ -232,7 +271,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("openCourseList: " + openCourseList);	
 		return "common/searchpop-opencourse-result";
 	}
 	
@@ -252,11 +291,26 @@ public class HomeController {
 		return boardList;
 	}
 	
+	/**
+	 * @description	수강생 검색 팝업
+	 * @date	2023. 1. 26.
+	 * @author	Minsu
+	 * @throws Exception
+	 */
 	@GetMapping(value="/common/searchpop-student")
 	public void searchPopStudent() throws Exception{
-		
+
 	}
-	
+
+	/**
+	 * @description	수강생 검색 팝업 : 결과
+	 * @date	2023. 1. 26.
+	 * @author	Minsu
+	 * @param studentVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(value="/common/searchpop-student-result", produces = "application/text; charset=UTF-8")
 	public String searchPopStudentResult(StudentVO studentVo, Model model) throws Exception{		
 		List<StudentVO> studentList = homeService.searchStudentList(studentVo);
@@ -266,7 +320,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");
 		}
-		
+		logger.info("studentList: " + studentList);	
 		return "common/searchpop-student-result";
 	}
 }

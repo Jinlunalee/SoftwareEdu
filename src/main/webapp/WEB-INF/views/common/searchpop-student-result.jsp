@@ -37,12 +37,12 @@
                     </tr>
                 </c:forEach>
             </table>
-        </div>                			
+        </div>                         
     </c:if>
     <!-- 게시물 x -->
     <c:if test="${boardCheck == 'empty'}">
         <div class="table-empty">
-        	수강생이 없습니다.
+            수강생이 없습니다.
         </div>
     </c:if>
 </div>

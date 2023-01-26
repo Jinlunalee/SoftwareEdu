@@ -151,36 +151,24 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public Map<String, Object> infoSubjectCourse(String courseId, String subjectId) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		int check = subjectRepository.checkOpenCourse(courseId); //과정 개설 여부 확인
-		
 		logger.info("service/infoSubjectCourse/check : " + check);
 		
-		SubjectVO subjectInfo = subjectRepository.infoSubject(subjectId);
+		SubjectVO subjectInfo = subjectRepository.infoSubject(subjectId); //강좌에 대한 정보 가져오기
 		subjectInfo.setLevelCdTitle(homeRepository.getComnCdTitle(subjectInfo.getLevelCd())); //level에대한 코드 코드명으로 변경
-		if("".equals(courseId)) { // 과정 입력 X
-			logger.info("coursId X");
-//			map.put("subjectInfo", subjectRepository.infoSubject(subjectId)); // 강좌에 대한 정보만 가져옴
+		if(!"".equals(courseId) && (check != 0)) { // 개설되어있는 경우
+			logger.info("개설되어있는경우");
+			map.put("courseInfo", subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
+			map.put("subjectInfo", subjectInfo); //강좌에 대한 정보 가져오기
+			map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
+		}else { //과정이 없거나, 최초개설인 경우
+			logger.info("coursId X && courseId O 최초개설");
 			map.put("subjectInfo", subjectInfo); // 강좌에 대한 정보만 가져옴
-		}else { //coursId 있는경우 - open테이블에 있는경우와 없는 경우(개설한 경우와 최초개설인 경우)
-			logger.info("coursId O");
-			if(check == 0) { //최초개설
-				logger.info("최초개설");
-//				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));// 신청일자를 가져올 필요없으므로 강좌에 대한 정보만 가져옴
-				map.put("subjectInfo", subjectInfo); // 강좌에 대한 정보만 가져옴
-			}else { //개설되어있는 경우
-				logger.info("개설되어있는경우");
-				map.put("courseInfo", subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
-//				map.put("subjectInfo", subjectRepository.infoSubject(subjectId));//강좌에 대한 정보 가져오기
-				map.put("subjectInfo", subjectInfo); //강좌에 대한 정보 가져오기
-				map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
-			}
 		}
 		
 		logger.info("service/infoSubjectCourse/list: " + map);
 		return map;
 	}
-		
 		////////////////////////////////////
 //		VO로 데이터 전송
 //		SubjectVO subject = null;
