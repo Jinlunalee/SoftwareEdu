@@ -44,11 +44,12 @@ function showList() {
         } else if (path.substring(10,25)==='opencourse') {
             disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='opensubject') {
-            disableListByState();
-        } else if (path.substring(10, 7) === 'student') {
-        	
+            disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+        } else if (path.substring(10,25)==='student'){
+            // 강좌/과정이 선택되어 있을 시 이미 해당 강좌 수강중인 학생은 튕기게
         }
-       })
+    })
+    
 }
 
 /* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
@@ -94,10 +95,11 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
     } else if(value === 'studentId') {
-    	studentInput.setAttribute("name", 'studentId');
+        studentInput.setAttribute("name", 'studentId');
     } else{
-    	studentInput.setAttribute("name", 'name');
+        studentInput.setAttribute("name", 'name');
     }
+
 }
 
 
@@ -132,13 +134,12 @@ function moveOutside(event, value){
         
         setUnavailableSubjectId(valueId); // 작성 해에 courseId에 등록된 강좌 리스트 반영하기
     }
-    
-    if(valueId.substring(0,4) === 'STDT') {
-    	let valueTitle = valueArr[1];
-    	$(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
+    // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
+    if(valueId.substring(0,4)==='STDT') {
+        let valueTitle = valueArr[1];
+        $(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
-        window.close();
     }
     // 팝업창 닫기
     window.close();

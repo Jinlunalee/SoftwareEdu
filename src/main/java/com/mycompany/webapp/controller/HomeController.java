@@ -252,11 +252,26 @@ public class HomeController {
 		return boardList;
 	}
 	
+	/**
+	 * @description	수강생 검색 팝업
+	 * @date	2023. 1. 26.
+	 * @author	Minsu
+	 * @throws Exception
+	 */
 	@GetMapping(value="/common/searchpop-student")
 	public void searchPopStudent() throws Exception{
-		
+
 	}
-	
+
+	/**
+	 * @description	수강생 검색 팝업 : 결과
+	 * @date	2023. 1. 26.
+	 * @author	Minsu
+	 * @param studentVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(value="/common/searchpop-student-result", produces = "application/text; charset=UTF-8")
 	public String searchPopStudentResult(StudentVO studentVo, Model model) throws Exception{		
 		List<StudentVO> studentList = homeService.searchStudentList(studentVo);

@@ -23,7 +23,7 @@
                     <form id="search-form">
                         <div class="search-input">
                             <select name="student" onchange="putNameonInput(this.value)" >
-                            	<option value="">이름/아이디</option>
+                                <option value="">이름/아이디</option>
                                 <option value="name">수강생 명</option>
                                 <option value="studentId">수강생 아이디</option>
                             </select>
