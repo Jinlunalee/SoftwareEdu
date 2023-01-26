@@ -37,7 +37,6 @@
                     </tr>
                 </c:forEach>
             </table>
-<<<<<<< HEAD
         </div>                         
     </c:if>
     <!-- 게시물 x -->
@@ -47,14 +46,3 @@
         </div>
     </c:if>
 </div>
-=======
-        </div>                			
-    </c:if>
-    <!-- 게시물 x -->
-    <c:if test="${boardCheck == 'empty'}">
-        <div class="table-empty">
-        	수강생이 없습니다.
-        </div>
-    </c:if>
-</div>
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
