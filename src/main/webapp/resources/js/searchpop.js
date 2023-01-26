@@ -42,11 +42,16 @@ function showList() {
         } else if (path.substring(10,25)==='course') {
         
         } else if (path.substring(10,25)==='opencourse') {
-            disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+            const EnrollInsert = 'EnrollInsert'
+            disableListByState(EnrollInsert); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='opensubject') {
-            disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+            const EnrollInsert = 'EnrollInsert'
+            disableListByState(EnrollInsert); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='student'){
-            // 강좌/과정이 선택되어 있을 시 이미 해당 강좌 수강중인 학생은 튕기게
+            // 수강 추가에서 강좌/과정이 선택되어 있을 시 이미 해당 강좌 수강중인 학생은 튕기게
+        } else if (path.substring(10,30)==='opensubjectDone') {
+            const Survey = 'Survey'
+            disableListByState(Survey); // 만족도 조사에서 완료된 강좌만 선택할 수 있게
         }
     })
     
@@ -64,20 +69,44 @@ function disableSubjectList() {
     }
 }
 
-/* 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게 OPN02, OPN03, OPN04 : OK / OPN01, 0PN05, OPN07*/
-function disableListByState() {
-    for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
-        document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
-        document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 수강 신청하실 수 없습니다.")');
+/* 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게 OPN02, OPN03, OPN04 : OK / OPN01, 0PN05, OPN07 : NO */
+function disableListByState(value) {
+    if(value==='EnrollInsert') {
+        for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
+            document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
+            document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 수강 신청하실 수 없습니다.")');
+        }
+        for(var k=0; k<document.getElementsByClassName('OPN05').length; k++) {
+            document.getElementsByClassName('OPN05')[k].removeAttribute("onclick");
+            document.getElementsByClassName('OPN05')[k].setAttribute("onclick", 'alert("진행완료인 과정은 수강 신청하실 수 없습니다.")');
+        }
+        for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
+            document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
+            document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 수강 신청하실 수 없습니다.")');
+        }
+    } else if(value==='Survey') {
+        for(var i=0; i<document.getElementsByClassName('OPN01').length; i++) {
+            document.getElementsByClassName('OPN01')[i].removeAttribute("onclick");
+            document.getElementsByClassName('OPN01')[i].setAttribute("onclick", 'alert("모집예정인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        }
+        for(var k=0; k<document.getElementsByClassName('OPN02').length; k++) {
+            document.getElementsByClassName('OPN02')[k].removeAttribute("onclick");
+            document.getElementsByClassName('OPN02')[k].setAttribute("onclick", 'alert("모집중인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        }
+        for(var j=0; j<document.getElementsByClassName('OPN03').length; j++) {
+            document.getElementsByClassName('OPN03')[j].removeAttribute("onclick");
+            document.getElementsByClassName('OPN03')[j].setAttribute("onclick", 'alert("모집마감인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        }
+        for(var j=0; j<document.getElementsByClassName('OPN04').length; j++) {
+            document.getElementsByClassName('OPN04')[j].removeAttribute("onclick");
+            document.getElementsByClassName('OPN04')[j].setAttribute("onclick", 'alert("진행중인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        }
+        for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
+            document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
+            document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 만족도 조사 결과가 존재하지 않습니다.")');
+        }
     }
-    for(var k=0; k<document.getElementsByClassName('OPN05').length; k++) {
-        document.getElementsByClassName('OPN05')[k].removeAttribute("onclick");
-        document.getElementsByClassName('OPN05')[k].setAttribute("onclick", 'alert("진행완료인 과정은 수강 신청하실 수 없습니다.")');
-    }
-    for(var j=0; j<document.getElementsByClassName('OPN07').length; j++) {
-        document.getElementsByClassName('OPN07')[j].removeAttribute("onclick");
-        document.getElementsByClassName('OPN07')[j].setAttribute("onclick", 'alert("폐강인 과정은 수강 신청하실 수 없습니다.")');
-    }
+
 }
 
 /* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
