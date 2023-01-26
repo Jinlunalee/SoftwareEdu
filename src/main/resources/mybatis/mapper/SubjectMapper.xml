@@ -285,4 +285,13 @@
 		AND enroll.del_yn = 'N' AND enroll.state_cd != 'OPN07'
 		ORDER BY enroll.reg_dt
 	</select>
+	
+	<select id="checkHoliday" parameterType="map" resultType="int">
+	/*checkHoliday*/
+		select count(*)
+		from holiday
+		where holiday_day between #{startDay} and #{endDay}
+		and holiday_yn = 'y'
+	</select>
+	
 </mapper>

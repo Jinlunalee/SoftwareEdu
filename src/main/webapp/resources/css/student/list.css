@@ -7,6 +7,8 @@
     margin: 0 10px;
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
+    position: relative;
+    right: 10px;
 }
 
 .select-box {
@@ -16,6 +18,8 @@
     margin: 0 10px;
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
+    position: relative;
+    left: 10px;
 }
 
 .input-date {
@@ -34,6 +38,9 @@
     border-radius: 8px;
     color: #fff;
     background-color: #003964;
+    position: relative;
+    right: 10px;
+    bottom: 1px;
 }
 
 .search {
@@ -56,6 +63,8 @@
 	text-align: end;
     margin-top: 15px;
     margin-bottom: 10px;
+    position: relative;
+    top: 10px;
 }
 
 .list {
@@ -246,7 +255,7 @@ td {
 }
 
 .btn-outline-secondary {
-	font-size: 14px;  	
+	font-size: 13px;  	
 }
 
 .close-btn2{
@@ -255,12 +264,14 @@ td {
     left: 349px;
 }
 
-.list_top .cnt {
+.list_top{
     color: #666;
     float: left;
     margin: 5px 10px;
     }
 .cnt {
+	color: #666;
+    float: left;
 	font-size: 12px;
 }
 #applyperiod {
@@ -275,10 +286,13 @@ td {
 
 #list-wrap {
 	position: relative;
-	bottom: 30px;
+	bottom: 20px;
 }
 .text-center {
     text-align: center!important;
     position: relative;
     left: 120px
+}
+.basic_txt_color {
+    color: #003964;
 }

@@ -387,4 +387,21 @@ public class SubjectController {
 		return "subject/boardlist-result";
 	}
 	
+	
+	/**
+	 * @Description : 연수 끝나는 날 지정해줄때 휴일인 경우 고려
+	 * @author KOSA
+	 * @date 2023. 1. 26.
+	 * @param startDay
+	 * @param endDay
+	 * @return
+	 */
+	@RequestMapping(value="/ajaxcheckholiday", method=RequestMethod.GET)
+	@ResponseBody
+	public int ajaxCheckHoliday(String startDay, String endDay) {
+		logger.info("checkHoliday:"+startDay+endDay);
+		logger.info("checkHoliday/count:"+subjectService.checkHoliday(startDay, endDay));
+		return subjectService.checkHoliday(startDay, endDay);
+	}
+	
 }

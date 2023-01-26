@@ -1,17 +1,19 @@
 @charset "UTF-8";
 
 .input-text {
-	width: 450px;
-    height: 45px;
+	width: 350px;
+    height: 39px;
     border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
+    position: relative;
+    right: 20px;
 }
 
 .select-box {
 	width: 150px;
-    height: 45px;
+    height: 39px;
     border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
@@ -19,8 +21,8 @@
 }
 
 .input-date {
-	width: 170px;
-    height: 45px;
+	width: 160px;
+    height: 39px;
     border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
@@ -28,23 +30,23 @@
 }
 
 .input-button {
+	margin-top: 7px;
 	display: inline-block;
-    width: 100px;
-    height: 45px;
-    line-height: 42px;
+    width: 77px;
+    height: 39px;
     border-radius: 8px;
     color: #fff;
     background-color: #003964;
     position: relative;
-    left: 440px;
+    left: 392px;
     bottom: 41px;
 }
 
 .search {
 	text-align: center;
 	background-color: #f7f7f7;
-	padding-top: 30px;
-	height: 170px;
+	padding-top: 19px;
+	height: 125px;
 }
 
 .select-view {
@@ -57,6 +59,8 @@
 }
 
 .view {
+	position: relative;
+	top: 26px;
 	text-align: end;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -67,11 +71,21 @@
     text-align: center;
     border-top: 2px solid #bababa;
     margin-bottom: 20px;
+    font-size: 13px;
+    position: relative;
+    bottom: 20px;
 }
 
 tr {
 	border-bottom: 1px solid #e8e8e8;
 	height: 40px;
+}
+th {
+    font-weight: 500;
+    font-size: 0.963rem;
+}
+td {
+    color: #666;
 }
 
 .down {
@@ -81,6 +95,8 @@ tr {
 .excelimg {
 	width: 140px;
     height: 37px;
+    position: relative;
+    bottom: 30px;
 }
 
 .modal {
@@ -195,10 +211,9 @@ tr {
 }
 
 .selectstudent{
-	position: relative;
-    right: 254px;
     position: relative;
-    right: 394px;
+    right: 328px;
+    margin-top: 3px;
 }
 
 .apply-period {
@@ -210,28 +225,50 @@ tr {
 	display : inline;
 	text-align : left;
 	position: relative;
-    left: 10px;
+    left: 30px;
 }
 
 .state{
 	display: inline;
     position: relative;
-    left: 79px;
+    left: 129px;
     bottom: 45px;
+    margin-top: 3px;
 }
 
 .input-student {
 	position: relative;
-    left: 10px;
-    width: 170px;
+    right: 23px;
+    width: 195px;
 }
 
 .select-stu{
-	width: 170px;
+	width: 160px;
 	position: relative;
     right: 3px;
 }
 
 .input-cancel{
 	display: inline;
+}
+.btn-secondary{
+    font-size: 11px;
+}
+
+.list_top{
+    color: #666;
+    margin: 5px 10px;
+}
+
+.cnt {
+	position: relative;
+	bottom: 20px;
+	color: #666;
+    font-size: 12px;
+}
+.btn-outline-secondary {
+    font-size: 13px;
+}
+.basic_txt_color {
+    color: #003964;
 }

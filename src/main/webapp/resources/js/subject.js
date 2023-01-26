@@ -274,7 +274,17 @@ function calcEndDay(){
 
 		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
 
-		startDay2.setDate(startDay2.getDate() + days);
+		startDay2.setDate(startDay2.getDate() + days); 
+
+		//휴일체크
+		let resultDay = checkHoliday(startDay, startDay2.toJSON().substring(0, 10));
+		console.log(resultDay);
+
+		// 휴일인만큼 날짜 더하기
+		startDay2.setDate(startDay2.getDate() + resultDay); 
+		days += resultDay;
+		console.log(days);
+		console.log(typeof days);
 
 		endDay.value = '';
 		endDay.value = startDay2.toJSON().substring(0, 10);
@@ -285,15 +295,25 @@ function calcEndDay(){
 }
 
 /*기간내에 휴일 확인*/
-function checkHoliday(){
+function checkHoliday(startDay, endDay){
+	console.log("checkHoliday!");
+	let resultData;
+	startDay = startDay.replaceAll("-","");
+	endDay = endDay.replaceAll("-","");
 	$.ajax({
-		url:
+		type: "get",
+		url: "ajaxcheckholiday?startDay="+startDay+"&endDay="+endDay,
+		async: false,
 	}).done(function(result){
 		console.log('success');
-		
+		console.log(result);
+		resultData = result;
+
 	}).fail(function(){
 		console.log('fail');
 	});
+
+	return resultData;
 }
 
 /*신청기간 지정 - 처음에 입력했을때*/

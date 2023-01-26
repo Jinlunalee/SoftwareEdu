@@ -219,4 +219,9 @@ public class SubjectService implements ISubjectService{
 		return subjectRepository.selectOpenSubjectByStudentId(studentId);
 	}
 	
+	@Override
+	public int checkHoliday(String startDay, String endDay) {
+		return subjectRepository.checkHoliday(startDay, endDay);
+	}
+	
 }
