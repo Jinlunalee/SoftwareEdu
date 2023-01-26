@@ -268,3 +268,8 @@ td {
 	position : relative;
 	right: 400px;
 }
+
+.btn-outline-success {
+    color: #29608a;
+    border-color: #29608a;
+}

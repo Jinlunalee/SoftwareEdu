@@ -273,15 +273,15 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@PostMapping(value="/common/searchpop-student-result", produces = "application/text; charset=UTF-8")
-	public String searchPopStudentResult(StudentVO studentVo, Model model) throws Exception{      
+	public String searchPopStudentResult(StudentVO studentVo, Model model) throws Exception{		
 		List<StudentVO> studentList = homeService.searchStudentList(studentVo);
-
+		
 		if(!studentList.isEmpty()) {
 			model.addAttribute("studentList", studentList);
 		} else {
 			model.addAttribute("boardCheck", "empty");
 		}
-
+		
 		return "common/searchpop-student-result";
 	}
 }
