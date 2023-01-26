@@ -121,7 +121,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("subjectlist: " + subjectList);	
 		return "common/searchpop-subject-result";
 	}
 	
@@ -158,7 +158,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("courselist: " + courseList);	
 		return "common/searchpop-course-result";
 	}
 	
@@ -193,7 +193,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("openSubjectlist: " + openSubjectList);	
 		return "common/searchpop-opensubject-result";
 	}
 	
@@ -232,7 +232,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		
+		logger.info("openCourseList: " + openCourseList);	
 		return "common/searchpop-opencourse-result";
 	}
 	
@@ -281,7 +281,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");
 		}
-		
+		logger.info("studentList: " + studentList);	
 		return "common/searchpop-student-result";
 	}
 }

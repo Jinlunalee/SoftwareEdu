@@ -23,7 +23,7 @@
                     <tr>
                         <td>${board.courseId}</td>
                         <td>
-                            <a class="${board.stateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
+                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
                                 ${board.courseTitle}
                             </a>
                         </td>
@@ -31,9 +31,9 @@
                         <td>${board.endDay}</td>
                         <td>${board.recruitStartDay}</td>
                         <td>${board.recruitEndDay}</td>
-                        <td>${board.stateCdTitle}</td>
+                        <td>${board.openStateCdTitle}</td>
                         <td>${board.catCourseCdTitle}</td>
-                        <td>${board.regYear}</td>
+                        <td>${board.courseOpenYear}</td>
                     </tr>
                 </c:forEach>
             </table>
