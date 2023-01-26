@@ -28,7 +28,7 @@
                             </select>
                             <input type="text" id="course-input" name="courseId">
                             상태 : 
-                            <select name="stateCd">
+                            <select name="openStateCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${stateList}" var="state">
                                     <c:if test="${(state.comnCd eq 'OPN02') or (state.comnCd eq 'OPN03') or (state.comnCd eq 'OPN04')}">
@@ -44,9 +44,9 @@
                                 </c:forEach>
                             </select>
                             등록년도 :
-                            <select name="regYear">
+                            <select name="courseOpenYear">
                                 <option value="0">전체</option>
-                                <c:forEach var="i" begin="2019" end="2020">
+                                <c:forEach var="i" begin="2019" end="2023">
                                     <option value="${i}">${i}</option>
                                 </c:forEach>
                             </select>

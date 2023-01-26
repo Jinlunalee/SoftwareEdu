@@ -14,7 +14,6 @@
 			<div class="search-box">
 				<div class="search-content">
 					<span class="name">수강생</span> &nbsp; &nbsp;
-					
 					<form id="form" name="search-form" class="search">
 						<input id="studentTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 수강생을 검색하세요.">
 						<input id="student-input" name="student" type="hidden">
@@ -56,28 +55,6 @@
 					</div>
 				</div>
 			</div>
-				<!-- <div class="search-content">
-				<span class="name">강좌 / 과정</span> &nbsp; &nbsp;
-				<form id="form" name="search-subject-course" class="search2">
-					<select name="openState" class="sc2">
-						<option selected value="">개설상태</option>
-						<option value="recruitExpecting">모집예정</option>
-						<option value="recruitOngoing">모집중</option>
-						<option value="recruitEnd">모집마감</option>
-						<option value="ongoing">진행중</option>
-						<option value="completion">진행완료</option>
-					</select>
-					<select name="subCor" class="sc2">
-						<option selected value="">강좌/과정</option>
-						<option value="subject">강좌</option>
-						<option value="course">과정</option>
-					</select>
-					<input type="text" name="kw" class="search-in">
-					<input type="button" onclick="getOpenList()" class="btn btn2" value="검색">
-				</form>
-				</div> -->
-			
-
 			<div class="subject-result"></div>
 		</div>
 	</div>
@@ -106,50 +83,50 @@
 		}
 	}
 
-	// student 정보 가져오기
-	function getStudentList() {
-		$.ajax({
-			type : 'GET',
-			url : 'studentlist',
-			data : $("form[name=search-form]").serialize(),
-			async : false,
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-			success : function(result){
-				// add Enroll에서 쓰기 위해 포맷 맞춰줌
-				studentId = JSON.stringify(result[0].studentId);
-				studentId = studentId.replace(/\"/gi, "");
+	// // student 정보 가져오기
+	// function getStudentList() {
+	// 	$.ajax({
+	// 		type : 'GET',
+	// 		url : 'studentlist',
+	// 		data : $("form[name=search-form]").serialize(),
+	// 		async : false,
+	// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+	// 		success : function(result){
+	// 			// add Enroll에서 쓰기 위해 포맷 맞춰줌
+	// 			studentId = JSON.stringify(result[0].studentId);
+	// 			studentId = studentId.replace(/\"/gi, "");
 				
-				$(".student-result").empty();
-				if(result.length > 0) {
-					var ul = $("<ul/>");
-					for(var i in result) {
-						var $studentId = result[i].studentId;
-						var $name = result[i].name;
-						var $genderTitle = result[i].genderTitle;
-						var $birth = result[i].birth;
-						var $email = result[i].email;
-						var $phone = result[i].phone;
-						var $addDoTitle = result[i].addDoTitle;
-						var $addEtc = result[i].addEtc;
-						var $positionTitle = result[i].positionTitle;
+	// 			$(".student-result").empty();
+	// 			if(result.length > 0) {
+	// 				var ul = $("<ul/>");
+	// 				for(var i in result) {
+	// 					var $studentId = result[i].studentId;
+	// 					var $name = result[i].name;
+	// 					var $genderTitle = result[i].genderTitle;
+	// 					var $birth = result[i].birth;
+	// 					var $email = result[i].email;
+	// 					var $phone = result[i].phone;
+	// 					var $addDoTitle = result[i].addDoTitle;
+	// 					var $addEtc = result[i].addEtc;
+	// 					var $positionTitle = result[i].positionTitle;
 						
-						var li = $("<ul class='stu'/>").append(
-								$("<li/>").text(' ' + '이름 : ' + $name),
-								$("<li/>").text(' ' + '성별 : ' + $genderTitle),
-								$("<li/>").text(' ' + '생년월일 : ' + $birth),
-								$("<li/>").text(' ' + '이메일 : ' + $email),
-								$("<li/>").text(' ' + '전화번호 : ' + $phone),
-								$("<li/>").text(' ' + '주소 : ' + $addDoTitle + ' ' + $addEtc),
-								$("<li/>").text(' ' + '직위 : ' + $positionTitle)
-						);
-						ul.append(li);
-					}
-					$(".student-result").append(ul);
-				}
+	// 					var li = $("<ul class='stu'/>").append(
+	// 							$("<li/>").text(' ' + '이름 : ' + $name),
+	// 							$("<li/>").text(' ' + '성별 : ' + $genderTitle),
+	// 							$("<li/>").text(' ' + '생년월일 : ' + $birth),
+	// 							$("<li/>").text(' ' + '이메일 : ' + $email),
+	// 							$("<li/>").text(' ' + '전화번호 : ' + $phone),
+	// 							$("<li/>").text(' ' + '주소 : ' + $addDoTitle + ' ' + $addEtc),
+	// 							$("<li/>").text(' ' + '직위 : ' + $positionTitle)
+	// 					);
+	// 					ul.append(li);
+	// 				}
+	// 				$(".student-result").append(ul);
+	// 			}
 				
-			}
-		})
-	}
+	// 		}
+	// 	})
+	// }
 
 	// // subject/course 정보 가져오기
 	// function getOpenList() {
@@ -263,21 +240,23 @@
 
 	/*검색 팝업에 맞춰 수강 추가 처리하기*/
 	function addEnroll2(){
-		alert(studentId);
+		
+		let studentInput = $("#student-input").val();
+		let studentArr = studentInput.split('/');
+		let studentId = studentArr[0];
+		alert('studentId : ' + studentId);
 
 		// 강좌/과정 선택 값 확인
 		let selected = $("select[name=subCor]").val();
 
-		if(selected === "subject"){ //강좌인 경우
-			alert(selected);
+		if ((selected === 'subject') || !selected) { //강좌인 경우 (기본, selected = subject)
+			alert('selected : ' + selected);
 			let subjectInput = $("#subject-input").val();
 			let subjectArr = subjectInput.split('/');
 			let subjectId = subjectArr[0];
 			let subjectSeq = subjectArr[1];
-			console.log(subjectInput);
-			console.log(subjectId);
-			console.log(subjectSeq);
-	
+			alert('subjectId : ' + subjectId +  ' | subjectSeq : ' + subjectSeq);
+
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
@@ -289,16 +268,14 @@
 					alert(result);
 				}
 			})
-		}else if(selected === "course") { //과정인 경우
-			alert(selected);
+		} else if(selected === "course") { //과정인 경우
+			alert('selected : ' + selected);
 
 			let courseInput = $("#course-input").val();
 			let courseArr = courseInput.split('/');
 			let courseId = courseArr[0];
 			let courseOpenYear = courseArr[3];
-			console.log(courseInput);
-			console.log(courseId);
-			console.log(courseOpenYear);
+			alert('courseId : ' + courseId + ' | courseOpenYear : ' + courseOpenYear);
 	
 			$.ajax({
 				type : 'POST',
@@ -312,7 +289,6 @@
 				}
 			})
 		}
-
 	}
 
 	// 수강 추가 처리하기
