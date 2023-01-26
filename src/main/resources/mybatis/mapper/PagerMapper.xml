@@ -93,7 +93,7 @@
 					comn_cd_title as open_state_cd_title,
 					file_id,
 					subject.cat_cd as cat_subject_cd,
-					open.open_dt
+					TO_CHAR(TO_DATE(open.open_dt, 'YYYYMMDD/HH24MISS'),'YYYY-MM-DD HH24:MI') as open_dt
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id
