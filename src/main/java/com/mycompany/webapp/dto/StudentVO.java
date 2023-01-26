@@ -68,4 +68,6 @@ public class StudentVO {
 	
 	private String positionTitle;	// 수강생 지위(ex.직장인, 학생)
 	
+	private String student; // 수강생 명 아이디 검색
+	
 }
