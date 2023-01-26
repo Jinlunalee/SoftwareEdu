@@ -276,6 +276,16 @@
 		AND del_yn = 'N' AND state_cd != 'OPN07'
 	</select>
 	
+	<select id="selectOpenSubjectByStudentId" parameterType="String" resultType="OpenVO">
+	/*selectOpenSubjectByStudentId*/
+		SELECT enroll.subject_id, enroll.subject_seq, course_id
+		FROM enroll
+		LEFT JOIN open ON enroll.subject_id=open.subject_id AND enroll.subject_seq=open.subject_seq
+		WHERE student_id = #{studentId}
+		AND enroll.del_yn = 'N' AND enroll.state_cd != 'OPN07'
+		ORDER BY enroll.reg_dt
+	</select>
+	
 	<select id="checkHoliday" parameterType="map" resultType="int">
 	/*checkHoliday*/
 		select count(*)

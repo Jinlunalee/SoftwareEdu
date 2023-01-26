@@ -201,6 +201,11 @@ public class SubjectService implements ISubjectService{
 	}
 
 	@Override
+	public List<OpenVO> selectOpenSubjectByStudentId(String studentId) {
+		return subjectRepository.selectOpenSubjectByStudentId(studentId);
+	}
+	
+	@Override
 	public int checkHoliday(String startDay, String endDay) {
 		return subjectRepository.checkHoliday(startDay, endDay);
 	}
