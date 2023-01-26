@@ -35,4 +35,6 @@ public interface ISubjectService {
 	
 	List<OpenVO> selectSubjectByCourseId(String courseId);
 	List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year); // 
+
+	int checkHoliday(String startDay, String endDay);
 }

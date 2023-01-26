@@ -276,4 +276,12 @@
 		AND del_yn = 'N' AND state_cd != 'OPN07'
 	</select>
 	
+	<select id="checkHoliday" parameterType="map" resultType="int">
+	/*checkHoliday*/
+		select count(*)
+		from holiday
+		where holiday_day between #{startDay} and #{endDay}
+		and holiday_yn = 'y'
+	</select>
+	
 </mapper>

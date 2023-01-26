@@ -40,6 +40,7 @@ public interface ISubjectRepository {
 	int closeSubject(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);//폐강버튼 눌렀을 때 
 	
 	List<OpenVO> selectSubjectByCourseId(String courseId); // 한과정안에 동일한 강좌 못들어가도록하기위해 과정안의 강좌를 가져옴.
-	
 	List<OpenVO> selectOpenSubjectByCourseIdAndYear(@Param("courseId") String courseId, @Param("year") String year);
+	
+	int checkHoliday(@Param("startDay") String startDay, @Param("endDay") String endDay); // 휴일 체크
 }
