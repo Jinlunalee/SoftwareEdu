@@ -16,6 +16,22 @@
 .basic_txt_color {
    color:#666;
 }
+.sub_title {
+	border: 2px solid #1A54CD;
+	border-radius: 40px;
+    padding: 5px 10px;
+    margin: 10px;
+    display: inline-block;
+}
+.course_title {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.main_title {
+	font-size: 1.4em;
+    margin: 10px;
+}
 .course_state {
    color: #FFFFFF;
     border-radius: 40px;
