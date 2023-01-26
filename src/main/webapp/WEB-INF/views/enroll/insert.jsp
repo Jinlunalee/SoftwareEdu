@@ -22,7 +22,11 @@
 					</form>
 				</div>
 			</div>
-
+			<!-- 수강생이 들었던/듣고 있는 개설 강좌 넘어온 값 -->
+			<div>
+				<input type="hidden" id="subjectId-string">
+				<input type="hidden" id="subjectSeq-string">
+			</div>
 			<div id="student-list"></div>
 			
 		</div>

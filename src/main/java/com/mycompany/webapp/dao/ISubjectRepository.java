@@ -42,4 +42,5 @@ public interface ISubjectRepository {
 	List<OpenVO> selectSubjectByCourseId(String courseId); // 한과정안에 동일한 강좌 못들어가도록하기위해 과정안의 강좌를 가져옴.
 	
 	List<OpenVO> selectOpenSubjectByCourseIdAndYear(@Param("courseId") String courseId, @Param("year") String year);
+	List<OpenVO> selectOpenSubjectByStudentId(String studentId);
 }
