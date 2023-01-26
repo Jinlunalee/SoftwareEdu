@@ -1,10 +1,11 @@
 $(document).ready(function() {
 });
 
+
 /* 검색조건 입력 후 버튼 클릭 시 검색 결과 리스트 출력 */
-const searchBtn = document.getElementById('search-btn'); // 검색 버튼
-searchBtn.addEventListener('click', bringValue);
-searchBtn.addEventListener('click', showList);
+	const searchBtn = document.getElementById('search-btn'); // 검색 버튼
+	searchBtn.addEventListener('click', bringValue);
+	searchBtn.addEventListener('click', showList);
 
 /* 부모창에서 작성 해에 courseId에 등록된 강좌 리스트 가져오기 */
 function bringValue() {
@@ -21,10 +22,12 @@ function showList() {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
     }
     let searchUrl = String(formInputs).substring(1);
+    console.log("searchUrl : " + searchUrl);
     const pathArr = location.pathname.split('/');
-    console.log(location.pathname);
-    console.log(pathArr);
+    console.log("location : " + location.pathname);
+    console.log("pathArr : " + pathArr);
     const path = pathArr[2];
+    console.log("path : " + path);
     console.log(path + "-result?" + searchUrl);
     $.ajax({
         url : path + "-result?" + searchUrl,
@@ -37,14 +40,15 @@ function showList() {
         if(path.substring(10,25)==='subject') {
             disableSubjectList(); // 강좌 개설에서 과정에 이미 담긴 강좌는 개설하지 못하게 하기
         } else if (path.substring(10,25)==='course') {
-            
+        	
         } else if (path.substring(10,25)==='opencourse') {
             disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
         } else if (path.substring(10,25)==='opensubject') {
-            disableListByState(); // 수강 추가에서 모집 중, 모집 마감, 진행중만 선택할 수 있게
+            disableListByState();
+        } else if (path.substring(10, 7) === 'student') {
+        	
         }
-    })
-    
+       })
 }
 
 /* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
@@ -78,6 +82,7 @@ function disableListByState() {
 /* ㅇㅇ명/ㅇㅇ아이디 선택에 따른 input name 설정 */
 let subjectInput = document.getElementById('subject-input'); // input 태그
 let courseInput = document.getElementById('course-input'); // input 태그
+let studentInput = document.getElementById('student-input');
 
 function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택에 따라 iput 이름 설정
     if(value==='subjectId') {
@@ -86,8 +91,12 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
         subjectInput.setAttribute("name", 'subjectTitle');
     } else if(value==='courseId') {
         courseInput.setAttribute("name", 'courseId');
-    } else {
+    } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
+    } else if(value === 'studentId') {
+    	studentInput.setAttribute("name", 'studentId');
+    } else{
+    	studentInput.setAttribute("name", 'name');
     }
 }
 
@@ -122,6 +131,14 @@ function moveOutside(event, value){
         $(opener.document).find("#courseYear-input").val(valueYear);
         
         setUnavailableSubjectId(valueId); // 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+    }
+    
+    if(valueId.substring(0,4) === 'STDT') {
+    	let valueTitle = valueArr[1];
+    	$(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
+        $(opener.document).find("#student-input").val(value);
+        $(opener.document).find("#studentId-input").val(valueId);
+        window.close();
     }
     // 팝업창 닫기
     window.close();
@@ -181,3 +198,37 @@ function checkUnavailableSubjectId(result, count) {
         }
     }
 }
+
+//const searchStudentBtn = document.getElementById('student-btn'); // 수강생 검색 버튼
+//searchStudentBtn.addEventListener('click', studentList);
+
+//function studentList() {
+//    //const searchForm = document.getElementById('search-student-form'); // 검색 폼
+//    /*let formInputs = '';
+//    for(var i=1; i<searchForm.length-1; i++) {
+//        formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
+//    }
+//    let searchUrl = String(formInputs).substring(1);
+//    const pathArr = location.pathname.split('/');
+//    console.log(location.pathname);
+//    console.log(pathArr);
+//    const path = pathArr[2];
+//    console.log(path + "-result?" + searchUrl);*/
+//    $.ajax({
+//        url : 'searchpop-student-result',
+//        type : "POST"
+//        
+//    }).done(function(result){
+//        var html = jQuery('<div>').html(result);
+//        var contents = html.find("div#student-result-list").html();
+//        $(".student-list-wrap").html(contents);
+//        /*if(path.substring(10,20)==='subject') {
+//            disableSubjectList();
+//        } else if (path.substring(10,20)==='course') {
+//            
+//        }*/
+//    })
+//    
+//}
+
+

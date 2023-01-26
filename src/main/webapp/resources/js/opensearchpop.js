@@ -45,3 +45,13 @@ $('.course-popup-btn').on("click", function(e){
 
     window.open(popupUrl,"검색 팝업", popupOption);
 });
+
+/* 수강 입력에서 수강생 검색 팝업*/
+$('.student-popup-btn').on("click", function(e){
+	e.preventDefault();
+	
+	let popupUrl = "/common/searchpop-student";
+	let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
+	
+	window.open(popupUrl, "수강생 검색", popupOption);
+});

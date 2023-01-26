@@ -158,7 +158,7 @@ li{
 	display: inline;
 }
 
-#subjectTitle-input, #courseTitle-input{
+#subjectTitle-input, #courseTitle-input, #studentTitle-input {
 	height: 40px;
     width: 60%;
 }
