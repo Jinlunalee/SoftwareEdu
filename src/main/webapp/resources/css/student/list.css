@@ -246,7 +246,7 @@ td {
 }
 
 .btn-outline-secondary {
-	font-size: 14px;  	
+	font-size: 13px;  	
 }
 
 .close-btn2{
@@ -255,12 +255,14 @@ td {
     left: 349px;
 }
 
-.list_top .cnt {
+.list_top{
     color: #666;
     float: left;
     margin: 5px 10px;
     }
 .cnt {
+	color: #666;
+    float: left;
 	font-size: 12px;
 }
 #applyperiod {
@@ -281,4 +283,7 @@ td {
     text-align: center!important;
     position: relative;
     left: 120px
+}
+.basic_txt_color {
+    color: #003964;
 }
