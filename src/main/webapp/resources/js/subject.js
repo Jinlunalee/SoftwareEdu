@@ -99,7 +99,67 @@ const selected = function() {
 					// console.log("삭제"+$('#subjectId').val(options[i]).disabled);
 				}
 
-				if(courseId === ""){ //과정없을때 (선택안했을때)
+				if(courseId !== "" && result.courseInfo){ //과정이 개설되어있는 경우
+					console.log("result: " + result);//리스트 몇개 넘어오는지 확인
+					//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
+					console.log("개설되어있는 경우");
+
+					// 과정안에 담겨있는 강좌 데이터 저장
+					let ajaxCheckList = [];
+					for (var i = 0; i < result.checkList.length; i++) {
+						ajaxCheckList.push(result.checkList[i].subjectId);
+					}
+					console.log(options);
+					console.log(ajaxCheckList);
+
+					//ajaxCheckList랑 options비교해서 비활성화
+					for (var i = 0; i < options.length; i++) {
+						for (var j = 0; j < ajaxCheckList.length; j++) {
+							if (options[i] === ajaxCheckList[j]) {
+								console.log(ajaxCheckList[j]);
+								$("select option[value=" + options[i]).attr('disabled', true);
+							}
+						}
+					}
+
+					//과정 정보 입력
+					let date = parse(result.courseInfo.endDay);
+					startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
+					startDay.attr('min', date);
+					ajaxEnd = date;
+
+					date = parse(result.courseInfo.startDay);
+					ajaxStart = date;
+
+					date = parse(result.courseInfo.recruitStartDay);
+					recruitStartDay.val(date);
+					ajaxRecruitStart = date;
+
+					date = parse(result.courseInfo.recruitEndDay);
+					recruitEndDay.val(date);
+					ajaxRecruitEnd = date;
+
+					startDay.change();
+
+					//강좌 정보 입력
+					console.log('result[1].hours:' + result.subjectInfo.hours);
+					printHours.append("(" + result.subjectInfo.hours + "시간)");
+					hours.val(result.subjectInfo.hours);
+					if (!result.subjectInfo.levelEtc) {//난이도 기타값이 null일때
+						// level.append(result.subjectInfo.level);
+						levelCdTitle.append(result.subjectInfo.levelCdTitle);
+						levelCd.val(result.subjectInfo.levelCd);
+					} else {
+						// level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+						levelCdTitle.append(result.subjectInfo.levelCdTitle + "(" + result.subjectInfo.levelEtc + ")");
+						levelCd.val(result.subjectInfo.levelCd);
+					}
+					cost.append(result.subjectInfo.cost + "원");
+					if (result.subjectInfo.supportYn === 'Y') {
+						support.append("※교육비 지원을 받는 강좌입니다.");
+					}
+				}else {
+					console.log("과정 선택을 안했거나 최초개설인 경우");
 					printHours.append("("+result.subjectInfo.hours+"시간)");
 					hours.val(result.subjectInfo.hours);
 
@@ -118,89 +178,6 @@ const selected = function() {
 
 					if(result.subjectInfo.supportYn === 'Y'){
 						support.append("※교육비 지원을 받는 강좌입니다.");
-					}
-				} else { //과정있을때 (1. 최조개설 2.개설되어있는 과정)
-					if(!result.courseInfo) { //최초개설(과정에대한 정보가 없으면)
-						console.log("최초개설");
-
-						printHours.append("("+result.subjectInfo.hours+"시간)");
-						hours.val(result.subjectInfo.hours);
-						if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-							// level.append(result.subjectInfo.levelCd);
-							levelCdTitle.append(result.subjectInfo.levelCdTitle);
-							levelCd.val(result.subjectInfo.levelCd);
-						}else{
-							// level.append(result.subjectInfo.levelCd+"("+result.subjectInfo.levelEtc+")");
-							levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
-							levelCd.val(result.subjectInfo.levelCd);
-						}
-						cost.append(result.subjectInfo.cost+"원");
-						if(result.subjectInfo.supportYn === 'Y'){
-							support.append("※교육비 지원을 받는 강좌입니다.");
-						}
-					}else { //개설되어있는 경우(과정에대한 정보가 있을때)
-						console.log("result: "+result);//리스트 몇개 넘어오는지 확인
-						//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
-						console.log("개설되어있는 경우");
-
-						// 과정안에 담겨있는 강좌 데이터 저장
-						let ajaxCheckList = [];
-						for(var i=0;i<result.checkList.length;i++){
-							ajaxCheckList.push(result.checkList[i].subjectId);
-						}
-						console.log(options);
-						console.log(ajaxCheckList);
-
-						//ajaxCheckList랑 options비교해서 비활성화
-						for(var i=0;i<options.length;i++){
-							for(var j=0;j<ajaxCheckList.length;j++){
-								if(options[i] === ajaxCheckList[j]){
-									console.log(ajaxCheckList[j]);
-									$("select option[value="+options[i]).attr('disabled', true);
-								}
-							}
-						}
-
-						//과정 정보 입력
-						let date = parse(result.courseInfo.endDay);
-						startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
-						startDay.attr('min', date);
-						ajaxEnd = date;
-
-						//startDay의 min을 endDay로 지정 (과정이 개설되어있는경우에만 필요) -- 아직안됨
-						// startDay.attr('value', date);
-						
-
-						date = parse(result.courseInfo.startDay);
-						ajaxStart = date;
-
-						date = parse(result.courseInfo.recruitStartDay);
-						recruitStartDay.val(date);
-						ajaxRecruitStart = date;
-
-						date = parse(result.courseInfo.recruitEndDay);
-						recruitEndDay.val(date);
-						ajaxRecruitEnd = date;
-
-						startDay.change();
-
-						//강좌 정보 입력
-						console.log('result[1].hours:'+result.subjectInfo.hours);
-						printHours.append("("+result.subjectInfo.hours+"시간)");
-						hours.val(result.subjectInfo.hours);
-						if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-							// level.append(result.subjectInfo.level);
-							levelCdTitle.append(result.subjectInfo.levelCdTitle);
-							levelCd.val(result.subjectInfo.levelCd);
-						}else{
-							// level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
-							levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
-							levelCd.val(result.subjectInfo.levelCd);
-						}
-						cost.append(result.subjectInfo.cost+"원");
-						if(result.subjectInfo.supportYn === 'Y'){
-							support.append("※교육비 지원을 받는 강좌입니다.");
-						}
 					}
 				}
 			},
