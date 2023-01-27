@@ -140,17 +140,17 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    start_day,
-		    end_day, 
-		    recruit_start_day, 
-		    recruit_end_day,
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
+		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitStartDay", 
+		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitEndDay", 
 		    recruit_people,
 		    state_cd as open_state_cd,
 		    comn_cd_title as open_state_cd_title,
 		    file_id,
 		    subject.cat_cd as cat_subject_cd,
 		    subject.reg_year,
-		    open_dt
+		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "openDt" 
 		FROM open
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -174,7 +174,7 @@
 		<if test="openStateCd != null and !openStateCd.equals('')">
 			AND state_cd = #{openStateCd}
 		</if>
-		ORDER BY start_day, end_day
+		ORDER BY open.subject_id, subject_seq
 	</select>
 	
 	<select id="searchOpenCourse" parameterType="OpenVO" resultType="OpenVO">
@@ -217,7 +217,7 @@
 	      SELECT student_id, 
 	            name, 
 	            gender_cd, 
-	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY/MM/DD') AS "birth", 
+	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
 	            email, 
 	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
 	            add_do_cd, 
@@ -231,6 +231,25 @@
 	      <if test="name != null and !name.equals('')">
 	         AND name = #{name}
 	      </if>
+   </select>
+   
+   <select id="selectSubjectListByCourseId" parameterType="OpenVO" resultType="OpenVO">
+   /*selectSubjectListByCourseId*/
+   SELECT s.subject_id,
+   			subject_title, 
+   			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
+   			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS "startTime", 
+   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS "endTime",  
+   			days, 
+   			hours, 
+   			level_cd, 
+   			cost, 
+   			support_yn   
+	FROM  SUBJECT s 
+	LEFT JOIN OPEN o 
+	ON s.subject_id = o.subject_id 
+	WHERE course_id = #{courseId}
    </select>
 	
 <!-- 			select DISTINCT

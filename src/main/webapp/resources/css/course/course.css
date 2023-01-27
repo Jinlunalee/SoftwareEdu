@@ -10,8 +10,9 @@
 .list_top .cnt {
 	color: #666;
 	float: left;
+	/*
 	margin: 5px 10px;
-	
+	*/
 }
 .basic_txt_color {
     color: #003964;
@@ -20,19 +21,21 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+/*
 table.list {
 	width: 100%;
     text-align: center;
     border-top: 2px solid #bababa;
     margin-bottom: 40px;
 }
+*/
 table.list th {
     font-weight: 500;
     font-size: 0.963rem;
     color: #000;
 }
 table.list tbody td {
-	font-size: 11px;
+	font-size: 12.5px;
 }
 table.list td {
     color: #666;

@@ -14,7 +14,7 @@
 	font-size: 0.7rem;
 }
 .navbar {
-	height: 80px;
+    height: 65px;
 }
 .navbar-brand {
     letter-spacing: -2px;
@@ -32,14 +32,14 @@
 	margin-right: 5px;
 }
 .nav-list {
-	font-size: 26px;
-    letter-spacing: -4px;
+    font-size: 23px;
+    letter-spacing: -1px;
 }
 .nav-btn {
 	background-color:#3C76ED;
 }
 .container-fluid {
-	border-radius: 44px;
+	border-radius: 2rem;
 	margin: 19px 35px; 
 	overflow: hidden; 
 	width: auto;
@@ -66,17 +66,19 @@ a:hover{
     margin-right: 7px;
 }
 .footer {
-	background-color: #fff;
-	padding: 0 30px;
+    background-color: #fff;
+    padding: 7px 30px;
     white-space: pre-line;
     display: flex;
+    align-content: center;
+    align-items: center;
 }
 .footer_title {
 	margin-right: 60px;
 }
 .footer_content {
-	font-size: 0.875rem;
+    font-size: 13px;
     color: #878787;
-    line-height: 17px;
+    line-height: 15px;
     font-weight: 500;
 }
