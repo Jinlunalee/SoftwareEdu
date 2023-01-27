@@ -200,7 +200,8 @@ function moveOutside(event, value){
         
         opener.document.getElementById('subject-btn').removeAttribute("disabled"); // 수강생 선택하면 강좌 검색 버튼 활성화
         opener.document.getElementById('course-btn').removeAttribute("disabled"); // 수강생 선택하면 과정 검색 버튼 활성화
-        // 강좌/과정 검색 리셋
+        
+        resetValue();    // 강좌/과정 검색 리셋
 
         setUnavailableSubjectId('studentNameClicked', valueId); // 수강생 이름 클릭 시, 수강생이 수강했거나 수강하고 있는 개설강좌 리스트 반영하기
     }
@@ -296,5 +297,27 @@ function checkUnavailableSubjectId(result, count) {
             subjectInput.removeAttribute("value");
             alert("해당 과정에는 이미 선택하신 강좌가 존재합니다.\n강좌를 다시 선택해주세요.");
         }
+    }
+}
+
+/* 강좌/과정 선택값 리셋하기 */
+function resetValue() {
+    console.log('resetValue');
+    const subjectIdInput = opener.document.getElementById('subjectId-input');
+    const subjectTitleInput = opener.document.getElementById('subjectTitle-input');
+    const subjectInput2 = opener.document.getElementById('subject-input'); // subjectInput이 이미 있다고 떠서 2 붙임
+    const courseIdInput = opener.document.getElementById('courseId-input');
+    const courseTitleInput = opener.document.getElementById('courseTitle-input');
+    const courseInput2 = opener.document.getElementById('course-input');
+    if(subjectTitleInput.value || courseTitleInput.value) {
+        // subjectIdInput.removeAttribute("value");
+        subjectTitleInput.value=null;
+        subjectTitleInput.setAttribute("placeholder", "수강생 선택 후 검색 버튼을 눌러 강좌를 검색하세요.");
+        subjectInput2.removeAttribute("value");
+        // courseIdInput.removeAttribute("value");
+        courseTitleInput.value=null;
+        courseTitleInput.setAttribute("placeholder", "수강생 선택 후 검색 버튼을 눌러 과정을 검색하세요.");
+        courseInput2.removeAttribute("value");
+        alert("강좌/과정을 다시 선택해주세요.");
     }
 }
