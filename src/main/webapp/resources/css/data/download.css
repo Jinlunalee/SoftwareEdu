@@ -94,9 +94,10 @@ img {
 
 .card_info {
    text-align: center;
-   margin: 10px;
+   margin-top: 10px;
+   margin-left: 10px;
    width: 600px;
-   height: 120px;
+   height: 110px;
    border: 2px solid #95b3d4;
    display: none;
 }
@@ -146,3 +147,12 @@ img {
 #result, #resultXml, #result3, #result4  {
     white-space: pre;
 } 
+
+
+.table_info1, .table_info2 {
+    width: 600px;
+    height: 98px;
+	text-align: left;
+	margin-left: 45px;
+	margin-top: 5px;
+}
