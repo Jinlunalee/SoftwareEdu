@@ -107,11 +107,11 @@ public class DataService implements IDataService{
            result += "<subject_title>" + subjectTitle
                  + "</subject_title>" + "\n";
            result += "<hours>" + hours + "</hours>" + "\n";
+           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>" + "\n";
            result += "<start_day>" + sDay + "</start_day>" + "\n";
            result += "<end_day>" + eDay + "</end_day>" + "\n";
            result += "<cost>" + cost + "</cost>" + "\n";
            result += "<send_dt>" + sendDt + "</send_dt>" + "\n";
-           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>" + "\n";
            result += "</subject>" + "\n" + "\n";  
         }
 
