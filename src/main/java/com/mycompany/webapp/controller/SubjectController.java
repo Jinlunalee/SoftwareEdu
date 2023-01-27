@@ -364,6 +364,7 @@ public class SubjectController {
 	@ResponseBody
 	public int ajaxCheckHoliday(String startDay, String endDay) {
 		logger.info("checkHoliday:"+startDay+endDay);
+		logger.info("checkHoliday:"+subjectService.checkHoliday(startDay, endDay));
 		return subjectService.checkHoliday(startDay, endDay);
 	}
 	

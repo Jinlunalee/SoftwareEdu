@@ -160,33 +160,35 @@
 				</tr>
 			</c:forEach>
 
-			<%-- paging --%>
-			<tr>
-				<td colspan="4" class="text-center">
-					<div>
-						<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=1">처음</a>
-						<c:if test="${pager.groupNo>1}">
-							<a class="btn btn-outline-info btn-sm" href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
-						</c:if>
-
-						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-							<c:if test="${pager.pageNo != i}">
-								<a class="btn btn-outline-success btn-sm" href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
-							</c:if>
-							<c:if test="${pager.pageNo == i}">
-								<a class="btn btn-danger btn-sm" href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${pager.groupNo<pager.totalGroupNo}">
-							<a class="btn btn-outline-info btn-sm" href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a>
-						</c:if>
-						<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
-					</div>
-				</td>
-			</tr>
 		</table>
 		
+       <%-- paging --%>
+
+            <!-- paging -->
+             <div id="paging">
+                   <ul class="paging">
+                    <li><a href="boardlist?pageNo=1">처음</a></li>
+                    <c:if test="${pager.groupNo>1}">
+                        <li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+                    </c:if>
+
+                    <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+                        <c:if test="${pager.pageNo != i}">
+                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                        </c:if>
+                        <c:if test="${pager.pageNo == i}">
+                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${pager.groupNo<pager.totalGroupNo}">
+                        <li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+                    </c:if>
+                    <li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+                </ul>
+              </div> 
+
+
 		<div class="down">
 				<a href="<c:url value='/enroll/enrollexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}'/>">
 					<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>

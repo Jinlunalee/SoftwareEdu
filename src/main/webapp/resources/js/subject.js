@@ -229,34 +229,42 @@ $('input#startTime').timepicker({
 	dynamic: false,
 	dropdown: true,
 	scrollbar: true,
-	change: calcEndDay,
-	change: function(time){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
-		$('input#endTime').timepicker({
-			timeFormat: 'HH:mm',
-			interval: 30,
-			startTime: '09:00',
-			minTime: time,
-			maxTime: '11:00pm',
-			dynamic: false,
-			dropdown: true,
-			scrollbar: true,
-			change: calcEndDay
-		});
+	disableTextInput: true,
+	change: function(resultTime){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
+		console.log("calcEndDay startTime onChange");	
+		$('input#endTime').timepicker('option', 'minTime', resultTime);
+		console.log("change endTime minTIme");
 	}
 });
 
+$('input#endTime').timepicker({
+	timeFormat: 'HH:mm',
+	interval: 30,
+	startTime: '09:00',
+	minTime: '9',
+	maxTime: '11:00pm',
+	dynamic: false,
+	dropdown: true,
+	scrollbar: true,
+	disableTextInput: true,
+	change: calcEndDay
+});
+
+
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
+	console.log("calcEndDay");
 	let startDay = document.getElementById("startDay").value;
 	let startDay2 = new Date(startDay);
 	let startTime = document.getElementById("startTime").value;
 	let endTime = document.getElementById("endTime").value;
 	let printDay = document.getElementById("printDay");
 	let endDay = document.getElementById("endDay");
-
+	
 	printDay.innerHTML = ''; //비울때는 =
 
 	if (startTime !== '' && endTime !== '') {
+		console.log("start");
 		let hours = document.getElementById("hours").value;
 
 		let startHour = parseInt(startTime.substring(0, 2));
@@ -303,7 +311,7 @@ function checkHoliday(startDay, endDay){
 	endDay = endDay.replaceAll("-","");
 	$.ajax({
 		type: "get",
-		url: "ajaxcheckholiday?startDay="+startDay+"&endDay="+endDay,
+		url: "/subject/ajaxcheckholiday?startDay="+startDay+"&endDay="+endDay,
 		async: false,
 	}).done(function(result){
 		console.log('success');
@@ -352,6 +360,8 @@ function selectRecruitDay(){
 		recruitEndDay.max = startDay; //연수시작 시간날까지만 가능
 		recruitEndDay.onchange(); //값이 바뀐 엘리먼트의 onchange 함수 실행
 	}
+
+	calcEndDay();
 
 }
 

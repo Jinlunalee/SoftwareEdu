@@ -16,7 +16,9 @@
 	 <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 수정 페이지</div>
 	</div>
 	<div class="card-body">
-		<div class="sub_title">정기과정명 | ${open.courseTitle} </div>
+		<c:if test="${not empty open.courseTitle}">
+			<div class="sub_title">정기과정명 | ${open.courseTitle} </div>
+		</c:if>
 				
 		<form class="insert_form" action="<c:url value='/subject/update/${open.subjectId}/${open.subjectSeq}'/>" method="post" enctype="multipart/form-data">
 			<div class="course_title">
@@ -60,8 +62,8 @@
 					<input type="date" name="startDay" id="startDay" value="${open.startDay}" onchange="calcEndDay()"}>
 					~ 
 					<input type="date" name="endDay" id="endDay" value="${open.endDay}" readonly>
+					(${open.hours}시간)
 					<span id="printDay"></span>
-					<span id="printHours"></span>
 				</td>
 			</tr>
 			<tr>
