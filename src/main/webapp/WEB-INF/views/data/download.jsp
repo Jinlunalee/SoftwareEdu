@@ -213,8 +213,7 @@
    function getJsonSbj() {
         var startDay = $('#input_startDay').val();
         var endDay = $('#input_endDay').val();
-      
-      
+          
       $.ajax({
          type : "GET",
          url : "getjsonSbj",
