@@ -49,6 +49,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
+					<th>개설년도</th>
 					<th>처리</th>
 				</tr>
 			</thead>
@@ -63,6 +64,7 @@
 							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 							<td>${board.openStateCdTitle}</td>
+							<td>${board.courseOpenYear}
 							<td>
 								<div>
 									<c:choose>
