@@ -173,7 +173,9 @@ td {
 #paging {
 	display: inline;
 	position: relative;
-	left: 40%;
+	bottom: 20px;
+	left: 43%;
+	font-size: 13px;
 }
 
 .cancelrs{

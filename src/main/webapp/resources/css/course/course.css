@@ -20,12 +20,14 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+/*
 table.list {
 	width: 100%;
     text-align: center;
     border-top: 2px solid #bababa;
     margin-bottom: 40px;
 }
+*/
 table.list th {
     font-weight: 500;
     font-size: 0.963rem;
