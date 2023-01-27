@@ -149,7 +149,7 @@ img {
 } 
 
 
-.table_info1 {
+.table_info1, .table_info2 {
     width: 600px;
     height: 98px;
 	text-align: left;

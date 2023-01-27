@@ -101,8 +101,7 @@
             <div id="first_info" class="first_info"> 
                <table class="table_info1">
                    <tr>
-                    <td>* agentId : 훈련기관ID</td>
-                    <td>* agentId : 훈련기관ID</td>
+                    <td>* agentId : 훈련기관ID</td>                   
                    </tr>
                    <tr>
                     <td colspan = '2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
@@ -110,11 +109,11 @@
                    </tr>
                    <tr>
                     <td>* name : 수강생 이름</td>
-                    <td>* stateCd : 진행상태(ERL06)</td>
+                    <td>* completeHours : 수강완료시수</td>     
                    </tr>
                    <tr>
-                    <td>* completeHours : 수강완료시수</td>
                     <td>* sendDt : 전송시간</td>
+                    <td>* stateCd : 진행상태(ERL06)</td>
                 </table>             
             </div>
          </div>
@@ -123,8 +122,7 @@
             <div id="first_info" class="first_info"> 
                <table class="table_info1">
                    <tr>
-                    <td>* agentId : 훈련기관ID</td>
-                    <td>* agentId : 훈련기관ID</td>
+                    <td>* agentId : 훈련기관ID</td>                   
                    </tr>
                    <tr>
                     <td colspan = '2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
@@ -132,11 +130,11 @@
                    </tr>
                    <tr>
                     <td>* name : 수강생 이름</td>
-                    <td>* stateCd : 진행상태(ERL06)</td>
+                    <td>* completeHours : 수강완료시수</td>     
                    </tr>
                    <tr>
-                    <td>* completeHours : 수강완료시수</td>
                     <td>* sendDt : 전송시간</td>
+                    <td>* stateCd : 진행상태(ERL06)</td>
                 </table> 
                
             </div>
@@ -144,7 +142,7 @@
 
          <div class="card_info" id="show_info3">
             <div id="first_info" class="first_info"> 
-            <table class="table_info1">
+            <table class="table_info2">
                 <tr>
                     <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
                     <td>* subjectTitle : 강좌 이름</td>
@@ -166,7 +164,7 @@
 
          <div class="card_info" id="show_info4">
             <div id="first_info" class="first_info"> 
-            <table class="table_info1">
+            <table class="table_info2">
                 <tr>
                     <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
                     <td>* subjectTitle : 강좌 이름</td>
