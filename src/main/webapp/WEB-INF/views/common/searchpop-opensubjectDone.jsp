@@ -22,41 +22,76 @@
                 <div class="search-wrap">
                     <form id="search-form">
                         <div class="search-input">
-                            <select name="subject" onchange="putNameonInput(this.value)" >
-                                <option value="subjectId">강좌아이디</option>
-                                <option value="subjectTitle">강좌명</option>
-                            </select>
-                            <input type="text" id="subject-input" name="subjectId">
-                            난이도 : 
-                            <select name="levelCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${levelList}" var="level">
-                                    <option value="${level.comnCd}">${level.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            상태 : 
-                            <select name="openStateCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${stateList}" var="state">
-                                    <option value="${state.comnCd}">${state.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            분류 : 
-                            <select name="catSubjectCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${catSubjectList}" var="catSubject">
-                                    <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            </select>
-                            등록년도 :
-                            <select name="regYear">
-                                <option value="0">전체</option>
-                                <c:forEach var="i" begin="2019" end="2023">
-                                    <option value="${i}">${i}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
+                            <table border="1" style="width:100%;">
+                                <colgroup>
+                                    <col width="10%">
+                                    <col width="30%">
+                                    <col width="10%">
+                                    <col width="20%">
+                                    <col width="10%">
+                                    <col width="20%">
+                                </colgroup>
+                                <tr>
+                                    <td>
+                                    <select name="subject" onchange="putNameonInput(this.value)" >
+                                        <option value="subjectId">강좌아이디</option>
+                                        <option value="subjectTitle">강좌명</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="subject-input" name="subjectId">
+                                    </td>
+                                    <td>
+                                        상태
+                                    </td>
+                                    <td>
+                                        <select name="openStateCd">
+                                            <option value="">전체</option>
+                                            <c:forEach items="${stateList}" var="state">
+                                                <option value="${state.comnCd}">${state.comnCdTitle}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        분류
+                                    </td>
+                                    <td>
+                                        <select name="catSubjectCd">
+                                            <option value="">전체</option>
+                                            <c:forEach items="${catSubjectList}" var="catSubject">
+                                                <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        난이도
+                                    </td>
+                                    <td>
+                                        <select name="levelCd">
+                                            <option value="">전체</option>
+                                            <c:forEach items="${levelList}" var="level">
+                                                <option value="${level.comnCd}">${level.comnCdTitle}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        등록년도
+                                    </td>
+                                    <td>
+                                        <select name="regYear">
+                                            <option value="0">전체</option>
+                                            <c:forEach var="i" begin="2019" end="2023">
+                                                <option value="${i}">${i}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td rowspan="2">
+                                        <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </form>
                 </div>

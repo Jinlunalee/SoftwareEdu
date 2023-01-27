@@ -37,6 +37,8 @@ function showList() {
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
         
+        changeDateFormat(); // dateformat 바꾸기
+
         if(path.substring(10,25)==='subject') {
             const subjectInsert = 'SubjectInsert';
             disableHiddenBringValueList(subjectInsert); // 강좌 개설 : 과정에 이미 담긴 강좌는 개설하지 못하게 하기
@@ -63,6 +65,15 @@ function showList() {
             disableListByState(survey, opnArr); // 만족도 조사 : 완료된 강좌만 선택할 수 있게
         }
     })
+}
+
+/* dateFormat 바꾸기 */
+function changeDateFormat(){
+    const dateFormats = document.getElementsByClassName('date-format');
+    for(let i=0; i<dateFormats.length; i++) {
+        let newDate = dateFormats[i].innerText.substring(0,4)+'-'+dateFormats[i].innerText.substring(4,6)+'-'+dateFormats[i].innerText.substring(6,8);
+    dateFormats[i].innerText = newDate;
+    }
 }
 
 /* bringValue로 가져온 강좌아이디에 해당하는 showList 리스트는 비활성화하기 */
