@@ -20,5 +20,6 @@ public interface IHomeService {
 	List<OpenVO> searchOpenSubject(OpenVO openVo);
 	List<OpenVO> searchOpenCourse(OpenVO openVo);
 	List<StudentVO> searchStudentList(StudentVO studentVo);
+	List<OpenVO> selectSubjectListByCourseId(OpenVO openVo);
 //	List<String> getColumnName(String searchType, List<Map<String, Object>> searchParam);
 }
