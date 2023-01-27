@@ -277,15 +277,19 @@ function changeEverything(i) {
 	submitBtn.addEventListener("click", checkInputMoreThanThree); // submit 버튼 클릭 시 checkInputMoreThanThree 함수 실행
 
 	function checkInputMoreThanThree() { // Question Input Null 확인해서 alert 해줌
-		const hiddenInputs = document.getElementsByClassName("hidden-inputs");
+		console.log('checkInputMoreThanThree')
 
-		// hidden div 아래에 추가된 .serveyqn-input 개수 및 value 확인
-		let hiddenQnInputsCount = hiddenInputs[0].childElementCount/2;  // .serveyqn-input 개수
-		for (var i=1; i<=hiddenQnInputsCount; i++) { // .serveyqn-input 개수만큼 반복
-			if(!hiddenInputs[0].childNodes[i*2-1].value) { // hidden div 아래에 추가된 .serveqn-input의 value가 없다면
-				alert("만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."); // alert
-			}
-		}
+		const questionInputSet1 = document.getElementById('question-inputSet-1');
+		const questionInputSet2 = document.getElementById('question-inputSet-2');
+		const questionInputSet3 = document.getElementById('question-inputSet-3');
+		console.log(questionInputSet1.value);
+		console.log(questionInputSet2.value);
+		console.log(questionInputSet3.value);
+
+		// 만족도 조사 모달에 입력한 값 확인하여 alert
+		if(questionInputSet1.value==='' || questionInputSet2.value==='' || questionInputSet3.value==='' ) {
+			alert('"만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."')
+		} 
 	}
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
