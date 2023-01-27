@@ -156,42 +156,146 @@ function moveOutside(event, value){
     let valueArr = value.split('/');
     let valueId = valueArr[0];
     
-    let studentBirth = valueArr[2] + "/" + valueArr[3] + "/" + valueArr[4];
-    let studentGenderTitle = valueArr[5];
-    let studentEmail = valueArr[6];
-    let studentPhone = valueArr[7];
-    let studentAddDoTitle = valueArr[8];
-    let studentAddEtc = valueArr[9];
-    let studentPositionTitle = valueArr[10];
-    
     console.log(valueId.substring(0,4));
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 강좌일 경우
     if(valueId.substring(0,4)==='SUBJ') {
         let valueTitle = valueArr[2];
         let reg = valueArr[3];
+        let supportYn = valueArr[5];
+        let levelCdTitle = valueArr[6];
+        let levelEtc = valueArr[7];
+        let days = valueArr[8];
+        let hours = valueArr[9];
+        let startDay = valueArr[10];
+        let endDay = valueArr[11];
+        let recruitStartDay = valueArr[12];
+        let recruitEndDay = valueArr[13];
+        let recruitPeople = valueArr[14];
+        let openStateCdTitle = valueArr[15];
+        let catSubjectCdTitle = valueArr[16];
+        
         $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + reg);
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
+        
+        var table = $("<table class='subjectdetails'/>");
+        var tr = $("<table class='subjectdetails' border='1'/>").append(
+        		$("<tr/>"),
+        		$("<td/>").text('강좌 기간'),
+        		$("<td/>").text('모집 기간'),
+				$("<td/>").text('일수'),
+				$("<td/>").text('시수'),
+				$("<tr/>"),
+				$("<td/>").text(startDay + ' ~ ' + endDay),
+				$("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
+				$("<td/>").text(days),
+				$("<td/>").text(hours),
+				$("<tr/>"),
+				$("<td/>").text('모집 인원'),
+				$("<td/>").text('강좌 분류'),
+				$("<td/>").text('개설 상태'),
+				$("<td/>").text('난이도 (기타)'),
+				$("<tr/>"),
+				$("<td/>").text(recruitPeople),
+				$("<td/>").text(catSubjectCdTitle),
+				$("<td/>").text(openStateCdTitle),
+				$("<td/>").text(levelCdTitle + '(' + levelEtc + ')')
+		);
+		table.append(tr);
+		$(opener.document).find("#subject-list").html(table);
+        window.close();
+
     }
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
         let valueYear = valueArr[3];
-        $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  강좌명 : " + valueTitle);
+        $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  과정명 : " + valueTitle);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
         $(opener.document).find("#courseYear-input").val(valueYear);
         
         const pathArr = location.pathname.split('/');
         const path = pathArr[2];
+        
+        // course 만 해당
+        if(path.substring(10,25)==='course') {
+            setUnavailableSubjectId('courseTitleClicked', valueId); // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+        }
+        
+        $.ajax({
+        	url : 'selectsubjectlistbycourseid?courseId=' + valueId,
+        	dataType : "json",
+        	async : false,
+        	success : function(result) {
+        		if(result.length > 0) {
+        			var table = $("<table class='courselist'/>");
+        			var tr1 = $("<table class='courselist' border='1'/>").append(
+        					$("<tr/>"),
+                    		$("<td/>").text('강좌 아이디'),
+            				$("<td/>").text('강좌 명'),
+            				$("<td/>").text('강좌 기간'),
+            				$("<td/>").text('강좌 시간'),
+            				$("<td/>").text('일수'),
+            				$("<td/>").text('시수'),
+            				$("<td/>").text('난이도'),
+            				$("<td/>").text('비용'),
+            				$("<td/>").text('교육비 지원 여부')
+            		);
+            				
+        			for(var i in result) {
+        				var $subjectId = result[i].subjectId;
+        				var $subjectTitle = result[i].subjectTitle;
+        				var $startDay = result[i].startDay;
+        				var $endDay = result[i].endDay;
+        				var $startTime = result[i].startTime;
+        				var $endTime = result[i].endTime;
+        				var $days = result[i].days;
+        				var $hours = result[i].hours;
+        				var $levelCdTitle = result[i].levelCdTitle;
+        				var $cost = result[i].cost;
+        				var $supportYn = result[i].supportYn;
+        				
+        				var tr2 = tr1.append(
+                				$("<tr/>"),
+                				$("<td/>").text($subjectId),
+                				$("<td/>").text($subjectTitle),
+                				$("<td/>").text($startDay + ' ~ ' + $endDay),
+                				$("<td/>").text($startTime + ' ~ ' + $endTime),
+                				$("<td/>").text($days),
+                				$("<td/>").text($hours),
+                				$("<td/>").text($levelCdTitle),
+                				$("<td/>").text($cost),
+                				$("<td/>").text($supportYn)
+                		);
+        				table.append(tr2);
+        			}
+        			$(opener.document).find("#subject-list").html(table);
+        		}
+        	},
+        	error : function(result) {
+        		alert("에러" + JSON.stringify(result));
+        	}
+        
+        });
+        
         // course 만 해당
         if(path.substring(10,25)==='course') {
             setUnavailableSubjectId('courseTitleClicked', valueId); // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
         }
     }
+
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 학생일 경우
     if(valueId.substring(0,4)==='STDT') {
         let valueTitle = valueArr[1];
+        let studentBirth = valueArr[2];
+        let studentGenderTitle = valueArr[3];
+        let studentEmail = valueArr[4];
+        let studentPhone = valueArr[5];
+        let studentAddDoTitle = valueArr[6];
+        let studentAddEtc = valueArr[7];
+        let studentPositionTitle = valueArr[8];
+        
         $(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);

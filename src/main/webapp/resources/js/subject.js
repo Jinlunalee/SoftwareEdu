@@ -231,9 +231,11 @@ $('input#startTime').timepicker({
 	scrollbar: true,
 	disableTextInput: true,
 	change: function(resultTime){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
-		console.log("calcEndDay startTime onChange");	
-		$('input#endTime').timepicker('option', 'minTime', resultTime);
-		console.log("change endTime minTIme");
+		// $('input#endTime').timepicker('option', 'minTime', resultTime);
+		let endTimePicker = $('input#endTime').timepicker('getTime');
+		console.log(resultTime);
+		console.log(endTimePicker);
+		timeMinMax(resultTime, endTimePicker);
 	}
 });
 
@@ -247,9 +249,19 @@ $('input#endTime').timepicker({
 	dropdown: true,
 	scrollbar: true,
 	disableTextInput: true,
-	change: calcEndDay
+	change: function(result){
+		endTime = result;
+		calcEndDay();
+	}
+	
 });
 
+/*시간 선후관계 설정*/
+function timeMinMax(startTime, endTime){
+	console.log("timeMinMax");
+	$('input#endTime').timepicker('option', 'minTime', startTime);
+	$('intput#startTime').timepicker('option', 'maxTime', endTime);
+}
 
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){

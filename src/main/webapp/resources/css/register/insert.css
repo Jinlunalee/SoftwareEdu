@@ -124,6 +124,7 @@ table>tr {
 	position: relative;
 	height: 40px;
 	border-radius: 8px;
+	text-align: center;
 }
 
 .tb {
@@ -182,4 +183,19 @@ li {
 	border-radius: 8px;
 	position: relative;
 	bottom: 2px;
+}
+
+.subjectdetails, .courselist {
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+#studentTitle-input, #subjectTitle-input, #courseTitle-input {
+	text-align: center;
+}
+
+#studentTitle-input {
+	position: relative;
+	bottom: 10px;
 }

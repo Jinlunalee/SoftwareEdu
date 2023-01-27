@@ -46,7 +46,7 @@
 .search {
 	text-align: center;
 	background-color: #f7f7f7;
-	padding: 10px;
+	padding: 15px;
 }
 
 .select-view {
@@ -64,15 +64,17 @@
     margin-top: 15px;
     margin-bottom: 10px;
     position: relative;
-    top: 10px;
+    top: 21px;
 }
 
 .list {
 	width: 100%;
     text-align: center;
     border-top: 2px solid #bababa;
-    margin-bottom: 20px;
-    font-size: 13px
+    margin-bottom: 10px;
+    font-size: 13px;
+    position: relative;
+    top: 10px;
 }
 
 tr {
@@ -173,7 +175,7 @@ td {
 #paging {
 	display: inline;
 	position: relative;
-	bottom: 20px;
+	top: 7px;
 	left: 43%;
 	font-size: 13px;
 }
@@ -270,6 +272,8 @@ td {
     color: #666;
     float: left;
     margin: 5px 10px;
+    position: relative;
+    top: 10px;
     }
 .cnt {
 	color: #666;
