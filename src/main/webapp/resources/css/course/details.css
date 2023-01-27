@@ -3,67 +3,77 @@
 .subject_course_title {
     width: 100%;
     text-align: center;
+    border-bottom: 2px solid #bababa;
 }
 
 .subject_course_title .title-input {
-    width:100%;
+    width: 100%;
 }
 
-.subject_course_title th, td {
-    padding:5px;
+.subject_course_title th,
+td {
+    padding: 5px;
 }
 
 .basic_txt_color {
-   color:#666;
+    color: #666;
 }
+
 .sub_title {
-	border: 2px solid #1A54CD;
-	border-radius: 40px;
+    border: 2px solid #1A54CD;
+    border-radius: 40px;
     padding: 5px 10px;
     margin: 10px;
     display: inline-block;
 }
+
 .course_title {
-	display: flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
 }
+
 .main_title {
-	font-size: 1.4em;
+    font-size: 1.4em;
     margin: 10px;
 }
+
 .course_state {
-   color: #FFFFFF;
+    color: #FFFFFF;
     border-radius: 40px;
     background-color: #1A54CD;
     margin: 10px;
     padding: 5px 10px;
     display: inline-block;
 }
+
 .list {
-   width: 95%;
-    border-top: 2px solid #bababa;
-    margin-bottom: 20px;
+    width: 100%;
+    margin: 20px 0;
 }
+
 tr {
-   height: 40px;
+    height: 40px;
 }
+
 table .detail_img {
-   max-width:90%;
+    max-width: 90%;
 }
+
 .course_intro {
-   display: flex;
+    display: flex;
     align-items: center;
-    border:1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
     border-radius: 20px;
-      padding: 20px 0px;
+    padding: 20px 0px;
     margin-bottom: 40px;
-    
+
 }
+
 .course_intro .txt {
-   color:#666;
-   padding: 0 0 0 30px;
-   line-height: 28px;
+    color: #666;
+    padding: 0 0 0 30px;
+    line-height: 28px;
     border-left: 1px dotted #e1e1e1;
     min-height: 100px;
     display: inline-flex;
