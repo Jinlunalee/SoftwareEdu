@@ -70,6 +70,7 @@ a:hover{
     padding: 7px 30px;
     white-space: pre-line;
     display: flex;
+    align-content: center;
     align-items: center;
 }
 .footer_title {
