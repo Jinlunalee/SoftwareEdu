@@ -71,12 +71,12 @@ public class DataService implements IDataService{
 			// 밑의 문자열에 "\n" 넣어도 엔터처리 안 됨
 			// +=로 문자열을 이어붙이기
         result += "<student>" + "\n";
-        result += "<agent_id>" + "KOSA01" + "</agent_id>" + "\n";
-        result += "<std_sbj>"+ stdSbj +"</std_sbj>" + "\n";
+        result += "<agentId>" + "KOSA01" + "</agentId>" + "\n";
+        result += "<stdSbj>"+ stdSbj +"</stdSbj>" + "\n";
         result += "<name>" + name + "</name>" + "\n";
-        result += "<complete_hours>" + completeHours + "</complete_hours>" + "\n";
-        result += "<send_dt>" + sendDt + "<send_dt>" + "\n";
-        result += "<state_cd>" + stateCd + "<state_cd>" + "\n";
+        result += "<completeHours>" + completeHours + "</completeHours>" + "\n";
+        result += "<sendDt>" + sendDt + "<sendDt>" + "\n";
+        result += "<stateCd>" + stateCd + "<stateCd>" + "\n";
         result +=  "</student>" + "\n" + "\n"; 
 //        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
@@ -103,15 +103,15 @@ public class DataService implements IDataService{
         	
         	
            result += "<subject>" + "\n";
-           result += "<sbjId_seq>" + sbjIdSeq + "</sbjId_seq>" + "\n";
-           result += "<subject_title>" + subjectTitle
-                 + "</subject_title>" + "\n";
+           result += "<sbjIdSeq>" + sbjIdSeq + "</sbjIdSeq>" + "\n";
+           result += "<subjectTitle>" + subjectTitle
+                 + "</subjectTitle>" + "\n";
            result += "<hours>" + hours + "</hours>" + "\n";
-           result += "<cnt_std>" + cntStd + "명" + "</cnt_std>" + "\n";
-           result += "<start_day>" + sDay + "</start_day>" + "\n";
-           result += "<end_day>" + eDay + "</end_day>" + "\n";
+           result += "<cntStd>" + cntStd + "명" + "</cntStd>" + "\n";
+           result += "<startDay>" + sDay + "</startDay>" + "\n";
+           result += "<endDay>" + eDay + "</endDay>" + "\n";
            result += "<cost>" + cost + "</cost>" + "\n";
-           result += "<send_dt>" + sendDt + "</send_dt>" + "\n";
+           result += "<sendDt>" + sendDt + "</sendDt>" + "\n";
            result += "</subject>" + "\n" + "\n";  
         }
 
