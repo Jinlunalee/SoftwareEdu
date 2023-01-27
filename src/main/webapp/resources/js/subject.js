@@ -281,7 +281,7 @@ function calcEndDay(){
 
 		// 휴일인만큼 날짜 더하기
 		startDay2.setDate(startDay2.getDate() + resultDay); 
-		days += resultDay;
+		// days += resultDay; 
 
 		endDay.value = '';
 		endDay.value = startDay2.toJSON().substring(0, 10);
