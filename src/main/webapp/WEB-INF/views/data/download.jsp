@@ -98,39 +98,90 @@
       <div class="card_right">
 
          <div class="card_info" id="show_info1">
-            <a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
-               * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-               * name : 수강생 이름  &emsp; &emsp; &emsp; * state_cd : 진행상태(ERL06)<br> * complete_hours : 수강완료시수<br> 
-               * send_dt : 전송시간<br>
-            </a>
+            <div id="first_info" class="first_info"> 
+               <table class="table_info1">
+                   <tr>
+                    <td>* agentId : 훈련기관ID</td>                   
+                   </tr>
+                   <tr>
+                    <td colspan = '2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
+                    
+                   </tr>
+                   <tr>
+                    <td>* name : 수강생 이름</td>
+                    <td>* completeHours : 수강완료시수</td>     
+                   </tr>
+                   <tr>
+                    <td>* sendDt : 전송시간</td>
+                    <td>* stateCd : 진행상태(ERL06)</td>
+                </table>             
+            </div>
          </div>
 
          <div class="card_info" id="show_info2">
-            <a id="first_info" class="first_info"> * agent_id : 훈련기관ID<br>
-               * std_sbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)<br>
-               * name : 수강생 이름 &emsp; &emsp; &emsp; * state_cd : 진행상태(ERL06) <br> * complete_hours : 수강완료시수<br> 
-               * send_dt : 전송시간<br>
-            </a>
+            <div id="first_info" class="first_info"> 
+               <table class="table_info1">
+                   <tr>
+                    <td>* agentId : 훈련기관ID</td>                   
+                   </tr>
+                   <tr>
+                    <td colspan = '2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
+                    
+                   </tr>
+                   <tr>
+                    <td>* name : 수강생 이름</td>
+                    <td>* completeHours : 수강완료시수</td>     
+                   </tr>
+                   <tr>
+                    <td>* sendDt : 전송시간</td>
+                    <td>* stateCd : 진행상태(ERL06)</td>
+                </table> 
+               
+            </div>
          </div>
 
          <div class="card_info" id="show_info3">
-            <a id="first_info" class="first_info"> * sbjId_seq : 강좌아이디,
-               강좌시퀀스 &emsp; &emsp; &emsp; &emsp; * subject_title : 강좌 이름<br>
-               * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; *
-               cnt_std : 수강 완료 된 수강생 수<br> * start_day : 강좌 시작 일자 &emsp;
-               &emsp; &emsp; &emsp; * end_day : 강좌 마감 일자<br> * cost : 교육비
-               &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; * send_dt : 전송시간<br>
-            </a>
+            <div id="first_info" class="first_info"> 
+            <table class="table_info2">
+                <tr>
+                    <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
+                    <td>* subjectTitle : 강좌 이름</td>
+                </tr>
+                <tr>
+                    <td>* hours : 해당 강좌 전체 시수</td>
+                    <td>*cntStd : 수강 완료 된 수강생 수</td>
+                </tr>
+                <tr>
+                    <td>* startDay : 강좌 시작 일자</td>
+                    <td>* endDay : 강좌 마감 일자</td>
+                </tr>
+                <tr>
+                    <td>* cost : 교육비</td>
+                    <td>* sendDt : 전송시간</td>
+            </table>           
+            </div>
          </div>
 
          <div class="card_info" id="show_info4">
-            <a id="first_info" class="first_info"> * sbjId_seq : 강좌아이디,
-               강좌시퀀스 &emsp; &emsp; &emsp; &emsp; * subject_title : 강좌 이름<br>
-               * hours : 해당 강좌 전체 시수 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; *
-               cnt_std : 수강 완료 된 수강생 수<br> * start_day : 강좌 시작 일자 &emsp;
-               &emsp; &emsp; &emsp; * end_day : 강좌 마감 일자<br> * cost : 교육비
-               &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; * send_dt : 전송시간<br>
-            </a>
+            <div id="first_info" class="first_info"> 
+            <table class="table_info2">
+                <tr>
+                    <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
+                    <td>* subjectTitle : 강좌 이름</td>
+                </tr>
+                <tr>
+                    <td>* hours : 해당 강좌 전체 시수</td>
+                    <td>*cntStd : 수강 완료 된 수강생 수</td>
+                </tr>
+                <tr>
+                    <td>* startDay : 강좌 시작 일자</td>
+                    <td>* endDay : 강좌 마감 일자</td>
+                </tr>
+                <tr>
+                    <td>* cost : 교육비</td>
+                    <td>* sendDt : 전송시간</td>
+            </table> 
+            </div>
          </div>
 
 
@@ -213,8 +264,7 @@
    function getJsonSbj() {
         var startDay = $('#input_startDay').val();
         var endDay = $('#input_endDay').val();
-      
-      
+          
       $.ajax({
          type : "GET",
          url : "getjsonSbj",

@@ -44,7 +44,8 @@
 					sum(cost) over (partition by open.course_id) as cost,
 					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
 					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
-					course.cat_cd as cat_course_cd
+					course.cat_cd as cat_course_cd,
+					course_open_year
 				from open 
 						left join subject on open.subject_id = subject.subject_id
 		        		left join course on open.course_id = course.course_id

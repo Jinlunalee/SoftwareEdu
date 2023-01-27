@@ -123,7 +123,7 @@
 						<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
 							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count})">취소</button>
 							<%-- 취소 사유 모달창 --%>
-							<div class="modal modal-${status.count}">
+							<div class="modal modal-${status.count}" >
 								<div class="modal-content modal-content-${status.count}">
 									<span style="font-size: 1.2em;">취소하시겠습니까?</span>
 									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform" onSubmit="checkForm()">
@@ -160,33 +160,35 @@
 				</tr>
 			</c:forEach>
 
-			<%-- paging --%>
-			<tr>
-				<td colspan="4" class="text-center">
-					<div>
-						<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=1">처음</a>
-						<c:if test="${pager.groupNo>1}">
-							<a class="btn btn-outline-info btn-sm" href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a>
-						</c:if>
-
-						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-							<c:if test="${pager.pageNo != i}">
-								<a class="btn btn-outline-success btn-sm" href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
-							</c:if>
-							<c:if test="${pager.pageNo == i}">
-								<a class="btn btn-danger btn-sm" href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${pager.groupNo<pager.totalGroupNo}">
-							<a class="btn btn-outline-info btn-sm" href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a>
-						</c:if>
-						<a class="btn btn-outline-primary btn-sm" href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a>
-					</div>
-				</td>
-			</tr>
 		</table>
 		
+       <%-- paging --%>
+
+            <!-- paging -->
+             <div id="paging">
+                   <ul class="paging">
+                    <li><a href="boardlist?pageNo=1">처음</a></li>
+                    <c:if test="${pager.groupNo>1}">
+                        <li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+                    </c:if>
+
+                    <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+                        <c:if test="${pager.pageNo != i}">
+                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                        </c:if>
+                        <c:if test="${pager.pageNo == i}">
+                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${pager.groupNo<pager.totalGroupNo}">
+                        <li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+                    </c:if>
+                    <li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+                </ul>
+              </div> 
+
+
 		<div class="down">
 				<a href="<c:url value='/enroll/enrollexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}'/>">
 					<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
@@ -209,7 +211,8 @@
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
-			});
+				document.location.href = document.location.href;
+			});       
 			
 		};
 		
@@ -251,7 +254,7 @@
 				createInput.setAttribute("class", "input-cancel");
 				document.querySelector("#cancelRsEtc").append(createInput);
 			}else if(cancel !== '관리자 기타'){
-				$('#cancelRsEtc').empty();		
+				$('#cancelRsEtc').empty();
 			}
 		}
 		
@@ -259,7 +262,7 @@
 			if($('select[name=cancelRsCd]').val() === "") {
 				alert("취소 사유를 선택해 주세요.");
 				event.preventDefault();
-			}
+			} 
 		}
 	</script>
 

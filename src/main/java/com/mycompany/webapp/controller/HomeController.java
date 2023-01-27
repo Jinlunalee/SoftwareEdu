@@ -292,6 +292,22 @@ public class HomeController {
 	}
 	
 	/**
+	 * @description	수강생이 수강했거나 수강하고 있는 개설강좌 리스트 가져오기
+	 * @date	2023. 1. 26.
+	 * @author	Jin Lee
+	 * @param studentId
+	 * @return
+	 */
+	@GetMapping(value="/common/selectOpenSubjectByStudentId")
+	@ResponseBody
+	public List<OpenVO> selectOpenSubjectByStudentId(String studentId) {
+		System.out.println(studentId);
+		List<OpenVO> boardList = subjectService.selectOpenSubjectByStudentId(studentId);
+		logger.info("selectOpenSubjectByStudentId: " + boardList);
+		return boardList;
+	}
+	
+	/**
 	 * @description	수강생 검색 팝업
 	 * @date	2023. 1. 26.
 	 * @author	Minsu

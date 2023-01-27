@@ -169,20 +169,6 @@ public class SubjectService implements ISubjectService{
 		logger.info("service/infoSubjectCourse/list: " + map);
 		return map;
 	}
-		////////////////////////////////////
-//		VO로 데이터 전송
-//		SubjectVO subject = null;
-//		logger.info("service/infoSubjectCourse/courseId : " + courseId.getClass().getName());
-//		
-//		if("none".equals(courseId)) {
-//			return subjectRepository.infoSubject(subjectId);
-//		}else { //coursId 있는경우
-//			subject = subjectRepository.infoSubject(subjectId);
-//			subjectRepository.infoOpenCourse(courseId);
-//			logger.info("service/infoSubjectCourse/subject: " + subject);
-//			return subject;
-//		}
-
 
 	@Override
 	public void clickDeleteOpen(String subjectId, int subjectSeq) {
@@ -212,6 +198,16 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year) {
 		return subjectRepository.selectOpenSubjectByCourseIdAndYear(courseId, year);
+	}
+
+	@Override
+	public List<OpenVO> selectOpenSubjectByStudentId(String studentId) {
+		return subjectRepository.selectOpenSubjectByStudentId(studentId);
+	}
+	
+	@Override
+	public int checkHoliday(String startDay, String endDay) {
+		return subjectRepository.checkHoliday(startDay, endDay);
 	}
 	
 }

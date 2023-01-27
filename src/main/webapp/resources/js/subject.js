@@ -33,158 +33,162 @@ const selected = function() {
 		const courseId = document.getElementById('courseId-input').value;
 		const subjectId = document.getElementById('subjectId-input').value;
 		console.log(courseId , subjectId);
-		$.ajax({
-			type: "get",
-			url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
-			data: {
-				// subjectId: subjectId,
-			},
-			success: function(result) {
-				console.log("subjectId: "+subjectId);
-				console.log("courseId:"+courseId);
+		if(subjectId) {
+			$.ajax({
+				type: "get",
+				url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
+				data: {
+					// subjectId: subjectId,
+				},
+				success: function(result) {
+					console.log("subjectId: "+subjectId);
+					console.log("courseId:"+courseId);
 
-				// console.log(JSON.stringify(result)); // result값 확인 
-				// console.log(result.checkList); // map형식 데이터에서 key가 checkList인 값 가져오기
-				// console.log(result.checkList[0].subjectId); //checkList 0번째의 subjectId가져오기
+					// console.log(JSON.stringify(result)); // result값 확인 
+					// console.log(result.checkList); // map형식 데이터에서 key가 checkList인 값 가져오기
+					// console.log(result.checkList[0].subjectId); //checkList 0번째의 subjectId가져오기
 
-				let startTime = $('#startTime');
-				let endTime = $('#endTime');
-				let startDay = $('#startDay');
-				let endDay = $('#endDay');
-				let recruitStartDay = $('#recruitStartDay');
-				let recruitEndDay = $('#recruitEndDay');
-				let printHours = $('#printHours');
-				let printDay = $('#printDay');
-				let hours = $('#hours');
-				let levelCd = $('#levelCd');
-				let levelCdTitle = $('#levelCdTitle');
-				let cost = $('#cost');
-				let support = $('.support');
+					let startTime = $('#startTime');
+					let endTime = $('#endTime');
+					let startDay = $('#startDay');
+					let endDay = $('#endDay');
+					let recruitStartDay = $('#recruitStartDay');
+					let recruitEndDay = $('#recruitEndDay');
+					let printHours = $('#printHours');
+					let printDay = $('#printDay');
+					let hours = $('#hours');
+					let levelCd = $('#levelCd');
+					let levelCdTitle = $('#levelCdTitle');
+					let cost = $('#cost');
+					let support = $('.support');
 
-				startTime.val('');
-				endTime.val('');
-				startDay.val('');
-				endDay.val('');
-				recruitStartDay.val('');
-				recruitStartDay.removeAttr('max'); //연수시작이 바뀌면 selectRecruitDay 실행으로 max생김
-				recruitEndDay.val('');
-				recruitEndDay.removeAttr('max'); 
-				recruitEndDay.removeAttr('min');
-				printHours.empty();
-				printDay.empty();
-				levelCd.val('');
-				levelCdTitle.empty();
-				cost.empty();
-				support.empty();
+					startTime.val('');
+					endTime.val('');
+					startDay.val('');
+					endDay.val('');
+					recruitStartDay.val('');
+					recruitStartDay.removeAttr('max'); //연수시작이 바뀌면 selectRecruitDay 실행으로 max생김
+					recruitEndDay.val('');
+					recruitEndDay.removeAttr('max'); 
+					recruitEndDay.removeAttr('min');
+					printHours.empty();
+					printDay.empty();
+					levelCd.val('');
+					levelCdTitle.empty();
+					cost.empty();
+					support.empty();
 
-				ajaxRecruitStart = null; //초기화 안하면 과정을 바꿨을때 그대로 값이 남아있음
-				ajaxRecruitEnd = null;
-				ajaxStart = null;
-				ajaxEnd = null;
+					ajaxRecruitStart = null; //초기화 안하면 과정을 바꿨을때 그대로 값이 남아있음
+					ajaxRecruitEnd = null;
+					ajaxStart = null;
+					ajaxEnd = null;
 
-				// select option에 있는 모든value가져오기
-				let options = $('#subjectId').find('option').map(function(){
-					return this.value;
-				}).get();
+					// select option에 있는 모든value가져오기
+					let options = $('#subjectId').find('option').map(function(){
+						return this.value;
+					}).get();
 
-				//비활성화 되어있던 속성 제거 (초기화)
-				for(var i=0;i<options.length;i++){
-					//option의 0번부터 끝까지 초기화
-					$('#subjectId option:eq('+i+')').prop('disabled', false);
+					//비활성화 되어있던 속성 제거 (초기화)
+					for(var i=0;i<options.length;i++){
+						//option의 0번부터 끝까지 초기화
+						$('#subjectId option:eq('+i+')').prop('disabled', false);
 
-					// $("select option[value="+options[i]).attr('disabled', false);
-					// $("select#subjectId").val(options[i]).removeAttr('disabled')
-					// $('#subjectId').val(options[i]).prop("disabled", false);
-					// $('#subjectId').val(options[i]).removeAttr('disabled');
-					// console.log("삭제"+$('#subjectId').val(options[i]).disabled);
-				}
-
-				if(courseId !== "" && result.courseInfo){ //과정이 개설되어있는 경우
-					console.log("result: " + result);//리스트 몇개 넘어오는지 확인
-					//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
-					console.log("개설되어있는 경우");
-
-					// 과정안에 담겨있는 강좌 데이터 저장
-					let ajaxCheckList = [];
-					for (var i = 0; i < result.checkList.length; i++) {
-						ajaxCheckList.push(result.checkList[i].subjectId);
+						// $("select option[value="+options[i]).attr('disabled', false);
+						// $("select#subjectId").val(options[i]).removeAttr('disabled')
+						// $('#subjectId').val(options[i]).prop("disabled", false);
+						// $('#subjectId').val(options[i]).removeAttr('disabled');
+						// console.log("삭제"+$('#subjectId').val(options[i]).disabled);
 					}
-					console.log(options);
-					console.log(ajaxCheckList);
 
-					//ajaxCheckList랑 options비교해서 비활성화
-					for (var i = 0; i < options.length; i++) {
-						for (var j = 0; j < ajaxCheckList.length; j++) {
-							if (options[i] === ajaxCheckList[j]) {
-								console.log(ajaxCheckList[j]);
-								$("select option[value=" + options[i]).attr('disabled', true);
+					if(courseId !== "" && result.courseInfo){ //과정이 개설되어있는 경우
+						console.log("result: " + result);//리스트 몇개 넘어오는지 확인
+						//result[0]은 과정에 대한 정보, result[1]은 강좌에 대한 정보
+						console.log("개설되어있는 경우");
+
+						// 과정안에 담겨있는 강좌 데이터 저장
+						let ajaxCheckList = [];
+						for (var i = 0; i < result.checkList.length; i++) {
+							ajaxCheckList.push(result.checkList[i].subjectId);
+						}
+						console.log(options);
+						console.log(ajaxCheckList);
+
+						//ajaxCheckList랑 options비교해서 비활성화
+						for (var i = 0; i < options.length; i++) {
+							for (var j = 0; j < ajaxCheckList.length; j++) {
+								if (options[i] === ajaxCheckList[j]) {
+									console.log(ajaxCheckList[j]);
+									$("select option[value=" + options[i]).attr('disabled', true);
+								}
 							}
 						}
+
+						//과정 정보 입력
+						let date = parse(result.courseInfo.endDay);
+						startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
+						startDay.attr('min', date);
+						ajaxEnd = date;
+
+						date = parse(result.courseInfo.startDay);
+						ajaxStart = date;
+
+						date = parse(result.courseInfo.recruitStartDay);
+						recruitStartDay.val(date);
+						ajaxRecruitStart = date;
+
+						date = parse(result.courseInfo.recruitEndDay);
+						recruitEndDay.val(date);
+						ajaxRecruitEnd = date;
+
+						startDay.change();
+
+						//강좌 정보 입력
+						console.log('result[1].hours:' + result.subjectInfo.hours);
+						printHours.append("(" + result.subjectInfo.hours + "시간)");
+						hours.val(result.subjectInfo.hours);
+						if (!result.subjectInfo.levelEtc) {//난이도 기타값이 null일때
+							// level.append(result.subjectInfo.level);
+							levelCdTitle.append(result.subjectInfo.levelCdTitle);
+							levelCd.val(result.subjectInfo.levelCd);
+						} else {
+							// level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
+							levelCdTitle.append(result.subjectInfo.levelCdTitle + "(" + result.subjectInfo.levelEtc + ")");
+							levelCd.val(result.subjectInfo.levelCd);
+						}
+						cost.append(result.subjectInfo.cost + "원");
+						if (result.subjectInfo.supportYn === 'Y') {
+							support.append("※교육비 지원을 받는 강좌입니다.");
+						}
+					}else {
+						console.log("과정 선택을 안했거나 최초개설인 경우");
+						printHours.append("("+result.subjectInfo.hours+"시간)");
+						hours.val(result.subjectInfo.hours);
+
+						if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
+							// levelCd.append(result.subjectInfo.levelCd);
+							levelCdTitle.append(result.subjectInfo.levelCdTitle);
+							levelCd.val(result.subjectInfo.levelCd);
+						}else{
+							// levelCd.append(result.subjectInfo.levelCd+"("+result.subjectInfo.levelEtc+")");
+							levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
+							levelCd.val(result.subjectInfo.levelCd);
+
+						}
+
+						cost.append(result.subjectInfo.cost+"원");
+
+						if(result.subjectInfo.supportYn === 'Y'){
+							support.append("※교육비 지원을 받는 강좌입니다.");
+						}
 					}
-
-					//과정 정보 입력
-					let date = parse(result.courseInfo.endDay);
-					startDay.val(date); // 과정안에서 다른 강좌 끝나는날 시작
-					startDay.attr('min', date);
-					ajaxEnd = date;
-
-					date = parse(result.courseInfo.startDay);
-					ajaxStart = date;
-
-					date = parse(result.courseInfo.recruitStartDay);
-					recruitStartDay.val(date);
-					ajaxRecruitStart = date;
-
-					date = parse(result.courseInfo.recruitEndDay);
-					recruitEndDay.val(date);
-					ajaxRecruitEnd = date;
-
-					startDay.change();
-
-					//강좌 정보 입력
-					console.log('result[1].hours:' + result.subjectInfo.hours);
-					printHours.append("(" + result.subjectInfo.hours + "시간)");
-					hours.val(result.subjectInfo.hours);
-					if (!result.subjectInfo.levelEtc) {//난이도 기타값이 null일때
-						// level.append(result.subjectInfo.level);
-						levelCdTitle.append(result.subjectInfo.levelCdTitle);
-						levelCd.val(result.subjectInfo.levelCd);
-					} else {
-						// level.append(result.subjectInfo.level+"("+result.subjectInfo.levelEtc+")");
-						levelCdTitle.append(result.subjectInfo.levelCdTitle + "(" + result.subjectInfo.levelEtc + ")");
-						levelCd.val(result.subjectInfo.levelCd);
-					}
-					cost.append(result.subjectInfo.cost + "원");
-					if (result.subjectInfo.supportYn === 'Y') {
-						support.append("※교육비 지원을 받는 강좌입니다.");
-					}
-				}else {
-					console.log("과정 선택을 안했거나 최초개설인 경우");
-					printHours.append("("+result.subjectInfo.hours+"시간)");
-					hours.val(result.subjectInfo.hours);
-
-					if(!result.subjectInfo.levelEtc){//난이도 기타값이 null일때
-						// levelCd.append(result.subjectInfo.levelCd);
-						levelCdTitle.append(result.subjectInfo.levelCdTitle);
-						levelCd.val(result.subjectInfo.levelCd);
-					}else{
-						// levelCd.append(result.subjectInfo.levelCd+"("+result.subjectInfo.levelEtc+")");
-						levelCdTitle.append(result.subjectInfo.levelCdTitle+"("+result.subjectInfo.levelEtc+")");
-						levelCd.val(result.subjectInfo.levelCd);
-
-					}
-
-					cost.append(result.subjectInfo.cost+"원");
-
-					if(result.subjectInfo.supportYn === 'Y'){
-						support.append("※교육비 지원을 받는 강좌입니다.");
-					}
+				},
+				error: function(){
+					console.log("fail");
 				}
-			},
-			error: function(){
-				console.log("fail");
-			}
-		})
+			})
+		} else {
+			alert('강좌를 선택 후 눌러주세요.');
+		}
 };
 
 /*날짜format*/
@@ -225,63 +229,99 @@ $('input#startTime').timepicker({
 	dynamic: false,
 	dropdown: true,
 	scrollbar: true,
-	change: calcEndDay,
-	change: function(time){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
-		$('input#endTime').timepicker({
-			timeFormat: 'HH:mm',
-			interval: 30,
-			startTime: '09:00',
-			minTime: time,
-			maxTime: '11:00pm',
-			dynamic: false,
-			dropdown: true,
-			scrollbar: true,
-			change: calcEndDay
-		});
+	disableTextInput: true,
+	change: function(resultTime){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
+		console.log("calcEndDay startTime onChange");	
+		$('input#endTime').timepicker('option', 'minTime', resultTime);
+		console.log("change endTime minTIme");
 	}
 });
 
+$('input#endTime').timepicker({
+	timeFormat: 'HH:mm',
+	interval: 30,
+	startTime: '09:00',
+	minTime: '9',
+	maxTime: '11:00pm',
+	dynamic: false,
+	dropdown: true,
+	scrollbar: true,
+	disableTextInput: true,
+	change: calcEndDay
+});
+
+
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
+	console.log("calcEndDay");
 	let startDay = document.getElementById("startDay").value;
-		let startDay2 = new Date(startDay);
-		let startTime = document.getElementById("startTime").value;
-		let endTime = document.getElementById("endTime").value;
-		let printDay = document.getElementById("printDay");
-		let endDay = document.getElementById("endDay");
+	let startDay2 = new Date(startDay);
+	let startTime = document.getElementById("startTime").value;
+	let endTime = document.getElementById("endTime").value;
+	let printDay = document.getElementById("printDay");
+	let endDay = document.getElementById("endDay");
+	
+	printDay.innerHTML = ''; //비울때는 =
 
-		printDay.innerHTML = ''; //비울때는 =
+	if (startTime !== '' && endTime !== '') {
+		console.log("start");
+		let hours = document.getElementById("hours").value;
 
-		if(startTime !== '' && endTime !== ''){
-			let hours = document.getElementById("hours").value;
+		let startHour = parseInt(startTime.substring(0, 2));
+		let startMin = parseInt(startTime.substring(3))
+		let endHour = parseInt(endTime.substring(0, 2));
+		let endMin = parseInt(endTime.substring(3));
 
-			let startHour = parseInt(startTime.substring(0,2));
-			let startMin = parseInt(startTime.substring(3))
-			let endHour = parseInt(endTime.substring(0,2));
-			let endMin = parseInt(endTime.substring(3));
-
-			let diffHour = endHour - startHour;
-			let diffMin = 0;
-			if(endMin < startMin){
-				diffMin = (endMin - startMin) + 60;
-				diffHour = diffHour - 1;
-			}else{
-				diffMin = endMin - startMin;
-			}
-			diffMin = Math.ceil(diffMin/60 * 100) / 100; //소수점 두자리 변환
-
-			let diffTime = diffHour+diffMin; // 시작시간과 끝시간 계산
-
-			let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
-
-			startDay2.setDate(startDay2.getDate() + days);
-			
-			endDay.value = '';
-			endDay.value = startDay2.toJSON().substring(0,10);
-
-			//일수 출력
-			printDay.innerText += "("+days+"일)"; //추가해주는거라 +=
+		let diffHour = endHour - startHour;
+		let diffMin = 0;
+		if (endMin < startMin) {
+			diffMin = (endMin - startMin) + 60;
+			diffHour = diffHour - 1;
+		} else {
+			diffMin = endMin - startMin;
 		}
+		diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
+
+		let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+
+		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
+
+		startDay2.setDate(startDay2.getDate() + days); //시수계산한 날짜를 더해 endDay
+
+		//휴일체크
+		let resultDay = checkHoliday(startDay, startDay2.toJSON().substring(0, 10));
+
+		// 휴일인만큼 날짜 더하기
+		startDay2.setDate(startDay2.getDate() + resultDay); 
+		// days += resultDay; 
+
+		endDay.value = '';
+		endDay.value = startDay2.toJSON().substring(0, 10);
+
+		//일수 출력
+		printDay.innerText += "(" + days + "일)"; //추가해주는거라 +=
+	}
+}
+
+/*기간내에 휴일 확인*/
+function checkHoliday(startDay, endDay){
+	console.log("checkHoliday!");
+	let resultData;
+	startDay = startDay.replaceAll("-","");
+	endDay = endDay.replaceAll("-","");
+	$.ajax({
+		type: "get",
+		url: "/subject/ajaxcheckholiday?startDay="+startDay+"&endDay="+endDay,
+		async: false,
+	}).done(function(result){
+		console.log('success');
+		resultData = result;
+
+	}).fail(function(){
+		console.log('fail');
+	});
+
+	return resultData;
 }
 
 /*신청기간 지정 - 처음에 입력했을때*/
@@ -320,6 +360,8 @@ function selectRecruitDay(){
 		recruitEndDay.max = startDay; //연수시작 시간날까지만 가능
 		recruitEndDay.onchange(); //값이 바뀐 엘리먼트의 onchange 함수 실행
 	}
+
+	calcEndDay();
 
 }
 
@@ -360,7 +402,7 @@ function inputState(){
 	// console.log(state.value);
 }
 
-//*페이지별 개수 선택 유지(subject) - ajax*/
+/*페이지별 개수 선택 유지(subject) - ajax*/
 function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({
@@ -376,7 +418,7 @@ function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 	});
 }
 
-//*페이지별 개수 선택 유지(course) - ajax*/
+/*페이지별 개수 선택 유지(course) - ajax*/
 function listCount2(RowsPerPage) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({

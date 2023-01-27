@@ -22,7 +22,11 @@
 					</form>
 				</div>
 			</div>
-
+			<!-- 수강생이 들었던/듣고 있는 개설 강좌 넘어온 값 -->
+			<div>
+				<input type="hidden" id="subjectId-string">
+				<input type="hidden" id="subjectSeq-string">
+			</div>
 			<div id="student-list"></div>
 			
 		</div>
@@ -40,14 +44,14 @@
 						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button class="open-subject-popup-btn btn3 btn-outline-secondary">검색</button>
+						<button id="subject-btn" class="open-subject-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
 						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
 						<input id="course-input" name="subject" type="hidden">
 						<input id="courseYear-input" name="openYear" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button class="open-course-popup-btn btn3 btn-outline-secondary">검색</button>
+						<button id="course-btn" class="open-course-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
 					</div>
 					
 				</div>

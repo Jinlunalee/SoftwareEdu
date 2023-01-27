@@ -23,7 +23,7 @@
                     <tr>
                         <td>${board.courseId}</td>
                         <td>
-                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
+                            <a class="${board.openStateCd} ${board.subjectId}-${board.subjectSeq}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
                                 ${board.courseTitle}
                             </a>
                         </td>
