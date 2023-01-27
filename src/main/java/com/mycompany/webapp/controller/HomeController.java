@@ -323,5 +323,13 @@ public class HomeController {
 		logger.info("studentList: " + studentList);	
 		return "common/searchpop-student-result";
 	}
+	
+	@GetMapping(value="/common/selectsubjectlistbycourseid")
+	@ResponseBody
+	public List<OpenVO> selectSubjectListByCourseId(OpenVO openVo) throws Exception {
+		List<OpenVO> boardList = homeService.selectSubjectListByCourseId(openVo);
+		logger.info("컨트롤러 : " + boardList);
+		return boardList;
+	}
 }
 

@@ -123,6 +123,14 @@ public class HomeService implements IHomeService {
 		
 		return searchStudentList;
 	}
+	
+	public List<OpenVO> selectSubjectListByCourseId(OpenVO openVo) {
+		List<OpenVO> list = homeRepository.selectSubjectListByCourseId(openVo);
+		for(OpenVO open : list) {
+			open.setLevelCdTitle(homeRepository.getComnCdTitle(open.getLevelCd()));
+		}
+		return list;
+	}
 
 
 }

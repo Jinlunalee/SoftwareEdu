@@ -35,9 +35,11 @@
                     <tr>
                         <td>${board.subjectId}</td>
                         <td>
-                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}">
-                                ${board.subjectTitle}
-                            </a>
+                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" 
+                            name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}/
+                            ${board.supportYn}/${board.levelCdTitle}/${board.levelEtc}/${board.days}/${board.hours}/${board.startDay}/${board.endDay}/
+                            ${board.recruitStartDay}/${board.recruitEndDay}/${board.recruitPeople}/${board.openStateCdTitle}/${board.catSubjectCdTitle}">
+                            ${board.subjectTitle}</a>
                         </td>
                         <td>${board.courseId}</td>
                         <td>${board.courseTitle}</td>

@@ -14,7 +14,7 @@
 		    	name,
 				student_id, 
 				email, 
-				to_char(to_date(birth), 'YYYY/MM/DD') as birth, 	
+				to_char(to_date(birth), 'YYYY-MM-DD') as birth, 	
             	common_code.comn_cd_title as position_title
 		    FROM student
 		    left join common_code on student.position_cd = common_code.comn_cd
@@ -125,7 +125,7 @@
 		                s.subject_title,
 		                e.state_cd,
 		                complete_hours, 
-		                TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY/MM/DD') AS "enrollDt", 
+		                TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
 		                e.reg_id,
 		                e.reg_dt,
 		                e.modi_id,
@@ -184,7 +184,7 @@
 				name,  
 				e.state_cd, 
 				complete_hours, 
-				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY/MM/DD') AS "enrollDt", 
+				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
 				e.reg_id, 
 				e.reg_dt, 
 				e.modi_id, 
