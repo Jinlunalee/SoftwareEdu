@@ -10,33 +10,34 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
 <script type="text/javascript">
-/* 문항 개수를 입력 받아 추가 */
-const changeQuestionNumber = function(value) {
-	let questionNumber = value;
-	const questionSet = document.querySelector("#question-set-3");
-	$("#new-questions").empty();
-	for(let i=0, max = questionNumber; i<max-3; i++){
-		$(questionSet).clone().appendTo('#new-questions');
-		changeClassId(i);
-		changeEverything(i);
+	/* 문항 개수를 입력 받아 추가 */
+	const changeQuestionNumber = function(value) {
+		let questionNumber = value;
+		const questionSet = document.querySelector("#question-set-3");
+		$("#new-questions").empty();
+		for(let i=0, max = questionNumber; i<max-3; i++){
+			$(questionSet).clone().appendTo('#new-questions');
+			changeClassId(i);
+			changeEverything(i);
+		};
 	};
-};
-/* Modal 클래스 id 바꾸기 */
-function changeClassId(i) {
-	let number = (i+4).toString();
-	document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
-};
-/* Modal input 클래스 id, Num value, Set name 바꾸기  */
-function changeEverything(i) {
-	let number = (i+4).toString();
-	let numberMinusOne = (i+3).toString();
-	document.querySelector("#new-questions #question-inputNum-3").setAttribute("value", number); // questionNum 값 넣기
-	document.querySelector("#new-questions #question-inputNum-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionNum'); // questionNum name값 넣기 (매핑을 위함)
-	document.querySelector("#new-questions #question-inputSet-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionContent'); // questionContent name값 넣기 (매핑을 위함)
-	document.querySelector("#new-questions #question-inputNum-3").setAttribute("id", 'question-inputNum-' + number); // questionNum 아이디 바꾸기
-	document.querySelector("#new-questions #question-inputSet-3").setAttribute("id", 'question-inputSet-' + number); // questionContent 아이디 바꾸기
-}
+	/* Modal 클래스 id 바꾸기 */
+	function changeClassId(i) {
+		let number = (i+4).toString();
+		document.querySelector("#new-questions #question-set-3").setAttribute("id", 'question-set-' + number);
+	};
+	/* Modal input 클래스 id, Num value, Set name 바꾸기  */
+	function changeEverything(i) {
+		let number = (i+4).toString();
+		let numberMinusOne = (i+3).toString();
+		document.querySelector("#new-questions #question-inputNum-3").setAttribute("value", number); // questionNum 값 넣기
+		document.querySelector("#new-questions #question-inputNum-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionNum'); // questionNum name값 넣기 (매핑을 위함)
+		document.querySelector("#new-questions #question-inputSet-3").setAttribute("name", 'questionSet[' + numberMinusOne + '].questionContent'); // questionContent name값 넣기 (매핑을 위함)
+		document.querySelector("#new-questions #question-inputNum-3").setAttribute("id", 'question-inputNum-' + number); // questionNum 아이디 바꾸기
+		document.querySelector("#new-questions #question-inputSet-3").setAttribute("id", 'question-inputSet-' + number); // questionContent 아이디 바꾸기
+	}
 </script>
+
 <div class="card m-2">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
@@ -44,182 +45,187 @@ function changeEverything(i) {
 	</div>
 	<div class="card-body">
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
-			<div>
-				<table class="subject_course_title">
-					<tr>
-						<div class="subject-table">
-							<th style="width:5%">강좌명</th>
-							<td style="width:30%">
-								<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
-								<input id="subject-input" name="subject" type="hidden">
-								<input id="subjectId-input" name="subjectId" type="hidden">
-							</td>
-							<td style="width:10%">
-								<button type="button" class="subject-popup-btn btn btn-outline-secondary">검색</button>
-							</td>
-						</div>
-						<!-- 과정에 이미 포함된 강좌 넘어온 값 -->
-						<input type="hidden" id="subjectId-string">
-						<div class="course-table">
-							<th style="width:5%">과정명</th>
-							<td style="width:30%">
-								<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
-								<input id="course-input" name="course" type="hidden">
-								<input id="courseId-input" name="courseId" type="hidden">
-							</td>
-							<td style="width:10%">
-								<button class="course-popup-btn btn btn-outline-secondary">검색</button>
-							</td>
-							<td style="width:10%">
-								<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected()">선택 완료</button>
-							</td>
-						</div>
-					</tr>
-				</table>
-			</div>
-			<table class="list">
+			<table class="subject_course_title">
 				<colgroup>
-					<col width="40%">
+					<col width="10%">
+					<col width="70%">
+					<col width="10%">
+					<col width="10%">
+				</colgroup>
+				<tr>
+					<td colspan="4" class="info-text">※ 개설하고자하는 과정 및 강좌를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.</td>
+				</tr>
+				<tr>
+					<th>강좌명</th>
+					<td>
+						<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
+						<input id="subject-input" name="subject" type="hidden">
+						<input id="subjectId-input" name="subjectId" type="hidden">
+					</td>
+					<td>
+						<button type="button" class="subject-popup-btn btn btn-outline-secondary">검색</button>
+					</td>
+					<td rowspan="2">
+						<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected(); removeHideFirst();">선택 완료</button>
+					</td>
+				</tr>
+				<tr>
+					<th>과정명</th>
+					<td>
+						<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
+						<input id="course-input" name="course" type="hidden">
+						<input id="courseId-input" name="courseId" type="hidden">
+					</td>
+					<td>
+						<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+					</td>
+				</tr>
+			</table>
+			<!-- 과정에 이미 포함된 강좌 넘어온 값 -->
+			<input type="hidden" id="subjectId-string">
+			<table class="list remove-hide hide-first">
+				<colgroup>
+					<col width="20%">
+					<col width="20%">
 					<col width="15%">
 					<col width="45%">
 				</colgroup>
-			<thead>
-			<tr>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td rowspan="8">
-					<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
-				</td>
-				<td> 연수기간(시수)</td>
-				<td> 
-					<input type="hidden" name="hours" id="hours" value="">
-					<input type="date" name="startDay" id="startDay" min="" onchange="selectRecruitDay()">
-					~ 
-					<input type="date" name="endDay" id="endDay" readonly>
-					<span id="printDay"></span>
-					<span id="printHours"></span>
-				</td>
-			</tr>
-			<tr>
-				<td> 연수시간</td>
-				<td> <!-- 30분단위로 입력(초) -->
-					<input class="timepicker" name="startTime" id="startTime"> 
-					~ 
-					<input class="timepicker" name="endTime" id="endTime">
-				</td>
-			</tr>
-			<tr>
-				<td> 신청기간 </td>
-				<td> 
-					<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()"> 
-					~ 
-					<input type="date" name="recruitEndDay" id="recruitEndDay" onchange="inputState()"> 
-				</td>
-			</tr>
-			<tr>
-				<td> 난이도 </td>
-				<td>
-					<!-- <span name="levelCd" id="levelCd"></span> -->
-					<span name="levelCdTitle" id="levelCdTitle"></span>
-					<input type="hidden" name="levelCd" id="levelCd" value="">
-				</td>
-			</tr>
-			<tr>
-				<td> 모집인원</td>
-				<td> <input type="text" name="recruitPeople"> 명 </td>
-			</tr>
-			<tr>
-				<td> 교육비</td>
-				<td><span name="cost" id="cost"></span>  
-					<span class="support"></span>
-				</td>
-			</tr>
-			<tr>
-				<td> 만족도 조사</td>
-				<td> <button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;">입력</button> </td>
-			</tr>
-			<tr>
-				<td> 첨부파일 </td>
-				<td class="filebox"> 
-					<input class="insert_FileUpload" placeholder="업로드 파일의 최대 크기는 50MB 입니다.">
-					<span><label for="file">파일찾기</label></span>
-					<input type="file" name="file" id="file" onchange="previewImg(this);">
-				</td>
-			</tr>
-			</tbody>
-		</table>
+				<tbody>
+					<tr>
+						<td colspan="2" rowspan="8" style="text-align: center;">
+							<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
+						</td>
+						<td> 연수기간(시수)</td>
+						<td> 
+							<input type="hidden" name="hours" id="hours" value="">
+							<input type="date" name="startDay" id="startDay" min="" onchange="selectRecruitDay()">
+							~ 
+							<input type="date" name="endDay" id="endDay" readonly>
+							<span id="printDay"></span>
+							<span id="printHours"></span>
+						</td>
+					</tr>
+					<tr>
+						<td> 연수시간</td>
+						<td> <!-- 30분단위로 입력(초) -->
+							<input class="timepicker" name="startTime" id="startTime"> 
+							~ 
+							<input class="timepicker" name="endTime" id="endTime">
+						</td>
+					</tr>
+					<tr>
+						<td> 신청기간 </td>
+						<td> 
+							<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()"> 
+							~ 
+							<input type="date" name="recruitEndDay" id="recruitEndDay" onchange="inputState()"> 
+						</td>
+					</tr>
+					<tr>
+						<td> 난이도 </td>
+						<td>
+							<!-- <span name="levelCd" id="levelCd"></span> -->
+							<span name="levelCdTitle" id="levelCdTitle"></span>
+							<input type="hidden" name="levelCd" id="levelCd" value="">
+						</td>
+					</tr>
+					<tr>
+						<td> 모집인원</td>
+						<td> <input type="text" name="recruitPeople"> 명 </td>
+					</tr>
+					<tr>
+						<td> 교육비</td>
+						<td><span name="cost" id="cost"></span>  
+							<span class="support"></span>
+						</td>
+					</tr>
+					<tr>
+						<td> 만족도 조사</td>
+						<td> <button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;">입력</button> </td>
+					</tr>
+					<tr>
+						<td> 첨부파일 </td>
+						<td class="filebox"> 
+							<input class="insert_FileUpload" placeholder="업로드 파일의 최대 크기는 50MB 입니다.">
+							<span><label for="file">파일찾기</label></span>
+							<input type="file" name="file" id="file" onchange="previewImg(this);">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
+						</td>
+						<td colspan="3">
+							<textarea name="content" id="content"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		
-		<div class="hidden-inputs" style="display: none;">
-		</div>
+			<div class="hidden-inputs" style="display: none;">
+			</div>
 		
-		<!-- modal -->
-		<div class="modal">
-			<div class="modal_body">
-				<div class="content-grid">
-					<div class="survey_top">
-						<div class="question-number">
-							<div class="question-number-upper-row">
-								<div class="question-number-text">문항 개수</div>
-								<span><select class="question-number-dropdown" id="question-number-dropdown" onchange="changeQuestionNumber(this.value)">
-									<option value=3>3개</option>
-									<option value=4>4개</option>
-									<option value=5>5개</option>
-									<option value=6>6개</option>
-									<option value=7>7개</option>
-									<option value=8>8개</option>
-									<option value=9>9개</option>
-									<option value=10>10개</option>
-								</select></span>
-							</div>
-							<div class="question-number-lower-row">
-								<div class="question-number-warning">*문항은 최소 3개부터 최대 10개까지 입력 가능합니다.</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="survey_content">
-						<div id="question-grid" class="question-grid">
-							<c:forEach var="i" begin="1" end="3" step="1">
-								<div id="question-set-${i}" class="question-set">
-									<div class="question">
-										<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
-										<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i-1}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
-										<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요.">
-										<span id="surveyqn-input" class="serveyqn-input"></span>
-									</div>
+			<!-- modal -->
+			<div class="modal">
+				<div class="modal_body">
+					<div class="content-grid">
+						<div class="survey_top">
+							<div class="question-number">
+								<div class="question-number-upper-row">
+									<div class="question-number-text">문항 개수</div>
+									<span><select class="question-number-dropdown" id="question-number-dropdown" onchange="changeQuestionNumber(this.value)">
+										<option value=3>3개</option>
+										<option value=4>4개</option>
+										<option value=5>5개</option>
+										<option value=6>6개</option>
+										<option value=7>7개</option>
+										<option value=8>8개</option>
+										<option value=9>9개</option>
+										<option value=10>10개</option>
+									</select></span>
 								</div>
-							</c:forEach>
+								<div class="question-number-lower-row">
+									<div class="question-number-warning">*문항은 최소 3개부터 최대 10개까지 입력 가능합니다.</div>
+								</div>
+							</div>
 						</div>
-						<div id="new-questions" class="new-questions"></div>
-					</div>
-					<div class="buttons">
-						<button type="button" class="button-item close-btn" onclick="">입력완료</button>
+						
+						<div class="survey_content">
+							<div id="question-grid" class="question-grid">
+								<c:forEach var="i" begin="1" end="3" step="1">
+									<div id="question-set-${i}" class="question-set">
+										<div class="question">
+											<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
+											<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i-1}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
+											<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요.">
+											<span id="surveyqn-input" class="serveyqn-input"></span>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<div id="new-questions" class="new-questions"></div>
+						</div>
+						<div class="buttons">
+							<button type="button" class="button-item close-btn" onclick="">입력완료</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="course_intro">
-			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt"> <textarea name="content" id="content" cols="60" rows="10"></textarea> </p>
-		</div>
-		<div class="submit-btn">
-			<input type="hidden" name="openStateCd" id="openStateCd" value="">
-			<input type="submit" class="btn-submit-open-popup" value="저장">
-		</div>
+			
+			<div class="submit-btn remove-hide hide-first">
+				<input type="hidden" name="openStateCd" id="openStateCd" value="">
+				<input type="submit" class="btn-submit-open-popup" value="저장">
+			</div>
 		</form>		
 	</div>
 </div>
 
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
-	<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
+<script type="text/javascript">
 	
 	/* 모달창 열기 */
 	const body = document.querySelector('body');
@@ -277,13 +283,28 @@ function changeEverything(i) {
 	submitBtn.addEventListener("click", checkInputMoreThanThree); // submit 버튼 클릭 시 checkInputMoreThanThree 함수 실행
 
 	function checkInputMoreThanThree() { // Question Input Null 확인해서 alert 해줌
-		const hiddenInputs = document.getElementsByClassName("hidden-inputs");
+		console.log('checkInputMoreThanThree')
 
-		// hidden div 아래에 추가된 .serveyqn-input 개수 및 value 확인
-		let hiddenQnInputsCount = hiddenInputs[0].childElementCount/2;  // .serveyqn-input 개수
-		for (var i=1; i<=hiddenQnInputsCount; i++) { // .serveyqn-input 개수만큼 반복
-			if(!hiddenInputs[0].childNodes[i*2-1].value) { // hidden div 아래에 추가된 .serveqn-input의 value가 없다면
-				alert("만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."); // alert
+		const questionInputSet1 = document.getElementById('question-inputSet-1');
+		const questionInputSet2 = document.getElementById('question-inputSet-2');
+		const questionInputSet3 = document.getElementById('question-inputSet-3');
+		console.log(questionInputSet1.value);
+		console.log(questionInputSet2.value);
+		console.log(questionInputSet3.value);
+
+		// 만족도 조사 모달에 입력한 값 확인하여 alert
+		if(questionInputSet1.value==='' || questionInputSet2.value==='' || questionInputSet3.value==='' ) {
+			alert('"만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."')
+		} 
+	}
+
+	/* 선택완료 버튼 클릭 시 remove-hide 클래스에서 hide-first 클래스 삭제하기 */
+	function removeHideFirst() {
+		const subjectId = document.getElementById('subjectId-input').value;
+		const removeHide = document.getElementsByClassName('remove-hide');
+		if(subjectId) {
+			for(let i=0; i<removeHide.length; i++) {
+				removeHide[i].classList.remove('hide-first')
 			}
 		}
 	}

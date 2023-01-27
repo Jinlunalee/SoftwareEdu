@@ -8,7 +8,7 @@
             name,
             student_id,
             email,
-            to_char(to_date(birth), 'YYYY/MM/DD') as birth,
+            to_char(to_date(birth), 'YYYY-MM-DD') as birth,
             common_code.comn_cd_title
         from student
         left join common_code on student.position_cd = common_code.comn_cd
