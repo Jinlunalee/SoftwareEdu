@@ -26,13 +26,8 @@ function showList() {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
     }
     let searchUrl = String(formInputs).substring(1);
-    console.log("searchUrl : " + searchUrl);
     const pathArr = location.pathname.split('/');
-    console.log("location : " + location.pathname);
-    console.log("pathArr : " + pathArr);
     const path = pathArr[2];
-    console.log("path : " + path);
-    console.log(path + "-result?" + searchUrl);
     $.ajax({
         url : path + "-result?" + searchUrl,
         type : "POST",
@@ -176,7 +171,12 @@ function moveOutside(event, value){
         $(opener.document).find("#courseId-input").val(valueId);
         $(opener.document).find("#courseYear-input").val(valueYear);
         
-        setUnavailableSubjectId('courseTitleClicked', valueId); // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+        const pathArr = location.pathname.split('/');
+        const path = pathArr[2];
+        // course 만 해당
+        if(path.substring(10,25)==='course') {
+            setUnavailableSubjectId('courseTitleClicked', valueId); // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+        }
     }
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 학생일 경우
     if(valueId.substring(0,4)==='STDT') {
