@@ -6,8 +6,7 @@
 
 .info-text {
    text-align: left;
-   color: #05386387;
-   font-weight: bold;
+   color: cornflowerblue;
    padding-left: 30px;
 }
 
@@ -23,10 +22,10 @@
 select:not(.select_course) {
    height: 35px;
    border-radius: 8px;
-   margin: 5px 10px 5px 0;
-   padding: 3px 20px 0 20px;
+   margin: 5px 0px 5px 0;
+   padding: 0px 20px 0 20px;
    border: 1px solid #e8e8e8;
-   width: 40%;
+   width: 37%;
 }
 
 .insert_form td .support {
