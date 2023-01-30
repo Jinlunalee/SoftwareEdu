@@ -356,28 +356,20 @@
 	   $("#reset_btn").click(function() {
 		    const result = document.getElementById('result');
 	    	result.innerText='';
+	    	
+            const resultXml = document.getElementById('resultXml');
+            resultXml.innerText='';
+            
+            const result3 = document.getElementById('result3');
+            result3.innerText='';
+            
+            const result4 = document.getElementById('result4');
+            result4.innerText='';
 
 	      });
    });
-   $(function() {
-       $("#reset_btn").click(function() {
-            const resultXml = document.getElementById('resultXml');
-            resultXml.innerText='';
-          });
-   });
    
-   $(function() {
-       $("#reset_btn").click(function() {
-            const resultXml = document.getElementById('result3');
-            result3.innerText='';
-          });
-   });    
-   $(function() {
-       $("#reset_btn").click(function() {
-            const result4 = document.getElementById('result4');
-            result4.innerText='';
-          });
-   });
+
 
 </script>
 
