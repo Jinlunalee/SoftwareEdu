@@ -31,7 +31,14 @@
                                 ${board.subjectTitle}
                             </a>
                         </td>
-                        <td>${board.supportYn}</td>
+                        <td>
+                            <c:if test="${board.supportYn eq 'Y'}">
+                                지원가능
+                            </c:if>
+                            <c:if test="${board.supportYn eq 'N'}">
+                                지원불가
+                            </c:if>
+                        </td>
                         <c:if test="${board.levelCd ne 'LEV04'}">
                             <td>${board.levelCdTitle}</td>
                         </c:if>

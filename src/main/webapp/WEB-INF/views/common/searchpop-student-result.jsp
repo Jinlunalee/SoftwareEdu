@@ -16,7 +16,7 @@
                         <td class="th-column-7">전화번호</td>
                         <td class="th-column-8">주소 도</td>
                         <td class="th-column-15">주소 상세</td>
-                        <td class="th-column-16">지위</td>
+                        <td class="th-column-16">직위</td>
                     </tr>
                 </thead>
                 <c:forEach items="${studentList}" var="student">

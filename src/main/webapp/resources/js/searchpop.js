@@ -67,7 +67,7 @@ function showList() {
     })
 }
 
-/* dateFormat 바꾸기 */
+/* dateFormat 바꾸기 --> VO에 애초에 변경된 값 입력하기*/ 
 function changeDateFormat(){
     const dateFormats = document.getElementsByClassName('date-format');
     for(let i=0; i<dateFormats.length; i++) {
