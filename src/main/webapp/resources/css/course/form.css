@@ -74,3 +74,8 @@ select:not(.select_course) {
    width: 100%;
    height: 155px;
 }
+.write-txt::after{
+	content: "*";
+	color: #ed8264;
+	margin-left: 2px;
+}

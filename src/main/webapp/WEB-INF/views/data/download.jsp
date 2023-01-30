@@ -28,11 +28,11 @@
                   type="date" name="endDay" id="input_endDay" class="input-date"
                   value="${endDay}">
             </div>
-         </form>
-         <button type="button" class="btn btn-outline-secondary"
+
+         <input type="reset" class="btn btn-outline-secondary"
                   id="reset_btn">
-                 기간 초기화 <img id= "resetImg" src="<c:url value='/resources/images/reset.png'/>" />
-               </button>
+              <img id= "resetImg" src="<c:url value='/resources/images/reset.png'/>" />
+          </form>
          
       </div>
 
@@ -42,7 +42,7 @@
         <div class="card_check">
             
          <div class="first_card">
-               <a>▶ 연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보 <br>(수강 완료 시수 포함)
+               <a>▶ 연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보 <br>&emsp;(수강 완료 시수 포함)
                </a>  <%-- (검색조건은 std_sbj에 있는 강좌 교육일로) --%>
                <br>
                <div class="checkDataStd">
@@ -69,8 +69,7 @@
 
 
          <div class="second_card">
-
-                  <a>▶ 연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료 <br>(수강 완료 시수 포함)
+                  <a>▶ 연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료 <br>&emsp;(수강 완료 시수 포함)
                </a> <%--검색조건은 강좌시작일 --%>
                <br>
                 <div class="checkDataSbj">
@@ -351,6 +350,33 @@
          getXmlSbj();
       });
    });
+   
+   
+   $(function() {
+	   $("#reset_btn").click(function() {
+		/*    
+		    const result = document.getElementById('result');
+	    	result.innerText='';
+	    	
+            const resultXml = document.getElementById('resultXml');
+            resultXml.innerText='';
+            
+            const result3 = document.getElementById('result3');
+            result3.innerText='';
+            
+            const result4 = document.getElementById('result4');
+            result4.innerText=''; 
+        */
+            
+            $("#show_JSON, #show_info1").hide();
+            $("#show_JSON2, #show_info3").hide();
+            $("#show_XML, #show_info2").hide();
+            $("#show_XML2, #show_info4").hide();
+	      });
+   });
+   
+
+
 </script>
 
 
