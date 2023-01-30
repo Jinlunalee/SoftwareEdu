@@ -25,7 +25,6 @@
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span>
 					<select name="course" class="select-box">
 						<option value="">강좌/과정</option>
 						<option value="sj" ${enroll.course eq 'sj' ? "selected" : ""}>강좌</option>
@@ -36,9 +35,7 @@
 
 				<%-- 수강생 선택 --%>
 				<div class="selectstudent">
-					<span>수강생 구분</span>
 					<select name="student" class="select-box select-stu">
-							<option value="">이름/아이디</option>
 							<option value="sdName" ${enroll.student eq 'sdName' ? "selected" : ""}>수강생 명</option>
 							<option value="sdId" ${enroll.student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
 					</select>
@@ -48,7 +45,7 @@
 				<%-- 수강 상태 선택 --%>
 				<div class="state">
 					<span>수강 상태</span> <select name="state" class="select-box">
-						<option value="">수강 상태</option>
+						<option value="">전체</option>
 						<option value="expect" ${enroll.state eq 'expect' ? "selected" : ""}>수강 예정</option>
 						<option value="progress" ${enroll.state eq 'progress' ? "selected" : ""}>수강 중</option>
 						<option value="cancel" ${enroll.state eq 'cancel' ? "selected" : ""}>수강 취소</option>
