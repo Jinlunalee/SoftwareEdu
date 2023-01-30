@@ -49,7 +49,7 @@
 					<th>신청기간</th>
 					<th>교육비</th>
 					<th>상태</th>
-					<th>개설년도</th>
+					<th>개설연도</th>
 					<th>처리</th>
 				</tr>
 			</thead>
@@ -60,8 +60,8 @@
 							<td>${board.courseId}</td>
 							<td>${board.courseTitle}</td>
 							<td>${board.catCourseCdTitle}</td>
-							<td>${board.startDay}~${board.endDay}</td>
-							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
+							<td>${board.startDay} ~ ${board.endDay}</td>
+							<td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 							<td>${board.openStateCdTitle}</td>
 							<td>${board.courseOpenYear}

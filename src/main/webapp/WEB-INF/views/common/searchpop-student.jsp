@@ -26,7 +26,7 @@
                                 <option value="name">수강생 명</option>
                                 <option value="studentId">수강생 아이디</option>
                             </select>
-                            <input type="text" id="student-input" name="studentId">
+                            <input type="text" id="student-input" name="name">
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>

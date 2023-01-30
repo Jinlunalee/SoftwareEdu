@@ -26,7 +26,6 @@
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
 					<select name="course" class="select-box">
-						<option value="">강좌/과정</option>
 						<option value="sj" ${enroll.course eq 'sj' ? "selected" : ""}>강좌</option>
 						<option value="cs" ${enroll.course eq 'cs' ? "selected" : ""}>과정</option>
 					</select>

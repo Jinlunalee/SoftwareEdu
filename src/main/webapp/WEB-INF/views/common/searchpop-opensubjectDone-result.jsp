@@ -12,7 +12,7 @@
                         <td class="th-column-2">강좌명</td>
                         <td class="th-column-3">과정아이디</td>
                         <td class="th-column-4">과정명</td>
-                        <td class="th-column-5">지원여부</td>
+                        <td class="th-column-5">교육비 지원여부</td>
                         <c:if test="${board.levelCd ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
@@ -21,14 +21,12 @@
                         </c:if>
                         <td class="th-column-7">수강일수</td>
                         <td class="th-column-8">수강시수</td>
-                        <td class="th-column-9">시작일자</td>
-                        <td class="th-column-10">종료일자</td>
-                        <td class="th-column-11">모집시작일자</td>
-                        <td class="th-column-12">모집종료일자</td>
-                        <td class="th-column-13">모집인원</td>
-                        <td class="th-column-14">상태</td>
-                        <td class="th-column-15">분류</td>
-                        <td class="th-column-16">등록일자</td>
+                        <td class="th-column-9">강의 진행 기간</td>
+                        <td class="th-column-10">강의 모집 기간</td>
+                        <td class="th-column-11">모집인원</td>
+                        <td class="th-column-12">상태</td>
+                        <td class="th-column-13">분류</td>
+                        <td class="th-column-14">등록일자</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,7 +40,14 @@
                             </td>
                             <td>${board.courseId}</td>
                             <td>${board.courseTitle}</td>
-                            <td>${board.supportYn}</td>
+                            <td>
+                                <c:if test="${board.supportYn eq 'Y'}">
+                                    지원가능
+                                </c:if>
+                                <c:if test="${board.supportYn eq 'N'}">
+                                    지원불가
+                                </c:if>
+                            </td>
                             <c:if test="${board.levelCd ne 'LEV04'}">
                                 <td>${board.levelCdTitle}</td>
                             </c:if>
@@ -51,14 +56,12 @@
                             </c:if>
                             <td>${board.days}</td>
                             <td>${board.hours}</td>
-                            <td class="date-format">${board.startDay}</td>
-                            <td class="date-format">${board.endDay}</td>
-                            <td class="date-format">${board.recruitStartDay}</td>
-                            <td class="date-format">${board.recruitEndDay}</td>
+                            <td>${board.startDay} ~ ${board.endDay}</td>
+                            <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
                             <td>${board.recruitPeople}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
-                            <td class="date-format">${board.openDt}</td>
+                            <td>${board.openDt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
