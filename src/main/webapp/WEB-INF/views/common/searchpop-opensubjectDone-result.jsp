@@ -74,4 +74,16 @@
             개설된 강좌가 없습니다.
         </div>
     </c:if>
+    <div id="chart-table" class="chart-item chart-table">
+        <div class="chart-item-title">
+            <img class="title-img" src="<c:url value='/resources/images/survey/survey_summary.png'/>"/>
+            강좌 전체 만족도
+        </div>
+    </div>
+    <div id="chart-bar" class="chart-item chart-bar">
+        <div class="chart-item-title">
+            <img class="title-img" src="<c:url value='/resources/images/survey/survey_summary.png'/>"/>
+            강좌 문항별 만족도
+        </div>
+    </div>
 </div>

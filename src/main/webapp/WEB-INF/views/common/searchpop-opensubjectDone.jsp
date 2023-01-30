@@ -105,6 +105,8 @@
             </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
 </body>
 </html>

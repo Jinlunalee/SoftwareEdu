@@ -106,31 +106,7 @@ public class SurveyController {
 		return "survey/summary";
 	}
 	
-	// 통계 ajax
-	@RequestMapping(value="/getjson", method=RequestMethod.GET)
-	@ResponseBody
-	public List<AnswerVO> getjson(String subjectId, String subjectSeq) {
-		System.out.println("subjectId : " + subjectId);
-		System.out.println("subjectSeq : " + subjectSeq);
-		int subjectSeqInt = Integer.parseInt(subjectSeq);
-		
-		List<AnswerVO> answerVoList = new ArrayList<>();
-		
-
-		// 문항 수 구하기
-		int questionNum = surveyService.getCountQuestionNum(subjectId, subjectSeqInt);
-
-		// 문항 수만큼 반복
-		for(int i=1; i<=questionNum; i++) {
-			// 답변 개수 (5개) 만큼 반복
-			for(int k=1; k<=5; k++) {
-				AnswerVO answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k); // vo에 답변 저장하기
-				answerVoList.add(answerVo);
-			}
-		}
-		logger.info("survey/summary-post: "+ answerVoList);
-		return answerVoList;
-	}
+	
 	
 /*	// 통계 ajax
 	@RequestMapping(value="/getjson", method=RequestMethod.GET)
