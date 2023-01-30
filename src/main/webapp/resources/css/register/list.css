@@ -91,7 +91,7 @@ td {
 .down {
 	text-align: right;
 	position: relative;
-	bottom: 30px;
+	bottom: 25px;
 }
 
 .excelimg {
@@ -180,7 +180,7 @@ td {
 #paging {
 	display: inline;
 	position: relative;
-	bottom: 35px;
+	bottom: 30px;
 	left: 40%;
 	font-size: 13px;
 	

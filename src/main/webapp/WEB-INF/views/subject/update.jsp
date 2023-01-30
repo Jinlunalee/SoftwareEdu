@@ -84,7 +84,7 @@
 			</tr>
 			<tr>
 				<td> 난이도 </td>
-				<td> ${open.levelCd}
+				<td> ${open.levelCdTitle}
 					<c:if test="${not empty open.levelEtc}">(${open.levelEtc})</c:if>
 				</td>
 			</tr>

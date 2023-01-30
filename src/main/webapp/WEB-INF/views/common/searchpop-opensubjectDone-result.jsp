@@ -31,35 +31,37 @@
                         <td class="th-column-16">등록일자</td>
                     </tr>
                 </thead>
-                <c:forEach items="${boardList}" var="board">
-                    <tr>
-                        <td>${board.subjectId}</td>
-                        <td>
-                            <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}">
-                                ${board.subjectTitle}
-                            </a>
-                        </td>
-                        <td>${board.courseId}</td>
-                        <td>${board.courseTitle}</td>
-                        <td>${board.supportYn}</td>
-                        <c:if test="${board.levelCd ne 'LEV04'}">
-                            <td>${board.levelCdTitle}</td>
-                        </c:if>
-                        <c:if test="${board.levelCd eq 'LEV04'}">
-                            <td>${board.levelEtc}</td>
-                        </c:if>
-                        <td>${board.days}</td>
-                        <td>${board.hours}</td>
-                        <td>${board.startDay}</td>
-                        <td>${board.endDay}</td>
-                        <td>${board.recruitStartDay}</td>
-                        <td>${board.recruitEndDay}</td>
-                        <td>${board.recruitPeople}</td>
-                        <td>${board.openStateCdTitle}</td>
-                        <td>${board.catSubjectCdTitle}</td>
-                        <td>${board.openDt}</td>
-                    </tr>
-                </c:forEach>
+                <tbody>
+                    <c:forEach items="${boardList}" var="board">
+                        <tr>
+                            <td>${board.subjectId}</td>
+                            <td>
+                                <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}">
+                                    ${board.subjectTitle}
+                                </a>
+                            </td>
+                            <td>${board.courseId}</td>
+                            <td>${board.courseTitle}</td>
+                            <td>${board.supportYn}</td>
+                            <c:if test="${board.levelCd ne 'LEV04'}">
+                                <td>${board.levelCdTitle}</td>
+                            </c:if>
+                            <c:if test="${board.levelCd eq 'LEV04'}">
+                                <td>${board.levelEtc}</td>
+                            </c:if>
+                            <td>${board.days}</td>
+                            <td>${board.hours}</td>
+                            <td class="date-format">${board.startDay}</td>
+                            <td class="date-format">${board.endDay}</td>
+                            <td class="date-format">${board.recruitStartDay}</td>
+                            <td class="date-format">${board.recruitEndDay}</td>
+                            <td>${board.recruitPeople}</td>
+                            <td>${board.openStateCdTitle}</td>
+                            <td>${board.catSubjectCdTitle}</td>
+                            <td class="date-format">${board.openDt}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>                			
     </c:if>
