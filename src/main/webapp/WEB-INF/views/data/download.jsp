@@ -354,6 +354,7 @@
    
    $(function() {
 	   $("#reset_btn").click(function() {
+		/*    
 		    const result = document.getElementById('result');
 	    	result.innerText='';
 	    	
@@ -364,8 +365,13 @@
             result3.innerText='';
             
             const result4 = document.getElementById('result4');
-            result4.innerText='';
-
+            result4.innerText=''; 
+        */
+            
+            $("#show_JSON, #show_info1").hide();
+            $("#show_JSON2, #show_info3").hide();
+            $("#show_XML, #show_info2").hide();
+            $("#show_XML2, #show_info4").hide();
 	      });
    });
    
