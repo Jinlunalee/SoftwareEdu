@@ -12,7 +12,7 @@
                         <td class="th-column-2">강좌명</td>
                         <td class="th-column-3">과정아이디</td>
                         <td class="th-column-4">과정명</td>
-                        <td class="th-column-5">지원여부</td>
+                        <td class="th-column-5">교육비 지원여부</td>
                         <c:if test="${board.levelCd ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
