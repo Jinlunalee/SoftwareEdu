@@ -34,7 +34,6 @@
 		<div class="wrap">
 			<div class="search-box">
 				<div class="search2">
-					<span class="name2">강좌 / 과정</span> &nbsp; &nbsp;
 					<select name="subCor" class="sc2" onchange="changeSubCor(this.value);">
 						<option selected value="subject">강좌</option>
 						<option value="course">과정</option>

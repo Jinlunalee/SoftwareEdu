@@ -71,8 +71,8 @@
 								</span>
 							</td>
 							<td>${board.catSubjectCdTitle}</td>
-							<td>${board.startDay}~${board.endDay}</td>
-							<td>${board.recruitStartDay}~${board.recruitEndDay}</td>
+							<td>${board.startDay} ~ ${board.endDay}</td>
+							<td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 							<td>${board.openStateCdTitle}</td>
 							<td>${board.openDt}</td>
