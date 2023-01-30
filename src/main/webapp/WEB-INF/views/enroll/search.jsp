@@ -25,9 +25,7 @@
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span>
 					<select name="course" class="select-box">
-						<option value="">강좌/과정</option>
 						<option value="sj" ${enroll.course eq 'sj' ? "selected" : ""}>강좌</option>
 						<option value="cs" ${enroll.course eq 'cs' ? "selected" : ""}>과정</option>
 					</select>
@@ -36,9 +34,7 @@
 
 				<%-- 수강생 선택 --%>
 				<div class="selectstudent">
-					<span>수강생 구분</span>
 					<select name="student" class="select-box select-stu">
-							<option value="">이름/아이디</option>
 							<option value="sdName" ${enroll.student eq 'sdName' ? "selected" : ""}>수강생 명</option>
 							<option value="sdId" ${enroll.student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
 					</select>
@@ -48,7 +44,7 @@
 				<%-- 수강 상태 선택 --%>
 				<div class="state">
 					<span>수강 상태</span> <select name="state" class="select-box">
-						<option value="">수강 상태</option>
+						<option value="">전체</option>
 						<option value="expect" ${enroll.state eq 'expect' ? "selected" : ""}>수강 예정</option>
 						<option value="progress" ${enroll.state eq 'progress' ? "selected" : ""}>수강 중</option>
 						<option value="cancel" ${enroll.state eq 'cancel' ? "selected" : ""}>수강 취소</option>
@@ -172,32 +168,33 @@
 			</tr>
 		</c:forEach>
 
-		<%-- paging --%>
-		<tr>
-			<td colspan="4" class="text-center">
-				<div>
-					<a class="btn btn-outline-primary btn-sm" href="searchlist?pageNo=1&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">처음</a>
-					<c:if test="${pager.groupNo>1}">
-						<a class="btn btn-outline-info btn-sm" href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">이전</a>
-					</c:if>
-
-					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-						<c:if test="${pager.pageNo != i}">
-							<a class="btn btn-outline-success btn-sm" href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
-						</c:if>
-						<c:if test="${pager.pageNo == i}">
-							<a class="btn btn-danger btn-sm" href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a>
-						</c:if>
-					</c:forEach>
-
-					<c:if test="${pager.groupNo<pager.totalGroupNo}">
-						<a class="btn btn-outline-info btn-sm" href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">다음</a>
-					</c:if>
-					<a class="btn btn-outline-primary btn-sm" href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">맨끝</a>
-				</div>
-			</td>
-		</tr>
 	</table>
+	       <%-- paging --%>
+
+            <div id="paging">
+                <ul class="paging">
+                <li><a href="searchlist?pageNo=1&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">처음</a></li>
+                    <c:if test="${pager.groupNo>1}">
+                        <li><a href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">이전</a></li>
+                    </c:if>
+
+                    <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+                        <c:if test="${pager.pageNo != i}">
+                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a></li>
+                        </c:if>
+                        <c:if test="${pager.pageNo == i}">
+                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${pager.groupNo<pager.totalGroupNo}">
+                        <li><a href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">다음</a></li>
+                    </c:if>
+                    <li><a href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">맨끝</a></li>
+                </ul>
+              </div> 
+              
+              
 	
 		<div class="down">
 			<a href="<c:url value='/enroll/enrollsearchexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}

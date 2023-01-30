@@ -174,7 +174,7 @@ function moveOutside(event, value){
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
         
-        $(opener.document).find("#subjectTitle-input").val("강좌아이디 : " + valueId + "  |  강좌명 : " + valueTitle + "  |  등록일자 : " + reg);
+        $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ")  |  등록일자 : " + reg);
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
         
@@ -210,7 +210,7 @@ function moveOutside(event, value){
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
         let valueYear = valueArr[3];
-        $(opener.document).find("#courseTitle-input").val("과정아이디 : " + valueId + "  |  과정명 : " + valueTitle);
+        $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ")");
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
         $(opener.document).find("#courseYear-input").val(valueYear);
@@ -279,10 +279,6 @@ function moveOutside(event, value){
         
         });
         
-        // course 만 해당
-        if(path.substring(10,25)==='course') {
-            setUnavailableSubjectId('courseTitleClicked', valueId); // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
-        }
     }
 
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 학생일 경우
@@ -296,7 +292,7 @@ function moveOutside(event, value){
         let studentAddEtc = valueArr[7];
         let studentPositionTitle = valueArr[8];
         
-        $(opener.document).find("#studentTitle-input").val("수강생 아이디 : " + valueId + "  |  이름 : " + valueTitle);
+        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + valueId + ")");
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
         

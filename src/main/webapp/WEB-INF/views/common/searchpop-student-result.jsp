@@ -14,8 +14,7 @@
                         <td class="th-column-6">성별</td>
                         <td class="th-column-6">이메일</td>
                         <td class="th-column-7">전화번호</td>
-                        <td class="th-column-8">주소 도</td>
-                        <td class="th-column-15">주소 상세</td>
+                        <td class="th-column-8">주소</td>
                         <td class="th-column-16">직위</td>
                     </tr>
                 </thead>
@@ -31,8 +30,7 @@
                         <td>${student.genderTitle}</td>
                         <td>${student.email}</td>
                         <td>${student.phone}</td>
-                        <td>${student.addDoTitle}</td>
-                        <td>${student.addEtc}</td>
+                        <td>${student.addDoTitle} ${student.addEtc}</td>
                         <td>${student.positionTitle}</td>
                     </tr>
                 </c:forEach>

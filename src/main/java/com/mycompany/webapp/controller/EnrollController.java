@@ -302,7 +302,7 @@ public class EnrollController {
 				row.createCell(3).setCellValue(enroll.getStudentId());
 				row.createCell(4).setCellValue(enroll.getEnrollDt());
 				row.createCell(5).setCellValue(enroll.getStateCdTitle());
-				row.createCell(6).setCellValue(enroll.getRatio());
+				row.createCell(6).setCellValue(enroll.getRatio() + "%");
 			}
 		
 		String fileName = "수강 목록.xls";
@@ -350,7 +350,7 @@ public class EnrollController {
 				row.createCell(3).setCellValue(enroll.getStudentId());
 				row.createCell(4).setCellValue(enroll.getEnrollDt());
 				row.createCell(5).setCellValue(enroll.getStateCdTitle());
-				row.createCell(6).setCellValue(enroll.getRatio());
+				row.createCell(6).setCellValue(enroll.getRatio() + "%");
 			}
 		
 		String fileName = "검색 수강 목록.xls";
