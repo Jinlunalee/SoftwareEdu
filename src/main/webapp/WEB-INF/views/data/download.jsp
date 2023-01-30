@@ -187,27 +187,27 @@
 
 
          <div class="box" id="show_JSON" style="overflow: scroll;">
-            <img id="check_img"
+            <img id="result_img"
                src="<c:url value='/resources/images/json.png'/>" /><br>
 
             <div id="result"></div>
          </div>
 
          <div class="box" id="show_XML" style="overflow: scroll;">
-            <img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
+            <img id="result_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
             <div id="resultXml"></div>
          </div>
 
 
          <div class="box" id="show_JSON2" style="overflow: scroll;">
-            <img id="check_img"
+            <img id="result_img"
                src="<c:url value='/resources/images/json.png'/>" /><br>
             <div id="result3"></div>
          </div>
 
 
          <div class="box" id="show_XML2" style="overflow: scroll;">
-            <img id="check_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
+            <img id="result_img" src="<c:url value='/resources/images/xml.png'/>" /><br>
             <div id="result4"></div>
          </div>
 
