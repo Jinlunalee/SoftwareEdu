@@ -37,25 +37,23 @@
       </div>
 
 
-
-
       <div class="card_left" style="width: 50%">
-         <div class="first_card">
-            <br>
-            <br>
-            <div class="card_check">
 
+        <div class="card_check">
+            
+         <div class="first_card">
                <a>▶ 연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보 <br>(수강 완료 시수 포함)
                </a>  <%-- (검색조건은 std_sbj에 있는 강좌 교육일로) --%>
                <br>
                <div class="checkDataStd">
+               
            <div class="card_check">
                   <img id="check_img" src="<c:url value='/resources/images/json.png'/>" />     
                   <button type="button" class="btn btn-outline-secondary" id="first_btn">
                   연계 정보 출력 <img src="<c:url value='/resources/images/check.png'/>" />
                </button>
                </div>
-            </div>
+           
 
 
             <div class="card_check">
@@ -69,11 +67,13 @@
 
 
 
+
          <div class="second_card">
 
                   <a>▶ 연수원_교육비 환급 대상 교육과정 최종 검증용 연계자료 <br>(수강 완료 시수 포함)
                </a> <%--검색조건은 강좌시작일 --%>
                <br>
+                <div class="checkDataSbj">
              <div class="card_check">
                <img id="check_img" src="<c:url value='/resources/images/json.png'/>" />
                <button type="button" class="btn btn-outline-secondary" id="third_btn">
@@ -90,6 +90,8 @@
             </div>
          </div>
       </div>
+      </div>
+</div>
 
 
       <div class="vl"></div>
