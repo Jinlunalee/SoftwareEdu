@@ -148,7 +148,7 @@ img {
 
 .data-period {
 	position: relative;
-	left: -20px;
+	left: -22px;
 }
 
 #result, #resultXml, #result3, #result4  {
@@ -165,16 +165,20 @@ img {
 }
 
 #reset_btn {
-	width: 117px;
-	position: relative;
-    left: 251px;
-    top: 18px;
+    width: 70px;
+    position: relative;
+    left: 279px;
+    top: -38px;
     font-size: 12px;
+    text-align: left;
 }
 
 #resetImg {
-	width: 25px;
-	height: 12px;	
+    width: 23px;
+    height: 11px;
+    position: relative;
+    left: 249px;
+    bottom: 39px;
 }
 
 .checkDataStd, .checkDataSbj{
