@@ -56,7 +56,7 @@
 					<td colspan="4" class="info-text">※ 개설하고자하는 과정 및 강좌를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.</td>
 				</tr>
 				<tr>
-					<th>강좌명</th>
+					<th class="write-txt">강좌명</th>
 					<td>
 						<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
@@ -92,10 +92,15 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<td colspan="2" rowspan="8" style="text-align: center;">
+						<td colspan="2" rowspan="9" style="text-align: center;">
 							<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
 						</td>
-						<td> 연수기간(시수)</td>
+						<td colspan="2" style="text-align: right;">
+							<span class="write-txt">※</span> 항목은 필수 입력 사항입니다.
+						</td>
+					</tr>
+					<tr>
+						<td class="write-txt"> 연수기간(시수)</td>
 						<td> 
 							<input type="hidden" name="hours" id="hours" value="">
 							<input type="date" name="startDay" id="startDay" min="" onchange="selectRecruitDay()">
@@ -106,7 +111,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td> 연수시간</td>
+						<td class="write-txt"> 연수시간</td>
 						<td> <!-- 30분단위로 입력(초) -->
 							<input class="timepicker" name="startTime" id="startTime"> 
 							~ 
@@ -114,7 +119,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td> 신청기간 </td>
+						<td class="write-txt"> 신청기간</td>
 						<td> 
 							<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()"> 
 							~ 
@@ -130,7 +135,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td> 모집인원</td>
+						<td class="write-txt"> 모집인원</td>
 						<td> <input type="text" name="recruitPeople"> 명 </td>
 					</tr>
 					<tr>
@@ -140,7 +145,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td> 만족도 조사</td>
+						<td class="write-txt"> 만족도 조사</td>
 						<td> <button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;">입력</button> </td>
 					</tr>
 					<tr>
