@@ -25,9 +25,7 @@
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
-					<span id="selectsubcor">강좌 과정 구분</span>
 					<select name="course" class="select-box">
-						<option value="">강좌/과정</option>
 						<option value="sj">강좌</option>
 						<option value="cs">과정</option>
 					</select>
@@ -36,9 +34,7 @@
 
 				<%-- 수강생 선택 --%>
 				<div class="selectstudent">
-					<span>수강생 구분</span>
 					<select name="student" class="select-box select-stu">
-						<option value="">이름/아이디</option>
 						<option value="sdName">수강생 명</option>
 						<option value="sdId">수강생 아이디</option>
 					</select>
@@ -49,7 +45,7 @@
 				<div class="state">
 					<span>수강 상태</span>
 					<select name="state" class="select-box">
-						<option value="">수강 상태</option>
+						<option value="">전체</option>
 						<option value="expect">수강 예정</option>
 						<option value="progress">수강 중</option>
 						<option value="cancel">수강 취소</option>

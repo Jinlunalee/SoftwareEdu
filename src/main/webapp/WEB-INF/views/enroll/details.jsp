@@ -23,8 +23,8 @@
 				<td>${enroll.enrollDt}</td>
 				<th>수강 상태</th>
 				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
-				<th>취소 상세 사유</th>
-				<td>${enroll.cancelRsEtc}</td>
+				<th style="width: 210px">취소 상세 사유</th>
+				<td style="width: 210px">${enroll.cancelRsEtc}</td>
 			</tr>
 		</table>
 
@@ -45,7 +45,7 @@
 			</tr>
 			
 			<tr>
-				<th>수강생 구분</th>
+				<th>직위</th>
 				<td>${enroll.positionCdTitle}</td>
 				<th>수강생 연락처</th>
 				<td>${enroll.phone}</td>

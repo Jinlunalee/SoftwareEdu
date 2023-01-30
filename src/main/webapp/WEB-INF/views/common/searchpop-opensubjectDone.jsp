@@ -87,7 +87,9 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    <td rowspan="2">
+                                    <td>
+                                    </td>
+                                    <td>
                                         <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                                     </td>
                                 </tr>

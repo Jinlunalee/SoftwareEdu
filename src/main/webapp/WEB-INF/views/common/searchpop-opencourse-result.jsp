@@ -10,13 +10,11 @@
                     <tr>
                         <td class="th-column-1">과정아이디</td>
                         <td class="th-column-2">과정명</td>
-                        <td class="th-column-9">시작일자</td>
-                        <td class="th-column-10">종료일자</td>
-                        <td class="th-column-11">모집시작일자</td>
-                        <td class="th-column-12">모집종료일자</td>
-                        <td class="th-column-14">상태</td>
-                        <td class="th-column-15">분류</td>
-                        <td class="th-column-16">등록년도</td>
+                        <td class="th-column-3">강의 진행 기간</td>
+                        <td class="th-column-4">강의 모집 기간</td>
+                        <td class="th-column-5">상태</td>
+                        <td class="th-column-6">분류</td>
+                        <td class="th-column-7">등록년도</td>
                     </tr>
                 </thead>
                 <c:forEach items="${boardList}" var="board">
@@ -27,10 +25,8 @@
                                 ${board.courseTitle}
                             </a>
                         </td>
-                        <td>${board.startDay}</td>
-                        <td>${board.endDay}</td>
-                        <td>${board.recruitStartDay}</td>
-                        <td>${board.recruitEndDay}</td>
+                        <td>${board.startDay} ~ ${board.endDay}</td>
+                        <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
                         <td>${board.openStateCdTitle}</td>
                         <td>${board.catCourseCdTitle}</td>
                         <td>${board.courseOpenYear}</td>

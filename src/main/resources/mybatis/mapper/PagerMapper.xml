@@ -246,7 +246,7 @@
 			AND (e.student_id = #{keyword1} OR REPLACE(UPPER(e.student_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%') 
 		</if>
 		<if test='course != null and course.equals("sj")'>
-			AND c.course_id is null AND (s.subject_title = #{keyword2} OR REPLACE(UPPER(s.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
+			AND (s.subject_title = #{keyword2} OR REPLACE(UPPER(s.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='course != null and course.equals("cs")'>
 			AND c.course_id is not null AND (c.course_title = #{keyword2} OR REPLACE(UPPER(c.course_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
