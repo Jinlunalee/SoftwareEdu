@@ -126,10 +126,11 @@
 						<%-- 취소 사유 모달창 --%>
 						<div class="modal modal-${status.count}">
 							<div class="modal-content modal-content-${status.count}">
-								<span style="font-size: 1.2em;">취소하시겠습니까?</span>
+								<img class="cancel-img" src="/resources/images/survey/survey_question.png">
+								<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 									<select id="selectCancel" name="cancelRsCd" class="cancelrs"  onchange="cancel(); this.onclick=null;">
-										<option>취소 사유</option>
+										<option>취소 사유 선택</option>
 										<c:forEach var="cancel" items="${cancelList}">
 											<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 										</c:forEach>
