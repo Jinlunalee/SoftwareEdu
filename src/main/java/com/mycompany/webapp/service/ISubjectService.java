@@ -35,6 +35,7 @@ public interface ISubjectService {
 	
 	List<OpenVO> selectSubjectByCourseId(String courseId);  // 한과정안에 동일한 강좌 못들어가도록하기위해 과정안의 강좌를 가져옴.
 	List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year);  // 올해 같은 과정으로 개설된 강좌 리스트 가져오기
+	List<OpenVO> selectOpenCourseBySubjectIdAndYear(String subjectId, String year);  // 올해 해당강좌에 개설된 과정 리스트 가져오기
 	List<OpenVO> selectOpenSubjectByStudentId(String studentId);  // 수강생이 들었거나 듣고있는 강좌 리스트 가져오기
 	int checkHoliday(String startDay, String endDay);
 }

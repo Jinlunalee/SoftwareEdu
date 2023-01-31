@@ -38,7 +38,7 @@
     color: #fff;
     background-color: #003964;
     position: relative;
-    left: 392px;
+    left: 338px;
     bottom: 41px;
 }
 
@@ -108,13 +108,12 @@ td {
 	top: 0;
 	left: 0;
 	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
 	width: 410px;
-	height: 244px;
-  	background-color:  #086db9;
-  	color: #fff;
+	height: 210px;
   	border-radius: 10px;
   	position: relative;
   	top: 50%;
@@ -128,6 +127,7 @@ td {
   	cursor: pointer;
   	text-align: left;
   	list-style: none;
+  	border-radius: 46px;
 }
 
 .input-time {
@@ -164,7 +164,7 @@ td {
     background-color: #003964;
     position: absolute;
     top: 200px;
-    left: 317px;
+    left: 310px;
 }
 
 .paging {
@@ -191,6 +191,7 @@ td {
     border-radius: 8px;
     position: relative;
     left: 20px;
+    bottom: 40px;
 }
 
 .cacelform{
@@ -200,8 +201,8 @@ td {
 
 .confirm{
 	position: absolute;
-    top: 90px;
-    left: 245px;
+    top: 20px;
+    left: 240px;
     width: 50px;
     height: 30px;
     border-radius: 8px;
@@ -219,13 +220,15 @@ td {
 
 .selectstudent{
     position: relative;
-    right: 328px;
+    right: 380px;
     margin-top: 3px;
 }
 
 .apply-period {
 	display : inline;
 	text-align : left;
+	position: relative;
+	right: 70px;
 }
 
 .select-subcor{
@@ -238,28 +241,34 @@ td {
 .state{
 	display: inline;
     position: relative;
-    left: 155px;
+    left: 200px;
     bottom: 45px;
     margin-top: 3px;
 }
 
 .input-student {
 	position: relative;
-    right: 23px;
     width: 195px;
+    left: 58px;
 }
 
 .select-stu{
 	width: 160px;
 	position: relative;
-    right: 3px;
+    left: 37px;
 }
 
 .input-cancel{
 	display: inline;
 	position: relative;
     left: 25px;
+    width: 210px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 8px;
+    bottom: 40px;
 }
+
 .btn-secondary{
     font-size: 11px;
 }
@@ -284,7 +293,21 @@ td {
 
 #cancelId {
 	position: relative;
-	left: 20px;
+	left: 42px;
+    bottom: 27px;
 	
 }
 
+.cancel-img {
+	width: 35px;
+    margin-right: 10px;
+}
+
+.h-100 {
+	height: 105%!important;
+}
+
+#enroll-state {
+	position: relative;
+    left: 28px;
+}

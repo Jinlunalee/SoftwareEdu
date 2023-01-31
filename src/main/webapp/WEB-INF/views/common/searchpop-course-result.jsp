@@ -18,7 +18,7 @@
                         <tr>
                             <td>${board.courseId}</td>
                             <td>
-                                <a class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}">
+                                <a id="${board.courseId}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}">
                                     ${board.courseTitle}
                                 </a>
                             </td>

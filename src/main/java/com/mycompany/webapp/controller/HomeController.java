@@ -330,6 +330,22 @@ public class HomeController {
 	}
 	
 	/**
+	 * @description	작성 해에 subjectId에 등록된 과정 리스트 가져오기
+	 * @date	2023. 1. 31.
+	 * @author	Jin Lee
+	 * @param subjectId
+	 * @param year
+	 * @return
+	 */
+	@GetMapping(value="/common/selectOpenCourseBySubjectIdAndYear")
+	@ResponseBody
+	public List<OpenVO> selectOpenCourseBySubjectIdAndYear(String subjectId, String year) {
+		List<OpenVO> boardList = subjectService.selectOpenCourseBySubjectIdAndYear(subjectId, year);
+		logger.info("getCourseListFromSubjectId: " + boardList);
+		return boardList;
+	}
+	
+	/**
 	 * @description	수강생이 수강했거나 수강하고 있는 개설강좌 리스트 가져오기
 	 * @date	2023. 1. 26.
 	 * @author	Jin Lee

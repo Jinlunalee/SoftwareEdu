@@ -27,6 +27,7 @@
 				<input type="hidden" id="subjectId-string">
 				<input type="hidden" id="subjectSeq-string">
 				<input type="hidden" id="courseId-string">
+				<input type="hidden" id="courseOpenYear-string">
 			</div>
 			<div id="student-list"></div>
 			

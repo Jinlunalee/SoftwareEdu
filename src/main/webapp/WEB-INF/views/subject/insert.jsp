@@ -84,6 +84,7 @@
 			</table>
 			<!-- 과정에 이미 포함된 강좌 넘어온 값 -->
 			<input type="hidden" id="subjectId-string">
+			<input type="hidden" id="courseId-string">
 			<table class="list remove-hide hide-first">
 				<colgroup>
 					<col width="20%">
