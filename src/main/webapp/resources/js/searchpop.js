@@ -18,7 +18,9 @@ function bringValue() {
     }
     if(opener.document.getElementById('courseId-string')){
         const courseIdString = opener.document.getElementById('courseId-string'); // 부모창에 있는 hidden input
+        const courseOpenYearString = opener.document.getElementById('courseOpenYear-string'); // 부모창에 있는 hidden input
         $(courseIdString).clone().appendTo(unavailablePop);
+        $(courseOpenYearString).clone().appendTo(unavailablePop);
     }
 }
 
@@ -95,12 +97,16 @@ function disableHiddenBringValueList(value) {
     } else if(value==='EnrollInsertOpenCourse'){
         console.log('EnrollInsertOpenCourse');
         const courseIdString = document.getElementById('courseId-string').value;
+        const courseOpenYearString = document.getElementById('courseOpenYear-string').value;
         const courseIdArr = courseIdString.split('/');
+        const courseOpenYearArr = courseOpenYearString.split('/');
         for(var i=0; i<courseIdArr.length; i++) {
             let id = String(courseIdArr[i]);
-            for(var j=0; j<document.getElementsByClassName(id).length; j++) {
-                document.getElementsByClassName(id)[j].removeAttribute("onclick");
-                document.getElementsByClassName(id)[j].setAttribute("onclick", 'alert("이미 해당 강좌/과정을 수강신청하였습니다.")');
+            let openYear = String(courseOpenYearArr[i]);
+            let idOpenYear = id + '-' + openYear;
+            for(var j=0; j<document.getElementsByClassName(idOpenYear).length; j++) {
+                document.getElementsByClassName(idOpenYear)[j].removeAttribute("onclick");
+                document.getElementsByClassName(idOpenYear)[j].setAttribute("onclick", 'alert("이미 해당 강좌/과정을 수강신청하였습니다.")');
             }
         }
     }
@@ -310,7 +316,7 @@ function moveOutside(event, value){
     }
     // 팝업창 닫기
     setTimeout(function(){
-        // window.close();
+        window.close();
     }, 900);
 
     return false;
@@ -377,24 +383,29 @@ function setUnavailableSubjectId(section, valueId) {
                 const count = Object.keys(result).length;
                 console.log(count);
 
-                // 리스트에 담긴 만큼 반복해서 insert.jsp #subjectId-string #subjectSeq-string #courseId-String의 value에 반영하기
+                // 리스트에 담긴 만큼 반복해서 insert.jsp #subjectId-string #subjectSeq-string #courseId-String #courseOpenYear-String의 value에 반영하기
                 let subjectIdString = '';
                 let subjectSeqString = '';
                 let courseIdString = '';
+                let courseOpenYearString = '';
                 for(var i=0; i<count; i++) {
                     subjectIdString += "/" + result[i].subjectId;
                     subjectSeqString += "/" + result[i].subjectSeq;
                     courseIdString += "/" + result[i].courseId;
+                    courseOpenYearString += "/" + result[i].courseOpenYear;
                 }
                 subjectIdString = String(subjectIdString).substring(1);
                 subjectSeqString = String(subjectSeqString).substring(1);
                 courseIdString = String(courseIdString).substring(1);
+                courseOpenYearString = String(courseOpenYearString).substring(1);
                 console.log(subjectIdString);
                 console.log(subjectSeqString);
                 console.log(courseIdString);
+                console.log(courseOpenYearString);
                 $(opener.document).find("#subjectId-string").val(subjectIdString);
                 $(opener.document).find("#subjectSeq-string").val(subjectSeqString);
                 $(opener.document).find("#courseId-string").val(courseIdString);
+                $(opener.document).find("#courseOpenYear-string").val(courseOpenYearString);
 
             },
             error : function() {

@@ -278,7 +278,7 @@
 	
 	<select id="selectOpenSubjectByStudentId" parameterType="String" resultType="OpenVO">
 	/*selectOpenSubjectByStudentId*/
-		SELECT enroll.subject_id, enroll.subject_seq, course_id
+		SELECT enroll.subject_id, enroll.subject_seq, course_id, course_open_year
 		FROM enroll
 		LEFT JOIN open ON enroll.subject_id=open.subject_id AND enroll.subject_seq=open.subject_seq
 		WHERE student_id = #{studentId}
