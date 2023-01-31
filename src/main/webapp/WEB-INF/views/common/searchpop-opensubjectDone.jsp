@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="subject-name-warp">
-        <span>개설 강좌 선택</span>
+        <span>완료 강좌 선택</span>
     </div>
     <div class="content-wrap">
             <!-- 게시물 표 영역 -->

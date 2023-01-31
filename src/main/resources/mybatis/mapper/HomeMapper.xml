@@ -193,7 +193,7 @@
 		        left join subject on open.subject_id = subject.subject_id
 		        left join course on open.course_id = course.course_id
 		        left join common_code on open.state_cd = common_code.comn_cd
-		where open.course_id IS NOT NULL AND del_yn = 'N'
+		where open.course_id IS NOT NULL AND open.del_yn = 'N'
 		and open.state_cd in <![CDATA[('OPN02','OPN03','OPN04')]]>
 			<if test="courseId != null and !courseId.equals('') ">
 				AND open.course_id = #{courseId}
@@ -249,7 +249,7 @@
 	FROM  SUBJECT s 
 	LEFT JOIN OPEN o 
 	ON s.subject_id = o.subject_id 
-	WHERE course_id = #{courseId}
+	WHERE del_yn= 'N' AND course_id = #{courseId}
    </select>
 	
 <!-- 			select DISTINCT
