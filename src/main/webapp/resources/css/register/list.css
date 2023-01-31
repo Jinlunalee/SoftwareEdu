@@ -38,7 +38,7 @@
     color: #fff;
     background-color: #003964;
     position: relative;
-    left: 392px;
+    left: 338px;
     bottom: 41px;
 }
 
@@ -220,13 +220,15 @@ td {
 
 .selectstudent{
     position: relative;
-    right: 328px;
+    right: 380px;
     margin-top: 3px;
 }
 
 .apply-period {
 	display : inline;
 	text-align : left;
+	position: relative;
+	right: 70px;
 }
 
 .select-subcor{
@@ -239,21 +241,21 @@ td {
 .state{
 	display: inline;
     position: relative;
-    left: 155px;
+    left: 200px;
     bottom: 45px;
     margin-top: 3px;
 }
 
 .input-student {
 	position: relative;
-    right: 23px;
     width: 195px;
+    left: 58px;
 }
 
 .select-stu{
 	width: 160px;
 	position: relative;
-    right: 3px;
+    left: 37px;
 }
 
 .input-cancel{
@@ -299,4 +301,13 @@ td {
 .cancel-img {
 	width: 35px;
     margin-right: 10px;
+}
+
+.h-100 {
+	height: 105%!important;
+}
+
+#enroll-state {
+	position: relative;
+    left: 28px;
 }

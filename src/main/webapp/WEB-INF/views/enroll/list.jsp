@@ -44,7 +44,7 @@
 				<%-- 수강 상태 선택 --%>
 				<div class="state">
 					<span>수강 상태</span>
-					<select name="state" class="select-box">
+					<select id="enroll-state" name="state" class="select-box">
 						<option value="">전체</option>
 						<option value="expect">수강 예정</option>
 						<option value="progress">수강 중</option>
