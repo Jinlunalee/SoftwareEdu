@@ -106,20 +106,20 @@
                   <ul class="paging">
                       <li><a href="subjectboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">처음</a></li>
                       <c:if test="${pager.groupNo>1}">
-                          <li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">이전</a></li>
+                          <li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">이전</a></li>
                       </c:if>
                       <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
                           <c:if test="${pager.pageNo != i}">
-                              <li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">${i}</a></li>
+                              <li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">${i}</a></li>
                           </c:if>
                           <c:if test="${pager.pageNo == i}">
-                              <li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">${i}</a></li>
+                              <li><a href="subjectboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">${i}</a></li>
                           </c:if>
                       </c:forEach>
                       <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                          <li><a href="subjectboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">다음</a></li>
+                          <li><a href="subjectboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">다음</a></li>
                       </c:if>
-                      <li><a href="subjectboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catSubject=${catId}">맨끝</a></li>
+                      <li><a href="subjectboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">맨끝</a></li>
                   </ul>
               </div>
 
