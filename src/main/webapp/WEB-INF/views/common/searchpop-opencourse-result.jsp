@@ -14,24 +14,26 @@
                         <td class="th-column-4">강의 모집 기간</td>
                         <td class="th-column-5">상태</td>
                         <td class="th-column-6">분류</td>
-                        <td class="th-column-7">등록년도</td>
+                        <td class="th-column-7">개설연도</td>
                     </tr>
                 </thead>
-                <c:forEach items="${boardList}" var="board">
-                    <tr>
-                        <td>${board.courseId}</td>
-                        <td>
-                            <a class="${board.openStateCd} ${board.subjectId}-${board.subjectSeq}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
-                                ${board.courseTitle}
-                            </a>
-                        </td>
-                        <td>${board.startDay} ~ ${board.endDay}</td>
-                        <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
-                        <td>${board.openStateCdTitle}</td>
-                        <td>${board.catCourseCdTitle}</td>
-                        <td>${board.courseOpenYear}</td>
-                    </tr>
-                </c:forEach>
+                <tbody>
+                    <c:forEach items="${boardList}" var="board">
+                        <tr>
+                            <td>${board.courseId}</td>
+                            <td>
+                                <a class="${board.openStateCd} ${board.courseId}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
+                                    ${board.courseTitle}
+                                </a>
+                            </td>
+                            <td>${board.startDay} ~ ${board.endDay}</td>
+                            <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
+                            <td>${board.openStateCdTitle}</td>
+                            <td>${board.catCourseCdTitle}</td>
+                            <td>${board.courseOpenYear}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>                			
     </c:if>

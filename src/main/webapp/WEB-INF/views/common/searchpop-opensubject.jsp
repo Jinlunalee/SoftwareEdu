@@ -49,8 +49,8 @@
                                 </c:forEach>
                             </select>
                             </select>
-                            등록년도 :
-                            <select name="regYear">
+                            개설연도 :
+                            <select name="openDtYear">
                                 <option value="0">전체</option>
                                 <c:forEach var="i" begin="2019" end="2023">
                                     <option value="${i}">${i}</option>

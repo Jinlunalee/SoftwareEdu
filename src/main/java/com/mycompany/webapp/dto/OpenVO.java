@@ -70,5 +70,9 @@ public class OpenVO {
 	private int cntStd;   // 학생 수
 	@Expose
 	private String sendDt;	// 전송시간
+	
+	// 개설강좌 검색팝업 관련
+	private String cases; // 개설강좌의 쓰임 목적에 따라 리스트 조회 조건을 다르게 하기 위함
+	private String openDtYear; // openDt를 년도로 조회하기 위함 
 
 }

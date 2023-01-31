@@ -25,11 +25,14 @@
                             <table border="1" style="width:100%;">
                                 <colgroup>
                                     <col width="10%">
-                                    <col width="30%">
-                                    <col width="10%">
                                     <col width="20%">
                                     <col width="10%">
-                                    <col width="20%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
                                 </colgroup>
                                 <tr>
                                     <td>
@@ -42,17 +45,6 @@
                                         <input type="text" id="subject-input" name="subjectId">
                                     </td>
                                     <td>
-                                        상태
-                                    </td>
-                                    <td>
-                                        <select name="openStateCd">
-                                            <option value="">전체</option>
-                                            <c:forEach items="${stateList}" var="state">
-                                                <option value="${state.comnCd}">${state.comnCdTitle}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
-                                    <td>
                                         분류
                                     </td>
                                     <td>
@@ -63,8 +55,6 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>
                                         난이도
                                     </td>
@@ -77,17 +67,15 @@
                                         </select>
                                     </td>
                                     <td>
-                                        등록년도
+                                        개설연도
                                     </td>
                                     <td>
-                                        <select name="regYear">
+                                        <select name="OpenDtYear">
                                             <option value="0">전체</option>
                                             <c:forEach var="i" begin="2019" end="2023">
                                                 <option value="${i}">${i}</option>
                                             </c:forEach>
                                         </select>
-                                    </td>
-                                    <td>
                                     </td>
                                     <td>
                                         <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>

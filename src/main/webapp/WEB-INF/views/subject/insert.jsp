@@ -53,10 +53,11 @@
 					<col width="10%">
 				</colgroup>
 				<tr>
-					<td colspan="4" class="info-text">※ 개설하고자하는 과정 및 강좌를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.</td>
+					<td colspan="4" class="info-text">※ 개설하고자하는 '강좌'를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.<br>
+						※ '과정'으로 강좌를 개설하고자 한다면, 강좌 선택 후 '과정' 또한 선택해주세요.</td>
 				</tr>
 				<tr>
-					<th class="write-txt">강좌명</th>
+					<th class="write-txt" style="padding-left: 12px;">강좌</th>
 					<td>
 						<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌를 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
@@ -70,7 +71,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>과정명</th>
+					<th>과정</th>
 					<td>
 						<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
 						<input id="course-input" name="course" type="hidden">

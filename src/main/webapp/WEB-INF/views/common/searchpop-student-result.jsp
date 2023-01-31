@@ -18,22 +18,24 @@
                         <td class="th-column-16">직위</td>
                     </tr>
                 </thead>
-                <c:forEach items="${studentList}" var="student">
-                    <tr>
-                        <td>${student.name}</td>
-                        <td>
-                            <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}/${student.birth}/${student.genderTitle}/${student.email}/${student.phone}/${student.addDoTitle}/${student.addEtc}/${student.positionTitle}">
-                                ${student.studentId}
-                            </a>
-                        </td>
-                        <td>${student.birth}</td>
-                        <td>${student.genderTitle}</td>
-                        <td>${student.email}</td>
-                        <td>${student.phone}</td>
-                        <td>${student.addDoTitle} ${student.addEtc}</td>
-                        <td>${student.positionTitle}</td>
-                    </tr>
-                </c:forEach>
+                <tbody>
+                    <c:forEach items="${studentList}" var="student">
+                        <tr>
+                            <td>${student.name}</td>
+                            <td>
+                                <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}/${student.birth}/${student.genderTitle}/${student.email}/${student.phone}/${student.addDoTitle}/${student.addEtc}/${student.positionTitle}">
+                                    ${student.studentId}
+                                </a>
+                            </td>
+                            <td>${student.birth}</td>
+                            <td>${student.genderTitle}</td>
+                            <td>${student.email}</td>
+                            <td>${student.phone}</td>
+                            <td>${student.addDoTitle} ${student.addEtc}</td>
+                            <td>${student.positionTitle}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>                         
     </c:if>

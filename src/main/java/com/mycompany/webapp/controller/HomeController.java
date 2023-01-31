@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.AnswerVO;
+import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
@@ -177,7 +178,11 @@ public class HomeController {
 	@GetMapping(value="/common/searchpop-opensubject")
 	public void searchPopOpenSubject(Model model) throws Exception{
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
-		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		List<CommonCodeVO> opnComnCdList = homeService.getComnCdList("OPN");
+		opnComnCdList.remove(0); // 모집 예정 제거
+		opnComnCdList.remove(3); // 진행완료 제거
+		opnComnCdList.remove(3); // 폐강 제거
+		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
 	}
 	
@@ -189,8 +194,7 @@ public class HomeController {
 	 */
 	@PostMapping(value="/common/searchpop-opensubject-result", produces = "application/text; charset=UTF-8")
 	public String searchPopOpenSubjectResult(OpenVO openVo, Model model) throws Exception{
-		System.out.println(openVo);
-		
+		openVo.setCases("case1"); // 개설강좌 상태가 모집중, 모집마감, 진행중인 경우만 보여주고, 개설과정에 포함된 건은 안보여주기 위함
 		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
 		
 		// ajax로 구현할 것
@@ -199,7 +203,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		logger.info("openSubjectlist: " + openSubjectList);	
+//		logger.info("openSubjectlist: " + openSubjectList);	
 		return "common/searchpop-opensubject-result";
 	}
 	
@@ -213,7 +217,6 @@ public class HomeController {
 	@GetMapping(value="/common/searchpop-opensubjectDone")
 	public void searchPopOpenSubjectDone(Model model) throws Exception{
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
-		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
 	}
 	
@@ -228,8 +231,7 @@ public class HomeController {
 	 */
 	@PostMapping(value="/common/searchpop-opensubjectDone-result", produces = "application/text; charset=UTF-8")
 	public String searchPopOpenSubjectResultDone(OpenVO openVo, Model model) throws Exception{
-		System.out.println(openVo);
-		
+		openVo.setCases("case2"); // 개설강좌 상태가 진행완료인 강좌만 보여주기 위함
 		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
 		
 		// ajax로 구현할 것
@@ -278,7 +280,11 @@ public class HomeController {
 	 */
 	@GetMapping(value="/common/searchpop-opencourse")
 	public void searchPopOpenCourse(Model model) throws Exception{
-		model.addAttribute("stateList", homeService.getComnCdList("OPN"));	// 상태 공통코드 리스트
+		List<CommonCodeVO> opnComnCdList = homeService.getComnCdList("OPN");
+		opnComnCdList.remove(0); // 모집 예정 제거
+		opnComnCdList.remove(3); // 진행완료 제거
+		opnComnCdList.remove(3); // 폐강 제거
+		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catCourseList", homeService.getComnCdList("CRS"));	// 분류 공통코드 리스트
 	}
 	
@@ -293,11 +299,10 @@ public class HomeController {
 	 */
 	@PostMapping(value="/common/searchpop-opencourse-result", produces = "application/text; charset=UTF-8")
 	public String searchPopOpenCourseResult(OpenVO openVo, Model model) throws Exception{
-		System.out.println(openVo);
-		
+		System.out.println("check1");
+		openVo.setCases("case1"); // 개설강좌 상태가 모집중, 모집마감, 진행중인 경우만 보여주기 위함
 		List<OpenVO> openCourseList = homeService.searchOpenCourse(openVo);
-		logger.info("subjectlist: " + openCourseList);
-		
+		System.out.println("check2");
 		// ajax로 구현할 것
 		if(!openCourseList.isEmpty()) {
 			model.addAttribute("boardList",openCourseList);	// 존재 경우

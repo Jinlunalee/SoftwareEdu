@@ -13,17 +13,19 @@
                         <td class="th-column-15">분류</td>
                     </tr>
                 </thead>
-                <c:forEach items="${boardList}" var="board">
-                    <tr>
-                        <td>${board.courseId}</td>
-                        <td>
-                            <a class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}">
-                                ${board.courseTitle}
-                            </a>
-                        </td>
-                        <td>${board.catCourseCdTitle}</td>
-                    </tr>
-                </c:forEach>
+                <tbody>
+                    <c:forEach items="${boardList}" var="board">
+                        <tr>
+                            <td>${board.courseId}</td>
+                            <td>
+                                <a class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}">
+                                    ${board.courseTitle}
+                                </a>
+                            </td>
+                            <td>${board.catCourseCdTitle}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>                			
     </c:if>

@@ -42,7 +42,7 @@
                                 </c:forEach>
                             </select>
                             </select>
-                            등록년도 :
+                            등록연도 :
                             <select name="regYear">
                                 <option value="0">전체</option>
                                 <c:forEach var="i" begin="2019" end="2020">
