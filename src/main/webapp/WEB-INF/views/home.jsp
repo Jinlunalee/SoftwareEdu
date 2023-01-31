@@ -29,9 +29,9 @@
 	<div class="main-second-row-btn regular">
 		<div class="title"><a><img id="category_image" src="<c:url value='/resources/images/main/category.png'/>"/> 개설 과정 분류별 보기</a></div>
 		<div class="regular-content">
-			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourse=CRS01'/>">국비 지원 과정</a></div>
-			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourse=CRS02'/>">전문가 과정</a></div>
-			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourse=CRS03'/>">기초 과정</a></div>
+			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourseCd=CRS01'/>">국비 지원 과정</a></div>
+			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourseCd=CRS02'/>">전문가 과정</a></div>
+			<div class="regular-content-item"><a href="<c:url value='/subject/courseboardlist?catCourseCd=CRS03'/>">기초 과정</a></div>
 		</div>		
 	</div>
 </div>

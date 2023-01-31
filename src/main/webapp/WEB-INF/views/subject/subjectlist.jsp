@@ -104,7 +104,7 @@
       <!--paging-->
               <div id="paging">
                   <ul class="paging">
-                      <li><a href="subjectboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourse=${catId}">처음</a></li>
+                      <li><a href="subjectboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">처음</a></li>
                       <c:if test="${pager.groupNo>1}">
                           <li><a href="subjectboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}">이전</a></li>
                       </c:if>
