@@ -180,8 +180,10 @@ public class HomeController {
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
 		List<CommonCodeVO> opnComnCdList = homeService.getComnCdList("OPN");
 		opnComnCdList.remove(0); // 모집 예정 제거
-		opnComnCdList.remove(3); // 진행완료 제거
-		opnComnCdList.remove(3); // 폐강 제거
+		opnComnCdList.remove(1); // 모집 마감 제거
+		opnComnCdList.remove(2); // 진행 완료 제거
+		opnComnCdList.remove(2); // 폐강 제거
+		
 		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
 	}
