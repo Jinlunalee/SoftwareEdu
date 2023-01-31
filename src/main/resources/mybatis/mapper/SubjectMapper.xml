@@ -276,6 +276,15 @@
 		AND del_yn = 'N' AND state_cd != 'OPN07'
 	</select>
 	
+	<select id="selectOpenCourseBySubjectIdAndYear" parameterType="map" resultType="OpenVO">
+	/*selectOpenCourseBySubjectIdAndYear*/
+		SELECT *
+		FROM open
+		WHERE subject_id = #{subjectId}
+		AND substr(reg_dt,1,4) = #{year}
+		AND del_yn = 'N' AND state_cd != 'OPN07'
+	</select>
+	
 	<select id="selectOpenSubjectByStudentId" parameterType="String" resultType="OpenVO">
 	/*selectOpenSubjectByStudentId*/
 		SELECT enroll.subject_id, enroll.subject_seq, course_id, course_open_year

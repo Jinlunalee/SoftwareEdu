@@ -37,6 +37,9 @@
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
                         </div>
                     </form>
+                    <!-- 강좌가 들어있는 과정 넘어온 값 -->
+                    <div id="unavailable-pop" type="hidden">
+                    </div>
                 </div>
 
                 <!-- 리스트 영역 -->

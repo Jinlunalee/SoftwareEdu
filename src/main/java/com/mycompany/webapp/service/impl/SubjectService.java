@@ -199,6 +199,11 @@ public class SubjectService implements ISubjectService{
 	public List<OpenVO> selectOpenSubjectByCourseIdAndYear(String courseId, String year) {
 		return subjectRepository.selectOpenSubjectByCourseIdAndYear(courseId, year);
 	}
+	
+	@Override
+	public List<OpenVO> selectOpenCourseBySubjectIdAndYear(String subjectId, String year) {
+		return subjectRepository.selectOpenCourseBySubjectIdAndYear(subjectId, year);
+	}
 
 	@Override
 	public List<OpenVO> selectOpenSubjectByStudentId(String studentId) {
