@@ -138,7 +138,7 @@
 					</tr>
 					<tr>
 						<td class="write-txt"> 모집인원</td>
-						<td> <input type="number" name="recruitPeople" min="1"> 명 </td>
+						<td> <input type="number" name="recruitPeople" min="5"> 명 </td>
 					</tr>
 					<tr>
 						<td> 교육비</td>
