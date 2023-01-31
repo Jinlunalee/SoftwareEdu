@@ -1,6 +1,5 @@
 /* subject에 따른 table chart 보여주기 */
 function showTableChart(data) {
-
   // 답변 값 총합의 변수 만듦
   let fiveStarSum=0;
   let fourStarSum=0;
@@ -25,7 +24,7 @@ function showTableChart(data) {
     }
   }
 
-  console.log(fiveStarSum, fourStarSum, threeStarSum,  twoStarSum,  oneStarSum);
+  console.log(fiveStarSum + ' ' + fourStarSum + ' ' + threeStarSum + ' ' + twoStarSum + ' ' + oneStarSum);
 
   // table chart 실행
   var tableOptions = {
@@ -48,7 +47,9 @@ function showTableChart(data) {
     }]
     };
 
-    var chartTable = new ApexCharts(document.querySelector("#chart-table"), tableOptions);
+    // var chartTable = new ApexCharts(document.querySelector("#chart-table"), tableOptions);
+    const chartTableLocation = opener.document.querySelector("#chart-table");
+    var chartTable = new ApexCharts(chartTableLocation, tableOptions);
     chartTable.render();
 }
 
@@ -151,6 +152,8 @@ function showBarChart(data) {
     }
     };
 
-    var chartBar = new ApexCharts(document.querySelector("#chart-bar"), barOptions);
+    // var chartBar = new ApexCharts(document.querySelector("#chart-bar"), barOptions);
+    const chartBarLocation = opener.document.querySelector("#chart-bar");
+    var chartBar = new ApexCharts(chartBarLocation, barOptions);
     chartBar.render();
 }

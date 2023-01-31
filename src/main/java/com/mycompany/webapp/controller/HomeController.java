@@ -1,5 +1,6 @@
 package com.mycompany.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.AnswerVO;
 import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
@@ -21,6 +23,7 @@ import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
+import com.mycompany.webapp.service.ISurveyService;
 
 @RequestMapping
 @Controller
@@ -35,6 +38,9 @@ public class HomeController {
 	
 	@Autowired
 	ISubjectService subjectService;
+	
+	@Autowired
+	ISurveyService surveyService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -235,6 +241,33 @@ public class HomeController {
 		logger.info("openSubjectlist: " + openSubjectList);	
 		return "common/searchpop-opensubjectDone-result";
 	}
+	
+	// 통계 ajax
+		@RequestMapping(value="/common/getjson", method=RequestMethod.GET)
+		@ResponseBody
+		public List<AnswerVO> getjson(String subjectId, String subjectSeq) {
+			System.out.println("subjectId : " + subjectId);
+			System.out.println("subjectSeq : " + subjectSeq);
+			int subjectSeqInt = Integer.parseInt(subjectSeq);
+			
+			List<AnswerVO> answerVoList = new ArrayList<>();
+			
+
+			// 문항 수 구하기
+			int questionNum = surveyService.getCountQuestionNum(subjectId, subjectSeqInt);
+
+			// 문항 수만큼 반복
+			for(int i=1; i<=questionNum; i++) {
+				// 답변 개수 (5개) 만큼 반복
+				for(int k=1; k<=5; k++) {
+					AnswerVO answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k); // vo에 답변 저장하기
+					answerVoList.add(answerVo);
+				}
+			}
+			logger.info("survey/summary-post: "+ answerVoList);
+			return answerVoList;
+		}
+	
 	
 	/**
 	 * @description	개설과정 검색 팝업

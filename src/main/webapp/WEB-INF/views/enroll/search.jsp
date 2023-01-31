@@ -219,6 +219,7 @@
 			
 			$(".close-btn").click(function(){
 				$(".modal").fadeOut();
+				document.location.href = document.location.href;
 			});
 		};
 		
