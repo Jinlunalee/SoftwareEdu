@@ -23,7 +23,7 @@
 		<form class="insert_form" action="<c:url value='/subject/update/${open.subjectId}/${open.subjectSeq}'/>" method="post" enctype="multipart/form-data">
 			<div class="course_title">
 				<div class="main_title"><b>${open.subjectId}</b> 
-					<input class="readonly_txt" type="text" value="${open.subjectTitle}" readonly>
+					<input class="readonly_txt" type="text" style="width: auto;" value="${open.subjectTitle}" readonly>
 				</div>
 				<div class="course_state">${open.openStateCdTitle}</div>
 			</div>
@@ -90,7 +90,7 @@
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> <input type="text" name="recruitPeople" value="${open.recruitPeople}"> 명 </td>
+				<td> <input type="number" name="recruitPeople" min="5" value="${open.recruitPeople}"> 명 </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>

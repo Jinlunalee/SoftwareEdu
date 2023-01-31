@@ -44,7 +44,7 @@
 				<%-- 수강 상태 선택 --%>
 				<div class="state">
 					<span>수강 상태</span>
-					<select name="state" class="select-box">
+					<select id="enroll-state" name="state" class="select-box">
 						<option value="">전체</option>
 						<option value="expect">수강 예정</option>
 						<option value="progress">수강 중</option>
@@ -121,7 +121,9 @@
 							<%-- 취소 사유 모달창 --%>
 							<div class="modal modal-${status.count}" >
 								<div class="modal-content modal-content-${status.count}">
+									<img class="cancel-img" src="/resources/images/survey/survey_question.png">
 									<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
+									
 									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform" onSubmit="checkForm()">
 										<select id="selectCancel" name="cancelRsCd" class="cancelrs" onchange="cancel(); this.onclick=null;">
 											<option value="">취소 사유 선택</option>
@@ -132,11 +134,12 @@
 										<span id="cancelRsEtc"></span>
 										<input type="submit" value="확인" class="confirm">
 									</form>
+									
 									<div id="close-btn">
 										<button class="close-btn">닫기</button>
 									</div>
 								</div>
-							</div>
+								</div>
 						</c:if>
 					</td>
 
