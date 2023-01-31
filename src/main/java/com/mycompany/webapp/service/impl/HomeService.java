@@ -71,41 +71,44 @@ public class HomeService implements IHomeService {
 
 	@Override
 	public List<OpenVO> searchOpenCourse(OpenVO openVo) {
+		System.out.println("check2");
 		List<OpenVO> boardList = homeRepository.searchOpenCourse(openVo);
-		
+		System.out.println("check3");
+		System.out.println(boardList);
 		
 		for(OpenVO openVoReturn : boardList) {
 			// state, catSubject 공통코드로 가져와서 set 하기
 			openVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatCourseCd()));
 			
-			//기간에 따라 상태 표현
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
-			int today = Integer.parseInt(formatter.format(new Date()));
-			for(int i=0;i<boardList.size();i++) {
-				int startDay = Integer.parseInt(boardList.get(i).getStartDay().replaceAll("-", ""));
-				int endDay = Integer.parseInt(boardList.get(i).getEndDay().replaceAll("-", ""));
-				int recruitStartDay = Integer.parseInt(boardList.get(i).getRecruitStartDay().replaceAll("-", ""));
-				int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
-				
-				if(today < recruitStartDay) {
-					boardList.get(i).setOpenStateCd("OPN01");//모집예정 
-				}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
-					boardList.get(i).setOpenStateCd("OPN02");
-				}else { //모집마감 1. 진행중  2.진행완료
-					if(startDay < today && today < endDay) { //진행중
-						boardList.get(i).setOpenStateCd("OPN04");
-					}else if(endDay < today){ //진행완료
-						boardList.get(i).setOpenStateCd("OPN05");
-					}else { //모집마감
-						boardList.get(i).setOpenStateCd("OPN03");
-					}
-				}
-			}
+			System.out.println("check4");
+//			//기간에 따라 상태 표현
+//			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
+//			int today = Integer.parseInt(formatter.format(new Date()));
+//			for(int i=0;i<boardList.size();i++) {
+//				int startDay = Integer.parseInt(boardList.get(i).getStartDay().replaceAll("-", ""));
+//				int endDay = Integer.parseInt(boardList.get(i).getEndDay().replaceAll("-", ""));
+//				int recruitStartDay = Integer.parseInt(boardList.get(i).getRecruitStartDay().replaceAll("-", ""));
+//				int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
+//				
+////				if(today < recruitStartDay) {
+////					boardList.get(i).setOpenStateCd("OPN01");//모집예정 
+////				}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
+////					boardList.get(i).setOpenStateCd("OPN02");
+////				}else { //모집마감 1. 진행중  2.진행완료
+////					if(startDay < today && today < endDay) { //진행중
+////						boardList.get(i).setOpenStateCd("OPN04");
+////					}else if(endDay < today){ //진행완료
+////						boardList.get(i).setOpenStateCd("OPN05");
+////					}else { //모집마감
+////						boardList.get(i).setOpenStateCd("OPN03");
+////					}
+////				}
+//			}
 			
 			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
-			// 여기에서 상태 검색 적용어떻게 하지?
-
+			System.out.println("check5");
 		}
+		System.out.println("check6");
 		return boardList;
 	}
 
