@@ -71,8 +71,8 @@
 			<tr>
 				<td> 교육비</td>
 				<td> <fmt:formatNumber value="${open.cost}" type="number"/> 원
-					<c:if test="${open.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
-					<c:if test="${open.supportYn eq 'N'}">* 교육비 지원하지않는 강좌입니다.</c:if>
+					<c:if test="${open.supportYn eq 'Y'}"><span class="support">※ 교육비 지원을 받는 강좌입니다.</span></c:if>
+					<c:if test="${open.supportYn eq 'N'}"><span class="support">※ 교육비 지원을 받지않는 강좌입니다.</span></c:if>
 				</td>
 			</tr>
 			<tr>

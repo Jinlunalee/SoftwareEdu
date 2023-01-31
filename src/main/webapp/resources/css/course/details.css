@@ -79,3 +79,7 @@ table .detail_img {
     display: inline-flex;
     align-items: center;
 }
+.support {
+	color: cornflowerblue;
+    font-size: 12px;
+}

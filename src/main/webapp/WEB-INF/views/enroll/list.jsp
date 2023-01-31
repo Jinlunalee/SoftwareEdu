@@ -121,7 +121,7 @@
 							<%-- 취소 사유 모달창 --%>
 							<div class="modal modal-${status.count}" >
 								<div class="modal-content modal-content-${status.count}">
-									<span style="font-size: 1.2em;">취소하시겠습니까?</span>
+									<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 									<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform" onSubmit="checkForm()">
 										<select id="selectCancel" name="cancelRsCd" class="cancelrs" onchange="cancel(); this.onclick=null;">
 											<option value="">취소 사유 선택</option>

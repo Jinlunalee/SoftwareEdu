@@ -112,8 +112,8 @@ td {
 
 .modal-content {
 	width: 410px;
-	height: 270px;
-  	background-color: #8db2ff;
+	height: 244px;
+  	background-color:  #086db9;
   	color: #fff;
   	border-radius: 10px;
   	position: relative;
@@ -163,8 +163,8 @@ td {
     color: #fff;
     background-color: #003964;
     position: absolute;
-    top: 220px;
-    left: 340px;
+    top: 200px;
+    left: 317px;
 }
 
 .paging {
@@ -189,6 +189,8 @@ td {
 .cancelrs{
 	height: 40px;
     border-radius: 8px;
+    position: relative;
+    left: 20px;
 }
 
 .cacelform{
@@ -198,8 +200,8 @@ td {
 
 .confirm{
 	position: absolute;
-    top: -57px;
-    left: 170px;
+    top: 90px;
+    left: 245px;
     width: 50px;
     height: 30px;
     border-radius: 8px;
@@ -255,6 +257,8 @@ td {
 
 .input-cancel{
 	display: inline;
+	position: relative;
+    left: 25px;
 }
 .btn-secondary{
     font-size: 11px;
@@ -277,3 +281,10 @@ td {
 .basic_txt_color {
     color: #003964;
 }
+
+#cancelId {
+	position: relative;
+	left: 20px;
+	
+}
+

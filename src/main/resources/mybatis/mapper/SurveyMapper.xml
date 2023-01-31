@@ -97,5 +97,19 @@
 	   from answer
 	   where subject_id = #{subjectId} and subject_seq = #{subjectSeq} 
    </select>
+   
+   <select id="pivotAnswerValue" parameterType="map" resultType="map">
+   /* pivotAnswerValue */
+   	  select *
+   	  from (
+	    select answer_value
+	    from answer
+	    where subject_id = #{subjectId} and subject_seq = #{subjectSeq} and question_num = #{questionNum}
+	    )
+	  pivot (
+	        count(*)
+	        for answer_value in (5, 4, 3, 2, 1)
+	  )
+   </select>
 
 </mapper>

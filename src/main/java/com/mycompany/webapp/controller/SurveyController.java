@@ -1,9 +1,9 @@
 package com.mycompany.webapp.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +11,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,37 +190,53 @@ public class SurveyController {
 	public void downloadExcel(String subjectId, String subjectSeq, String openDt, HttpServletResponse response) throws Exception {
 		logger.info("downloadExcel:"+subjectId+subjectSeq+openDt);
 		int subjectSeqInt = Integer.parseInt(subjectSeq);
-		
+				
 		Workbook workbook = new HSSFWorkbook();//xls파일로 저장하기위해 생성
 		Sheet sheet = workbook.createSheet("강좌 만족도 조사 문항"); // 하나의 sheet 생성
 		Sheet sheet2 = workbook.createSheet("강좌 만족도");
 		int rowNo = 0; // row number 카운팅
-
+		
 		//sheet1
 		Row headerRow = sheet.createRow(rowNo++);
-		headerRow.createCell(0).setCellValue("subject_id");
-		headerRow.createCell(1).setCellValue("subject_seq");
-		headerRow.createCell(2).setCellValue("question_num");
-		headerRow.createCell(3).setCellValue("question_content");
+		headerRow.createCell(0).setCellValue("강좌아이디");
+		headerRow.createCell(1).setCellValue("강좌시퀀스"); //시퀀스 다른용어?
+		headerRow.createCell(2).setCellValue("만족도 조사 문항 번호");
+		headerRow.createCell(3).setCellValue("만족도 조사 문항 내용");
+		headerRow.createCell(4).setCellValue("매우만족");
+		headerRow.createCell(5).setCellValue("만족");
+		headerRow.createCell(6).setCellValue("보통");
+		headerRow.createCell(7).setCellValue("불만족");
+		headerRow.createCell(8).setCellValue("매우불만족");
 		
 		List<QuestionSetVO> questionList = surveyService.selectSubjectQuestionSet(subjectId, subjectSeqInt);
+		Map<String, Integer> map = new HashMap<>();
+		int i=0;
 		for(QuestionSetVO question : questionList) {
+			i++;
+			map = surveyService.pivotAnswerValue(subjectId, subjectSeqInt, i);
 			Row row = sheet.createRow(rowNo++);
 			row.createCell(0).setCellValue(subjectId);
 			row.createCell(1).setCellValue(subjectSeqInt);
 			row.createCell(2).setCellValue(question.getQuestionNum());
 			row.createCell(3).setCellValue(question.getQuestionContent());
+			row.createCell(4).setCellValue(Integer.parseInt(String.valueOf(map.get("5"))));
+			row.createCell(5).setCellValue(Integer.parseInt(String.valueOf(map.get("4"))));
+			row.createCell(6).setCellValue(Integer.parseInt(String.valueOf(map.get("3"))));
+			row.createCell(7).setCellValue(Integer.parseInt(String.valueOf(map.get("2"))));
+			row.createCell(8).setCellValue(Integer.parseInt(String.valueOf(map.get("1"))));
 		}
 		
+		
+
 		rowNo = 0;
 		
 		//sheet2
 		//상단 헤더row
 		Row headerRow2 = sheet2.createRow(rowNo++);
-		headerRow2.createCell(0).setCellValue("subject_id");
-		headerRow2.createCell(1).setCellValue("subject_seq");
-		headerRow2.createCell(2).setCellValue("question_num");
-		headerRow2.createCell(3).setCellValue("answer_value");
+		headerRow2.createCell(0).setCellValue("강좌아이디");
+		headerRow2.createCell(1).setCellValue("강좌시퀀스");
+		headerRow2.createCell(2).setCellValue("만족도 조사 문항 번호");
+		headerRow2.createCell(3).setCellValue("만족도 조사 답변 점수");
 		
 		List<AnswerVO> answerList = surveyService.selectAnswerList(subjectId, subjectSeqInt);
 		for(AnswerVO answer : answerList) {
