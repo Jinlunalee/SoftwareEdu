@@ -1,6 +1,7 @@
 package com.mycompany.webapp.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +74,11 @@ public class SurveyService implements ISurveyService {
 	@Override
 	public List<AnswerVO> selectAnswerList(String subjectId, int subjectSeq) {
 		return surveyRepository.selectAnswerList(subjectId, subjectSeq);
+	}
+
+	@Override
+	public Map<String, Integer> pivotAnswerValue(String subjectId, int subjectSeq, int questionNum) {
+		return surveyRepository.pivotAnswerValue(subjectId, subjectSeq, questionNum);
 	}
 
 }
