@@ -155,7 +155,7 @@ const selected = function() {
 							levelCdTitle.append(result.subjectInfo.levelCdTitle + "(" + result.subjectInfo.levelEtc + ")");
 							levelCd.val(result.subjectInfo.levelCd);
 						}
-						cost.append(result.subjectInfo.cost + "원");
+						cost.append(result.subjectInfo.cost.toLocaleString() + "원");
 						if (result.subjectInfo.supportYn === 'Y') {
 							support.append("※교육비 지원을 받는 강좌입니다.");
 						}
@@ -175,7 +175,7 @@ const selected = function() {
 
 						}
 
-						cost.append(result.subjectInfo.cost+"원");
+						cost.append(result.subjectInfo.cost.toLocaleString()+"원");
 
 						if(result.subjectInfo.supportYn === 'Y'){
 							support.append("※교육비 지원을 받는 강좌입니다.");

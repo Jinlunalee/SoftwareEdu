@@ -102,8 +102,9 @@
 					<tr>
 						<td class="write-txt"> 연수기간(시수)</td>
 						<td> 
+							<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 							<input type="hidden" name="hours" id="hours" value="">
-							<input type="date" name="startDay" id="startDay" min="" onchange="selectRecruitDay()">
+							<input type="date" name="startDay" id="startDay" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()">
 							~ 
 							<input type="date" name="endDay" id="endDay" readonly>
 							<span id="printDay"></span>
@@ -136,11 +137,12 @@
 					</tr>
 					<tr>
 						<td class="write-txt"> 모집인원</td>
-						<td> <input type="text" name="recruitPeople"> 명 </td>
+						<td> <input type="number" name="recruitPeople" min="1"> 명 </td>
 					</tr>
 					<tr>
 						<td> 교육비</td>
-						<td><span name="cost" id="cost"></span>  
+						<td>
+							<span name="cost" id="cost"></span>  
 							<span class="support"></span>
 						</td>
 					</tr>
@@ -202,7 +204,7 @@
 										<div class="question">
 											<img class="surveyqn-img" src="<c:url value='/resources/images/survey/survey_question.png'/>"/>
 											<input id="question-inputNum-${i}" class="questionNum" name="questionSet[${i-1}].questionNum" value="${i}" type="hidden" placeholder="문항을 입력해주세요.">
-											<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요.">
+											<input id="question-inputSet-${i}" class="questionSet serveyqn-input" name="questionSet[${i-1}].questionContent" type="text" required placeholder="문항을 입력해주세요." style="width: auto;">
 											<span id="surveyqn-input" class="serveyqn-input"></span>
 										</div>
 									</div>

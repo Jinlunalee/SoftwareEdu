@@ -1,6 +1,7 @@
 package com.mycompany.webapp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +21,5 @@ public interface ISurveyService {
 	int getMaxSubjectSeq(String subjectId);
 	
 	List<AnswerVO> selectAnswerList(String subjectId, int subjectSeq); //해당 강좌에 대한 답변정보
+	Map<String, Integer> pivotAnswerValue(String subjectId, int subjectSeq, int questionNum);
 }

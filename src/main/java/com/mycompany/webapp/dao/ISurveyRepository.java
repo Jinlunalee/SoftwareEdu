@@ -1,13 +1,13 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.webapp.dto.AnswerVO;
 import com.mycompany.webapp.dto.QuestionSetVO;
-import com.mycompany.webapp.dto.QuestionVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 @Mapper
@@ -22,4 +22,5 @@ public interface ISurveyRepository {
 	int getMaxSubjectSeq(String subjectId);
 	
 	List<AnswerVO> selectAnswerList(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); //해당 강좌에 대한 답변정보
+	Map<String, Integer> pivotAnswerValue(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("questionNum") int questionNum);
 }
