@@ -20,7 +20,7 @@
                         <td class="th-column-7">수강일수</td>
                         <td class="th-column-8">수강시수</td>
                         <td class="th-column-15">분류</td>
-                        <td class="th-column-16">등록년도</td>
+                        <td class="th-column-16">등록연도</td>
                     </tr>
                 </thead>
                 <tbody>
