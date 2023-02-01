@@ -350,7 +350,7 @@
          $(function () {
             $("#reset_btn").click(function () {
                /*    
-                   const result = document.getElementById('result');
+                    const result = document.getElementById('result');
                     result.innerText='';
                 	
                      const resultXml = document.getElementById('resultXml');
