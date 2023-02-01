@@ -106,7 +106,7 @@
 	
 	<select id="searchCourse" parameterType="CourseVO" resultType="CourseVO">
 	/*searchCourse*/
-		SELECT
+		(SELECT
 		    course_id,
 		    course_title,
 		    cat_cd as cat_course_cd
@@ -121,7 +121,15 @@
 			<if test="catCourseCd != null and !catCourseCd.equals('')">
 				AND cat_cd = #{catCourseCd} 
 			</if>
-		</where>
+		</where>)
+		MINUS
+		(SELECT
+		    distinct open.course_id,
+		    course_title,
+		    cat_cd as cat_course_cd
+		FROM open
+		LEFT JOIN course on open.course_id=course.course_id
+		WHERE course_open_year = 2023 and state_cd != 'OPN01' and open.course_id IS NOT NULL)
 	</select>
 	
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
@@ -168,9 +176,18 @@
 		<if test="levelCd != null and !levelCd.equals('') ">
 			AND level_cd = #{levelCd} 
 		</if>
-		<if test="regYear != 0">
-			AND subject.reg_year = #{regYear} 
+		<if test="openDtYear != 0">
+			AND open.open_dt LIKE (#{openDtYear}||'%') 
 		</if>
+		<choose>
+			<when test="cases.equals('case1')">
+				AND state_cd in ('OPN02', 'OPN03', 'OPN04')
+				AND open.course_id is null
+			</when>
+			<when test="cases.equals('case2')">
+				AND state_cd = 'OPN05'
+			</when>
+		</choose>
 		<if test="openStateCd != null and !openStateCd.equals('')">
 			AND state_cd = #{openStateCd}
 		</if>
@@ -179,22 +196,29 @@
 	
 	<select id="searchOpenCourse" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenCourse*/
-		select DISTINCT
-		    open.course_id,
-		    course_title,
-		    TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
-		    TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
-		    sum(cost) over (partition by open.course_id) as cost,
-		    TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
-		    TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
-		    course.cat_cd as cat_course_cd,
-		    subject.reg_year
-		from open 
-		        left join subject on open.subject_id = subject.subject_id
-		        left join course on open.course_id = course.course_id
-		        left join common_code on open.state_cd = common_code.comn_cd
-		where open.course_id IS NOT NULL AND del_yn = 'N'
-		and open.state_cd in <![CDATA[('OPN02','OPN03','OPN04')]]>
+		SELECT *
+		    FROM
+		    (select DISTINCT
+		        open.course_id,
+		        open.course_open_year,
+		        course_title,
+		        TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
+		        TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
+		        sum(cost) over (partition by open.course_id) as cost,
+		        TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+		        TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
+		        course.cat_cd as cat_course_cd,
+		        CASE    WHEN    max(open.state_cd) over (partition by course.course_id, open.course_open_year) <![CDATA[<=]]> 'OPN04'
+		                THEN    max(open.state_cd) over (partition by course.course_id, open.course_open_year)
+		                WHEN    min(open.state_cd) over (partition by course.course_id, open.course_open_year) <![CDATA[>=]]>  'OPN04'
+		                THEN    min(open.state_cd) over (partition by course.course_id, open.course_open_year)
+		                END open_state_cd
+		    from open 
+		            left join subject on open.subject_id = subject.subject_id
+		            left join course on open.course_id = course.course_id
+		            left join common_code on open.state_cd = common_code.comn_cd
+		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07')
+	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
 				AND open.course_id = #{courseId}
 			</if>
@@ -204,12 +228,19 @@
 			<if test="catCourseCd != null and !catCourseCd.equals('')">
 				AND course.cat_cd = #{catCourseCd} 
 			</if>
-			<if test="regYear != 0">
-				AND subject.reg_year = #{regYear} 
+			<if test="courseOpenYear != 0">
+				AND open.course_open_year = #{courseOpenYear} 
 			</if>
+			<choose>
+				<when test="cases.equals('case1')">
+					AND open_state_cd in ('OPN02', 'OPN03', 'OPN04')
+				</when>
+			</choose>
 			<if test="openStateCd != null and !openStateCd.equals('')">
-			AND open.state_cd = #{openStateCd}
+			AND open_state_cd = #{openStateCd}
 			</if>
+		</where>
+		order by 1
 	</select>
 	
 	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
