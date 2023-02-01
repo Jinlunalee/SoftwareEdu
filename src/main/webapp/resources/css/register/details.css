@@ -6,7 +6,7 @@
 
 .enroll-detail-table .info {
     text-align : center;
-    background-color: #053863;
+    background-color: #9BC3FF;
     color: #fff;
 }
 
@@ -28,10 +28,15 @@
 
 .add-hours-table .add-hours-form .add-hours-input, .add-hours-submit {
     height: 25px;
+    text-align: center;
 }
 
 .add-hours-table .add-hours-form .add-hours-submit {
     font-size:10px;
+    background-color: #003964;
+    color: #fff;
+    position: relative;
+    left: 10px;
 }
 
 .add-hours-table th {

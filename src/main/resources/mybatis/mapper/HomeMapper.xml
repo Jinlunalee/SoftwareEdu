@@ -155,7 +155,7 @@
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
 		LEFT JOIN common_code ON open.state_cd = common_code.comn_cd
-		WHERE del_yn = 'N' AND open.state_cd IN ('OPN02', 'OPN04') 
+		WHERE del_yn = 'N' 
 		<if test="subjectId != null and !subjectId.equals('') ">
 			AND subject.subject_id = #{subjectId}
 		</if>
