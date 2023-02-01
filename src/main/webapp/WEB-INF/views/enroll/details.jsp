@@ -72,7 +72,7 @@
 				<th>강좌 일수</th>
 				<td>${enroll.days}</td>
 				<th>강좌 시수</th>
-				<td>${enroll.hours}</td>
+				<td id="subject-hours">${enroll.hours}</td>
 				<th>강좌 상태</th>
 				<td>${enroll.openStateCdTitle}</td>
 				<th>강좌 모집인원</th>
@@ -105,10 +105,10 @@
 			</tr>
 			
 			<tr>
-				<td>${enroll.completeHours}</td>
+				<td id="enroll-complete-hours">${enroll.completeHours}</td>
 				<td><span id="ratio">${enroll.ratio}</span>%</td>
 				<td>
-					<form class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
+					<form onsubmit="submitFunction(event)" class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
 						<input name="enrollId" value="${enroll.enrollId}" type="hidden">
 						<input id="add-hours-input" class="add-hours-input" name="addHours" type="number" placeholder="추가할 시간을 입력하세요.">
 						<input id="add-hours-submit" class="add-hours-submit btn btn-outline-secondary" type="submit" value="추가">
@@ -122,26 +122,44 @@
 	
 </div>
 
-	<script>
-		window.onload = function () {
-			const ratio = document.getElementById('ratio').innerText;
-			const stateCd = document.getElementById('stateCdTitle').innerText;
-			console.log(stateCdTitle);
-			console.log(typeof stateCdTitle);
-			console.log(ratio);
-			console.log(typeof ratio);
-			const addHoursInput = document.getElementById('add-hours-input');
-			const addHoursSubmit = document.getElementById('add-hours-submit');
-			if(ratio>=100) {
-				addHoursInput.setAttribute("readonly", true);
-				addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다.");
-				addHoursSubmit.setAttribute("type","button");
-			} else if(stateCd === '수강신청' || stateCd === '수강예정' || stateCd === '수강취소' || stateCd === '수강완료') {
-				addHoursInput.setAttribute("readonly", true);
-				addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다.");
-				addHoursSubmit.setAttribute("type", "button");
-			}
+<script>
+	window.onload = function () {
+		const ratio = document.getElementById('ratio').innerText;
+		const stateCd = document.getElementById('stateCdTitle').innerText;
+		console.log(stateCdTitle);
+		console.log(typeof stateCdTitle);
+		console.log(ratio);
+		console.log(typeof ratio);
+		const addHoursInput = document.getElementById('add-hours-input');
+		const addHoursSubmit = document.getElementById('add-hours-submit');
+		if(ratio>=100) {
+			addHoursInput.setAttribute("readonly", true);
+			addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다.");
+			addHoursSubmit.setAttribute("type","button");
+		} else if(stateCd === '수강신청' || stateCd === '수강예정' || stateCd === '수강취소' || stateCd === '수강완료') {
+			addHoursInput.setAttribute("readonly", true);
+			addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다.");
+			addHoursSubmit.setAttribute("type", "button");
+		} 
+	}
+
+	function submitFunction(event) {
+		const addHoursInput = document.getElementById('add-hours-input');
+		let addHoursInputValue = addHoursInput.value;
+		addHoursInputValue = Number(addHoursInputValue);
+		let subjectHours = document.getElementById('subject-hours').innerText;
+		subjectHours = Number(subjectHours);
+		let enrollCompleteHours = document.getElementById('enroll-complete-hours').innerText;
+		enrollCompleteHours = Number(enrollCompleteHours);
+
+		// 수강시수 초과 입력 방지
+		if(addHoursInputValue+enrollCompleteHours>subjectHours){
+			alert('수강시수를 초과하여 입력할 수 없습니다.');
+			event.preventDefault();
+		} else {
+			return true;
 		}
-	</script>
+	}
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
