@@ -2,6 +2,8 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="<c:url value='/resources/css/course/details.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/form.css'/>" />
@@ -44,7 +46,8 @@
 	<div><span> > 강좌 관리 ></span> <span class="submenu-title">강좌 개설</span> </div>
 	</div>
 	<div class="card-body">
-		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
+		<c:url value="/subject/insert" var="actionURL" scope="page"/>
+		<form:form class="insert_form" action="${actionURL}" modelAttribute="openVo" enctype="multipart/form-data">
 			<table class="subject_course_title">
 				<colgroup>
 					<col width="10%">
@@ -109,7 +112,9 @@
 						<td> 
 							<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 							<input type="hidden" name="hours" id="hours" value="">
-							<input type="date" name="startDay" id="startDay" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()">
+							<input type="date" name="startDay" id="startDay" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()" required>
+							<%-- <form:input path="startDay" type="date" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()" required="required"/>
+							<form:errors path="startDay" class="error"/> --%>
 							~ 
 							<input type="date" name="endDay" id="endDay" readonly>
 							<span id="printDay"></span>
@@ -119,17 +124,17 @@
 					<tr>
 						<td class="write-txt"> 연수시간</td>
 						<td> <!-- 30분단위로 입력(초) -->
-							<input class="timepicker" name="startTime" id="startTime"> 
+							<input class="timepicker" name="startTime" id="startTime" required> 
 							~ 
-							<input class="timepicker" name="endTime" id="endTime">
+							<input class="timepicker" name="endTime" id="endTime" required>
 						</td>
 					</tr>
 					<tr>
 						<td class="write-txt"> 신청기간</td>
 						<td> 
-							<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()"> 
+							<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()" required> 
 							~ 
-							<input type="date" name="recruitEndDay" id="recruitEndDay" onchange="inputState()"> 
+							<input type="date" name="recruitEndDay" id="recruitEndDay" onchange="inputState()" required> 
 						</td>
 					</tr>
 					<tr>
@@ -142,7 +147,10 @@
 					</tr>
 					<tr>
 						<td class="write-txt"> 모집인원</td>
-						<td> <input type="number" name="recruitPeople" min="5"> 명 </td>
+						<td> <input type="number" name="recruitPeople" min="5" required> 명 
+						<%-- 	<form:input path="recruitPeople" type="number" required="required"/> 며
+							<form:errors path="recruitPeople" class="error"/>		 --%>		
+						</td>
 					</tr>
 					<tr>
 						<td> 교육비</td>
@@ -228,7 +236,7 @@
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장">
 			</div>
-		</form>		
+		</form:form>		
 	</div>
 </div>
 

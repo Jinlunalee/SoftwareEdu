@@ -30,11 +30,11 @@
 			
 			<table class="list">
 				<colgroup>
-					<col width="40%">
+					<col width="20%">
+					<col width="20%">
 					<col width="15%">
 					<col width="45%">
 				</colgroup>
-			
 			<thead>
 			<tr>
 				<th></th>
@@ -42,7 +42,7 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td rowspan="8">
+				<td colspan="2" rowspan="9">
 					<c:choose>
 						<c:when test="${!empty open.fileName}">
 							<c:set var="len" value="${fn:length(open.fileName)}"/>
@@ -56,10 +56,16 @@
 						</c:otherwise>
 					</c:choose>					
 				</td>
-				<td> 연수기간(일수)</td>
+				<td colspan="2" style="text-align: right;">
+					<span class="write-txt">※</span> 항목은 필수 입력 사항입니다.
+				</td>
+			</tr>
+			<tr>
+				<td class="write-txt"> 연수기간(일수)</td>
 				<td> 
+					<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 					<input type="hidden" name="hours" id="hours" value="${open.hours}">
-					<input type="date" name="startDay" id="startDay" value="${open.startDay}" onchange="calcEndDay()"}>
+					<input type="date" name="startDay" id="startDay" value="${open.startDay}" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="calcEndDay()" required>
 					~ 
 					<input type="date" name="endDay" id="endDay" value="${open.endDay}" readonly>
 					(${open.hours}시간)
@@ -67,19 +73,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 연수시간</td>
+				<td class="write-txt"> 연수시간</td>
 				<td>
-					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}"> 
+					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required> 
 					~
-					<input class="timepicker" name="endTime" id="endTime" value="${open.endTime}">
+					<input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required>
 				</td>
 			</tr>
 			<tr>
-				<td> 신청기간 </td>
+				<td class="write-txt"> 신청기간 </td>
 				<td> 
-					<input type="date" name="recruitStartDay" id="recruitStartDay" value="${open.recruitStartDay}" onchange="inputState()"> 
+					<input type="date" name="recruitStartDay" id="recruitStartDay" value="${open.recruitStartDay}" onchange="inputState()" required> 
 					~ 
-					<input type="date" name="recruitEndDay" id="recruitEndDay" value="${open.recruitEndDay}" onchange="inputState()">
+					<input type="date" name="recruitEndDay" id="recruitEndDay" value="${open.recruitEndDay}" onchange="inputState()" required>
 				</td>
 			</tr>
 			<tr>
@@ -89,13 +95,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 모집인원</td>
-				<td> <input type="number" name="recruitPeople" min="5" value="${open.recruitPeople}"> 명 </td>
+				<td class="write-txt"> 모집인원</td>
+				<td> <input type="number" name="recruitPeople" min="5" value="${open.recruitPeople}" required> 명 </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>
 				<td class="readonly_txt"> 
-					<input type="text" name="costFormat" value="$<fmt:formatNumber value="${open.cost}" type="number"/>" style="text-align: right;" readonly> 원 <br>
+					<fmt:formatNumber value="${open.cost}" type="number"/>원
 					<c:if test="${open.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
 				</td>
 			</tr>
