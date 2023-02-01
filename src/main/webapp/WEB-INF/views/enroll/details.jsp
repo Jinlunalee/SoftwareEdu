@@ -99,9 +99,9 @@
 
 		<table class="enroll-detail-table add-hours-table all-table">
 			<tr class="hours-ratio">
-				<th style="width:20%; background-color: #053863;">현재 수강 완료 시간</th>
-				<th style="width:20%; background-color: #053863;">진도율</th>
-				<th style="width:60%; background-color: #053863;">추가 수강 시간</th>
+				<th style="width:20%; background-color: #9BC3FF;">현재 수강 완료 시간</th>
+				<th style="width:20%; background-color: #9BC3FF;">진도율</th>
+				<th style="width:60%; background-color: #9BC3FF;">추가 수강 시간</th>
 			</tr>
 			
 			<tr>

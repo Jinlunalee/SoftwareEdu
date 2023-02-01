@@ -182,6 +182,7 @@ public class HomeController {
 		opnComnCdList.remove(0); // 모집 예정 제거
 		opnComnCdList.remove(3); // 진행 완료 제거
 		opnComnCdList.remove(3); // 폐강 제거
+
 		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
 	}
