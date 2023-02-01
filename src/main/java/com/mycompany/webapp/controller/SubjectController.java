@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -209,6 +212,7 @@ public class SubjectController {
 	public String insertSubject(Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("openVo", new OpenVO());
 
 		List<CourseVO> allCourseList = subjectService.selectAllCourse();
 		List<SubjectVO> allSubjectList = subjectService.selectAllSubject();
@@ -220,8 +224,13 @@ public class SubjectController {
 
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {
-
+	public String insertSubject(@ModelAttribute("openVo") @Valid OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo, 
+			BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "subject/insert";
+		}
+		
 		logger.info("subject/insert:"+openVo);
 		logger.info("subject/insert:"+questionVo);
 
