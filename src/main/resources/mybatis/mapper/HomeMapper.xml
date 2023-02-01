@@ -183,14 +183,15 @@
 			<when test="cases.equals('case1')">
 				AND state_cd in ('OPN02', 'OPN03', 'OPN04')
 				AND open.course_id is null
+				and to_date(sysdate, 'YYYY-MM-DD') <![CDATA[<=]]> to_date(start_day, 'YYYY-MM-DD') + 7
+				<if test="openStateCd != null and !openStateCd.equals('')">
+					AND state_cd = #{openStateCd}
+				</if>
 			</when>
 			<when test="cases.equals('case2')">
 				AND state_cd = 'OPN05'
 			</when>
 		</choose>
-		<if test="openStateCd != null and !openStateCd.equals('')">
-			AND state_cd = #{openStateCd}
-		</if>
 		ORDER BY open.subject_id, subject_seq
 	</select>
 	
@@ -233,7 +234,7 @@
 			</if>
 			<choose>
 				<when test="cases.equals('case1')">
-					AND open_state_cd in ('OPN02', 'OPN03', 'OPN04')
+					AND open_state_cd in ('OPN02', 'OPN03')
 				</when>
 			</choose>
 			<if test="openStateCd != null and !openStateCd.equals('')">

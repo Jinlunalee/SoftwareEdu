@@ -281,9 +281,10 @@ public class HomeController {
 	@GetMapping(value="/common/searchpop-opencourse")
 	public void searchPopOpenCourse(Model model) throws Exception{
 		List<CommonCodeVO> opnComnCdList = homeService.getComnCdList("OPN");
-		opnComnCdList.remove(0); // 모집 예정 제거
-		opnComnCdList.remove(3); // 진행완료 제거
-		opnComnCdList.remove(3); // 폐강 제거
+		opnComnCdList.remove(0); // 모집예정 제거
+		opnComnCdList.remove(2); // 진행중 제거
+		opnComnCdList.remove(2); // 진행완료 제거
+		opnComnCdList.remove(2); // 폐강 제거
 		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catCourseList", homeService.getComnCdList("CRS"));	// 분류 공통코드 리스트
 	}
