@@ -66,8 +66,8 @@
 					<td>
 						<button type="button" class="subject-popup-btn btn btn-outline-secondary">검색</button>
 					</td>
-					<td rowspan="2">
-						<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected(); removeHideFirst();">선택 완료</button>
+					<td>
+						<button type="button" id="reset-btn" class="btn btn-outline-secondary" onclick="resetSelected();">초기화</button>
 					</td>
 				</tr>
 				<tr>
@@ -79,6 +79,9 @@
 					</td>
 					<td>
 						<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+					</td>
+					<td>
+						<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected(); removeHideFirst();">선택 완료</button>
 					</td>
 				</tr>
 			</table>
@@ -307,15 +310,6 @@
 		} 
 	}
 
-	/* 선택완료 버튼 클릭 시 remove-hide 클래스에서 hide-first 클래스 삭제하기 */
-	function removeHideFirst() {
-		const subjectId = document.getElementById('subjectId-input').value;
-		const removeHide = document.getElementsByClassName('remove-hide');
-		if(subjectId) {
-			for(let i=0; i<removeHide.length; i++) {
-				removeHide[i].classList.remove('hide-first')
-			}
-		}
-	}
+
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

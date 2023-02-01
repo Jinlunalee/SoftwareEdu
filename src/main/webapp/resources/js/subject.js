@@ -1,3 +1,34 @@
+/* 선택완료 버튼 클릭 시 remove-hide 클래스에서 hide-first 클래스 삭제하기 */
+function removeHideFirst() {
+	const subjectId = document.getElementById('subjectId-input').value;
+	const removeHide = document.getElementsByClassName('remove-hide');
+	if(subjectId) {
+		for(let i=0; i<removeHide.length; i++) {
+			removeHide[i].classList.remove('hide-first')
+		}
+	}
+}
+
+/* 초기화 버튼 클릭 시 선택한 값들 다 reset하기 */
+function resetSelected() {
+	// 강좌
+	document.getElementById('subjectTitle-input').value=null;
+	document.getElementById('subject-input').removeAttribute("value");
+	document.getElementById('subjectId-input').removeAttribute("value");
+	document.getElementById('subjectId-string').removeAttribute("value"); // 과정에 이미 포함된 강좌 넘어온 값
+	// 과정
+	document.getElementById('courseTitle-input').value=null;
+	document.getElementById('course-input').removeAttribute("value");
+	document.getElementById('courseId-input').removeAttribute("value");
+	document.getElementById('courseId-string').removeAttribute("value"); // 과정에 이미 포함된 강좌 넘어온 값
+	// remove-hide 클래스에 hide-first 클래스 다시 넣기
+	const removeHide = document.getElementsByClassName('remove-hide');
+	for(let i=0; i<removeHide.length; i++) {
+		removeHide[i].classList.add('hide-first')
+	}
+
+}
+
 /*파일 누르면 이름 들어가게*/
 $(function(){
 	$("#file").on('change',function(){
@@ -6,6 +37,7 @@ $(function(){
 		$(".insert_FileUpload").val(fileName);
 	});
 });
+
 /*이미지 미리보기 기능 만들기 */
 function previewImg(input) {
 	//input 태그에 파일이 있는 경우
