@@ -258,45 +258,38 @@
 		let studentInput = $("#student-input").val();
 		let studentArr = studentInput.split('/');
 		let studentId = studentArr[0];
-		alert('studentId : ' + studentId);
 
 		// 강좌/과정 선택 값 확인
 		let selected = $("select[name=subCor]").val();
 
 		if ((selected === 'subject') || !selected) { //강좌인 경우 (기본, selected = subject)
-			alert('selected : ' + selected);
 			let subjectInput = $("#subject-input").val();
 			let subjectArr = subjectInput.split('/');
 			let subjectId = subjectArr[0];
 			let subjectSeq = subjectArr[1];
-			alert('subjectId : ' + subjectId +  ' | subjectSeq : ' + subjectSeq);
 
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-					alert("subject success");
 				},
 				error : function(result) {
 					alert(result);
 				}
 			})
 		} else if(selected === "course") { //과정인 경우
-			alert('selected : ' + selected);
 
 			let courseInput = $("#course-input").val();
 			let courseArr = courseInput.split('/');
 			let courseId = courseArr[0];
 			let courseOpenYear = courseArr[3];
-			alert('courseId : ' + courseId + ' | courseOpenYear : ' + courseOpenYear);
 	
 			$.ajax({
 				type : 'POST',
 				url : 'addcourse/' + studentId + '/' + courseId + '/' + courseOpenYear,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-					alert("course success");
 				},
 				error : function(result) {
 					alert(result);
