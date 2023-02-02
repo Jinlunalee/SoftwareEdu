@@ -109,7 +109,7 @@
                            </tr>
                            <tr>
                               <td>* sendDt : 전송시간</td>
-                              <td>* stateCd : 진행상태(ERL06)</td>
+                              <td>* stateCd : 진행상태 (진행완료:ERL06)</td>
                         </table>
                      </div>
                   </div>
@@ -130,7 +130,7 @@
                            </tr>
                            <tr>
                               <td>* sendDt : 전송시간</td>
-                              <td>* stateCd : 진행상태(ERL06)</td>
+                              <td>* stateCd : 진행상태 (진행완료:ERL06)</td>
                         </table>
 
                      </div>
@@ -152,7 +152,7 @@
                               <td>* endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
-                              <td>* cost : 교육비</td>
+                              <td>* cost : 교육비 (단위: 원)</td>
                               <td>* sendDt : 전송시간</td>
                         </table>
                      </div>
@@ -174,7 +174,7 @@
                               <td>* endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
-                              <td>* cost : 교육비</td>
+                              <td>* cost : 교육비 (단위: 원)</td>
                               <td>* sendDt : 전송시간</td>
                         </table>
                      </div>
