@@ -135,8 +135,8 @@
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenSubject*/
 		SELECT
-		    open.subject_id, 
-		    subject_seq,
+		    open.subject_id, /* 강좌아이디 */
+		    subject_seq, /* 차수 */
 		    subject_title,
 		    support_yn, 
 		    days, 
@@ -148,7 +148,7 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", /**/
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
 		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitStartDay", 
 		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitEndDay", 
@@ -218,7 +218,7 @@
 		            left join subject on open.subject_id = subject.subject_id
 		            left join course on open.course_id = course.course_id
 		            left join common_code on open.state_cd = common_code.comn_cd
-		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07')
+		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07') /* OPN07 폐강 */
 	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
 				AND open.course_id = #{courseId}
@@ -269,7 +269,7 @@
    /*selectSubjectListByCourseId*/
    SELECT s.subject_id,
    			subject_title, 
-   			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
+   			TO_CHAR(TO_DATE(START_DAY, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
    			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS "startTime", 
    			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS "endTime",  
