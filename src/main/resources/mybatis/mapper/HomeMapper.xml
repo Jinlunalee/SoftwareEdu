@@ -135,8 +135,8 @@
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenSubject*/
 		SELECT
-		    open.subject_id, 
-		    subject_seq,
+		    open.subject_id, /* 강좌아이디 */
+		    subject_seq, /* 차수 */
 		    subject_title,
 		    support_yn, 
 		    days, 
@@ -148,10 +148,11 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, /**/
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
 		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
 		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
+
 		    recruit_people,
 		    state_cd as open_state_cd,
 		    comn_cd_title as open_state_cd_title,
@@ -218,7 +219,7 @@
 		            left join subject on open.subject_id = subject.subject_id
 		            left join course on open.course_id = course.course_id
 		            left join common_code on open.state_cd = common_code.comn_cd
-		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07')
+		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07') /* OPN07 폐강 */
 	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
 				AND open.course_id = #{courseId}
@@ -249,9 +250,9 @@
 	      SELECT student_id, 
 	            name, 
 	            gender_cd, 
-	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
+	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
 	            email, 
-	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS phone, 
 	            add_do_cd, 
 	            add_etc,
 	            position_cd 
