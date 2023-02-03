@@ -20,6 +20,7 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
+                    <div>※ 개설 과정은 '모집중', '모집마감' 상태만 수강 추가할 수 있습니다.</div>
                     <form id="search-form">
                         <div class="search-input">
                             <select name="course" onchange="putNameonInput(this.value)" >

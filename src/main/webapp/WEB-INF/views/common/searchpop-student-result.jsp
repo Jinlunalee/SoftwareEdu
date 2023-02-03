@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <td class="th-column-1">수강생 명</td>
-                        <td class="th-column-2">아이디</td>
+                        <td class="th-column-2">수강생아이디</td>
                         <td class="th-column-5">생년월일</td>
                         <td class="th-column-6">성별</td>
                         <td class="th-column-6">이메일</td>
@@ -23,8 +23,8 @@
                         <tr>
                             <td>${student.name}</td>
                             <td>
-                                <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}/${student.birth}/${student.genderTitle}/${student.email}/${student.phone}/${student.addDoTitle}/${student.addEtc}/${student.positionTitle}">
-                                    ${student.studentId}
+                                <a id="${student.studentId}" class="move" onclick="return moveOutside(event, this.name);" href="#"  name="${student.studentId}/${student.name}/${student.birth}/${student.genderTitle}/${student.email}/${student.phone}/${student.addDoTitle}/${student.addEtc}/${student.positionTitle}/${student.userId}">
+                                    ${student.userId}
                                 </a>
                             </td>
                             <td>${student.birth}</td>

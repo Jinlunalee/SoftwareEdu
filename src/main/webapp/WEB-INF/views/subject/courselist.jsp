@@ -12,22 +12,25 @@
 	</div>
 	<div class="card-body">
 		<!-- 검색 시작 -->
+		<form action="<c:url value='/subject/searchCourseBoardlist'/>">
 		<div class="search">
-			<select class="select-box">
-				<option>과정명</option>
-				<option>과정아이디</option>
+			<select name="course" class="select-box">
+				<option value="crseTitle" ${course eq 'crseTitle'?"selected":""}>과정명</option>
+				<option value="crseId" ${course eq 'crseId'?"selected":""}>과정아이디</option>
 			</select>
-			<input class="input-text" type="text" placeholder="과정명 / 과정아이디를 입력해 주세요">
-			<input class="input-button" type="button" value="검색" style="position: static;">
+			<input name="keyword" class="input-text" type="text" value="${keyword}">
+			<input class="input-button" type="submit" value="검색" style="position: static;">
         </div>
+        </form>
+        <!-- 검색끝 -->
         
         <div class="view">
-			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
-			<select class="select-view" onchange="listCount2(this.value)">
+			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert?check=${check}"/>'">강좌/과정 개설</button>
+			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
-				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
-				<option value="30" ${rowsPerPage eq '30'?"selected":""}>30개</option>
-				<option value="50" ${rowsPerPage eq '50'?"selected":""}>50개</option>
+				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '10'?"selected":""}>10개</option>
+				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '30'?"selected":""}>30개</option>
+				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '50'?"selected":""}>50개</option>
 			</select>
 		</div>
 		
@@ -47,7 +50,7 @@
 					<th>분류</th>
 					<th>연수기간</th>
 					<th>신청기간</th>
-					<th>교육비</th>
+					<th>교육비(원)</th>
 					<th>상태</th>
 					<th>개설연도</th>
 					<th>처리</th>
@@ -93,24 +96,24 @@
 		<!--paging-->
             <div id="paging">
                 <ul class="paging">
-                    <li><a href="courseboardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">처음</a></li>
+                    <li><a href="searchCourseBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">처음</a></li>
                     <c:if test="${pager.groupNo>1}">
-                        <li><a href="courseboardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">이전</a></li>
+                        <li><a href="searchCourseBoardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">이전</a></li>
                     </c:if>
 
                     <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
                         <c:if test="${pager.pageNo != i}">
-                            <li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">${i}</a></li>
+                            <li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
                         </c:if>
                         <c:if test="${pager.pageNo == i}">
-                            <li><a href="courseboardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">${i}</a></li>
+                            <li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <li><a href="courseboardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">다음</a></li>
+                        <li><a href="searchCourseBoardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">다음</a></li>
                     </c:if>
-                    <li><a href="courseboardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}">맨끝</a></li>
+                    <li><a href="searchCourseBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">맨끝</a></li>
                 </ul>
             </div>
 		</div>

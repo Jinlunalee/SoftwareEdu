@@ -8,21 +8,22 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <td class="th-column-7">개설연도</td>
                         <td class="th-column-1">과정아이디</td>
                         <td class="th-column-2">과정명</td>
-                        <td class="th-column-3">강의 진행 기간</td>
-                        <td class="th-column-4">강의 모집 기간</td>
+                        <td class="th-column-3">강좌기간</td>
+                        <td class="th-column-4">모집기간</td>
                         <td class="th-column-5">상태</td>
                         <td class="th-column-6">분류</td>
-                        <td class="th-column-7">개설연도</td>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${boardList}" var="board">
                         <tr>
+                            <td>${board.courseOpenYear}</td>
                             <td>${board.courseId}</td>
                             <td>
-                                <a class="${board.openStateCd} ${board.courseId}-${board.courseOpenYear}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.regYear}">
+                                <a class="${board.openStateCd} ${board.courseId}-${board.courseOpenYear}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.courseId}/${board.catCourseCd}/${board.courseTitle}/${board.courseOpenYear}">
                                     ${board.courseTitle}
                                 </a>
                             </td>
@@ -30,7 +31,6 @@
                             <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catCourseCdTitle}</td>
-                            <td>${board.courseOpenYear}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

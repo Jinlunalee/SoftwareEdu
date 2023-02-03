@@ -135,8 +135,8 @@
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenSubject*/
 		SELECT
-		    open.subject_id, 
-		    subject_seq,
+		    open.subject_id, /* 강좌아이디 */
+		    subject_seq, /* 차수 */
 		    subject_title,
 		    support_yn, 
 		    days, 
@@ -148,17 +148,18 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
-		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
-		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitStartDay", 
-		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitEndDay", 
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, /**/
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
+		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
+		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
+
 		    recruit_people,
 		    state_cd as open_state_cd,
 		    comn_cd_title as open_state_cd_title,
 		    file_id,
 		    subject.cat_cd as cat_subject_cd,
 		    subject.reg_year,
-		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "openDt" 
+		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS open_dt 
 		FROM open
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -192,7 +193,7 @@
 				AND state_cd = 'OPN05'
 			</when>
 		</choose>
-		ORDER BY open.subject_id, subject_seq
+		ORDER BY open.open_dt DESC
 	</select>
 	
 	<select id="searchOpenCourse" parameterType="OpenVO" resultType="OpenVO">
@@ -218,7 +219,7 @@
 		            left join subject on open.subject_id = subject.subject_id
 		            left join course on open.course_id = course.course_id
 		            left join common_code on open.state_cd = common_code.comn_cd
-		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07')
+		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07') /* OPN07 폐강 */
 	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
 				AND open.course_id = #{courseId}
@@ -241,24 +242,25 @@
 			AND open_state_cd = #{openStateCd}
 			</if>
 		</where>
-		order by 1
+		order by 2 DESC
 	</select>
 	
 	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
 	   /*searchStudentList*/
-	      SELECT student_id, 
+	      SELECT student_id,
+	      		user_id, 
 	            name, 
 	            gender_cd, 
-	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
+	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
 	            email, 
-	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS phone, 
 	            add_do_cd, 
 	            add_etc,
 	            position_cd 
 	      FROM STUDENT 
 	      WHERE 1=1 
-	      <if test="studentId != null and !studentId.equals('')">
-	         AND (student_id = #{studentId} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{studentId}) || '%')
+	      <if test="userId != null and !userId.equals('')">
+	         AND (user_id = #{userId} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{userId}) || '%')
 	      </if>
 	      <if test="name != null and !name.equals('')">
 	         AND name = #{name}
@@ -269,10 +271,10 @@
    /*selectSubjectListByCourseId*/
    SELECT s.subject_id,
    			subject_title, 
-   			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
-		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
-   			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS "startTime", 
-   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS "endTime",  
+   			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
+   			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS start_time, 
+   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS end_time,  
    			days, 
    			hours, 
    			level_cd, 

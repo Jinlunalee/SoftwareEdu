@@ -6,12 +6,12 @@
 	<select id="getDataList" parameterType="map" resultType="StudentVO">
 		/* getDataList */
 		select
-            'KOSA01' as agentId,
+            'KOSA01' as agent_id,
             SUBSTR(open.start_day, 1, 4)||','||enroll.subject_id || ',' || enroll.subject_seq ||','|| 
-            enroll_id ||','|| student.student_id as "stdSbj",
+            enroll_id ||','|| student.student_id as std_sbj,
             student.name,
             enroll.complete_hours,
-            to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as "sendDt",
+            to_char(SYSDATE, 'yyyyMMdd hh24:mi:ss') as send_dt,
             enroll.state_cd
         from enroll
         inner join student on enroll.student_id = student.student_id

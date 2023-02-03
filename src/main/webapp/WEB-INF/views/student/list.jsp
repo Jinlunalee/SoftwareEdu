@@ -15,18 +15,21 @@
 	</div>
 
 	<div class="card-body">
-
-		<div class="search">
+	   <form action="<c:url value='/subject/searchCourseBoardlist'/>">
+        <div class="search">
+		<div class="selectstudent">
 			<select class="select-box">
-				<option>수강생 명</option>
-				<option>구분</option>
+				<option value="studentName">수강생이름</option>
+				<option value="userId">수강생아이디</option>
 			</select> 
-			<input class="input-text" type="text" placeholder="수강생 명을 입력해 주세요"> 
+			<input class="input-text" type="text" value ="${student.keyword}" placeholder="검색어를 입력해 주세요"> 
 			<input class="input-button" type="button" value="검색">
 		</div>
+		</div>
+		</form>
 
 		<div class="view">
-			<button type="button" class="btn btn-outline-secondary">수강생추가</button>
+<!-- 			<button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
 			<select class="select-view" onchange="listCount(this.value)">
 				<option value="">선택</option>
 				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
@@ -45,10 +48,10 @@
 
 			<table class="list">
 				<tr>
-                    <th>수강생 아이디</th>
-					<th>수강생명</th>
-					<th>이메일</th>
+                    <th>수강생이름(관리아이디)</th>				
+                    <th>수강생아이디</th>
 					<th>생년월일</th>
+					<th>이메일</th>
 					<th>직위</th>
 					<th>수정/삭제</th>
 					<th></th>
@@ -58,10 +61,10 @@
 				<c:if test="${boardListSize ne 0}">  	
 					<c:forEach var="board" items="${boardList}" varStatus="status"> 
 						<tr>
-                            <td>${board.studentId}</td>
-							<td>${board.name}</td>
+                            <td>${board.name}(${board.studentId})</td> 
+                            <td>${board.userId}</td>
+                            <td>${board.birth}</td>							
 							<td>${board.email}</td>
-							<td>${board.birth}</td>
 							<td>${board.positionTitle}</td>
 							<td>
 								<form>

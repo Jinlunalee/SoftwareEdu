@@ -23,4 +23,5 @@ public interface ISurveyRepository {
 	
 	List<AnswerVO> selectAnswerList(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); //해당 강좌에 대한 답변정보
 	Map<String, Integer> pivotAnswerValue(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("questionNum") int questionNum);
+	String getSubjectTitle(String subjectId);
 }

@@ -160,7 +160,7 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
     } else if(value === 'studentId') {
-        studentInput.setAttribute("name", 'studentId');
+        studentInput.setAttribute("name", 'userId');
     } else{
         studentInput.setAttribute("name", 'name');
     }
@@ -196,7 +196,7 @@ function moveOutside(event, value){
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
         
-        $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ")  |  등록일자 : " + openDt);
+        $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
 
@@ -217,14 +217,14 @@ function moveOutside(event, value){
             var table = $("<table class='subjectdetails'/>");
             var tr = $("<table class='subjectdetails' border='1'/>").append(
                     $("<tr/>"),
-                    $("<td class='subject-th'/>").text('연수 기간'),
-                    $("<td class='subject-th'/>").text('신청 기간'),
+                    $("<td class='subject-th'/>").text('강좌기간'),
+                    $("<td class='subject-th'/>").text('모집기간'),
                     $("<td class='subject-th'/>").text('일수'),
-                    $("<td class='subject-th'/>").text('시수'),
-                    $("<td class='subject-th'/>").text('모집 인원'),
-                    $("<td class='subject-th'/>").text('강좌 분류'),
-                    $("<td class='subject-th'/>").text('개설 상태'),
-                    $("<td class='subject-th'/>").text('난이도 (기타)'),
+                    $("<td class='subject-th'/>").text('시수(시간)'),
+                    $("<td class='subject-th'/>").text('모집인원'),
+                    $("<td class='subject-th'/>").text('강좌분류'),
+                    $("<td class='subject-th'/>").text('개설상태'),
+                    $("<td class='subject-th'/>").text('난이도(기타)'),
                     $("<tr/>"),
                     $("<td/>").text(startDay + ' ~ ' + endDay),
                     $("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
@@ -243,7 +243,7 @@ function moveOutside(event, value){
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
         let valueYear = valueArr[3];
-        $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ")");
+        $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ") | 개설연도 : " + valueYear);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
         $(opener.document).find("#courseYear-input").val(valueYear);
@@ -269,19 +269,21 @@ function moveOutside(event, value){
                         var table = $("<table class='courselist'/>");
                         var tr1 = $("<table class='courselist' border='1'/>").append(
                                 $("<tr/>"),
-                                $("<td class='course-th'/>").text('강좌 아이디'),
-                                $("<td class='course-th'/>").text('강좌 명'),
-                                $("<td class='course-th'/>").text('연수 기간'),
-                                $("<td class='course-th'/>").text('연수 시간'),
+                                $("<td class='course-th'/>").text('강좌아이디'),
+                                $("<td class='course-th'/>").text('강좌회차'),
+                                $("<td class='course-th'/>").text('강좌명'),
+                                $("<td class='course-th'/>").text('강좌기간'),
+                                $("<td class='course-th'/>").text('강좌시간'),
                                 $("<td class='course-th'/>").text('일수'),
-                                $("<td class='course-th'/>").text('시수'),
+                                $("<td class='course-th'/>").text('시수(시간)'),
                                 $("<td class='course-th'/>").text('난이도'),
                                 $("<td class='course-th'/>").text('비용'),
-                                $("<td class='course-th'/>").text('교육비 지원 여부')
+                                $("<td class='course-th'/>").text('교육비지원여부')
                         );
                                     
                         for(var i in result) {
                             var $subjectId = result[i].subjectId;
+                            var $subjectSeq = result[i].subjectSeq;
                             var $subjectTitle = result[i].subjectTitle;
                             var $startDay = result[i].startDay;
                             var $endDay = result[i].endDay;
@@ -291,17 +293,19 @@ function moveOutside(event, value){
                             var $hours = result[i].hours;
                             var $levelCdTitle = result[i].levelCdTitle;
                             var $cost = result[i].cost;
+                            $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             var $supportYn = result[i].supportYn;
                             
                             if($supportYn === 'Y') {
-                            	$supportYn = '지원 가능'
+                                $supportYn = '지원 가능'
                             }else if($supportYn === 'N') {
-                            	$supportYn = '지원 불가'
+                                $supportYn = '지원 불가'
                             }
                             
                             var tr2 = tr1.append(
                                     $("<tr/>"),
                                     $("<td/>").text($subjectId),
+                                    $("<td/>").text($subjectSeq),
                                     $("<td/>").text($subjectTitle),
                                     $("<td/>").text($startDay + ' ~ ' + $endDay),
                                     $("<td/>").text($startTime + ' ~ ' + $endTime),
@@ -335,8 +339,9 @@ function moveOutside(event, value){
         let studentAddDoTitle = valueArr[6];
         let studentAddEtc = valueArr[7];
         let studentPositionTitle = valueArr[8];
+        let studentUserId = valueArr[9];
         
-        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + valueId + ")");
+        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + studentUserId + ")");
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
         
@@ -371,6 +376,8 @@ function moveOutside(event, value){
 
 /* 만족도 조사 : 통계 조회 버튼 누를 시 통계 테이블 보여주기 */
 function viewSummary(subjectId, subjectSeq){
+    opener.document.querySelector("#chart-table").lastElementChild.remove(); // 리셋
+    opener.document.querySelector("#chart-bar").lastElementChild.remove(); // 리셋
     $.ajax({
         url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
         type : "GET",

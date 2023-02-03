@@ -142,7 +142,7 @@
 						(subject_id, subject_seq, course_id, file_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, course_open_year, open_dt, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{fileId}, #{content},
+						(#{subjectId},#{subjectSeq},#{courseId}, #{fileId}, #{content},
 						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
 						TO_CHAR(TO_TIMESTAMP(#{endTime},'HH24:MI'),'HH24MI'),
 						TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),
@@ -157,7 +157,7 @@
 						(subject_id, subject_seq, course_id, content, start_time, end_time, start_day, end_day, recruit_start_day, recruit_end_day,
                 		recruit_people, state_cd, course_open_year, open_dt, reg_id, reg_dt, del_yn)
 				values 
-						(#{subjectId},SEQ_SUBJECT.NEXTVAL,#{courseId}, #{content},
+						(#{subjectId},#{subjectSeq},#{courseId}, #{content},
 						TO_CHAR(TO_TIMESTAMP(#{startTime},'HH24:MI'),'HH24MI'),
 						TO_CHAR(TO_TIMESTAMP(#{endTime},'HH24:MI'),'HH24MI'),
 						TO_CHAR(TO_DATE(#{startDay},'YYYY-MM-DD'), 'YYYYMMDD'),

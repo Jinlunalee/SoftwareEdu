@@ -47,7 +47,7 @@
 	</div>
 	<div class="card-body">
 		<c:url value="/subject/insert" var="actionURL" scope="page"/>
-		<form:form class="insert_form" action="${actionURL}" modelAttribute="openVo" enctype="multipart/form-data">
+		<form class="insert_form" action="${actionURL}" modelAttribute="openVo" enctype="multipart/form-data">
 			<table class="subject_course_title">
 				<colgroup>
 					<col width="10%">
@@ -55,6 +55,9 @@
 					<col width="10%">
 					<col width="10%">
 				</colgroup>
+				<tr>
+					<td colspan="4" style="text-align: right;"><span class="write-txt">※</span> 항목은 필수 입력 사항입니다.</td>
+				</tr>
 				<tr>
 					<td colspan="4" class="info-text">※ 개설하고자하는 '강좌'를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.<br>
 						※ '과정'으로 강좌를 개설하고자 한다면, 강좌 선택 후 '과정' 또한 선택해주세요.</td>
@@ -74,17 +77,25 @@
 					</td>
 				</tr>
 				<tr>
-					<th>과정</th>
+					<c:choose>
+					<c:when test="${check eq 'openCourse'}">
+						<th class="write-txt" style="padding-left: 12px;">과정</th>
+					</c:when>
+					<c:otherwise>
+						<th>과정</th>
+					</c:otherwise>
+					</c:choose>
 					<td>
 						<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 과정을 검색하세요.">
 						<input id="course-input" name="course" type="hidden">
 						<input id="courseId-input" name="courseId" type="hidden">
+						<input id="check" type="hidden" value="${check}">
 					</td>
 					<td>
-						<button class="course-popup-btn btn btn-outline-secondary">검색</button>
+						<button type="button" class="course-popup-btn btn btn-outline-secondary">검색</button>
 					</td>
 					<td>
-						<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="selected(); removeHideFirst();">선택 완료</button>
+						<button type="button" id="select-btn" class="btn btn-outline-secondary" onclick="chcekCourseOrSubject();">선택 완료</button>
 					</td>
 				</tr>
 			</table>
@@ -102,9 +113,6 @@
 					<tr>
 						<td colspan="2" rowspan="9" style="text-align: center;">
 							<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
-						</td>
-						<td colspan="2" style="text-align: right;">
-							<span class="write-txt">※</span> 항목은 필수 입력 사항입니다.
 						</td>
 					</tr>
 					<tr>
@@ -124,9 +132,9 @@
 					<tr>
 						<td class="write-txt"> 연수시간</td>
 						<td> <!-- 30분단위로 입력(초) -->
-							<input class="timepicker" name="startTime" id="startTime" required> 
+							<input type=number class="timepicker" name="startTime" id="startTime" required> 
 							~ 
-							<input class="timepicker" name="endTime" id="endTime" required>
+							<input type=number class="timepicker" name="endTime" id="endTime" required>
 						</td>
 					</tr>
 					<tr>
@@ -236,7 +244,7 @@
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장">
 			</div>
-		</form:form>		
+		</form>		
 	</div>
 </div>
 
