@@ -439,6 +439,9 @@ public class SubjectController {
 		return "subject/boardlist-result";
 	}
 	
+	
+	
+	
 	/**
 	 * @Description : 연수 끝나는 날 지정해줄때 휴일인 경우 고려
 	 * @author KOSA
