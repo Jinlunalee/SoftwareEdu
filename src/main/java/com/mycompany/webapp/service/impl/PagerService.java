@@ -160,6 +160,9 @@ public class PagerService implements IPagerService {
 		String keyword2 = enroll.getKeyword2();
 		
 		List<EnrollVO> boardList = pagerRepository.selectSearchListByExcel(applyStartDay, applyEndDay, student, course, state, keyword1, keyword2);
+		for(EnrollVO enrollVo : boardList) {
+			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+		}
 		
 		return boardList;
 	}

@@ -1,10 +1,9 @@
 package com.mycompany.webapp.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -169,9 +168,10 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/cancel/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String clickCancel(EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	public String clickCancel(HttpServletRequest request, EnrollVO enroll, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.clickCancel(enroll, studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	/**
@@ -296,8 +296,8 @@ public class EnrollController {
 		headerRow.createCell(1).setCellValue("과정 명");
 		headerRow.createCell(2).setCellValue("수강생 명");
 		headerRow.createCell(3).setCellValue("수강생 아이디");
-		headerRow.createCell(4).setCellValue("신청일자");
-		headerRow.createCell(5).setCellValue("현재 상태");
+		headerRow.createCell(4).setCellValue("신청 일자");
+		headerRow.createCell(5).setCellValue("수강 상태");
 		headerRow.createCell(6).setCellValue("진도율");
 		
 		int totalRows = rowsPerPage;
@@ -344,8 +344,8 @@ public class EnrollController {
 		headerRow.createCell(1).setCellValue("과정 명");
 		headerRow.createCell(2).setCellValue("수강생 명");
 		headerRow.createCell(3).setCellValue("수강생 아이디");
-		headerRow.createCell(4).setCellValue("신청일자");
-		headerRow.createCell(5).setCellValue("현재 상태");
+		headerRow.createCell(4).setCellValue("신청 일자");
+		headerRow.createCell(5).setCellValue("수강 상태");
 		headerRow.createCell(6).setCellValue("진도율");
 		
 			List<EnrollVO> searchList = pagerService.selectSearchListByExcel(enrollVo);
@@ -354,13 +354,13 @@ public class EnrollController {
 				row.createCell(0).setCellValue(enroll.getSubjectTitle());
 				row.createCell(1).setCellValue(enroll.getCourseTitle());
 				row.createCell(2).setCellValue(enroll.getName());
-				row.createCell(3).setCellValue(enroll.getStudentId());
+				row.createCell(3).setCellValue(enroll.getUserId());
 				row.createCell(4).setCellValue(enroll.getEnrollDt());
 				row.createCell(5).setCellValue(enroll.getStateCdTitle());
 				row.createCell(6).setCellValue(enroll.getRatio() + "%");
 			}
 		
-		String fileName = "검색 수강 목록.xls";
+		String fileName = "수강 목록.xls";
 		String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
 		response.setContentType("ms-vnd/excel");
 		response.setHeader("Content-Disposition", "attachment;fileName=\"" + outputFileName + "\"");

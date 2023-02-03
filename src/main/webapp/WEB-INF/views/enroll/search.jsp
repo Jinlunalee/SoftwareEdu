@@ -79,8 +79,8 @@
 		<tr>
 			<th>강좌 명 (과정 명)</th>
 			<th>수강생 명 (아이디)</th>
-			<th>신청일자</th>
-			<th>현재 상태 (진도율)</th>
+			<th>신청 일자</th>
+			<th>수강 상태 (진도율)</th>
 			<th>취소 사유</th>
 			<th>취소</th>
 			<th>삭제</th>
@@ -130,14 +130,14 @@
 								<img class="cancel-img" src="/resources/images/survey/survey_question.png">
 								<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
-									<select id="selectCancel" name="cancelRsCd" class="cancelrs"  onchange="cancel(); this.onclick=null;">
+									<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
 										<option>취소 사유 선택</option>
 										<c:forEach var="cancel" items="${cancelList}">
 											<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 										</c:forEach>
 									</select>
 									<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
-									<span id="cancelRsEtc"></span>
+									<span id="cancelRsEtc-${status.count}"></span>
 									<input type="submit" value="확인" class="confirm">
 								</form>
 								<div id="close-btn">
@@ -264,35 +264,37 @@
 			}
 		}
 
-		function cancel(){
-			var selectCancel = document.getElementById('selectCancel');
-			var cancel = selectCancel.options[selectCancel.selectedIndex].text;
-		
-			if(cancel === '관리자 기타'){
+		function cancel(i){
+			const selectId = "#selectCancel-" + i;
+			var selectCancel = selectId + " option:selected";
+			var cancel = $(selectCancel).val();
+			console.log(cancel);
+			
+			if(cancel === 'CXL07'){
 				var createInput = document.createElement("input");
 				createInput.setAttribute("type", "text");
 				createInput.setAttribute("name", "cancelRsEtc");
 				createInput.setAttribute("class", "input-cancel");
-				document.querySelector("#cancelRsEtc").append(createInput);
-			}else if(cancel !== '관리자 기타'){
-					$('#cancelRsEtc').empty();		
+				const cancelRsEtcId = "#cancelRsEtc-" + i;
+				$(cancelRsEtcId).append(createInput);
+			}else if(cancel !== 'CXL07'){
+					$(cancelRsEtcId).empty();		
 			}
 		}
 		
-		/* document.getElementById('applyStartDay').valueAsDate = new Date().setFullYear(new Date().getFullYear()-1);
-		const applyEndDay = $('#applyEndDay').val();
+		/* document.getElementById('applyStartDay').valueAsDate = new Date().setFullYear(new Date().getFullYear()-1); */
 		if(applyEndDay === '') {
 		var today = new Date();
 		var year = today.getFullYear();
 		var month = today.getMonth()+1 > 9 ? today.getMonth()+1 : '0' + today.getMonth()+1;
 		var day = today.getDate() > 9 ? today.getDate() : '0' + today.getDate();
 		
-		let offset = date.getTimezoneOffset() * 60000;
+		/* let offset = date.getTimezoneOffset() * 60000;
 		let dateOffset = new Date(date.getTime() - offset);
-		
+		 */
 		$('#applyEndDay').val(dateOffset.toISOString());
+		
 		}
-		document.getElementById('applyEndDay').valueAsDate = new Date(); */
 	</script>
 
 

@@ -23,13 +23,13 @@
         		start_day,
         		end_day 
 		FROM ENROLL e 
-		LEFT OUTER JOIN STUDENT t 
-		ON e.student_id = t.student_id 
+		LEFT OUTER JOIN STUDENT stu 
+		ON e.student_id = stu.student_id 
         LEFT OUTER JOIN OPEN o 
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        LEFT OUTER JOIN SUBJECT s 
-        ON e.subject_id = s.subject_id 
-        WHERE NOT (e.del_yn ='Y')
+        LEFT OUTER JOIN SUBJECT sub 
+        ON e.subject_id = sub.subject_id 
+        WHERE e.del_yn ='N'
 	</select>
 	
 	<select id="getRatioUsingEnrollId" parameterType="String" resultType="int">
@@ -37,34 +37,34 @@
 		SELECT ROUND(complete_hours/hours * 100) 
 		FROM ENROLL e, SUBJECT s 
 		WHERE e.subject_id = s.subject_id AND enroll_id = #{enrollId} 
-		AND NOT (e.del_yn ='Y')
+		AND e.del_yn ='N'
 	</select>
 	
 	<select id="getHours" parameterType="string" resultType="int">
 	/* getHours */
 		SELECT complete_hours 
 		FROM ENROLL 
-		WHERE enroll_id = #{enrollId} AND NOT (e.del_yn ='Y')
+		WHERE e.del_yn ='Y' AND enroll_id = #{enrollId}
 	</select>
 	
 	<select id="getCancelList" resultType="CommonCodeVO">
 	/* getCancelList */
-		SELECT comn_cd, 
-		comn_cd_title 
+		SELECT 	comn_cd, 
+				comn_cd_title 
 		FROM COMMON_CODE 
 		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
 	</select>
 	
 	<select id="getStudentList" parameterType="StudentVO" resultType="StudentVO">
 	/* getStudentList */
-		SELECT student_id, 
+		SELECT 	student_id, 
 				name, 
 				gender_cd, 
-				TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
+				TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
 				email, 
-				REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+				REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS phone, 
 				add_do_cd, 
-				add_etc,
+				add_etc, 
 				position_cd 
 		FROM STUDENT 
 		WHERE 
@@ -106,11 +106,11 @@
 			    SELECT 
 			        o.course_id, 
 			        course_title, 
-			        min(start_day) AS "startDay", 
-			        max(end_day) AS "endDay", 
-			        min(recruit_start_day) AS "recruitStartDay", 
-			        max(recruit_end_day) AS "recruitEndDay", 
-			        max(recruit_people) AS "recruitPeople" 
+			        min(start_day) AS start_day, 
+			        max(end_day) AS end_day, 
+			        min(recruit_start_day) AS recruit_start_day, 
+			        max(recruit_end_day) AS recruit_end_day, 
+			        max(recruit_people) AS recruit_people 
 			    FROM OPEN o 
 			    LEFT OUTER JOIN COURSE c 
 			    ON o.course_id = c.course_id 
@@ -152,9 +152,9 @@
 	
 	<select id="getSubjectCountByCourse" parameterType="String" resultType="int">
 	/* getSubjectCountByCourse */
-		SELECT count(subject_id)
-		FROM open
-		WHERE course_id=#{courseId}
+		SELECT count(subject_id) 
+		FROM open 
+		WHERE course_id = #{courseId}
 	</select>
 	
 	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
@@ -162,7 +162,7 @@
 		select 
 		    subject_id, 
 		    subject_seq 
-		from open
+		from open 
 		where course_id = #{courseId}
 	</select>
 	

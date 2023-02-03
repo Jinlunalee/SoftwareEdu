@@ -110,38 +110,38 @@
 	
 	<select id="getCountEnrollRow" resultType="int">
 		/*getCountEnrollRow*/
-		SELECT count(*)
-		FROM enroll
-		WHERE del_yn = 'N' 
+		SELECT count(*) 
+		FROM enroll 
+		WHERE del_yn = 'N'
 	</select>
 
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
 		/*selectEnrollListByPage*/
 		<include refid="paging-header" /> 
 		        SELECT  enroll_id, 
-		                e.subject_id,
-		                e.subject_seq,
+		                e.subject_id, 
+		                e.subject_seq, 
 		                e.student_id, 
-		                name,
-		                sub.subject_title,
-		                e.state_cd,
+		                name, 
+		                sub.subject_title, 
+		                e.state_cd, 
 		                complete_hours, 
-		                TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
-		                e.reg_id,
-		                e.reg_dt,
-		                e.modi_id,
-		                e.modi_dt,
+		                TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS enroll_dt, 
+		                e.reg_id, 
+		                e.reg_dt, 
+		                e.modi_id, 
+		                e.modi_dt, 
 		                e.del_yn, 
 		                cancel_rs_cd, 
 		                cancel_rs_etc, 
-		                start_time,
-		                end_time,
-		                start_day,
-		                end_day,
-		                o.state_cd as open_state_cd,
-                        o.course_id,
-        				course_title,
-        				ROUND(complete_hours/s.hours * 100) AS "ratio"
+		                start_time, 
+		                end_time, 
+		                start_day, 
+		                end_day, 
+		                o.state_cd as open_state_cd, 
+                        o.course_id, 
+        				course_title, 
+        				ROUND(complete_hours/s.hours * 100) AS ratio 
 		        FROM ENROLL e 
 		        INNER JOIN STUDENT stu 
 		        ON e.student_id = stu.student_id 
@@ -149,11 +149,11 @@
 		        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
 		        INNER JOIN SUBJECT sub 
 		        ON e.subject_id = sub.subject_id 
-		        LEFT OUTER JOIN course c
-				ON o.course_id = c.course_id
-		        WHERE NOT (e.del_yn ='Y') 
+		        LEFT OUTER JOIN course c 
+				ON o.course_id = c.course_id 
+		        WHERE e.del_yn ='N' 
 		        ORDER BY e.reg_dt DESC 
-		<include refid="paging-footer" />  
+		<include refid="paging-footer" />
 	</select>	
 	
 	<select id="getCountSearchRow" parameterType="EnrollVO" resultType="int">
@@ -168,7 +168,7 @@
         ON e.subject_id = sub.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
-		WHERE NOT (e.del_yn ='Y') 
+		WHERE e.del_yn ='N' 
 		<include refid="enroll-search" />
 	</select>
 	
@@ -184,9 +184,9 @@
 				e.student_id, 
 				stu.user_id, 
 				name, 
-				e.state_cd, 
+				e.state_cd AS state_cd, 
 				complete_hours, 
-				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
+				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS enroll_dt, 
 				e.reg_id, 
 				e.reg_dt, 
 				e.modi_id, 
@@ -197,9 +197,9 @@
         		start_time, 
         		end_time, 
         		start_day, 
-        		end_day,
-        		o.state_cd as open_state_cd,
-        		ROUND(complete_hours/sub.hours * 100) AS "ratio" 
+        		end_day, 
+        		o.state_cd as open_state_cd, 
+        		ROUND(complete_hours/sub.hours * 100) AS ratio 
 		FROM ENROLL e 
 		INNER JOIN STUDENT stu 
 		ON e.student_id = stu.student_id 
@@ -209,14 +209,14 @@
         ON e.subject_id = sub.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
-		WHERE NOT (e.del_yn ='Y') 
+		WHERE e.del_yn ='N' 
 		<include refid="enroll-search" />
 		ORDER BY e.reg_dt DESC 
 		<include refid="paging-footer" />
 	</select>
 	
 	<select id="selectSearchListByExcel" parameterType="map" resultType="EnrollVO">
-		/*selectSearchListByPage*/
+		/*selectSearchListByExcel*/
 		SELECT	enroll_id, 
 				e.subject_id, 
 				e.subject_seq, 
@@ -226,9 +226,9 @@
 				e.student_id, 
 				stu.user_id, 
 				name, 
-				e.state_cd, 
+				e.state_cd AS state_cd, 
 				complete_hours, 
-				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
+				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS enroll_dt, 
 				e.reg_id, 
 				e.reg_dt, 
 				e.modi_id, 
@@ -239,9 +239,9 @@
         		start_time, 
         		end_time, 
         		start_day, 
-        		end_day,
-        		o.state_cd as open_state_cd,
-        		ROUND(complete_hours/sub.hours * 100) AS "ratio" 
+        		end_day, 
+        		o.state_cd AS open_state_cd, 
+        		ROUND(complete_hours/sub.hours * 100) AS ratio  
 		FROM ENROLL e 
 		INNER JOIN STUDENT stu 
 		ON e.student_id = stu.student_id 
@@ -251,7 +251,7 @@
         ON e.subject_id = sub.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
-		WHERE NOT (e.del_yn ='Y') 
+		WHERE e.del_yn ='N'  
 		<include refid="enroll-search" />
 		ORDER BY e.reg_dt DESC
 	</select>

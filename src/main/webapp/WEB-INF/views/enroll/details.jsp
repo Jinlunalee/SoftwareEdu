@@ -66,6 +66,8 @@
 			</tr>
 			
 			<tr>
+				<th>수강 관리 아이디</th>
+				<td>${enroll.studentId}</td>
 				<th>이름 (아이디)</th>
 				<td>${enroll.name} (${enroll.userId})</td>
 				<th>생년월일</th>
