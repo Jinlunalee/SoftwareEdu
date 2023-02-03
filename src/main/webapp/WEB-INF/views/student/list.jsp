@@ -16,12 +16,12 @@
 
 	<div class="card-body">
 
-		<div class="search">
+		<div class="selectstudent">
 			<select class="select-box">
-				<option>수강생 명</option>
-				<option>구분</option>
+				<option value="studentName">수강생명</option>
+				<option value="studentId">수강생아이디</option>
 			</select> 
-			<input class="input-text" type="text" placeholder="수강생 명을 입력해 주세요"> 
+			<input class="input-text" type="text" name="keyword" class="input-text input-student" value ="${student.keyword}" placeholder="수강생 명을 입력해 주세요"> 
 			<input class="input-button" type="button" value="검색">
 		</div>
 
