@@ -247,7 +247,8 @@
 	
 	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
 	   /*searchStudentList*/
-	      SELECT student_id, 
+	      SELECT student_id,
+	      		user_id, 
 	            name, 
 	            gender_cd, 
 	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
