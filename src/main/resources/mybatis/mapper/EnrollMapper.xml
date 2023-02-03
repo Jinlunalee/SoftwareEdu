@@ -258,45 +258,46 @@
 	/*getEnrollDetails*/
 		SELECT
 		    enroll_id, 
-		    enroll.state_cd, 
+		    stu.user_id, 
+		    e.state_cd, 
 		    complete_hours, 
-		    enroll.reg_dt, 
-		    TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
-		    enroll.subject_id, 
-		    enroll.subject_seq, 
-		    subject.subject_title, 
-		    open.course_id, 
-		    course.course_title, 
+		    e.reg_dt, 
+		    TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS enroll_dt, 
+		    e.subject_id, 
+		    e.subject_seq, 
+		    sub.subject_title, 
+		    o.course_id, 
+		    c.course_title, 
 		    level_cd, 
 		    days, 
 		    hours, 
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", 
-		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
-		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitStartDay", 
-		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitEndDay", 
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
+		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
+		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
 		    recruit_people, 
-		    open.state_cd AS "openStateCd", 
-		    subject.cat_cd as cat_subject_cd, 
-		    enroll.student_id, 
+		    o.state_cd AS open_state_cd, 
+		    sub.cat_cd AS cat_subject_cd, 
+		    e.student_id, 
 		    name, 
-		    TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
+		    TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
 		    gender_cd, 
 		    email, 
-		    REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+		    REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS phone, 
 		    add_do_cd, 
 		    add_etc, 
 		    position_cd, 
 		    cancel_rs_etc 
-		FROM enroll
-		INNER JOIN subject
-		ON enroll.subject_id = subject.subject_id
-		INNER JOIN student
-		ON enroll.student_id = student.student_id
-		LEFT JOIN open
-		ON enroll.subject_id = open.subject_id and enroll.subject_seq = open.subject_seq
-		LEFT JOIN course
-		ON open.course_id = course.course_id
-		WHERE enroll_id=#{enrollId}
+		FROM ENROLL e 
+		INNER JOIN SUBJECT sub 
+		ON e.subject_id = sub.subject_id 
+		INNER JOIN STUDENT stu 
+		ON e.student_id = stu.student_id 
+		LEFT JOIN OPEN o 
+		ON e.subject_id = o.subject_id and e.subject_seq = o.subject_seq 
+		LEFT JOIN COURSE c 
+		ON o.course_id = c.course_id 
+		WHERE enroll_id = #{enrollId}
 	</select>
 	
 </mapper>

@@ -12,7 +12,8 @@ public class EnrollVO {
 	private String enrollId;			// 수강 아이디
 	private String subjectId;			// 강좌 아이디
 	private int subjectSeq;				// 강좌 시퀀스
-	private String studentId;			// 수강생 아이디
+	private String studentId;			// 수강생 관리 아이디
+	private String userId;				// 수강생 아이디
 	private String stateCd;				// 수강 상태 코드
 	private int completeHours;			// 수강 완료 시수
 	private String enrollDt;			// 수강 신청 일시

@@ -12,7 +12,8 @@
 		<include refid="paging-header" /> 
 		    SELECT
 		    	name,
-				student_id, 
+		    	student_id,
+				user_id, 
 				email, 
 				to_char(to_date(birth), 'YYYY-MM-DD') as birth, 	
             	common_code.comn_cd_title as position_title
@@ -122,7 +123,7 @@
 		                e.subject_seq,
 		                e.student_id, 
 		                name,
-		                s.subject_title,
+		                sub.subject_title,
 		                e.state_cd,
 		                complete_hours, 
 		                TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
@@ -142,12 +143,12 @@
         				course_title,
         				ROUND(complete_hours/s.hours * 100) AS "ratio"
 		        FROM ENROLL e 
-		        INNER JOIN STUDENT t 
-		        ON e.student_id = t.student_id 
+		        INNER JOIN STUDENT stu 
+		        ON e.student_id = stu.student_id 
 		        INNER JOIN OPEN o 
 		        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-		        INNER JOIN SUBJECT s 
-		        ON e.subject_id = s.subject_id 
+		        INNER JOIN SUBJECT sub 
+		        ON e.subject_id = sub.subject_id 
 		        LEFT OUTER JOIN course c
 				ON o.course_id = c.course_id
 		        WHERE NOT (e.del_yn ='Y') 
@@ -159,12 +160,12 @@
 		/*getCountSearchRow*/
 		SELECT count(*) 
 		FROM ENROLL e 
-		INNER JOIN STUDENT t 
-		ON e.student_id = t.student_id 
+		INNER JOIN STUDENT stu 
+		ON e.student_id = stu.student_id 
         INNER JOIN OPEN o 
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        INNER JOIN SUBJECT s 
-        ON e.subject_id = s.subject_id 
+        INNER JOIN SUBJECT sub 
+        ON e.subject_id = sub.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
@@ -174,14 +175,15 @@
 	<select id="selectSearchListByPage" parameterType="map" resultType="EnrollVO">
 		/*selectSearchListByPage*/
 		<include refid="paging-header" /> 
-			SELECT  enroll_id, 
+		SELECT	enroll_id, 
 				e.subject_id, 
 				e.subject_seq, 
-				s.subject_title, 
+				sub.subject_title, 
 				c.course_id, 
                 c.course_title, 
 				e.student_id, 
-				name,  
+				stu.user_id, 
+				name, 
 				e.state_cd, 
 				complete_hours, 
 				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
@@ -197,20 +199,61 @@
         		start_day, 
         		end_day,
         		o.state_cd as open_state_cd,
-        		ROUND(complete_hours/s.hours * 100) AS "ratio" 
+        		ROUND(complete_hours/sub.hours * 100) AS "ratio" 
 		FROM ENROLL e 
-		INNER JOIN STUDENT t 
-		ON e.student_id = t.student_id 
+		INNER JOIN STUDENT stu 
+		ON e.student_id = stu.student_id 
         INNER JOIN OPEN o 
         ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        INNER JOIN SUBJECT s 
-        ON e.subject_id = s.subject_id 
+        INNER JOIN SUBJECT sub 
+        ON e.subject_id = sub.subject_id 
         LEFT OUTER JOIN COURSE c 
         ON c.course_id = o.course_id 
 		WHERE NOT (e.del_yn ='Y') 
 		<include refid="enroll-search" />
 		ORDER BY e.reg_dt DESC 
-		<include refid="paging-footer" /> 
+		<include refid="paging-footer" />
+	</select>
+	
+	<select id="selectSearchListByExcel" parameterType="map" resultType="EnrollVO">
+		/*selectSearchListByPage*/
+		SELECT	enroll_id, 
+				e.subject_id, 
+				e.subject_seq, 
+				sub.subject_title, 
+				c.course_id, 
+                c.course_title, 
+				e.student_id, 
+				stu.user_id, 
+				name, 
+				e.state_cd, 
+				complete_hours, 
+				TO_CHAR(TO_DATE(SUBSTR(enroll_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "enrollDt", 
+				e.reg_id, 
+				e.reg_dt, 
+				e.modi_id, 
+				e.modi_dt, 
+				e.del_yn, 
+				cancel_rs_cd, 
+				cancel_rs_etc, 
+        		start_time, 
+        		end_time, 
+        		start_day, 
+        		end_day,
+        		o.state_cd as open_state_cd,
+        		ROUND(complete_hours/sub.hours * 100) AS "ratio" 
+		FROM ENROLL e 
+		INNER JOIN STUDENT stu 
+		ON e.student_id = stu.student_id 
+        INNER JOIN OPEN o 
+        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
+        INNER JOIN SUBJECT sub 
+        ON e.subject_id = sub.subject_id 
+        LEFT OUTER JOIN COURSE c 
+        ON c.course_id = o.course_id 
+		WHERE NOT (e.del_yn ='Y') 
+		<include refid="enroll-search" />
+		ORDER BY e.reg_dt DESC
 	</select>
 	
 	<select id="getCountSearchOpenCourseRow" parameterType="map" resultType="int">
@@ -332,6 +375,9 @@
     <sql id="enroll-search">
     <!-- 수강 검색 쿼리 -->
     /*enroll-search*/
+    	<if test="applyStartDay == '' and applyEndDay == ''">
+    		AND SUBSTR(e.enroll_dt, 1, 8) BETWEEN TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, -12), 'YYYYMMDD')) AND TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) 
+    	</if>
 		<if test="applyStartDay != '' and applyEndDay != ''">
 			AND SUBSTR(e.enroll_dt, 1, 8) BETWEEN TO_DATE(#{applyStartDay}) AND TO_DATE(#{applyEndDay})  
 		</if>
@@ -342,10 +388,10 @@
 			AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%') 
 		</if>
 		<if test='student != null and student.equals("sdId")'>
-			AND (e.student_id = #{keyword1} OR REPLACE(UPPER(e.student_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%') 
+			AND (stu.user_id = #{keyword1} OR REPLACE(UPPER(stu.user_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%') 
 		</if>
 		<if test='course != null and course.equals("sj")'>
-			AND (s.subject_title = #{keyword2} OR REPLACE(UPPER(s.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
+			AND (sub.subject_title = #{keyword2} OR REPLACE(UPPER(sub.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
 		</if>
 		<if test='course != null and course.equals("cs")'>
 			AND c.course_id is not null AND (c.course_title = #{keyword2} OR REPLACE(UPPER(c.course_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%')   
