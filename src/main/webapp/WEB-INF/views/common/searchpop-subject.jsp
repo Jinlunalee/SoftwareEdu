@@ -28,14 +28,14 @@
                             </select>
                             <input type="text" id="subject-input" name="subjectId">
                             난이도 : 
-                            <select name="level">
+                            <select name="levelCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${levelList}" var="level">
                                     <option value="${level.comnCd}">${level.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
                             분류 : 
-                            <select name="catSubject">
+                            <select name="catSubjectCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${catSubjectList}" var="catSubject">
                                     <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
