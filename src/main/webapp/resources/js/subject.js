@@ -447,10 +447,10 @@ function inputState(){
 }
 
 /*페이지별 개수 선택 유지(subject) - ajax*/
-function listCount(RowsPerPage) { // 검색 결과 리스트 출력
+function listCount(RowsPerPage, subject, keyword) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({
-		url: "ajaxsubjectboardlist?strRowsPerPage="+RowsPerPage,
+		url: "ajaxsubjectboardlist?strRowsPerPage="+RowsPerPage+"&subject="+subject+"&keyword="+keyword,
 		type: "POST"
 	}).done(function (result) {
 		console.log('success');
@@ -463,10 +463,10 @@ function listCount(RowsPerPage) { // 검색 결과 리스트 출력
 }
 
 /*페이지별 개수 선택 유지(course) - ajax*/
-function listCount2(RowsPerPage) { // 검색 결과 리스트 출력
+function listCount2(RowsPerPage, course, keyword) { // 검색 결과 리스트 출력
 	console.log(RowsPerPage);
 	$.ajax({
-		url: "ajaxcourseboardlist?strRowsPerPage="+RowsPerPage,
+		url: "ajaxcourseboardlist?strRowsPerPage="+RowsPerPage+"&course="+course+"&keyword="+keyword,
 		type: "POST"
 	}).done(function (result) {
 		console.log('success');

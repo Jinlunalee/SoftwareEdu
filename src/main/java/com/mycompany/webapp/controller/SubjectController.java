@@ -129,7 +129,18 @@ public class SubjectController {
 		return "subject/details";
 	}
 	
-	// paging 개설 과정 검색 (open course)
+	/**
+	 * @Description : paging 개설 과정 검색 (open course)
+	 * @author KOSA
+	 * @date 2023. 2. 3.
+	 * @param catCourseCd
+	 * @param course
+	 * @param keyword
+	 * @param pageNo
+	 * @param rowsPerPage
+	 * @param model
+	 * @return
+	 */
 	@GetMapping(value="/searchCourseBoardlist")
 	public String searchCourse(@RequestParam(defaultValue="all") String catCourseCd, @RequestParam(defaultValue="crseTitle") String course, @RequestParam(defaultValue="") String keyword, 
 			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
@@ -158,7 +169,18 @@ public class SubjectController {
 		return "subject/courselist";
 	}
 	
-	// paging 개설 강좌 검색 (open subject)
+	/**
+	 * @Description : paging 개설 강좌 검색 (open subject)
+	 * @author KOSA
+	 * @date 2023. 2. 3.
+	 * @param catSubjectCd
+	 * @param subject
+	 * @param keyword
+	 * @param pageNo
+	 * @param rowsPerPage
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/searchSubjectBoardlist", method=RequestMethod.GET)
 	public String searchSubject(@RequestParam(defaultValue="all") String catSubjectCd, @RequestParam(defaultValue="subjTitle") String subject, @RequestParam(defaultValue="") String keyword, 
 			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
@@ -331,49 +353,9 @@ public class SubjectController {
 		logger.info("closeSubject:");
 		return "redirect:/subject/subjectboardlist";
 	}	
-
-	/**
-	 * @Description : paging 강좌 목록 조회 - ajax
-	 * @author KOSA
-	 * @date 2023. 1. 16.
-	 * @param strPageNo
-	 * @param strRowsPerPage
-	 * @param catSubject
-	 * @param model
-	 * @return
-	 */
-	@PostMapping("/ajaxsubjectboardlist")
-	public String ajaxSubjectList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
-			@RequestParam(defaultValue="all") String catSubjectCd, Model model) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-		model.addAttribute("check", "openSubject");
-		
-		logger.info("strRowPerPage:"+strRowsPerPage);
-		
-		int pageNo = Integer.parseInt(strPageNo);
-		int rowsPerPage = Integer.parseInt(strRowsPerPage);
-		
-		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenSubjectRow(catSubjectCd);
-
-		// 페이저 정보가 담긴 Pager 객체 생성
-		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
-
-		// 해당 페이지의 행을 가져오기
-		List<OpenVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubjectCd);
-
-		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catSubjectCd);
-		model.addAttribute("pager", pager);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-
-		return "subject/boardlist-result";
-	}
 	
 	/**
-	 * @Description : paging 개설 과정 목록 조회 (course) - ajax
+	 * @Description : paging 개설 과정 목록 조회 (course) 게시물 개수 변경  - ajax
 	 * @author KOSA
 	 * @date 2023. 1. 17.
 	 * @param strPageNo
@@ -384,7 +366,7 @@ public class SubjectController {
 	 */
 	@PostMapping("/ajaxcourseboardlist")
 	public String ajaxCourseList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
-			@RequestParam(defaultValue="all") String catCourseCd, Model model) {
+			@RequestParam(defaultValue="all") String catCourseCd, @RequestParam(defaultValue="crseTitle") String course, @RequestParam(defaultValue="") String keyword, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		
@@ -392,24 +374,70 @@ public class SubjectController {
 		int rowsPerPage = Integer.parseInt(strRowsPerPage);
 		
 		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenCourseRow(catCourseCd);
+		int totalRows = pagerService.getCountSearchOpenCourseRow(catCourseCd, course, keyword);
 
 		// 페이저 정보가 담긴 Pager 객체 생성
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
 
 		// 해당 페이지의 행을 가져오기
-		List<OpenVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourseCd);
+		List<OpenVO> boardList = pagerService.selectSearchOpenCourseListByPage(pager, catCourseCd, course, keyword);
 
 		//JSP에서 사용할 데이터를 저장
 		model.addAttribute("catId", catCourseCd); 
+		model.addAttribute("course", course);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		logger.info("OpenCourseBoardList: " + boardList);
+		model.addAttribute("rowsPerPage", rowsPerPage);	
+		logger.info("searchOpenCourseBoardList: " + boardList);
 		
 		return "subject/boardlist-result";
 	}
-	
+
+	/**
+	 * @Description : paging 강좌 목록 조회 (subject) 게시물 개수 변경 - ajax
+	 * @author KOSA
+	 * @date 2023. 1. 16.
+	 * @param strPageNo
+	 * @param strRowsPerPage
+	 * @param catSubject
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/ajaxsubjectboardlist")
+	public String ajaxSubjectList(@RequestParam(defaultValue="1") String strPageNo, @RequestParam(defaultValue="10") String strRowsPerPage, 
+			@RequestParam(defaultValue="all") String catSubjectCd, @RequestParam(defaultValue="subjTitle") String subject, @RequestParam(defaultValue="") String keyword, Model model) {
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("check", "openSubject");
+		
+		logger.info("strRowPerPage:"+strRowsPerPage);
+		
+		int pageNo = Integer.parseInt(strPageNo);
+		int rowsPerPage = Integer.parseInt(strRowsPerPage);
+		
+		// 페이징 대상이 되는 전체 행수
+		int totalRows = pagerService.getCountSearchOpenSubjectRow(catSubjectCd, subject, keyword);
+
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
+
+		// 해당 페이지의 행을 가져오기
+		List<OpenVO> boardList = pagerService.selectSearchOpenSubjectListByPage(pager, catSubjectCd, subject, keyword);
+
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("catId", catSubjectCd);
+		model.addAttribute("subject", subject);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
+		logger.info("searchOpenSubjectBoardList: " + boardList);
+		
+		return "subject/boardlist-result";
+	}
 	
 	/**
 	 * @Description : 연수 끝나는 날 지정해줄때 휴일인 경우 고려
