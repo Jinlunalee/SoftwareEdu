@@ -10,21 +10,21 @@
                     <tr>
                         <td class="th-column-14">개설일자</td>
                         <td class="th-column-1">강좌아이디</td>
-                        <td class="th-column-1">강좌 회차</td>
+                        <td class="th-column-1">강좌회차</td>
                         <td class="th-column-2">강좌명</td>
                         <td class="th-column-3">과정아이디</td>
                         <td class="th-column-4">과정명</td>
-                        <td class="th-column-5">교육비 지원여부</td>
+                        <td class="th-column-5">교육비지원여부</td>
                         <c:if test="${board.levelCd ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
                         <c:if test="${board.levelCd eq 'LEV04'}">
                             <td class="th-column-6">난이도 기타</td>
                         </c:if>
-                        <td class="th-column-7">수강일수</td>
-                        <td class="th-column-8">수강시수</td>
-                        <td class="th-column-9">강의 진행 기간</td>
-                        <td class="th-column-10">강의 모집 기간</td>
+                        <td class="th-column-7">강좌일수</td>
+                        <td class="th-column-8">강좌시수(시간)</td>
+                        <td class="th-column-9">강좌기간</td>
+                        <td class="th-column-10">모집기간</td>
                         <td class="th-column-11">모집인원</td>
                         <td class="th-column-12">상태</td>
                         <td class="th-column-13">분류</td>
