@@ -48,8 +48,8 @@
 					<th>과정아이디</th>
 					<th>과정명</th>
 					<th>분류</th>
-					<th>연수기간</th>
-					<th>신청기간</th>
+					<th>강좌기간</th>
+					<th>모집기간</th>
 					<th>교육비(원)</th>
 					<th>상태</th>
 					<th>개설연도</th>
@@ -88,6 +88,11 @@
 							</td>
 						</tr>
 					</c:forEach>
+				</c:if>
+				<c:if test="${boardListSize eq 0}">
+					<div class="table-empty">
+			            게시물이 없습니다.
+			        </div>
 				</c:if>
 				
 				

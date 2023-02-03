@@ -116,7 +116,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="write-txt"> 연수기간(시수)</td>
+						<td class="write-txt"> 강좌기간(시수)</td>
 						<td> 
 							<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 							<input type="hidden" name="hours" id="hours" value="">
@@ -125,20 +125,39 @@
 							<form:errors path="startDay" class="error"/> --%>
 							~ 
 							<input type="date" name="endDay" id="endDay" readonly>
+							<input type="hidden" Id="calcHours" value="">
 							<span id="printDay"></span>
 							<span id="printHours"></span>
 						</td>
 					</tr>
-					<tr>
-						<td class="write-txt"> 연수시간</td>
-						<td> <!-- 30분단위로 입력(초) -->
-							<input type=number class="timepicker" name="startTime" id="startTime" required> 
+					<!-- <tr>
+						<td class="write-txt"> 강좌시간</td>
+						<td> 30분단위로 입력(초)
+							<input class="timepicker" name="startTime" id="startTime" required> 
 							~ 
-							<input type=number class="timepicker" name="endTime" id="endTime" required>
+							<input class="timepicker" name="endTime" id="endTime" required>
+						</td>
+					</tr> -->
+					<tr>
+						<td class="write-txt"> 강좌시간</td>
+						<td>
+							<select name="startTime" id="startTime" onchange="calcEndDay()" required>
+								<option value="">선택</option>
+								<c:forEach var="i" begin="9" end="21">
+									<option value="${i}:00">${i}:00</option>
+								</c:forEach>
+							</select>
+							~
+							<select name="endTime" id="endTime" onchange="calcEndDay()" required>
+								<option value="">선택</option>
+								<c:forEach var="i" begin="9" end="21">
+									<option value="${i}:00">${i}:00</option>
+								</c:forEach>
+							</select>
 						</td>
 					</tr>
 					<tr>
-						<td class="write-txt"> 신청기간</td>
+						<td class="write-txt"> 모집기간</td>
 						<td> 
 							<input type="date" name="recruitStartDay" id="recruitStartDay" onchange="inputState()" required> 
 							~ 
@@ -242,7 +261,7 @@
 			
 			<div class="submit-btn remove-hide hide-first">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
-				<input type="submit" class="btn-submit-open-popup" value="저장">
+				<input type="submit" class="btn-submit-open-popup" value="저장" onclick="return checkTimeValid()">
 			</div>
 		</form>		
 	</div>
@@ -306,9 +325,11 @@
 		};
 	}
 
+	/* 유효성 검사*/
 	/* Submit버튼 클릭 시, Question 3개 이상 입력하지 않았으면 alert */
 	const submitBtn = document.querySelector(".btn-submit-open-popup"); // submit 버튼 저장
 	submitBtn.addEventListener("click", checkInputMoreThanThree); // submit 버튼 클릭 시 checkInputMoreThanThree 함수 실행
+	// submitBtn.addEventListener("click", checkTimeValid); 
 
 	function checkInputMoreThanThree() { // Question Input Null 확인해서 alert 해줌
 		console.log('checkInputMoreThanThree')
@@ -324,6 +345,16 @@
 		if(questionInputSet1.value==='' || questionInputSet2.value==='' || questionInputSet3.value==='' ) {
 			alert('"만족도 조사는 필수 항목이며, 입력을 위해 문항을 최소 3개 이상 입력 후 \"입력완료\" 버튼을 클릭해야 합니다."')
 		} 
+	}
+
+	function checkTimeValid(){
+		const calcHours = parseInt(document.getElementById('calcHours').value);
+		console.log(calcHours);
+
+		if(calcHours <= 0){
+			alert("시간을 다시 입력해 주세요.");
+		}
+		return false;
 	}
 
 
