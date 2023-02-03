@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="card-body">
-	   <form action="<c:url value='/subject/searchCourseBoardlist'/>">
+<!--   <form action="<c:url value='/student/ '/>">   -->     
         <div class="search">
 		<div class="selectstudent">
 			<select class="select-box">
@@ -26,7 +26,7 @@
 			<input class="input-button" type="button" value="검색">
 		</div>
 		</div>
-		</form>
+<!-- 	</form>  -->  
 
 		<div class="view">
 <!-- 			<button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
