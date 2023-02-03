@@ -24,9 +24,6 @@
                         <td class="th-column-7">강좌일수</td>
                         <td class="th-column-8">강좌시수(시간)</td>
                         <td class="th-column-9">강좌기간</td>
-                        <td class="th-column-10">모집기간</td>
-                        <td class="th-column-11">모집인원</td>
-                        <td class="th-column-12">상태</td>
                         <td class="th-column-13">분류</td>
                     </tr>
                 </thead>
@@ -60,9 +57,6 @@
                             <td>${board.days}</td>
                             <td>${board.hours}</td>
                             <td>${board.startDay} ~ ${board.endDay}</td>
-                            <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
-                            <td>${board.recruitPeople}</td>
-                            <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
                         </tr>
                     </c:forEach>

@@ -1,11 +1,10 @@
 package com.mycompany.webapp.service.impl;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
@@ -17,6 +16,9 @@ import com.mycompany.webapp.service.IHomeService;
 public class HomeService implements IHomeService {
 	@Autowired
 	IHomeRepository homeRepository;
+	
+	@Autowired
+	IEnrollRepository enrollRepository;
 	
 	@Override
 	public List<OpenVO> selectSubjectList(String catSubjectCd) {
@@ -60,8 +62,9 @@ public class HomeService implements IHomeService {
 	@Override
 	public List<OpenVO> searchOpenSubject(OpenVO openVo) {
 		List<OpenVO> boardList = homeRepository.searchOpenSubject(openVo);
-		// level, state, catSubject 공통코드로 가져와서 set 하기
+		// level, state, catSubject 공통코드로 가져와서 set 하기, totalPeople set하기
 		for(OpenVO openVoReturn : boardList) {
+			openVoReturn.setTotalPeople(enrollRepository.recruitTotalPeople(openVoReturn.getSubjectId(), openVoReturn.getSubjectSeq(), openVoReturn.getOpenStateCd())); //subject의 상태에 따라 카운드할 수강생 상태가 달라짐
 			openVoReturn.setLevelCdTitle(homeRepository.getComnCdTitle(openVoReturn.getLevelCd()));
 			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
 			openVoReturn.setCatSubjectCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatSubjectCd()));

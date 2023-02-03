@@ -54,6 +54,7 @@ public class OpenVO {
 	private String recruitStartDay; //모집 시작 일자
 	@NotBlank(message = "모집종료일자는 필수입력값입니다.")
 	private String recruitEndDay; //모집 종료 일자
+	private int totalPeople; // 현재 모집된 인원
 	@Min(value=5, message="모집인원은 최소 5명 이상이여야 합니다.")
 	private int recruitPeople; //모집 인원
 	private String content;//개설 강좌 내용

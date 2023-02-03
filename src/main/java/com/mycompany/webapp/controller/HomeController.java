@@ -21,6 +21,7 @@ import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.IEnrollService;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
@@ -42,6 +43,9 @@ public class HomeController {
 	
 	@Autowired
 	ISurveyService surveyService;
+	
+	@Autowired
+	IEnrollService enrollService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -197,6 +201,7 @@ public class HomeController {
 	public String searchPopOpenSubjectResult(OpenVO openVo, Model model) throws Exception{
 		openVo.setCases("case1"); // 개설강좌 상태가 모집중, 모집마감, 진행중인 경우만 보여주고, 개설과정에 포함된 건은 안보여주기 위함
 		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
+		
 		
 		// ajax로 구현할 것
 		if(!openSubjectList.isEmpty()) {
