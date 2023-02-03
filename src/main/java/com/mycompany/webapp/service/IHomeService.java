@@ -1,5 +1,6 @@
 package com.mycompany.webapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
@@ -22,4 +23,5 @@ public interface IHomeService {
 	List<StudentVO> searchStudentList(StudentVO studentVo);
 	List<OpenVO> selectSubjectListByCourseId(OpenVO openVo);
 //	List<String> getColumnName(String searchType, List<Map<String, Object>> searchParam);
+	List<String> selectYearListByPop(String pop); // 검색팝업의 개설/등록연도 가져오기
 }

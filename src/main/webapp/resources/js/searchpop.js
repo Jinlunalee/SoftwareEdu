@@ -195,6 +195,7 @@ function moveOutside(event, value){
         let recruitPeople = valueArr[14];
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
+        let totalPeople = valueArr[17];
         
         $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
@@ -217,20 +218,20 @@ function moveOutside(event, value){
             var table = $("<table class='subjectdetails'/>");
             var tr = $("<table class='subjectdetails' border='1'/>").append(
                     $("<tr/>"),
-                    $("<td class='subject-th'/>").text('강좌 기간'),
-                    $("<td class='subject-th'/>").text('모집 기간'),
+                    $("<td class='subject-th'/>").text('강좌기간'),
+                    $("<td class='subject-th'/>").text('모집기간'),
                     $("<td class='subject-th'/>").text('일수'),
-                    $("<td class='subject-th'/>").text('시수'),
-                    $("<td class='subject-th'/>").text('모집 인원'),
-                    $("<td class='subject-th'/>").text('강좌 분류'),
-                    $("<td class='subject-th'/>").text('개설 상태'),
-                    $("<td class='subject-th'/>").text('난이도 (기타)'),
+                    $("<td class='subject-th'/>").text('시수(시간)'),
+                    $("<td class='subject-th'/>").text('모집인원'),
+                    $("<td class='subject-th'/>").text('강좌분류'),
+                    $("<td class='subject-th'/>").text('개설상태'),
+                    $("<td class='subject-th'/>").text('난이도(기타)'),
                     $("<tr/>"),
                     $("<td/>").text(startDay + ' ~ ' + endDay),
                     $("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
                     $("<td/>").text(days),
                     $("<td/>").text(hours),
-                    $("<td/>").text(recruitPeople),
+                    $("<td/>").text(totalPeople + '/' + recruitPeople),
                     $("<td/>").text(catSubjectCdTitle),
                     $("<td/>").text(openStateCdTitle),
                     $("<td/>").text(levelCdTitle + '(' + levelEtc + ')')
@@ -269,19 +270,21 @@ function moveOutside(event, value){
                         var table = $("<table class='courselist'/>");
                         var tr1 = $("<table class='courselist' border='1'/>").append(
                                 $("<tr/>"),
-                                $("<td class='course-th'/>").text('강좌 아이디'),
-                                $("<td class='course-th'/>").text('강좌 명'),
-                                $("<td class='course-th'/>").text('강좌 진행 기간'),
-                                $("<td class='course-th'/>").text('강좌 시간'),
+                                $("<td class='course-th'/>").text('강좌아이디'),
+                                $("<td class='course-th'/>").text('강좌회차'),
+                                $("<td class='course-th'/>").text('강좌명'),
+                                $("<td class='course-th'/>").text('강좌기간'),
+                                $("<td class='course-th'/>").text('강좌시간'),
                                 $("<td class='course-th'/>").text('일수'),
-                                $("<td class='course-th'/>").text('시수'),
+                                $("<td class='course-th'/>").text('시수(시간)'),
                                 $("<td class='course-th'/>").text('난이도'),
                                 $("<td class='course-th'/>").text('비용'),
-                                $("<td class='course-th'/>").text('교육비 지원 여부')
+                                $("<td class='course-th'/>").text('교육비지원여부')
                         );
                                     
                         for(var i in result) {
                             var $subjectId = result[i].subjectId;
+                            var $subjectSeq = result[i].subjectSeq;
                             var $subjectTitle = result[i].subjectTitle;
                             var $startDay = result[i].startDay;
                             var $endDay = result[i].endDay;
@@ -291,17 +294,19 @@ function moveOutside(event, value){
                             var $hours = result[i].hours;
                             var $levelCdTitle = result[i].levelCdTitle;
                             var $cost = result[i].cost;
+                            $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 비용 콤마 처리
                             var $supportYn = result[i].supportYn;
                             
                             if($supportYn === 'Y') {
-                            	$supportYn = '지원 가능'
+                                $supportYn = '지원 가능'
                             }else if($supportYn === 'N') {
-                            	$supportYn = '지원 불가'
+                                $supportYn = '지원 불가'
                             }
                             
                             var tr2 = tr1.append(
                                     $("<tr/>"),
                                     $("<td/>").text($subjectId),
+                                    $("<td/>").text($subjectSeq),
                                     $("<td/>").text($subjectTitle),
                                     $("<td/>").text($startDay + ' ~ ' + $endDay),
                                     $("<td/>").text($startTime + ' ~ ' + $endTime),
@@ -541,4 +546,11 @@ function resetValue() {
         subjectList.innerText=null;
         alert("수강생을 다시 선택하였습니다. 강좌/과정을 다시 선택해주세요.");
     }
+}
+
+const closeBtn = document.getElementById('close-btn');
+closeBtn.addEventListener("click", closePop);
+
+function closePop() {
+    close();
 }

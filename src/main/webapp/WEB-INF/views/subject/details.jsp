@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> ${totalPeople}/${open.recruitPeople} </td>
+				<td> ${open.totalPeople}/${open.recruitPeople} </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>

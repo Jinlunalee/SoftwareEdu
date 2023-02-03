@@ -21,7 +21,7 @@
 }
 
 .input-date {
-	width: 160px;
+	width: 175px;
     height: 39px;
     border-radius: 8px;
     margin: 0 10px;
@@ -241,21 +241,19 @@ td {
 .state{
 	display: inline;
     position: relative;
-    left: 200px;
+    left: 175px;
     bottom: 45px;
     margin-top: 3px;
 }
 
 .input-student {
-	position: relative;
     width: 195px;
-    left: 58px;
 }
 
 .select-stu{
 	width: 160px;
 	position: relative;
-    left: 37px;
+    right: 15px;
 }
 
 .input-cancel{

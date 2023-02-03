@@ -1,6 +1,7 @@
 package com.mycompany.webapp.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -26,4 +27,5 @@ public interface IHomeRepository {
 	List<OpenVO> searchOpenCourse(OpenVO openVo);
 	List<StudentVO> searchStudentList(StudentVO studentVo);
 	List<OpenVO> selectSubjectListByCourseId(OpenVO openVo);
+	List<String> selectYearListByPop(String pop); // 검색팝업의 개설/등록연도 가져오기
 }

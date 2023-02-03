@@ -119,8 +119,8 @@ public class SubjectController {
 
 		OpenVO openVo = subjectService.selectSubjectDetails(subjectId, subjectSeq);
 		int totalPeople = enrollService.recruitTotalPeople(subjectId, subjectSeq, openVo.getOpenStateCd());//subject의 상태에 따라 카운드할 수강생 상태가 달라짐
+		openVo.setTotalPeople(totalPeople);
 		model.addAttribute("open", openVo);
-		model.addAttribute("totalPeople", totalPeople);
 
 		logger.info("details/subject: "+ openVo);
 		logger.info("details/subject: "+ totalPeople);

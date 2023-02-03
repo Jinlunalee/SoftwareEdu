@@ -1,6 +1,8 @@
 package com.mycompany.webapp.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +29,6 @@ import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.service.IEnrollService;
-import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 
 @Controller
@@ -88,35 +89,44 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/searchlist", method=RequestMethod.GET)
-	public String getSearchList(EnrollVO enroll, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+	public String getSearchList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, @RequestParam(defaultValue="") String applyStartDay, @RequestParam(defaultValue="") String applyEndDay, @RequestParam(defaultValue="") String course, @RequestParam(defaultValue="") String keyword2, @RequestParam(defaultValue="") String student, @RequestParam(defaultValue="") String keyword1, @RequestParam(defaultValue="") String state, Model model) {
 		model.addAttribute("menu", "enroll");
 		model.addAttribute("menuKOR", "수강 관리");
 
 		List<CommonCodeVO> cancelList = enrollService.getCancelList();
 		model.addAttribute("cancelList", cancelList);
-
-		String applyStartDay = enroll.getApplyStartDay();
-		String applyEndDay = enroll.getApplyEndDay();
-
-		enroll.setApplyStartDay(enroll.getApplyStartDay().replaceAll("-", ""));
-		enroll.setApplyEndDay(enroll.getApplyEndDay().replaceAll("-", ""));
+		
+		EnrollVO enroll = new EnrollVO();
+		enroll.setApplyStartDay(applyStartDay.replaceAll("-", ""));
+		enroll.setApplyEndDay(applyEndDay.replaceAll("-", ""));
+		enroll.setCourse(course);
+		enroll.setKeyword2(keyword2);
+		enroll.setStudent(student);
+		enroll.setKeyword1(keyword1);
+		enroll.setState(state);
 
 		int totalRows = pagerService.getCountSearchRow(enroll);
 		int rowsPerPages = rowsPerPage;
 
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
 
-		enroll.setApplyStartDay(applyStartDay);
-		enroll.setApplyEndDay(applyEndDay);
-
 		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
 		logger.info("EnrollSearchList : " + searchList);
 		model.addAttribute("rowsPerPages", rowsPerPages);
-		model.addAttribute("enroll", enroll);
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", searchList);
 		model.addAttribute("boardListSize", searchList.size());
-
+		
+		// 검색 반영		
+		model.addAttribute("applyStartDay", applyStartDay);
+		model.addAttribute("applyEndDay", applyEndDay);
+		model.addAttribute("course", course);
+		model.addAttribute("keyword2", keyword2);
+		model.addAttribute("student", student);
+		model.addAttribute("keyword1", keyword1);
+		model.addAttribute("state", state);
+		
 		return "enroll/search";
 	}
 	
@@ -324,7 +334,7 @@ public class EnrollController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/enrollsearchexcel", method=RequestMethod.GET)
-	public void downloadEnroll(EnrollVO enrollVo, HttpServletResponse response, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage) throws IOException {
+	public void downloadEnroll(EnrollVO enrollVo, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, HttpServletResponse response) throws IOException {
 		Workbook workbook = new HSSFWorkbook();
 		Sheet sheet = workbook.createSheet("수강 목록");
 		int rowNo = 0;
@@ -338,10 +348,7 @@ public class EnrollController {
 		headerRow.createCell(5).setCellValue("현재 상태");
 		headerRow.createCell(6).setCellValue("진도율");
 		
-		int totalRows = rowsPerPage;
-		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
-		
-			List<EnrollVO> searchList = pagerService.selectSearchListByPage(enrollVo, pager);
+			List<EnrollVO> searchList = pagerService.selectSearchListByExcel(enrollVo);
 			for (EnrollVO enroll : searchList) {
 				Row row = sheet.createRow(rowNo++);
 				row.createCell(0).setCellValue(enroll.getSubjectTitle());

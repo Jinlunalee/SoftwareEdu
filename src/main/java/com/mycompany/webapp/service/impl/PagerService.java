@@ -121,7 +121,6 @@ public class PagerService implements IPagerService {
 
 	@Override
 	public int getCountSearchRow(EnrollVO enroll) {
-		// TODO Auto-generated method stub
 		return pagerRepository.getCountSearchRow(enroll);
 	}
 
@@ -148,6 +147,20 @@ public class PagerService implements IPagerService {
 				enrollVo.setCancelRsTitle(homeRepository.getComnCdTitle(enrollVo.getCancelRsCd()));
 			}
 		}
+		return boardList;
+	}
+	
+	public List<EnrollVO> selectSearchListByExcel(EnrollVO enroll) {
+		String applyStartDay = enroll.getApplyStartDay();
+		String applyEndDay = enroll.getApplyEndDay();
+		String student = enroll.getStudent();
+		String course = enroll.getCourse();
+		String state = enroll.getState();
+		String keyword1 = enroll.getKeyword1();
+		String keyword2 = enroll.getKeyword2();
+		
+		List<EnrollVO> boardList = pagerRepository.selectSearchListByExcel(applyStartDay, applyEndDay, student, course, state, keyword1, keyword2);
+		
 		return boardList;
 	}
 	
@@ -230,6 +243,5 @@ public class PagerService implements IPagerService {
 		int startRowNo = pager.getStartRowNo();
 		return pagerRepository.selectSearchStudentListByPage(endRowNo, startRowNo, student, keyword);
 	}
-
 
 }

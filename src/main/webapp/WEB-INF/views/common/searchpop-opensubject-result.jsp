@@ -40,7 +40,7 @@
                                 <a class="${board.openStateCd} ${board.subjectId}-${board.subjectSeq}" class="move" onclick="return moveOutside(event, this.name);" href="#" 
                                 name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}/
                                 ${board.supportYn}/${board.levelCdTitle}/${board.levelEtc}/${board.days}/${board.hours}/${board.startDay}/${board.endDay}/
-                                ${board.recruitStartDay}/${board.recruitEndDay}/${board.recruitPeople}/${board.openStateCdTitle}/${board.catSubjectCdTitle}">
+                                ${board.recruitStartDay}/${board.recruitEndDay}/${board.recruitPeople}/${board.openStateCdTitle}/${board.catSubjectCdTitle}/${board.totalPeople}">
                                 ${board.subjectTitle}</a>
                             </td>
                             <td>${board.courseId}</td>
@@ -63,7 +63,7 @@
                             <td>${board.hours}</td>
                             <td>${board.startDay} ~ ${board.endDay}</td>
                             <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
-                            <td>${board.recruitPeople}</td>
+                            <td>${board.totalPeople}/${board.recruitPeople}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
                         </tr>

@@ -72,13 +72,14 @@
                                     <td>
                                         <select name="OpenDtYear">
                                             <option value="0">전체</option>
-                                            <c:forEach var="i" begin="2019" end="2023">
-                                                <option value="${i}">${i}</option>
+                                            <c:forEach items="${yearList}" var="year">
+                                                <option value="${year}">${year}</option>
                                             </c:forEach>
                                         </select>
                                     </td>
                                     <td>
                                         <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
+                                        <button type="button" id="close-btn">창닫기</button>
                                     </td>
                                 </tr>
                             </table>
