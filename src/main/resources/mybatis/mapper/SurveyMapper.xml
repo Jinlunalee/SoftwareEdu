@@ -111,5 +111,11 @@
 	        for answer_value in (5, 4, 3, 2, 1)
 	  )
    </select>
-
+	
+	<select id="getSubjectTitle" parameterType="String" resultType="String">
+	/* getSubjectTitle */
+		select subject_title 
+		from subject
+		where subject_id = #{subjectId}
+	</select>
 </mapper>

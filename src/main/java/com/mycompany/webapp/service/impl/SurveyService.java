@@ -81,4 +81,9 @@ public class SurveyService implements ISurveyService {
 		return surveyRepository.pivotAnswerValue(subjectId, subjectSeq, questionNum);
 	}
 
+	@Override
+	public String getSubjectTitle(String subjectId) {
+		return surveyRepository.getSubjectTitle(subjectId);
+	}
+
 }

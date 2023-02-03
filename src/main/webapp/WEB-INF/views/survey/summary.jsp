@@ -52,36 +52,7 @@
 <script>
 	$(document).ready(function() {
 	});
-	/* 통계 조회 버튼 누를 시 통계 테이블 보여주기 */
-	// const viewSummary = function() {
-	// 	let subject = document.getElementById('subject-input').value;
-	// 	console.log(subject);
-	// 	if(subject){
-	// 		let subjectArr = subject.split('/');
-	// 		let subjectId = subjectArr[0];
-	// 		let subjectSeq = subjectArr[1];
-	// 		// let openDt = subjectArr[3];
-	// 		// let state = subjectArr[4];
-	// 		// if(state==='OPN05'){
-	// 		$.ajax({
-	// 			url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
-	// 			type : "GET",
-	// 			success : function(data){
-	// 				console.log(data);
-	// 				showTableChart(data); // subject에 따른 table chart 보여주기
-	// 				showBarChart(data); // subject에 따른 bar chart 보여주기
-	// 			},
-	// 			error:function(){
-	// 				alert("요청에 실패했습니다. 관리자에게 문의하세요.");
-	// 			}
-	// 		});
-	// 		// } else {
-	// 		// 	alert("완료된 강의를 선택해주세요.");
-	// 		// }
-	// 	} else {
-	// 		alert("강의를 선택해주세요.");
-	// 	}
-	// }
+	
 	/*버튼 누르면 엑셀 다운로드 받기*/
 	function downloadExcel(){
 		let subject = document.getElementById('subject-input').value;

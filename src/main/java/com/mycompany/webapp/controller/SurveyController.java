@@ -105,76 +105,6 @@ public class SurveyController {
 		return "survey/summary";
 	}
 	
-	
-	
-/*	// 통계 ajax
-	@RequestMapping(value="/getjson", method=RequestMethod.GET)
-	@ResponseBody
-	public String getjson(String subjectId, String subjectSeq) {
-		System.out.println("subjectId : " + subjectId);
-		System.out.println("subjectSeq : " + subjectSeq);
-		int subjectSeqInt = Integer.parseInt(subjectSeq);
-		
-		AnswerVO answerVo = new AnswerVO();
-		
-		// 데이터 쌓을 List<AnswerVO> 만들기
-//		List<AnswerVO> answerList = new ArrayList<>();
-//		JSONArray jsonDataList = new JSONArray();
-		JSONObject jsonObject = new JSONObject();
-
-		// 문항 수 구하기
-		int questionNum = surveyService.getCountQuestionNum(subjectId, subjectSeqInt);
-
-		List<HashMap<String, Object>> answerValueByQuestionList = new ArrayList<>();
-		HashMap<String, Object> answerValueByQuestionMap = new HashMap();
-		// 문항 수만큼 반복
-		for(int i=1; i<=questionNum; i++) {
-			answerValueByQuestionMap = new HashMap();
-			
-			List<HashMap<String, Integer>> answerValueCountList = new ArrayList<>();
-			HashMap<String, Integer> answerValueCountMap = new HashMap();
-			
-			// 답변 개수 (5개) 만큼 반복
-			for(int k=1; k<=5; k++) {
-				answerValueCountMap = new HashMap();
-				answerVo = surveyService.getAnswerValue(subjectId, subjectSeqInt, i, k); // vo에 답변 저장하기
-				
-				// vo에서 데이터 추출
-				int answerValue = answerVo.getAnswerValue();
-				int countAnswerValue = answerVo.getCountAnswerValue();
-				
-				answerValueCountMap.put("answerValue", answerValue);
-				answerValueCountMap.put("countAnswerValue", countAnswerValue);
-				answerValueCountList.add(answerValueCountMap);
-			}
-			
-			answerValueByQuestionMap.put("questionNum", i);
-			answerValueByQuestionMap.put("answerValueCount", answerValueCountList);
-			answerValueByQuestionList.add(answerValueByQuestionMap);
-			
-//			HashMap<String, Object> answerMap = new HashMap();
-//			answerMap.put("subjectId", subjectId);
-//			answerMap.put("subjectSeq", subjectSeq);
-//			answerMap.put("answerValueByQuestion", answerValueByQuestionMap);
-			
-
-		}
-		jsonObject.put("subjectId", subjectId);
-		jsonObject.put("subjectSeq", subjectSeq);
-		jsonObject.put("answerValueByQuestion", answerValueByQuestionList);
-		
-		logger.info("survey/summary-post: "+ jsonObject);
-		
-		// 문자열로 바꿔서 리턴
-		String result = jsonObject.toString();
-		System.out.println("-----------------------");
-		System.out.println(result);
-		return result;
-	}*/	
-	
-	
-	
-	
 	/**
 	 * @Description : 만족도 조사 통계 엑셀파일 다운로드
 	 * @author KOSA
@@ -190,23 +120,26 @@ public class SurveyController {
 	public void downloadExcel(String subjectId, String subjectSeq, String openDt, HttpServletResponse response) throws Exception {
 		logger.info("downloadExcel:"+subjectId+subjectSeq+openDt);
 		int subjectSeqInt = Integer.parseInt(subjectSeq);
+		String subjectTitle = surveyService.getSubjectTitle(subjectId);// 강좌명
 				
 		Workbook workbook = new HSSFWorkbook();//xls파일로 저장하기위해 생성
-		Sheet sheet = workbook.createSheet("강좌 만족도 조사 문항"); // 하나의 sheet 생성
-		Sheet sheet2 = workbook.createSheet("강좌 만족도");
+		Sheet sheet = workbook.createSheet(subjectTitle + " " + subjectSeqInt + "회차 만족도"); // 하나의 sheet 생성
+//		Sheet sheet2 = workbook.createSheet("강좌 만족도");
 		int rowNo = 0; // row number 카운팅
 		
 		//sheet1
 		Row headerRow = sheet.createRow(rowNo++);
 		headerRow.createCell(0).setCellValue("강좌아이디");
-		headerRow.createCell(1).setCellValue("강좌시퀀스"); //시퀀스 다른용어?
-		headerRow.createCell(2).setCellValue("만족도 조사 문항 번호");
-		headerRow.createCell(3).setCellValue("만족도 조사 문항 내용");
-		headerRow.createCell(4).setCellValue("매우만족");
-		headerRow.createCell(5).setCellValue("만족");
-		headerRow.createCell(6).setCellValue("보통");
-		headerRow.createCell(7).setCellValue("불만족");
-		headerRow.createCell(8).setCellValue("매우불만족");
+		headerRow.createCell(1).setCellValue("강좌명");
+		headerRow.createCell(2).setCellValue("강좌회차");
+		headerRow.createCell(3).setCellValue("문항번호");
+		headerRow.createCell(4).setCellValue("문항내용");
+		headerRow.createCell(5).setCellValue("매우만족");
+		headerRow.createCell(6).setCellValue("만족");
+		headerRow.createCell(7).setCellValue("보통");
+		headerRow.createCell(8).setCellValue("불만족");
+		headerRow.createCell(9).setCellValue("매우불만족");
+		headerRow.createCell(10).setCellValue("만족도(%)");
 		
 		List<QuestionSetVO> questionList = surveyService.selectSubjectQuestionSet(subjectId, subjectSeqInt);
 		Map<String, Integer> map = new HashMap<>();
@@ -216,39 +149,48 @@ public class SurveyController {
 			map = surveyService.pivotAnswerValue(subjectId, subjectSeqInt, i);
 			Row row = sheet.createRow(rowNo++);
 			row.createCell(0).setCellValue(subjectId);
-			row.createCell(1).setCellValue(subjectSeqInt);
-			row.createCell(2).setCellValue(question.getQuestionNum());
-			row.createCell(3).setCellValue(question.getQuestionContent());
-			row.createCell(4).setCellValue(Integer.parseInt(String.valueOf(map.get("5"))));
-			row.createCell(5).setCellValue(Integer.parseInt(String.valueOf(map.get("4"))));
-			row.createCell(6).setCellValue(Integer.parseInt(String.valueOf(map.get("3"))));
-			row.createCell(7).setCellValue(Integer.parseInt(String.valueOf(map.get("2"))));
-			row.createCell(8).setCellValue(Integer.parseInt(String.valueOf(map.get("1"))));
+			row.createCell(1).setCellValue(subjectTitle);
+			row.createCell(2).setCellValue(subjectSeqInt);
+			row.createCell(3).setCellValue(question.getQuestionNum());
+			row.createCell(4).setCellValue(question.getQuestionContent());
+			int value5 = Integer.parseInt(String.valueOf(map.get("5")));
+			int value4 = Integer.parseInt(String.valueOf(map.get("4")));
+			int value3 = Integer.parseInt(String.valueOf(map.get("3")));
+			int value2 = Integer.parseInt(String.valueOf(map.get("2")));
+			int value1 = Integer.parseInt(String.valueOf(map.get("1")));
+			int satisfiedPercent = ((value5*100) + (value4*75) + (value3*50) + (value2*25) + (value1*0)) / (value5+value4+value3+value2+value1);
+			row.createCell(5).setCellValue(value5);
+			row.createCell(6).setCellValue(value4);
+			row.createCell(7).setCellValue(value3);
+			row.createCell(8).setCellValue(value2);
+			row.createCell(9).setCellValue(value1);
+			row.createCell(10).setCellValue(satisfiedPercent);
 		}
 		
 		
 
-		rowNo = 0;
+//		rowNo = 0;
 		
 		//sheet2
 		//상단 헤더row
-		Row headerRow2 = sheet2.createRow(rowNo++);
-		headerRow2.createCell(0).setCellValue("강좌아이디");
-		headerRow2.createCell(1).setCellValue("강좌시퀀스");
-		headerRow2.createCell(2).setCellValue("만족도 조사 문항 번호");
-		headerRow2.createCell(3).setCellValue("만족도 조사 답변 점수");
-		
-		List<AnswerVO> answerList = surveyService.selectAnswerList(subjectId, subjectSeqInt);
-		for(AnswerVO answer : answerList) {
-			Row row2 = sheet2.createRow(rowNo++);
-			row2.createCell(0).setCellValue(answer.getSubjectId());
-			row2.createCell(1).setCellValue(answer.getSubjectSeq());
-			row2.createCell(2).setCellValue(answer.getQuestionNum());
-			row2.createCell(3).setCellValue(answer.getAnswerValue());
-		}
-		
+//		Row headerRow2 = sheet2.createRow(rowNo++);
+//		headerRow2.createCell(0).setCellValue("강좌아이디");
+//		headerRow2.createCell(1).setCellValue("강좌시퀀스");
+//		headerRow2.createCell(2).setCellValue("만족도 조사 문항 번호");
+//		headerRow2.createCell(3).setCellValue("만족도 조사 답변 점수");
+//		
+//		List<AnswerVO> answerList = surveyService.selectAnswerList(subjectId, subjectSeqInt);
+//		for(AnswerVO answer : answerList) {
+//			Row row2 = sheet2.createRow(rowNo++);
+//			row2.createCell(0).setCellValue(answer.getSubjectId());
+//			row2.createCell(1).setCellValue(answer.getSubjectSeq());
+//			row2.createCell(2).setCellValue(answer.getQuestionNum());
+//			row2.createCell(3).setCellValue(answer.getAnswerValue());
+//		}
+		String fileName = subjectTitle + " " + subjectSeqInt + "회차 만족도 통계자료.xls";
+		String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
 		response.setContentType("ms-vnd/excel");
-		response.setHeader("Content-Disposition", "attachment;filename=summary.xls");
+		response.setHeader("Content-Disposition", "attachment;fileName=\"" + outputFileName + "\"");
 		
 		workbook.write(response.getOutputStream());
 		workbook.close();
