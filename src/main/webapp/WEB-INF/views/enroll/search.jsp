@@ -78,6 +78,7 @@
 	<table class="list">
 		<tr>
 			<th>강좌 명 (과정 명)</th>
+			<th>강좌 회차</th>
 			<th>수강생 명 (아이디)</th>
 			<th>신청일자</th>
 			<th>현재 상태 (진도율)</th>
@@ -98,6 +99,9 @@
 						(${board.courseTitle})
 					</c:if></a>
 				</td>
+				
+				<%-- 강좌회차  --%> 
+				<td>${board.subjectSeq}</td>
 
 				<%-- 수강생 명 --%>
 				<td>${board.name} (${board.userId})</td>
