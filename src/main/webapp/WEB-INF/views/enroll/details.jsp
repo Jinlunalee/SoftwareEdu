@@ -11,9 +11,9 @@
 	</div>
 	
 	<div class="card-body">
-		<table class="enroll-detail-table enroll-table all-table">
+		<table class="enroll-detail-table student-table all-table">
 			<tr>
-				<th class="info enroll-info" colspan='8'>수강 정보</th>
+				<th class="info open-info" colspan='8'>수강 정보</th>
 			</tr>
 			
 			<tr>
@@ -23,8 +23,40 @@
 				<td>${enroll.enrollDt}</td>
 				<th>수강 상태</th>
 				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
-				<th style="width: 210px">취소 상세 사유</th>
-				<td style="width: 210px">${enroll.cancelRsEtc}</td>
+				<th>취소 상세 사유</th>
+				<td>${enroll.cancelRsEtc}</td>
+			</tr>
+			
+			<tr>
+				<th>강좌 명 (아이디)</th>
+				<td>${enroll.subjectTitle} (${enroll.subjectId})</td>
+				<th>연수 기간</th>
+				<td>${enroll.startDay} ~ ${enroll.endDay}</td>
+				<th>일수</th>
+				<td>${enroll.days}</td>
+				<th>시수</th>
+				<td id="subject-hours">${enroll.hours}</td>
+			</tr>
+			
+			<tr>
+				
+				<th>강좌 상태</th>
+				<td>${enroll.openStateCdTitle}</td>
+				<th>강좌 분류</th>
+				<td>${enroll.catSubjectCdTitle}</td>
+				<th>강좌 난이도</th>
+				<td>${enroll.levelCdTitle}</td>
+				<th>과정 명 (아이디)</th>
+				<td>${enroll.courseId} (${enroll.courseTitle})</td>
+			</tr>
+			
+			<tr>
+				
+			</tr>
+			
+			<tr>
+				
+				
 			</tr>
 		</table>
 
@@ -34,68 +66,25 @@
 			</tr>
 			
 			<tr>
-				<th>수강생 아이디</th>
-				<td>${enroll.studentId}</td>
-				<th>수강생 이름</th>
-				<td>${enroll.name}</td>
-				<th>수강생 생년월일</th>
+				<th>이름 (아이디)</th>
+				<td>${enroll.name} (${enroll.userId})</td>
+				<th>생년월일</th>
 				<td>${enroll.birth}</td>
-				<th>수강생 성별</th>
+				<th>성별</th>
 				<td>${enroll.genderCdTitle}</td>
 			</tr>
 			
 			<tr>
 				<th>직위</th>
 				<td>${enroll.positionCdTitle}</td>
-				<th>수강생 연락처</th>
+				<th>연락처</th>
 				<td>${enroll.phone}</td>
-				<th>수강생 주소</th>
-				<td colspan='3'>${enroll.addDoCdTitle} ${enroll.addEtc}</td>
+				<th>주소</th>
+				<td colspan='3' style="text-align: left"> ${enroll.addDoCdTitle} ${enroll.addEtc}</td>
 			</tr>
 		</table>
 
-		<table class="enroll-detail-table student-table all-table">
-			<tr>
-				<th class="info open-info" colspan='8'>개설 강좌 정보</th>
-			</tr>
-			
-			<tr>
-				<th>강좌 아이디</th>
-				<td>${enroll.subjectId}</td>
-				<th>강좌명</th>
-				<td colspan='2'>${enroll.subjectTitle}</td>
-				<th>강좌 기간</th>
-				<td colspan='2'>${enroll.startDay} ~ ${enroll.endDay}</td>
-			</tr>
-			
-			<tr>
-				<th>강좌 일수</th>
-				<td>${enroll.days}</td>
-				<th>강좌 시수</th>
-				<td id="subject-hours">${enroll.hours}</td>
-				<th>강좌 상태</th>
-				<td>${enroll.openStateCdTitle}</td>
-				<th>강좌 모집인원</th>
-				<td>${enroll.recruitPeople}</td>
-			</tr>
-			
-			<tr>
-				<th>강좌 분류</th>
-				<td colspan='2'>${enroll.catSubjectCdTitle}</td>
-				<th>강좌 난이도</th>
-				<td>${enroll.levelCdTitle}</td>
-				<th>강좌 모집 기간</th>
-				<td colspan='2'>${enroll.recruitStartDay} ~ ${enroll.recruitEndDay}</td>
-			</tr>
-			
-			<tr>
-				<th>과정 아이디</th>
-				<td>${enroll.courseId}</td>
-				<th>과정명</th>
-				<td>${enroll.courseTitle}</td>
-				
-			</tr>
-		</table>
+		
 
 		<table class="enroll-detail-table add-hours-table all-table">
 			<tr class="hours-ratio">
@@ -117,7 +106,7 @@
 			</tr>
 
 		</table>
-
+		<input type="reset" onclick="back()" value="이 전" class="btn">
 	</div>
 	
 </div>
@@ -159,6 +148,10 @@
 		} else {
 			return true;
 		}
+	}
+	
+	function back() {
+		history.back();
 	}
 </script>
 
