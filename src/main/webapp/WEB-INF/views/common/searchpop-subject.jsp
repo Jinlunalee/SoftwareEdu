@@ -45,8 +45,8 @@
                             등록연도 :
                             <select name="regYear">
                                 <option value="0">전체</option>
-                                <c:forEach var="i" begin="2019" end="2023">
-                                    <option value="${i}">${i}</option>
+                                <c:forEach items="${yearList}" var="year">
+                                    <option value="${year}">${year}</option>
                                 </c:forEach>
                             </select>
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
