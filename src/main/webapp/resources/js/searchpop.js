@@ -217,14 +217,14 @@ function moveOutside(event, value){
             var table = $("<table class='subjectdetails'/>");
             var tr = $("<table class='subjectdetails' border='1'/>").append(
                     $("<tr/>"),
-                    $("<td class='subject-th'/>").text('강좌 기간'),
-                    $("<td class='subject-th'/>").text('모집 기간'),
+                    $("<td class='subject-th'/>").text('강좌기간'),
+                    $("<td class='subject-th'/>").text('모집기간'),
                     $("<td class='subject-th'/>").text('일수'),
-                    $("<td class='subject-th'/>").text('시수'),
-                    $("<td class='subject-th'/>").text('모집 인원'),
-                    $("<td class='subject-th'/>").text('강좌 분류'),
-                    $("<td class='subject-th'/>").text('개설 상태'),
-                    $("<td class='subject-th'/>").text('난이도 (기타)'),
+                    $("<td class='subject-th'/>").text('시수(시간)'),
+                    $("<td class='subject-th'/>").text('모집인원'),
+                    $("<td class='subject-th'/>").text('강좌분류'),
+                    $("<td class='subject-th'/>").text('개설상태'),
+                    $("<td class='subject-th'/>").text('난이도(기타)'),
                     $("<tr/>"),
                     $("<td/>").text(startDay + ' ~ ' + endDay),
                     $("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
@@ -269,19 +269,21 @@ function moveOutside(event, value){
                         var table = $("<table class='courselist'/>");
                         var tr1 = $("<table class='courselist' border='1'/>").append(
                                 $("<tr/>"),
-                                $("<td class='course-th'/>").text('강좌 아이디'),
-                                $("<td class='course-th'/>").text('강좌 명'),
-                                $("<td class='course-th'/>").text('강좌 진행 기간'),
-                                $("<td class='course-th'/>").text('강좌 시간'),
+                                $("<td class='course-th'/>").text('강좌아이디'),
+                                $("<td class='course-th'/>").text('강좌회차'),
+                                $("<td class='course-th'/>").text('강좌명'),
+                                $("<td class='course-th'/>").text('강좌기간'),
+                                $("<td class='course-th'/>").text('강좌시간'),
                                 $("<td class='course-th'/>").text('일수'),
-                                $("<td class='course-th'/>").text('시수'),
+                                $("<td class='course-th'/>").text('시수(시간)'),
                                 $("<td class='course-th'/>").text('난이도'),
                                 $("<td class='course-th'/>").text('비용'),
-                                $("<td class='course-th'/>").text('교육비 지원 여부')
+                                $("<td class='course-th'/>").text('교육비지원여부')
                         );
                                     
                         for(var i in result) {
                             var $subjectId = result[i].subjectId;
+                            var $subjectSeq = result[i].subjectSeq;
                             var $subjectTitle = result[i].subjectTitle;
                             var $startDay = result[i].startDay;
                             var $endDay = result[i].endDay;
@@ -291,17 +293,19 @@ function moveOutside(event, value){
                             var $hours = result[i].hours;
                             var $levelCdTitle = result[i].levelCdTitle;
                             var $cost = result[i].cost;
+                            $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             var $supportYn = result[i].supportYn;
                             
                             if($supportYn === 'Y') {
-                            	$supportYn = '지원 가능'
+                                $supportYn = '지원 가능'
                             }else if($supportYn === 'N') {
-                            	$supportYn = '지원 불가'
+                                $supportYn = '지원 불가'
                             }
                             
                             var tr2 = tr1.append(
                                     $("<tr/>"),
                                     $("<td/>").text($subjectId),
+                                    $("<td/>").text($subjectSeq),
                                     $("<td/>").text($subjectTitle),
                                     $("<td/>").text($startDay + ' ~ ' + $endDay),
                                     $("<td/>").text($startTime + ' ~ ' + $endTime),
