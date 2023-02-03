@@ -25,7 +25,7 @@
         <!-- 검색끝 -->
         
         <div class="view">
-			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert"/>'">강좌/과정 개설</button>
+			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/subject/insert?check=${check}"/>'">강좌/과정 개설</button>
 			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
 				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '10'?"selected":""}>10개</option>
