@@ -146,6 +146,7 @@ public class SubjectController {
 			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("check", "openCourse");
 		
 		// 페이징 대상이 되는 전체 검색 행수
 		int totalRows = pagerService.getCountSearchOpenCourseRow(catCourseCd, course, keyword);
@@ -186,6 +187,7 @@ public class SubjectController {
 			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
+		model.addAttribute("check", "openSubject");
 		
 		// 페이징 대상이 되는 전체 검색 행수
 		int totalRows = pagerService.getCountSearchOpenSubjectRow(catSubjectCd, subject, keyword);
@@ -281,10 +283,11 @@ public class SubjectController {
 
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insertSubject(Model model) {
+	public String insertSubject(@RequestParam(defaultValue="") String check, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
 		model.addAttribute("openVo", new OpenVO());
+		model.addAttribute("check", check); // 개설 과정 목록을 통해 들어왔는지 확인
 
 		List<CourseVO> allCourseList = subjectService.selectAllCourse();
 		List<SubjectVO> allSubjectList = subjectService.selectAllSubject();
@@ -442,8 +445,6 @@ public class SubjectController {
 		
 		return "subject/boardlist-result";
 	}
-	
-	
 	
 	
 	/**

@@ -1,11 +1,8 @@
 /* 선택완료 버튼 클릭 시 remove-hide 클래스에서 hide-first 클래스 삭제하기 */
 function removeHideFirst() {
-	const subjectId = document.getElementById('subjectId-input').value;
 	const removeHide = document.getElementsByClassName('remove-hide');
-	if(subjectId) {
-		for(let i=0; i<removeHide.length; i++) {
+	for(let i=0; i<removeHide.length; i++) {
 			removeHide[i].classList.remove('hide-first')
-		}
 	}
 }
 
@@ -60,12 +57,37 @@ var ajaxRecruitEnd;
 var ajaxStart;
 var ajaxEnd;
 
+/*과정필수인지 아닌지 확인*/
+function chcekCourseOrSubject() {
+	const courseId = document.getElementById('courseId-input').value;
+	const subjectId = document.getElementById('subjectId-input').value;
+	const check = document.getElementById('check').value;
+	console.log(courseId , subjectId, check);
+
+	if(check === "openCourse"){ //과정 필수
+		if(courseId && subjectId){
+			selected(courseId, subjectId);
+			removeHideFirst()
+		}else{
+			alert("과정과 강좌 모두 선택 후 눌러주세요.");
+		}
+	}else{ //강좌만 필수
+		if(subjectId){
+			selected(courseId, subjectId);
+			removeHideFirst()
+		}else{
+			alert("강좌 선택 후 눌러주세요.");
+		}
+	}
+}
+
 /*강좌변화후 #select-btn 버튼 클릭 시 비동기 데이터 출력*/
-const selected = function() {
-		const courseId = document.getElementById('courseId-input').value;
-		const subjectId = document.getElementById('subjectId-input').value;
-		console.log(courseId , subjectId);
-		if(subjectId) {
+const selected = function(courseId, subjectId) {
+		// const courseId = document.getElementById('courseId-input').value;
+		// const subjectId = document.getElementById('subjectId-input').value;
+		// const check = document.getElementById('check').value;
+		// console.log(courseId , subjectId, check);
+		// if(subjectId) {
 			$.ajax({
 				type: "get",
 				url: "ajax?courseId="+courseId+"&subjectId="+subjectId,
@@ -218,9 +240,9 @@ const selected = function() {
 					console.log("fail");
 				}
 			})
-		} else {
-			alert('강좌를 선택 후 눌러주세요.');
-		}
+		// } else {
+		// 	console.log('강좌를 선택 후 눌러주세요.');
+		// }
 };
 
 /*날짜format*/
@@ -257,7 +279,7 @@ $('input#startTime').timepicker({
 	interval: 30,
 	startTime: '09:00',
 	minTime: '9',
-	maxTime: '11:00pm',
+	maxTime: '08:00pm',
 	dynamic: false,
 	dropdown: true,
 	scrollbar: true,
@@ -276,7 +298,7 @@ $('input#endTime').timepicker({
 	interval: 30,
 	startTime: '09:00',
 	minTime: '9',
-	maxTime: '11:00pm',
+	maxTime: '10:00pm',
 	dynamic: false,
 	dropdown: true,
 	scrollbar: true,
