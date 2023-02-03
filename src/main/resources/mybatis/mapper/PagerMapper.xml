@@ -12,7 +12,8 @@
 		<include refid="paging-header" /> 
 		    SELECT
 		    	name,
-				student_id, 
+		    	student_id,
+				user_id, 
 				email, 
 				to_char(to_date(birth), 'YYYY-MM-DD') as birth, 	
             	common_code.comn_cd_title as position_title
