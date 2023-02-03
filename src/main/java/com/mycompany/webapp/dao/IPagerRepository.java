@@ -36,4 +36,7 @@ public interface IPagerRepository {
 	List<OpenVO> selectSearchOpenSubjectListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catSubjectCd") String catSubjectCd, 
 			@Param("subject") String subject, @Param("keyword") String keyword);
 	
+	//수강생 검색
+	int getCountSearchStudentRow(@Param("student") String student, @Param("keyword") String keyword);
+	List<StudentVO> selectSearchStudentListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("student") String student, @Param("keyword") String keyword);
 }

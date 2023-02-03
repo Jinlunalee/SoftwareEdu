@@ -291,6 +291,28 @@
 		<include refid="paging-footer" /> 
 	</select>
 	
+	<select id="getCountSearchStudentRow" parameterType="map" resultType="int">
+		/*getCountSearchStudentRow*/
+		SELECT count(*) FROM student
+		<include refid="student-search" />
+	</select>
+
+	<select id="selectSearchStudentListByPage" parameterType="map" resultType="StudentVO">
+		/*selectSearchStudentListByPage*/
+		<include refid="paging-header" /> 
+		    SELECT
+		    	name,
+				student_id, 
+				email, 
+				to_char(to_date(birth), 'YYYY-MM-DD') as birth, 	
+            	common_code.comn_cd_title as position_title
+		    FROM student s
+		    left join common_code cm on s.position_cd = cm.comn_cd
+		    <include refid="student-search" />
+		    ORDER BY student_id
+		<include refid="paging-footer" /> 
+	</select>
+	
 	<sql id="paging-header">
     <!-- 페이징 쿼리 윗부분-->
     /*paging-header*/
@@ -371,6 +393,16 @@
 		</if>
 		<if test='subject != null and subject.equals("subjTitle")'>
 			AND (subject_title = #{keyword} OR REPLACE(UPPER(subject_title), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+		</if>
+    </sql>
+    
+    <sql id="student-search">
+    /*student-search*/
+    	<if test='student != null and student.equals("stdtId")'>
+    		AND (student_id = #{keyword} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+		</if>
+		<if test='student != null and student.equals("stdtName")'>
+			AND (name = #{keyword} OR REPLACE(UPPER(name), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
 		</if>
     </sql>
 	

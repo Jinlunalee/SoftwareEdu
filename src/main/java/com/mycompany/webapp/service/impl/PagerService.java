@@ -219,5 +219,17 @@ public class PagerService implements IPagerService {
 		return boardList;
 	}
 
+	@Override
+	public int getCountSearchStudentRow(String student, String keyword) {
+		return pagerRepository.getCountSearchStudentRow(student, keyword);
+	}
+
+	@Override
+	public List<StudentVO> selectSearchStudentListByPage(Pager pager, String student, String keyword) {
+		int endRowNo = pager.getEndRowNo();
+		int startRowNo = pager.getStartRowNo();
+		return pagerRepository.selectSearchStudentListByPage(endRowNo, startRowNo, student, keyword);
+	}
+
 
 }

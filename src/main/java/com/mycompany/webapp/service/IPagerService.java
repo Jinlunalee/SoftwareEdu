@@ -30,4 +30,8 @@ public interface IPagerService {
 	int getCountSearchOpenSubjectRow(String catSubjectCd, String subject, String keyword);
 	List<OpenVO> selectSearchOpenSubjectListByPage(Pager pager, String catSubjectCd, String subject, String keyword);
 	
+	//수강생 검색
+	int getCountSearchStudentRow(String student, String keyword);
+	List<StudentVO> selectSearchStudentListByPage(Pager pager, String student, String keyword);
+	
 }
