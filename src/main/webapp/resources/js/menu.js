@@ -50,4 +50,3 @@ const submenuLinks = {
 //     let subMenu = `<div class="aside-bar-submenu-` + i + `><a href="<c:url value='` + submenuLink[tag][i] + `'/>">` + submenuName[tag][i] + `</a>` +`</div>`;
 //     $(".aside-bar-submenu").append(subMenu);
 // }
-
