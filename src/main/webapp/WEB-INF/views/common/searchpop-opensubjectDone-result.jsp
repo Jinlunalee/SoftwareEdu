@@ -8,6 +8,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <td class="th-column-14">개설일자</td>
                         <td class="th-column-1">강좌아이디</td>
                         <td class="th-column-2">강좌명</td>
                         <td class="th-column-3">과정아이디</td>
@@ -26,12 +27,12 @@
                         <td class="th-column-11">모집인원</td>
                         <td class="th-column-12">상태</td>
                         <td class="th-column-13">분류</td>
-                        <td class="th-column-14">개설일자</td>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${boardList}" var="board">
                         <tr>
+                            <td>${board.openDt}</td>
                             <td>${board.subjectId}</td>
                             <td>
                                 <a class="${board.openStateCd}" class="move" onclick="return moveOutside(event, this.name);" href="#" name="${board.subjectId}/${board.subjectSeq}/${board.subjectTitle}/${board.openDt}/${board.openStateCd}">
@@ -61,7 +62,6 @@
                             <td>${board.recruitPeople}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
-                            <td>${board.openDt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

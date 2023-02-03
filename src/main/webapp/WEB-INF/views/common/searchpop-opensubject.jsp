@@ -48,7 +48,6 @@
                                     <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
-                            </select>
                             개설연도 :
                             <select name="openDtYear">
                                 <option value="0">전체</option>

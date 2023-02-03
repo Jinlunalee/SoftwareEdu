@@ -193,7 +193,7 @@
 				AND state_cd = 'OPN05'
 			</when>
 		</choose>
-		ORDER BY open.subject_id, subject_seq
+		ORDER BY open.open_dt DESC
 	</select>
 	
 	<select id="searchOpenCourse" parameterType="OpenVO" resultType="OpenVO">
@@ -242,7 +242,7 @@
 			AND open_state_cd = #{openStateCd}
 			</if>
 		</where>
-		order by 1
+		order by 2 DESC
 	</select>
 	
 	<select id="searchStudentList" parameterType="StudentVO" resultType="StudentVO">
@@ -259,8 +259,8 @@
 	            position_cd 
 	      FROM STUDENT 
 	      WHERE 1=1 
-	      <if test="studentId != null and !studentId.equals('')">
-	         AND (student_id = #{studentId} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{studentId}) || '%')
+	      <if test="userId != null and !userId.equals('')">
+	         AND (user_id = #{userId} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{userId}) || '%')
 	      </if>
 	      <if test="name != null and !name.equals('')">
 	         AND name = #{name}

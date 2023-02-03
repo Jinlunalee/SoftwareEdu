@@ -160,7 +160,7 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
     } else if(value === 'studentId') {
-        studentInput.setAttribute("name", 'studentId');
+        studentInput.setAttribute("name", 'userId');
     } else{
         studentInput.setAttribute("name", 'name');
     }
@@ -335,8 +335,9 @@ function moveOutside(event, value){
         let studentAddDoTitle = valueArr[6];
         let studentAddEtc = valueArr[7];
         let studentPositionTitle = valueArr[8];
+        let studentUserId = valueArr[9];
         
-        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + valueId + ")");
+        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + studentUserId + ")");
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
         
