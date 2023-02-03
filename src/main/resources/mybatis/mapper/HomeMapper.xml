@@ -148,17 +148,18 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "startDay", /**/
-		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
-		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitStartDay", 
-		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "recruitEndDay", 
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, /**/
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
+		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
+		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
+
 		    recruit_people,
 		    state_cd as open_state_cd,
 		    comn_cd_title as open_state_cd_title,
 		    file_id,
 		    subject.cat_cd as cat_subject_cd,
 		    subject.reg_year,
-		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS "openDt" 
+		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS open_dt 
 		FROM open
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -249,9 +250,9 @@
 	      SELECT student_id, 
 	            name, 
 	            gender_cd, 
-	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS "birth", 
+	            TO_CHAR(TO_DATE(birth, 'YYYYMMDD'), 'YYYY-MM-DD') AS birth, 
 	            email, 
-	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "phone", 
+	            REGEXP_REPLACE(phone, '(.{3})(.+)(.{4})', '\1-\2-\3') AS phone, 
 	            add_do_cd, 
 	            add_etc,
 	            position_cd 
@@ -269,10 +270,10 @@
    /*selectSubjectListByCourseId*/
    SELECT s.subject_id,
    			subject_title, 
-   			TO_CHAR(TO_DATE(START_DAY, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
-		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS "endDay", 
-   			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS "startTime", 
-   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS "endTime",  
+   			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
+		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
+   			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS start_time, 
+   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS end_time,  
    			days, 
    			hours, 
    			level_cd, 

@@ -76,7 +76,7 @@ img {
 	height: 600px;
 	font-size: 15px;
 	position: relative;
-	top: -80px;
+	top: -36px;
 }
 
 .box {
@@ -167,8 +167,8 @@ img {
 #reset_btn {
     width: 70px;
     position: relative;
-    left: 279px;
-    top: -38px;
+    left: 410px;
+    top: -48px;
     font-size: 12px;
     text-align: left;
 }
@@ -177,8 +177,8 @@ img {
     width: 23px;
     height: 11px;
     position: relative;
-    left: 249px;
-    bottom: 39px;
+    left: 381px;
+    bottom: 49px;
 }
 
 .checkDataStd, .checkDataSbj{
