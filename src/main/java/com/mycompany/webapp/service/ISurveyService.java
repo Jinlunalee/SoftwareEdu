@@ -22,4 +22,5 @@ public interface ISurveyService {
 	
 	List<AnswerVO> selectAnswerList(String subjectId, int subjectSeq); //해당 강좌에 대한 답변정보
 	Map<String, Integer> pivotAnswerValue(String subjectId, int subjectSeq, int questionNum);
+	String getSubjectTitle(String subjectId);
 }
