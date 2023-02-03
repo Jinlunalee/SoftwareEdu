@@ -315,18 +315,22 @@ public class SubjectController {
 				file.setFileContentType(mf.getContentType());
 				file.setFileData(mf.getBytes());
 
+				// subjectSeq 넣고 fileData, subject insert
+				int subjectSeq = surveyService.getMaxSubjectSeq(openVo.getSubjectId()) + 1;
+				openVo.setSubjectSeq(subjectSeq);
 				subjectService.insertFileData(openVo, file);
 
-				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
-				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
-				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
+				//subjectSeq quesitonVo에 set
+				questionVo.setSubjectSeq(subjectSeq);
 				surveyService.insertQuestion(questionVo);
 			}else { // 첨부파일 없을 때
+				// subjectSeq 넣고 subject insert
+				int subjectSeq = surveyService.getMaxSubjectSeq(openVo.getSubjectId()) + 1;
+				openVo.setSubjectSeq(subjectSeq);
 				subjectService.insertSubject(openVo);
 
-				//subjectId 중 subjectSeq가 max인 것을 찾아 quesitonVo에 set
-				questionVo.setSubjectSeq(surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
-				System.out.println("subjectSeq" + surveyService.getMaxSubjectSeq(openVo.getSubjectId()));
+				//subjectSeq quesitonVo에 set
+				questionVo.setSubjectSeq(subjectSeq);
 				surveyService.insertQuestion(questionVo);
 			}
 		}catch (Exception e) {
