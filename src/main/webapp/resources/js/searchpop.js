@@ -160,7 +160,7 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     } else if(value === 'courseTitle'){
         courseInput.setAttribute("name", 'courseTitle');
     } else if(value === 'studentId') {
-        studentInput.setAttribute("name", 'studentId');
+        studentInput.setAttribute("name", 'userId');
     } else{
         studentInput.setAttribute("name", 'name');
     }
@@ -196,7 +196,7 @@ function moveOutside(event, value){
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
         
-        $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ")  |  등록일자 : " + openDt);
+        $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
         $(opener.document).find("#subjectId-input").val(valueId);
 
@@ -243,7 +243,7 @@ function moveOutside(event, value){
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
         let valueYear = valueArr[3];
-        $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ")");
+        $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ") | 개설연도 : " + valueYear);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);
         $(opener.document).find("#courseYear-input").val(valueYear);
@@ -335,8 +335,9 @@ function moveOutside(event, value){
         let studentAddDoTitle = valueArr[6];
         let studentAddEtc = valueArr[7];
         let studentPositionTitle = valueArr[8];
+        let studentUserId = valueArr[9];
         
-        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + valueId + ")");
+        $(opener.document).find("#studentTitle-input").val(valueTitle + " (" + studentUserId + ")");
         $(opener.document).find("#student-input").val(value);
         $(opener.document).find("#studentId-input").val(valueId);
         

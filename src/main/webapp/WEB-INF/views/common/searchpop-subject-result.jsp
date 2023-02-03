@@ -10,15 +10,15 @@
                     <tr>
                         <td class="th-column-1">강좌아이디</td>
                         <td class="th-column-2">강좌명</td>
-                        <td class="th-column-5">교육비 지원여부</td>
+                        <td class="th-column-5">교육비지원여부</td>
                         <c:if test="${board.level ne 'LEV04'}">
                             <td class="th-column-6">난이도</td>
                         </c:if>
                         <c:if test="${board.level eq 'LEV04'}">
-                            <td class="th-column-6">난이도 기타</td>
+                            <td class="th-column-6">난이도기타</td>
                         </c:if>
                         <td class="th-column-7">수강일수</td>
-                        <td class="th-column-8">수강시수</td>
+                        <td class="th-column-8">수강시수(시간)</td>
                         <td class="th-column-15">분류</td>
                         <td class="th-column-16">등록연도</td>
                     </tr>

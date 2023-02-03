@@ -31,7 +31,7 @@ public class StudentController {
 	@Autowired
 	IPagerService pagerService;
 	
-	//목록조회
+//목록조회
 //	@RequestMapping(value="/list", method=RequestMethod.GET)
 //	public String getStudentList(Model model) {
 //		model.addAttribute("menu", "student");
@@ -85,6 +85,11 @@ public class StudentController {
 	public String searchStudent(@RequestParam String studentName, @RequestParam String studentId, Model model) {
 		model.addAttribute("menu", "student");
 		model.addAttribute("menuKOR", "수강생 관리");
+		
+		
+		
+		
+		
 		return "student/search";
 	}
 

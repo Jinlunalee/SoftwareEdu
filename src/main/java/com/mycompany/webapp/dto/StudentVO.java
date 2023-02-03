@@ -13,7 +13,9 @@ public class StudentVO {
 	
 	
 	
-	private String studentId;  // 수강생 아이디
+	private String studentId;  // 수강생 관리 아이디
+	
+	private String userId;  // 수강생 아이디
 	
 	@Expose
 	private String name;		// 수강생 이름
