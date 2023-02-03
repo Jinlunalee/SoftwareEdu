@@ -67,7 +67,7 @@
 			AND subject.cat_cd=#{catSubjectCd}
 		</if>
 	</select>
-
+	
 	<select id="selectOpenSubjectListByPage" parameterType="map" resultType="OpenVO">
 		/*selectOpenSubjectListByPage1*/
 		<include refid="paging-header" /> 
@@ -107,7 +107,6 @@
 		<include refid="paging-footer" /> 
 	</select>
 	
-
 	<select id="getCountEnrollRow" resultType="int">
 		/*getCountEnrollRow*/
 		SELECT count(*)
@@ -214,6 +213,84 @@
 		<include refid="paging-footer" /> 
 	</select>
 	
+	<select id="getCountSearchOpenCourseRow" parameterType="map" resultType="int">
+		/*getCountSearchOpenCourseRow*/
+		SELECT count(distinct o.course_id)
+		FROM open o
+		LEFT JOIN course c ON o.course_id = c.course_id
+		WHERE o.course_id is not null AND del_yn = 'N'
+		<include refid="course-search" />
+	</select>
+
+	<select id="selectSearchOpenCourseListByPage" parameterType="map" resultType="OpenVO">
+		/*selectSearchOpenCourseListByPage*/
+		<include refid="paging-header" /> 
+		        select DISTINCT
+					o.course_id,
+					course_title,
+					TO_CHAR(TO_DATE(min(start_day) over (partition by o.course_id)), 'YYYY-MM-DD') as start_day,
+					TO_CHAR(TO_DATE(max(end_day) over (partition by o.course_id)), 'YYYY-MM-DD') as end_day,
+					sum(cost) over (partition by o.course_id) as cost,
+					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
+					c.cat_cd as catCourseCd,
+					course_open_year
+				from open o 
+						left join subject s on o.subject_id = s.subject_id
+		        		left join course c on o.course_id = c.course_id
+		        		left join common_code  cm on o.state_cd = cm.comn_cd
+		        where o.course_id IS NOT NULL AND del_yn = 'N'
+				<include refid="course-search" />
+				order by course_open_year desc
+		<include refid="paging-footer" /> 
+	</select>	
+	
+	<select id="getCountSearchOpenSubjectRow" parameterType="map" resultType="int">
+	/*getCountOpenSubjectRow*/
+		SELECT count(*)
+		FROM open o
+		LEFT JOIN subject s ON o.subject_id = s.subject_id
+		WHERE del_yn = 'N'
+		<include refid="subject-search" />
+	</select>
+	
+	<select id="selectSearchOpenSubjectListByPage" parameterType="map" resultType="OpenVO">
+		/*selectOpenSubjectListByPage1*/
+		<include refid="paging-header" /> 
+	        select 
+				o.subject_id,
+				subject_seq,
+				subject_title,
+				support_yn,
+				days,
+				hours,
+				level_cd,
+				level_etc,
+				s.cost,
+				o.course_id,
+				c.course_title,
+				TO_CHAR(TO_TIMESTAMP(start_time, 'HH24:MI'),'HH24:MI') as start_time,
+				TO_CHAR(TO_TIMESTAMP(end_time, 'HH24:MI'),'HH24:MI') as end_time,
+				TO_CHAR(TO_DATE(start_day), 'YYYY-MM-DD') as start_day,
+				TO_CHAR(TO_DATE(end_day), 'YYYY-MM-DD') as end_day,
+				TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
+				TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
+				recruit_people,
+				state_cd as open_state_cd,
+				comn_cd_title as open_state_cd_title,
+				file_id,
+				s.cat_cd as catSubjectCd,
+				TO_CHAR(TO_DATE(o.open_dt, 'YYYYMMDD/HH24MISS'),'YYYY-MM-DD HH24:MI') as open_dt
+			from open o
+					left join subject s on o.subject_id = s.subject_id
+	        		left join course  c on o.course_id = c.course_id
+	        		left join common_code cm on o.state_cd = cm.comn_cd
+	        WHERE del_yn = 'N' 
+			<include refid="subject-search" />
+			order by o.open_dt desc
+		<include refid="paging-footer" /> 
+	</select>
+	
 	<sql id="paging-header">
     <!-- 페이징 쿼리 윗부분-->
     /*paging-header*/
@@ -268,6 +345,32 @@
 		</if>
 		<if test='state != null and state.equals("complete")'>
 			AND e.state_cd = 'ERL06' 
+		</if>
+    </sql>
+    
+    <sql id="course-search">
+    /*course-search*/
+    	<if test="catCourseCd != 'all'">
+			AND c.cat_cd = #{catCourseCd}
+		</if>
+    	<if test='course != null and course.equals("crseId")'>
+    		AND (o.course_id = #{keyword} OR REPLACE(UPPER(o.course_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+		</if>
+		<if test='course != null and course.equals("crseTitle")'>
+			AND (course_title = #{keyword} OR REPLACE(UPPER(course_title), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+		</if>
+    </sql>
+    
+    <sql id="subject-search">
+    /*subject-search*/
+    	<if test="catSubjectCd != 'all'">
+			AND s.cat_cd=#{catSubjectCd}
+		</if>
+    	<if test='subject != null and subject.equals("subjId")'>
+    		AND (o.subject_id = #{keyword} OR REPLACE(UPPER(o.subject_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+		</if>
+		<if test='subject != null and subject.equals("subjTitle")'>
+			AND (subject_title = #{keyword} OR REPLACE(UPPER(subject_title), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
 		</if>
     </sql>
 	

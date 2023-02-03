@@ -22,4 +22,12 @@ public interface IPagerService {
 	
 	int getCountSearchRow(EnrollVO enroll);
 	List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager);
+	
+	//과정/강좌 검색하기
+	int getCountSearchOpenCourseRow(String catCourseCd, String course, String keyword);
+	List<OpenVO> selectSearchOpenCourseListByPage(Pager pager, String catCourseCd, String course, String keyword);
+	
+	int getCountSearchOpenSubjectRow(String catSubjectCd, String subject, String keyword);
+	List<OpenVO> selectSearchOpenSubjectListByPage(Pager pager, String catSubjectCd, String subject, String keyword);
+	
 }

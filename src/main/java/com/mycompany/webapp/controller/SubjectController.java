@@ -128,13 +128,63 @@ public class SubjectController {
 
 		return "subject/details";
 	}
-
-	// 개설 강좌 검색 (open)
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String searchSubject(@RequestParam String subjectTitle, @RequestParam String subjectId, Model model) {
+	
+	// paging 개설 과정 검색 (open course)
+	@GetMapping(value="/searchCourseBoardlist")
+	public String searchCourse(@RequestParam(defaultValue="all") String catCourseCd, @RequestParam(defaultValue="crseTitle") String course, @RequestParam(defaultValue="") String keyword, 
+			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
 		model.addAttribute("menu", "subject");
 		model.addAttribute("menuKOR", "강좌 관리");
-		return "subject/search";
+		
+		// 페이징 대상이 되는 전체 검색 행수
+		int totalRows = pagerService.getCountSearchOpenCourseRow(catCourseCd, course, keyword);
+		
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+		
+		// 해당 페이지의 행을 가져오기
+		List<OpenVO> boardList = pagerService.selectSearchOpenCourseListByPage(pager, catCourseCd, course, keyword);
+		
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("catId", catCourseCd);
+		model.addAttribute("course", course);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
+		logger.info("searchOpenCourseBoardList: " + boardList);
+		
+		return "subject/courselist";
+	}
+	
+	// paging 개설 강좌 검색 (open subject)
+	@RequestMapping(value="/searchSubjectBoardlist", method=RequestMethod.GET)
+	public String searchSubject(@RequestParam(defaultValue="all") String catSubjectCd, @RequestParam(defaultValue="subjTitle") String subject, @RequestParam(defaultValue="") String keyword, 
+			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model) {
+		model.addAttribute("menu", "subject");
+		model.addAttribute("menuKOR", "강좌 관리");
+		
+		// 페이징 대상이 되는 전체 검색 행수
+		int totalRows = pagerService.getCountSearchOpenSubjectRow(catSubjectCd, subject, keyword);
+		
+		// 페이저 정보가 담긴 Pager 객체 생성
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+		
+		// 해당 페이지의 행을 가져오기
+		List<OpenVO> boardList = pagerService.selectSearchOpenSubjectListByPage(pager, catSubjectCd, subject, keyword);
+		
+		//JSP에서 사용할 데이터를 저장
+		model.addAttribute("catId", catSubjectCd);
+		model.addAttribute("subject", subject);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
+		logger.info("searchOpenSubjectBoardList: " + boardList);
+		
+		return "subject/subjectlist";
 	}
 
 	// 개설 강좌 수정 (open)

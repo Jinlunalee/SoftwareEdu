@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
@@ -150,8 +151,73 @@ public class PagerService implements IPagerService {
 		return boardList;
 	}
 	
+	//과정 검색
+	@Override
+	public int getCountSearchOpenCourseRow(String catCourseCd, String course, String keyword) {
+		return pagerRepository.getCountSearchOpenCourseRow(catCourseCd, course, keyword);
+	}
 	
+	@Transactional
+	@Override
+	public List<OpenVO> selectSearchOpenCourseListByPage(Pager pager, String catCourseCd, String course, String keyword) {
+		int endRowNo = pager.getEndRowNo();
+		int startRowNo = pager.getStartRowNo();
+		
+		List<OpenVO> boardList = pagerRepository.selectSearchOpenCourseListByPage(endRowNo, startRowNo, catCourseCd, course, keyword);
+		
+		// catCourse 공통코드로 catCourseTitle 가져와서 set하기
+		for(OpenVO openVo : boardList) {
+			openVo.setCatCourseCdTitle(homeRepository.getComnCdTitle(openVo.getCatCourseCd()));
+		}
+		
+		//기간에 따라 상태 표현
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
+		int today = Integer.parseInt(formatter.format(new Date()));
+		for(int i=0;i<boardList.size();i++) {
+			int startDay = Integer.parseInt(boardList.get(i).getStartDay().replaceAll("-", ""));
+			int endDay = Integer.parseInt(boardList.get(i).getEndDay().replaceAll("-", ""));
+			int recruitStartDay = Integer.parseInt(boardList.get(i).getRecruitStartDay().replaceAll("-", ""));
+			int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
+			
+			if(today < recruitStartDay) {
+				boardList.get(i).setOpenStateCdTitle("모집예정");//모집예정 
+			}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
+				boardList.get(i).setOpenStateCdTitle("모집중");
+			}else { //모집마감 1. 진행중  2.진행완료
+				if(startDay < today && today < endDay) { //진행중
+					boardList.get(i).setOpenStateCdTitle("진행중");
+				}else if(endDay < today){ //진행완료
+					boardList.get(i).setOpenStateCdTitle("진행완료");
+				}else { //모집마감
+					boardList.get(i).setOpenStateCdTitle("모집마감");
+				}
+			}
+		}
+		
+		return boardList;
+	}
+	
+	//강좌 검색
+	@Override
+	public int getCountSearchOpenSubjectRow(String catSubjectCd, String subject, String keyword) {
+		return pagerRepository.getCountSearchOpenSubjectRow(catSubjectCd, subject, keyword);
+	}
 
+	@Transactional
+	@Override
+	public List<OpenVO> selectSearchOpenSubjectListByPage(Pager pager, String catSubjectCd, String subject, String keyword) {
+		int endRowNo = pager.getEndRowNo();
+		int startRowNo = pager.getStartRowNo();
+		
+		List<OpenVO> boardList = pagerRepository.selectSearchOpenSubjectListByPage(endRowNo, startRowNo, catSubjectCd, subject, keyword);
+		
+		// catSubject 공통코드로 catSubjectTitle 가져와서 set하기
+		for(OpenVO openVo : boardList) {
+			openVo.setCatSubjectCdTitle(homeRepository.getComnCdTitle(openVo.getCatSubjectCd()));
+		}
+		
+		return boardList;
+	}
 
 
 }
