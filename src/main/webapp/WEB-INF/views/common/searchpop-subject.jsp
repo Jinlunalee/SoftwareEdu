@@ -50,6 +50,7 @@
                                 </c:forEach>
                             </select>
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
+                            <button type="button" id="close-btn">창닫기</button>
                         </div>
                     </form>
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->

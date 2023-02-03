@@ -302,7 +302,7 @@
 				from open
 			</when>
 		</choose>
-		order by 1
+		order by 1 DESC
 	</select>
 		
 </mapper>

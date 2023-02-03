@@ -547,3 +547,10 @@ function resetValue() {
         alert("수강생을 다시 선택하였습니다. 강좌/과정을 다시 선택해주세요.");
     }
 }
+
+const closeBtn = document.getElementById('close-btn');
+closeBtn.addEventListener("click", closePop);
+
+function closePop() {
+    close();
+}
