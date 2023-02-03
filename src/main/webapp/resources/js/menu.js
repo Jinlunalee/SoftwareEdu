@@ -26,7 +26,7 @@ const submenuLinks = {
         'http://localhost/student/boardlist', ''
     ],
     enroll : [
-        'http://localhost/enroll/boardlist'
+        'http://localhost/enroll/searchlist'
     ],
     survey : [
         'http://localhost/survey/summary'

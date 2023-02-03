@@ -22,4 +22,6 @@ public interface IPagerService {
 	
 	int getCountSearchRow(EnrollVO enroll);
 	List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager);
+	
+	List<EnrollVO> selectSearchListByExcel(EnrollVO enroll);
 }

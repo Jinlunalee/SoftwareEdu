@@ -28,7 +28,7 @@
 				</a>
 				<div class="nav-list"><a href="<c:url value='/subject/courseboardlist?catCourse=all'/>">강좌 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/student/boardlist'/>">수강생 관리</a></div>						
-				<div class="nav-list"><a href="<c:url value='/enroll/boardlist'/>">수강 관리</a></div>
+				<div class="nav-list"><a href="<c:url value='/enroll/searchlist'/>">수강 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/survey/summary'/>">강의 만족도 조사 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/data/download'/>">연계 자료 관리</a></div>
 				<div>

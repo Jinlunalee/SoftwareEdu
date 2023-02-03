@@ -217,8 +217,8 @@ function moveOutside(event, value){
             var table = $("<table class='subjectdetails'/>");
             var tr = $("<table class='subjectdetails' border='1'/>").append(
                     $("<tr/>"),
-                    $("<td class='subject-th'/>").text('강좌 기간'),
-                    $("<td class='subject-th'/>").text('모집 기간'),
+                    $("<td class='subject-th'/>").text('연수 기간'),
+                    $("<td class='subject-th'/>").text('신청 기간'),
                     $("<td class='subject-th'/>").text('일수'),
                     $("<td class='subject-th'/>").text('시수'),
                     $("<td class='subject-th'/>").text('모집 인원'),
@@ -271,8 +271,8 @@ function moveOutside(event, value){
                                 $("<tr/>"),
                                 $("<td class='course-th'/>").text('강좌 아이디'),
                                 $("<td class='course-th'/>").text('강좌 명'),
-                                $("<td class='course-th'/>").text('강좌 진행 기간'),
-                                $("<td class='course-th'/>").text('강좌 시간'),
+                                $("<td class='course-th'/>").text('연수 기간'),
+                                $("<td class='course-th'/>").text('연수 시간'),
                                 $("<td class='course-th'/>").text('일수'),
                                 $("<td class='course-th'/>").text('시수'),
                                 $("<td class='course-th'/>").text('난이도'),

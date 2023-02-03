@@ -27,4 +27,6 @@ public interface IPagerRepository {
 	
 	int getCountSearchRow(EnrollVO enroll);
 	List<EnrollVO> selectSearchListByPage(@Param("applyStartDay") String applyStartDay, @Param("applyEndDay") String applyEndDay, @Param("student") String student, @Param("course") String course, @Param("state") String state, @Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("keyword1") String keyword1, @Param("keyword2") String keyword2);
+	
+	List<EnrollVO> selectSearchListByExcel(@Param("applyStartDay") String applyStartDay, @Param("applyEndDay") String applyEndDay, @Param("student") String student, @Param("course") String course, @Param("state") String state, @Param("keyword1") String keyword1, @Param("keyword2") String keyword2);
 }

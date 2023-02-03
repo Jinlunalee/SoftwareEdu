@@ -19,26 +19,26 @@
 				<%--신청 기간 --%>
 				<div class="apply-period">
 					<span id="applyperiod">신청기간</span>
-					<input type="date" name="applyStartDay" class="input-date" value="${enroll.applyStartDay}"> ~ 
-					<input type="date" name="applyEndDay" class="input-date" value="${enroll.applyEndDay}">
+					<input type="date" name="applyStartDay" class="input-date" id="applyStartDay" value="${applyStartDay}"> ~ 
+					<input type="date" name="applyEndDay" class="input-date" id="applyEndDay" value="${applyEndDay}">
 				</div>
 
 				<%-- 강좌 과정 선택 --%>
 				<div class="select-subcor">
 					<select name="course" class="select-box">
-						<option value="sj" ${enroll.course eq 'sj' ? "selected" : ""}>강좌</option>
-						<option value="cs" ${enroll.course eq 'cs' ? "selected" : ""}>과정</option>
+						<option value="sj" ${course eq 'sj' ? "selected" : ""}>강좌 명</option>
+						<option value="cs" ${course eq 'cs' ? "selected" : ""}>과정 명</option>
 					</select>
-					<input type="text" name="keyword2" class="input-text" value="${enroll.keyword2}">
+					<input type="text" name="keyword2" class="input-text" value="${keyword2}">
 				</div>
 
 				<%-- 수강생 선택 --%>
 				<div class="selectstudent">
 					<select name="student" class="select-box select-stu">
-							<option value="sdName" ${enroll.student eq 'sdName' ? "selected" : ""}>수강생 명</option>
-							<option value="sdId" ${enroll.student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
+							<option value="sdName" ${student eq 'sdName' ? "selected" : ""}>수강생 명</option>
+							<option value="sdId" ${student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
 					</select>
-					<input type="text" name="keyword1" class="input-text input-student" value="${enroll.keyword1}">
+					<input type="text" name="keyword1" class="input-text input-student" value="${keyword1}">
 				</div>
 
 				<%-- 수강 상태 선택 --%>
@@ -46,11 +46,11 @@
 					<span>수강 상태</span>
 					<select id="enroll-state" name="state" class="select-box">
 						<option value="">전체</option>
-						<option value="expect" ${enroll.state eq 'expect' ? "selected" : ""}>수강 예정</option>
-						<option value="progress" ${enroll.state eq 'progress' ? "selected" : ""}>수강 중</option>
-						<option value="cancel" ${enroll.state eq 'cancel' ? "selected" : ""}>수강 취소</option>
-						<option value="apply" ${enroll.state eq 'apply' ? "selected" : ""}>수강 신청</option>
-						<option value="complete" ${enroll.state eq 'complete' ? "selected" : ""}>수강 완료</option>
+						<option value="expect" ${state eq 'expect' ? "selected" : ""}>수강 예정</option>
+						<option value="progress" ${state eq 'progress' ? "selected" : ""}>수강 중</option>
+						<option value="cancel" ${state eq 'cancel' ? "selected" : ""}>수강 취소</option>
+						<option value="apply" ${state eq 'apply' ? "selected" : ""}>수강 신청</option>
+						<option value="complete" ${state eq 'complete' ? "selected" : ""}>수강 완료</option>
 					</select>
 				</div>
 				<input type="submit" class="input-button" value="검색">
@@ -100,7 +100,7 @@
 				</td>
 
 				<%-- 수강생 명 --%>
-				<td>${board.name} (${board.studentId})</td>
+				<td>${board.name} (${board.userId})</td>
 				
 				<!-- 신청일자 -->
 				<td>${board.enrollDt}</td>
@@ -175,32 +175,32 @@
 
             <div id="paging">
                 <ul class="paging">
-                <li><a href="searchlist?pageNo=1&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">처음</a></li>
+                <li><a href="searchlist?pageNo=1&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">처음</a></li>
                     <c:if test="${pager.groupNo>1}">
-                        <li><a href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">이전</a></li>
+                        <li><a href="searchlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">이전</a></li>
                     </c:if>
 
                     <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
                         <c:if test="${pager.pageNo != i}">
-                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a></li>
+                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">${i}</a></li>
                         </c:if>
                         <c:if test="${pager.pageNo == i}">
-                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">${i}</a></li>
+                            <li><a href="searchlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">${i}</a></li>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <li><a href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">다음</a></li>
+                        <li><a href="searchlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">다음</a></li>
                     </c:if>
-                    <li><a href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}">맨끝</a></li>
+                    <li><a href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">맨끝</a></li>
                 </ul>
-              </div> 
+              </div>
               
               
 	
 		<div class="down">
-			<a href="<c:url value='/enroll/enrollsearchexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}
-			&course=${enroll.course}&keyword2=${enroll.keyword2}&student=${enroll.student}&keyword1=${enroll.keyword1}&state=${enroll.state}'/>">
+			<a href="<c:url value='/enroll/enrollsearchexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}
+			&course=${course}&keyword2=${keyword2}&student=${student}&keyword1=${keyword1}&state=${state}'/>">
 				<img class="excelimg" src="<c:url value='/resources/images/register/exceldown.png'/>"/>
 			</a>
 		</div>
@@ -210,6 +210,15 @@
 </div>
 
 	<script>
+		const applyStartDay = $('#applyStartDay').val();	
+		const applyEndDay = $('#applyEndDay').val();
+		const course = $('select[name=course]').val();
+		const keyword2 = $('input[name=keyword2]').val();
+		const student = $('select[name=student]').val();
+		const keyword1 = $('input[name=keyword1]').val();
+		const state = $('select[name=state]').val();
+	
+	
  		function showModal(i){
  			var openBtnClassName = ".modal-open-" + i;
  			var modalClassName = ".modal-" + i; 
@@ -269,6 +278,21 @@
 					$('#cancelRsEtc').empty();		
 			}
 		}
+		
+		/* document.getElementById('applyStartDay').valueAsDate = new Date().setFullYear(new Date().getFullYear()-1);
+		const applyEndDay = $('#applyEndDay').val();
+		if(applyEndDay === '') {
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = today.getMonth()+1 > 9 ? today.getMonth()+1 : '0' + today.getMonth()+1;
+		var day = today.getDate() > 9 ? today.getDate() : '0' + today.getDate();
+		
+		let offset = date.getTimezoneOffset() * 60000;
+		let dateOffset = new Date(date.getTime() - offset);
+		
+		$('#applyEndDay').val(dateOffset.toISOString());
+		}
+		document.getElementById('applyEndDay').valueAsDate = new Date(); */
 	</script>
 
 
