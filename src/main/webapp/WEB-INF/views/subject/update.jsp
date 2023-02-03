@@ -61,7 +61,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="write-txt"> 연수기간(일수)</td>
+				<td class="write-txt"> 강좌기간(일수)</td>
 				<td> 
 					<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 					<input type="hidden" name="hours" id="hours" value="${open.hours}">
@@ -73,7 +73,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="write-txt"> 연수시간</td>
+				<td class="write-txt"> 강좌시간</td>
 				<td>
 					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required> 
 					~
@@ -81,7 +81,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="write-txt"> 신청기간 </td>
+				<td class="write-txt"> 모집기간 </td>
 				<td> 
 					<input type="date" name="recruitStartDay" id="recruitStartDay" value="${open.recruitStartDay}" onchange="inputState()" required> 
 					~ 
@@ -108,7 +108,7 @@
 			<tr>
 				<td> 만족도 조사 </td>
 				<td>
-					<button class="btn-open-popup btn btn-secondary" style="height:35px;"> 수정 </button> 
+					<button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;"> 수정 </button> 
 				</td>
 			</tr>
 			<tr>

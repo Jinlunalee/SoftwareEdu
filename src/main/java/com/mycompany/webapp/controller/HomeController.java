@@ -21,6 +21,7 @@ import com.mycompany.webapp.dto.CourseVO;
 import com.mycompany.webapp.dto.OpenVO;
 import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
+import com.mycompany.webapp.service.IEnrollService;
 import com.mycompany.webapp.service.IHomeService;
 import com.mycompany.webapp.service.IPagerService;
 import com.mycompany.webapp.service.ISubjectService;
@@ -42,6 +43,9 @@ public class HomeController {
 	
 	@Autowired
 	ISurveyService surveyService;
+	
+	@Autowired
+	IEnrollService enrollService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -105,6 +109,7 @@ public class HomeController {
 	public void searchPopSubject(Model model) throws Exception{
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+		model.addAttribute("yearList", homeService.selectYearListByPop("subject")); // 개설/등록연도 리스트
 	}
 	
 	/**
@@ -182,9 +187,9 @@ public class HomeController {
 		opnComnCdList.remove(0); // 모집 예정 제거
 		opnComnCdList.remove(3); // 진행 완료 제거
 		opnComnCdList.remove(3); // 폐강 제거
-
 		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+		model.addAttribute("yearList", homeService.selectYearListByPop("opensubject")); // 개설/등록연도 리스트
 	}
 	
 	/**
@@ -197,6 +202,7 @@ public class HomeController {
 	public String searchPopOpenSubjectResult(OpenVO openVo, Model model) throws Exception{
 		openVo.setCases("case1"); // 개설강좌 상태가 모집중, 모집마감, 진행중인 경우만 보여주고, 개설과정에 포함된 건은 안보여주기 위함
 		List<OpenVO> openSubjectList = homeService.searchOpenSubject(openVo);
+		
 		
 		// ajax로 구현할 것
 		if(!openSubjectList.isEmpty()) {
@@ -219,6 +225,7 @@ public class HomeController {
 	public void searchPopOpenSubjectDone(Model model) throws Exception{
 		model.addAttribute("levelList", homeService.getComnCdList("LEV"));	// 난이도 공통코드 리스트
 		model.addAttribute("catSubjectList", homeService.getComnCdList("SUB"));	// 분류 공통코드 리스트
+		model.addAttribute("yearList", homeService.selectYearListByPop("opensubject")); // 개설/등록연도 리스트
 	}
 	
 	/**
@@ -288,6 +295,7 @@ public class HomeController {
 		opnComnCdList.remove(2); // 폐강 제거
 		model.addAttribute("stateList", opnComnCdList);	// 상태 공통코드 리스트
 		model.addAttribute("catCourseList", homeService.getComnCdList("CRS"));	// 분류 공통코드 리스트
+		model.addAttribute("yearList", homeService.selectYearListByPop("opencourse")); // 개설/등록연도 리스트
 	}
 	
 	/**

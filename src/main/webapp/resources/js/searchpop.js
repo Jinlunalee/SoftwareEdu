@@ -195,6 +195,7 @@ function moveOutside(event, value){
         let recruitPeople = valueArr[14];
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
+        let totalPeople = valueArr[17];
         
         $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
@@ -230,7 +231,7 @@ function moveOutside(event, value){
                     $("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
                     $("<td/>").text(days),
                     $("<td/>").text(hours),
-                    $("<td/>").text(recruitPeople),
+                    $("<td/>").text(totalPeople + '/' + recruitPeople),
                     $("<td/>").text(catSubjectCdTitle),
                     $("<td/>").text(openStateCdTitle),
                     $("<td/>").text(levelCdTitle + '(' + levelEtc + ')')
@@ -293,7 +294,7 @@ function moveOutside(event, value){
                             var $hours = result[i].hours;
                             var $levelCdTitle = result[i].levelCdTitle;
                             var $cost = result[i].cost;
-                            $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 비용 콤마 처리
                             var $supportYn = result[i].supportYn;
                             
                             if($supportYn === 'Y') {
@@ -545,4 +546,11 @@ function resetValue() {
         subjectList.innerText=null;
         alert("수강생을 다시 선택하였습니다. 강좌/과정을 다시 선택해주세요.");
     }
+}
+
+const closeBtn = document.getElementById('close-btn');
+closeBtn.addEventListener("click", closePop);
+
+function closePop() {
+    close();
 }

@@ -98,7 +98,7 @@
 						(${board.courseTitle})
 					</c:if></a>
 				</td>
-
+				
 				<%-- 수강생 명 --%>
 				<td>${board.name} (${board.userId})</td>
 				

@@ -15,18 +15,18 @@
 	</div>
 
 	<div class="card-body">
-	   <form action="<c:url value='/subject/searchCourseBoardlist'/>">
+<!--   <form action="<c:url value='/student/ '/>">   -->     
         <div class="search">
 		<div class="selectstudent">
 			<select class="select-box">
-				<option value="studentName">수강생이름</option>
+				<option value="studentName">수강생 명</option>
 				<option value="userId">수강생아이디</option>
 			</select> 
 			<input class="input-text" type="text" value ="${student.keyword}" placeholder="검색어를 입력해 주세요"> 
 			<input class="input-button" type="button" value="검색">
 		</div>
 		</div>
-		</form>
+<!-- 	</form>  -->  
 
 		<div class="view">
 <!-- 			<button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
@@ -48,7 +48,7 @@
 
 			<table class="list">
 				<tr>
-                    <th>수강생이름(관리아이디)</th>				
+                    <th>수강생 명(관리아이디)</th>				
                     <th>수강생아이디</th>
 					<th>생년월일</th>
 					<th>이메일</th>

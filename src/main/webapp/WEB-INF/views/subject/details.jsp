@@ -18,7 +18,7 @@
 			<div class="sub_title">정기과정명 | ${open.courseTitle} </div>
 		</c:if>
 		<div class="course_title">
-			<div class="main_title"><b class="basic_txt_color">${open.subjectId}</b>  ${open.subjectTitle}</div>
+			<div class="main_title"><b class="basic_txt_color">${open.subjectId}</b>  ${open.subjectTitle} ${open.subjectSeq}회차</div>
 			<div class="course_state">${open.openStateCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
@@ -46,16 +46,16 @@
 						</c:if>
 					</c:if>
 				</td>
-				<td> 연수기간(일수)</td>
+				<td> 강좌기간(일수)</td>
 				<td> ${open.startDay} ~ ${open.endDay} (${open.days}일)
 				</td>
 			</tr>
 			<tr>
-				<td> 연수시간</td>
+				<td> 강좌시간</td>
 				<td> ${open.startTime} ~ ${open.endTime}</td>
 			</tr>
 			<tr>
-				<td> 신청기간 </td>
+				<td> 모집기간 </td>
 				<td> ${open.recruitStartDay} ~ ${open.recruitEndDay} </td>
 			</tr>
 			<tr>
@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td> 모집인원</td>
-				<td> ${totalPeople}/${open.recruitPeople} </td>
+				<td> ${open.totalPeople}/${open.recruitPeople} </td>
 			</tr>
 			<tr>
 				<td> 교육비</td>

@@ -326,29 +326,42 @@ function calcEndDay(){
 	let endTime = document.getElementById("endTime").value;
 	let printDay = document.getElementById("printDay");
 	let endDay = document.getElementById("endDay");
+	let calcHours = document.getElementById("calcHours");
 	
 	printDay.innerHTML = ''; //비울때는 =
+	calcHours.value = '';
 
 	if (startTime !== '' && endTime !== '') {
 		console.log("start");
 		let hours = document.getElementById("hours").value;
 
 		let startHour = parseInt(startTime.substring(0, 2));
-		let startMin = parseInt(startTime.substring(3))
+		// let startMin = parseInt(startTime.substring(3))
 		let endHour = parseInt(endTime.substring(0, 2));
-		let endMin = parseInt(endTime.substring(3));
+		// let endMin = parseInt(endTime.substring(3));
 
 		let diffHour = endHour - startHour;
-		let diffMin = 0;
-		if (endMin < startMin) {
-			diffMin = (endMin - startMin) + 60;
-			diffHour = diffHour - 1;
-		} else {
-			diffMin = endMin - startMin;
+		console.log(diffHour);
+		if(6 <= diffHour && diffHour < 9 ){
+			diffHour = diffHour - 1; //점심시간 제외
+			console.log(diffHour);
+		}else if(diffHour >= 9){
+			diffHour = diffHour - 2; //점심,저녁시간 제외
+			console.log(diffHour);
 		}
-		diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
 
-		let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+		// let diffMin = 0;
+		// if (endMin < startMin) {
+		// 	diffMin = (endMin - startMin) + 60;
+		// 	diffHour = diffHour - 1;
+		// } else {
+		// 	diffMin = endMin - startMin;
+		// }
+		// diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
+
+		// let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+
+		let diffTime = diffHour; // 시작시간과 끝시간 계산
 
 		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
 
@@ -366,6 +379,7 @@ function calcEndDay(){
 
 		//일수 출력
 		printDay.innerText += "(" + days + "일)"; //추가해주는거라 +=
+		calcHours.value =days;
 	}
 }
 
