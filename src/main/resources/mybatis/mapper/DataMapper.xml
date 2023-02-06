@@ -46,7 +46,7 @@
 			(select count(*) from enroll e where e.subject_id = open.subject_id and
 			state_cd = 'ERL06' and e.subject_seq= open.subject_seq) as cnt_std
 		from open
-		left join subject on open.subject_id=subject.subject_id
+		inner join subject on open.subject_id=subject.subject_id
 		where subject.support_yn = 'Y' and to_date(end_day)  <![CDATA[ < ]]>
 		SYSDATE
         <if test="startDay != '' and endDay != ''">
