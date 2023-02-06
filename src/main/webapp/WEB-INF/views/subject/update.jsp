@@ -145,6 +145,7 @@
 			<input type="hidden" name="courseId" value="${open.courseId}">
 			<input type="hidden" name="openStateCd" id="openStateCd" value="${open.openStateCd}">
 			<input type="submit" value="저장">
+			<input type="reset" onclick="history.back();" value="취소" class="btn">
 		</div>
 		</form>
 	</div>
