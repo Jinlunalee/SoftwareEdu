@@ -28,14 +28,14 @@
                             </select>
                             <input type="text" id="subject-input" name="subjectId">
                             난이도 : 
-                            <select name="level">
+                            <select name="levelCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${levelList}" var="level">
                                     <option value="${level.comnCd}">${level.comnCdTitle}</option>
                                 </c:forEach>
                             </select>
                             분류 : 
-                            <select name="catSubject">
+                            <select name="catSubjectCd">
                                 <option value="">전체</option>
                                 <c:forEach items="${catSubjectList}" var="catSubject">
                                     <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
@@ -45,11 +45,12 @@
                             등록연도 :
                             <select name="regYear">
                                 <option value="0">전체</option>
-                                <c:forEach var="i" begin="2019" end="2023">
-                                    <option value="${i}">${i}</option>
+                                <c:forEach items="${yearList}" var="year">
+                                    <option value="${year}">${year}</option>
                                 </c:forEach>
                             </select>
                             <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
+                            <button type="button" id="close-btn">창닫기</button>
                         </div>
                     </form>
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->

@@ -55,7 +55,7 @@
 					<img class="logo-header" src="${pageContext.request.contextPath}/resources/images/logo_header.png">
 					소프트웨어 교육 연수원 - 관리시스템
 				</a>
-				<div class="nav-list"><a href="<c:url value='/subject/searchCourseBoardlist?catCourse=all'/>">강좌 관리</a></div>
+				<div class="nav-list"><a href="<c:url value='/subject/searchSubjectBoardlist?catSubject=all'/>">강좌 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/student/boardlist'/>">수강생 관리</a></div>						
 				<div class="nav-list"><a href="<c:url value='/enroll/searchlist'/>">수강 관리</a></div>
 				<div class="nav-list"><a href="<c:url value='/survey/summary'/>">강의 만족도 조사 관리</a></div>

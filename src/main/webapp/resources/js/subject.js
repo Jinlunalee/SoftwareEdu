@@ -317,6 +317,71 @@ function timeMinMax(startTime, endTime){
 	$('intput#startTime').timepicker('option', 'maxTime', endTime);
 }
 
+/*시간 선후관계 설정*/
+function timeMinMax22(startTime, endTime) {
+	console.log(startTime, endTime);	
+
+	if(startTime){
+		console.log("timeMinMax22 startTime");
+		// select option에 있는 모든value가져오기
+		let options = $('#endTime').find('option').map(function(){
+			return this.value;
+		}).get();
+
+		//비활성화 되어있던 속성 제거 (초기화)
+		for(var i=0;i<options.length;i++){
+			//option의 0번부터 끝까지 초기화
+			$('#endTime option:eq('+i+')').prop('disabled', false);
+		}
+
+		//선택된 startTime 가져오기
+		let checkSelectTime = $("#startTime option:selected").val();
+
+		console.log(checkSelectTime);
+		console.log(options);
+		//checkSelectTime랑 options비교해서 비활성화
+		for (var i = 0; i < options.length; i++) {
+			console.log(options[i]);
+			// $('#endTime option:eq(1)').prop('disabled', true); //9:00 비활성화 처리
+			if (options[i] <= checkSelectTime) {
+				console.log(options[i]);
+				// $('select#endTime option[value=' + options[i]+ ']').prop('disabled', true);
+				// $("select#endTime").val(options[i]).prop("disabled", true);
+				$('#endTime option:eq('+i+')').prop('disabled', true);
+			}
+		}
+	}
+	if(endTime){
+		console.log("timeMinMax22 endTime");
+		// select option에 있는 모든value가져오기
+		let options = $('#startTime').find('option').map(function(){
+			return this.value;
+		}).get();
+
+		//비활성화 되어있던 속성 제거 (초기화)
+		for(var i=0;i<options.length;i++){
+			//option의 0번부터 끝까지 초기화
+			$('#startTime option:eq('+i+')').prop('disabled', false);
+		}
+
+		//선택된 endTime 가져오기
+		let checkSelectTime = $("#endTime option:selected").val();
+
+		console.log(checkSelectTime);
+		console.log(options);
+		//checkSelectTime랑 options비교해서 비활성화
+		for (var i = 0; i < options.length; i++) {
+			console.log(options[i]);
+			if (options[i] >= checkSelectTime) {
+				console.log(options[i]);
+				$('#startTime option:eq('+i+')').prop('disabled', true);
+			}
+		}
+		// $('#startTime option:eq(1)').prop('disabled', false); //9:00 비활성화 제거
+	}
+	
+}
+
 /*시수에 맞춰 endDay 설정해주기, startTime, endTime 변환시(onChange)*/
 function calcEndDay(){
 	console.log("calcEndDay");
@@ -326,29 +391,45 @@ function calcEndDay(){
 	let endTime = document.getElementById("endTime").value;
 	let printDay = document.getElementById("printDay");
 	let endDay = document.getElementById("endDay");
+	let calcHours = document.getElementById("calcHours");
 	
 	printDay.innerHTML = ''; //비울때는 =
+	calcHours.value = '';
+	
+	//시간 선후관계 비활성화
+	timeMinMax22(startTime, endTime);
 
 	if (startTime !== '' && endTime !== '') {
 		console.log("start");
 		let hours = document.getElementById("hours").value;
 
 		let startHour = parseInt(startTime.substring(0, 2));
-		let startMin = parseInt(startTime.substring(3))
+		// let startMin = parseInt(startTime.substring(3))
 		let endHour = parseInt(endTime.substring(0, 2));
-		let endMin = parseInt(endTime.substring(3));
+		// let endMin = parseInt(endTime.substring(3));
 
 		let diffHour = endHour - startHour;
-		let diffMin = 0;
-		if (endMin < startMin) {
-			diffMin = (endMin - startMin) + 60;
-			diffHour = diffHour - 1;
-		} else {
-			diffMin = endMin - startMin;
+		console.log(diffHour);
+		if(6 <= diffHour && diffHour < 9 ){
+			diffHour = diffHour - 1; //점심시간 제외
+			console.log(diffHour);
+		}else if(diffHour >= 9){
+			diffHour = diffHour - 2; //점심,저녁시간 제외
+			console.log(diffHour);
 		}
-		diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
 
-		let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+		// let diffMin = 0;
+		// if (endMin < startMin) {
+		// 	diffMin = (endMin - startMin) + 60;
+		// 	diffHour = diffHour - 1;
+		// } else {
+		// 	diffMin = endMin - startMin;
+		// }
+		// diffMin = Math.ceil(diffMin / 60 * 100) / 100; //소수점 두자리 변환
+
+		// let diffTime = diffHour + diffMin; // 시작시간과 끝시간 계산
+
+		let diffTime = diffHour; // 시작시간과 끝시간 계산
 
 		let days = Math.ceil(parseInt(hours) / diffTime); // 일수 = 시수/입력한 시간차이
 
@@ -366,6 +447,7 @@ function calcEndDay(){
 
 		//일수 출력
 		printDay.innerText += "(" + days + "일)"; //추가해주는거라 +=
+		calcHours.value =days;
 	}
 }
 

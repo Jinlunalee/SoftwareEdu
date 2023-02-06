@@ -87,10 +87,10 @@
 		FROM subject
 		<where>
 			<if test="subjectId != null and !subjectId.equals('') ">
-				AND subject_id = #{subjectId}
+				AND (subject_id = #{subjectId} OR REPLACE (UPPER(subject_id), ' ', '') LIKE '%'||UPPER(#{subjectId})||'%')
 			</if>
 			<if test="subjectTitle != null and !subjectTitle.equals('')">
-				AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
+				AND (subject_title = #{subjectTitle} OR REPLACE (UPPER(subject_title), ' ', '') LIKE '%'||UPPER(#{subjectTitle})||'%')
 			</if>
 			<if test="catSubjectCd != null and !catSubjectCd.equals('')">
 				AND cat_cd = #{catSubjectCd} 
@@ -113,10 +113,10 @@
 		FROM course
 		<where>
 			<if test="courseId != null and !courseId.equals('') ">
-				AND course_id = #{courseId}
+				AND (course_id = #{courseId} OR REPLACE (UPPER(course_id), ' ', '') LIKE '%'||UPPER(#{courseId})||'%')
 			</if>
 			<if test="courseTitle != null and !courseTitle.equals('')">
-				AND (course_title = #{courseTitle} OR REPLACE (course_title, ' ', '') LIKE '%'||#{courseTitle}||'%')
+				AND (course_title = #{courseTitle} OR REPLACE (UPPER(course_title), ' ', '') LIKE '%'||UPPER(#{courseTitle})||'%')
 			</if>
 			<if test="catCourseCd != null and !catCourseCd.equals('')">
 				AND cat_cd = #{catCourseCd} 
@@ -166,10 +166,10 @@
 		LEFT JOIN common_code ON open.state_cd = common_code.comn_cd
 		WHERE del_yn = 'N' 
 		<if test="subjectId != null and !subjectId.equals('') ">
-			AND subject.subject_id = #{subjectId}
+			AND (subject.subject_id = #{subjectId} OR REPLACE (UPPER(subject.subject_id), ' ', '') LIKE '%'||UPPER(#{subjectId})||'%')
 		</if>
 		<if test="subjectTitle != null and !subjectTitle.equals('')">
-			AND (subject_title = #{subjectTitle} OR REPLACE (subject_title, ' ', '') LIKE '%'||#{subjectTitle}||'%')
+			AND (subject_title = #{subjectTitle} OR REPLACE (UPPER(subject_title), ' ', '') LIKE '%'||UPPER(#{subjectTitle})||'%')
 		</if>
 		<if test="catSubjectCd != null and !catSubjectCd.equals('')">
 			AND subject.cat_cd = #{catSubjectCd} 
@@ -222,16 +222,16 @@
 		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07') /* OPN07 폐강 */
 	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
-				AND open.course_id = #{courseId}
+				AND (course_id = #{courseId} OR REPLACE (UPPER(course_id), ' ', '') LIKE '%'||UPPER(#{courseId})||'%')
 			</if>
 			<if test="courseTitle != null and !courseTitle.equals('')">
-				AND (course_title = #{courseTitle} OR REPLACE (course_title, ' ', '') LIKE '%'||#{courseTitle}||'%')
+				AND (course_title = #{courseTitle} OR REPLACE (UPPER(course_title), ' ', '') LIKE '%'||UPPER(#{courseTitle})||'%')
 			</if>
 			<if test="catCourseCd != null and !catCourseCd.equals('')">
-				AND course.cat_cd = #{catCourseCd} 
+				AND cat_course_cd = #{catCourseCd} 
 			</if>
 			<if test="courseOpenYear != 0">
-				AND open.course_open_year = #{courseOpenYear} 
+				AND course_open_year = #{courseOpenYear} 
 			</if>
 			<choose>
 				<when test="cases.equals('case1')">
@@ -263,7 +263,7 @@
 	         AND (user_id = #{userId} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{userId}) || '%')
 	      </if>
 	      <if test="name != null and !name.equals('')">
-	         AND name = #{name}
+	         AND (name = #{name} OR REPLACE (name, ' ', '') LIKE '%'||#{name}||'%')
 	      </if>
    </select>
    
@@ -285,22 +285,24 @@
 	ON s.subject_id = o.subject_id 
 	WHERE del_yn= 'N' AND course_id = #{courseId}
    </select>
-	
-<!-- 			select DISTINCT
-		    open.course_id,
-		    course_title,
-		    TO_CHAR(TO_DATE(min(start_day) over (partition by open.course_id)), 'YYYY-MM-DD') as start_day,
-		    TO_CHAR(TO_DATE(max(end_day) over (partition by open.course_id)), 'YYYY-MM-DD') as end_day,
-		    sum(cost) over (partition by open.course_id) as cost,
-		    TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
-		    TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
-		    course.cat_cd as cat_course_cd,
-            subject.reg_year,
-            TO_CHAR(max(open.state_cd) over (partition by open.course_id)) as state_cd
-		from open 
-		        left join subject on open.subject_id = subject.subject_id
-		        left join course on open.course_id = course.course_id
-		        left join common_code on open.state_cd = common_code.comn_cd
-		where open.course_id IS NOT NULL AND del_yn = 'N'; -->
+
+	<select id="selectYearListByPop" parameterType="String" resultType="String">
+	/* selectYearListByPop */
+		<choose>
+			<when test="pop.equals('subject')">
+				select distinct reg_year
+				from subject	
+			</when>
+			<when test="pop.equals('opensubject')">
+				select distinct substr(open_dt, 0, 4)
+				from open
+			</when>
+			<when test="pop.equals('opencourse')">
+				select distinct course_open_year
+				from open
+			</when>
+		</choose>
+		order by 1 DESC
+	</select>
 		
 </mapper>

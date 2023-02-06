@@ -1,11 +1,11 @@
 package com.mycompany.webapp.service.impl;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.CourseVO;
@@ -17,6 +17,9 @@ import com.mycompany.webapp.service.IHomeService;
 public class HomeService implements IHomeService {
 	@Autowired
 	IHomeRepository homeRepository;
+	
+	@Autowired
+	IEnrollRepository enrollRepository;
 	
 	@Override
 	public List<OpenVO> selectSubjectList(String catSubjectCd) {
@@ -60,8 +63,9 @@ public class HomeService implements IHomeService {
 	@Override
 	public List<OpenVO> searchOpenSubject(OpenVO openVo) {
 		List<OpenVO> boardList = homeRepository.searchOpenSubject(openVo);
-		// level, state, catSubject 공통코드로 가져와서 set 하기
+		// level, state, catSubject 공통코드로 가져와서 set 하기, totalPeople set하기
 		for(OpenVO openVoReturn : boardList) {
+			openVoReturn.setTotalPeople(enrollRepository.recruitTotalPeople(openVoReturn.getSubjectId(), openVoReturn.getSubjectSeq(), openVoReturn.getOpenStateCd())); //subject의 상태에 따라 카운드할 수강생 상태가 달라짐
 			openVoReturn.setLevelCdTitle(homeRepository.getComnCdTitle(openVoReturn.getLevelCd()));
 			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
 			openVoReturn.setCatSubjectCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatSubjectCd()));
@@ -79,36 +83,8 @@ public class HomeService implements IHomeService {
 		for(OpenVO openVoReturn : boardList) {
 			// state, catSubject 공통코드로 가져와서 set 하기
 			openVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(openVoReturn.getCatCourseCd()));
-			
-			System.out.println("check4");
-//			//기간에 따라 상태 표현
-//			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd"); // 포맷팅 정의
-//			int today = Integer.parseInt(formatter.format(new Date()));
-//			for(int i=0;i<boardList.size();i++) {
-//				int startDay = Integer.parseInt(boardList.get(i).getStartDay().replaceAll("-", ""));
-//				int endDay = Integer.parseInt(boardList.get(i).getEndDay().replaceAll("-", ""));
-//				int recruitStartDay = Integer.parseInt(boardList.get(i).getRecruitStartDay().replaceAll("-", ""));
-//				int recruitEndDay = Integer.parseInt(boardList.get(i).getRecruitEndDay().replaceAll("-", ""));
-//				
-////				if(today < recruitStartDay) {
-////					boardList.get(i).setOpenStateCd("OPN01");//모집예정 
-////				}else if(recruitStartDay < today && today < recruitEndDay) { //모집중
-////					boardList.get(i).setOpenStateCd("OPN02");
-////				}else { //모집마감 1. 진행중  2.진행완료
-////					if(startDay < today && today < endDay) { //진행중
-////						boardList.get(i).setOpenStateCd("OPN04");
-////					}else if(endDay < today){ //진행완료
-////						boardList.get(i).setOpenStateCd("OPN05");
-////					}else { //모집마감
-////						boardList.get(i).setOpenStateCd("OPN03");
-////					}
-////				}
-//			}
-			
 			openVoReturn.setOpenStateCdTitle(homeRepository.getComnCdTitle(openVoReturn.getOpenStateCd()));
-			System.out.println("check5");
 		}
-		System.out.println("check6");
 		return boardList;
 	}
 
@@ -132,6 +108,12 @@ public class HomeService implements IHomeService {
 			open.setLevelCdTitle(homeRepository.getComnCdTitle(open.getLevelCd()));
 		}
 		return list;
+	}
+
+	@Override
+	public List<String> selectYearListByPop(String pop) {
+		List<String> yearList = homeRepository.selectYearListByPop(pop);
+		return yearList;
 	}
 
 
