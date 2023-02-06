@@ -59,10 +59,10 @@
 			<div id="subject-list"></div>
 		</div>
 		<div class="submit-btn">
-			<form action="<c:url value='/enroll/boardlist'/>">
+			
 				<input type="submit" onclick="addEnroll2()" value="저 장" class="btn">
 				<input type="reset" onclick="location.href='<c:url value="/enroll/searchlist"/>'" value="취 소" class="btn">
-			</form>
+
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
@@ -100,7 +100,6 @@
 
 	/*검색 팝업에 맞춰 수강 추가 처리하기*/
 	function addEnroll2(){
-		
 		let studentInput = $("#student-input").val();
 		let studentArr = studentInput.split('/');
 		let studentId = studentArr[0];

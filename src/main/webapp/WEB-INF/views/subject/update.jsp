@@ -23,7 +23,7 @@
 		<form class="insert_form" action="<c:url value='/subject/update/${open.subjectId}/${open.subjectSeq}'/>" method="post" enctype="multipart/form-data">
 			<div class="course_title">
 				<div class="main_title"><b>${open.subjectId}</b> 
-					<input class="readonly_txt" type="text" style="width: auto;" value="${open.subjectTitle}" readonly>
+					<input class="readonly_txt" type="text" style="width: auto;" value="${open.subjectTitle} ${open.subjectSeq}회차" readonly>
 				</div>
 				<div class="course_state">${open.openStateCdTitle}</div>
 			</div>
@@ -42,6 +42,9 @@
 			</thead>
 			<tbody>
 			<tr>
+				<td colspan="4" style="text-align: right;"><span class="write-txt">※</span> 항목은 필수 입력 사항입니다.</td>
+			</tr>
+			<tr>
 				<td colspan="2" rowspan="9">
 					<c:choose>
 						<c:when test="${!empty open.fileName}">
@@ -56,12 +59,9 @@
 						</c:otherwise>
 					</c:choose>					
 				</td>
-				<td colspan="2" style="text-align: right;">
-					<span class="write-txt">※</span> 항목은 필수 입력 사항입니다.
-				</td>
 			</tr>
 			<tr>
-				<td class="write-txt"> 강좌기간(일수)</td>
+				<td class="write-txt"> 강좌기간(시수)</td>
 				<td> 
 					<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 					<input type="hidden" name="hours" id="hours" value="${open.hours}">
@@ -69,15 +69,38 @@
 					~ 
 					<input type="date" name="endDay" id="endDay" value="${open.endDay}" readonly>
 					(${open.hours}시간)
+					<input type="hidden" Id="calcHours" value="">
 					<span id="printDay"></span>
 				</td>
 			</tr>
-			<tr>
+	<%-- 		<tr>
 				<td class="write-txt"> 강좌시간</td>
 				<td>
 					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required> 
 					~
 					<input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required>
+				</td>
+			</tr> --%>
+			<tr>
+				<td class="write-txt"> 강좌시간</td>
+				<td>
+					<%-- <input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required>  --%>
+					<select name="startTime" id="startTime" onchange="calcEndDay()" required>
+						<option value="">선택</option>
+						<option value="09:00" ${open.startTime eq '09:00'?"selected":""}>09:00</option>
+						<c:forEach var="i" begin="10" end="21">
+							<option value="${i}:00" ${open.startTime eq i+=':00'?"selected":""}>${i}:00</option>
+						</c:forEach>
+					</select>
+					~
+					<%-- <input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required> --%>
+					<select name="endTime" id="endTime" onchange="calcEndDay()" required>
+						<option value="">선택</option>
+						<option value="09:00" ${open.endTime eq '09:00'?"selected":""}>09:00</option>
+						<c:forEach var="i" begin="10" end="21">
+							<option value="${i}:00" ${open.endTime eq i+=':00'?"selected":""}>${i}:00</option>
+						</c:forEach>
+					</select>
 				</td>
 			</tr>
 			<tr>

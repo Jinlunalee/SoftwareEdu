@@ -269,7 +269,6 @@
 		    o.course_id, 
 		    c.course_title, 
 		    level_cd, 
-		    days, 
 		    hours, 
 		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
