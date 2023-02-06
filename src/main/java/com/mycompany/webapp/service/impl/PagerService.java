@@ -107,6 +107,10 @@ public class PagerService implements IPagerService {
 		List<EnrollVO> boardList = pagerRepository.selectSearchListByExcel(applyStartDay, applyEndDay, student, course, state, keyword1, keyword2);
 		for(EnrollVO enrollVo : boardList) {
 			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
+			if(enrollVo.getCancelRsCd() != null) {
+				enrollVo.setCancelRsTitle(homeRepository.getComnCdTitle(enrollVo.getCancelRsCd()));
+			}
+			
 		}
 		
 		return boardList;

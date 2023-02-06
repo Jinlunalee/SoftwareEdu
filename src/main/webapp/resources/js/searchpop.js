@@ -233,9 +233,15 @@ function moveOutside(event, value){
                     $("<td/>").text(hours),
                     $("<td/>").text(totalPeople + '/' + recruitPeople),
                     $("<td/>").text(catSubjectCdTitle),
-                    $("<td/>").text(openStateCdTitle),
-                    $("<td/>").text(levelCdTitle + '(' + levelEtc + ')')
+                    $("<td/>").text(openStateCdTitle)
+                    
             );
+            if(levelEtc === '') {
+            	tr.append($("<td/>").text(levelCdTitle));
+            }
+            else{
+            	tr.append($("<td/>").text(levelCdTitle + '(' + levelEtc + ')'));
+            }
             table.append(tr);
             $(opener.document).find("#subject-list").html(table);
             }
