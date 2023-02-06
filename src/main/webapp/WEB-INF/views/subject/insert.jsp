@@ -143,14 +143,16 @@
 						<td>
 							<select name="startTime" id="startTime" onchange="calcEndDay()" required>
 								<option value="">선택</option>
-								<c:forEach var="i" begin="9" end="21">
+								<option value="09:00">09:00</option>
+								<c:forEach var="i" begin="10" end="21">
 									<option value="${i}:00">${i}:00</option>
 								</c:forEach>
 							</select>
 							~
 							<select name="endTime" id="endTime" onchange="calcEndDay()" required>
 								<option value="">선택</option>
-								<c:forEach var="i" begin="9" end="21">
+								<option value="09:00">09:00</option>
+								<c:forEach var="i" begin="10" end="21">
 									<option value="${i}:00">${i}:00</option>
 								</c:forEach>
 							</select>
