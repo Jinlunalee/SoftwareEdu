@@ -77,7 +77,6 @@
 					subject_seq,
 					subject_title,
 					support_yn,
-					days,
 					hours,
 					level_cd,
 					level_etc,
@@ -141,7 +140,7 @@
 		                o.state_cd as open_state_cd, 
                         o.course_id, 
         				course_title, 
-        				ROUND(complete_hours/s.hours * 100) AS ratio 
+        				ROUND(complete_hours/sub.hours * 100) AS ratio 
 		        FROM ENROLL e 
 		        INNER JOIN STUDENT stu 
 		        ON e.student_id = stu.student_id 
@@ -311,7 +310,6 @@
 				subject_seq,
 				subject_title,
 				support_yn,
-				days,
 				hours,
 				level_cd,
 				level_etc,

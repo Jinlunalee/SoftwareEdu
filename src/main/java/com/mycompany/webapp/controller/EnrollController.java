@@ -183,9 +183,10 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
-	public String clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	public String clickDelete(HttpServletRequest request, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	/**
@@ -242,9 +243,10 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
-	public String approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	public String approval(HttpServletRequest request, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	/**
@@ -260,7 +262,8 @@ public class EnrollController {
 		System.out.println(studentId);
 		logger.info("addEnroll: "+studentId+subjectId+subjectSeq);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
-		return "redirect:/enroll/boardlist";
+		
+		return "redirect:/enroll/searchlist";
 	}
 
 	/**
@@ -274,7 +277,7 @@ public class EnrollController {
 	public String addCourse(@PathVariable String studentId, @PathVariable String courseId, @PathVariable String courseOpenYear) {
 		System.out.println(courseId);
 		enrollService.addCourse(studentId, courseId, courseOpenYear);
-		return "redirect:/enroll/boardlist";
+		return "redirect:/enroll/searchlist";
 	}
 
 	/**
@@ -347,6 +350,8 @@ public class EnrollController {
 		headerRow.createCell(4).setCellValue("신청 일자");
 		headerRow.createCell(5).setCellValue("수강 상태");
 		headerRow.createCell(6).setCellValue("진도율");
+		headerRow.createCell(7).setCellValue("취소 사유");
+		headerRow.createCell(8).setCellValue("취소 사유 기타");
 		
 			List<EnrollVO> searchList = pagerService.selectSearchListByExcel(enrollVo);
 			for (EnrollVO enroll : searchList) {
@@ -358,6 +363,8 @@ public class EnrollController {
 				row.createCell(4).setCellValue(enroll.getEnrollDt());
 				row.createCell(5).setCellValue(enroll.getStateCdTitle());
 				row.createCell(6).setCellValue(enroll.getRatio() + "%");
+				row.createCell(7).setCellValue(enroll.getCancelRsTitle());
+				row.createCell(8).setCellValue(enroll.getCancelRsEtc());
 			}
 		
 		String fileName = "수강 목록.xls";
