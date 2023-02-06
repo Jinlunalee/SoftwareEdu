@@ -11,12 +11,6 @@ public interface IPagerService {
 	int getCountStudentRow();
 	List<StudentVO> selectStudentListByPage(Pager pager);
 
-	int getCountOpenCourseRow(String catCourseCd);
-	List<OpenVO> selectOpenCourseListByPage(Pager pager, String catCourseCd);
-	
-	int getCountOpenSubjectRow(String catSubjectCd);
-	List<OpenVO> selectOpenSubjectListByPage(Pager pager, String catSubjectCd);
-	
 	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);
 	

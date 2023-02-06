@@ -55,58 +55,6 @@ public class SubjectController {
 	@Autowired
 	IPagerService pagerService;
 
-	// paging 개설 과정 목록 조회 (course)
-	@GetMapping("/courseboardlist")
-	public String courseList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catCourseCd) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-
-		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenCourseRow(catCourseCd);
-
-		// 페이저 정보가 담긴 Pager 객체 생성
-		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
-
-		// 해당 페이지의 행을 가져오기
-		List<OpenVO> boardList = pagerService.selectOpenCourseListByPage(pager, catCourseCd);
-
-		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catCourseCd); 
-		model.addAttribute("pager", pager);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		model.addAttribute("rowsPerPage", rowsPerPage);
-		logger.info("OpenCourseBoardList: " + boardList);
-
-		return "subject/courselist";
-	}
-
-	// paging 강좌 목록 조회 (open)
-	@GetMapping("/subjectboardlist")
-	public String subjectList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage, Model model, @RequestParam(defaultValue="all") String catSubjectCd) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-
-		// 페이징 대상이 되는 전체 행수
-		int totalRows = pagerService.getCountOpenSubjectRow(catSubjectCd);
-
-		// 페이저 정보가 담긴 Pager 객체 생성
-		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);  // (int rowsPerPage, int pagesPerGroup, int totalRows, int pageNo)
-
-		// 해당 페이지의 행을 가져오기
-		List<OpenVO> boardList = pagerService.selectOpenSubjectListByPage(pager, catSubjectCd);
-
-		//JSP에서 사용할 데이터를 저장
-		model.addAttribute("catId", catSubjectCd);
-		model.addAttribute("pager", pager);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
-		model.addAttribute("rowsPerPage", rowsPerPage);
-		logger.info("boardList: " + boardList);
-
-		return "subject/subjectlist";
-	}
-
 	// 개설 강좌 상세조회 (open)
 	@RequestMapping(value="/details/{subjectId}/{subjectSeq}", method=RequestMethod.GET)
 	public String getSubjectDetails(@PathVariable String subjectId, @PathVariable int subjectSeq, Model model) {

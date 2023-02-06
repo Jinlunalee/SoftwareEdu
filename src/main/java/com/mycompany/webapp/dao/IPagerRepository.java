@@ -14,13 +14,7 @@ import com.mycompany.webapp.dto.StudentVO;
 public interface IPagerRepository {
 	int getCountStudentRow();
 	List<StudentVO> selectStudentListByPage(Pager pager);
-	
-	int getCountOpenCourseRow(@Param("catCourseCd") String catCourseCd);
-	List<OpenVO> selectOpenCourseListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catCourseCd") String catCourseCd);
-	
-	int getCountOpenSubjectRow(@Param("catSubjectCd") String catSubjectCd);
-	List<OpenVO> selectOpenSubjectListByPage(@Param("endRowNo") int endRowNo, @Param("startRowNo") int startRowNo, @Param("catSubjectCd") String catSubjectCd);
-	
+		
 	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);
 	

@@ -38,7 +38,7 @@
 		<div id="list-wrap">
 			<div class="list_top">
 				<div class="cnt">
-				전체목록 <b class="basic_txt_color">${boardListSize}</b>개, 
+				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
 				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 				</div>
 			</div>

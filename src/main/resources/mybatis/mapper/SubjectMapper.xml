@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.ISubjectRepository">
-	
-	<select id="selectCourseList" resultType="OpenVO">
-		/*selectCourseList*/
-		select DISTINCT
-			open.course_id, 
-			course_title,
-			min(start_day) over (partition by open.course_id) as start_day,
-    		max(end_day) over (partition by open.course_id) as end_day,
-			sum(cost) over (partition by open.course_id) as cost,
-			recruit_start_day, 
-			recruit_end_day,
-			state_cd as open_state_cd,
-			comn_cd_title as open_state_cd_title
-		from open 
-				left join subject on open.subject_id = subject.subject_id
-        		left join course on open.course_id = course.course_id
-        		left join common_code on open.state_cd = common_code.comn_cd
-        where open.course_id IS NOT NULL and del_yn = 'N'
-	</select>
-	
-	<select id="selectSubjectList" resultType="OpenVO">
-		/*selectSubjectList*/
-		select 
-			open.subject_id, 
-			subject_seq,
-			subject_title,
-			support_yn,
-			hours, 
-			level_cd, 
-			level_etc, 
-			subject.cost,
-			open.course_id, 
-			course.course_title, 
-			start_time,
-			end_time,
-			start_day,
-			end_day, 
-			recruit_start_day, 
-			recruit_end_day,
-			recruit_people,
-			state_cd as open_state_cd,
-			comn_cd_title as open_state_cd_title,
-			file_id
-		from open 
-				left join subject on open.subject_id = subject.subject_id
-        		left join course on open.course_id = course.course_id
-        		left join common_code on open.state_cd = common_code.comn_cd
-        where del_yn = 'N'
-        order by start_day, end_day
-	</select>
 
 	<select id="selectSubjectDetails" parameterType="map" resultType="OpenVO">
 		/*selectSubjectDetails*/

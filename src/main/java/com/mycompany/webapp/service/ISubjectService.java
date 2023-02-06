@@ -9,9 +9,6 @@ import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 
 public interface ISubjectService {
-	List<OpenVO> selectCourseList();
-	List<OpenVO> selectSubjectList();
-	
 	OpenVO selectSubjectDetails(String subjectId, int subjectSeq);
 	
 	int updateSubject(OpenVO openVo); // 과정/강좌 수정
@@ -25,8 +22,6 @@ public interface ISubjectService {
 	List<SubjectVO> selectAllSubject(); //강좌명 가져오기
 	
 	Map<String, Object> infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
-//	List<SubjectVO> infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
-//	SubjectVO infoSubjectCourse(String courseId, String subjectId); // 강좌에 대한 정보
 	
 	void clickDeleteOpen(String subjectId, int subjectSeq); // 논리 삭제
 	void clickDeleteUploadFile(String fileId); //논리삭제 (첨부파일)

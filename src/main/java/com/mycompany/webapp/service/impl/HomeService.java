@@ -1,5 +1,4 @@
 package com.mycompany.webapp.service.impl;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +19,6 @@ public class HomeService implements IHomeService {
 	
 	@Autowired
 	IEnrollRepository enrollRepository;
-	
-	@Override
-	public List<OpenVO> selectSubjectList(String catSubjectCd) {
-		return homeRepository.selectSubjectList(catSubjectCd); 
-	}
-
-	@Override
-	public List<OpenVO> selectCourseList(String catCourseCd) {
-		return homeRepository.selectCourseList(catCourseCd); 
-	}
 
 	@Override
 	public String getComnCdTitle(String comnCd) {
