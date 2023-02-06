@@ -19,8 +19,8 @@
         <div class="search">
 		<div class="selectstudent">
 			<select class="select-box" name="student">
-				<option value="stdtName">수강생 명</option>
-				<option value="stdtId">수강생아이디</option>
+				<option value="stdtName" ${student eq 'stdtName' ? "selected" : ""}>수강생 명</option>
+				<option value="stdtId" ${student eq 'stdtId' ? "selected" : ""}>수강생아이디</option>
 			</select> 
 			<input name="keyword" class="input-text" type="text" value="${keyword}" placeholder="검색어를 입력해 주세요">
             <input class="input-button" type="submit" value="검색" style="position: static;" >

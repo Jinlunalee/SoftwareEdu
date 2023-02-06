@@ -82,7 +82,7 @@ public class StudentController {
 
 	//검색
 	@RequestMapping(value="/searchStudentBoardlist", method=RequestMethod.GET)
-	public String searchStudent( @RequestParam(defaultValue="1") int pageNo, 
+	public String searchStudent(@RequestParam(defaultValue="1") int pageNo, 
 			@RequestParam(defaultValue="10") int rowsPerPage, @RequestParam(defaultValue="") String keyword, 
 			@RequestParam String student, Model model) {
 		model.addAttribute("menu", "student");
@@ -93,7 +93,6 @@ public class StudentController {
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
 		
 		List<StudentVO> boardList = pagerService.selectSearchStudentListByPage(pager, student, keyword);
-		
 		model.addAttribute("student", student);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("pager", pager);
