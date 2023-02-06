@@ -72,4 +72,7 @@ public class StudentVO {
 	
 	private String student; // 수강생 명 아이디 검색
 	
+	@Expose	
+	private String startDay; // 강좌 시작일
+	
 }

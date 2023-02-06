@@ -121,8 +121,6 @@
 							<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 							<input type="hidden" name="hours" id="hours" value="">
 							<input type="date" name="startDay" id="startDay" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()" required>
-							<%-- <form:input path="startDay" type="date" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="selectRecruitDay()" required="required"/>
-							<form:errors path="startDay" class="error"/> --%>
 							~ 
 							<input type="date" name="endDay" id="endDay" readonly>
 							<input type="hidden" Id="calcHours" value="">
@@ -176,10 +174,7 @@
 					</tr>
 					<tr>
 						<td class="write-txt"> 모집인원</td>
-						<td> <input type="number" name="recruitPeople" min="5" required> 명 
-						<%-- 	<form:input path="recruitPeople" type="number" required="required"/> 며
-							<form:errors path="recruitPeople" class="error"/>		 --%>		
-						</td>
+						<td> <input type="number" name="recruitPeople" min="5" required> 명 	</td>
 					</tr>
 					<tr>
 						<td> 교육비</td>
