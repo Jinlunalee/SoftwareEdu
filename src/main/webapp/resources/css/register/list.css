@@ -1,79 +1,136 @@
 @charset "UTF-8";
 
-.input-text {
-	width: 350px;
-    height: 39px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
-    position: relative;
-    right: 20px;
+.title {
+    text-align: center;
+    margin-top: 30px;
 }
 
-.select-box {
-	width: 150px;
-    height: 39px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
+.list_top .cnt {
+    color: #666;
+    float: left;
 }
 
-.input-date {
-	width: 175px;
-    height: 39px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
+.basic_txt_color {
+    color: #003964;
 }
 
-.input-button {
-	margin-top: 7px;
-	display: inline-block;
-    width: 77px;
-    height: 39px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: relative;
-    left: 347px;
-    bottom: 41px;
-}
-
+/* 검색 */
 .search {
-	text-align: center;
-	background-color: #f7f7f7;
-	padding-top: 19px;
-	height: 125px;
+    /* text-align: center; */
+    background-color: #f7f7f7;
+    /* padding-top: 19px; */
+    /* height: 125px; */
+    font-size: 14px;
+    box-shadow: 0px 1px 13px 0px #80808036;
+}
+
+.search .search-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.search .search-section {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    margin-right: 35px;
+}
+
+.search .search-section .search-section-title {
+    font-size: 11px;
+    color: gray;
+}
+
+.search .search-section .search-section-content {
+    
+}
+
+.search .search-section .search-section-content .input-box {
+    height: 36px;
+    border-color: #80808047;
+    border-radius: 4px;
+}
+
+.select-box { /* 선택 */
+    width: 103px;
+    text-align: center;
+}
+
+.input-date { /* 날짜 입력창 */
+    width: 143px;
+}
+
+.input-button { /* 검색 버튼 */
+    height: 36px;
+    width: 58px;
+    background-color: white;
+    color: black;
+}
+
+
+/* 추가 버튼 */
+.btn-outline-secondary {
+    font-size: 13px;
+}
+
+/* 목록 수 선택 */
+.view {
+    text-align: end;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    top: 21px;
+    z-index: 1;
 }
 
 .select-view {
-	width: 100px;
+    font-size: 13px;
+    width: 100px;
     height: 34px;
-	border-radius: 8px;
+    border-radius: 8px;
     margin: 0 10px;
     padding: 3px 20px 0 20px;
     border: 1px solid #e8e8e8;
 }
 
-.view {
-	position: relative;
-	top: 26px;
-	text-align: end;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
 
-.list {
-	width: 100%;
-    text-align: center;
-    border: 1px solid #e8e8e8;
-    margin-bottom: 20px;
-    font-size: 13px;
+/* 전체목록/페이지 */
+#list-wrap {
     position: relative;
     bottom: 20px;
+}
+
+.list_top {
+    color: #666;
+    float: left;
+    margin: 5px 10px;
+    position: relative;
+    top: 10px;
+}
+
+.cnt {
+    color: #666;
+    float: left;
+    font-size: 12px;
+}
+
+/* 테이블 */
+.list {
+    width: 100%;
+    text-align: center;
+    border: 2px solid #e8e8e8;
+    margin-bottom: 10px;
+    font-size: 13px;
+    position: relative;
+    top: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 table thead {
@@ -81,130 +138,101 @@ table thead {
 }
 
 tr {
-	/* border-bottom: 1px solid #e8e8e8; */
-	height: 40px;
+    height: 40px;
 }
-th {
+
+table.list th {
     font-weight: 500;
-    font-size: 0.963rem;
+    font-size: 13px;
+    color: #000;
+    border: 1px solid #e8e8e8;
 }
-td {
+
+table.list tbody td {
+    font-size: 11px;
+    border: 1px solid #e8e8e8;
+}
+
+table.list td {
     color: #666;
 }
 
-.down {
-	text-align: right;
-	position: relative;
-	bottom: 25px;
-}
-
-.excelimg {
-	width: 140px;
-    height: 37px;
+table.list td.title {
+    font-size: 1em;
+    color: #333;
+    text-align: left;
     position: relative;
-    bottom: 30px;
 }
 
+/* 취소 버튼 */
+.btn-secondary {
+    font-size: 11px;
+}
+
+/* 취소 사유 모달 */
 .modal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	display: none;
-	background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-	width: 410px;
-	height: 210px;
-  	border-radius: 10px;
-  	position: relative;
-  	top: 50%;
-  	left: 50%;
-  	margin-top: -100px;
-  	margin-left: -200px;
-  	text-align: center;
-  	box-sizing: border-box;
-  	padding: 40px 20px;
-  	line-height: 23px;
-  	cursor: pointer;
-  	text-align: left;
-  	list-style: none;
-  	border-radius: 46px;
+    width: 410px;
+    height: 210px;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 40px 20px;
+    line-height: 23px;
+    cursor: pointer;
+    text-align: left;
+    list-style: none;
+    border-radius: 46px;
 }
 
 .input-time {
-	width: 70px;
-	height: 40px;
-	position: relative;
+    width: 70px;
+    height: 40px;
+    position: relative;
     left: 130px;
     bottom: 25px;
 }
 
 .input-time-btn {
-	width: 50px;
-	height: 30px;
-	position: relative;
-	left: 210px;
+    width: 50px;
+    height: 30px;
+    position: relative;
+    left: 210px;
     bottom: 53px;
     border-radius: 8px;
     color: #fff;
     background-color: #003964;
 }
 
-#close-btn {
-	text-align: right;
-	position: absolute;
-    bottom: 260px;
-    left: 10px;
-}
-
-.close-btn {
-	width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: absolute;
-    top: 200px;
-    left: 310px;
-}
-
-.paging {
-	list-style: none;
-	display: inline;
-}
-
-.paging li {
-	float: left;
-	margin: 10px;
-}
-
-#paging {
-	display: inline;
-	position: relative;
-	bottom: 30px;
-	left: 40%;
-	font-size: 13px;
-	
-}
-
-.cancelrs{
-	height: 40px;
+.cancelrs {
+    height: 40px;
     border-radius: 8px;
     position: relative;
     left: 20px;
     bottom: 40px;
 }
 
-.cacelform{
-	position: relative;
+.cacelform {
+    position: relative;
     top: 30px;
 }
 
-.confirm{
-	position: absolute;
+.confirm {
+    position: absolute;
     top: 20px;
     left: 240px;
     width: 50px;
@@ -214,55 +242,27 @@ td {
     background-color: #003964;
 }
 
-.rt{
-	display : inline;
+#close-btn {
+    text-align: right;
+    position: absolute;
+    bottom: 260px;
+    left: 10px;
 }
 
-#applyperiod {
-	position : relative;
+.close-btn {
+    width: 50px;
+    height: 30px;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #003964;
+    position: absolute;
+    top: 200px;
+    left: 310px;
 }
 
-.selectstudent{
+.input-cancel {
+    display: inline;
     position: relative;
-    right: 380px;
-    margin-top: 3px;
-}
-
-.apply-period {
-	display : inline;
-	text-align : left;
-	position: relative;
-	right: 70px;
-}
-
-.select-subcor{
-	display : inline;
-	text-align : left;
-	position: relative;
-    left: 30px;
-}
-
-.state{
-	display: inline;
-    position: relative;
-    left: 175px;
-    bottom: 45px;
-    margin-top: 3px;
-}
-
-.input-student {
-    width: 195px;
-}
-
-.select-stu{
-	width: 160px;
-	position: relative;
-    right: 15px;
-}
-
-.input-cancel{
-	display: inline;
-	position: relative;
     left: 25px;
     width: 210px;
     height: 40px;
@@ -271,45 +271,47 @@ td {
     bottom: 40px;
 }
 
-.btn-secondary{
-    font-size: 11px;
-}
-
-.list_top{
-    color: #666;
-    margin: 5px 10px;
-}
-
-.cnt {
-	position: relative;
-	bottom: 20px;
-	color: #666;
-    font-size: 12px;
-}
-.btn-outline-secondary {
-    font-size: 13px;
-}
-.basic_txt_color {
-    color: #003964;
-}
-
 #cancelId {
-	position: relative;
-	left: 42px;
+    position: relative;
+    left: 42px;
     bottom: 27px;
-	
+
 }
 
 .cancel-img {
-	width: 35px;
+    width: 35px;
     margin-right: 10px;
 }
 
-.h-100 {
-	height: 105%!important;
+/* 엑셀 및 페이징 */
+.bottoms {
+    display:flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
-#enroll-state {
-	position: relative;
-    left: 28px;
+/* 엑셀 다운로드 */
+.down {
+    position: absolute;
+    right: 0px;
+}
+
+.excelimg {
+    width: 140px;
+    height: 37px;
+}
+
+/* 페이징 */
+.paging {
+    list-style: none;
+    display: inline;
+}
+
+.paging li {
+    float: left;
+    margin: 10px;
+}
+
+#paging {
+    font-size: 13px;
 }

@@ -81,28 +81,30 @@
 				</tbody>
 			</table>
 
-			<!-- paging -->
-			<div id="paging">
-				<ul class="paging">
-					<li><a href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a></li>
-					<c:if test="${pager.groupNo>1}">
-						<li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
-					</c:if>
-			
-					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-						<c:if test="${pager.pageNo != i}">
-							<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+			<div class="bottoms">
+				<!-- paging -->
+				<div id="paging">
+					<ul class="paging">
+						<li><a href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a></li>
+						<c:if test="${pager.groupNo>1}">
+							<li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
 						</c:if>
-						<c:if test="${pager.pageNo == i}">
-							<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+				
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+							</c:if>
+						</c:forEach>
+				
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
 						</c:if>
-					</c:forEach>
-			
-					<c:if test="${pager.groupNo<pager.totalGroupNo}">
-						<li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
-					</c:if>
-					<li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
-				</ul>
+						<li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
