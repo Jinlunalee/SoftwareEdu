@@ -38,7 +38,7 @@
                   <div class="card_check">
 
                      <div class="first_card">
-                        <a>▶ 연수원_교육비 지원대상 교육과정을 수강 완료한 수강생 교육 정보 <br>&emsp;(수강 완료 시수 포함)
+                        <a>▶ 연수원_교육비 지원대상 교육강좌를 수강 완료한 수강생 교육 정보 <br>&emsp;(수강 완료 시수 포함)
                         </a> <%-- (검색조건은 std_sbj에 있는 강좌 교육일로) --%>
                            <br>
                            <div class="checkDataStd">
@@ -98,6 +98,7 @@
                         <table class="table_info1">
                            <tr>
                               <td>* agentId : 훈련기관ID</td>
+                              <td>* startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
                               <td colspan='2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
@@ -119,6 +120,7 @@
                         <table class="table_info1">
                            <tr>
                               <td>* agentId : 훈련기관ID</td>
+                              <td>* startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
                               <td colspan='2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
@@ -148,7 +150,7 @@
                               <td>*cntStd : 수강 완료 된 수강생 수</td>
                            </tr>
                            <tr>
-                              <td>* startDay : 강좌 시작 일자</td>
+                              <td>* startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
                               <td>* endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
@@ -170,7 +172,7 @@
                               <td>*cntStd : 수강 완료 된 수강생 수</td>
                            </tr>
                            <tr>
-                              <td>* startDay : 강좌 시작 일자</td>
+                              <td>* startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
                               <td>* endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
