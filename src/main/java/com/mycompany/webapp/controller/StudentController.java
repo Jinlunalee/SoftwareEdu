@@ -81,16 +81,30 @@ public class StudentController {
 	}
 
 	//검색
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String searchStudent(@RequestParam String studentName, @RequestParam String studentId, Model model) {
+	@RequestMapping(value="/searchStudentBoardlist", method=RequestMethod.GET)
+	public String searchStudent(@RequestParam(defaultValue="1") int pageNo, 
+			@RequestParam(defaultValue="10") int rowsPerPage, @RequestParam(defaultValue="") String keyword, 
+			@RequestParam String student, Model model) {
 		model.addAttribute("menu", "student");
 		model.addAttribute("menuKOR", "수강생 관리");
 		
+		int totalRows = pagerService.getCountSearchStudentRow(student, keyword);
 		
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
 		
+		List<StudentVO> boardList = pagerService.selectSearchStudentListByPage(pager, student, keyword);
+		model.addAttribute("student", student);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size()); // 페이지 상단 좌측 "전체 목록" 수
+		model.addAttribute("rowsPerPage", rowsPerPage);
+		logger.info("searchStudentboardList: " + boardList);
 		
+		System.out.println(student);
+		System.out.println(keyword);
 		
-		return "student/search";
+		return "student/list";
 	}
 
 	//수정

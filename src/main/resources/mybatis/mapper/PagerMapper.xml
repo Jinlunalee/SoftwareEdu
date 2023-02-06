@@ -342,7 +342,7 @@
 	
 	<select id="getCountSearchStudentRow" parameterType="map" resultType="int">
 		/*getCountSearchStudentRow*/
-		SELECT count(*) FROM student
+		SELECT count(*) FROM student where 1=1 
 		<include refid="student-search" />
 	</select>
 
@@ -351,12 +351,14 @@
 		<include refid="paging-header" /> 
 		    SELECT
 		    	name,
+		    	user_id,
 				student_id, 
 				email, 
 				to_char(to_date(birth), 'YYYY-MM-DD') as birth, 	
-            	common_code.comn_cd_title as position_title
+            	cm.comn_cd_title as position_title
 		    FROM student s
-		    left join common_code cm on s.position_cd = cm.comn_cd
+		    left join common_code cm on s.position_cd = cm.comn_cd	    
+		    where 1=1 
 		    <include refid="student-search" />
 		    ORDER BY student_id
 		<include refid="paging-footer" /> 
@@ -451,7 +453,7 @@
     <sql id="student-search">
     /*student-search*/
     	<if test='student != null and student.equals("stdtId")'>
-    		AND (student_id = #{keyword} OR REPLACE(UPPER(student_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
+    		AND (user_id = #{keyword} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')
 		</if>
 		<if test='student != null and student.equals("stdtName")'>
 			AND (name = #{keyword} OR REPLACE(UPPER(name), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%')

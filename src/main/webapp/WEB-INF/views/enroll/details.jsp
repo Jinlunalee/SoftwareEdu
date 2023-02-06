@@ -30,7 +30,7 @@
 			<tr>
 				<th>강좌 명 (아이디)</th>
 				<td>${enroll.subjectTitle} (${enroll.subjectId})</td>
-				<th>연수 기간</th>
+				<th>강좌 기간</th>
 				<td>${enroll.startDay} ~ ${enroll.endDay}</td>
 				<th>일수</th>
 				<td>${enroll.days}</td>
@@ -47,7 +47,7 @@
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
 				<th>과정 명 (아이디)</th>
-				<td>${enroll.courseId} (${enroll.courseTitle})</td>
+				<td>${enroll.courseTitle} (${enroll.courseId})</td>
 			</tr>
 			
 			<tr>

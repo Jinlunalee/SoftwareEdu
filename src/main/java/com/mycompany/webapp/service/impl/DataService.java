@@ -78,7 +78,7 @@ public class DataService implements IDataService{
         result += "<sendDt>" + sendDt + "<sendDt>" + "\n";
         result += "<stateCd>" + stateCd + "<stateCd>" + "\n";
         result +=  "</student>" + "\n" + "\n"; 
-//        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디 추가하기
+//        넣어야 할 정보 : 수강생 아이디에 교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 연수생아이디(userId) 추가하기
 //        교육비 지원여부는 어차피 지원되는 것만 조회되는 거니까 넣지 말기
 		}
 		return result;

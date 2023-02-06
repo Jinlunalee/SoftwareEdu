@@ -14,10 +14,5 @@ public interface IStudentRepository {
 	List<StudentVO> getStudentList();// 수강생 목록 조회
 
 	
-	// 밑에 추가
-	/*
-	public List<StudentVO> selectByPage(Pager pager);
-	public int count();
-	public StudentVO selectByBno(int bno);
-	*/
+
 }
