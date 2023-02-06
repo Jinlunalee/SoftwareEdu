@@ -220,12 +220,11 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
-	public String addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	@ResponseBody
+	public void addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		System.out.println(studentId);
 		logger.info("addEnroll: "+studentId+subjectId+subjectSeq);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
-		
-		return "redirect:/enroll/searchlist";
 	}
 
 	/**
@@ -236,10 +235,10 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/addcourse/{studentId}/{courseId}/{courseOpenYear}", method=RequestMethod.POST)
-	public String addCourse(@PathVariable String studentId, @PathVariable String courseId, @PathVariable String courseOpenYear) {
+	@ResponseBody
+	public void addCourse(@PathVariable String studentId, @PathVariable String courseId, @PathVariable String courseOpenYear) {
 		System.out.println(courseId);
 		enrollService.addCourse(studentId, courseId, courseOpenYear);
-		return "redirect:/enroll/searchlist";
 	}
 
 	/**
