@@ -183,10 +183,9 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/del/{studentId}/{subjectId}/{subjectSeq}")
-	public String clickDelete(HttpServletRequest request, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	@ResponseBody
+	public void clickDelete(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.clickDelete(studentId, subjectId, subjectSeq);
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
 	}
 
 	/**
@@ -243,10 +242,9 @@ public class EnrollController {
 	 * @return
 	 */
 	@RequestMapping(value="/approval/{studentId}/{subjectId}/{subjectSeq}")
-	public String approval(HttpServletRequest request, @PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
+	@ResponseBody
+	public void approval(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
 		enrollService.approval(studentId, subjectId, subjectSeq);
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
 	}
 
 	/**

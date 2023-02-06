@@ -131,14 +131,14 @@
 								<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 									<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-										<option>취소 사유 선택</option>
+										<option value="">취소 사유 선택</option>
 										<c:forEach var="cancel" items="${cancelList}">
 											<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 										</c:forEach>
 									</select>
 									<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 									<span id="cancelRsEtc-${status.count}"></span>
-									<input type="submit" value="확인" class="confirm">
+									<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
 								</form>
 								<div id="close-btn">
 									<button class="close-btn">닫기</button>
@@ -266,12 +266,9 @@
 				url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
 				success : function(data) {
 					document.location.href = document.location.href;
-					}
-				})
-			
-		}else {
-			return false;
-			}
+				}
+			})
+		}
 		}
 		
 		function approval(studentId, subjectId, subjectSeq) {
@@ -284,15 +281,20 @@
 					}
 				})
 			}
-			else{
-			}
 		}
 
 		function cancel(i){
 			const selectId = "#selectCancel-" + i;
 			var selectCancel = selectId + " option:selected";
 			var cancel = $(selectCancel).val();
+			var cancelBtn = "#cancelBtn-" + i;
+			
+			
 			console.log(cancel);
+			
+			if(cancel === '') {
+				$(cancelBtn).setAttribute("type", "text");
+			}
 			
 			if(cancel === 'CXL07'){
 				var createInput = document.createElement("input");
