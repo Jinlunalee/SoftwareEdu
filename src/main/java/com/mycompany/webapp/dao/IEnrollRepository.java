@@ -8,12 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
-import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 
 @Mapper
 public interface IEnrollRepository {
-	List<EnrollVO> getEnrollList();
 	void clickCancel(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	void clickDelete(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	int getRatioUsingEnrollId(@Param("enrollId") String enrollId);

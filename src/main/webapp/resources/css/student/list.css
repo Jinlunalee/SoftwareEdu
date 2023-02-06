@@ -1,105 +1,172 @@
 @charset "UTF-8";
 
-.input-text {
-	width: 450px;
-    height: 39px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
-    position: relative;
-    right: 10px;
+.title {
+	text-align: center;
+	margin-top: 30px;
 }
 
-.select-box {
-	width: 156px;
-    height: 39px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
-    position: relative;
-    left: 10px;
+.list_top .cnt {
+	color: #666;
+	float: left;
 }
 
-.input-date {
-	width: 170px;
-    height: 45px;
-    border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
+.basic_txt_color {
+	color: #003964;
 }
 
-.input-button {
-	display: inline-block;
-    width: 77px;
-    height: 39px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: relative;
-    right: 10px;
-    bottom: 1px;
-}
 
+/* 검색 */
 .search {
 	text-align: center;
 	background-color: #f7f7f7;
 	padding: 15px;
 }
 
+.input-text {
+	width: 450px;
+	height: 39px;
+	border-radius: 8px;
+	margin: 0 10px;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
+	position: relative;
+	right: 10px;
+}
+
+.select-box {
+	width: 156px;
+	height: 39px;
+	border-radius: 8px;
+	margin: 0 10px;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
+	position: relative;
+	left: 10px;
+}
+
+.input-date {
+	width: 170px;
+	height: 45px;
+	border-radius: 8px;
+	margin: 0 10px;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
+}
+
+.input-button {
+	display: inline-block;
+	width: 77px;
+	height: 39px;
+	border-radius: 8px;
+	color: #fff;
+	background-color: #003964;
+	position: relative;
+	right: 10px;
+	bottom: 1px;
+}
+
+
+/* 추가 버튼 */
+.btn-outline-secondary {
+	font-size: 13px;
+}
+
+/* 목록 수 선택 */
+.view {
+	text-align: end;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	position: relative;
+	top: 21px;
+	z-index: 1;
+}
+
 .select-view {
 	font-size: 13px;
 	width: 100px;
-    height: 34px;
+	height: 34px;
 	border-radius: 8px;
-    margin: 0 10px;
-    padding: 3px 20px 0 20px;
-    border: 1px solid #e8e8e8;
+	margin: 0 10px;
+	padding: 3px 20px 0 20px;
+	border: 1px solid #e8e8e8;
 }
 
-.view {
-	text-align: end;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    position: relative;
-    top: 21px;
-    z-index: 1;
+
+/* 전체목록/페이지 */
+#list-wrap {
+	position: relative;
+	bottom: 20px;
 }
 
+.list_top {
+	color: #666;
+	float: left;
+	margin: 5px 10px;
+	position: relative;
+	top: 10px;
+}
+
+.cnt {
+	color: #666;
+	float: left;
+	font-size: 12px;
+}
+
+
+/* 테이블 */
 .list {
 	width: 100%;
-    text-align: center;
-    border-top: 2px solid #bababa;
-    margin-bottom: 10px;
-    font-size: 13px;
-    position: relative;
-    top: 10px;
+	text-align: center;
+	border: 2px solid #e8e8e8;
+	margin-bottom: 10px;
+	font-size: 13px;
+	position: relative;
+	top: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table thead {
+	background-color: #f7f7f7;
 }
 
 tr {
-	border-bottom: 1px solid #e8e8e8;
 	height: 40px;
 }
-th {
+
+table.list th {
 	font-weight: 500;
-    font-size: 0.963rem;
+	font-size: 13px;
+	color: #000;
+	border: 1px solid #e8e8e8;
 }
-td {
+
+table.list tbody td {
+	font-size: 11px;
+	border: 1px solid #e8e8e8;
+}
+
+table.list td {
 	color: #666;
 }
 
-.down {
-	text-align: right;
+table.list td.title {
+	font-size: 1em;
+	color: #333;
+	text-align: left;
+	position: relative;
 }
 
-.excelimg {
-	width: 140px;
-    height: 37px;
+/* 취소 버튼 */
+.btn-secondary {
+	font-size: 11px;
 }
 
-.modal {
+/* 취소 사유 모달 */
+/* .modal {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -111,29 +178,29 @@ td {
 .modal-content {
 	width: 410px;
 	height: 270px;
-  	background-color: #8db2ff;
-  	color: #fff;
-  	border-radius: 10px;
-  	position: relative;
-  	top: 50%;
-  	left: 50%;
-  	margin-top: -100px;
-  	margin-left: -200px;
-  	text-align: center;
-  	box-sizing: border-box;
-  	padding: 40px 20px;
-  	line-height: 23px;
-  	cursor: pointer;
-  	text-align: left;
-  	list-style: none;
+	background-color: #8db2ff;
+	color: #fff;
+	border-radius: 10px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	margin-top: -100px;
+	margin-left: -200px;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 40px 20px;
+	line-height: 23px;
+	cursor: pointer;
+	text-align: left;
+	list-style: none;
 }
 
 .input-time {
 	width: 70px;
 	height: 40px;
 	position: relative;
-    left: 130px;
-    bottom: 25px;
+	left: 130px;
+	bottom: 25px;
 }
 
 .input-time-btn {
@@ -141,165 +208,57 @@ td {
 	height: 30px;
 	position: relative;
 	left: 210px;
-    bottom: 53px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
+	bottom: 53px;
+	border-radius: 8px;
+	color: #fff;
+	background-color: #003964;
 }
 
 #close-btn {
 	text-align: right;
 	position: relative;
-    bottom: 50px;
+	bottom: 50px;
 }
 
 .close-btn {
 	width: 50px;
 	height: 30px;
 	border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: relative;
-    bottom: 33px;
+	color: #fff;
+	background-color: #003964;
+	position: relative;
+	bottom: 33px;
+} */
+
+/* 엑셀 및 페이징 */
+.bottoms {
+    display:flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
+/* 엑셀 다운로드 */
+.down {
+    position: absolute;
+    right: 0px;
+}
+
+.excelimg {
+    width: 140px;
+    height: 37px;
+}
+
+/* 페이징 */
 .paging {
-	list-style: none;
-	display: inline;
+    list-style: none;
+    display: inline;
 }
 
 .paging li {
-	float: left;
-	margin: 10px;
+    float: left;
+    margin: 10px;
 }
 
 #paging {
-	display: inline;
-	position: relative;
-	top: 7px;
-	left: 43%;
-	font-size: 13px;
-}
-
-.cancelrs{
-	height: 40px;
-    border-radius: 8px;
-}
-
-.close-btn2{
-	width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: relative;
-	top: 110px;
-    left: 10px;
-}
-
-.cacelform{
-	position: relative;
-    top: 30px;
-}
-
-.confirm{
-	position: relative;
-    top: -34px;
-    left: 335px;
-    width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-}
-
-.rt{
-	display : inline;
-}
-
-.modal2 {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	display: none;
-}
-
-.modal-content2 {
-	width: 410px;
-	height: 240px;
-  	background-color: #8db2ff;
-  	color: #fff;
-  	border-radius: 10px;
-  	position: relative;
-  	top: 50%;
-  	left: 50%;
-  	margin-top: -100px;
-  	margin-left: -200px;
-  	text-align: center;
-  	box-sizing: border-box;
-  	padding: 40px 20px;
-  	line-height: 23px;
-  	cursor: pointer;
-  	text-align: left;
-  	list-style: none;
-}
-
-.btn-secondary{
-	font-size: 11px;
-}
-.btn-outline-primary{
-	color: #29608a;
-    border-color: #29608a;
-}
-.btn-danger {
-    color: #fff;
-    background-color: #4f6985;
-    border-color: #29608a;
-}
-
-.btn-outline-secondary {
-	font-size: 13px;  	
-}
-
-.close-btn2{
-	position: absolute;
-    top: 200px;
-    left: 349px;
-}
-
-.list_top{
-    color: #666;
-    float: left;
-    margin: 5px 10px;
-    position: relative;
-    top: 10px;
-    }
-.cnt {
-	color: #666;
-    float: left;
-	font-size: 12px;
-}
-#applyperiod {
-	position : relative;
-	right: 400px;
-}
-
-.btn-outline-success {
-    color: #29608a;
-    border-color: #29608a;
-}
-
-#list-wrap {
-	position: relative;
-	bottom: 20px;
-}
-.text-center {
-    text-align: center!important;
-    position: relative;
-    left: 120px
-}
-.basic_txt_color {
-    color: #003964;
+    font-size: 13px;
 }

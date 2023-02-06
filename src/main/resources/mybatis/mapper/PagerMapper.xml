@@ -23,13 +23,6 @@
 		<include refid="paging-footer" /> 
 	</select>
 	
-	<select id="getCountEnrollRow" resultType="int">
-		/*getCountEnrollRow*/
-		SELECT count(*) 
-		FROM enroll 
-		WHERE del_yn = 'N'
-	</select>
-
 	<select id="selectEnrollListByPage" parameterType="Pager" resultType="EnrollVO">
 		/*selectEnrollListByPage*/
 		<include refid="paging-header" /> 

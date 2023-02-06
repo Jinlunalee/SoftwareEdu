@@ -11,9 +11,9 @@ public interface IPagerService {
 	int getCountStudentRow();
 	List<StudentVO> selectStudentListByPage(Pager pager);
 
-	int getCountEnrollRow();
 	List<EnrollVO> selectEnrollListByPage(Pager pager);
 	
+	//수강 검색
 	int getCountSearchRow(EnrollVO enroll);
 	List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager);
 	

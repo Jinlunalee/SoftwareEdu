@@ -48,16 +48,18 @@
 			</div>
 
 			<table class="list">
-				<tr>
-                    <th>수강생 명(관리아이디)</th>				
-                    <th>수강생아이디</th>
-					<th>생년월일</th>
-					<th>이메일</th>
-					<th>직위</th>
-					<th>수정/삭제</th>
-					<th></th>
-				</tr>
+				<thead>
+					<tr>
+						<th>수강생 명(관리아이디)</th>				
+						<th>수강생아이디</th>
+						<th>생년월일</th>
+						<th>이메일</th>
+						<th>직위</th>
+						<th>수정/삭제</th>
+					</tr>
+				</thead>
 				
+				<tbody>
 				<!-- 리스트 -->
 				<c:if test="${boardListSize ne 0}">  	
 					<c:forEach var="board" items="${boardList}" varStatus="status"> 
@@ -76,34 +78,35 @@
 						</tr>
 					</c:forEach>
 				</c:if>
-				
-					
+				</tbody>
 			</table>
-			<!-- paging -->
-			 <div id="paging">
-			       <ul class="paging">
-                    <li><a href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a></li>
-                    <c:if test="${pager.groupNo>1}">
-                        <li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
-                    </c:if>
 
-                    <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-                        <c:if test="${pager.pageNo != i}">
-                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
-                        </c:if>
-                        <c:if test="${pager.pageNo == i}">
-                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
-                        </c:if>
-                    </c:forEach>
-
-                    <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
-                    </c:if>
-                    <li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
-                </ul>
-			  </div>   
-                 
-</div>
+			<div class="bottoms">
+				<!-- paging -->
+				<div id="paging">
+					<ul class="paging">
+						<li><a href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a></li>
+						<c:if test="${pager.groupNo>1}">
+							<li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+						</c:if>
+				
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+							</c:if>
+						</c:forEach>
+				
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+						</c:if>
+						<li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 	<script type="text/javascript">

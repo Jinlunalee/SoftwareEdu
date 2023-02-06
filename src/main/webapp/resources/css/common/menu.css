@@ -4,7 +4,7 @@
     align-items: center;
 }
 .aside-bar-menu{
-	background-color: #053863;
+	/* background-color: #053863; */
     height: 150px;
     width: 100%;
     padding: 25px;
@@ -22,7 +22,7 @@
 	padding-left: 10px;
 }
 .aside-bar-submenu{
-	background-color: #FFFFFF;
+	/* background-color: #FFFFFF; */
     width: 100%;
     padding: 15px;
     margin: 20px;

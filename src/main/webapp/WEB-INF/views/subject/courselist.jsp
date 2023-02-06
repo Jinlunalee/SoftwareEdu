@@ -91,36 +91,37 @@
 				</c:if>
 				<c:if test="${boardListSize eq 0}">
 					<div class="table-empty">
-			            게시물이 없습니다.
-			        </div>
+						게시물이 없습니다.
+					</div>
 				</c:if>
-				
-				
-			</tbody>
+			</tbody>	
 		</table>
+
+		<div class="bottoms">
 		<!--paging-->
-            <div id="paging">
-                <ul class="paging">
-                    <li><a href="searchCourseBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">처음</a></li>
-                    <c:if test="${pager.groupNo>1}">
-                        <li><a href="searchCourseBoardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">이전</a></li>
-                    </c:if>
+				<div id="paging">
+					<ul class="paging">
+						<li><a href="searchCourseBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">처음</a></li>
+						<c:if test="${pager.groupNo>1}">
+							<li><a href="searchCourseBoardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">이전</a></li>
+						</c:if>
 
-                    <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-                        <c:if test="${pager.pageNo != i}">
-                            <li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
-                        </c:if>
-                        <c:if test="${pager.pageNo == i}">
-                            <li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
-                        </c:if>
-                    </c:forEach>
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<li><a href="searchCourseBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">${i}</a></li>
+							</c:if>
+						</c:forEach>
 
-                    <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <li><a href="searchCourseBoardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">다음</a></li>
-                    </c:if>
-                    <li><a href="searchCourseBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">맨끝</a></li>
-                </ul>
-            </div>
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<li><a href="searchCourseBoardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">다음</a></li>
+						</c:if>
+						<li><a href="searchCourseBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&course=${course}&keyword=${keyword}">맨끝</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

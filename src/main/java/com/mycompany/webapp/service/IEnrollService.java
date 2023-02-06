@@ -2,16 +2,12 @@ package com.mycompany.webapp.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.mycompany.webapp.dto.CommonCodeVO;
 import com.mycompany.webapp.dto.EnrollVO;
 import com.mycompany.webapp.dto.OpenVO;
-import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.StudentVO;
 
 public interface IEnrollService {
-	List<EnrollVO> getEnrollList();
 	void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq);
 	void clickDelete(String studentId, String subjectId, int subjectSeq);
 	int getRatioUsingEnrollId(String enrollId);

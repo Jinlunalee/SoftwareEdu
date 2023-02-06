@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.IEnrollRepository">
-
-	<select id="getEnrollList" resultType="EnrollVO">
-	/* getEnrollList */
-		SELECT  enroll_id,
-				e.subject_id,
-				e.subject_seq,
-				e.student_id, 
-				name,
-        		s.subject_title, 
-				e.state_cd, 
-				complete_hours,
-				e.reg_id,
-				e.reg_dt, 
-				e.modi_id, 
-				e.modi_dt, 
-				e.del_yn,
-				cancel_rs_etc, 
-        		start_time,
-        		end_time,
-        		start_day,
-        		end_day 
-		FROM ENROLL e 
-		LEFT OUTER JOIN STUDENT stu 
-		ON e.student_id = stu.student_id 
-        LEFT OUTER JOIN OPEN o 
-        ON e.subject_id = o.subject_id AND e.subject_seq = o.subject_seq 
-        LEFT OUTER JOIN SUBJECT sub 
-        ON e.subject_id = sub.subject_id 
-        WHERE e.del_yn ='N'
-	</select>
 	
 	<select id="getRatioUsingEnrollId" parameterType="String" resultType="int">
 	/* getRatioUsingEnrollId */
@@ -38,13 +8,6 @@
 		FROM ENROLL e, SUBJECT s 
 		WHERE e.subject_id = s.subject_id AND enroll_id = #{enrollId} 
 		AND e.del_yn ='N'
-	</select>
-	
-	<select id="getHours" parameterType="string" resultType="int">
-	/* getHours */
-		SELECT complete_hours 
-		FROM ENROLL 
-		WHERE e.del_yn ='Y' AND enroll_id = #{enrollId}
 	</select>
 	
 	<select id="getCancelList" resultType="CommonCodeVO">
