@@ -18,6 +18,24 @@ const submenuNames = {
     ]
 }
 
+// const submenuLinks = {
+//     subject : [
+//         'http://192.168.0.147/subject/searchSubjectBoardlist?catCourse=all', 'http://192.168.0.147/subject/searchCourseBoardlist?catSubject=all'
+//     ],
+//     student : [
+//         'http://192.168.0.147/student/boardlist', ''
+//     ],
+//     enroll : [
+//         'http://192.168.0.147/enroll/searchlist'
+//     ],
+//     survey : [
+//         'http://192.168.0.147/survey/summary'
+//     ],
+//     data : [
+//         'http://192.168.0.147/data/download'
+//     ]
+// }
+
 const submenuLinks = {
     subject : [
         'http://localhost/subject/searchSubjectBoardlist?catCourse=all', 'http://localhost/subject/searchCourseBoardlist?catSubject=all'
@@ -35,18 +53,3 @@ const submenuLinks = {
         'http://localhost/data/download'
     ]
 }
-
-// // Controller에서 model.addAttribute("menu", "course");
-
-
-// // EL태그로 받아온 course를 tag에 저장
-// const tag = '<c:out value="${menu}"/>';
-
-// // submenuName/Link에 course를 키 값으로 대입해 value 호출하여 arrName/Link에 저장
-// const arrName = submenuName[tag];
-// const arrLink = submenuLink[tag];
-
-// for(let i=0, max = arrName.length; i<max; i++) {
-//     let subMenu = `<div class="aside-bar-submenu-` + i + `><a href="<c:url value='` + submenuLink[tag][i] + `'/>">` + submenuName[tag][i] + `</a>` +`</div>`;
-//     $(".aside-bar-submenu").append(subMenu);
-// }

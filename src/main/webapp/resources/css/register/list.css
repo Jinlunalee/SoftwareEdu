@@ -69,15 +69,19 @@
 .list {
 	width: 100%;
     text-align: center;
-    border-top: 2px solid #bababa;
+    border: 1px solid #e8e8e8;
     margin-bottom: 20px;
     font-size: 13px;
     position: relative;
     bottom: 20px;
 }
 
+table thead {
+    background-color: #f7f7f7;
+}
+
 tr {
-	border-bottom: 1px solid #e8e8e8;
+	/* border-bottom: 1px solid #e8e8e8; */
 	height: 40px;
 }
 th {

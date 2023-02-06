@@ -1,4 +1,17 @@
 @charset "UTF-8";
+.title {
+	text-align: center;
+    margin-top: 30px;
+}
+
+.list_top .cnt {
+	color: #666;
+	float: left;
+}
+
+.basic_txt_color {
+    color: #003964;
+}
 
 .input-text {
 	width: 450px;
@@ -71,23 +84,48 @@
 .list {
 	width: 100%;
     text-align: center;
-    border-top: 2px solid #bababa;
+    border: 2px solid #e8e8e8;
     margin-bottom: 10px;
     font-size: 13px;
     position: relative;
     top: 10px;
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table thead {
+    background-color: #f7f7f7;
+}
+
 tr {
-	border-bottom: 1px solid #e8e8e8;
+	/* border-bottom: 1px solid #e8e8e8; */
 	height: 40px;
 }
-th {
-	font-weight: 500;
-    font-size: 0.963rem;
+
+table.list th {
+    font-weight: 500;
+    font-size: 13px;
+    color: #000;
+    border: 1px solid #e8e8e8;
 }
-td {
-	color: #666;
+
+table.list tbody td {
+	font-size: 11px;
+    border: 1px solid #e8e8e8;
+}
+
+table.list td {
+    color: #666;
+}
+
+table.list td.title {
+	font-size:1em;
+    color: #333;
+    text-align: left;
+    position: relative;
 }
 
 .down {

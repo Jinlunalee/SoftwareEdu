@@ -13,7 +13,7 @@
 <div class="card m-2">
 	<div class="card-header">  
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	 <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 수정 페이지</div>
+	<div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 수정 페이지</div>
 	</div>
 	<div class="card-body">
 		<c:if test="${not empty open.courseTitle}">
