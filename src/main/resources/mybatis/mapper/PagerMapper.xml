@@ -77,7 +77,6 @@
 					subject_seq,
 					subject_title,
 					support_yn,
-					days,
 					hours,
 					level_cd,
 					level_etc,
@@ -258,11 +257,17 @@
 	
 	<select id="getCountSearchOpenCourseRow" parameterType="map" resultType="int">
 		/*getCountSearchOpenCourseRow*/
-		SELECT count(distinct o.course_id)
-		FROM open o
-		LEFT JOIN course c ON o.course_id = c.course_id
-		WHERE o.course_id is not null AND del_yn = 'N'
-		<include refid="course-search" />
+		select count(*)
+		from (
+		    select DISTINCT
+							o.course_id,
+							course_title,
+							course_open_year
+						from open o 
+				        		left join course c on o.course_id = c.course_id
+				        where o.course_id IS NOT NULL AND del_yn = 'N'
+				        <include refid="course-search" />
+		)
 	</select>
 
 	<select id="selectSearchOpenCourseListByPage" parameterType="map" resultType="OpenVO">
@@ -305,7 +310,6 @@
 				subject_seq,
 				subject_title,
 				support_yn,
-				days,
 				hours,
 				level_cd,
 				level_etc,

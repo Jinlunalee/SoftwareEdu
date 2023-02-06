@@ -47,7 +47,7 @@ img {
 	margin-right: 3px;
 	margin-left: 3px;
 	margin-right: 3px;
-	top: 80px;
+	top: 69px;
 	flex-direction: row;
 }
 
@@ -76,7 +76,7 @@ img {
 	height: 600px;
 	font-size: 15px;
 	position: relative;
-	top: -36px;
+	bottom: 80px;
 }
 
 .box {
@@ -156,12 +156,19 @@ img {
 } 
 
 
-.table_info1, .table_info2 {
-	width: 600px;
+.table_info1 {
+	width: 700px;
 	height: 98px;
 	text-align: left;
 	margin-left: 45px;
 	margin-top: 5px;
+}
+ .table_info2 {
+    width: 500px;
+    height: 98px;
+    text-align: left;
+    margin-left: 45px;
+    margin-top: 5px;
 }
 
 #reset_btn {
@@ -192,4 +199,9 @@ img {
 	width: 80px;
     height: 30px;
 	
+}
+
+.expl {
+	font-size: 8px;
+	color: #003fffc9;
 }

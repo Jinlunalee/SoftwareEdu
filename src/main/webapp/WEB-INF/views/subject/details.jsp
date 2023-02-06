@@ -46,8 +46,8 @@
 						</c:if>
 					</c:if>
 				</td>
-				<td> 강좌기간(일수)</td>
-				<td> ${open.startDay} ~ ${open.endDay} (${open.days}일)
+				<td> 강좌기간(시수)</td>
+				<td> ${open.startDay} ~ ${open.endDay} (${open.hours}시간)
 				</td>
 			</tr>
 			<tr>
