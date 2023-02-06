@@ -251,6 +251,7 @@
 			<div class="submit-btn remove-hide hide-first">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장" onclick="return checkTimeValid()">
+				<input type="reset" onclick="history.back();" value="취소" class="btn">
 			</div>
 		</form>		
 	</div>
