@@ -29,8 +29,8 @@
 			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
 				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '10'?"selected":""}>10개</option>
-				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '30'?"selected":""}>30개</option>
-				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=10&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '50'?"selected":""}>50개</option>
+				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=30&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '30'?"selected":""}>30개</option>
+				<option value="<c:url value="/subject/searchCourseBoardlist?pageNo=1&rowsPerPage=50&course=${course}&keyword=${keyword}"/>" ${rowsPerPage eq '50'?"selected":""}>50개</option>
 			</select>
 		</div>
 		
@@ -38,7 +38,7 @@
 		<div id="list-wrap">
 			<div class="list_top">
 				<div class="cnt">
-				전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+				전체목록 <b class="basic_txt_color">${boardListSize}</b>개, 
 				페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
 				</div>
 			</div>
