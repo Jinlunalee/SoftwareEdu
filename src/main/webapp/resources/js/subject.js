@@ -253,72 +253,9 @@ function parse(str){
 	return y+'-'+m+'-'+d;
 }
 
-/*select 두개 연계 (필요X)*/
-// function courseChange(e){
-// 	var course1 = ["AI가 대신 만들어주는 앱", "자바 기초"];
-// 	var course2 = ["한번에 끝내는 HTML","두번만에 끝내는 CSS", "세번해도 안끝나는 JS"];
-// 	var target = document.querySelector(".select_smallCourse");
-
-// 	if(e.value == "a") var d = course1;
-// 	else if(e.value == "b") var d = course2;
-
-// 	target.options.length = 0;
-
-// 	for(x in d) {
-// 		var opt = document.createElement("option");
-// 		console.log(d[x]);
-// 		opt.value = d[x];
-// 		opt.innerHTML = d[x];
-// 		target.appendChild(opt);
-// 	}
-// }
-
-/*jquery timepicker 사용해서 30분단위로 보이도록 커스텀*/
-$('input#startTime').timepicker({
-	timeFormat: 'HH:mm',
-	interval: 30,
-	startTime: '09:00',
-	minTime: '9',
-	maxTime: '08:00pm',
-	dynamic: false,
-	dropdown: true,
-	scrollbar: true,
-	disableTextInput: true,
-	change: function(resultTime){ // 선택한 시간인 date 객체가 첫번째 인수로 전달됨
-		// $('input#endTime').timepicker('option', 'minTime', resultTime);
-		let endTimePicker = $('input#endTime').timepicker('getTime');
-		console.log(resultTime);
-		console.log(endTimePicker);
-		timeMinMax(resultTime, endTimePicker);
-	}
-});
-
-$('input#endTime').timepicker({
-	timeFormat: 'HH:mm',
-	interval: 30,
-	startTime: '09:00',
-	minTime: '9',
-	maxTime: '10:00pm',
-	dynamic: false,
-	dropdown: true,
-	scrollbar: true,
-	disableTextInput: true,
-	change: function(result){
-		endTime = result;
-		calcEndDay();
-	}
-	
-});
 
 /*시간 선후관계 설정*/
-function timeMinMax(startTime, endTime){
-	console.log("timeMinMax");
-	$('input#endTime').timepicker('option', 'minTime', startTime);
-	$('intput#startTime').timepicker('option', 'maxTime', endTime);
-}
-
-/*시간 선후관계 설정*/
-function timeMinMax22(startTime, endTime) {
+function timeMinMax(startTime, endTime) {
 	console.log(startTime, endTime);	
 
 	if(startTime){
@@ -397,7 +334,7 @@ function calcEndDay(){
 	calcHours.value = '';
 	
 	//시간 선후관계 비활성화
-	timeMinMax22(startTime, endTime);
+	timeMinMax(startTime, endTime);
 
 	if (startTime !== '' && endTime !== '') {
 		console.log("start");

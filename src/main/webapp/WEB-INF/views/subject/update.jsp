@@ -73,14 +73,6 @@
 					<span id="printDay"></span>
 				</td>
 			</tr>
-	<%-- 		<tr>
-				<td class="write-txt"> 강좌시간</td>
-				<td>
-					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required> 
-					~
-					<input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required>
-				</td>
-			</tr> --%>
 			<tr>
 				<td class="write-txt"> 강좌시간</td>
 				<td>

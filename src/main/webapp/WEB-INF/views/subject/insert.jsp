@@ -128,14 +128,6 @@
 							<span id="printHours"></span>
 						</td>
 					</tr>
-					<!-- <tr>
-						<td class="write-txt"> 강좌시간</td>
-						<td> 30분단위로 입력(초)
-							<input class="timepicker" name="startTime" id="startTime" required> 
-							~ 
-							<input class="timepicker" name="endTime" id="endTime" required>
-						</td>
-					</tr> -->
 					<tr>
 						<td class="write-txt"> 강좌시간</td>
 						<td>

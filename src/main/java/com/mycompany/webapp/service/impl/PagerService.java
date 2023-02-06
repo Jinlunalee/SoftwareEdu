@@ -43,11 +43,6 @@ public class PagerService implements IPagerService {
 	}
 
 	@Override
-	public int getCountEnrollRow() {
-		return pagerRepository.getCountEnrollRow();
-	}
-
-	@Override
 	public List<EnrollVO> selectEnrollListByPage(Pager pager) {
 		List<EnrollVO> boardList = pagerRepository.selectEnrollListByPage(pager);
 		// stateCd, openStateCd 공통코드로 stateCdTitle, openStateCdTitle 가져와서 set하기
