@@ -217,8 +217,32 @@
 		const student = $('select[name=student]').val();
 		const keyword1 = $('input[name=keyword1]').val();
 		const state = $('select[name=state]').val();
-	
-	
+		
+		if(applyStartDay === '') {
+			const today1 = new Date();
+			const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
+			const startDay = formatDate(oneYearAgo);
+			console.log("startDay : " + startDay);
+			document.getElementById('applyStartDay').value = startDay
+		}
+		
+		if(applyEndDay === '') {
+			const today2 = new Date();
+			console.log("today2 : " + today2);
+			const endDay = formatDate(today2);
+			console.log("endDay : " + endDay);
+			document.getElementById('applyEndDay').value = endDay
+		}
+		
+		function formatDate(date) {
+			var dt = date;
+			var year = dt.getFullYear();
+			var month = dt.getMonth()+1 > 9 ? dt.getMonth()+1 : '0' + (dt.getMonth()+1);
+			var day = dt.getDate() > 9 ? dt.getDate() : '0' + dt.getDate();
+			
+			return [year, month, day].join('-');
+		}
+		
  		function showModal(i){
  			var openBtnClassName = ".modal-open-" + i;
  			var modalClassName = ".modal-" + i; 
@@ -232,7 +256,7 @@
 				$(".modal").fadeOut();
 				document.location.href = document.location.href;
 			});
-		};
+		}
 		
 		function del(studentId, subjectId, subjectSeq) {
 			event.preventDefault();
@@ -282,19 +306,6 @@
 			}
 		}
 		
-		/* document.getElementById('applyStartDay').valueAsDate = new Date().setFullYear(new Date().getFullYear()-1); */
-		if(applyEndDay === '') {
-		var today = new Date();
-		var year = today.getFullYear();
-		var month = today.getMonth()+1 > 9 ? today.getMonth()+1 : '0' + today.getMonth()+1;
-		var day = today.getDate() > 9 ? today.getDate() : '0' + today.getDate();
-		
-		/* let offset = date.getTimezoneOffset() * 60000;
-		let dateOffset = new Date(date.getTime() - offset);
-		 */
-		$('#applyEndDay').val(dateOffset.toISOString());
-		
-		}
 	</script>
 
 
