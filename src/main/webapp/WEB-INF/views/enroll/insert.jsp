@@ -116,11 +116,8 @@
 			$.ajax({
 				type : 'POST',
 				url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-				},
-				error : function(result) {
-					alert(result);
+					location.replace('searchlist');
 				}
 			})
 		} else if(selected === "course") { //과정인 경우
@@ -133,11 +130,8 @@
 			$.ajax({
 				type : 'POST',
 				url : 'addcourse/' + studentId + '/' + courseId + '/' + courseOpenYear,
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success : function(result){
-				},
-				error : function(result) {
-					alert(result);
+					location.replace('searchlist');
 				}
 			})
 		}

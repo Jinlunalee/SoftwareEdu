@@ -128,14 +128,6 @@
 							<span id="printHours"></span>
 						</td>
 					</tr>
-					<!-- <tr>
-						<td class="write-txt"> 강좌시간</td>
-						<td> 30분단위로 입력(초)
-							<input class="timepicker" name="startTime" id="startTime" required> 
-							~ 
-							<input class="timepicker" name="endTime" id="endTime" required>
-						</td>
-					</tr> -->
 					<tr>
 						<td class="write-txt"> 강좌시간</td>
 						<td>
@@ -259,6 +251,7 @@
 			<div class="submit-btn remove-hide hide-first">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장" onclick="return checkTimeValid()">
+				<input type="reset" onclick="history.back();" value="취소" class="btn">
 			</div>
 		</form>		
 	</div>

@@ -1,6 +1,5 @@
 package com.mycompany.webapp.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mycompany.webapp.dto.CommonCodeVO;
@@ -10,9 +9,7 @@ import com.mycompany.webapp.dto.StudentVO;
 import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IHomeService {
-	List<OpenVO> selectSubjectList(String catSubjectCd);
-	List<OpenVO> selectCourseList(String catCourseCd);
-
+	
 	String getComnCdTitle(String comnCd);
 	List<CommonCodeVO> getComnCdList (String comnCdType);
 	

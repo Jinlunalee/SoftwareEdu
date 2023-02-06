@@ -31,17 +31,7 @@ public class SubjectService implements ISubjectService{
 	
 	@Autowired
 	IHomeRepository homeRepository;
-	
-	@Override
-	public List<OpenVO> selectCourseList() {
-		return subjectRepository.selectCourseList();
-	}
 
-	@Override
-	public List<OpenVO> selectSubjectList() {
-		return subjectRepository.selectSubjectList();
-	}
-	
 	@Transactional
 	@Override
 	public OpenVO selectSubjectDetails(String subjectId, int subjectSeq) {

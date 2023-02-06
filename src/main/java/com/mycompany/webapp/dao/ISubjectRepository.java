@@ -11,12 +11,8 @@ import com.mycompany.webapp.dto.SubjectVO;
 import com.mycompany.webapp.dto.UploadfileVO;
 
 @Mapper
-public interface ISubjectRepository {
-	List<OpenVO> selectCourseList(); // 개설 과정 목록 조회
-	List<OpenVO> selectSubjectList(); // 개설 강좌 목록 조회
-	
+public interface ISubjectRepository {	
 	OpenVO selectSubjectDetails(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); // 강좌 상세보기
-//	int recruitTotalPeople(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("state") String state);//모집된 인원보기
 	
 	int updateSubject(OpenVO openVo); // 과정/강좌 수정
 	int updateFileData(UploadfileVO file); // 과정/강좌 수정 첨부파일

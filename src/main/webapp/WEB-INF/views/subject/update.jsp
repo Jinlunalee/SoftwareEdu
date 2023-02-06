@@ -73,14 +73,6 @@
 					<span id="printDay"></span>
 				</td>
 			</tr>
-	<%-- 		<tr>
-				<td class="write-txt"> 강좌시간</td>
-				<td>
-					<input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required> 
-					~
-					<input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required>
-				</td>
-			</tr> --%>
 			<tr>
 				<td class="write-txt"> 강좌시간</td>
 				<td>
@@ -153,6 +145,7 @@
 			<input type="hidden" name="courseId" value="${open.courseId}">
 			<input type="hidden" name="openStateCd" id="openStateCd" value="${open.openStateCd}">
 			<input type="submit" value="저장">
+			<input type="reset" onclick="history.back();" value="취소" class="btn">
 		</div>
 		</form>
 	</div>

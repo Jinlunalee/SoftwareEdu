@@ -112,6 +112,8 @@
 			</c:choose>
 		</div> 
 		
+		<input type="reset" onclick="history.back();" value="이 전" class="btn">
+		
 		<!-- modal -->
 		<div class="modal">
 			<div class="modal_body">

@@ -23,11 +23,6 @@ public class EnrollService implements IEnrollService{
 	IHomeRepository homeRepository;
 	
 	@Override
-	public List<EnrollVO> getEnrollList() {
-		return enrollRepository.getEnrollList();
-	}
-	
-	@Override
 	public void clickCancel(EnrollVO enroll, String studentId, String subjectId, int subjectSeq) {
 		String cancelRsCd = enroll.getCancelRsCd();
 		String cancelRsEtc = enroll.getCancelRsEtc();
