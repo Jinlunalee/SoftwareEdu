@@ -110,7 +110,7 @@
                            </tr>
                            <tr>
                               <td>* sendDt : 전송시간</td>
-                              <td>* stateCd : 진행상태 (진행완료:ERL06)</td>
+                              <td>* stateCd : 진행상태 (ERL06:진행완료)</td>
                         </table>
                      </div>
                   </div>
