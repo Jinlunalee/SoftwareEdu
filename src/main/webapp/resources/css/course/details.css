@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+.card-body {
+    font-size: 14px;
+}
 .subject_course_title {
     width: 100%;
     text-align: center;
@@ -21,10 +23,12 @@ td {
 
 .sub_title {
     border: 2px solid #1A54CD;
-    border-radius: 40px;
-    padding: 5px 10px;
-    margin: 10px;
+    border-radius: 15px;
+    height: 38px;
+    padding: 5px 12px;
+    margin: 0px 25px;
     display: inline-block;
+    font-size: 17px;
 }
 
 .course_title {
@@ -34,7 +38,8 @@ td {
 }
 
 .main_title {
-    font-size: 1.4em;
+    font-size: 24px;
+    font-weight: bold;
     margin: 10px;
 }
 
@@ -45,6 +50,11 @@ td {
     margin: 10px;
     padding: 5px 10px;
     display: inline-block;
+}
+
+.no-image {
+    text-align: center;
+    color: gray;
 }
 
 .list {
@@ -83,3 +93,17 @@ table .detail_img {
 	color: cornflowerblue;
     font-size: 12px;
 }
+
+.content{
+    width: 100%;
+    height: 155px;
+ }
+ .write-txt::after{
+     content: "*";
+     color: #ed8264;
+     margin-left: 2px;
+ }
+ 
+ .content-image {
+    text-align: center;
+ }

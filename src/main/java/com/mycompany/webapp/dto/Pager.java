@@ -25,6 +25,7 @@ public class Pager {
 		this.pageNo = pageNo;
 
 		totalPageNo = totalRows / rowsPerPage;
+		
 		if(totalRows % rowsPerPage != 0) totalPageNo++;
 		
 		totalGroupNo = totalPageNo / pagesPerGroup;
@@ -41,8 +42,9 @@ public class Pager {
 		startRowIndex = startRowNo - 1;
 		endRowNo = pageNo * rowsPerPage;
 		endRowIndex = endRowNo - 1; 
-	}
+		}
 }
+
 
 
 

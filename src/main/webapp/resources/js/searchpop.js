@@ -215,8 +215,8 @@ function moveOutside(event, value){
 
         // 수강추가 : open subject만 해당, 선택한 강좌 정보 보여주기
         } else if(path.substring(10,30)==='opensubject') { 
-            var table = $("<table class='subjectdetails'/>");
-            var tr = $("<table class='subjectdetails' border='1'/>").append(
+            var table = $("<table class='subjectdetails' border='1'/>");
+            var tr = table.append(
                     $("<tr/>"),
                     $("<td class='subject-th'/>").text('강좌기간'),
                     $("<td class='subject-th'/>").text('모집기간'),
@@ -249,7 +249,7 @@ function moveOutside(event, value){
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
-        let valueYear = '미개설 과정';
+        let valueYear = '신규 개설 과정';
         if(valueArr[3]){
             Number(valueYear) = valueArr[3];
         }
@@ -356,18 +356,27 @@ function moveOutside(event, value){
         $(opener.document).find("#studentId-input").val(valueId);
         
         // 수강생 정보 반영하기
-        var ul = $("<ul/>");
-        var li = $("<ul class='stu'/>").append(
-				$("<li/>").text(' ' + '이름 : ' + valueTitle),
-				$("<li/>").text(' ' + '성별 : ' + studentGenderTitle),
-				$("<li/>").text(' ' + '생년월일 : ' + studentBirth),
-				$("<li/>").text(' ' + '이메일 : ' + studentEmail),
-				$("<li/>").text(' ' + '전화번호 : ' + studentPhone),
-				$("<li/>").text(' ' + '주소 : ' + studentAddDoTitle + ' ' + studentAddEtc),
-				$("<li/>").text(' ' + '직위 : ' + studentPositionTitle)
+        var studentTable = $("<table class='subjectdetails' border='1'/>");
+        var tr = studentTable.append(
+            $("<tr/>"),
+            $("<td class='subject-th'/>").text('이름'),
+            $("<td class='subject-th'/>").text('성별'),
+            $("<td class='subject-th'/>").text('생년월일'),
+            $("<td class='subject-th'/>").text('이메일'),
+            $("<td class='subject-th'/>").text('전화번호'),
+            $("<td class='subject-th'/>").text('주소'),
+            $("<td class='subject-th'/>").text('직위'),
+            $("<tr/>"),
+            $("<td/>").text(valueTitle),
+            $("<td/>").text(studentGenderTitle),
+            $("<td/>").text(studentBirth),
+            $("<td/>").text(studentEmail),
+            $("<td/>").text(studentPhone),
+            $("<td/>").text(studentAddDoTitle + ' ' + studentAddEtc),
+            $("<td/>").text(studentPositionTitle),
 		);
-		ul.append(li);
-		$(opener.document).find("#student-list").html(ul);
+		studentTable.append(tr);
+		$(opener.document).find("#student-list").html(studentTable);
         
         opener.document.getElementById('subject-btn').removeAttribute("disabled"); // 수강생 선택하면 강좌 검색 버튼 활성화
         opener.document.getElementById('course-btn').removeAttribute("disabled"); // 수강생 선택하면 과정 검색 버튼 활성화

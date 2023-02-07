@@ -150,7 +150,7 @@
 	<script type="text/javascript">
 		/*수강삭제*/
 		function del(subjectId, subjectSeq, fileId) {
-			if(confirm('수강 정보를 삭제하시겠습니까?')) {
+			if(confirm('강좌 정보를 삭제하시겠습니까?')) {
 				location.href = '<c:url value="/subject/del/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
 			}

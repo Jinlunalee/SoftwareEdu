@@ -14,105 +14,101 @@
 	<div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 상세 페이지</div>
 	</div>
 	<div class="card-body">
-		<c:if test="${not empty open.courseTitle}">
-			<div class="sub_title">정기과정명 | ${open.courseTitle} </div>
-		</c:if>
 		<div class="course_title">
-			<div class="main_title"><b class="basic_txt_color">${open.subjectId}</b>  ${open.subjectTitle} ${open.subjectSeq}회차</div>
+			<div class="main_title"><b class="basic_txt_color"></b>  ${open.subjectTitle} (${open.subjectId}) ${open.subjectSeq}회차</div>
+			<c:if test="${not empty open.courseTitle}">
+				<div class="sub_title">과정명 | ${open.courseTitle} </div>
+			</c:if>
 			<div class="course_state">${open.openStateCdTitle}</div>
 		</div>
 		<!-- 교육 상세내용 -->
 		<div class="list-wrap">
-		<table class="list">
-			<colgroup>
-				<col width="50%">
-				<col width="15%">
-				<col width="35%">
-			</colgroup>
-			
-			<thead>
-			<tr>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td rowspan="7">
-					<c:if test="${!empty open.fileName}">
-						<c:set var="len" value="${fn:length(open.fileName)}"/>
-						<c:set var="filetype" value="${fn:toUpperCase(fn:substring(open.fileName, len-4, len))}"/>
-						<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
-							<img class="detail_img" src='<c:url value="/subject/file/${open.fileId}"/>'><br>
-						</c:if>
-					</c:if>
-				</td>
-				<td> 강좌기간(시수)</td>
-				<td> ${open.startDay} ~ ${open.endDay} (${open.hours}시간)
-				</td>
-			</tr>
-			<tr>
-				<td> 강좌시간</td>
-				<td> ${open.startTime} ~ ${open.endTime}</td>
-			</tr>
-			<tr>
-				<td> 모집기간 </td>
-				<td> ${open.recruitStartDay} ~ ${open.recruitEndDay} </td>
-			</tr>
-			<tr>
-				<td> 난이도 </td>
-				<td> ${open.levelCdTitle} 
-					<c:if test="${not empty open.levelEtc}">(${open.levelEtc})</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td> 모집인원</td>
-				<td> ${open.totalPeople}/${open.recruitPeople} </td>
-			</tr>
-			<tr>
-				<td> 교육비</td>
-				<td> <fmt:formatNumber value="${open.cost}" type="number"/> 원
-					<c:if test="${open.supportYn eq 'Y'}"><span class="support">※ 교육비 지원을 받는 강좌입니다.</span></c:if>
-					<c:if test="${open.supportYn eq 'N'}"><span class="support">※ 교육비 지원을 받지않는 강좌입니다.</span></c:if>
-				</td>
-			</tr>
-			<tr>
-				<td> 만족도 조사</td>
-				<td> <button class="btn-open-popup btn btn-secondary" style="height:35px;">조회</button> </td>
-			</tr>
-			</tbody>
-		</table>
-		</div>
-		
-		<!-- 교육 소개 -->
-		<div class="course_intro">
-			<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
-			<p class="txt" style="white-space:pre;">${open.content}</p>
-		</div>
+			<table class="list">
+				<colgroup>
+					<col width="20%">
+					<col width="20%">
+					<col width="15%">
+					<col width="45%">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td colspan="2" rowspan="7">
+							<c:if test="${!empty open.fileName}">
+								<c:set var="len" value="${fn:length(open.fileName)}"/>
+								<c:set var="filetype" value="${fn:toUpperCase(fn:substring(open.fileName, len-4, len))}"/>
+								<c:if test="${(filetype eq '.JPG') or (filetype eq 'JPEG') or (filetype eq '.PNG') or (filetype eq '.GIF')}">
+									<img class="detail_img" src='<c:url value="/subject/file/${open.fileId}"/>'><br>
+								</c:if>
+							</c:if>
+							<c:if test="${empty open.fileName}">
+								<div class="no-image">이미지가 존재하지 않습니다.</div>
+							</c:if>
+						</td>
+						<td> 강좌기간(시수)</td>
+						<td> ${open.startDay} ~ ${open.endDay} (${open.hours}시간)</td>
+					</tr>
+					<tr>
+						<td> 강좌시간</td>
+						<td> ${open.startTime} ~ ${open.endTime}</td>
+					</tr>
+					<tr>
+						<td> 모집기간 </td>
+						<td> ${open.recruitStartDay} ~ ${open.recruitEndDay} </td>
+					</tr>
+					<tr>
+						<td> 난이도 </td>
+						<td> ${open.levelCdTitle} 
+							<c:if test="${not empty open.levelEtc}">(${open.levelEtc})</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td> 모집인원</td>
+						<td> ${open.totalPeople}/${open.recruitPeople} </td>
+					</tr>
+					<tr>
+						<td> 교육비</td>
+						<td> <fmt:formatNumber value="${open.cost}" type="number"/> 원
+							<c:if test="${open.supportYn eq 'Y'}"><span class="support">※ 교육비 지원을 받는 강좌입니다.</span></c:if>
+							<c:if test="${open.supportYn eq 'N'}"><span class="support">※ 교육비 지원을 받지않는 강좌입니다.</span></c:if>
+						</td>
+					</tr>
+					<tr>
+						<td> 만족도 조사</td>
+						<td> <button class="btn-open-popup btn btn-secondary" style="height:35px;">조회</button> </td>
+					</tr>
+					<tr> <!-- 교육 소개 -->
+						<td class="content-image">
+							<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
+						</td>
+						<td colspan="3">
+							<!-- <p class="txt content" style="white-space:pre;">${open.content}</p> -->
+							<textarea name="content" class="content" placeholder="${open.content}" readonly></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>	
 		
 		<!-- button -->
 		<div class="submit-btn">
+			<input type="reset" onclick="history.back();" value="◀ 이전" class="btns">
 			<c:choose>
 				<c:when
 					test="${(open.openStateCdTitle eq '모집예정') or (open.openStateCdTitle eq '모집중') or (open.openStateCdTitle eq '추가모집중') or (open.openStateCdTitle eq '모집마감') }">
-					<button type="button" class="btn btn-secondary"
-						onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
-					<button type="button" class="btn btn-secondary"
-						onclick="closeCourse('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">폐강</button>
+					<button type="button" class="btns" onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
+					<button type="button" class="btns" onclick="closeCourse('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">폐강</button>
 				</c:when>
 				<c:when test="${open.openStateCdTitle eq '진행중'}">
-					<button type="button" class="btn btn-secondary"
-						onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
+					<button type="button" class="btns" onclick="location.href='<c:url value="/subject/update/${open.subjectId}/${open.subjectSeq}"/>'">수정</button>
 				</c:when>
 				<c:when test="${open.openStateCdTitle eq '폐강'}">
-					<button type="button" class="btn btn-secondary"
-						onclick="del('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">삭제</button>
+					<button type="button" class="btns" onclick="del('${open.subjectId}', '${open.subjectSeq}', '${open.fileId}')">삭제</button>
 				</c:when>
 				<c:when test="${open.openStateCdTitle eq '진행완료'}">
 				</c:when>
 			</c:choose>
 		</div> 
 		
-		<input type="reset" onclick="history.back();" value="이 전" class="btn">
 		
 		<!-- modal -->
 		<div class="modal">

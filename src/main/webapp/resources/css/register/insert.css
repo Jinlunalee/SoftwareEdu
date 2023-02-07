@@ -8,24 +8,25 @@
 }
 
 .wrap {
-	padding: 17px;
-	width: 100%;
-	;
-	height: 500%;
-	border: 1px solid #bababa;
-	border-radius: 10px;
-	margin: auto;
-	margin-top: 15px;
+    width: 98%;
+    height: 240px;
+    border: 1px solid #bababa;
+    border-radius: 6px;
+    margin: auto;
+    margin-bottom: 32px;
 }
 
 .search-box {
 	text-align: center;
-	background-color: #f7f7f7;
 	height: 50px;
+	margin-top: 23px;
+	display:flex;
+	justify-content: center;
+    width: 100%;
 }
 
 .search-content {
-	padding: 14px;
+	width: 100%;
 }
 
 input {
@@ -115,9 +116,7 @@ table>tr {
 }
 
 .search2 {
-	display: inline;
-	position: relative;
-	top: 5px;
+	width: 100%;
 }
 
 .sc2 {
@@ -187,7 +186,7 @@ li {
 }
 
 .subjectdetails, .courselist {
-	width: 100%;
+	width: 98%;
 	text-align: center;
 	margin-top: 10px;
 }
@@ -203,4 +202,9 @@ li {
 
 .course-th, .subject-th {
 	background-color: #f8f9fd;
+}
+
+.insert-list {
+	display: flex;
+    justify-content: center;
 }
