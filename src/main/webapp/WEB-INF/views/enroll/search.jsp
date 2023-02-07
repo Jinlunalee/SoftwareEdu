@@ -81,12 +81,17 @@
 			</select>
 		</div>
 
-		<!-- list table -->
+		<%-- list table --%>
 		<div id="list-wrap">
 			<div class="list_top">
 				<div class="cnt">
 					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-					페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
+					<c:if test="${pager.totalRows eq 0}">
+						페이지<b class="basic_txt_color"> 1</b> / 1
+					</c:if>
+					<c:if test="${pager.totalRows ne 0}">
+						페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
+					</c:if>
 				</div>
 			</div>
 
@@ -188,16 +193,18 @@
 							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${boardListSize eq 0}">
-						<div class="table-empty">
-							게시물이 없습니다.
-						</div>
-					</c:if>
 				</tbody>
 			</table>
+			
+			<c:if test="${boardListSize eq 0}">
+				<div class="table-empty" style="text-align: center">
+					게시물이 없습니다.
+				</div>
+			</c:if>
 
 			<div class="bottoms">
 				<%-- paging --%>
+				<c:if test="${pager.totalRows ne 0}">
 				<div id="paging">
 					<ul class="paging">
 						<li><a href="searchlist?pageNo=1&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">처음</a></li>
@@ -220,7 +227,9 @@
 						<li><a href="searchlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}">맨끝</a></li>
 					</ul>
 				</div>
-			
+				</c:if>
+				
+				<%-- 엑셀 파일 다운로드 --%>
 				<div class="down">
 					<a href="<c:url value='/enroll/enrollsearchexcel?pageNo=${pager.pageNo}&rowsPerPage=${pager.rowsPerPage}&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}
 					&course=${course}&keyword2=${keyword2}&student=${student}&keyword1=${keyword1}&state=${state}'/>">

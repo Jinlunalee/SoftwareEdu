@@ -68,13 +68,11 @@ public class EnrollController {
 
 		int totalRows = pagerService.getCountSearchRow(enroll);
 		int rowsPerPages = rowsPerPage;
-
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
-
-		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
-		logger.info("EnrollSearchList : " + searchList);
-		model.addAttribute("rowsPerPages", rowsPerPages);
 		
+		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enroll, pager);
+		
+		model.addAttribute("rowsPerPages", rowsPerPages);
 		model.addAttribute("pager", pager);
 		model.addAttribute("boardList", searchList);
 		model.addAttribute("boardListSize", searchList.size());
@@ -239,53 +237,6 @@ public class EnrollController {
 		enrollService.addCourse(studentId, courseId, courseOpenYear);
 	}
 
-	/**
-	 * @description	수강 목록 엑셀 다운로드
-	 * @date	2023. 1. 24.
-	 * @param response
-	 * @param pageNo
-	 * @param rowsPerPage
-	 * @throws IOException
-	 */
-	@RequestMapping(value="/enrollexcel", method=RequestMethod.GET)
-	public void downloadEnroll(HttpServletResponse response, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="10") int rowsPerPage) throws IOException {
-		Workbook workbook = new HSSFWorkbook();
-		Sheet sheet = workbook.createSheet("수강 목록");
-		int rowNo = 0;
-
-		Row headerRow = sheet.createRow(rowNo++);
-		headerRow.createCell(0).setCellValue("강좌 명");
-		headerRow.createCell(1).setCellValue("과정 명");
-		headerRow.createCell(2).setCellValue("수강생 명");
-		headerRow.createCell(3).setCellValue("수강생 아이디");
-		headerRow.createCell(4).setCellValue("신청 일자");
-		headerRow.createCell(5).setCellValue("수강 상태");
-		headerRow.createCell(6).setCellValue("진도율");
-		
-		int totalRows = rowsPerPage;
-		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
-		
-		List<EnrollVO> list = pagerService.selectEnrollListByPage(pager);
-			for (EnrollVO enroll : list) {
-				Row row = sheet.createRow(rowNo++);
-				row.createCell(0).setCellValue(enroll.getSubjectTitle());
-				row.createCell(1).setCellValue(enroll.getCourseTitle());
-				row.createCell(2).setCellValue(enroll.getName());
-				row.createCell(3).setCellValue(enroll.getStudentId());
-				row.createCell(4).setCellValue(enroll.getEnrollDt());
-				row.createCell(5).setCellValue(enroll.getStateCdTitle());
-				row.createCell(6).setCellValue(enroll.getRatio() + "%");
-			}
-		
-		String fileName = "수강 목록.xls";
-		String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
-		response.setContentType("ms-vnd/excel");
-		response.setHeader("Content-Disposition", "attachment;fileName=\"" + outputFileName + "\"");
-
-		workbook.write(response.getOutputStream());
-		workbook.close();
-	}
-	
 	/**
 	 * @description	수강 검색한 결과 목록 엑셀 다운로드
 	 * @date	2023. 1. 24.

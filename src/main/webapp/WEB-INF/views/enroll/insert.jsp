@@ -60,7 +60,7 @@
 		</div>
 		<div class="submit-btn">
 			
-				<input type="submit" onclick="addEnroll2()" value="저 장" class="btn">
+				<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
 				<input type="reset" onclick="location.href='<c:url value="/enroll/searchlist"/>'" value="취 소" class="btn">
 
 		</div>
@@ -69,12 +69,12 @@
 </div>
 
 <script>
+
 	var studentId;
 	var subjectId;
 	var subjectSeq;
 	var courseId;
-		
-
+	
 	/* 강좌/과정 선택에 따른 검색창 보여주기 */
 	function changeSubCor(value) {
 		const searchPopupSubject = document.getElementById('search-popup-subject');
@@ -87,19 +87,16 @@
 			searchPopupCourse.setAttribute("style", "display:none;");
 			subjectTitleInput.value = null;
 			courseTitleInput.value = null;
-		} else if (value==='course') {
+		}else if(value==='course') {
 			searchPopupCourse.removeAttribute("style");
 			searchPopupSubject.setAttribute("style", "display:none;");
 			subjectTitleInput.value = null;
 			courseTitleInput.value = null;
-		} else {
-
 		}
 	}
 
-
 	/*검색 팝업에 맞춰 수강 추가 처리하기*/
-	function addEnroll2(){
+	function addEnroll(){
 		let studentInput = $("#student-input").val();
 		let studentArr = studentInput.split('/');
 		let studentId = studentArr[0];
@@ -136,33 +133,7 @@
 			})
 		}
 	}
-
-	// 수강 추가 처리하기
-	// function addEnroll(){
-	// 	// 강좌일 경우
-	// 	if(studentId && subjectId && subjectSeq) {
-	// 		console.log(studentId, subjectId, subjectSeq);
-	// 		$.ajax({
-	// 			type : 'POST',
-	// 			url : 'addenroll/' + studentId + '/' + subjectId + '/' + subjectSeq,
-	// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	// 			success : function(result){
-	// 			}
-	// 		})
-	// 	}
-	// 	// 과정일 경우
-	// 	else if(studentId && courseId){
-	// 		console.log(studentId, courseId);
-	// 		$.ajax({
-	// 			type : 'POST',
-	// 			url : 'addcourse/' + studentId + '/' + courseId,
-	// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	// 			success : function(result){
-	// 				console.log("course is in process")
-	// 			}
-	// 		})
-	// 	}
-	// }
+	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
