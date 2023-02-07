@@ -29,7 +29,7 @@
 				<input type="hidden" id="courseId-string">
 				<input type="hidden" id="courseOpenYear-string">
 			</div>
-			<div id="student-list"></div>
+			<div id="student-list" class="insert-list"></div>
 			
 		</div>
 	
@@ -56,7 +56,7 @@
 					
 				</div>
 			</div>
-			<div id="subject-list"></div>
+			<div id="subject-list" class="insert-list"></div>
 		</div>
 		<div class="submit-btn">
 			
