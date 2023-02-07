@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.AnswerVO;
@@ -53,50 +52,6 @@ public class HomeController {
 //		log.info("실행");
 		return "home";
 	}
-	
-	
-	/**
-	 * @description 강좌 목록
-	 * @date		2023. 1. 20.
-	 * @param model
-	 * @param catSubject
-	 * @return
-	 */
-	@RequestMapping(value="/boardlist",method=RequestMethod.GET)
-	public String getSubjectList(Model model, @RequestParam String catSubjectCd) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "강좌 관리");
-		
-		List<OpenVO> subjectList = homeService.selectSubjectList(catSubjectCd);
-		model.addAttribute("boardList", subjectList);
-		model.addAttribute("subjectListSize", subjectList.size());
-		logger.info("subjectlist: " + subjectList);	
-		return "subject/subjectlist";
-	}
-	
-	
-	
-	/**
-	 * @description 과정 목록
-	 * @date		2023. 1. 20.
-	 * @param model
-	 * @param catCourse
-	 * @return
-	 */
-	@RequestMapping(value="/courseboardlist",method=RequestMethod.GET)
-	public String getCourseList(Model model, @RequestParam String catCourseCd) {
-		model.addAttribute("menu", "subject");
-		model.addAttribute("menuKOR", "과정 관리");
-		
-		List<OpenVO> courseList = homeService.selectCourseList(catCourseCd);
-		model.addAttribute("boardList", courseList);
-		model.addAttribute("courseListSize", courseList.size());
-		logger.info("courselist: " + courseList);	
-		return "subject/courselist";
-	}
-	
-	
-
 	
 	/**
 	 * @description	강좌 검색 팝업

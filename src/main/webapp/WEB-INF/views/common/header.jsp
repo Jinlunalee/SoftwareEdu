@@ -36,7 +36,9 @@
 				let color = '';
 				//현재 페이지 서브메뉴일때 color에 값 추가
 				if(submenuTitle == submenuNames[tag][i]){
-					color = 'style="color: #1A54CD;"'
+					color = 'style="color: #aad4ff;"'
+				} else {
+					color = 'style="color: white;"'
 				}
 				let line = '<div class="submenu-items aside-bar-submenu-' + i + '"><a '+ color +'href=' + submenuLinks[tag][i] + '>' + submenuNames[tag][i] + '</a></div>';
 				$(".aside-bar-submenu").append(line);
@@ -71,7 +73,7 @@
 				<div class="row h-100">
 					<div class="col-md-2" style="border: 1px solid #e8e8e8;padding: 0 !important;">
 						<div class="h-100 d-flex flex-column">
-							<div class="flex-grow-1" style="height: 0px; overflow-y: auto;">
+							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; background-color: #053863;">
 								<%@ include file="/WEB-INF/views/common/menu.jsp" %>
 							</div>
 						</div>

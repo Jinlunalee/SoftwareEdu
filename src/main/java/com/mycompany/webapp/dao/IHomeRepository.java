@@ -1,7 +1,6 @@
 package com.mycompany.webapp.dao;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -14,9 +13,6 @@ import com.mycompany.webapp.dto.SubjectVO;
 
 public interface IHomeRepository {
 	
-	List<OpenVO> selectSubjectList(String catSubjectCd);
-	List<OpenVO> selectCourseList(String catCourseCd);
-
 	String getComnCdTitle(@Param("comnCd") String comnCd);
 	List<CommonCodeVO> getComnCdList (String comnCdType);
 	
