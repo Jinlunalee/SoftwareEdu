@@ -31,11 +31,11 @@
 
 		<div class="view">
 <!-- 			<button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
-			<select class="select-view" onchange="listCount(this.value)">
+			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
-				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
-				<option value="30" ${rowsPerPage eq '30'?"selected":""}>30개</option>
-				<option value="50" ${rowsPerPage eq '50'?"selected":""}>50개</option>
+				<option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=10&student=${student}&keyword=${keyword}"/>"  ${rowsPerPage eq '10'?"selected":""}>10개</option>
+				<option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=30&student=${student}&keyword=${keyword}"/>" ${rowsPerPage eq '30'?"selected":""}>30개</option>
+				<option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=50&student=${student}&keyword=${keyword}"/>" ${rowsPerPage eq '50'?"selected":""}>50개</option>
 			</select>
 		</div>
 
@@ -77,31 +77,40 @@
 					</c:forEach>
 				</c:if>
 				
+	<!-- 	<c:if test="${boardListSize eq 0}">
+               <div class="table-empty">
+                                    해당하는 수강생이 없습니다.
+                    </div>
+                </c:if> --> 
+				
 					
 			</table>
-			<!-- paging -->
-			 <div id="paging">
-			       <ul class="paging">
-                    <li><a href="boardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}">처음</a></li>
+		
+			
+			     <!--paging-->
+            <div id="paging">
+                <ul class="paging">
+                    <li><a href="searchStudentBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">처음</a></li>
                     <c:if test="${pager.groupNo>1}">
-                        <li><a href="boardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}">이전</a></li>
+                        <li><a href="searchStudentBoardlist?pageNo=${pager.startPageNo-1}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">이전</a></li>
                     </c:if>
 
                     <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
                         <c:if test="${pager.pageNo != i}">
-                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                            <li><a href="searchStudentBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">${i}</a></li>
                         </c:if>
                         <c:if test="${pager.pageNo == i}">
-                            <li><a href="boardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}">${i}</a></li>
+                            <li><a href="searchStudentBoardlist?pageNo=${i}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">${i}</a></li>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <li><a href="boardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}">다음</a></li>
+                        <li><a href="searchStudentBoardlist?pageNo=${pager.endPageNo+1}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">다음</a></li>
                     </c:if>
-                    <li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
+                    <li><a href="searchStudentBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">맨끝</a></li>
                 </ul>
-			  </div>   
+            </div>
+
                  
 </div>
 	</div>
