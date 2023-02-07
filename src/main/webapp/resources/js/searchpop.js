@@ -249,7 +249,7 @@ function moveOutside(event, value){
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
-        let valueYear = '미개설 과정';
+        let valueYear = '신규 개설 과정';
         if(valueArr[3]){
             Number(valueYear) = valueArr[3];
         }
