@@ -34,7 +34,7 @@
 <!--          <button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
          <select class="select-view" onchange="if(this.value) location.href=(this.value);">
             <option value="">선택</option>
-            <option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=10&student=${student}&keyword=${keyword}"/>"  ${rowsPerPage eq '10'?"selected":""}>10개</option>
+            <option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=10&student=${student}&keyword=${keyword}"/>" ${rowsPerPage eq '10'?"selected":""}>10개</option>
             <option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=30&student=${student}&keyword=${keyword}"/>" ${rowsPerPage eq '30'?"selected":""}>30개</option>
             <option value="<c:url value="/student/searchStudentBoardlist?pageNo=1&rowsPerPage=50&student=${student}&keyword=${keyword}"/>" ${rowsPerPage eq '50'?"selected":""}>50개</option>
          </select>
@@ -80,9 +80,13 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${boardListSize eq 0}">
+				<tr>
+				<td colspan='6'>
 						<div class="table-empty">
-							게시물이 없습니다.
+							수강생 정보가 없습니다.
 						</div>
+						</td>
+				</tr>
 				</c:if>
 				</tbody>
 			</table>

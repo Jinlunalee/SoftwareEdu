@@ -75,9 +75,9 @@
 			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강추가</button>
 			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
-				<option ${rowsPerPages eq 10 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=10&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">10개</option>
-				<option ${rowsPerPages eq 30 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=30&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">30개</option>
-				<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=50&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">50개</option>
+				<option ${rowsPerPages eq 10 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=10&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">10개</option>
+				<option ${rowsPerPages eq 30 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=30&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">30개</option>
+				<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=50&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">50개</option>
 			</select>
 		</div>
 
@@ -151,14 +151,14 @@
 												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-														<option value="">취소 사유 선택</option>
+														<option value="cancelDefault">취소 사유 선택</option>
 														<c:forEach var="cancel" items="${cancelList}">
 															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 														</c:forEach>
 													</select>
 													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 													<span id="cancelRsEtc-${status.count}"></span>
-													<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
+													<input id="cancelBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="confirm">
 												</form>
 												<div id="close-btn">
 													<button class="close-btn">닫기</button>
@@ -270,6 +270,7 @@
 	function showModal(i) {
 		var openBtnClassName = ".modal-open-" + i;
 		var modalClassName = ".modal-" + i;
+		
 		function click() {
 			$(modalClassName).fadeIn();
 		}
@@ -283,7 +284,6 @@
 	}
 
 	function del(studentId, subjectId, subjectSeq) {
-		event.preventDefault();
 		if (confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
 				type: "GET",
@@ -292,14 +292,10 @@
 					document.location.href = document.location.href;
 				}
 			})
-
-		} else {
-			return false;
 		}
 	}
 
 	function approval(studentId, subjectId, subjectSeq) {
-		event.preventDefault();
 		if (confirm('수강 신청을 승인하시겠습니까?')) {
 			$.ajax({
 				url: "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
@@ -315,22 +311,22 @@
 		var selectCancel = selectId + " option:selected";
 		var cancel = $(selectCancel).val();
 		var cancelBtn = "#cancelBtn-" + i;
+		const cancelRsEtcId = "#cancelRsEtc-" + i;
 
-
-		console.log(cancel);
-
-		if (cancel === '') {
-			$(cancelBtn).setAttribute("type", "text");
+		$(cancelBtn).show();
+		
+		if(cancel === 'cancelDefault') {
+			$(cancelBtn).hide();
+			alert('취소 사유를 선택해 주세요');
 		}
-
-		if (cancel === 'CXL07') {
+		
+		if(cancel === 'CXL07'){
 			var createInput = document.createElement("input");
 			createInput.setAttribute("type", "text");
 			createInput.setAttribute("name", "cancelRsEtc");
 			createInput.setAttribute("class", "input-cancel");
-			const cancelRsEtcId = "#cancelRsEtc-" + i;
 			$(cancelRsEtcId).append(createInput);
-		} else if (cancel !== 'CXL07') {
+		}else{
 			$(cancelRsEtcId).empty();
 		}
 	}
