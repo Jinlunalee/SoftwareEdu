@@ -46,8 +46,7 @@
 	<div><span> > 강좌 관리 ></span> <span class="submenu-title">강좌 개설</span> </div>
 	</div>
 	<div class="card-body">
-		<c:url value="/subject/insert" var="actionURL" scope="page"/>
-		<form class="insert_form" action="${actionURL}" modelAttribute="openVo" enctype="multipart/form-data">
+		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
 			<table class="subject_course_title">
 				<colgroup>
 					<col width="10%">
@@ -250,7 +249,7 @@
 			
 			<div class="submit-btn remove-hide hide-first">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
-				<input type="submit" class="btn-submit-open-popup" value="저장" onclick="return checkTimeValid()">
+				<input type="submit" class="btn-submit-open-popup" value="저장">
 				<input type="reset" onclick="history.back();" value="취소" class="btn">
 			</div>
 		</form>		
