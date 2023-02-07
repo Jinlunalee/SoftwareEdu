@@ -151,11 +151,7 @@
 												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-<<<<<<< HEAD
 														<option value="cancelDefault">취소 사유 선택</option>
-=======
-														<option value="">취소 사유 선택</option>
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
 														<c:forEach var="cancel" items="${cancelList}">
 															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 														</c:forEach>
@@ -274,6 +270,7 @@
 	function showModal(i) {
 		var openBtnClassName = ".modal-open-" + i;
 		var modalClassName = ".modal-" + i;
+		
 		function click() {
 			$(modalClassName).fadeIn();
 		}
@@ -287,7 +284,6 @@
 	}
 
 	function del(studentId, subjectId, subjectSeq) {
-		event.preventDefault();
 		if (confirm('수강 정보를 삭제하시겠습니까?')) {
 			$.ajax({
 				type: "GET",
@@ -296,14 +292,10 @@
 					document.location.href = document.location.href;
 				}
 			})
-
-		} else {
-			return false;
 		}
 	}
 
 	function approval(studentId, subjectId, subjectSeq) {
-		event.preventDefault();
 		if (confirm('수강 신청을 승인하시겠습니까?')) {
 			$.ajax({
 				url: "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
