@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>"/>
+<link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>"/>
 
 <div class="card m-2">
 	<div class="card-header">
@@ -28,11 +28,11 @@
 
 					<%-- 강좌 과정 선택 --%>
 					<div class="select-subcor search-section">
-						<span class="search-section-title">강좌/과정</span>
+						<span class="search-section-title">개설강좌/개설과정</span>
 						<div class="search-section-content">
 							<select name="course" class="select-box input-box">
-								<option value="sj" ${course eq 'sj' ? "selected" : ""}>강좌 명</option>
-								<option value="cs" ${course eq 'cs' ? "selected" : ""}>과정 명</option>
+								<option value="sj" ${course eq 'sj' ? "selected" : ""}>개설강좌명</option>
+								<option value="cs" ${course eq 'cs' ? "selected" : ""}>개설과정명</option>
 							</select>
 							<input type="text" name="keyword2" class="input-text input-box" value="${keyword2}">
 						</div>
@@ -43,8 +43,8 @@
 						<span class="search-section-title">수강생</span>
 						<div class="search-section-content">
 							<select name="student" class="select-box select-stu input-box">
-									<option value="sdName" ${student eq 'sdName' ? "selected" : ""}>수강생 명</option>
-									<option value="sdId" ${student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
+									<option value="sdName" ${student eq 'sdName' ? "selected" : ""}>수강생명</option>
+									<option value="sdId" ${student eq 'sdId' ? "selected" : ""}>수강생아이디</option>
 							</select>
 							<input type="text" name="keyword1" class="input-text input-student input-box" value="${keyword1}">
 						</div>
@@ -151,7 +151,11 @@
 												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
+<<<<<<< HEAD
 														<option value="cancelDefault">취소 사유 선택</option>
+=======
+														<option value="">취소 사유 선택</option>
+>>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
 														<c:forEach var="cancel" items="${cancelList}">
 															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 														</c:forEach>
@@ -181,16 +185,13 @@
 									<%-- 승인 버튼 --%>
 									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
 										<form>
-											<input type="submit" class="btn btn-secondary"
-												onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"
-												value="승인">
+											<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
 										</form>
 									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
-
 					<c:if test="${boardListSize eq 0}">
 						<div class="table-empty">
 							게시물이 없습니다.
@@ -237,83 +238,83 @@
 
 <script>
 
-	const applyStartDay = $('#applyStartDay').val();	
+	const applyStartDay = $('#applyStartDay').val();
 	const applyEndDay = $('#applyEndDay').val();
 	const course = $('select[name=course]').val();
 	const keyword2 = $('input[name=keyword2]').val();
 	const student = $('select[name=student]').val();
 	const keyword1 = $('input[name=keyword1]').val();
 	const state = $('select[name=state]').val();
-	
-	if(applyStartDay === '') {
+
+	if (applyStartDay === '') {
 		const today1 = new Date();
 		const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
 		const startDay = formatDate(oneYearAgo);
 		console.log("startDay : " + startDay);
 		document.getElementById('applyStartDay').value = startDay
 	}
-	
-	if(applyEndDay === '') {
+
+	if (applyEndDay === '') {
 		const today2 = new Date();
 		console.log("today2 : " + today2);
 		const endDay = formatDate(today2);
 		console.log("endDay : " + endDay);
 		document.getElementById('applyEndDay').value = endDay
 	}
-	
+
 	function formatDate(date) {
 		var dt = date;
 		var year = dt.getFullYear();
-		var month = dt.getMonth()+1 > 9 ? dt.getMonth()+1 : '0' + (dt.getMonth()+1);
+		var month = dt.getMonth() + 1 > 9 ? dt.getMonth() + 1 : '0' + (dt.getMonth() + 1);
 		var day = dt.getDate() > 9 ? dt.getDate() : '0' + dt.getDate();
-		
+
 		return [year, month, day].join('-');
 	}
-	
-	function showModal(i){
+
+	function showModal(i) {
 		var openBtnClassName = ".modal-open-" + i;
-		var modalClassName = ".modal-" + i; 
+		var modalClassName = ".modal-" + i;
 		function click() {
 			$(modalClassName).fadeIn();
 		}
-		
+
 		click();
-		
-		$(".close-btn").click(function(){
+
+		$(".close-btn").click(function () {
 			$(".modal").fadeOut();
 			document.location.href = document.location.href;
 		});
 	}
-	
+
 	function del(studentId, subjectId, subjectSeq) {
 		event.preventDefault();
-	if(confirm('수강 정보를 삭제하시겠습니까?')) {
-		$.ajax({
-			type : "GET",
-			url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
-			success : function(data) {
-				document.location.href = document.location.href;
+		if (confirm('수강 정보를 삭제하시겠습니까?')) {
+			$.ajax({
+				type: "GET",
+				url: "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
+				success: function (data) {
+					document.location.href = document.location.href;
 				}
 			})
-		
-	}else {
-		return false;
+
+		} else {
+			return false;
 		}
 	}
-	
+
 	function approval(studentId, subjectId, subjectSeq) {
 		event.preventDefault();
-		if(confirm('수강 신청을 승인하시겠습니까?')) {
+		if (confirm('수강 신청을 승인하시겠습니까?')) {
 			$.ajax({
-				url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
-				success : function(data) {
+				url: "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
+				success: function (data) {
 					document.location.href = document.location.href;
 				}
 			})
 		}
 	}
 
-	function cancel(i){
+	function cancel(i) {
 		const selectId = "#selectCancel-" + i;
 		var selectCancel = selectId + " option:selected";
 		var cancel = $(selectCancel).val();
@@ -337,7 +338,7 @@
 			$(cancelRsEtcId).empty();
 		}
 	}
-		
+
 </script>
 
 

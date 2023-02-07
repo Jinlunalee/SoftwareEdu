@@ -12,16 +12,23 @@
 	</div>
 	<div class="card-body">
 		<!-- 검색 시작 -->
-		<form action="<c:url value='/subject/searchCourseBoardlist'/>">
 		<div class="search">
-			<select name="course" class="select-box">
-				<option value="crseTitle" ${course eq 'crseTitle'?"selected":""}>과정명</option>
-				<option value="crseId" ${course eq 'crseId'?"selected":""}>과정아이디</option>
-			</select>
-			<input name="keyword" class="input-text" type="text" value="${keyword}">
-			<input class="input-button" type="submit" value="검색" style="position: static;">
-        </div>
-        </form>
+			<form action="<c:url value='/subject/searchCourseBoardlist'/>">
+				<div class="search-row">
+					<div class="search-section">
+						<span class="search-section-title">개설과정</span>
+						<div class="search-section-content">
+							<select name="course" class="select-box input-box">
+								<option value="crseTitle" ${course eq 'crseTitle'?"selected":""}>과정명</option>
+								<option value="crseId" ${course eq 'crseId'?"selected":""}>과정아이디</option>
+							</select>
+							<input name="keyword" class="input-text input-box" type="text" value="${keyword}">
+						</div>
+					</div>
+					<input class="input-button btn btn-outline-secondary" type="submit" value="검색">
+				</div>
+			</form>
+		</div>
         <!-- 검색끝 -->
         
         <div class="view">
@@ -125,7 +132,7 @@
 		</div>
 	</div>
 </div>
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 	
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
