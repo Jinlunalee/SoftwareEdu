@@ -2,10 +2,6 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
-
 <link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>" />
 
 <div class="card m-2">
@@ -15,22 +11,25 @@
 	</div>
 
 	<div class="card-body">
-   <form action="<c:url value='/student/searchStudentBoardlist'/>">    
-        <div class="search">
-		<div class="selectstudent">
-			<select class="select-box" name="student">
-				<option value="stdtName" ${student eq 'stdtName' ? "selected" : ""}>수강생 명</option>
-				<option value="stdtId" ${student eq 'stdtId' ? "selected" : ""}>수강생아이디</option>
-			</select> 
-			<input name="keyword" class="input-text" type="text" value="${keyword}" placeholder="검색어를 입력해 주세요">
-            <input class="input-button" type="submit" value="검색" style="position: static;" >
-            
+		<div class="search">
+			<form action="<c:url value='/student/searchStudentBoardlist'/>">    
+				<div class="search-row">
+					<div class="search-section">
+						<span class="search-section-title">수강생</span>
+						<div class="search-section-content selectstudent">
+							<select class="select-box input-box" name="student">
+								<option value="stdtName" ${student eq 'stdtName' ? "selected" : ""}>수강생명</option>
+								<option value="stdtId" ${student eq 'stdtId' ? "selected" : ""}>수강생아이디</option>
+							</select> 
+							<input name="keyword" class="input-text input-box" type="text" value="${keyword}" placeholder="검색어를 입력해 주세요">
+						</div>
+					</div>
+					<input class="input-button btn btn-outline-secondary" type="submit" value="검색">
+				</div>
+			</form>  
 		</div>
-		</div>
- 	</form>  
 
 		<div class="view">
-<!-- 			<button type="button" class="btn btn-outline-secondary">수강생추가</button>  -->
 			<select class="select-view" onchange="listCount(this.value)">
 				<option value="">선택</option>
 				<option value="10" ${rowsPerPage eq '10'?"selected":""}>10개</option>
@@ -78,6 +77,11 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				<c:if test="${boardListSize eq 0}">
+						<div class="table-empty">
+							게시물이 없습니다.
+						</div>
+				</c:if>
 				</tbody>
 			</table>
 
@@ -109,24 +113,21 @@
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-		function listCount(RowsPerPage){
-			console.log(RowsPerPage);
-			$.ajax({
-				url : "ajaxstudentlist?strRowsPerPage="+RowsPerPage,
-				type : "POST"
-			}).done(function(result){
-				console.log('success');
-				var html = $('<div>').html(result);
-				var contents = html.find('div#page-list').html();
-				$('#list-wrap').html(contents);
-			}).fail(function(){
-				console.log('fail');
-			});
-		}
+<script type="text/javascript">
+	function listCount(RowsPerPage){
+		console.log(RowsPerPage);
+		$.ajax({
+			url : "ajaxstudentlist?strRowsPerPage="+RowsPerPage,
+			type : "POST"
+		}).done(function(result){
+			console.log('success');
+			var html = $('<div>').html(result);
+			var contents = html.find('div#page-list').html();
+			$('#list-wrap').html(contents);
+		}).fail(function(){
+			console.log('fail');
+		});
+	}
 
-	</script>
-
-
-
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

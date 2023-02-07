@@ -237,10 +237,10 @@ function moveOutside(event, value){
                     
             );
             if(levelEtc === '') {
-            	tr.append($("<td/>").text(levelCdTitle));
+                tr.append($("<td/>").text(levelCdTitle));
             }
             else{
-            	tr.append($("<td/>").text(levelCdTitle + '(' + levelEtc + ')'));
+                tr.append($("<td/>").text(levelCdTitle + '(' + levelEtc + ')'));
             }
             table.append(tr);
             $(opener.document).find("#subject-list").html(table);
@@ -249,7 +249,10 @@ function moveOutside(event, value){
     // find()함수로 반영할 곳을 찾아서 값 반영하기 - 과정일 경우
     if(valueId.substring(0,4)==='CRSE') {
         let valueTitle = valueArr[2];
-        let valueYear = valueArr[3];
+        let valueYear = '미개설 과정';
+        if(valueArr[3]){
+            Number(valueYear) = valueArr[3];
+        }
         $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ") | 개설연도 : " + valueYear);
         $(opener.document).find("#course-input").val(value);
         $(opener.document).find("#courseId-input").val(valueId);

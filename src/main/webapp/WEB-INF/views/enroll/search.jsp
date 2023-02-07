@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<link rel="stylesheet" href="<c:url value='/resources/css/register/list.css'/>"/>
+<link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>"/>
 
 <div class="card m-2">
 	<div class="card-header">
@@ -28,11 +28,11 @@
 
 					<%-- 강좌 과정 선택 --%>
 					<div class="select-subcor search-section">
-						<span class="search-section-title">강좌/과정</span>
+						<span class="search-section-title">개설강좌/개설과정</span>
 						<div class="search-section-content">
 							<select name="course" class="select-box input-box">
-								<option value="sj" ${course eq 'sj' ? "selected" : ""}>강좌 명</option>
-								<option value="cs" ${course eq 'cs' ? "selected" : ""}>과정 명</option>
+								<option value="sj" ${course eq 'sj' ? "selected" : ""}>개설강좌명</option>
+								<option value="cs" ${course eq 'cs' ? "selected" : ""}>개설과정명</option>
 							</select>
 							<input type="text" name="keyword2" class="input-text input-box" value="${keyword2}">
 						</div>
@@ -43,8 +43,8 @@
 						<span class="search-section-title">수강생</span>
 						<div class="search-section-content">
 							<select name="student" class="select-box select-stu input-box">
-									<option value="sdName" ${student eq 'sdName' ? "selected" : ""}>수강생 명</option>
-									<option value="sdId" ${student eq 'sdId' ? "selected" : ""}>수강생 아이디</option>
+									<option value="sdName" ${student eq 'sdName' ? "selected" : ""}>수강생명</option>
+									<option value="sdId" ${student eq 'sdId' ? "selected" : ""}>수강생아이디</option>
 							</select>
 							<input type="text" name="keyword1" class="input-text input-student input-box" value="${keyword1}">
 						</div>
@@ -151,14 +151,14 @@
 												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-														<option>취소 사유 선택</option>
+														<option value="">취소 사유 선택</option>
 														<c:forEach var="cancel" items="${cancelList}">
 															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 														</c:forEach>
 													</select>
 													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 													<span id="cancelRsEtc-${status.count}"></span>
-													<input type="submit" value="확인" class="confirm">
+													<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
 												</form>
 												<div id="close-btn">
 													<button class="close-btn">닫기</button>
@@ -181,51 +181,13 @@
 									<%-- 승인 버튼 --%>
 									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
 										<form>
-											<input type="submit" class="btn btn-secondary"
-												onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')"
-												value="승인">
+											<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
 										</form>
 									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
-				</td>
-
-				<td>
-					<c:if test="${board.stateCdTitle eq '수강취소'}">
-						${board.cancelRsTitle}
-					</c:if>
-				</td>
-
-				<%-- 버튼  --%>
-				<td>
-					<%-- 취소 버튼 --%>
-					<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-						<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
-						<%-- 취소 사유 모달창 --%>
-						<div class="modal modal-${status.count}">
-							<div class="modal-content modal-content-${status.count}">
-								<img class="cancel-img" src="/resources/images/survey/survey_question.png">
-								<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
-								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
-									<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-										<option value="">취소 사유 선택</option>
-										<c:forEach var="cancel" items="${cancelList}">
-											<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
-										</c:forEach>
-									</select>
-									<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
-									<span id="cancelRsEtc-${status.count}"></span>
-									<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
-								</form>
-								<div id="close-btn">
-									<button class="close-btn">닫기</button>
-								</div>
-							</div>
-						</div>
-						</c:if>
-						
 					<c:if test="${boardListSize eq 0}">
 						<div class="table-empty">
 							게시물이 없습니다.
