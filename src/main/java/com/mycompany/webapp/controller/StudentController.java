@@ -92,6 +92,7 @@ public class StudentController {
 		
 		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
 		
+		
 		List<StudentVO> boardList = pagerService.selectSearchStudentListByPage(pager, student, keyword);
 		model.addAttribute("student", student);
 		model.addAttribute("keyword", keyword);
