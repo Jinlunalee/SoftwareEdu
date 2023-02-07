@@ -75,9 +75,9 @@
 			<button type="button" class="btn btn-outline-secondary" onclick="location.href ='<c:url value="/enroll/insert"/>'">수강추가</button>
 			<select class="select-view" onchange="if(this.value) location.href=(this.value);">
 				<option value="">선택</option>
-				<option ${rowsPerPages eq 10 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=10&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">10개</option>
-				<option ${rowsPerPages eq 30 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=30&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">30개</option>
-				<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=50&applyStartDay=${enroll.applyStartDay}&applyEndDay=${enroll.applyEndDay}&student=${enroll.student}&keyword1=${enroll.keyword1}&course=${enroll.course}&keyword2=${enroll.keyword2}&state=${enroll.state}"/>">50개</option>
+				<option ${rowsPerPages eq 10 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=10&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">10개</option>
+				<option ${rowsPerPages eq 30 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=30&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">30개</option>
+				<option ${rowsPerPages eq 50 ? "selected" : ""} value="<c:url value="/enroll/searchlist?pageNo=1&rowsPerPage=50&applyStartDay=${applyStartDay}&applyEndDay=${applyEndDay}&student=${student}&keyword1=${keyword1}&course=${course}&keyword2=${keyword2}&state=${state}"/>">50개</option>
 			</select>
 		</div>
 
