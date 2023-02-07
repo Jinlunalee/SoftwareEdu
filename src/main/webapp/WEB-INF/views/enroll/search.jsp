@@ -122,7 +122,7 @@
 								<%-- 수강생 명 --%>
 								<td>${board.name} (${board.userId})</td>
 								
-								<!-- 신청일자 -->
+								<%-- 신청일자 --%>
 								<td>${board.enrollDt}</td>
 
 								<%-- 현재 상태 옆에 진도율 --%>
@@ -233,144 +233,108 @@
 </div>
 
 <script>
-	const applyStartDay = $('#applyStartDay').val();	
+
+	const applyStartDay = $('#applyStartDay').val();
 	const applyEndDay = $('#applyEndDay').val();
 	const course = $('select[name=course]').val();
 	const keyword2 = $('input[name=keyword2]').val();
 	const student = $('select[name=student]').val();
 	const keyword1 = $('input[name=keyword1]').val();
 	const state = $('select[name=state]').val();
-	
-	if(applyStartDay === '') {
+
+	if (applyStartDay === '') {
 		const today1 = new Date();
 		const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
 		const startDay = formatDate(oneYearAgo);
 		console.log("startDay : " + startDay);
 		document.getElementById('applyStartDay').value = startDay
 	}
-	
-	if(applyEndDay === '') {
+
+	if (applyEndDay === '') {
 		const today2 = new Date();
 		console.log("today2 : " + today2);
 		const endDay = formatDate(today2);
 		console.log("endDay : " + endDay);
 		document.getElementById('applyEndDay').value = endDay
 	}
-	
+
 	function formatDate(date) {
 		var dt = date;
 		var year = dt.getFullYear();
-		var month = dt.getMonth()+1 > 9 ? dt.getMonth()+1 : '0' + (dt.getMonth()+1);
+		var month = dt.getMonth() + 1 > 9 ? dt.getMonth() + 1 : '0' + (dt.getMonth() + 1);
 		var day = dt.getDate() > 9 ? dt.getDate() : '0' + dt.getDate();
-		
+
 		return [year, month, day].join('-');
 	}
-	
-	function showModal(i){
+
+	function showModal(i) {
 		var openBtnClassName = ".modal-open-" + i;
-		var modalClassName = ".modal-" + i; 
+		var modalClassName = ".modal-" + i;
 		function click() {
 			$(modalClassName).fadeIn();
 		}
-		
+
 		click();
-		
-		$(".close-btn").click(function(){
+
+		$(".close-btn").click(function () {
 			$(".modal").fadeOut();
 			document.location.href = document.location.href;
 		});
 	}
-	
+
 	function del(studentId, subjectId, subjectSeq) {
 		event.preventDefault();
-	if(confirm('수강 정보를 삭제하시겠습니까?')) {
-		$.ajax({
-			type : "GET",
-			url : "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
-			success : function(data) {
-				document.location.href = document.location.href;
+		if (confirm('수강 정보를 삭제하시겠습니까?')) {
+			$.ajax({
+				type: "GET",
+				url: "del/" + studentId + "/" + subjectId + "/" + subjectSeq,
+				success: function (data) {
+					document.location.href = document.location.href;
 				}
 			})
-		
-	}else {
-		return false;
+
+		} else {
+			return false;
 		}
 	}
-	
+
 	function approval(studentId, subjectId, subjectSeq) {
 		event.preventDefault();
-		if(confirm('수강 신청을 승인하시겠습니까?')) {
+		if (confirm('수강 신청을 승인하시겠습니까?')) {
 			$.ajax({
-				url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
-				success : function(data) {
+				url: "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
+				success: function (data) {
 					document.location.href = document.location.href;
 				}
 			})
 		}
 	}
 
-		
-		function approval(studentId, subjectId, subjectSeq) {
-			event.preventDefault();
-			if(confirm('수강 신청을 승인하시겠습니까?')) {
-				$.ajax({
-					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
-					success : function(data) {
-						document.location.href = document.location.href;
-					}
-				})
-			}
-=======
-		else{
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
-		}
-	}
-
-<<<<<<< HEAD
-		function cancel(i){
-			const selectId = "#selectCancel-" + i;
-			var selectCancel = selectId + " option:selected";
-			var cancel = $(selectCancel).val();
-			var cancelBtn = "#cancelBtn-" + i;
-			
-			
-			console.log(cancel);
-			
-			if(cancel === '') {
-				$(cancelBtn).setAttribute("type", "text");
-			}
-			
-			if(cancel === 'CXL07'){
-				var createInput = document.createElement("input");
-				createInput.setAttribute("type", "text");
-				createInput.setAttribute("name", "cancelRsEtc");
-				createInput.setAttribute("class", "input-cancel");
-				const cancelRsEtcId = "#cancelRsEtc-" + i;
-				$(cancelRsEtcId).append(createInput);
-			}else if(cancel !== 'CXL07'){
-					$(cancelRsEtcId).empty();		
-			}
-		}
-=======
-	function cancel(i){
+	function cancel(i) {
 		const selectId = "#selectCancel-" + i;
 		var selectCancel = selectId + " option:selected";
 		var cancel = $(selectCancel).val();
+		var cancelBtn = "#cancelBtn-" + i;
+
+
 		console.log(cancel);
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
-		
-		if(cancel === 'CXL07'){
+
+		if (cancel === '') {
+			$(cancelBtn).setAttribute("type", "text");
+		}
+
+		if (cancel === 'CXL07') {
 			var createInput = document.createElement("input");
 			createInput.setAttribute("type", "text");
 			createInput.setAttribute("name", "cancelRsEtc");
 			createInput.setAttribute("class", "input-cancel");
 			const cancelRsEtcId = "#cancelRsEtc-" + i;
 			$(cancelRsEtcId).append(createInput);
-		}else if(cancel !== 'CXL07'){
-				$(cancelRsEtcId).empty();		
+		} else if (cancel !== 'CXL07') {
+			$(cancelRsEtcId).empty();
 		}
 	}
-	
+
 </script>
 
 

@@ -4,8 +4,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -226,7 +223,7 @@ public class SubjectController {
 			logger.info("del/uploadfile:"+fileId);
 			subjectService.clickDeleteUploadFile(fileId);
 		}
-		return "redirect:/subject/subjectboardlist";
+		return "redirect:/subject/searchSubjectBoardlist";
 	}
 
 	// 개설 강좌 입력 (open)
@@ -247,13 +244,7 @@ public class SubjectController {
 
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(@ModelAttribute("openVo") @Valid OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo, 
-			BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return "subject/insert";
-		}
-		
+	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {	
 		logger.info("subject/insert:"+openVo);
 		logger.info("subject/insert:"+questionVo);
 
@@ -288,7 +279,7 @@ public class SubjectController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/subject/subjectboardlist";
+		return "redirect:/subject/searchSubjectBoardlist";
 	}
 
 	// 개설 강좌 입력 폼 비동기 출력
@@ -306,7 +297,7 @@ public class SubjectController {
 		//폐강하면 첨부파일은 어떻게 해야할가(삭제안해도 될듯?)
 		//개설강좌가 폐강 되면 수강생 수강취소도 함께
 		logger.info("closeSubject:");
-		return "redirect:/subject/subjectboardlist";
+		return "redirect:/subject/searchSubjectBoardlist";
 	}	
 	
 	/**
