@@ -122,7 +122,7 @@
 								<%-- 수강생 명 --%>
 								<td>${board.name} (${board.userId})</td>
 								
-								<!-- 신청일자 -->
+								<%-- 신청일자 --%>
 								<td>${board.enrollDt}</td>
 
 								<%-- 현재 상태 옆에 진도율 --%>
@@ -158,7 +158,7 @@
 													</select>
 													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 													<span id="cancelRsEtc-${status.count}"></span>
-													<input type="submit" value="확인" class="confirm">
+													<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
 												</form>
 												<div id="close-btn">
 													<button class="close-btn">닫기</button>
@@ -190,42 +190,7 @@
 							</tr>
 						</c:forEach>
 					</c:if>
-				</td>
 
-				<td>
-					<c:if test="${board.stateCdTitle eq '수강취소'}">
-						${board.cancelRsTitle}
-					</c:if>
-				</td>
-
-				<%-- 버튼  --%>
-				<td>
-					<%-- 취소 버튼 --%>
-					<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-						<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
-						<%-- 취소 사유 모달창 --%>
-						<div class="modal modal-${status.count}">
-							<div class="modal-content modal-content-${status.count}">
-								<img class="cancel-img" src="/resources/images/survey/survey_question.png">
-								<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
-								<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
-									<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-										<option value="">취소 사유 선택</option>
-										<c:forEach var="cancel" items="${cancelList}">
-											<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
-										</c:forEach>
-									</select>
-									<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
-									<span id="cancelRsEtc-${status.count}"></span>
-									<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
-								</form>
-								<div id="close-btn">
-									<button class="close-btn">닫기</button>
-								</div>
-							</div>
-						</div>
-						</c:if>
-						
 					<c:if test="${boardListSize eq 0}">
 						<div class="table-empty">
 							게시물이 없습니다.
@@ -271,6 +236,7 @@
 </div>
 
 <script>
+
 	const applyStartDay = $('#applyStartDay').val();	
 	const applyEndDay = $('#applyEndDay').val();
 	const course = $('select[name=course]').val();
@@ -347,56 +313,19 @@
 		}
 	}
 
-		
-		function approval(studentId, subjectId, subjectSeq) {
-			event.preventDefault();
-			if(confirm('수강 신청을 승인하시겠습니까?')) {
-				$.ajax({
-					url : "approval/" + studentId + "/" + subjectId + "/" + subjectSeq,
-					success : function(data) {
-						document.location.href = document.location.href;
-					}
-				})
-			}
-=======
-		else{
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
-		}
-	}
-
-<<<<<<< HEAD
-		function cancel(i){
-			const selectId = "#selectCancel-" + i;
-			var selectCancel = selectId + " option:selected";
-			var cancel = $(selectCancel).val();
-			var cancelBtn = "#cancelBtn-" + i;
-			
-			
-			console.log(cancel);
-			
-			if(cancel === '') {
-				$(cancelBtn).setAttribute("type", "text");
-			}
-			
-			if(cancel === 'CXL07'){
-				var createInput = document.createElement("input");
-				createInput.setAttribute("type", "text");
-				createInput.setAttribute("name", "cancelRsEtc");
-				createInput.setAttribute("class", "input-cancel");
-				const cancelRsEtcId = "#cancelRsEtc-" + i;
-				$(cancelRsEtcId).append(createInput);
-			}else if(cancel !== 'CXL07'){
-					$(cancelRsEtcId).empty();		
-			}
-		}
-=======
 	function cancel(i){
 		const selectId = "#selectCancel-" + i;
 		var selectCancel = selectId + " option:selected";
 		var cancel = $(selectCancel).val();
+		var cancelBtn = "#cancelBtn-" + i;
+			
+			
 		console.log(cancel);
->>>>>>> branch 'master' of https://github.com/Jinlunalee/SoftwareEdu.git
-		
+			
+		if(cancel === '') {
+				$(cancelBtn).setAttribute("type", "text");
+		}
+			
 		if(cancel === 'CXL07'){
 			var createInput = document.createElement("input");
 			createInput.setAttribute("type", "text");
@@ -408,7 +337,7 @@
 				$(cancelRsEtcId).empty();		
 		}
 	}
-	
+		
 </script>
 
 
