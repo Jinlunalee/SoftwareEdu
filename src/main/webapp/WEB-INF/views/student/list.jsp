@@ -80,9 +80,13 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${boardListSize eq 0}">
+				<tr>
+				<td colspan='6'>
 						<div class="table-empty">
-							게시물이 없습니다.
+							수강생 정보가 없습니다.
 						</div>
+						</td>
+				</tr>
 				</c:if>
 				</tbody>
 			</table>
