@@ -14,16 +14,23 @@
 	</div>
 	<div class="card-body">
 		<!-- 검색 시작 -->
-		<form action="<c:url value='/subject/searchSubjectBoardlist'/>">
 		<div class="search">
-			<select name="subject" class="select-box">
-				<option value="subjTitle" ${subject eq 'subjTitle'?"selected":""}>강좌명</option>
-				<option value="subjId" ${subject eq 'subjId'?"selected":""}>강좌아이디</option>
-			</select>
-			<input name="keyword" class="input-text" type="text" value="${keyword}">
-			<input class="input-button" type="submit" value="검색" style="position: static;">
-        </div>
-		</form>
+			<form action="<c:url value='/subject/searchSubjectBoardlist'/>">
+				<div class="search-row">
+					<div class="search-section">
+						<span class="search-section-title">개설강좌</span>
+						<div class="search-section-content">
+							<select name="subject" class="select-box input-box">
+								<option value="subjTitle" ${subject eq 'subjTitle'?"selected":""}>강좌명</option>
+								<option value="subjId" ${subject eq 'subjId'?"selected":""}>강좌아이디</option>
+							</select>
+							<input name="keyword" class="input-text input-box" type="text" value="${keyword}">
+						</div>
+					</div>
+					<input class="input-button btn btn-outline-secondary" type="submit" value="검색">
+				</div>
+			</form>
+		</div>
 		<!-- 검색끝 -->
 		
 		<div class="view">
