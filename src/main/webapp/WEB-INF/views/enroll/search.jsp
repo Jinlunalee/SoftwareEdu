@@ -151,14 +151,14 @@
 												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
 												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
 													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-														<option>취소 사유 선택</option>
+														<option value="cancelDefault">취소 사유 선택</option>
 														<c:forEach var="cancel" items="${cancelList}">
 															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
 														</c:forEach>
 													</select>
 													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 													<span id="cancelRsEtc-${status.count}"></span>
-													<input id="cancelBtn-${status.count}" type="submit" value="확인" class="confirm">
+													<input id="cancelBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="confirm">
 												</form>
 												<div id="close-btn">
 													<button class="close-btn">닫기</button>
@@ -318,23 +318,23 @@
 		var selectCancel = selectId + " option:selected";
 		var cancel = $(selectCancel).val();
 		var cancelBtn = "#cancelBtn-" + i;
-			
-			
-		console.log(cancel);
-			
-		if(cancel === '') {
-				$(cancelBtn).setAttribute("type", "text");
+		const cancelRsEtcId = "#cancelRsEtc-" + i;
+
+		$(cancelBtn).show();
+		
+		if(cancel === 'cancelDefault') {
+			$(cancelBtn).hide();
+			alert('취소 사유를 선택해 주세요');
 		}
-			
+		
 		if(cancel === 'CXL07'){
 			var createInput = document.createElement("input");
 			createInput.setAttribute("type", "text");
 			createInput.setAttribute("name", "cancelRsEtc");
 			createInput.setAttribute("class", "input-cancel");
-			const cancelRsEtcId = "#cancelRsEtc-" + i;
 			$(cancelRsEtcId).append(createInput);
-		}else if(cancel !== 'CXL07'){
-				$(cancelRsEtcId).empty();		
+		}else{
+			$(cancelRsEtcId).empty();
 		}
 	}
 		
