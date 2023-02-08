@@ -102,8 +102,7 @@
 						<th>강좌 명 (과정 명)</th>
 						<th>수강생 명 (아이디)</th>
 						<th>신청 일자</th>
-						<th>수강 상태 (진도율)</th>
-						<th>취소 사유</th>
+						<th>수강 상태</th>
 						<th>취소</th>
 						<th>삭제</th>
 						<th>승인</th>
@@ -130,17 +129,14 @@
 								<%-- 신청일자 --%>
 								<td>${board.enrollDt}</td>
 
-								<%-- 현재 상태 옆에 진도율 --%>
+								<%-- 현재 상태 옆에 (진도율 / 취소사유) --%>
 								<td>
 									${board.stateCdTitle}
 									<c:if test="${board.stateCdTitle eq '수강중'}">
 										(${board.ratio}%)
 									</c:if>
-								</td>
-
-								<td>
-									<c:if test="${board.stateCdTitle eq '수강취소'}">
-										${board.cancelRsTitle}
+									<c:if test="${board.stateCdTitle eq '수강취소' && !empty board.cancelRsTitle}">
+										(${board.cancelRsTitle})
 									</c:if>
 								</td>
 
