@@ -285,9 +285,9 @@ public class SubjectController {
 	// 개설 강좌 입력 폼 비동기 출력
 	@RequestMapping(value="/ajax", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> ajaxTest(String courseId, String subjectId) {
-		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId);
-		return subjectService.infoSubjectCourse(courseId, subjectId);
+	public Map<String, Object> ajaxTest(String courseId, String subjectId, String year) {
+		logger.info("test/subjectId: " + subjectId +", courseId: "+courseId + ", year: "+year);
+		return subjectService.infoSubjectCourse(courseId, subjectId, year);
 	}
 	
 	//개설강좌 폐강처리

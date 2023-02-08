@@ -578,7 +578,7 @@ function resetValueSubjectorCourse() {
                 alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
             }
         }else { //강좌만 필수
-            if(courseTitleInput.value){ //과정만 입력하구 강좌는 처음 입력하는거지
+            if(courseTitleInput.value){ //과정만 입력하구 강좌는 처음 입력
                 if(subjectTitleInput.value && courseTitleInput.value){
                     alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
                 }
