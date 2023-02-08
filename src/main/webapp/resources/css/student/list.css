@@ -171,33 +171,41 @@ table.list td.title {
 }
 
 /* 취소 사유 모달 */
-.modal {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+.show {
+    display: block!important;
+}
+
+.modal-background {
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     display: none;
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.modal {
+    max-height: calc(100vh - 210px);
+    position: fixed;
+    top: 50%;
+    left: 58%;
+    width: 382px;
+    height: 174px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 46px;
+    box-shadow: 0 2px 3px 0 rgb(34 36 38 / 15%);
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .modal-content {
-    width: 410px;
-    height: 210px;
-    border-radius: 10px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 40px 20px;
-    line-height: 23px;
-    cursor: pointer;
-    text-align: left;
-    list-style: none;
-    border-radius: 46px;
+    background-color: #6c757d0d;
+    padding: 25px 45px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .input-time {
@@ -219,64 +227,33 @@ table.list td.title {
     background-color: #003964;
 }
 
-.cancelrs {
-    height: 40px;
-    border-radius: 8px;
-    position: relative;
-    left: 20px;
-    bottom: 40px;
-}
-
-.cacelform {
-    position: relative;
-    top: 30px;
-}
-
-.confirm {
-    position: absolute;
-    top: 20px;
-    left: 240px;
-    width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-}
-
-#close-btn {
-    text-align: right;
-    position: absolute;
-    bottom: 260px;
-    left: 10px;
-}
-
-.close-btn {
-    width: 50px;
-    height: 30px;
-    border-radius: 8px;
-    color: #fff;
-    background-color: #003964;
-    position: absolute;
-    top: 200px;
-    left: 310px;
-}
-
-.input-cancel {
-    display: inline;
-    position: relative;
-    left: 25px;
-    width: 210px;
-    height: 40px;
-    border: 1px solid;
-    border-radius: 8px;
-    bottom: 40px;
-}
 
 #cancelId {
-    position: relative;
-    left: 42px;
-    bottom: 27px;
+    font-size: 14px;
+    /* position: relative;
+    bottom: 27px; */
+}
 
+.modal-items .modal-item {
+    height: 35px;
+    border-radius: 8px;
+    margin: 5px 0px 5px 0;
+    padding: 0px 20px px 0 20px;
+    border: 1px solid #e8e8e8;
+    text-align: center;
+}
+
+.modal-btns {
+    margin-top: 10px;
+}
+
+.modal-btns .modal-btn {
+    background-color: #003964;
+    width: 53px;
+    height: 30px;
+    border-radius: 8px;
+    color: #fff;
+    border: 0;
 }
 
 .cancel-img {

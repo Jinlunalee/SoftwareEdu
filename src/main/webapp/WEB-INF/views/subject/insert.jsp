@@ -246,9 +246,9 @@
 			</div>
 			
 			<div class="submit-btn remove-hide hide-first">
+				<input type="reset" onclick="history.back();" value="◀ 이전">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장">
-				<input type="reset" onclick="history.back();" value="취소" class="btn">
 			</div>
 		</form>		
 	</div>
