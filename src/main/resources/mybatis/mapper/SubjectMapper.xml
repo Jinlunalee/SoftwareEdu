@@ -157,16 +157,17 @@
 		where subject_id= #{subjectId}
 	</select>
 	
-	<select id="infoOpenCourse" parameterType="String" resultType="OpenVO">
+	<select id="infoOpenCourse" parameterType="map" resultType="OpenVO">
 		/*infoOpenCourse*/
 		select DISTINCT 
 						course_id, 
 						min(start_day) over (partition by course_id) as start_day, 
 						max(end_day) over (partition by course_id) as end_day, 
 						recruit_start_day, 
-						recruit_end_day
+						recruit_end_day,
+						course_open_year
 		from open
-		where course_id = #{courseId} and del_yn = 'N'
+		where course_id = #{courseId} and course_open_year = #{year} and del_yn = 'N'
 	</select>
 	
 	<select id="checkOpenCourse" parameterType="String" resultType="int">

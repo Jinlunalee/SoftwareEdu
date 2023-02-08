@@ -22,13 +22,19 @@
                 <div class="search-wrap">
                     <form id="search-form">
                         <div class="search-input">
-                            <select name="student" onchange="putNameonInput(this.value)" >
-                                <option value="name">수강생 명</option>
-                                <option value="studentId">수강생 아이디</option>
-                            </select>
-                            <input type="text" id="student-input" name="name">
-                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
-                            <button type="button" id="close-btn">창닫기</button>
+                            <div class="search-section">
+                                <span class="search-section-title">수강생</span>
+                                <div class="search-section-content">
+                                    <select name="student" onchange="putNameonInput(this.value)" class="input-box select-box-short">
+                                        <option value="name">수강생 명</option>
+                                        <option value="studentId">수강생 아이디</option>
+                                    </select>
+                                    <input type="text" id="student-input" name="name" class="input-box">
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="search-btn" class="btn search-btn open-subject-search-btn input-button">검 색</button>
+                            <button type="button" id="close-btn" class="input-button">창닫기</button>
                         </div>
                     </form>
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->

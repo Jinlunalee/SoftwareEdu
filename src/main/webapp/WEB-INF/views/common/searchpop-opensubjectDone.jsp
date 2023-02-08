@@ -25,9 +25,9 @@
                             <div class="search-section">
                                 <span class="search-section-title">개설강좌</span>
                                 <div class="search-section-content">
-                                    <select name="subject" class="input-box" onchange="putNameonInput(this.value)" >
+                                    <select name="subject" class="input-box select-box-short" onchange="putNameonInput(this.value)" >
                                         <option value="subjectId">강좌아이디</option>
-                                        <option value="subjectTitle">개설강좌명</option>
+                                        <option value="subjectTitle">강좌명</option>
                                     </select>
                                     <input type="text" id="subject-input" name="subjectId" class="input-box">
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="search-section">
                                 <span class="search-section-title">난이도</span>
                                 <div class="search-section-content">
-                                    <select name="levelCd" class="input-box">
+                                    <select name="levelCd" class="input-box select-box">
                                         <option value="">전체</option>
                                         <c:forEach items="${levelList}" var="level">
                                             <option value="${level.comnCd}">${level.comnCdTitle}</option>
@@ -48,7 +48,7 @@
                             <div class="search-section">
                                 <span class="search-section-title">분류</span>
                                 <div class="search-section-content">
-                                    <select name="catSubjectCd" class="input-box">
+                                    <select name="catSubjectCd" class="input-box select-box">
                                         <option value="">전체</option>
                                         <c:forEach items="${catSubjectList}" var="catSubject">
                                             <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
@@ -60,7 +60,7 @@
                             <div class="search-section">
                                 <span class="search-section-title">개설연도</span>
                                 <div class="search-section-content">
-                                    <select name="OpenDtYear" class="input-box">
+                                    <select name="OpenDtYear" class="input-box select-box">
                                         <option value="0">전체</option>
                                         <c:forEach items="${yearList}" var="year">
                                             <option value="${year}">${year}</option>
