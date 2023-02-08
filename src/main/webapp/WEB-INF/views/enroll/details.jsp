@@ -24,7 +24,7 @@
 				<th>수강 상태</th>
 				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
 				<th>취소 상세 사유</th>
-				<td>${enroll.cancelRsEtc}</td>
+				<td id="cancel-details">${enroll.cancelRsEtc}</td>
 			</tr>
 			
 			<tr>
@@ -47,17 +47,14 @@
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
 				<th>과정 명 (아이디)</th>
+				<c:if test="${empty enroll.courseId}">
+					<td>${enroll.courseTitle}</td>
+				</c:if>
+				<c:if test="${!empty enroll.courseId}">
 				<td>${enroll.courseTitle} (${enroll.courseId})</td>
+				</c:if>
 			</tr>
-			
-			<tr>
-				
-			</tr>
-			
-			<tr>
-				
-				
-			</tr>
+
 		</table>
 
 		<table class="enroll-detail-table student-table all-table">
@@ -84,36 +81,31 @@
 				<th>주소</th>
 				<td colspan='3' style="text-align: left"> ${enroll.addDoCdTitle} ${enroll.addEtc}</td>
 			</tr>
-		</table>
-
-		
-
-		<table class="enroll-detail-table add-hours-table all-table">
-			<tr class="hours-ratio">
-				<th style="width:20%; background-color: #9BC3FF;">현재 수강 완료 시간</th>
-				<th style="width:20%; background-color: #9BC3FF;">진도율</th>
-				<th style="width:60%; background-color: #9BC3FF;">추가 수강 시간</th>
-			</tr>
-			
 			<tr>
+				<th>현재 수강 완료 시간</th>
 				<td id="enroll-complete-hours">${enroll.completeHours}</td>
+				<th>진도율</th>
 				<td><span id="ratio">${enroll.ratio}</span>%</td>
-				<td>
+				<th>추가 수강 시간</th>
+				<td colspan='3' style="text-align: left;">
 					<form onsubmit="submitFunction(event)" class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
 						<input name="enrollId" value="${enroll.enrollId}" type="hidden">
-						<input id="add-hours-input" class="add-hours-input" name="addHours" type="number" placeholder="추가할 시간을 입력하세요.">
-						<input id="add-hours-submit" class="add-hours-submit btn btn-outline-secondary" type="submit" value="추가">
-					</form>
+						<input type="number" id="add-hours-input" class="add-hours-input" name="addHours" >
+						<input type="submit" id="add-hours-submit" class="add-hours-submit btn btn-outline-secondary"  value="추가">
+					</form> &emsp; &emsp;
+					<sapn style="color: cornflowerblue;">※ 수강 상태가 수강 중일 때만 입력할 수 있습니다.</sapn> &ensp;
+					<span style="color: cornflowerblue;">※ 진도율이 100%인 강좌는 입력할 수 없습니다.</span>
 				</td>
 			</tr>
-
 		</table>
-		<input type="reset" onclick="back()" value="이 전" class="btn">
+
+		<input id="back-btn" type="reset" onclick="back()" value="이 전" class="btn">
 	</div>
 	
 </div>
 
 <script>
+
 	window.onload = function () {
 		const ratio = document.getElementById('ratio').innerText;
 		const stateCd = document.getElementById('stateCdTitle').innerText;
@@ -125,11 +117,11 @@
 		const addHoursSubmit = document.getElementById('add-hours-submit');
 		if(ratio>=100) {
 			addHoursInput.setAttribute("readonly", true);
-			addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다.");
+			/* addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다."); */
 			addHoursSubmit.setAttribute("type","button");
 		} else if(stateCd === '수강신청' || stateCd === '수강예정' || stateCd === '수강취소' || stateCd === '수강완료') {
 			addHoursInput.setAttribute("readonly", true);
-			addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다.");
+			/* addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다."); */
 			addHoursSubmit.setAttribute("type", "button");
 		} 
 	}
@@ -145,7 +137,7 @@
 
 		// 수강시수 초과 입력 방지
 		if(addHoursInputValue+enrollCompleteHours>subjectHours){
-			alert('수강시수를 초과하여 입력할 수 없습니다.');
+			alert('수강 시수를 초과하여 입력할 수 없습니다.');
 			event.preventDefault();
 		} else {
 			return true;
@@ -155,6 +147,7 @@
 	function back() {
 		history.back();
 	}
+	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

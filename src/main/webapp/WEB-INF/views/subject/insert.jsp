@@ -55,11 +55,12 @@
 					<col width="10%">
 				</colgroup>
 				<tr>
-					<td colspan="4" style="text-align: right;"><span class="write-txt">※</span> 항목은 필수 입력 사항입니다.</td>
-				</tr>
-				<tr>
-					<td colspan="4" class="info-text">※ 개설하고자하는 '강좌'를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.<br>
-						※ '과정'으로 강좌를 개설하고자 한다면, 강좌 선택 후 '과정' 또한 선택해주세요.</td>
+					<td colspan="4">
+						<div class="info-text">
+							<div class="info-text-btn">※ 개설하고자하는 '강좌'를 선택 후 선택완료 버튼을 클릭해서 상세 정보를 입력해주세요.</div>
+							<div class="info-text-star"><span class="write-txt">※</span> 항목은 필수 입력 사항입니다.</div>
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th class="write-txt" style="padding-left: 12px;">강좌</th>
@@ -110,11 +111,9 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<td colspan="2" rowspan="9" style="text-align: center;">
+						<td colspan="2" rowspan="8" style="text-align: center;">
 							<img class="detail_img" src="<c:url value='/resources/images/subject/no_image.png'/>"/>
 						</td>
-					</tr>
-					<tr>
 						<td class="write-txt"> 강좌기간(시수)</td>
 						<td> 
 							<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
@@ -123,8 +122,8 @@
 							~ 
 							<input type="date" name="endDay" id="endDay" readonly>
 							<input type="hidden" Id="calcHours" value="">
-							<span id="printDay"></span>
 							<span id="printHours"></span>
+							<span id="printDay"></span>
 						</td>
 					</tr>
 					<tr>
@@ -158,7 +157,6 @@
 					<tr>
 						<td> 난이도 </td>
 						<td>
-							<!-- <span name="levelCd" id="levelCd"></span> -->
 							<span name="levelCdTitle" id="levelCdTitle"></span>
 							<input type="hidden" name="levelCd" id="levelCd" value="">
 						</td>
@@ -187,7 +185,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td class="content-image">
 							<img src="<c:url value='/resources/images/subject/subject_intro.png'/>"/>
 						</td>
 						<td colspan="3">

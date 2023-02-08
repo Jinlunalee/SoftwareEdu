@@ -5,13 +5,22 @@
 }
 
 .info-text {
-   text-align: left;
-   color: cornflowerblue;
-   padding-left: 30px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin: 0 50px;
 }
 
 .select_course {
    border: none;
+}
+
+.btn-outline-secondary {
+   font-size: 14px;
+}
+
+.insert_form {
+   font-size: 14px;
 }
 
 .insert_form td {
@@ -25,7 +34,7 @@ select:not(.select_course) {
    margin: 5px 0px 5px 0;
    padding: 0px 20px 0 20px;
    border: 1px solid #e8e8e8;
-   width: 37%;
+   width: 30%;
 }
 
 .insert_form td .support {
@@ -78,4 +87,8 @@ select:not(.select_course) {
 	content: "*";
 	color: #ed8264;
 	margin-left: 2px;
+}
+
+.content-image {
+   text-align: center;
 }
