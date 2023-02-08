@@ -164,6 +164,7 @@
        <%-- paging --%>
 
             <!-- paging -->
+            <c:if test="${pager.totalRows ne 0}">
              <div id="paging">
                    <ul class="paging">
                     <li><a href="boardlist?pageNo=1">처음</a></li>
@@ -186,6 +187,7 @@
                     <li><a href="boardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}">맨끝</a></li>
                 </ul>
               </div> 
+              </c:if>
 
 
 		<div class="down">
