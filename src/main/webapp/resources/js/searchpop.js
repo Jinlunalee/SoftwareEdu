@@ -192,8 +192,6 @@ function moveOutside(event, value){
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
         let totalPeople = valueArr[17];
-
-        resetValueSubjectorCourse(); //강좌/과정 다시선택
         
         $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
@@ -206,6 +204,7 @@ function moveOutside(event, value){
         if(path.substring(10,25)==='subject') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
             setUnavailableSubjectId('subjectTitleClicked', valueId); 
+            resetValueSubjectorCourse(); //강좌/과정 다시선택
 
         // 만족도 조사 : open subject done만 해당, 통계 테이블 보여주기
         } else if(path.substring(10,30)==='opensubjectDone') { 
@@ -223,27 +222,25 @@ function moveOutside(event, value){
                 levelString = levelCdTitle + '(' + levelEtc + ')';
             }
 
-            var table = $("<table class='subjectdetails' border='1'/>");
-            var tr = table.append($("<tr/>").append(
-                    $("<td class='subject-th'/>").text('강좌기간'),
-                    $("<td class='subject-th'/>").text('모집기간'),
-                    $("<td class='subject-th'/>").text('일수'),
-                    $("<td class='subject-th'/>").text('시수(시간)'),
-                    $("<td class='subject-th'/>").text('모집인원'),
-                    $("<td class='subject-th'/>").text('강좌분류'),
-                    $("<td class='subject-th'/>").text('개설상태'),
-                    $("<td class='subject-th'/>").text('난이도(기타)')
+            var table = $("<table class='result-table' border='1'/>");
+            var tr = table.append($("<tr class='result-tr'/>").append(
+                    $("<th class='result-th'/>").text('강좌기간'),
+                    $("<th class='result-th'/>").text('모집기간'),
+                    $("<th class='result-th'/>").text('시수(시간)'),
+                    $("<th class='result-th'/>").text('모집인원'),
+                    $("<th class='result-th'/>").text('강좌분류'),
+                    $("<th class='result-th'/>").text('개설상태'),
+                    $("<th class='result-th'/>").text('난이도(기타)')
             ));
             table.append(tr);
-            var tr = table.append($("<tr/>").append(
-                $("<td/>").text(startDay + ' ~ ' + endDay),
-                $("<td/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
-                $("<td/>").text(days),
-                $("<td/>").text(hours),
-                $("<td/>").text(totalPeople + '/' + recruitPeople),
-                $("<td/>").text(catSubjectCdTitle),
-                $("<td/>").text(openStateCdTitle),
-                $("<td/>").text(levelString)
+            var tr = table.append($("<tr class='result-tr'/>").append(
+                $("<td class='result-td'/>").text(startDay + ' ~ ' + endDay),
+                $("<td class='result-td'/>").text(recruitStartDay + ' ~ ' + recruitEndDay),
+                $("<td class='result-td'/>").text(hours),
+                $("<td class='result-td'/>").text(totalPeople + '/' + recruitPeople),
+                $("<td class='result-td'/>").text(catSubjectCdTitle),
+                $("<td class='result-td'/>").text(openStateCdTitle),
+                $("<td class='result-td'/>").text(levelString)
             ));
             table.append(tr);
             $(opener.document).find("#subject-list").html(table);
@@ -276,21 +273,21 @@ function moveOutside(event, value){
                 async : false,
                 success : function(result) {
                     if(result.length > 0) {
-                        var table = $("<table class='courselist' border='1'/>");
-                        var tr1 = table.append($("<tr/>").append(
-                                $("<td class='course-th'/>").text('강좌아이디'),
-                                $("<td class='course-th'/>").text('강좌회차'),
-                                $("<td class='course-th'/>").text('강좌명'),
-                                $("<td class='course-th'/>").text('강좌기간'),
-                                $("<td class='course-th'/>").text('강좌시간'),
-                                $("<td class='course-th'/>").text('일수'),
-                                $("<td class='course-th'/>").text('시수(시간)'),
-                                $("<td class='course-th'/>").text('난이도'),
-                                $("<td class='course-th'/>").text('비용'),
-                                $("<td class='course-th'/>").text('교육비지원여부')
+                        var table = $("<table class='result-table' border='1'/>");
+                        var tr1 = table.append($("<tr class='result-tr'/>").append(
+                                $("<th class='result-th'/>").text('강좌아이디'),
+                                $("<th class='result-th'/>").text('강좌회차'),
+                                $("<th class='result-th'/>").text('강좌명'),
+                                $("<th class='result-th'/>").text('강좌기간'),
+                                $("<th class='result-th'/>").text('강좌시간'),
+                                $("<th class='result-th'/>").text('시수(시간)'),
+                                $("<th class='result-th'/>").text('난이도'),
+                                $("<th class='result-th'/>").text('비용'),
+                                $("<th class='result-th'/>").text('교육비지원여부')
                         ));
                                     
                         for(var i in result) {
+                            console.log(result);
                             var $subjectId = result[i].subjectId;
                             var $subjectSeq = result[i].subjectSeq;
                             var $subjectTitle = result[i].subjectTitle;
@@ -311,17 +308,16 @@ function moveOutside(event, value){
                                 $supportYn = '지원 불가'
                             }
                             
-                            var tr2 = table.append($("<tr/>").append(
-                                    $("<td/>").text($subjectId),
-                                    $("<td/>").text($subjectSeq),
-                                    $("<td/>").text($subjectTitle),
-                                    $("<td/>").text($startDay + ' ~ ' + $endDay),
-                                    $("<td/>").text($startTime + ' ~ ' + $endTime),
-                                    $("<td/>").text($days),
-                                    $("<td/>").text($hours),
-                                    $("<td/>").text($levelCdTitle),
-                                    $("<td/>").text($cost),
-                                    $("<td/>").text($supportYn)
+                            var tr2 = table.append($("<tr class='result-tr'/>").append(
+                                    $("<td class='result-td'/>").text($subjectId),
+                                    $("<td class='result-td'/>").text($subjectSeq),
+                                    $("<td class='result-td'/>").text($subjectTitle),
+                                    $("<td class='result-td'/>").text($startDay + ' ~ ' + $endDay),
+                                    $("<td class='result-td'/>").text($startTime + ' ~ ' + $endTime),
+                                    $("<td class='result-td'/>").text($hours),
+                                    $("<td class='result-td'/>").text($levelCdTitle),
+                                    $("<td class='result-td'/>").text($cost),
+                                    $("<td class='result-td'/>").text($supportYn)
                             ));
                             table.append(tr2);
                         }
@@ -354,25 +350,25 @@ function moveOutside(event, value){
         $(opener.document).find("#studentId-input").val(valueId);
         
         // 수강생 정보 반영하기
-        var table = $("<table class='subjectdetails' border='1'/>");
-        var tr = table.append($("<tr/>").append(
-            $("<td class='subject-th'/>").text('이름'),
-            $("<td class='subject-th'/>").text('성별'),
-            $("<td class='subject-th'/>").text('생년월일'),
-            $("<td class='subject-th'/>").text('이메일'),
-            $("<td class='subject-th'/>").text('전화번호'),
-            $("<td class='subject-th'/>").text('주소'),
-            $("<td class='subject-th'/>").text('직위')
+        var table = $("<table class='result-table' border='1'/>");
+        var tr = table.append($("<tr class='result-tr'/>").append(
+            $("<th class='result-th'/>").text('이름'),
+            $("<th class='result-th'/>").text('성별'),
+            $("<th class='result-th'/>").text('생년월일'),
+            $("<th class='result-th'/>").text('이메일'),
+            $("<th class='result-th'/>").text('전화번호'),
+            $("<th class='result-th'/>").text('주소'),
+            $("<th class='result-th'/>").text('직위')
         ));
         table.append(tr);
-        var tr = table.append($("<tr/>").append(
-            $("<td/>").text(valueTitle),
-            $("<td/>").text(studentGenderTitle),
-            $("<td/>").text(studentBirth),
-            $("<td/>").text(studentEmail),
-            $("<td/>").text(studentPhone),
-            $("<td/>").text(studentAddDoTitle + ' ' + studentAddEtc),
-            $("<td/>").text(studentPositionTitle)
+        var tr = table.append($("<tr class='result-tr'/>").append(
+            $("<td class='result-td'/>").text(valueTitle),
+            $("<td class='result-td'/>").text(studentGenderTitle),
+            $("<td class='result-td'/>").text(studentBirth),
+            $("<td class='result-td'/>").text(studentEmail),
+            $("<td class='result-td'/>").text(studentPhone),
+            $("<td class='result-td'/>").text(studentAddDoTitle + ' ' + studentAddEtc),
+            $("<td class='result-td'/>").text(studentPositionTitle)
         ));
         table.append(tr);
 		$(opener.document).find("#student-list").html(table);

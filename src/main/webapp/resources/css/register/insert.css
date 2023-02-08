@@ -9,7 +9,8 @@
 
 .wrap {
     width: 98%;
-    height: 240px;
+	min-height: 240px;
+    padding-bottom: 38px;
     border: 1px solid #bababa;
     border-radius: 6px;
     margin: auto;
@@ -85,11 +86,6 @@
 	margin-top: 40px;
 }
 
-table>tr {
-	font-size: 14px;
-	text-align: center;
-}
-
 .sc2 {
     height: 36px;
     border-color: #80808047;
@@ -131,12 +127,6 @@ li {
 	display: inline;
 }
 
-.subjectdetails, .courselist {
-	width: 90%;
-	text-align: center;
-	margin-top: 10px;
-}
-
 .title-input {
 	height: 35px;
     border-radius: 8px;
@@ -147,9 +137,22 @@ li {
     text-align: center;
 }
 
+.result-table {
+	width: 90%;
+	text-align: center;
+	margin-top: 10px;
+	border: 1px solid #e9ebf0;
+}
 
-.course-th, .subject-th {
+.result-tr {
+	font-size: 14px;
+	text-align: center;
+	height: 45px;
+}
+
+.result-th {
 	background-color: #f8f9fd;
+	padding: 0px 7px;
 }
 
 .insert-list {
@@ -161,3 +164,4 @@ li {
 	margin-right: 29px;
     padding-left: 28px;
 }
+

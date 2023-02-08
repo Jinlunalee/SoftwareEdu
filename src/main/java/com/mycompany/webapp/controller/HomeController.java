@@ -264,7 +264,6 @@ public class HomeController {
 	 */
 	@PostMapping(value="/common/searchpop-opencourse-result", produces = "application/text; charset=UTF-8")
 	public String searchPopOpenCourseResult(OpenVO openVo, Model model) throws Exception{
-		System.out.println("check1");
 		openVo.setCases("case1"); // 개설강좌 상태가 모집중, 모집마감, 진행중인 경우만 보여주기 위함
 		List<OpenVO> openCourseList = homeService.searchOpenCourse(openVo);
 		System.out.println("check2");

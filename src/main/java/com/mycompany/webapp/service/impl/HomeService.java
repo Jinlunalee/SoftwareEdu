@@ -64,9 +64,7 @@ public class HomeService implements IHomeService {
 
 	@Override
 	public List<OpenVO> searchOpenCourse(OpenVO openVo) {
-		System.out.println("check2");
 		List<OpenVO> boardList = homeRepository.searchOpenCourse(openVo);
-		System.out.println("check3");
 		System.out.println(boardList);
 		
 		for(OpenVO openVoReturn : boardList) {
