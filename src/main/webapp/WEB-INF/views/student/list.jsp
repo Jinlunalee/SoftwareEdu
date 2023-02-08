@@ -44,7 +44,12 @@
          <div class="list_top">
             <div class="cnt">
                전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개,
+           <c:if test="${pager.totalRows eq 0}">
+                        페이지<b class="basic_txt_color"> 0</b> / 0
+                    </c:if>
+            <c:if test="${pager.totalRows ne 0}">
                페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+            </c:if>
             </div>
          </div>
 
@@ -93,6 +98,7 @@
 
          <div class="bottoms">
             <!-- paging -->
+           <c:if test="${pager.totalRows ne 0}">
             <div id="paging">
                <ul class="paging">
                   <li><a href="searchStudentBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">처음</a></li>
@@ -115,6 +121,8 @@
                   <li><a href="searchStudentBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&student=${student}&keyword=${keyword}">맨끝</a></li>
                </ul>
             </div>
+            </c:if>
+            
          </div>
       </div>
    </div>

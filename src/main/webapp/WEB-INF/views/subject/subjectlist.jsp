@@ -48,7 +48,12 @@
 			<div class="list_top">
 				<div class="cnt">
 					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
+           <c:if test="${pager.totalRows eq 0}">
+                        페이지<b class="basic_txt_color"> 0</b> / 0
+                    </c:if>
+            <c:if test="${pager.totalRows ne 0}">
 					페이지<b class="basic_txt_color"> ${pager.pageNo} </b> / ${pager.totalPageNo}
+				</c:if>
 				</div>
 			</div>
 
@@ -110,15 +115,20 @@
 						</c:forEach>
 					</c:if>
 					<c:if test="${boardListSize eq 0}">
+					<tr>
+					<td colspan='11'>
 						<div class="table-empty">
 							게시물이 없습니다.
 						</div>
+						</td>
+						</tr>
 					</c:if>
 				</tbody>
 			</table>
 
 			<div class="bottoms">
 				<!--paging-->
+           <c:if test="${pager.totalRows ne 0}">
 				<div id="paging">
 					<ul class="paging">
 						<li><a href="searchSubjectBoardlist?pageNo=1&rowsPerPage=${pager.rowsPerPage}&catCourseCd=${catId}&subject=${subject}&keyword=${keyword}">처음</a></li>
@@ -139,6 +149,7 @@
 						<li><a href="searchSubjectBoardlist?pageNo=${pager.totalPageNo}&rowsPerPage=${pager.rowsPerPage}&catSubjectCd=${catId}&subject=${subject}&keyword=${keyword}">맨끝</a></li>
 					</ul>
 				</div>
+				</c:if>
 			</div>
 
 		</div>

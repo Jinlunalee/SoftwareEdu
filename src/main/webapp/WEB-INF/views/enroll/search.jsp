@@ -167,8 +167,8 @@
 															<span id="cancelRsEtc-${status.count}"></span>
 														</div>
 														<div class="modal-btns">
-															<input id="cancelBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="modal-btn confirm-btn">
-															<button type="button" class="modal-btn close-btn">닫기</button>
+															<input id="cancelConfirmBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="modal-btn confirm-btn">
+															<button type="button" class="modal-btn close-btn close-btn-${status.count}">닫기</button>
 														</div>
 													</form>
 												</div>
@@ -254,7 +254,7 @@
 	const student = $('select[name=student]').val();
 	const keyword1 = $('input[name=keyword1]').val();
 	const state = $('select[name=state]').val();
-
+	
 	if (applyStartDay === '') {
 		const today1 = new Date();
 		const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
@@ -280,9 +280,6 @@
 		return [year, month, day].join('-');
 	}
 
-
-
-
 	const body = document.querySelector('body');
 	/* 모달창 열기 */
 	function showModal(i) {
@@ -293,6 +290,10 @@
 		let modalBg = document.querySelector(modalBgClassName); // 모달 배경
 
 		modalBg.classList.add('show'); // class를 이용한 모달 on
+		
+		var selectCancelDefault = document.getElementById("selectCancel-" + i);
+		selectCancelDefault.value = "cancelDefault"; // 취소 사유 초기화
+		
 		if (modalBg.classList.contains('show')) { // 모달이 on일 때
 			body.style.overflow = 'hidden'; // body의 스크롤을 막음
 		}
@@ -300,17 +301,55 @@
 		modalBg.addEventListener('click', (event) => { // 배경 클릭했을 때
 			if (event.target === modalBg) {
 				modalBg.classList.remove('show'); // class를 이용한 모달 off
+				
+				var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
+				var inputCancel = document.getElementById("input-cancel-" + i);
+				if(inputCancel) {
+					calcelRsEtc.removeChild(inputCancel);
+				}
+				
 				if (!modalBg.classList.contains('show')) { // 모달이 off일 때
 				body.style.overflow = 'auto';  // body의 스크롤을 풂
 				}
 			}
 		});
 
-		const closeBtn = document.querySelector(".close-btn");
+		const closeBtn = document.querySelector(".close-btn-" + i);
 		$(closeBtn).click(function(){ // 모달창 닫기
 			modalBg.classList.remove('show'); // 모달창 닫기
+			
+			var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
+			var inputCancel = document.getElementById("input-cancel-" + i);
+			if(inputCancel) {
+				calcelRsEtc.removeChild(inputCancel);
+			}
 		});
 
+	}
+	
+	function cancel(i) {
+		const selectCancel = "#selectCancel-" + i + " option:selected";
+		const selectCancelValue = $(selectCancel).val();
+		const cancelConfirmBtn = "#cancelConfirmBtn-" + i;
+		const cancelRsEtcDiv = "#cancelRsEtc-" + i;
+		
+		$(cancelConfirmBtn).show();
+		
+		if(selectCancelValue === 'cancelDefault') {
+			$(cancelConfirmBtn).hide();
+			alert('취소 사유를 선택해 주세요');
+		}
+		
+		if(selectCancelValue === 'CXL07'){
+			var createInput = document.createElement("input");
+			createInput.setAttribute("type", "text");
+			createInput.setAttribute("name", "cancelRsEtc");
+			createInput.setAttribute("Id", "input-cancel-" + i);
+			createInput.setAttribute("class", "input-cancel modal-item");
+			$(cancelRsEtcDiv).append(createInput);
+		}else{
+			$(cancelRsEtcDiv).empty();
+		}
 	}
 
 	function del(studentId, subjectId, subjectSeq) {
@@ -333,31 +372,6 @@
 					document.location.href = document.location.href;
 				}
 			})
-		}
-	}
-
-	function cancel(i) {
-		const selectId = "#selectCancel-" + i;
-		var selectCancel = selectId + " option:selected";
-		var cancel = $(selectCancel).val();
-		var cancelBtn = "#cancelBtn-" + i;
-		const cancelRsEtcId = "#cancelRsEtc-" + i;
-
-		$(cancelBtn).show();
-		
-		if(cancel === 'cancelDefault') {
-			$(cancelBtn).hide();
-			alert('취소 사유를 선택해 주세요');
-		}
-		
-		if(cancel === 'CXL07'){
-			var createInput = document.createElement("input");
-			createInput.setAttribute("type", "text");
-			createInput.setAttribute("name", "cancelRsEtc");
-			createInput.setAttribute("class", "input-cancel modal-item");
-			$(cancelRsEtcId).append(createInput);
-		}else{
-			$(cancelRsEtcId).empty();
 		}
 	}
 
