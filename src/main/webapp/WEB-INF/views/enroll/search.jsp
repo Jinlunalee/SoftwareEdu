@@ -163,7 +163,7 @@
 													</select>
 													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
 													<span id="cancelRsEtc-${status.count}"></span>
-													<input id="cancelBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="confirm">
+													<input id="cancelConfirmBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="confirm">
 												</form>
 												<div id="close-btn">
 													<button class="close-btn">닫기</button>
@@ -250,7 +250,7 @@
 	const student = $('select[name=student]').val();
 	const keyword1 = $('input[name=keyword1]').val();
 	const state = $('select[name=state]').val();
-
+	
 	if (applyStartDay === '') {
 		const today1 = new Date();
 		const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
@@ -285,11 +285,45 @@
 		}
 
 		click();
-
-		$(".close-btn").click(function () {
+		
+		var selectCancelDefault = document.getElementById("selectCancel-" + i);
+		selectCancelDefault.value = "cancelDefault";
+		
+		$(".close-btn").click(function() {
 			$(".modal").fadeOut();
-			document.location.href = document.location.href;
+
+			var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
+			var inputCancel = document.getElementById("input-cancel-" + i);
+			
+			if(inputCancel) {
+				calcelRsEtc.removeChild(inputCancel);	
+			}
 		});
+	}
+	
+	function cancel(i) {
+		const selectCancel = "#selectCancel-" + i + " option:selected";
+		const selectCancelValue = $(selectCancel).val();
+		const cancelConfirmBtn = "#cancelConfirmBtn-" + i;
+		const cancelRsEtcDiv = "#cancelRsEtc-" + i;
+		
+		$(cancelConfirmBtn).show();
+		
+		if(selectCancelValue === 'cancelDefault') {
+			$(cancelConfirmBtn).hide();
+			alert('취소 사유를 선택해 주세요');
+		}
+		
+		if(selectCancelValue === 'CXL07'){
+			var createInput = document.createElement("input");
+			createInput.setAttribute("type", "text");
+			createInput.setAttribute("name", "cancelRsEtc");
+			createInput.setAttribute("Id", "input-cancel-" + i);
+			createInput.setAttribute("class", "input-cancel");
+			$(cancelRsEtcDiv).append(createInput);
+		}else{
+			$(cancelRsEtcDiv).empty();
+		}
 	}
 
 	function del(studentId, subjectId, subjectSeq) {
@@ -312,31 +346,6 @@
 					document.location.href = document.location.href;
 				}
 			})
-		}
-	}
-
-	function cancel(i) {
-		const selectId = "#selectCancel-" + i;
-		var selectCancel = selectId + " option:selected";
-		var cancel = $(selectCancel).val();
-		var cancelBtn = "#cancelBtn-" + i;
-		const cancelRsEtcId = "#cancelRsEtc-" + i;
-
-		$(cancelBtn).show();
-		
-		if(cancel === 'cancelDefault') {
-			$(cancelBtn).hide();
-			alert('취소 사유를 선택해 주세요');
-		}
-		
-		if(cancel === 'CXL07'){
-			var createInput = document.createElement("input");
-			createInput.setAttribute("type", "text");
-			createInput.setAttribute("name", "cancelRsEtc");
-			createInput.setAttribute("class", "input-cancel");
-			$(cancelRsEtcId).append(createInput);
-		}else{
-			$(cancelRsEtcId).empty();
 		}
 	}
 
