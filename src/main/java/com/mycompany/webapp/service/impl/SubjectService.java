@@ -139,7 +139,7 @@ public class SubjectService implements ISubjectService{
 	
 	@Transactional
 	@Override
-	public Map<String, Object> infoSubjectCourse(String courseId, String subjectId) {
+	public Map<String, Object> infoSubjectCourse(String courseId, String subjectId, String year) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int check = subjectRepository.checkOpenCourse(courseId); //과정 개설 여부 확인
 		logger.info("service/infoSubjectCourse/check : " + check);
@@ -148,9 +148,9 @@ public class SubjectService implements ISubjectService{
 		subjectInfo.setLevelCdTitle(homeRepository.getComnCdTitle(subjectInfo.getLevelCd())); //level에대한 코드 코드명으로 변경
 		if(!"".equals(courseId) && (check != 0)) { // 개설되어있는 경우
 			logger.info("개설되어있는경우");
-			map.put("courseInfo", subjectRepository.infoOpenCourse(courseId)); //신청일자 연동위해 데이터 가져오기
+			map.put("courseInfo", subjectRepository.infoOpenCourse(courseId, year)); //신청일자 연동위해 과정 데이터 가져오기
 			map.put("subjectInfo", subjectInfo); //강좌에 대한 정보 가져오기
-			map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
+//			map.put("checkList", subjectRepository.selectSubjectByCourseId(courseId)); //과정안에 포함되어있는 강좌이름 가져오기
 		}else { //과정이 없거나, 최초개설인 경우
 			logger.info("coursId X && courseId O 최초개설");
 			map.put("subjectInfo", subjectInfo); // 강좌에 대한 정보만 가져옴
