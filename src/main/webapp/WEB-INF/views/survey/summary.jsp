@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="<c:url value='/resources/css/survey/summary.css'/>" />
 
-<div class="card m-2">
+<div class="card">
 	<div class="card-header">
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 	<div>> 만족도 조사 관리 > <span class="submenu-title">만족도 조사 통계</span></div>
