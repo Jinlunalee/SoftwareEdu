@@ -76,6 +76,11 @@
 		WHERE course_open_year = 2023 and state_cd != 'OPN01' and open.course_id IS NOT NULL)
 	</select>
 	
+	<select id="checkCourseByYearandState" parameterType="String" resultType="int">
+		select count(*) from open
+		where course_id=#{courseId} and course_open_year = 2023 and state_cd  = 'OPN01'
+	</select>
+	
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
 	/*searchOpenSubject*/
 		SELECT
@@ -91,11 +96,10 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, /**/
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day,
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
 		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
 		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
-
 		    recruit_people,
 		    state_cd as open_state_cd,
 		    comn_cd_title as open_state_cd_title,

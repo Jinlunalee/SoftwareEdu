@@ -266,7 +266,17 @@ function moveOutside(event, value){
         // 강좌개설 : course만 해당
         if(path.substring(10,25)==='course') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
+
+            if(valueYear === '0'){
+                valueYear = '신규 개설 과정';
+            }else {
+                valueYear = '2023';
+            }
+
+            $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ") | 개설연도 : " + valueYear);
+
             setUnavailableSubjectId('courseTitleClicked', valueId); 
+
         }
 
         // 수강추가 : open course만 해당
