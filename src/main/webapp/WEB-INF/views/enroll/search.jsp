@@ -305,7 +305,7 @@
 				var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
 				var inputCancel = document.getElementById("input-cancel-" + i);
 				if(inputCancel) {
-					calcelRsEtc.removeChild(inputCancel);
+					calcelRsEtc.removeChild(inputCancel); // 배경 클릭하면 취소 사유 입력칸 제거
 				}
 				
 				if (!modalBg.classList.contains('show')) { // 모달이 off일 때
@@ -321,7 +321,7 @@
 			var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
 			var inputCancel = document.getElementById("input-cancel-" + i);
 			if(inputCancel) {
-				calcelRsEtc.removeChild(inputCancel);
+				calcelRsEtc.removeChild(inputCancel); // 닫기 버튼 클릭하면 취소 사유 입력칸 제거
 			}
 		});
 

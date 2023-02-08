@@ -22,35 +22,51 @@
                 <div class="search-wrap">
                     <form id="search-form">
                         <div class="search-input">
-                            <select name="subject" onchange="putNameonInput(this.value)" >
-                                <option value="subjectId">강좌아이디</option>
-                                <option value="subjectTitle">강좌명</option>
-                            </select>
-                            <input type="text" id="subject-input" name="subjectId">
-                            난이도 : 
-                            <select name="levelCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${levelList}" var="level">
-                                    <option value="${level.comnCd}">${level.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            분류 : 
-                            <select name="catSubjectCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${catSubjectList}" var="catSubject">
-                                    <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            </select>
-                            등록연도 :
-                            <select name="regYear">
-                                <option value="0">전체</option>
-                                <c:forEach items="${yearList}" var="year">
-                                    <option value="${year}">${year}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
-                            <button type="button" id="close-btn">창닫기</button>
+                            <div class="search-section">
+                                <span class="search-section-title">강좌</span>
+                                <div class="search-section-content">
+                                    <select name="subject" onchange="putNameonInput(this.value)" class="input-box select-box-short">
+                                        <option value="subjectId">강좌아이디</option>
+                                        <option value="subjectTitle">강좌명</option>
+                                    </select>
+                                    <input type="text" id="subject-input" name="subjectId" class="input-box">
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">난이도</span>
+                                <div class="search-section-content">
+                                    <select name="levelCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${levelList}" var="level">
+                                            <option value="${level.comnCd}">${level.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">분류</span>
+                                <div class="search-section-content">
+                                    <select name="catSubjectCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${catSubjectList}" var="catSubject">
+                                            <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">등록연도</span>
+                                <div class="search-section-content">
+                                    <select name="regYear" class="input-box select-box">
+                                        <option value="0">전체</option>
+                                        <c:forEach items="${yearList}" var="year">
+                                            <option value="${year}">${year}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" id="search-btn" class="btn search-btn open-subject-search-btn input-button">검 색</button>
+                            <button type="button" id="close-btn" class="input-button">창닫기</button>
                         </div>
                     </form>
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->
