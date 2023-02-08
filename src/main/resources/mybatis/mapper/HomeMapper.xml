@@ -96,7 +96,7 @@
 		    course.course_title, 
 		    start_time,
 		    end_time,
-		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, /**/
+		    TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day,
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
 		    TO_CHAR(TO_DATE(recruit_start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_start_day, 
 		    TO_CHAR(TO_DATE(recruit_end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS recruit_end_day, 
