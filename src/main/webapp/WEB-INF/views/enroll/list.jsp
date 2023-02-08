@@ -8,7 +8,7 @@
 	<div class="card-header">
 		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 		<div>
-			> 수강 관리 > <span class="submenu-title">수강 목록 조회</span>
+			> 수강 관리 > <span class="submenu-title">수강 목록</span>
 		</div>
 	</div>
 	<div class="card-body">
