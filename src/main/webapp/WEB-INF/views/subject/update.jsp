@@ -63,9 +63,8 @@
 			<tr>
 				<td class="write-txt"> 강좌기간(시수)</td>
 				<td> 
-					<c:set var="todayDate" value="<%=new java.util.Date()%>"/>
 					<input type="hidden" name="hours" id="hours" value="${open.hours}">
-					<input type="date" name="startDay" id="startDay" value="${open.startDay}" min='<fmt:formatDate value="${todayDate}" pattern="yyyy-MM-dd"/>' onchange="calcEndDay()" required>
+					<input type="date" name="startDay" id="startDay" value="${open.startDay}" onchange="calcEndDay()" required>
 					~ 
 					<input type="date" name="endDay" id="endDay" value="${open.endDay}" readonly>
 					(${open.hours}시간)
@@ -76,7 +75,6 @@
 			<tr>
 				<td class="write-txt"> 강좌시간</td>
 				<td>
-					<%-- <input class="timepicker" name="startTime" id="startTime" value="${open.startTime}" required>  --%>
 					<select name="startTime" id="startTime" onchange="calcEndDay()" required>
 						<option value="">선택</option>
 						<option value="09:00" ${open.startTime eq '09:00'?"selected":""}>09:00</option>
@@ -85,7 +83,6 @@
 						</c:forEach>
 					</select>
 					~
-					<%-- <input class="timepicker" name="endTime" id="endTime" value="${open.endTime}" required> --%>
 					<select name="endTime" id="endTime" onchange="calcEndDay()" required>
 						<option value="">선택</option>
 						<option value="09:00" ${open.endTime eq '09:00'?"selected":""}>09:00</option>
