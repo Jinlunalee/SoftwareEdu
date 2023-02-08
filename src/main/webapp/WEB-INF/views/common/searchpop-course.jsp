@@ -22,20 +22,31 @@
                 <div class="search-wrap">
                     <form id="search-form">
                         <div class="search-input">
-                            <select name="course" onchange="putNameonInput(this.value)" >
-                                <option value="courseId">과정아이디</option>
-                                <option value="courseTitle">과정명</option>
-                            </select>
-                            <input type="text" id="course-input" name="courseId">
-                            분류 : 
-                            <select name="catCourseCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${catCourseList}" var="catCourse">
-                                    <option value="${catCourse.comnCd}">${catCourse.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
-                            <button type="button" id="close-btn">창닫기</button>
+                            <div class="search-section">
+                                <span class="search-section-title">과정</span>
+                                <div class="search-section-content">
+                                    <select name="course" onchange="putNameonInput(this.value)" class="input-box select-box-short">
+                                        <option value="courseId">과정아이디</option>
+                                        <option value="courseTitle">과정명</option>
+                                    </select>
+                                    <input type="text" id="course-input" name="courseId" class="input-box">
+                                </div>
+                            </div>
+
+                            <div class="search-section">
+                                <span class="search-section-title">분류</span>
+                                <div class="search-section-content">
+                                    <select name="catCourseCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${catCourseList}" var="catCourse">
+                                            <option value="${catCourse.comnCd}">${catCourse.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="button" id="search-btn" class="btn search-btn open-subject-search-btn input-button">검 색</button>
+                            <button type="button" id="close-btn" class="input-button">창닫기</button>
                         </div>
                     </form>
                     <!-- 강좌가 들어있는 과정 넘어온 값 -->

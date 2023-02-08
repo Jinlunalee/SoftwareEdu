@@ -21,7 +21,6 @@
                         <c:if test="${board.levelCd eq 'LEV04'}">
                             <td class="th-column-6">난이도기타</td>
                         </c:if>
-                        <td class="th-column-7">강좌일수</td>
                         <td class="th-column-8">강좌시수(시간)</td>
                         <td class="th-column-9">강좌기간</td>
                         <td class="th-column-13">분류</td>
@@ -54,7 +53,6 @@
                             <c:if test="${board.levelCd eq 'LEV04'}">
                                 <td>${board.levelEtc}</td>
                             </c:if>
-                            <td>${board.days}</td>
                             <td>${board.hours}</td>
                             <td>${board.startDay} ~ ${board.endDay}</td>
                             <td>${board.catSubjectCdTitle}</td>

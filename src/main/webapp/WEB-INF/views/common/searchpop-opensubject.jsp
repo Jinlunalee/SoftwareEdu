@@ -20,44 +20,65 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <div>※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div>
+                    <div class="info">※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div>
                     <form id="search-form">
                         <div class="search-input">
-                            <select name="subject" onchange="putNameonInput(this.value)" >
-                                <option value="subjectId">강좌아이디</option>
-                                <option value="subjectTitle">강좌명</option>
-                            </select>
-                            <input type="text" id="subject-input" name="subjectId">
-                            난이도 : 
-                            <select name="levelCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${levelList}" var="level">
-                                    <option value="${level.comnCd}">${level.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            상태 : 
-                            <select name="openStateCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${stateList}" var="state">
-                                    <option value="${state.comnCd}">${state.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            분류 : 
-                            <select name="catSubjectCd">
-                                <option value="">전체</option>
-                                <c:forEach items="${catSubjectList}" var="catSubject">
-                                    <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
-                                </c:forEach>
-                            </select>
-                            개설연도 :
-                            <select name="openDtYear">
-                                <option value="0">전체</option>
-                                <c:forEach items="${yearList}" var="year">
-                                    <option value="${year}">${year}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="button" id="search-btn" class='btn search-btn open-subject-search-btn'>검 색</button>
-                            <button type="button" id="close-btn">창닫기</button>
+                            <div class="search-section">
+                                <span class="search-section-title">개설강좌</span>
+                                <div class="search-section-content">
+                                    <select name="subject" onchange="putNameonInput(this.value)" class="input-box select-box-short">
+                                        <option value="subjectId">강좌아이디</option>
+                                        <option value="subjectTitle">강좌명</option>
+                                    </select>
+                                    <input type="text" id="subject-input" name="subjectId" class="input-box">
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">난이도</span>
+                                <div class="search-section-content">
+                                    <select name="levelCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${levelList}" var="level">
+                                            <option value="${level.comnCd}">${level.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">상태</span>
+                                <div class="search-section-content">
+                                    <select name="openStateCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${stateList}" var="state">
+                                            <option value="${state.comnCd}">${state.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">분류</span>
+                                <div class="search-section-content">
+                                    <select name="catSubjectCd" class="input-box select-box">
+                                        <option value="">전체</option>
+                                        <c:forEach items="${catSubjectList}" var="catSubject">
+                                            <option value="${catSubject.comnCd}">${catSubject.comnCdTitle}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-section">
+                                <span class="search-section-title">개설연도</span>
+                                <div class="search-section-content">
+                                    <select name="openDtYear" class="input-box select-box">
+                                        <option value="0">전체</option>
+                                        <c:forEach items="${yearList}" var="year">
+                                            <option value="${year}">${year}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" id="search-btn" class="btn search-btn open-subject-search-btn input-button">검 색</button>
+                            <button type="button" id="close-btn" class="input-button">창닫기</button>
                         </div>
                     </form>
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->
