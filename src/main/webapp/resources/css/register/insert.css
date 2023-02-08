@@ -14,6 +14,7 @@
     border-radius: 6px;
     margin: auto;
     margin-bottom: 32px;
+	font-size: 14px;
 }
 
 .search-box {
@@ -27,17 +28,6 @@
 
 .search-content {
 	width: 100%;
-}
-
-input {
-	width: 100px;
-	height: 45px;
-	border-radius: 8px;
-}
-
-.submit-btn {
-	text-align: center;
-	margin-top: 50px;
 }
 
 .a li::before {
@@ -78,21 +68,6 @@ input {
 	bottom: 10px;
 }
 
-.btn {
-	background-color: #003964;
-	color: #fff;
-}
-
-.btn {
-	position: relative;
-	bottom: 10px;
-}
-
-.name {
-	position: relative;
-	bottom: 10px;
-}
-
 .sel {
 	position: relative;
 	bottom: 10px;
@@ -115,16 +90,12 @@ table>tr {
 	text-align: center;
 }
 
-.search2 {
-	width: 100%;
-}
-
 .sc2 {
-	position: relative;
-	height: 40px;
-	border-radius: 8px;
-	text-align: center;
-	bottom: 1px;
+    height: 36px;
+    border-color: #80808047;
+    border-radius: 8px;
+    width: 103px;
+    text-align: center;
 }
 
 .tb {
@@ -160,45 +131,22 @@ li {
 	display: inline;
 }
 
-#subjectTitle-input,
-#courseTitle-input,
-#studentTitle-input {
-	height: 40px;
-	width: 60%;
-}
-
-.btn2 {
-	background-color: #003964;
-	color: #fff;
-	width: 100px;
-	height: 40px;
-	border-radius: 8px;
-}
-
-.btn3 {
-	background-color: #003964;
-	color: #fff;
-	width: 100px;
-	height: 40px;
-	border-radius: 8px;
-	position: relative;
-	bottom: 2px;
-}
-
 .subjectdetails, .courselist {
-	width: 98%;
+	width: 90%;
 	text-align: center;
 	margin-top: 10px;
 }
 
-#studentTitle-input, #subjectTitle-input, #courseTitle-input {
-	text-align: center;
+.title-input {
+	height: 35px;
+    border-radius: 8px;
+    margin: 5px 0px 5px 0;
+    padding: 0px 20px 0 20px;
+    border: 1px solid #e8e8e8;
+    width: 38%;
+    text-align: center;
 }
 
-#studentTitle-input {
-	position: relative;
-	bottom: 10px;
-}
 
 .course-th, .subject-th {
 	background-color: #f8f9fd;
@@ -207,4 +155,9 @@ li {
 .insert-list {
 	display: flex;
     justify-content: center;
+}
+
+.name {
+	margin-right: 29px;
+    padding-left: 28px;
 }

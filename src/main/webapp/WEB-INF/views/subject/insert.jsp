@@ -246,16 +246,15 @@
 			</div>
 			
 			<div class="submit-btn remove-hide hide-first">
+				<input type="reset" onclick="history.back();" value="◀ 이전">
 				<input type="hidden" name="openStateCd" id="openStateCd" value="">
 				<input type="submit" class="btn-submit-open-popup" value="저장">
-				<input type="reset" onclick="history.back();" value="취소" class="btn">
 			</div>
 		</form>		
 	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>

@@ -4,7 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>"/>
 
-<div class="card m-2">
+<div class="card">
 	<div class="card-header">
 		<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
 		<div>
@@ -150,23 +150,27 @@
 									<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
 										<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
 										<%-- 취소 사유 모달창 --%>
-										<div class="modal modal-${status.count}">
-											<div class="modal-content modal-content-${status.count}">
-												<img class="cancel-img" src="/resources/images/survey/survey_question.png">
-												<span id="cancelId" style="font-size: 1.2em;">취소하시겠습니까?</span>
-												<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
-													<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs"  onchange="cancel(${status.count}); this.onclick=null;">
-														<option value="cancelDefault">취소 사유 선택</option>
-														<c:forEach var="cancel" items="${cancelList}">
-															<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
-														</c:forEach>
-													</select>
-													<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
-													<span id="cancelRsEtc-${status.count}"></span>
-													<input id="cancelConfirmBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="confirm">
-												</form>
-												<div id="close-btn">
-													<button class="close-btn">닫기</button>
+										<div class="modal-background modal-background-${status.count}">
+											<div class="modal show modal-${status.count}">
+												<div class="modal-content modal-content-${status.count}">
+													<!-- <img class="cancel-img" src="/resources/images/survey/survey_question.png"> -->
+													<span id="cancelId">취소하시겠습니까?</span>
+													<form action="<c:url value='/enroll/cancel/${board.studentId}/${board.subjectId}/${board.subjectSeq}'/>" method="post" class="cacelform">
+														<div class="modal-items">
+															<select id="selectCancel-${status.count}" name="cancelRsCd" class="cancelrs modal-item"  onchange="cancel(${status.count}); this.onclick=null;">
+																<option value="cancelDefault">취소 사유 선택</option>
+																<c:forEach var="cancel" items="${cancelList}">
+																	<option value="${cancel.comnCd}">${cancel.comnCdTitle}</option>
+																</c:forEach>
+															</select>
+															<!-- <input type="text" name="cancelRsEtc" class="cancelrs" placeholder="기타 입력"> -->
+															<span id="cancelRsEtc-${status.count}"></span>
+														</div>
+														<div class="modal-btns">
+															<input id="cancelConfirmBtn-${status.count}" type="submit" style = "display: none;" value="확인" class="modal-btn confirm-btn">
+															<button type="button" class="modal-btn close-btn close-btn-${status.count}">닫기</button>
+														</div>
+													</form>
 												</div>
 											</div>
 										</div>
@@ -276,29 +280,51 @@
 		return [year, month, day].join('-');
 	}
 
+	const body = document.querySelector('body');
+	/* 모달창 열기 */
 	function showModal(i) {
-		var openBtnClassName = ".modal-open-" + i;
-		var modalClassName = ".modal-" + i;
-		
-		function click() {
-			$(modalClassName).fadeIn();
-		}
+		let modalOpenClassName = '.modal-open' + i; 
+		let modalOpen = document.querySelector(modalOpenClassName); // 모달 여는 버튼
 
-		click();
+		let modalBgClassName = '.modal-background-' + i;
+		let modalBg = document.querySelector(modalBgClassName); // 모달 배경
+
+		modalBg.classList.add('show'); // class를 이용한 모달 on
 		
 		var selectCancelDefault = document.getElementById("selectCancel-" + i);
-		selectCancelDefault.value = "cancelDefault";
+		selectCancelDefault.value = "cancelDefault"; // 취소 사유 초기화
 		
-		$(".close-btn").click(function() {
-			$(".modal").fadeOut();
+		if (modalBg.classList.contains('show')) { // 모달이 on일 때
+			body.style.overflow = 'hidden'; // body의 스크롤을 막음
+		}
 
-			var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
-			var inputCancel = document.getElementById("input-cancel-" + i);
-			
-			if(inputCancel) {
-				calcelRsEtc.removeChild(inputCancel);	
+		modalBg.addEventListener('click', (event) => { // 배경 클릭했을 때
+			if (event.target === modalBg) {
+				modalBg.classList.remove('show'); // class를 이용한 모달 off
+				
+				var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
+				var inputCancel = document.getElementById("input-cancel-" + i);
+				if(inputCancel) {
+					calcelRsEtc.removeChild(inputCancel);
+				}
+				
+				if (!modalBg.classList.contains('show')) { // 모달이 off일 때
+				body.style.overflow = 'auto';  // body의 스크롤을 풂
+				}
 			}
 		});
+
+		const closeBtn = document.querySelector(".close-btn-" + i);
+		$(closeBtn).click(function(){ // 모달창 닫기
+			modalBg.classList.remove('show'); // 모달창 닫기
+			
+			var calcelRsEtc = document.getElementById("cancelRsEtc-" + i);
+			var inputCancel = document.getElementById("input-cancel-" + i);
+			if(inputCancel) {
+				calcelRsEtc.removeChild(inputCancel);
+			}
+		});
+
 	}
 	
 	function cancel(i) {
@@ -319,7 +345,7 @@
 			createInput.setAttribute("type", "text");
 			createInput.setAttribute("name", "cancelRsEtc");
 			createInput.setAttribute("Id", "input-cancel-" + i);
-			createInput.setAttribute("class", "input-cancel");
+			createInput.setAttribute("class", "input-cancel modal-item");
 			$(cancelRsEtcDiv).append(createInput);
 		}else{
 			$(cancelRsEtcDiv).empty();

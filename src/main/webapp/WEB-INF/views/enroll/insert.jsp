@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/insert.css'/>"/>
+<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>"/>
 
 <div class="card m-2">
 	<div class="card-header"> 
@@ -13,12 +14,12 @@
 		<div class="wrap">
 			<div class="search-box">
 				<div class="search-content">
-					<span class="name">수강생</span> &nbsp; &nbsp;
+					<span class="name">수강생</span>
 					<form id="form" name="search-form" class="search">
 						<input id="studentTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 수강생을 검색하세요.">
 						<input id="student-input" name="student" type="hidden">
 						<input id="studentId-input" name="studentId" type="hidden">
-						<input type="button" class="student-popup-btn btn btn2" value="검색">
+						<input type="button" class="student-popup-btn btn btn-secondary" value="검색">
 					</form>
 				</div>
 			</div>
@@ -35,23 +36,23 @@
 	
 		<div class="wrap">
 			<div class="search-box">
-				<div class="search2">
+				<div class="search-content">
 					<select name="subCor" class="sc2" onchange="changeSubCor(this.value);">
 						<option selected value="subject">강좌</option>
 						<option value="course">과정</option>
 					</select>
 					<div class="search-popup" id="search-popup-subject">
-						<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
+						<input id="subjectTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
 						<input id="subject-input" name="subject" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button id="subject-btn" class="open-subject-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
+						<button id="subject-btn" class="open-subject-popup-btn btn btn-secondary" disabled>검색</button>
 					</div>
 					<div class="search-popup" id="search-popup-course" style="display:none;">
-						<input id="courseTitle-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
+						<input id="courseTitle-input" class="title-input" readonly placeholder="검색 버튼을 눌러 강좌/과정을 검색하세요.">
 						<input id="course-input" name="subject" type="hidden">
 						<input id="courseYear-input" name="openYear" type="hidden">
 						<!-- <input id="state-input" name="state" type="hidden"> -->
-						<button id="course-btn" class="open-course-popup-btn btn3 btn-outline-secondary" disabled>검색</button>
+						<button id="course-btn" class="open-course-popup-btn btn btn-secondary" disabled>검색</button>
 					</div>
 					
 				</div>
@@ -59,9 +60,9 @@
 			<div id="subject-list" class="insert-list"></div>
 		</div>
 		<div class="submit-btn">
-			
-				<input type="submit" onclick="addEnroll()" value="저 장" class="btn">
-				<input type="reset" onclick="location.href='<c:url value="/enroll/searchlist"/>'" value="취 소" class="btn">
+				<input type="reset" onclick="history.back();" value="◀ 이전">
+				<input type="submit" onclick="addEnroll()" value="저장">
+				<!-- <input type="reset" onclick="location.href='<c:url value="/enroll/searchlist"/>'" value="취 소" class="btn"> -->
 
 		</div>
 	</div>
