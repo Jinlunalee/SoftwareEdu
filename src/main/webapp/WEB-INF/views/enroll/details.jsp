@@ -86,7 +86,7 @@
 				<td id="enroll-complete-hours">${enroll.completeHours}</td>
 				<th>진도율</th>
 				<td><span id="ratio">${enroll.ratio}</span>%</td>
-				<th>추가 수강 시간</th>
+				<th>수강 시간 입력</th>
 				<td colspan='3' id="hour-column">
 				<div class="hour-column">
 					<form onsubmit="submitFunction(event)" class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
@@ -95,8 +95,7 @@
 						<input type="submit" id="add-hours-submit" class="btn btn-secondary " value="추가">
 					</form>
 					<div class="hour-info">
-						<div class="hour-details">※ 수강 상태가 수강 중일 때만 입력할 수 있습니다.</div>
-						<div class="hour-details">※ 진도율이 100%인 강좌는 입력할 수 없습니다.</div>
+						<div class="hour-details"></div>
 					</div>
 				</div>
 				</td>
@@ -114,20 +113,23 @@
 	window.onload = function () {
 		const ratio = document.getElementById('ratio').innerText;
 		const stateCd = document.getElementById('stateCdTitle').innerText;
-		console.log(stateCdTitle);
-		console.log(typeof stateCdTitle);
-		console.log(ratio);
-		console.log(typeof ratio);
 		const addHoursInput = document.getElementById('add-hours-input');
 		const addHoursSubmit = document.getElementById('add-hours-submit');
+		
+		const makeDiv = document.createElement('div');
+		
 		if(ratio>=100) {
-			addHoursInput.setAttribute("readonly", true);
-			/* addHoursInput.setAttribute("placeholder", "진도율이 100%인 강좌는 수강시간을 추가할 수 없습니다."); */
-			addHoursSubmit.setAttribute("type","button");
+			addHoursInput.style.display = "none";
+			addHoursSubmit.style.display = "none";
+			makeDiv.setAttribute("class", "no-add-hours");
+			makeDiv.innerHTML = '※ 진도율 100% 이상 강좌는 추가할 수 없습니다.';
+			$('.hour-details').append(makeDiv);
 		} else if(stateCd === '수강신청' || stateCd === '수강예정' || stateCd === '수강취소' || stateCd === '수강완료') {
-			addHoursInput.setAttribute("readonly", true);
-			/* addHoursInput.setAttribute("placeholder", "수강 중이 아닐 때는 시간을 입력할 수 없습니다."); */
-			addHoursSubmit.setAttribute("type", "button");
+			addHoursInput.style.display = "none";
+			addHoursSubmit.style.display = "none";
+			makeDiv.setAttribute("class", "no-add-hours");
+			makeDiv.innerHTML = "※ '수강 중' 인 상태만 입력할 수 있습니다.";
+			$('.hour-details').append(makeDiv);
 		} 
 	}
 

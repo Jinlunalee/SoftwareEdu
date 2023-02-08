@@ -357,7 +357,6 @@ function moveOutside(event, value){
             $("<th class='result-th'/>").text('생년월일'),
             $("<th class='result-th'/>").text('이메일'),
             $("<th class='result-th'/>").text('전화번호'),
-            $("<th class='result-th'/>").text('주소'),
             $("<th class='result-th'/>").text('직위')
         ));
         table.append(tr);
@@ -367,7 +366,6 @@ function moveOutside(event, value){
             $("<td class='result-td'/>").text(studentBirth),
             $("<td class='result-td'/>").text(studentEmail),
             $("<td class='result-td'/>").text(studentPhone),
-            $("<td class='result-td'/>").text(studentAddDoTitle + ' ' + studentAddEtc),
             $("<td class='result-td'/>").text(studentPositionTitle)
         ));
         table.append(tr);
