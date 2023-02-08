@@ -28,6 +28,7 @@
 
 .add-hours-form {
 	text-align: left;
+	display: inline;
 }
 
 .add-hours-input {
@@ -99,19 +100,24 @@
 	width: 120px;
 }
 
-.hour-column {
-	display: flex;
-}
-
 .hour-info {
 	position: relative;
     left: 27px;
     bottom: 9px;
+    display: inline;
 }
 
 .hour-details {
 	color: cornflowerblue;
 	height: 20px;
+	display: inline;
+	position: relative;
+    right: 15px;
+    top: 10px;
+}
+
+.no-add-hours {
+	display: inline;
 }
 
 .reset-btn {
