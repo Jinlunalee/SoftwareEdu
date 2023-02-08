@@ -97,20 +97,20 @@
                      <div id="first_info" class="first_info">
                         <table class="table_info1">
                            <tr>
-                              <td>* agentId : 훈련기관ID</td>
-                              <td>* startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
+                              <td>• agentId : 훈련기관ID</td>
+                              <td>• startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
-                              <td colspan='2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
+                              <td colspan='2'>• stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
 
                            </tr>
                            <tr>
-                              <td>* name : 수강생 이름</td>
-                              <td>* completeHours : 수강완료시수</td>
+                              <td>• name : 수강생 이름</td>
+                              <td>• completeHours : 수강완료시수</td>
                            </tr>
                            <tr>
-                              <td>* sendDt : 전송시간</td>
-                              <td>* stateCd : 진행상태 (ERL06:진행완료)</td>
+                              <td>• sendDt : 전송시간</td>
+                              <td>• stateCd : 진행상태 (ERL06:진행완료)</td>
                         </table>
                      </div>
                   </div>
@@ -119,20 +119,20 @@
                      <div id="first_info" class="first_info">
                         <table class="table_info1">
                            <tr>
-                              <td>* agentId : 훈련기관ID</td>
-                              <td>* startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
+                              <td>• agentId : 훈련기관ID</td>
+                              <td>• startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
-                              <td colspan='2'>* stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
+                              <td colspan='2'>• stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
 
                            </tr>
                            <tr>
-                              <td>* name : 수강생 이름</td>
-                              <td>* completeHours : 수강완료시수</td>
+                              <td>• name : 수강생 이름</td>
+                              <td>• completeHours : 수강완료시수</td>
                            </tr>
                            <tr>
-                              <td>* sendDt : 전송시간</td>
-                              <td>* stateCd : 진행상태 (ERL06:진행완료)</td>
+                              <td>• sendDt : 전송시간</td>
+                              <td>• stateCd : 진행상태 (ERL06:진행완료)</td>
                         </table>
 
                      </div>
@@ -142,20 +142,20 @@
                      <div id="first_info" class="first_info">
                         <table class="table_info2">
                            <tr>
-                              <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
-                              <td>* subjectTitle : 강좌 이름</td>
+                              <td>• sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
+                              <td>• subjectTitle : 강좌 이름</td>
                            </tr>
                            <tr>
-                              <td>* hours : 해당 강좌 전체 시수</td>
-                              <td>*cntStd : 수강 완료 된 수강생 수</td>
+                              <td>• hours : 해당 강좌 전체 시수</td>
+                              <td>• cntStd : 수강 완료 된 수강생 수</td>
                            </tr>
                            <tr>
-                              <td>* startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
-                              <td>* endDay : 강좌 마감 일자</td>
+                              <td>• startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
+                              <td>• endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
-                              <td>* cost : 교육비 (단위: 원)</td>
-                              <td>* sendDt : 전송시간</td>
+                              <td>• cost : 교육비 (단위: 원)</td>
+                              <td>• sendDt : 전송시간</td>
                         </table>
                      </div>
                   </div>
@@ -164,20 +164,20 @@
                      <div id="first_info" class="first_info">
                         <table class="table_info2">
                            <tr>
-                              <td>* sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
-                              <td>* subjectTitle : 강좌 이름</td>
+                              <td>• sbjIdSeq : 강좌아이디, 강좌시퀀스</td>
+                              <td>• subjectTitle : 강좌 이름</td>
                            </tr>
                            <tr>
-                              <td>* hours : 해당 강좌 전체 시수</td>
-                              <td>*cntStd : 수강 완료 된 수강생 수</td>
+                              <td>• hours : 해당 강좌 전체 시수</td>
+                              <td>• cntStd : 수강 완료 된 수강생 수</td>
                            </tr>
                            <tr>
-                              <td>* startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
-                              <td>* endDay : 강좌 마감 일자</td>
+                              <td>• startDay : 강좌 시작 일자 &nbsp; <span class="expl">※기간 검색 시 기준일</span></td>
+                              <td>• endDay : 강좌 마감 일자</td>
                            </tr>
                            <tr>
-                              <td>* cost : 교육비 (단위: 원)</td>
-                              <td>* sendDt : 전송시간</td>
+                              <td>• cost : 교육비 (단위: 원)</td>
+                              <td>• sendDt : 전송시간</td>
                         </table>
                      </div>
                   </div>
