@@ -135,7 +135,7 @@
 			</tbody>
 		</table>
 		<div class="submit-btn">
-			<input type="reset" onclick="history.back();" value="◀ 이전" class="btns">
+			<input type="reset" onclick="history.back();" value="◀ 이전">
 			<input type="hidden" name="fileId" value="${open.fileId}">
 			<input type="hidden" name="courseId" value="${open.courseId}">
 			<input type="hidden" name="openStateCd" id="openStateCd" value="${open.openStateCd}">
