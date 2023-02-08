@@ -5,6 +5,7 @@
 }
 .course-id-dropdown{
 	margin: 20px;
+    text-align: center;
 }
 .course-id-select {
 	width: 60%;
@@ -23,7 +24,7 @@
 }
 .charts-grid{
     background-color: #F4F8FF;
-    border-radius: 100px;	
+    border-radius: 13px;
     display:flex;
     flex-direction: row;
     align-items: center;
@@ -74,6 +75,8 @@
     background-color: transparent;
 }
 .excelimg {
-	width: 140px;
+    width: 140px;
     height: 37px;
+    position: absolute;
+    right: 17px;
 }
