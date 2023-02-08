@@ -2,8 +2,6 @@
 	margin-top: 50px;
 }
 
-
-
 .enroll-detail-table {
     line-height: 45px;
     width: 100%;
@@ -14,6 +12,7 @@
 .enroll-detail-table .info {
     text-align : center;
     background-color: #aad4ff;
+    font-size: 16px;
 }
 
 .enroll-detail-table th {
@@ -24,12 +23,11 @@
 
 .enroll-detail-table td {
     border: 1px solid #e9ebf0;
-    padding-left:10px;
+    padding-left: 10px;
 }
 
 .add-hours-form {
 	text-align: left;
-	display: inline;
 }
 
 .add-hours-input {
@@ -37,13 +35,11 @@
     height: 30px;
 }
 
-#add-hours-submit {
-    font-size: 10px;
-    height: 30px;
-    background-color: #6c757d;
-    color: #fff;
+.btn-secondary {
     position: relative;
     left: 10px;
+    height: 30px;
+    line-height: normal;
 }
 
 .add-hours-table th {
@@ -66,19 +62,58 @@
 	text-align : center;
 }
 
-.btn {
-	background-color: #003964;
-	color: #fff;
-}
-
-#cancel-details {
-	width: 15%;
-}
-
 .enroll-detail-table tr{
-	font-size: 11px;
+	font-size: 14px;
 }
 
-#back-btn {
-	font-size: 13px;
+#hour-column {
+	text-align: left;
+	width: 350px;
+}
+
+#title {
+	width: 130px;
+}
+
+.content0 {
+	width: 250px;
+}
+
+.content1{
+	width: 150px;
+}
+
+.content2, .content3 {
+	width: 300px;
+}
+
+.content4 {
+	width: 150px;
+}
+
+.content5 {
+	width: 140px;
+}
+
+.content6 {
+	width: 120px;
+}
+
+.hour-column {
+	display: flex;
+}
+
+.hour-info {
+	position: relative;
+    left: 27px;
+    bottom: 9px;
+}
+
+.hour-details {
+	color: cornflowerblue;
+	height: 20px;
+}
+
+.reset-btn {
+	margin-top: 20px;
 }

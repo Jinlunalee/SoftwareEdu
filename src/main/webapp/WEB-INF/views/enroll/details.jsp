@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/register/details.css'/>"/>
+<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>"/>
 
 <div class="card m-2">
 	<div class="card-header"> 
@@ -17,14 +18,14 @@
 			</tr>
 			
 			<tr>
-				<th>수강 아이디</th>
-				<td>${enroll.enrollId}</td>
-				<th>수강 등록일</th>
-				<td>${enroll.enrollDt}</td>
-				<th>수강 상태</th>
-				<td id="stateCdTitle">${enroll.stateCdTitle}</td>
-				<th>취소 상세 사유</th>
-				<td id="cancel-details">${enroll.cancelRsEtc}</td>
+				<th id="title">수강 아이디</th>
+				<td class="content2">${enroll.enrollId}</td>
+				<th id="title">수강 등록일</th>
+				<td class="content0">${enroll.enrollDt}</td>
+				<th id="title">수강 상태</th>
+				<td id="stateCdTitle" class="content1">${enroll.stateCdTitle}</td>
+				<th id="title">취소 상세 사유</th>
+				<td class="content3">${enroll.cancelRsEtc}</td>
 			</tr>
 			
 			<tr>
@@ -32,18 +33,17 @@
 				<td>${enroll.subjectTitle} (${enroll.subjectId})</td>
 				<th>강좌 기간</th>
 				<td>${enroll.startDay} ~ ${enroll.endDay}</td>
-				<th>일수</th>
-				<td>${enroll.days}</td>
-				<th>시수</th>
-				<td id="subject-hours">${enroll.hours}</td>
-			</tr>
-			
-			<tr>
-				
 				<th>강좌 상태</th>
 				<td>${enroll.openStateCdTitle}</td>
 				<th>강좌 분류</th>
 				<td>${enroll.catSubjectCdTitle}</td>
+			</tr>
+			
+			<tr>
+				<th>일수</th>
+				<td>${enroll.days}</td>
+				<th>시수</th>
+				<td id="subject-hours">${enroll.hours}</td>
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
 				<th>과정 명 (아이디)</th>
@@ -57,20 +57,20 @@
 
 		</table>
 
-		<table class="enroll-detail-table student-table all-table">
+		<table class="enroll-detail-table student-table all-table" style="margin-top: 50px">
 			<tr>
 				<th class="info student-info" colspan='8'>수강생 정보</th>
 			</tr>
 			
 			<tr>
-				<th>수강 관리 아이디</th>
-				<td>${enroll.studentId}</td>
-				<th>이름 (아이디)</th>
-				<td>${enroll.name} (${enroll.userId})</td>
-				<th>생년월일</th>
-				<td>${enroll.birth}</td>
-				<th>성별</th>
-				<td>${enroll.genderCdTitle}</td>
+				<th id="title">수강 관리 아이디</th>
+				<td class="content4">${enroll.studentId}</td>
+				<th id="title">이름 (아이디)</th>
+				<td class="content4">${enroll.name} (${enroll.userId})</td>
+				<th id="title">생년월일</th>
+				<td class="content5">${enroll.birth}</td>
+				<th id="title">성별</th>
+				<td class="content6">${enroll.genderCdTitle}</td>
 			</tr>
 			
 			<tr>
@@ -87,19 +87,24 @@
 				<th>진도율</th>
 				<td><span id="ratio">${enroll.ratio}</span>%</td>
 				<th>추가 수강 시간</th>
-				<td colspan='3' style="text-align: left;">
+				<td colspan='3' id="hour-column">
+				<div class="hour-column">
 					<form onsubmit="submitFunction(event)" class="add-hours-form" action="<c:url value='/enroll/addhours'/>" method="post"/>
 						<input name="enrollId" value="${enroll.enrollId}" type="hidden">
 						<input type="number" id="add-hours-input" class="add-hours-input" name="addHours" >
-						<input type="submit" id="add-hours-submit" class="add-hours-submit btn btn-outline-secondary"  value="추가">
-					</form> &emsp; &emsp;
-					<sapn style="color: cornflowerblue;">※ 수강 상태가 수강 중일 때만 입력할 수 있습니다.</sapn> &ensp;
-					<span style="color: cornflowerblue;">※ 진도율이 100%인 강좌는 입력할 수 없습니다.</span>
+						<input type="submit" id="add-hours-submit" class="btn btn-secondary " value="추가">
+					</form>
+					<div class="hour-info">
+						<div class="hour-details">※ 수강 상태가 수강 중일 때만 입력할 수 있습니다.</div>
+						<div class="hour-details">※ 진도율이 100%인 강좌는 입력할 수 없습니다.</div>
+					</div>
+				</div>
 				</td>
 			</tr>
 		</table>
-
-		<input id="back-btn" type="reset" onclick="back()" value="이 전" class="btn">
+		<div class="submit-btn">
+			<input type="reset" onclick="back()" class="reset-btn" value="이 전">
+		</div>
 	</div>
 	
 </div>
