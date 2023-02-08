@@ -85,12 +85,9 @@
 		<div id="list-wrap">
 			<div class="list_top">
 				<div class="cnt">
-					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-					<c:if test="${pager.totalRows eq 0}">
-						페이지<b class="basic_txt_color"> 1</b> / 1
-					</c:if>
+					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개
 					<c:if test="${pager.totalRows ne 0}">
-						페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
+						, 페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
 					</c:if>
 				</div>
 			</div>
