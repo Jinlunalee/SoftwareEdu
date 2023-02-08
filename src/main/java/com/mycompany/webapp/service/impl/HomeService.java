@@ -103,5 +103,10 @@ public class HomeService implements IHomeService {
 		return yearList;
 	}
 
+	@Override
+	public int checkCourseByYearandState(String courseId) {
+		return homeRepository.checkCourseByYearandState(courseId);
+	}
+
 
 }

@@ -280,14 +280,10 @@ function timeMinMax(startTime, endTime) {
 		//선택된 startTime 가져오기
 		let checkSelectTime = $("#startTime option:selected").val();
 
-		console.log(checkSelectTime);
-		console.log(options);
 		//checkSelectTime랑 options비교해서 비활성화
 		for (var i = 0; i < options.length; i++) {
-			console.log(options[i]);
 			// $('#endTime option:eq(1)').prop('disabled', true); //9:00 비활성화 처리
 			if (options[i] <= checkSelectTime) {
-				console.log(options[i]);
 				// $('select#endTime option[value=' + options[i]+ ']').prop('disabled', true);
 				// $("select#endTime").val(options[i]).prop("disabled", true);
 				$('#endTime option:eq('+i+')').prop('disabled', true);
