@@ -23,7 +23,12 @@
 				<th id="title">수강 등록일</th>
 				<td class="content0">${enroll.enrollDt}</td>
 				<th id="title">수강 상태</th>
-				<td id="stateCdTitle" class="content1">${enroll.stateCdTitle}</td>
+				<td class="content1">${enroll.stateCdTitle}
+					<input id="getStateCdTitle" type="hidden" value="${enroll.stateCdTitle}">
+					<c:if test="${!empty enroll.cancelRsTitle}">
+						(${enroll.cancelRsTitle})
+					</c:if>
+				</td>
 				<th id="title">취소 상세 사유</th>
 				<td class="content3">${enroll.cancelRsEtc}</td>
 			</tr>
@@ -102,7 +107,7 @@
 			</tr>
 		</table>
 		<div class="submit-btn">
-			<input type="reset" onclick="back()" class="reset-btn" value="이 전">
+			<input type="reset" onclick="history.back()" class="reset-btn" value="◀ 이 전">
 		</div>
 	</div>
 	
@@ -112,7 +117,7 @@
 
 	window.onload = function () {
 		const ratio = document.getElementById('ratio').innerText;
-		const stateCd = document.getElementById('stateCdTitle').innerText;
+		const stateCd = document.getElementById('getStateCdTitle').value;
 		const addHoursInput = document.getElementById('add-hours-input');
 		const addHoursSubmit = document.getElementById('add-hours-submit');
 		
@@ -149,10 +154,6 @@
 		} else {
 			return true;
 		}
-	}
-	
-	function back() {
-		history.back();
 	}
 	
 </script>

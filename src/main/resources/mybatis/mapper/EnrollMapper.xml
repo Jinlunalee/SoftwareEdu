@@ -249,6 +249,7 @@
 		    add_do_cd, 
 		    add_etc, 
 		    position_cd, 
+		    cancel_rs_cd, 
 		    cancel_rs_etc 
 		FROM ENROLL e 
 		INNER JOIN SUBJECT sub 

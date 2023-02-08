@@ -85,12 +85,9 @@
 		<div id="list-wrap">
 			<div class="list_top">
 				<div class="cnt">
-					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개, 
-					<c:if test="${pager.totalRows eq 0}">
-						페이지<b class="basic_txt_color"> 1</b> / 1
-					</c:if>
+					전체목록 <b class="basic_txt_color">${pager.totalRows}</b>개
 					<c:if test="${pager.totalRows ne 0}">
-						페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
+						, 페이지<b class="basic_txt_color"> ${pager.pageNo}</b> / ${pager.totalPageNo}
 					</c:if>
 				</div>
 			</div>
@@ -102,8 +99,7 @@
 						<th>강좌 명 (과정 명)</th>
 						<th>수강생 명 (아이디)</th>
 						<th>신청 일자</th>
-						<th>수강 상태 (진도율)</th>
-						<th>취소 사유</th>
+						<th>수강 상태</th>
 						<th>취소</th>
 						<th>삭제</th>
 						<th>승인</th>
@@ -130,17 +126,14 @@
 								<%-- 신청일자 --%>
 								<td>${board.enrollDt}</td>
 
-								<%-- 현재 상태 옆에 진도율 --%>
+								<%-- 현재 상태 옆에 (진도율 / 취소사유) --%>
 								<td>
 									${board.stateCdTitle}
 									<c:if test="${board.stateCdTitle eq '수강중'}">
 										(${board.ratio}%)
 									</c:if>
-								</td>
-
-								<td>
-									<c:if test="${board.stateCdTitle eq '수강취소'}">
-										${board.cancelRsTitle}
+									<c:if test="${board.stateCdTitle eq '수강취소' && !empty board.cancelRsTitle}">
+										(${board.cancelRsTitle})
 									</c:if>
 								</td>
 
