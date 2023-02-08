@@ -2,7 +2,7 @@
 function removeHideFirst() {
 	const removeHide = document.getElementsByClassName('remove-hide');
 	for(let i=0; i<removeHide.length; i++) {
-			removeHide[i].classList.remove('hide-first')
+		removeHide[i].classList.remove('hide-first')
 	}
 }
 
@@ -79,6 +79,7 @@ function chcekCourseOrSubject() {
 			alert("강좌 선택 후 눌러주세요.");
 		}
 	}
+
 }
 
 /*강좌변화후 #select-btn 버튼 클릭 시 비동기 데이터 출력*/

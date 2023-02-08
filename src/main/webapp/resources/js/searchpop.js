@@ -1,7 +1,6 @@
 $(document).ready(function() {
 });
 
-
 /* 검색조건 입력 후 버튼 클릭 시 검색 결과 리스트 출력 */
 	const searchBtn = document.getElementById('search-btn'); // 검색 버튼
 	searchBtn.addEventListener('click', bringValue);
@@ -166,9 +165,6 @@ function putNameonInput(value) { // ㅇㅇ강좌명/ㅇㅇ강좌아이디 선택
     }
 }
 
-
-
-
 /* ㅇㅇ명 클릭했을 시 팝업창 닫기 및 선택값 반영하기  */
 function moveOutside(event, value){
     event.preventDefault();
@@ -196,6 +192,8 @@ function moveOutside(event, value){
         let openStateCdTitle = valueArr[15];
         let catSubjectCdTitle = valueArr[16];
         let totalPeople = valueArr[17];
+
+        resetValueSubjectorCourse(); //강좌/과정 다시선택
         
         $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
@@ -564,6 +562,37 @@ function resetValue() {
         courseInput2.removeAttribute("value");
         subjectList.innerText=null;
         alert("수강생을 다시 선택하였습니다. 강좌/과정을 다시 선택해주세요.");
+    }
+}
+
+/* 강좌/과정 개설시 alert창 띄우기 */
+function resetValueSubjectorCourse() {
+    console.log('resetValueSubject');
+    const subjectTitleInput = opener.document.getElementById('subjectTitle-input');
+    const courseTitleInput = opener.document.getElementById('courseTitle-input');
+    const check = opener.document.getElementById('check').value;
+	if(check === "openCourse"){ //과정 필수
+        if(subjectTitleInput.value && courseTitleInput.value) {
+            alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
+        }
+    }else { //강좌만 필수
+        if(courseTitleInput.value){ //과정만 입력하구 강좌는 처음 입력하는거지
+            if(subjectTitleInput.value && courseTitleInput.value){
+                alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
+            }
+        }else if(subjectTitleInput.value || courseTitleInput.value){ // 강좌만 입력할때
+            alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
+        }
+    }
+    addHideFirst();
+}
+
+/*검색버튼 클릭시 remove-hide 클래스에서 hide-first 크래스 추가하기*/
+function addHideFirst() {
+    const removeHide = opener. document.getElementsByClassName('remove-hide');
+     /*검색버튼 클릭 시 remove-hide 클래스에서 hide-first 클래서 추가하기*/
+     for(let i=0; i<removeHide.length; i++) {
+        removeHide[i].classList.add("hide-first");
     }
 }
 
