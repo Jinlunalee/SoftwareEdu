@@ -8,7 +8,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td class="th-column-1">수강생 명</td>
+                        <td class="th-column-1">수강생명</td>
                         <td class="th-column-2">수강생아이디</td>
                         <td class="th-column-5">생년월일</td>
                         <td class="th-column-6">성별</td>

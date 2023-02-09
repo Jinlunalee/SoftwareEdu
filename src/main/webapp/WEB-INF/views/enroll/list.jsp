@@ -81,9 +81,9 @@
 				<th>신청일자</th>
 				<th>현재 상태 (진도율)</th>
 				<th>취소 사유</th>
+				<th>승인</th>
 				<th>취소</th>
 				<th>삭제</th>
-				<th>승인</th>
 			</tr>
 
 			<%-- 리스트 --%>
@@ -115,6 +115,12 @@
 
 					<%-- 버튼 --%>
 					<td>
+						<%-- 승인 버튼 --%>
+						<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
+							<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
+						</c:if>
+					</td>
+					<td>
 						<%-- 취소 버튼 --%>
 						<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
 							<button class="btn btn-secondary modal-open-${status.count}" onclick="showModal(${status.count})">취소</button>
@@ -142,18 +148,10 @@
 								</div>
 						</c:if>
 					</td>
-
 					<td>
 						<%-- 삭제 버튼 --%>
 						<c:if test="${board.stateCdTitle eq '수강취소'}">
 							<button type="button" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary">삭제</button>
-						</c:if>
-					</td>
-
-					<td>
-						<%-- 승인 버튼 --%>
-						<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
-							<button type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')">승인</button>
 						</c:if>
 					</td>
 				</tr>

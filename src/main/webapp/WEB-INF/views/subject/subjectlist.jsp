@@ -67,7 +67,9 @@
 						<th>교육비(원)</th>
 						<th>상태</th>
 						<th>개설일시</th>
-						<th>처리</th>
+						<th>수정</th>
+						<th>폐강</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				
@@ -89,24 +91,21 @@
 								<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 								<td>${board.openStateCdTitle}</td>
 								<td>${board.openDt}</td>
+								<!-- 모집상태에 따라 나오는 버튼 변경 -->
 								<td>
-									<div>
-										<!-- 모집상태에 따라 나오는 버튼 변경 -->
-										<c:choose>
-											<c:when test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
-												<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
-												<button type="button" class="btn btn-outline-secondary btn-11 btn-red" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
-											</c:when>
-											<c:when test="${board.openStateCdTitle eq '진행중'}">
-												<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
-											</c:when>
-											<c:when test="${board.openStateCdTitle eq '폐강'}">
-												<button type="button" class="btn btn-outline-secondary btn-11" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
-											</c:when>
-											<c:when test="${board.openStateCdTitle eq '진행완료'}">
-											</c:when>
-										</c:choose>
-									</div> 
+									<c:if test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') or (board.openStateCdTitle eq '진행중')}">
+										<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href='<c:url value="/subject/update/${board.subjectId}/${board.subjectSeq}"/>'">수정</button>
+									</c:if>						
+								</td>
+								<td>
+									<c:if test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
+										<button type="button" class="btn btn-outline-secondary btn-11 btn-red" onclick="closeCourse('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')">폐강</button>
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${board.openStateCdTitle eq '폐강'}">
+										<button type="button" class="btn btn-outline-secondary btn-11" onclick="del('${board.subjectId}', '${board.subjectSeq}', '${board.fileId}')" >삭제</button>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>

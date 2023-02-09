@@ -26,8 +26,8 @@
                                 <span class="search-section-title">수강생</span>
                                 <div class="search-section-content">
                                     <select name="student" onchange="putNameonInput(this.value)" class="input-box select-box-short">
-                                        <option value="name">수강생 명</option>
-                                        <option value="studentId">수강생 아이디</option>
+                                        <option value="name">수강생명</option>
+                                        <option value="studentId">수강생아이디</option>
                                     </select>
                                     <input type="text" id="student-input" name="name" class="input-box">
                                 </div>

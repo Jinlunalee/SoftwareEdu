@@ -60,7 +60,6 @@
                   <th>생년월일</th>
                   <th>이메일</th>
                   <th>직위</th>
-                  <th>수정/삭제</th>
                </tr>
             </thead>
             
@@ -75,12 +74,6 @@
                      <td>${board.birth}</td>							
 							<td>${board.email}</td>
 							<td>${board.positionTitle}</td>
-							<td>
-								<form>
-									<button type="button" class="btn btn-11 btn-outline-secondary btn-blue">수정</button>
-									<button type="button" class="btn btn-11 btn-outline-secondary btn-red" value="삭제" onclick="del()">삭제</button>
-								</form>
-							</td>
 						</tr>
 					</c:forEach>
 				</c:if>

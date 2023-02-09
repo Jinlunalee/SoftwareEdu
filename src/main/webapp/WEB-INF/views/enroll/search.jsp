@@ -101,9 +101,9 @@
 						<th>수강생명 (아이디)</th>
 						<th>신청 일자</th>
 						<th>수강 상태</th>
+						<th>승인</th>
 						<th>취소</th>
 						<th>삭제</th>
-						<th>승인</th>
 					</tr>
 				</thead>
 
@@ -139,6 +139,14 @@
 								</td>
 
 								<%-- 버튼  --%>
+								<td>
+									<%-- 승인 버튼 --%>
+									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
+										<form>
+											<input type="submit" class="btn btn-11 btn-outline-secondary btn-blue" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
+										</form>
+									</c:if>
+								</td>
 								<td>
 									<%-- 취소 버튼 --%>
 									<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
@@ -180,14 +188,7 @@
 									</c:if>
 								</td>
 
-								<td>
-									<%-- 승인 버튼 --%>
-									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
-										<form>
-											<input type="submit" class="btn btn-11 btn-outline-secondary btn-blue" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
-										</form>
-									</c:if>
-								</td>
+								
 							</tr>
 						</c:forEach>
 					</c:if>

@@ -63,7 +63,6 @@
 					<th>교육비(원)</th>
 					<th>상태</th>
 					<th>개설연도</th>
-					<th>처리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -78,24 +77,6 @@
 							<td><fmt:formatNumber value="${board.cost}" type="number"/></td>
 							<td>${board.openStateCdTitle}</td>
 							<td>${board.courseOpenYear}
-							<td>
-								<div>
-									<c:choose>
-										<c:when test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
-											<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-outline-secondary btn-11 btn-red" onclick="location.href=''">폐강</button>
-										</c:when>
-										<c:when test="${board.openStateCdTitle eq '진행중'}">
-											<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href=''">수정</button>
-										</c:when>
-										<c:when test="${board.openStateCdTitle eq '폐강'}">
-											<button type="button" class="btn btn-outline-secondary btn-11" onclick="location.href=''">삭제</button>
-										</c:when>
-										<c:when test="${board.openStateCdTitle eq '진행완료'}">
-										</c:when>
-									</c:choose>
-								</div> 
-							</td>
 						</tr>
 					</c:forEach>
 				</c:if>
