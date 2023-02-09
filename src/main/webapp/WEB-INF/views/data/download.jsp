@@ -22,7 +22,7 @@
                         <form name="sc-form" class="search-form">
                            <%--연계자료 기간 --%>
                            <div class="data-period">
-                              <span id="dataperiod">기간별 조회</span>
+                              <span id="dataperiod">기간별 조회  <a id=dataExpl>※ 수강 시작 일자(startDay)를 기준으로 검색됩니다.</a></span>
                               <div class="date-inputs">
                                  <input type="date" name="startDay" id="input_startDay" class="input-date" value="${startDay}"> ~ 
                                  <input type="date" name="endDay" id="input_endDay" class="input-date" value="${endDay}">
@@ -131,14 +131,16 @@
                                  <td>수강 완료 된 수강생 수</td>
                               </tr>
                               <tr>
+                                 <th>startDay</th>
+                                 <td>수강 시작 일자</td>
                                  <th>endDay</th>
                                  <td>강좌 마감 일자</td>
-                                 <th>cost</th>
-                                 <td>교육비 (단위: 원)</td>
                               </tr>
                               <tr>
+                                 <th>cost</th>
+                                 <td>교육비 (단위: 원)</td>                              
                                  <th>sendDt</th>
-                                 <td colspan="3">전송시간</td>
+                                 <td>전송시간</td>
                               </tr>
                            </table>
                         </div>
