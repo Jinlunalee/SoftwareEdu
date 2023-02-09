@@ -164,3 +164,10 @@ img {
 .card_info {
 	display: none;
 }
+
+#dataExpl {
+	font-size: 10px;
+	color: #6495ed;
+}
+
+
