@@ -98,7 +98,6 @@
                         <table class="table_info1">
                            <tr>
                               <td>• agentId : 훈련기관ID</td>
-                              <td>• startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
                               <td colspan='2'>• stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>
@@ -120,7 +119,6 @@
                         <table class="table_info1">
                            <tr>
                               <td>• agentId : 훈련기관ID</td>
-                              <td>• startDay : 강좌 시작 일자 &nbsp;<span class="expl">※기간 검색 시 기준일</span></td>
                            </tr>
                            <tr>
                               <td colspan='2'>• stdSbj : 수강생, 강좌 정보 (교육연도, 강좌아이디, 강좌시퀀스, 수강아이디, 수강생아이디)</td>

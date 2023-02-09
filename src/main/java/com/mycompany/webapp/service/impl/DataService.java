@@ -62,7 +62,6 @@ public class DataService implements IDataService{
 		String result = "";  // for문 밖에서 결과값을 받을 result를 선언 
 		for (StudentVO vo : dataList) {	
 			String agentId = vo.getAgentId();
-			String sbjStartDay = vo.getStartDay();
 			String stdSbj = vo.getStdSbj();
 			String name = vo.getName();
 			String completeHours = vo.getCompleteHours();
@@ -73,7 +72,6 @@ public class DataService implements IDataService{
 			// +=로 문자열을 이어붙이기
         result += "<student>" + "\n";
         result += "<agentId>" + "KOSA01" + "</agentId>" + "\n";
-        result += "<startDay>" + sbjStartDay + "<startDay>" + "\n";
         result += "<stdSbj>"+ stdSbj +"</stdSbj>" + "\n";
         result += "<name>" + name + "</name>" + "\n";
         result += "<completeHours>" + completeHours + "</completeHours>" + "\n";
