@@ -65,7 +65,7 @@
 				<div>
 					<div>
 
-						<a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그아웃</a>
+						<!-- <a class="btn btn-sm" href="#" style="background-color: #8db2ff; color:white;">로그아웃</a> -->
 					</div>
 				</div>
 			</nav>
