@@ -5,7 +5,7 @@
       <link rel="stylesheet" href="<c:url value='/resources/css/data/download.css'/>" />
 
 
-      <div class="card m-2">
+      <div class="card">
          <div class="card-header">
             <img class="home_img" src="<c:url value='/resources/images/home_small.png'/>" />
             <div>

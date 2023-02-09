@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
-<div class="card m-2">
+<div class="card">
    <div class="card-header">  
    <img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
    <div> > 강좌 관리 > <span class="submenu-title">개설 강좌 목록</span> > 개설 강좌 수정 페이지</div>
