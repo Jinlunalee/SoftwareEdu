@@ -139,7 +139,7 @@ public class SurveyController {
 		headerRow.createCell(7).setCellValue("보통");
 		headerRow.createCell(8).setCellValue("불만족");
 		headerRow.createCell(9).setCellValue("매우불만족");
-		headerRow.createCell(10).setCellValue("만족도(%)");
+		headerRow.createCell(10).setCellValue("만족도");
 		
 		List<QuestionSetVO> questionList = surveyService.selectSubjectQuestionSet(subjectId, subjectSeqInt);
 		Map<String, Integer> map = new HashMap<>();
@@ -159,12 +159,13 @@ public class SurveyController {
 			int value2 = Integer.parseInt(String.valueOf(map.get("2")));
 			int value1 = Integer.parseInt(String.valueOf(map.get("1")));
 			int satisfiedPercent = ((value5*100) + (value4*75) + (value3*50) + (value2*25) + (value1*0)) / (value5+value4+value3+value2+value1);
+			String satisfiedPercentStr = String.valueOf(satisfiedPercent) + "%";
 			row.createCell(5).setCellValue(value5);
 			row.createCell(6).setCellValue(value4);
 			row.createCell(7).setCellValue(value3);
 			row.createCell(8).setCellValue(value2);
 			row.createCell(9).setCellValue(value1);
-			row.createCell(10).setCellValue(satisfiedPercent);
+			row.createCell(10).setCellValue(satisfiedPercentStr);
 		}
 		
 		
