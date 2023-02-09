@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.dao.IEnrollRepository;
 import com.mycompany.webapp.dao.IHomeRepository;
@@ -39,12 +40,14 @@ public class HomeService implements IHomeService {
 		}
 		return boardList;
 	}
-
+	
+	@Transactional
 	@Override
 	public List<CourseVO> searchCourse(CourseVO courseVo) {
 		List<CourseVO> boardList = homeRepository.searchCourse(courseVo);
 		for(CourseVO courseVoReturn : boardList) {
 			courseVoReturn.setCatCourseCdTitle(homeRepository.getComnCdTitle(courseVoReturn.getCatCourseCd()));
+			courseVoReturn.setCheckFirst(homeRepository.checkCourseByYearandState(courseVoReturn.getCourseId()));
 		}
 		return boardList;
 	}
@@ -102,11 +105,5 @@ public class HomeService implements IHomeService {
 		List<String> yearList = homeRepository.selectYearListByPop(pop);
 		return yearList;
 	}
-
-	@Override
-	public int checkCourseByYearandState(String courseId) {
-		return homeRepository.checkCourseByYearandState(courseId);
-	}
-
 
 }

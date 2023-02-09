@@ -266,10 +266,13 @@ function moveOutside(event, value){
         // 강좌개설 : course만 해당
         if(path.substring(10,25)==='course') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
-
+            alert(value);
+            alert(valueYear);
             if(valueYear === '0'){
+                alert('신규 개설과정');
                 valueYear = '신규 개설 과정';
             }else {
+                alert('2023');
                 valueYear = '2023';
             }
 
