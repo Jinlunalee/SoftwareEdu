@@ -54,9 +54,9 @@
          <table class="list">
             <thead>
                <tr>
-                  <th>관리아이디</th>            
-                  <th>수강생 명</th>            
-                  <th>수강생 아이디</th>
+                  <th>수강생관리아이디</th>            
+                  <th>수강생명</th>            
+                  <th>아이디</th>
                   <th>생년월일</th>
                   <th>이메일</th>
                   <th>직위</th>

@@ -97,8 +97,8 @@
 			<table class="list">
 				<thead>
 					<tr>
-						<th>강좌 명 (과정 명)</th>
-						<th>수강생 명 (아이디)</th>
+						<th>강좌명 (과정명)</th>
+						<th>수강생명 (아이디)</th>
 						<th>신청 일자</th>
 						<th>수강 상태</th>
 						<th>취소</th>
