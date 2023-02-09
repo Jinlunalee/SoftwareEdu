@@ -190,14 +190,19 @@
 							</tr>
 						</c:forEach>
 					</c:if>
+					<c:if test="${boardListSize eq 0}">
+                    <tr>
+                    <td colspan = '7'>
+                    <div class="table-empty" style="text-align: center">
+                                              게시물이 없습니다.
+                    </div>
+                    </td>
+                    </tr>
+            </c:if>
 				</tbody>
 			</table>
 			
-			<c:if test="${boardListSize eq 0}">
-				<div class="table-empty" style="text-align: center">
-					게시물이 없습니다.
-				</div>
-			</c:if>
+
 
 			<div class="bottoms">
 				<%-- paging --%>
