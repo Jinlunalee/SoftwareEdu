@@ -68,6 +68,7 @@ tr {
 
 table .detail_img {
     max-width: 90%;
+    max-height: 330px;
 }
 
 .course_intro {

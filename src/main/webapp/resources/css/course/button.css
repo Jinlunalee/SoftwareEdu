@@ -18,3 +18,26 @@
 .btn-secondary {
 	font-size: 14px;
 }
+
+.btn-14 {
+	font-size: 14px;
+}
+
+.btn-11 {
+	font-size: 11px;
+}
+
+.btn-blue {
+	border-color: #55a5ec;
+    color: #55a5ec;
+}
+
+.btn-red {
+	border-color: #e47b88;
+    color: #e47b88;
+}
+
+.btn-green {
+	border-color: #45b336;
+    color: #45b336;
+}

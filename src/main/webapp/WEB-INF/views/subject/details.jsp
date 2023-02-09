@@ -32,7 +32,7 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<td colspan="2" rowspan="7">
+						<td colspan="2" rowspan="7" style="text-align: center;">
 							<c:if test="${!empty open.fileName}">
 								<c:set var="len" value="${fn:length(open.fileName)}"/>
 								<c:set var="filetype" value="${fn:toUpperCase(fn:substring(open.fileName, len-4, len))}"/>

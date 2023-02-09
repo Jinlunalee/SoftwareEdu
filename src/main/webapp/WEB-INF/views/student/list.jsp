@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 
 <div class="card">
    <div class="card-header">
@@ -77,8 +78,8 @@
 							<td>${board.positionTitle}</td>
 							<td>
 								<form>
-									<button type="button" class="btn btn-secondary">수정</button>
-									<button type="button" class="btn btn-secondary" value="삭제" onclick="del()">삭제</button>
+									<button type="button" class="btn btn-11 btn-outline-secondary btn-blue">수정</button>
+									<button type="button" class="btn btn-11 btn-outline-secondary btn-red" value="삭제" onclick="del()">삭제</button>
 								</form>
 							</td>
 						</tr>

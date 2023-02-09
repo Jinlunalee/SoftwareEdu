@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>"/>
+<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 
 <div class="card">
 	<div class="card-header">
@@ -141,7 +142,7 @@
 								<td>
 									<%-- 취소 버튼 --%>
 									<c:if test="${(board.stateCdTitle eq '수강신청') or (board.stateCdTitle eq '수강예정') or (board.stateCdTitle eq '수강중') }">
-										<button class="btn btn-secondary modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
+										<button class="btn btn-11 btn-outline-secondary btn-red modal-open modal-open-${status.count}" onclick="showModal(${status.count});">취소</button>
 										<%-- 취소 사유 모달창 --%>
 										<div class="modal-background modal-background-${status.count}">
 											<div class="modal show modal-${status.count}">
@@ -174,7 +175,7 @@
 									<%-- 삭제 버튼 --%>
 									<c:if test="${board.stateCdTitle eq '수강취소'}">
 										<form>
-											<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-secondary" value="삭제">
+											<input type="submit" onclick="del('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" class="btn btn-11 btn-outline-secondary" value="삭제">
 										</form>
 									</c:if>
 								</td>
@@ -183,7 +184,7 @@
 									<%-- 승인 버튼 --%>
 									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집마감')}">
 										<form>
-											<input type="submit" class="btn btn-secondary" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
+											<input type="submit" class="btn btn-11 btn-outline-secondary btn-blue" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
 										</form>
 									</c:if>
 								</td>
