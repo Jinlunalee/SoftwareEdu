@@ -29,11 +29,8 @@
                               </div>
                            </div>
                            <div class="reset-group">
-                              <!-- <input type="reset" class="btn btn-outline-secondary reset-btn" id="reset_btn"> -->
-                              <button type="button" class="btn btn-outline-secondary reset-btn" id="reset_btn">
-                                 초기화 <img id="resetImg" src="<c:url value='/resources/images/reset.png'/>"/>
-                              </button>
-                              <!-- <img id="resetImg" src="<c:url value='/resources/images/reset.png'/>"/> -->
+                              <input type="reset" class="btn btn-outline-secondary reset-btn" id="reset_btn"> 
+                              <img id="resetImg" src="<c:url value='/resources/images/reset.png'/>"/>
                            </div>
                         </form>
                      </div>

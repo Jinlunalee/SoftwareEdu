@@ -55,6 +55,14 @@ img {
 	
 }
 
+#resetImg{
+    position: relative;
+    top: 11px;
+    right: 3px;
+    height: 10px;
+    width: 19px;
+}
+
 .card {
 	overflow-x: scroll;
 	-ms-overflow-style: none;
@@ -99,7 +107,12 @@ img {
     margin-top: 10px;
 }
 .reset-btn {
-	font-size:14px;
+	font-size:13px;
+	text-align: left;
+    width: 75px;
+    position: relative;
+    left: 19px;
+
 }
 .card_check .output_btns {	
     margin-top: 30px;
