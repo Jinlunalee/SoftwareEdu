@@ -15,7 +15,6 @@ public interface IHomeService {
 	
 	List<SubjectVO> searchSubject(SubjectVO subjectVo);
 	List<CourseVO> searchCourse(CourseVO courseVo);
-	int checkCourseByYearandState(String courseId);
 	
 	List<OpenVO> searchOpenSubject(OpenVO openVo);
 	List<OpenVO> searchOpenCourse(OpenVO openVo);

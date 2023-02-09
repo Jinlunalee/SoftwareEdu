@@ -118,15 +118,12 @@ public class HomeController {
 		System.out.println(courseVo);
 		
 		List<CourseVO> courseList = homeService.searchCourse(courseVo);
-		int checkFirst = homeService.checkCourseByYearandState(courseVo.getCourseId());
-		
 		// ajax로 구현할 것
 		if(!courseList.isEmpty()) {
 			model.addAttribute("boardList",courseList);	//  존재 경우
 		} else {
 			model.addAttribute("boardCheck", "empty");	// 존재하지 않을 경우
 		}
-		model.addAttribute("checkFirst", checkFirst);
 		logger.info("courselist: " + courseList);	
 		return "common/searchpop-course-result";
 	}
