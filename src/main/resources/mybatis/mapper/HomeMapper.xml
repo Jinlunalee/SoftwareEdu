@@ -217,6 +217,7 @@
    <select id="selectSubjectListByCourseId" parameterType="OpenVO" resultType="OpenVO">
    /*selectSubjectListByCourseId*/
    SELECT s.subject_id,
+   			subject_seq,
    			subject_title, 
    			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
