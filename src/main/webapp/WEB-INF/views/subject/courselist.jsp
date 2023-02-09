@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="<c:url value='/resources/css/student/list.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/course/course.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/course/button.css'/>" />
 
 <div class="card">
 	<div class="card-header"> 
@@ -81,14 +82,14 @@
 								<div>
 									<c:choose>
 										<c:when test="${(board.openStateCdTitle eq '모집예정') or (board.openStateCdTitle eq '모집중') or (board.openStateCdTitle eq '추가모집중') or (board.openStateCdTitle eq '모집마감') }">
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">폐강</button>
+											<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href=''">수정</button>
+											<button type="button" class="btn btn-outline-secondary btn-11 btn-red" onclick="location.href=''">폐강</button>
 										</c:when>
 										<c:when test="${board.openStateCdTitle eq '진행중'}">
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">수정</button>
+											<button type="button" class="btn btn-outline-secondary btn-11 btn-blue" onclick="location.href=''">수정</button>
 										</c:when>
 										<c:when test="${board.openStateCdTitle eq '폐강'}">
-											<button type="button" class="btn btn-secondary" onclick="location.href=''">삭제</button>
+											<button type="button" class="btn btn-outline-secondary btn-11" onclick="location.href=''">삭제</button>
 										</c:when>
 										<c:when test="${board.openStateCdTitle eq '진행완료'}">
 										</c:when>
