@@ -66,7 +66,7 @@
 						</div>
 					</div>
 
-					<input type="submit" class="input-button btn btn-outline-secondary" value="검색">
+					<input type="submit" class="input-button btn-mt-15 btn btn-outline-secondary" value="검색">
 
 				</div>
 			</form>

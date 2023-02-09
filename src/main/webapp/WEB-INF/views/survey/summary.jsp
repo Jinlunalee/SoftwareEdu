@@ -20,7 +20,7 @@
 					<input id="subjectTitle-input" readonly placeholder="검색 버튼을 눌러 완료된 강좌를 검색하세요.">
 					<input id="subject-input" name="subject" type="hidden">
 					<input id="state-input" name="state" type="hidden">
-					<button class="open-subject-done-popup-btn btn btn-outline-secondary">검색</button>
+					<button class="open-subject-done-popup-btn btn btn-outline-secondary" style="margin-bottom: 3px;">검색</button>
 				</div>
 			</div>
 

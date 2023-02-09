@@ -43,6 +43,7 @@ img {
 }
 
 #result, #resultXml, #result3, #result4  {
+    padding: 10px;
 	white-space: pre;
 	font-size: 13px;
 } 

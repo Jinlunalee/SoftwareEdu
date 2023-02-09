@@ -25,7 +25,7 @@
 							<input name="keyword" class="input-text input-box" type="text" value="${keyword}" placeholder="검색어를 입력해 주세요">
 						</div>
 					</div>
-					<input class="input-button btn btn-outline-secondary" type="submit" value="검색">
+					<input class="input-button btn-mt-15 btn btn-outline-secondary" type="submit" value="검색">
 				</div>
 			</form>  
 		</div>

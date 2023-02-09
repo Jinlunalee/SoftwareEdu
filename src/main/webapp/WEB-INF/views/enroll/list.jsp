@@ -53,7 +53,7 @@
 						<option value="complete">수강 완료</option>
 					</select>
 				</div>
-				<input type="submit" class="input-button" value="검색">
+				<input type="submit" class="input-button btn-mt-15" value="검색">
 			</form>
 		</div>
 
