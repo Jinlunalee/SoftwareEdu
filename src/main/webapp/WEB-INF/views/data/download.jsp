@@ -131,14 +131,16 @@
                                  <td>수강 완료 된 수강생 수</td>
                               </tr>
                               <tr>
+                                 <th>startDay</th>
+                                 <td>수강 시작 일자</td>
                                  <th>endDay</th>
                                  <td>강좌 마감 일자</td>
-                                 <th>cost</th>
-                                 <td>교육비 (단위: 원)</td>
                               </tr>
                               <tr>
+                                 <th>cost</th>
+                                 <td>교육비 (단위: 원)</td>                              
                                  <th>sendDt</th>
-                                 <td colspan="3">전송시간</td>
+                                 <td>전송시간</td>
                               </tr>
                            </table>
                         </div>
