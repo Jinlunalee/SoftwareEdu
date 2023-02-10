@@ -1,6 +1,8 @@
 package com.mycompany.webapp.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,7 +190,12 @@ public class SurveyController {
 //			row2.createCell(2).setCellValue(answer.getQuestionNum());
 //			row2.createCell(3).setCellValue(answer.getAnswerValue());
 //		}
-		String fileName = subjectTitle + " " + subjectSeqInt + "회차 만족도 통계자료.xls";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		Calendar calendar = Calendar.getInstance();
+		String todayTitle = sdf.format(calendar.getTime());
+		
+		String fileName = todayTitle + "_" + subjectTitle + " " + subjectSeqInt + "회차 만족도 통계자료.xls";
 		String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
 		response.setContentType("ms-vnd/excel");
 		response.setHeader("Content-Disposition", "attachment;fileName=\"" + outputFileName + "\"");

@@ -1,6 +1,9 @@
 package com.mycompany.webapp.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +44,7 @@ public class EnrollController {
 	IPagerService pagerService;
 
 	/**
-	 * @description	수강 검색
+	 * @description	수강 목록
 	 * @date	2023. 1. 17.
 	 * @param enroll
 	 * @param pageNo
@@ -277,10 +280,14 @@ public class EnrollController {
 				row.createCell(8).setCellValue(enroll.getCancelRsEtc());
 			}
 		
-		String fileName = "수강 목록.xls";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		Calendar calendar = Calendar.getInstance();
+		String todayTitle = sdf.format(calendar.getTime());
+		
+		String fileName = "_수강 목록.xls";
 		String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
 		response.setContentType("ms-vnd/excel");
-		response.setHeader("Content-Disposition", "attachment;fileName=\"" + outputFileName + "\"");
+		response.setHeader("Content-Disposition", "attachment;fileName=\"" + todayTitle + outputFileName + "\"");
 
 		workbook.write(response.getOutputStream());
 		workbook.close();
