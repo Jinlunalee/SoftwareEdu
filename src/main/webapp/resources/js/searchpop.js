@@ -296,7 +296,7 @@ function moveOutside(event, value){
                                 $("<th class='result-th'/>").text('강좌시간'),
                                 $("<th class='result-th'/>").text('시수(시간)'),
                                 $("<th class='result-th'/>").text('난이도'),
-                                $("<th class='result-th'/>").text('비용'),
+                                $("<th class='result-th'/>").text('교육비(원)'),
                                 $("<th class='result-th'/>").text('교육비지원여부')
                         ));
                                     
