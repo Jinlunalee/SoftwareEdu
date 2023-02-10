@@ -27,6 +27,7 @@
                         <td class="th-column-11">모집인원</td>
                         <td class="th-column-12">상태</td>
                         <td class="th-column-13">분류</td>
+                        <td class="th-column-14">개설연도</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,7 @@
                             <td>${board.totalPeople}/${board.recruitPeople}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
+                            <td>${board.openDtYear}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

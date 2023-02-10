@@ -60,6 +60,7 @@ public class OpenVO {
 	private String openStateCd;//개설 상태 코드
 	private String openStateCdTitle; //개설 상태 코드명
 	private String courseOpenYear; //과정 개설 년도
+	private String courseOpenDt; //과정 개설 일자
 	private String openDt; //개설 등록 일자
 	
 	//수강에서 강좌검색후 추가할 때 사용

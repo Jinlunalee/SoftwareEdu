@@ -20,7 +20,7 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <div class="info">※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div>
+                    <!-- <div class="info">※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div> -->
                     <form id="search-form">
                         <div class="search-input">
                             <div class="search-section">
@@ -81,6 +81,9 @@
                             <button type="button" id="close-btn" class="input-button">창닫기</button>
                         </div>
                     </form>
+
+                    <div class="info">※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div>
+
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->
                     <div id="unavailable-pop" type="hidden">
                     </div>

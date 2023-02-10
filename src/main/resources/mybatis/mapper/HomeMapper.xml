@@ -106,7 +106,8 @@
 		    file_id,
 		    subject.cat_cd as cat_subject_cd,
 		    subject.reg_year,
-		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS open_dt 
+		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS open_dt,
+		    TO_CHAR(TO_DATE(SUBSTR(open_dt, 1, 4), 'YYYY'), 'YYYY') AS open_dt_year
 		FROM open
 		INNER JOIN subject ON open.subject_id = subject.subject_id
 		LEFT JOIN course ON open.course_id = course.course_id
@@ -157,6 +158,7 @@
 		        TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
 		        TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
 		        course.cat_cd as cat_course_cd,
+		        TO_CHAR(TO_DATE(SUBSTR(min(open.open_dt) over (partition by course.course_id, open.course_open_year), 1, 8), 'YYYYMMDD'), 'YYYY-MM-DD') AS course_open_dt,
 		        CASE    WHEN    max(open.state_cd) over (partition by course.course_id, open.course_open_year) <![CDATA[<=]]> 'OPN04'
 		                THEN    max(open.state_cd) over (partition by course.course_id, open.course_open_year)
 		                WHEN    min(open.state_cd) over (partition by course.course_id, open.course_open_year) <![CDATA[>=]]>  'OPN04'
