@@ -43,7 +43,16 @@
 <div class="card">
 	<div class="card-header"> 
 	<img class="home_img" src="<c:url value='/resources/images/home_small.png'/>"/>
-	<div><span> > 강좌 관리 ></span> <span class="submenu-title">강좌 개설</span> </div>
+	<div><span> > 강좌 관리 ></span> 
+		<c:choose>
+		<c:when test="${check eq 'openCourse'}">
+			<span>과정 개설</span>
+		</c:when>
+		<c:otherwise>
+			<span>강좌 개설</span>
+		</c:otherwise>
+		</c:choose>
+	</div>
 	</div>
 	<div class="card-body">
 		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
