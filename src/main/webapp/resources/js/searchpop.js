@@ -28,6 +28,8 @@ function bringValue() {
 /* 검색 결과 리스트 출력 함수 */
 function showList() {
     const searchForm = document.getElementById('search-form'); // 검색 폼
+    console.log(searchForm);
+    console.log(searchForm.length);
     let formInputs = '';
     for(var i=1; i<searchForm.length-1; i++) {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;

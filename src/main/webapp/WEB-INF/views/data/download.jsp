@@ -106,10 +106,10 @@
                                  <td>수강완료시수</td>
                               </tr>
                               <tr>
+                                 <th>stateCd</th>
+                                 <td>진행상태 (ERL06:진행완료)</td>                              
                                  <th>sendDt</th>
                                  <td>전송시간</td>
-                                 <th>stateCd</th>
-                                 <td>진행상태 (ERL06:진행완료)</td>
                               </tr>
                            </table>
                         </div>

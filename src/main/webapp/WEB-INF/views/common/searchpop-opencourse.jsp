@@ -20,7 +20,7 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <div class="info">※ 개설 과정은 '모집중', '모집마감' 상태만 수강 추가할 수 있습니다.</div>
+                    
                     <form id="search-form">
                         <div class="search-input">
                             <div class="search-section">
@@ -68,19 +68,21 @@
                             </div>
                             <button type="button" id="search-btn" class="btn search-btn open-subject-search-btn input-button">검 색</button>
                             <button type="button" id="close-btn" class="input-button">창닫기</button>
-                            </div>
                         </div>
                     </form>
+
+                    <div class="info">※ 개설 과정은 '모집중', '모집마감' 상태만 수강 추가할 수 있습니다.</div>
+                
                     <!-- 과정에 이미 포함된 강좌 넘어온 값 -->
                     <div id="unavailable-pop" type="hidden">
                     </div>
                 </div>
 
-                <!-- 리스트 영역 -->
-                <div class="list-wrap">
-                    
-                </div>
+            <!-- 리스트 영역 -->
+            <div class="list-wrap">
+                
             </div>
+        </div>
 
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/searchpop.js"></script>

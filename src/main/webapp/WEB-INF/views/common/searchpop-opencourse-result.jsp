@@ -15,6 +15,7 @@
                         <td class="th-column-4">모집기간</td>
                         <td class="th-column-5">상태</td>
                         <td class="th-column-6">분류</td>
+                        <td class="th-column-7">개설일자</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                             <td>${board.recruitStartDay} ~ ${board.recruitEndDay}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catCourseCdTitle}</td>
+                            <td>${board.courseOpenDt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

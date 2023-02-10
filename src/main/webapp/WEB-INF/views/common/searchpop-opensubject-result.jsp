@@ -8,7 +8,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td class="th-column-14">개설일자</td>
+                        <td class="th-column-14">개설연도</td>
                         <td class="th-column-1">강좌아이디</td>
                         <td class="th-column-1">강좌회차</td>
                         <td class="th-column-2">강좌명</td>
@@ -27,12 +27,13 @@
                         <td class="th-column-11">모집인원</td>
                         <td class="th-column-12">상태</td>
                         <td class="th-column-13">분류</td>
+                        <td class="th-column-14">개설일자</td>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${boardList}" var="board">
                         <tr>
-                            <td>${board.openDt}</td>
+                            <td>${board.openDtYear}</td>
                             <td>${board.subjectId}</td>
                             <td>${board.subjectSeq}</td>
                             <td>
@@ -64,6 +65,7 @@
                             <td>${board.totalPeople}/${board.recruitPeople}</td>
                             <td>${board.openStateCdTitle}</td>
                             <td>${board.catSubjectCdTitle}</td>
+                            <td>${board.openDt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
