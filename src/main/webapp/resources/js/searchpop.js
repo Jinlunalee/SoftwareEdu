@@ -43,7 +43,9 @@ function showList() {
         type : "POST",
         contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
     }).done(function(result){
+    	console.log("result 확인 : " + result);
         var html = jQuery('<div>').html(result);
+        console.log("html 확인 : " + html);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
         
