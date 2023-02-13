@@ -43,6 +43,9 @@
     padding:3px 30px;
     margin-bottom: 50px;
     font-size:25px;
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
 }
 .title-img {
 	width:45px;

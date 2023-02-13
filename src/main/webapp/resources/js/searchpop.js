@@ -403,8 +403,8 @@ function moveOutside(event, value){
 
 /* 만족도 조사 : 통계 조회 버튼 누를 시 통계 테이블 보여주기 */
 function viewSummary(subjectId, subjectSeq){
-    opener.document.querySelector("#chart-table").lastElementChild.remove(); // 리셋
-    opener.document.querySelector("#chart-bar").lastElementChild.remove(); // 리셋
+    opener.document.querySelector('#chart-table').innerHTML=''; // 리셋
+    opener.document.querySelector('#chart-bar').innerHTML=''; // 리셋
     $.ajax({
         url : "getjson?subjectId=" + subjectId + "&subjectSeq=" + subjectSeq,
         type : "GET",
