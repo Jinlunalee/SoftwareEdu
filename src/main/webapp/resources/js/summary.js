@@ -47,7 +47,6 @@ function showTableChart(data) {
     }]
     };
 
-    // var chartTable = new ApexCharts(document.querySelector("#chart-table"), tableOptions);
     const chartTableLocation = opener.document.querySelector("#chart-table");
     var chartTable = new ApexCharts(chartTableLocation, tableOptions);
     chartTable.render();
@@ -152,7 +151,6 @@ function showBarChart(data) {
     }
     };
 
-    // var chartBar = new ApexCharts(document.querySelector("#chart-bar"), barOptions);
     const chartBarLocation = opener.document.querySelector("#chart-bar");
     var chartBar = new ApexCharts(chartBarLocation, barOptions);
     chartBar.render();
