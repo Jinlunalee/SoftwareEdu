@@ -28,8 +28,6 @@ function bringValue() {
 /* 검색 결과 리스트 출력 함수 */
 function showList() {
     const searchForm = document.getElementById('search-form'); // 검색 폼
-    console.log(searchForm);
-    console.log(searchForm.length);
     let formInputs = '';
     for(var i=1; i<searchForm.length-1; i++) {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
@@ -37,15 +35,12 @@ function showList() {
     let searchUrl = String(formInputs).substring(1);
     const pathArr = location.pathname.split('/');
     const path = pathArr[2];
-    console.log(path + '-result?' + searchUrl);
     $.ajax({
         url : path + "-result?" + searchUrl,
         type : "POST",
         contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
     }).done(function(result){
-    	console.log("result 확인 : " + result);
         var html = jQuery('<div>').html(result);
-        console.log("html 확인 : " + html);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
         

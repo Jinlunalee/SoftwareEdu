@@ -57,11 +57,11 @@
 						<div class="search-section-content">
 							<select id="enroll-state" name="state" class="select-box input-box" style="width: 150px;">
 								<option value="">전체</option>
+								<option value="apply" ${state eq 'apply' ? "selected" : ""}>수강 신청</option>
 								<option value="expect" ${state eq 'expect' ? "selected" : ""}>수강 예정</option>
 								<option value="progress" ${state eq 'progress' ? "selected" : ""}>수강 중</option>
-								<option value="cancel" ${state eq 'cancel' ? "selected" : ""}>수강 취소</option>
-								<option value="apply" ${state eq 'apply' ? "selected" : ""}>수강 신청</option>
 								<option value="complete" ${state eq 'complete' ? "selected" : ""}>수강 완료</option>
+								<option value="cancel" ${state eq 'cancel' ? "selected" : ""}>수강 취소</option>
 							</select>
 						</div>
 					</div>
