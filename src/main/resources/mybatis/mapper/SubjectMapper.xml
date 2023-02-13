@@ -190,7 +190,7 @@
 	<update id="clickDeleteOpen" parameterType="map">
 		/*clickDeleteOpen*/
 		update open
-		set del_yn = 'Y'
+		set del_yn = 'Y', state_cd = 'OPN01'
 		where subject_id = #{subjectId} and subject_seq = #{subjectSeq}
 	</update>
 	

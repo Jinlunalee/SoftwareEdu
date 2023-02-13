@@ -78,7 +78,7 @@
 	
 	<select id="checkCourseByYearandState" parameterType="String" resultType="int">
 		select count(*) from open
-		where course_id=#{courseId} and course_open_year = 2023 and state_cd  = 'OPN01'
+		where course_id=#{courseId} and course_open_year = 2023 and state_cd  = 'OPN01' and del_yn = 'N'
 	</select>
 	
 	<select id="searchOpenSubject" parameterType="OpenVO" resultType="OpenVO">
