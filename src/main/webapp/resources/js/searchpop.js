@@ -28,8 +28,6 @@ function bringValue() {
 /* 검색 결과 리스트 출력 함수 */
 function showList() {
     const searchForm = document.getElementById('search-form'); // 검색 폼
-    console.log(searchForm);
-    console.log(searchForm.length);
     let formInputs = '';
     for(var i=1; i<searchForm.length-1; i++) {
         formInputs += "&" + searchForm.elements[i].name + "=" + searchForm.elements[i].value;
@@ -37,17 +35,14 @@ function showList() {
     let searchUrl = String(formInputs).substring(1);
     const pathArr = location.pathname.split('/');
     const path = pathArr[2];
-    console.log(path + '-result?' + searchUrl);
     $.ajax({
         url : path + "-result?" + searchUrl,
         type : "POST",
-        contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
+        contentType: "application/json; charset:UTF-8"
     }).done(function(result){
-    	console.log("result 확인 : " + result);
-        var html = jQuery('<div>').html(result);
-        console.log("html 확인 : " + html);
-        var contents = html.find("div#result-list").html();
-        $(".list-wrap").html(contents);
+        var html = jQuery('<div>').html(result); // <div>를 jQuery객체를 만들고, ajax결과(jsp)를 html에 담음
+        var contents = html.find("div#result-list").html();  // ajax결과(jsp)에서 #result-list <div>를 찾아 그 내용을 contents에 담음
+        $(".list-wrap").html(contents); // #result-list <div>의 내용을 .list-wrap에 넣음
         
         /* 불러온 리스트에서 수행할 작업 ex. 제한조건 */
         // 강좌 검색 팝업
@@ -210,7 +205,7 @@ function moveOutside(event, value){
         if(path.substring(10,25)==='subject') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
             $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + "  |  개설일자 : " + openDt);
-             setUnavailableSubjectId('subjectTitleClicked', valueId); 
+            setUnavailableSubjectId('subjectTitleClicked', valueId); 
 
         // 만족도 조사 : open subject done만 해당, 통계 테이블 보여주기
         } else if(path.substring(10,30)==='opensubjectDone') { 
@@ -404,7 +399,7 @@ function moveOutside(event, value){
     return false;
 }
 
-/* 만족도 조사 : 통계 조회 버튼 누를 시 통계 테이블 보여주기 */
+/* 만족도 조사 : 강좌명 누를 시 통계 테이블 보여주기 */
 function viewSummary(subjectId, subjectSeq){
     opener.document.querySelector('#chart-table').innerHTML=''; // 리셋
     opener.document.querySelector('#chart-bar').innerHTML=''; // 리셋
@@ -413,7 +408,6 @@ function viewSummary(subjectId, subjectSeq){
         type : "GET",
         async : false,
         success : function(data){
-            console.log(data);
             showTableChart(data); // subject에 따른 table chart 보여주기
             showBarChart(data); // subject에 따른 bar chart 보여주기
         },
