@@ -33,4 +33,7 @@ public interface ISubjectService {
 	List<OpenVO> selectOpenCourseBySubjectIdAndYear(String subjectId, String year);  // 올해 해당강좌에 개설된 과정 리스트 가져오기
 	List<OpenVO> selectOpenSubjectByStudentId(String studentId);  // 수강생이 들었거나 듣고있는 강좌 리스트 가져오기
 	int checkHoliday(String startDay, String endDay);
+	
+	OpenVO infoOpenCourse(String courseId, String year); // 같은 개설 과정에 대한 정보
+	
 }
