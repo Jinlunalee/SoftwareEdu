@@ -35,29 +35,26 @@
 			
 			<tr>
 				<th>강좌 명 (아이디)</th>
-				<td>${enroll.subjectTitle} (${enroll.subjectId})</td>
-				<th>강좌 기간</th>
-				<td>${enroll.startDay} ~ ${enroll.endDay}</td>
-				<th>강좌 상태</th>
-				<td>${enroll.openStateCdTitle}</td>
-				<th>강좌 분류</th>
-				<td>${enroll.catSubjectCdTitle}</td>
+				<td colspan='3'>${enroll.subjectTitle} (${enroll.subjectId})</td>
+				<th>과정 명 (아이디)</th>
+				<c:if test="${empty enroll.courseId}">
+					<td colspan='3'>${enroll.courseTitle}</td>
+				</c:if>
+				<c:if test="${!empty enroll.courseId}">
+				<td colspan='3'>${enroll.courseTitle} (${enroll.courseId})</td>
+				</c:if>
 			</tr>
 			
 			<tr>
-				<th>일수</th>
-				<td>${enroll.days}</td>
-				<th>시수</th>
-				<td id="subject-hours">${enroll.hours}</td>
+				<th id="subject-hours">강좌 기간 (시수)</th>
+				<td>${enroll.startDay} ~ ${enroll.endDay} (${enroll.hours})</td>
+				<th>강좌 상태</th>
+				<td>${enroll.openStateCdTitle}</td>
 				<th>강좌 난이도</th>
 				<td>${enroll.levelCdTitle}</td>
-				<th>과정 명 (아이디)</th>
-				<c:if test="${empty enroll.courseId}">
-					<td>${enroll.courseTitle}</td>
-				</c:if>
-				<c:if test="${!empty enroll.courseId}">
-				<td>${enroll.courseTitle} (${enroll.courseId})</td>
-				</c:if>
+				<th>강좌 분류</th>
+				<td>${enroll.catSubjectCdTitle}</td>
+				
 			</tr>
 
 		</table>

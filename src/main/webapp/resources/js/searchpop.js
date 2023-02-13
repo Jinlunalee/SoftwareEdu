@@ -43,7 +43,9 @@ function showList() {
         type : "POST",
         contentType: "application/json; charset:UTF-8"  // 한글이 물음표로 깨져서 나오는 현상 방지
     }).done(function(result){
+    	console.log("result 확인 : " + result);
         var html = jQuery('<div>').html(result);
+        console.log("html 확인 : " + html);
         var contents = html.find("div#result-list").html();
         $(".list-wrap").html(contents);
         
@@ -195,7 +197,7 @@ function moveOutside(event, value){
         let catSubjectCdTitle = valueArr[16];
         let totalPeople = valueArr[17];
         
-        resetValueSubjectorCourse(); //강좌/과정 다시선택
+        checkHideFirst(); //강좌/과정 다시선택
 
         $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + valueSeq + "회차  |  개설일자 : " + openDt);
         $(opener.document).find("#subject-input").val(value);
@@ -208,7 +210,7 @@ function moveOutside(event, value){
         if(path.substring(10,25)==='subject') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
             $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + "  |  개설일자 : " + openDt);
-            setUnavailableSubjectId('subjectTitleClicked', valueId); 
+             setUnavailableSubjectId('subjectTitleClicked', valueId); 
 
         // 만족도 조사 : open subject done만 해당, 통계 테이블 보여주기
         } else if(path.substring(10,30)==='opensubjectDone') { 
@@ -255,7 +257,7 @@ function moveOutside(event, value){
         let valueTitle = valueArr[2];
         let valueYear = valueArr[3];
 
-        resetValueSubjectorCourse(); //강좌/과정 다시선택
+        checkHideFirst(); //강좌/과정 다시선택
         
         $(opener.document).find("#courseTitle-input").val(valueTitle + " (" + valueId + ") | 개설연도 : " + valueYear);
         $(opener.document).find("#course-input").val(value);
@@ -573,30 +575,15 @@ function resetValue() {
         subjectList.innerText=null;
         alert("수강생을 다시 선택하였습니다. 강좌/과정을 다시 선택해주세요.");
     }
-}
+}  
 
-/* 강좌/과정 개설시 alert창 띄우기 */
-function resetValueSubjectorCourse() {
-    console.log('resetValueSubject');
-    const subjectTitleInput = opener.document.getElementById('subjectTitle-input');
-    const courseTitleInput = opener.document.getElementById('courseTitle-input');
-    const check = opener.document.getElementById('check');
+/*hide-fist가 없으면 alert창 띄우고 다시 숨겨주기*/
+function checkHideFirst() {
+    const removeHide = opener.document.getElementsByClassName('remove-hide').length;
+    const hideFirst = opener.document.getElementsByClassName('remove-hide hide-first');
 
-    if(check){
-        console.log('check not null');
-        if(check.value === "openCourse"){ //과정 필수
-            if(subjectTitleInput.value && courseTitleInput.value) {
-                alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
-            }
-        }else { //강좌만 필수
-            if(courseTitleInput.value){ //과정만 입력하구 강좌는 처음 입력
-                if(subjectTitleInput.value && courseTitleInput.value){
-                    alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
-                }
-            }else if(subjectTitleInput.value || courseTitleInput.value){ // 강좌만 입력할때
-                alert("강좌/과정을 다시 선택하였습니다. 선택완료를 눌러 상세정보를 입력해주세요. ");
-            }
-        }
+    if(hideFirst.length == 0){ //
+        alert("강좌/과정을 다시 선택했습니다.");
         addHideFirst();
     }
 }
