@@ -113,7 +113,7 @@
 						<c:forEach var="board" items="${boardList}" varStatus="status">
 							<tr>
 								<td>
-									<a href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
+									<a style="color: #005ba7;text-decoration: underline;" href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
 								
 									<%-- 과정명  --%> 
 									<c:if test="${not empty board.courseTitle}">
