@@ -163,6 +163,11 @@ public class SubjectController {
 		model.addAttribute("menuKOR", "강좌 관리");
 
 		OpenVO openVo = subjectService.selectSubjectDetails(subjectId, subjectSeq);
+		if(!"".equals(openVo.getCourseId()) && openVo.getCourseId() != null) {
+			OpenVO openCourseVo = subjectService.infoOpenCourse(openVo.getCourseId(), openVo.getCourseOpenYear());// 과정에 대한 정보 가져오기
+			model.addAttribute("openCourse", openCourseVo);
+			logger.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaa:"+openCourseVo);
+		}
 		model.addAttribute("open", openVo);
 
 		return "subject/update";

@@ -82,7 +82,7 @@
 								<td>${board.courseTitle}</td>
 								<td>
 									<span>
-									<a href="<c:url value='/subject/details/${board.subjectId}/${board.subjectSeq}'/>">${board.subjectTitle}</a>
+									<a style="color: #005ba7; text-decoration: underline;" href="<c:url value='/subject/details/${board.subjectId}/${board.subjectSeq}'/>">${board.subjectTitle}</a>
 									</span>
 								</td>
 								<td>${board.catSubjectCdTitle}</td>

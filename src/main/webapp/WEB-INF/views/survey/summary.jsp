@@ -27,16 +27,20 @@
 			<!-- 차트 테이블 -->
 			<div class="charts">
 				<div class="charts-grid">
-					<div id="chart-table" class="chart-item chart-table">
-						<div class="chart-item-title">
+					<div class="chart-table-group">
+						<div class="chart-item-title">	
 							<img class="title-img" src="<c:url value='/resources/images/survey/survey_summary.png'/>"/>
 							강좌 전체 만족도
 						</div>
+						<div id="chart-table" class="chart-item chart-table">
+						</div>
 					</div>
-					<div id="chart-bar" class="chart-item chart-bar">
+					<div class="chart-bar-group">
 						<div class="chart-item-title">
 							<img class="title-img" src="<c:url value='/resources/images/survey/survey_summary.png'/>"/>
 							강좌 문항별 만족도
+						</div>
+						<div id="chart-bar" class="chart-item chart-bar">
 						</div>
 					</div>
 				</div>

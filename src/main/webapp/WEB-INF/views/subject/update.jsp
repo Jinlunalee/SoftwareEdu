@@ -136,6 +136,7 @@
          <input type="hidden" name="fileId" value="${open.fileId}">
          <input type="hidden" name="courseId" value="${open.courseId}">
          <input type="hidden" name="openStateCd" id="openStateCd" value="${open.openStateCd}">
+         <input type="hidden" id ="openCourseStartDay" value="${openCourse.startDay}">
          <input type="submit" value="저장">
       </div>
       </form>
@@ -145,5 +146,17 @@
    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    <script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
+   <script type="text/javascript">
+      window.onload = function() {
+         let startTime = document.getElementById("startTime").value;
+	      let endTime = document.getElementById("endTime").value;
+         let startDay = document.getElementById("startDay").value;
+         let recruitStartDay = document.getElementById('recruitStartDay');
+         let recruitEndDay = document.getElementById('recruitEndDay');
+         timeMinMax(startTime, endTime);
+         MinMaxChange(startDay,recruitStartDay,recruitEndDay);
+      }
+
+   </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

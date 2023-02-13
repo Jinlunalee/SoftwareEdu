@@ -264,15 +264,15 @@
                }
             });
          }
+         
          /* 첫번째 JSON */
          $(function () {
             $("#first_btn").click(function () {
-               $("#show_JSON, #show_info1").hide();
                $("#show_XML, #show_info1").hide();
                $("#show_JSON2, #show_info2").hide();
                $("#show_XML2, #show_info2").hide();
 
-               $("#show_JSON, #show_info1").toggle();
+               $("#show_JSON, #show_info1").show();
 
                getJson();
             });
@@ -282,11 +282,10 @@
          $(function () {
             $("#second_btn").click(function () {
                $("#show_JSON, #show_info1").hide();
-               $("#show_XML, #show_info1").hide();
                $("#show_JSON2, #show_info2").hide();
                $("#show_XML2, #show_info2").hide();
 
-               $("#show_XML, #show_info1").toggle();
+               $("#show_XML, #show_info1").show();
 
                getXml();
             });
@@ -297,10 +296,9 @@
             $("#third_btn").click(function () {
                $("#show_JSON, #show_info1").hide();
                $("#show_XML, #show_info1").hide();
-               $("#show_JSON2, #show_info2").hide();
                $("#show_XML2, #show_info2").hide();
 
-               $("#show_JSON2, #show_info2").toggle();
+               $("#show_JSON2, #show_info2").show();
 
                getJsonSbj();
             });
@@ -312,9 +310,8 @@
                $("#show_JSON, #show_info1").hide();
                $("#show_XML, #show_info1").hide();
                $("#show_JSON2, #show_info2").hide();
-               $("#show_XML2, #show_info2").hide();
 
-               $("#show_XML2, #show_info2").toggle();
+               $("#show_XML2, #show_info2").show();
 
                getXmlSbj();
             });
@@ -335,7 +332,7 @@
                      
                      const result4 = document.getElementById('result4');
                      result4.innerText=''; 
-                 */
+                */
 
                $("#show_JSON, #show_info1").hide();
                $("#show_JSON2, #show_info3").hide();

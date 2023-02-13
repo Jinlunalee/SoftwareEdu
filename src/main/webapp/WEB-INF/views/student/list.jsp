@@ -20,7 +20,7 @@
 						<div class="search-section-content selectstudent">
 							<select class="select-box input-box" name="student">
 								<option value="stdtName" ${student eq 'stdtName' ? "selected" : ""}>수강생명</option>
-								<option value="stdtId" ${student eq 'stdtId' ? "selected" : ""}>수강생아이디</option>
+								<option value="stdtId" ${student eq 'stdtId' ? "selected" : ""}>아이디</option>
 							</select> 
 							<input name="keyword" class="input-text input-box" type="text" value="${keyword}" placeholder="검색어를 입력해 주세요">
 						</div>

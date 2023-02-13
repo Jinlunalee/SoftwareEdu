@@ -69,6 +69,7 @@ function chcekCourseOrSubject() {
 			selected(courseId, subjectId);
 			removeHideFirst()
 		}else{
+			// swal('','과정과 강좌 모두 선택 후 눌러주세요.', 'warning');
 			alert("과정과 강좌 모두 선택 후 눌러주세요.");
 		}
 	}else{ //강좌만 필수
@@ -76,6 +77,7 @@ function chcekCourseOrSubject() {
 			selected(courseId, subjectId);
 			removeHideFirst()
 		}else{
+			// swal('','강좌 선택 후 눌러주세요.', 'warning');
 			alert("강좌 선택 후 눌러주세요.");
 		}
 	}
@@ -306,13 +308,12 @@ function timeMinMax(startTime, endTime) {
 		//선택된 endTime 가져오기
 		let checkSelectTime = $("#endTime option:selected").val();
 
-		console.log(checkSelectTime);
-		console.log(options);
+		// console.log(checkSelectTime);
+		// console.log(options);
+
 		//checkSelectTime랑 options비교해서 비활성화
 		for (var i = 0; i < options.length; i++) {
-			console.log(options[i]);
 			if (options[i] >= checkSelectTime) {
-				console.log(options[i]);
 				$('#startTime option:eq('+i+')').prop('disabled', true);
 			}
 		}
@@ -420,14 +421,18 @@ function selectRecruitDay(){
 
 	if(ajaxRecruitStart){// 같은 과정이 있으면 그 과정의 신청기간을 들고와서 입력해줌
 		//신청시작일자
+		let ajaxStartDate = new Date(ajaxStart);
+		ajaxStartDate.setDate(ajaxStartDate.getDate()-1);
+
 		recruitStartDay.value = ajaxRecruitStart;
-		recruitStartDay.max = ajaxStart; //같은과정 연수 시작하기 전
+		// recruitStartDay.max = ajaxStart; //같은과정 연수 시작하기 전
+		recruitStartDay.max = ajaxStartDate.toJSON().substring(0,10); //같은과정 연수 시작하기 전
 
 		//신청끝나는일자
 		recruitEndDay.value = ajaxRecruitEnd;
 		recruitEndDay.min = recruitStartDay.value;
-		recruitEndDay.max = ajaxStart;  //같은과정 연수 시작하기 전
-		console.log(recruitStartDay.max);
+		// recruitEndDay.max = ajaxStart;  //같은과정 연수 시작하기 전
+		recruitEndDay.max = ajaxStartDate.toJSON().substring(0,10);  //같은과정 연수 시작하기 전
 
 		recruitStartDay.onchange();
 		recruitEndDay.onchange();
@@ -454,10 +459,59 @@ function selectRecruitDay(){
 
 /*신청기간이 변경 */
 function MinMaxChange(startDay, recruitStartDay, recruitEndDay){
-	recruitStartDay.max = startDay;
+	let startDate;
+	//입력시랑 수정시에 따라서 다르게 
+	pathArr = location.pathname.split('/');
+	pathName = pathArr[2];
+	if(pathName === 'insert'){ //입력시
+		if(ajaxRecruitStart){ // 같은 과정이 있을때 
+			let ajaxStartDate = new Date(ajaxStart);
+			ajaxStartDate.setDate(ajaxStartDate.getDate()-1);
+
+			recruitStartDay.max = ajaxStartDate.toJSON().substring(0,10); //같은과정 연수 시작하기 전
+
+			recruitEndDay.max = ajaxStartDate.toJSON().substring(0,10); //같은과정 연수 시작하기 전
+			if (recruitEndDay.value < recruitStartDay.value) { //모집기간 시작일이 모집기간 끝나는날보다 크면 
+				recruitEndDay.value = recruitStartDay.value;
+			}
+			recruitEndDay.min = recruitStartDay.value;
+		}else{ //같은 과정이 없을때
+			startDate = new Date(startDay);
+			startDate.setDate(startDate.getDate() - 1); // 강좌시작 하루전까지만 신청가능하도록
+			recruitStartDay.max = startDate.toJSON().substring(0, 10);
+
+			recruitEndDay.max = startDate.toJSON().substring(0, 10);
+			if (recruitEndDay.value < recruitStartDay.value) { //모집기간 시작일이 모집기간 끝나는날보다 크면 
+				recruitEndDay.value = recruitStartDay.value;
+			}
+			recruitEndDay.min = recruitStartDay.value;
+		}
+	}else if(pathName === 'update'){ //수정시 
+		//같은 과정을 가진 시작날짜 가져오기
+		const openCourseStartDay = document.getElementById("openCourseStartDay");
+		if(openCourseStartDay.value){ //같은과정이 있을떄
+			let csDate = new Date(parse(openCourseStartDay.value));
+			csDate.setDate(csDate.getDate()-1);
+			recruitStartDay.max = csDate.toJSON().substring(0,10); //같은과정 연수 시작하기 전
+
+			recruitEndDay.max = csDate.toJSON().substring(0,10); //같은과정 연수 시작하기 전
+			if (recruitEndDay.value < recruitStartDay.value) { //모집기간 시작일이 모집기간 끝나는날보다 크면 
+				recruitEndDay.value = recruitStartDay.value;
+			}
+			recruitEndDay.min = recruitStartDay.value;
+		}else{ //같은 과정이 없을때
+			startDate = new Date(startDay);
+			startDate.setDate(startDate.getDate() - 1); // 강좌시작 하루전까지만 신청가능하도록
+			recruitStartDay.max = startDate.toJSON().substring(0, 10);
+
+			recruitEndDay.max = startDate.toJSON().substring(0, 10);
+			if (recruitEndDay.value < recruitStartDay.value) { //모집기간 시작일이 모집기간 끝나는날보다 크면 
+				recruitEndDay.value = recruitStartDay.value;
+			}
+			recruitEndDay.min = recruitStartDay.value;
+		}
+	}
 	
-	recruitEndDay.max = startDay;
-	recruitEndDay.min = recruitStartDay.value;
 }
 
 /*오늘날짜와 기간들 비교해서 모집상태 입력*/

@@ -267,6 +267,7 @@
 <script type="text/javascript" src="<c:url value='/resources/js/subject.js'/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/opensearchpop.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/summary.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	
 	/* 모달창 열기 */
