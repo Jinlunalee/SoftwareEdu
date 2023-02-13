@@ -69,6 +69,7 @@ function chcekCourseOrSubject() {
 			selected(courseId, subjectId);
 			removeHideFirst()
 		}else{
+			// swal('','과정과 강좌 모두 선택 후 눌러주세요.', 'warning');
 			alert("과정과 강좌 모두 선택 후 눌러주세요.");
 		}
 	}else{ //강좌만 필수
@@ -76,6 +77,7 @@ function chcekCourseOrSubject() {
 			selected(courseId, subjectId);
 			removeHideFirst()
 		}else{
+			// swal('','강좌 선택 후 눌러주세요.', 'warning');
 			alert("강좌 선택 후 눌러주세요.");
 		}
 	}
