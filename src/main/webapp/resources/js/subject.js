@@ -543,34 +543,34 @@ function inputState(){
 	// console.log(state.value);
 }
 
-/*페이지별 개수 선택 유지(subject) - ajax*/
-function listCount(RowsPerPage, subject, keyword) { // 검색 결과 리스트 출력
-	console.log(RowsPerPage);
-	$.ajax({
-		url: "ajaxsubjectboardlist?strRowsPerPage="+RowsPerPage+"&subject="+subject+"&keyword="+keyword,
-		type: "POST"
-	}).done(function (result) {
-		console.log('success');
-		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
-		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택해서 변수에 저장/끼워넣을 jsp
-		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
-	}).fail(function(){
-		console.log('fail');
-	});
-}
+// /*페이지별 개수 선택 유지(subject) - ajax*/
+// function listCount(RowsPerPage, subject, keyword) { // 검색 결과 리스트 출력
+// 	console.log(RowsPerPage);
+// 	$.ajax({
+// 		url: "ajaxsubjectboardlist?strRowsPerPage="+RowsPerPage+"&subject="+subject+"&keyword="+keyword,
+// 		type: "POST"
+// 	}).done(function (result) {
+// 		console.log('success');
+// 		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
+// 		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택해서 변수에 저장/끼워넣을 jsp
+// 		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
+// 	}).fail(function(){
+// 		console.log('fail');
+// 	});
+// }
 
-/*페이지별 개수 선택 유지(course) - ajax*/
-function listCount2(RowsPerPage, course, keyword) { // 검색 결과 리스트 출력
-	console.log(RowsPerPage);
-	$.ajax({
-		url: "ajaxcourseboardlist?strRowsPerPage="+RowsPerPage+"&course="+course+"&keyword="+keyword,
-		type: "POST"
-	}).done(function (result) {
-		console.log('success');
-		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
-		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
-		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
-	}).fail(function(){
-		console.log('fail');
-	});
-}
+// /*페이지별 개수 선택 유지(course) - ajax*/
+// function listCount2(RowsPerPage, course, keyword) { // 검색 결과 리스트 출력
+// 	console.log(RowsPerPage);
+// 	$.ajax({
+// 		url: "ajaxcourseboardlist?strRowsPerPage="+RowsPerPage+"&course="+course+"&keyword="+keyword,
+// 		type: "POST"
+// 	}).done(function (result) {
+// 		console.log('success');
+// 		var html = jQuery('<div>').html(result); // div 요소의 내용을 지우고 result를넣음
+// 		var contents = html.find('div#page-list').html(); //위의 html요소의 하위요소 중 ''를 선택
+// 		$('#list-wrap').html(contents);//contents를 원래 jsp(subjectlist)에 넣음.
+// 	}).fail(function(){
+// 		console.log('fail');
+// 	});
+// }

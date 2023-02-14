@@ -1,8 +1,5 @@
 package com.mycompany.webapp.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.annotations.Expose;
@@ -41,20 +38,14 @@ public class OpenVO {
 	
 	//개설 관련
 	@Expose
-//	@NotBlank(message = "연수시작일자는 필수입력값입니다.")
 	private String startDay; //연수 시작 일자
 	@Expose
 	private String endDay; //연수 종료 일자
-//	@NotBlank(message = "연수시작시간은 필수입력값입니다.")
 	private String startTime; //연수 시작 시간
-//	@NotBlank(message = "연수종료시간은 필수입력값입니다.")
 	private String endTime; //연수 종료 시간
-//	@NotBlank(message = "모집시작일자는 필수입력값입니다.")
 	private String recruitStartDay; //모집 시작 일자
-//	@NotBlank(message = "모집종료일자는 필수입력값입니다.")
 	private String recruitEndDay; //모집 종료 일자
 	private int totalPeople; // 현재 모집된 인원
-//	@Min(value=5, message="모집인원은 최소 5명 이상이여야 합니다.")
 	private int recruitPeople; //모집 인원
 	private String content;//개설 강좌 내용
 	private String openStateCd;//개설 상태 코드
