@@ -19,7 +19,7 @@ $('.open-subject-done-popup-btn').on("click", function(e){
     let popupUrl = "/common/searchpop-opensubjectDone";
     let popupOption = "width = 1300px, height=550px, top=200px, left=200px, scrollbars=yes";
 
-    window.open(popupUrl,"개설 강좌 검색", popupOption);
+    window.open(popupUrl,"완료 강좌 검색", popupOption);
 });
 
 /* open course 검색 버튼 누를 시 검색 팝업 실행 */
