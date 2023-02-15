@@ -72,9 +72,9 @@
                      <td>${board.name}</td> 
                      <td>${board.userId}</td>
                      <td>${board.birth}</td>							
-							<td>${board.email}</td>
-							<td>${board.positionTitle}</td>
-						</tr>
+					 <td>${board.email}</td>
+					 <td>${board.positionTitle}</td>
+				  </tr>
 					</c:forEach>
 				</c:if>
 				<c:if test="${boardListSize eq 0}">

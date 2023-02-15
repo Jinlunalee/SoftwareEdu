@@ -22,7 +22,7 @@
         enroll.del_yn='N'
         <if test="startDay != '' and endDay != ''">
             AND open.start_day BETWEEN TO_DATE(#{startDay}) AND TO_DATE(#{endDay})
-        </if>     
+        </if>
         <!--  sysdate로 쓰는 것도 가능  -->
         <if test="startDay != '' and endDay == ''">
             AND open.start_day <![CDATA[ >= ]]> TO_DATE(#{startDay})

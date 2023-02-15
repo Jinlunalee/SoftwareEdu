@@ -219,7 +219,7 @@ function moveOutside(event, value){
                 levelString = levelCdTitle;
             }
             else{
-                levelString = levelCdTitle + '(' + levelEtc + ')';
+                levelString = levelEtc;
             }
 
             var table = $("<table class='result-table' border='1'/>");
@@ -230,7 +230,7 @@ function moveOutside(event, value){
                     $("<th class='result-th'/>").text('모집인원'),
                     $("<th class='result-th'/>").text('강좌분류'),
                     $("<th class='result-th'/>").text('개설상태'),
-                    $("<th class='result-th'/>").text('난이도(기타)')
+                    $("<th class='result-th'/>").text('난이도')
             ));
             table.append(tr);
             var tr = table.append($("<tr class='result-tr'/>").append(
@@ -305,9 +305,9 @@ function moveOutside(event, value){
                             var $endDay = result[i].endDay;
                             var $startTime = result[i].startTime;
                             var $endTime = result[i].endTime;
-                            var $days = result[i].days;
                             var $hours = result[i].hours;
                             var $levelCdTitle = result[i].levelCdTitle;
+                            var $levelEtc = result[i].levelEtc;
                             var $cost = result[i].cost;
                             $cost = $cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 비용 콤마 처리
                             var $supportYn = result[i].supportYn;
@@ -317,6 +317,14 @@ function moveOutside(event, value){
                             }else if($supportYn === 'N') {
                                 $supportYn = '지원 불가'
                             }
+                            // 난이도 정해놓기
+                            let levelString;
+                            if(!$levelEtc) {
+                                levelString = $levelCdTitle;
+                            }
+                            else{
+                                levelString = $levelEtc;
+                            }
                             
                             var tr2 = table.append($("<tr class='result-tr'/>").append(
                                     $("<td class='result-td'/>").text($subjectId),
@@ -325,7 +333,7 @@ function moveOutside(event, value){
                                     $("<td class='result-td'/>").text($startDay + ' ~ ' + $endDay),
                                     $("<td class='result-td'/>").text($startTime + ' ~ ' + $endTime),
                                     $("<td class='result-td'/>").text($hours),
-                                    $("<td class='result-td'/>").text($levelCdTitle),
+                                    $("<td class='result-td'/>").text(levelString),
                                     $("<td class='result-td'/>").text($cost),
                                     $("<td class='result-td'/>").text($supportYn)
                             ));

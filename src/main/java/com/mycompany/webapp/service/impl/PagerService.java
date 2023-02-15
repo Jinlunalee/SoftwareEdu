@@ -90,27 +90,6 @@ public class PagerService implements IPagerService {
 		return boardList;
 	}
 	
-	public List<EnrollVO> selectSearchListByExcel(EnrollVO enroll) {
-		String applyStartDay = enroll.getApplyStartDay();
-		String applyEndDay = enroll.getApplyEndDay();
-		String student = enroll.getStudent();
-		String course = enroll.getCourse();
-		String state = enroll.getState();
-		String keyword1 = enroll.getKeyword1();
-		String keyword2 = enroll.getKeyword2();
-		
-		List<EnrollVO> boardList = pagerRepository.selectSearchListByExcel(applyStartDay, applyEndDay, student, course, state, keyword1, keyword2);
-		for(EnrollVO enrollVo : boardList) {
-			enrollVo.setStateCdTitle(homeRepository.getComnCdTitle(enrollVo.getStateCd()));
-			if(enrollVo.getCancelRsCd() != null) {
-				enrollVo.setCancelRsTitle(homeRepository.getComnCdTitle(enrollVo.getCancelRsCd()));
-			}
-			
-		}
-		
-		return boardList;
-	}
-	
 	//과정 검색
 	@Override
 	public int getCountSearchOpenCourseRow(String catCourseCd, String course, String keyword) {

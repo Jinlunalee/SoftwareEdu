@@ -24,7 +24,6 @@ public interface IEnrollRepository {
 	void approval(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq);
 	List<OpenVO> getOpenList(OpenVO openVO);
 	void addEnroll(@Param("studentId") String studentId, @Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq, @Param("maxEnrollId") int maxEnrollId);
-//	void addCourse(Map<String, Object> addCourse, String studnetId, String maxEnroll2);
 	int getMaxEnrollId();
 	int getSubjectCountByCourse(@Param("courseId") String courseId, @Param("courseOpenYear") String courseOpenYear);
 	List<OpenVO> getSubjectInfoByCourse(@Param("courseId") String courseId, @Param("courseOpenYear") String courseOpenYear);

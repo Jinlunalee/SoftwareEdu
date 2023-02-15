@@ -3,7 +3,6 @@ package com.mycompany.webapp.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -159,7 +158,6 @@ public class EnrollController {
 	 */
 	@RequestMapping(value="/addhours", method=RequestMethod.POST)
 	public String addHours(EnrollVO enroll) {
-		System.out.println(enroll);
 		enrollService.addHours(enroll.getAddHours(), enroll.getEnrollId());
 		return "redirect:/enroll/details/" + enroll.getEnrollId();
 	}
@@ -221,8 +219,6 @@ public class EnrollController {
 	@RequestMapping(value="/addenroll/{studentId}/{subjectId}/{subjectSeq}", method=RequestMethod.POST)
 	@ResponseBody
 	public void addEnroll(@PathVariable String studentId, @PathVariable String subjectId, @PathVariable int subjectSeq) {
-		System.out.println(studentId);
-		logger.info("addEnroll: "+studentId+subjectId+subjectSeq);
 		enrollService.addEnroll(studentId, subjectId, subjectSeq);
 	}
 
@@ -236,7 +232,6 @@ public class EnrollController {
 	@RequestMapping(value="/addcourse/{studentId}/{courseId}/{courseOpenYear}", method=RequestMethod.POST)
 	@ResponseBody
 	public void addCourse(@PathVariable String studentId, @PathVariable String courseId, @PathVariable String courseOpenYear) {
-		System.out.println(courseId);
 		enrollService.addCourse(studentId, courseId, courseOpenYear);
 	}
 
@@ -266,7 +261,11 @@ public class EnrollController {
 		headerRow.createCell(7).setCellValue("취소 사유");
 		headerRow.createCell(8).setCellValue("취소 사유 기타");
 		
-			List<EnrollVO> searchList = pagerService.selectSearchListByExcel(enrollVo);
+		int totalRows = 0;
+		pageNo = 0;
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enrollVo, pager);
+		
 			for (EnrollVO enroll : searchList) {
 				Row row = sheet.createRow(rowNo++);
 				row.createCell(0).setCellValue(enroll.getSubjectTitle());
