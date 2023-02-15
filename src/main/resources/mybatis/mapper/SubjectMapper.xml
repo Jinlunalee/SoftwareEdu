@@ -79,7 +79,7 @@
 	
 	<select id="selectMaxFileId" resultType="String">
 		/*selectMaxFileId*/
-		select max(file_id)
+		select nvl(max(file_id),'FILE0001')
 		from upload_file
 	</select>
 	
@@ -171,11 +171,11 @@
 		where course_id = #{courseId} and course_open_year = #{year} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
-	<select id="checkOpenCourse" parameterType="String" resultType="int">
+	<select id="checkOpenCourse" parameterType="map" resultType="int">
 		/*checkOpenCourse*/
 		select count(*) 
 		from open 
-		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
+		where course_id = #{courseId} and course_open_year = #{year} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</select>
 	
 	<update id="updateRecruitSameCourse" parameterType="OpenVO">
@@ -185,7 +185,7 @@
 			recruit_start_day = TO_CHAR(TO_DATE(#{recruitStartDay},'YYYY-MM-DD'), 'YYYYMMDD'),
 			recruit_end_day = TO_CHAR(TO_DATE(#{recruitEndDay},'YYYY-MM-DD'), 'YYYYMMDD'),
 			state_cd=#{openStateCd}
-		where course_id = #{courseId} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
+		where course_id = #{courseId} and course_open_year = #{courseOpenYear} and del_yn = 'N' and state_cd <![CDATA[ <> ]]> 'OPN07'
 	</update>
 	
 	<update id="clickDeleteOpen" parameterType="map">

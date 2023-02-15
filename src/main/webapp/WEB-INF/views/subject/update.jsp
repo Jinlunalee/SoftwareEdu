@@ -130,6 +130,7 @@
          <input type="hidden" name="fileId" value="${open.fileId}">
          <input type="hidden" name="courseId" value="${open.courseId}">
          <input type="hidden" name="openStateCd" id="openStateCd" value="${open.openStateCd}">
+         <input type="hidden" name="courseOpenYear" id="courseOpenYear" value="${open.courseOpenYear}">
          <input type="hidden" id ="openCourseStartDay" value="${openCourse.startDay}">
          <input type="submit" value="저장">
       </div>

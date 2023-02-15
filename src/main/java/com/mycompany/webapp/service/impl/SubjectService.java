@@ -43,7 +43,7 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int insertSubject(OpenVO openVo) {
-		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId(), openVo.getCourseOpenYear()); //과정 개설 여부 확인
 		subjectRepository.insertSubject(openVo);
 		if(check > 0) { // 같은 과정 존재
 			subjectRepository.updateRecruitSameCourse(openVo);
@@ -54,7 +54,7 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int insertFileData(OpenVO openVo, UploadfileVO file) {
-		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId(),openVo.getCourseOpenYear()); //과정 개설 여부 확인
 		if(check > 0) { // 같은 과정 존재
 			subjectRepository.updateRecruitSameCourse(openVo);
 		}
@@ -91,7 +91,7 @@ public class SubjectService implements ISubjectService{
 	@Transactional
 	@Override
 	public int updateSubject(OpenVO openVo) {
-		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId(),openVo.getCourseOpenYear()); //과정 개설 여부 확인
 		subjectRepository.updateSubject(openVo);
 		if(check > 0) { // 같은 과정 존재
 			subjectRepository.updateRecruitSameCourse(openVo);
@@ -106,7 +106,7 @@ public class SubjectService implements ISubjectService{
 		logger.info("service/update/subject:" +openVo);
 		logger.info("service/update/subject:" +file);
 		
-		int check = subjectRepository.checkOpenCourse(openVo.getCourseId()); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(openVo.getCourseId(),openVo.getCourseOpenYear()); //과정 개설 여부 확인
 		if(check > 0) { // 같은 과정 존재
 			subjectRepository.updateRecruitSameCourse(openVo);
 		}
@@ -141,7 +141,7 @@ public class SubjectService implements ISubjectService{
 	@Override
 	public Map<String, Object> infoSubjectCourse(String courseId, String subjectId, String year) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int check = subjectRepository.checkOpenCourse(courseId); //과정 개설 여부 확인
+		int check = subjectRepository.checkOpenCourse(courseId, year); //과정 개설 여부 확인
 		logger.info("service/infoSubjectCourse/check : " + check);
 		
 		SubjectVO subjectInfo = subjectRepository.infoSubject(subjectId); //강좌에 대한 정보 가져오기

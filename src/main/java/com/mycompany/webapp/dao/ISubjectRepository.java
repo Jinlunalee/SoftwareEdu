@@ -27,7 +27,7 @@ public interface ISubjectRepository {
 	
 	SubjectVO infoSubject(String subjectId); // 강좌에 대한 기본 정보 출력
 	OpenVO infoOpenCourse(@Param("courseId") String courseId, @Param("year") String year); // 같은 개설 과정에 대한 정보
-	int checkOpenCourse(String courseId); // 강좌개설시, 같은 과정이 존재하는지 open테이블에서 확인(최초개설인지 개설되어있는 과정인지 확인)
+	int checkOpenCourse(@Param("courseId") String courseId, @Param("year") String year); // 강좌개설시, 같은 과정이 존재하는지 open테이블에서 확인(최초개설인지 개설되어있는 과정인지 확인)
 	
 	int updateRecruitSameCourse(OpenVO openVo); //같은 과정 신청일자 변경
 	void clickDeleteOpen(@Param("subjectId") String subjectId, @Param("subjectSeq") int subjectSeq); //논리 삭제

@@ -1,6 +1,8 @@
 package com.mycompany.webapp.controller;
 
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -252,7 +254,14 @@ public class SubjectController {
 	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {	
 		logger.info("subject/insert:"+openVo);
 		logger.info("subject/insert:"+questionVo);
-
+		
+		//현재년도 셋팅
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+		String year = formatter.format(new Date());
+		openVo.setCourseOpenYear(year);
+		
+		logger.info("subject/insert/aaaaaaaaaaaaaaaaaaaaaaaaaa:"+openVo);
+		
 		try {
 			MultipartFile mf = openVo.getFile();
 			if(mf!=null && !mf.isEmpty()) { // 첨부파일 있을 때
