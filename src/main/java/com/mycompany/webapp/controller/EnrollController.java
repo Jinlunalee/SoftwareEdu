@@ -266,7 +266,11 @@ public class EnrollController {
 		headerRow.createCell(7).setCellValue("취소 사유");
 		headerRow.createCell(8).setCellValue("취소 사유 기타");
 		
-			List<EnrollVO> searchList = pagerService.selectSearchListByExcel(enrollVo);
+		int totalRows = 0;
+		pageNo = 0;
+		Pager pager = new Pager(rowsPerPage, 5, totalRows, pageNo);
+		List<EnrollVO> searchList = pagerService.selectSearchListByPage(enrollVo, pager);
+		
 			for (EnrollVO enroll : searchList) {
 				Row row = sheet.createRow(rowNo++);
 				row.createCell(0).setCellValue(enroll.getSubjectTitle());

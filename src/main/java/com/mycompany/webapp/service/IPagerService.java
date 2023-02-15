@@ -16,8 +16,6 @@ public interface IPagerService {
 	//수강 검색
 	int getCountSearchRow(EnrollVO enroll);
 	List<EnrollVO> selectSearchListByPage(EnrollVO enroll, Pager pager);
-	
-	List<EnrollVO> selectSearchListByExcel(EnrollVO enroll);
 
 	//과정/강좌 검색하기
 	int getCountSearchOpenCourseRow(String catCourseCd, String course, String keyword);
