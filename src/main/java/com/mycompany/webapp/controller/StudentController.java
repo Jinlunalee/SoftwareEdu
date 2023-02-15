@@ -104,7 +104,6 @@ public class StudentController {
 		
 		System.out.println(student);
 		System.out.println(keyword);
-		
 		return "student/list";
 	}
 

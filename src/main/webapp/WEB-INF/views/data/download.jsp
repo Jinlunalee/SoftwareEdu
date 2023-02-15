@@ -188,7 +188,7 @@
                   sDay: startDay,
                   eDay: endDay
                },
-               contentType: "application/json; charset:UTF-8", // 한글이 물음표로 깨져서 나오는 현상 방지
+               contentType: "application/json; charset:UTF-8", 
                success: function (data) {
 
 
@@ -231,7 +231,7 @@
                   eDay: endDay
                },
                async: true,
-               //             contentType: "application/json; charset:UTF-8",  // 한글이 물음표로 깨져서 나오는 현상 방지
+               //             contentType: "application/json; charset:UTF-8",  
                contentType: "application/json; charset=UTF-8",
                success: function (data) {
                   console.log(data);
@@ -271,7 +271,7 @@
                $("#show_XML, #show_info1").hide();
                $("#show_JSON2, #show_info2").hide();
                $("#show_XML2, #show_info2").hide();
-
+               
                $("#show_JSON, #show_info1").show();
 
                getJson();
