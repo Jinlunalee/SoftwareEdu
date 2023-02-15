@@ -543,6 +543,7 @@ function inputState(){
 	// console.log(state.value);
 }
 
+
 // /*페이지별 개수 선택 유지(subject) - ajax*/
 // function listCount(RowsPerPage, subject, keyword) { // 검색 결과 리스트 출력
 // 	console.log(RowsPerPage);
