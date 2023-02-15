@@ -226,7 +226,8 @@
    			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS start_time, 
    			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS end_time,  
    			hours, 
-   			level_cd, 
+   			level_cd,
+   			level_etc,
    			cost, 
    			support_yn   
 	FROM  SUBJECT s 
