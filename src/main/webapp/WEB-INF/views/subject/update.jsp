@@ -37,7 +37,7 @@
                <td colspan="4" style="text-align: right;"><span class="write-txt">※</span> 항목은 필수 입력 사항입니다.</td>
             </tr>
             <tr>
-               <td colspan="2" rowspan="8">
+               <td colspan="2" rowspan="7">
                   <c:choose>
                      <c:when test="${!empty open.fileName}">
                         <c:set var="len" value="${fn:length(open.fileName)}"/>
@@ -105,12 +105,6 @@
                <td class="readonly_txt"> 
                   <fmt:formatNumber value="${open.cost}" type="number"/>원
                   <c:if test="${open.supportYn eq 'Y'}">* 교육비 지원을 받는 강좌입니다.</c:if>
-               </td>
-            </tr>
-            <tr>
-               <td> 만족도 조사 </td>
-               <td>
-                  <button type="button" class="btn-open-popup btn btn-secondary" style="height:35px;"> 수정 </button> 
                </td>
             </tr>
             <tr>
