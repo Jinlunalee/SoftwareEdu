@@ -340,7 +340,7 @@
 			alert('취소 사유를 선택해 주세요');
 		}
 		
-		if(selectCancelValue === 'CXL04'){
+		if(selectCancelValue === 'CXL03'){
 			var createInput = document.createElement("input");
 			createInput.setAttribute("type", "text");
 			createInput.setAttribute("name", "cancelRsEtc");

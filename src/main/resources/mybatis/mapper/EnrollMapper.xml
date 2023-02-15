@@ -15,7 +15,7 @@
 		SELECT 	comn_cd, 
 				comn_cd_title 
 		FROM COMMON_CODE 
-		WHERE comn_cd = 'CXL04' OR comn_cd = 'CXL06' OR comn_cd = 'CXL07'
+		WHERE comn_cd_type = 'CXL' and use_yn = 'Y'
 	</select>
 	
 	<select id="getStudentList" parameterType="StudentVO" resultType="StudentVO">
