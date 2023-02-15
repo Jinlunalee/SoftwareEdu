@@ -250,7 +250,8 @@
 		    add_etc, 
 		    position_cd, 
 		    cancel_rs_cd, 
-		    cancel_rs_etc 
+		    cancel_rs_etc,
+		    course_open_year
 		FROM ENROLL e 
 		INNER JOIN SUBJECT sub 
 		ON e.subject_id = sub.subject_id 

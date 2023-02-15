@@ -20,7 +20,7 @@
 
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
-                    <form id="search-form">
+                    <form id="search-form" onsubmit="return false;">
                         <div class="search-input">
                             <div class="search-section">
                                 <span class="search-section-title">과정</span>

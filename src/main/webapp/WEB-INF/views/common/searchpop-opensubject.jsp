@@ -21,7 +21,7 @@
                 <!-- 검색 영역 -->
                 <div class="search-wrap">
                     <!-- <div class="info">※ 개설 강좌는 '모집중', '모집마감', '진행중' 상태만 수강 추가할 수 있습니다. '진행중' 상태일 때는 강좌 시작 7일이내까지 수강 추가할 수 있습니다.</div> -->
-                    <form id="search-form">
+                    <form id="search-form" onsubmit="return false;">
                         <div class="search-input">
                             <div class="search-section">
                                 <span class="search-section-title">개설강좌</span>

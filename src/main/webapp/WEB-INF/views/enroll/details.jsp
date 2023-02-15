@@ -13,6 +13,16 @@
 	
 	<div class="card-body">
 		<table class="enroll-detail-table student-table all-table">
+			<colgroup>
+				<col width="10%">
+				<col width="20%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="20%">
+				<col width="10%">
+				<col width="20%">
+			</colgroup>
 			<tr>
 				<th class="info open-info" colspan='8'>수강 정보</th>
 			</tr>
@@ -35,14 +45,18 @@
 			
 			<tr>
 				<th>강좌 명 (아이디)</th>
-				<td colspan='3'>${enroll.subjectTitle} (${enroll.subjectId})</td>
+				<td>${enroll.subjectTitle} (${enroll.subjectId})</td>
+				<th>강좌 회차</th>
+				<td>${enroll.subjectSeq}</td>
 				<th>과정 명 (아이디)</th>
 				<c:if test="${empty enroll.courseId}">
-					<td colspan='3'>${enroll.courseTitle}</td>
+					<td>${enroll.courseTitle}</td>
 				</c:if>
 				<c:if test="${!empty enroll.courseId}">
-				<td colspan='3'>${enroll.courseTitle} (${enroll.courseId})</td>
+					<td>${enroll.courseTitle} (${enroll.courseId})</td>
 				</c:if>
+				<th>과정 개설연도</th>
+				<td>${enroll.courseOpenYear}</td>
 			</tr>
 			
 			<tr>

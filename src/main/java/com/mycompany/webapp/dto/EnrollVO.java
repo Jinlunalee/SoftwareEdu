@@ -47,6 +47,7 @@ public class EnrollVO {
 	private String recruitStartDay;		// 개설 강좌 모집 시작 일자
 	private String recruitEndDay;		// 개설 강좌 모집 종료 일자
 	private String recruitPeople;		// 개설 강좌 모집 인원
+	private String courseOpenYear;		// 개설 과정 연도
 	
 	private String openStateCd;			// 개설 강좌 상태 코드
 	
