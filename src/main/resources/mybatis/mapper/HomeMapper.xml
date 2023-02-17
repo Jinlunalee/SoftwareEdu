@@ -234,7 +234,7 @@
    			TO_CHAR(TO_DATE(start_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS start_day, 
 		    TO_CHAR(TO_DATE(end_day, 'YYYYMMDD'), 'YYYY-MM-DD') AS end_day, 
    			SUBSTR(start_time, 1, 2) || ':' || SUBSTR(start_time, 3, 2) AS start_time, 
-   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 1, 2) AS end_time,  
+   			SUBSTR(end_time, 1, 2) || ':' || SUBSTR(end_time, 3, 2) AS end_time,  
    			hours, 
    			level_cd,
    			level_etc,
