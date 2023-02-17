@@ -40,6 +40,7 @@
 					</c:if>
 				</td>
 				<th id="title">취소 상세 사유</th>
+				<c:if test="${enroll.openStateCd eq '폐강'}">폐강</c:if>
 				<td class="content3">${enroll.cancelRsEtc}</td>
 			</tr>
 			

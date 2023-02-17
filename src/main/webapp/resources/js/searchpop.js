@@ -286,7 +286,7 @@ function moveOutside(event, value){
                         var table = $("<table class='result-table' border='1'/>");
                         var tr1 = table.append($("<tr class='result-tr'/>").append(
                                 $("<th class='result-th'/>").text('강좌아이디'),
-                                $("<th class='result-th'/>").text('강좌회차'),
+                                $("<th class='result-th'/>").text('회차'),
                                 $("<th class='result-th'/>").text('강좌명'),
                                 $("<th class='result-th'/>").text('강좌기간'),
                                 $("<th class='result-th'/>").text('강좌시간'),

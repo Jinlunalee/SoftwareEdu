@@ -98,6 +98,7 @@
 				<thead>
 					<tr>
 						<th>강좌명 (과정명)</th>
+						<th>회차</th>
 						<th>수강생명 (아이디)</th>
 						<th>신청 일자</th>
 						<th>수강 상태</th>
@@ -113,13 +114,16 @@
 						<c:forEach var="board" items="${boardList}" varStatus="status">
 							<tr>
 								<td>
-									<a style="color: #005ba7;text-decoration: underline;" href="<c:url value='/enroll/details/${board.enrollId}'/>">${board.subjectTitle}
-								
-									<%-- 과정명  --%> 
+									<a style="color: #005ba7;text-decoration: underline;" href="<c:url value='/enroll/details/${board.enrollId}'/>">
+									${board.subjectTitle} 
+									<%-- 과정명  --%>
 									<c:if test="${not empty board.courseTitle}">
 										(${board.courseTitle})
 									</c:if></a>
 								</td>
+								
+								<%-- 회차 --%>
+								<td>${board.subjectSeq}</td>
 								
 								<%-- 수강생 명 --%>
 								<td>${board.name} (${board.userId})</td>
@@ -146,6 +150,7 @@
 											<input type="submit" class="btn btn-11 btn-outline-secondary btn-blue" onclick="approval('${board.studentId}', '${board.subjectId}', '${board.subjectSeq}')" value="승인">
 										</form>
 									</c:if>
+									<c:if test="${(board.stateCdTitle eq '수강신청') and (board.openStateCdTitle eq '모집중')}">모집 중</c:if>
 								</td>
 								<td>
 									<%-- 취소 버튼 --%>
