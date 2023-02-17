@@ -148,9 +148,9 @@
 		        select DISTINCT
 					o.course_id,
 					course_title,
-					TO_CHAR(TO_DATE(min(start_day) over (partition by o.course_id)), 'YYYY-MM-DD') as start_day,
-					TO_CHAR(TO_DATE(max(end_day) over (partition by o.course_id)), 'YYYY-MM-DD') as end_day,
-					sum(cost) over (partition by o.course_id) as cost,
+					TO_CHAR(TO_DATE(min(start_day) over (partition by o.course_id, course_open_year)), 'YYYY-MM-DD') as start_day,
+					TO_CHAR(TO_DATE(max(end_day) over (partition by o.course_id, course_open_year)), 'YYYY-MM-DD') as end_day,
+					sum(cost) over (partition by o.course_id, course_open_year) as cost,
 					TO_CHAR(TO_DATE(recruit_start_day), 'YYYY-MM-DD') as recruit_start_day,
 					TO_CHAR(TO_DATE(recruit_end_day), 'YYYY-MM-DD') as recruit_end_day,
 					c.cat_cd as catCourseCd,
