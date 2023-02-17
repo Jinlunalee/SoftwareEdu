@@ -60,8 +60,10 @@
 			</tr>
 			
 			<tr>
-				<th id="subject-hours">강좌 기간 (시수)</th>
-				<td>${enroll.startDay} ~ ${enroll.endDay} (${enroll.hours})</td>
+				<th>강좌 기간 (시수)</th>
+				<td>${enroll.startDay} ~ ${enroll.endDay} (${enroll.hours})
+					<div style="display:none;" id="subject-hours">${enroll.hours}</div>
+				</td>
 				<th>강좌 상태</th>
 				<td>${enroll.openStateCdTitle}</td>
 				<th>강좌 난이도</th>
@@ -151,12 +153,12 @@
 
 	function submitFunction(event) {
 		const addHoursInput = document.getElementById('add-hours-input');
-		let addHoursInputValue = addHoursInput.value;
+		let addHoursInputValue = addHoursInput.value; // 입력한 값
 		addHoursInputValue = Number(addHoursInputValue);
-		let subjectHours = document.getElementById('subject-hours').innerText;
-		subjectHours = Number(subjectHours);
+		let subjectHours = document.getElementById('subject-hours').innerText; 
+		subjectHours = Number(subjectHours); // 수강 시수
 		let enrollCompleteHours = document.getElementById('enroll-complete-hours').innerText;
-		enrollCompleteHours = Number(enrollCompleteHours);
+		enrollCompleteHours = Number(enrollCompleteHours); // 완료한 수강 시수
 
 		// 수강시수 초과 입력 방지
 		if(addHoursInputValue+enrollCompleteHours>subjectHours){
