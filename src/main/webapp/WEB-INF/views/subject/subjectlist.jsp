@@ -165,7 +165,7 @@
 	
 		/*폐강*/
 		function closeCourse(subjectId, subjectSeq, fileId){
-			if(confirm('폐강하시겠습니까?')) {
+			if(confirm('폐강하면 해당 강좌를 신청한 수강생들은 수강취소가 됩니다.\n그래도 폐강하시겠습니까?')) {
 				location.href = '<c:url value="/subject/closesubject/'+subjectId+'/'+subjectSeq+'?fileId='+fileId+'"/>'
 			} else {
 			}

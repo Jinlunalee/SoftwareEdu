@@ -21,6 +21,9 @@
 			$(questionSet).clone().appendTo('#new-questions');
 			changeClassId(i);
 			changeEverything(i);
+			let number = (i+4).toString();
+			let className = "#question-inputSet-" + number;
+			document.querySelector(className).value='';
 		};
 	};
 	/* Modal 클래스 id 바꾸기 */
