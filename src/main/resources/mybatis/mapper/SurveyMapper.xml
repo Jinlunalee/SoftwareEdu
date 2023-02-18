@@ -86,7 +86,7 @@
    
    <select id="getMaxSubjectSeq" parameterType="String" resultType="int">
    /* getMaxSubjectSeq */
-      select max(subject_seq) as "subjectSeq"
+      select nvl(max(subject_seq), 1) as "subjectSeq"
       from open
       where subject_id = #{subjectId}
    </select>
