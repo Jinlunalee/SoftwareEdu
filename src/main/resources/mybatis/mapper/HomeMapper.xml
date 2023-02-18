@@ -136,9 +136,8 @@
 		</if>
 		<choose>
 			<when test="cases.equals('case1')">
-				AND state_cd in ('OPN02', 'OPN03', 'OPN04')
+				AND ((state_cd = 'OPN02' OR state_cd = 'OPN03') OR (state_cd = 'OPN04' AND SYSDATE BETWEEN TO_DATE(start_day, 'YYYY-MM-DD') AND TO_DATE(start_day, 'YYYY-MM-DD') + 7))
 				AND open.course_id is null
-				and to_date(sysdate, 'YYYY-MM-DD') <![CDATA[<=]]> to_date(start_day, 'YYYY-MM-DD') + 7
 				<if test="openStateCd != null and !openStateCd.equals('')">
 					AND state_cd = #{openStateCd}
 				</if>
