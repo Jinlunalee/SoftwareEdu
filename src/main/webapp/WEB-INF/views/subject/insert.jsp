@@ -58,7 +58,7 @@
 	</div>
 	</div>
 	<div class="card-body">
-		<form class="insert_form" action="<c:url value='/subject/insert'/>" method="post" enctype="multipart/form-data">
+		<form class="insert_form" action="<c:url value='/subject/insert?check=${check}'/>" method="post" enctype="multipart/form-data">
 			<table class="subject_course_title">
 				<colgroup>
 					<col width="10%">

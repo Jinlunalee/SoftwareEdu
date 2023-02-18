@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -251,7 +253,7 @@ public class SubjectController {
 
 	// 개설 강좌 입력 (open)
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo) {	
+	public String insertSubject(OpenVO openVo, @ModelAttribute(value="QuestionVO") QuestionVO questionVo, HttpServletRequest request) {	
 		logger.info("subject/insert:"+openVo);
 		logger.info("subject/insert:"+questionVo);
 		
@@ -292,8 +294,14 @@ public class SubjectController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return "redirect:/subject/searchSubjectBoardlist";
+		
+		logger.info("check ?? :" + request.getParameter("check"));
+		
+		if("openCourse".equals(request.getParameter("check"))) {
+			return "redirect:/subject/searchCourseBoardlist"; // 개설 과정 목록을 통해서 개설햇으면 개설 과정 목록으로 돌아오게
+		} else {
+			return "redirect:/subject/searchSubjectBoardlist";
+		}
 	}
 
 	// 개설 강좌 입력 폼 비동기 출력
