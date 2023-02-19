@@ -202,7 +202,7 @@ function moveOutside(event, value){
         // 강좌개설 : subject만 해당
         if(path.substring(10,25)==='subject') {
             // 과정 타이틀 클릭 시, 작성 해에 courseId에 등록된 강좌 리스트 반영하기
-            $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + "  |  개설연도 : " + openDt);
+            $(opener.document).find("#subjectTitle-input").val(valueTitle + " (" + valueId + ") " + "  |  등록연도 : " + openDt);
             checkHideFirst(); //강좌/과정 다시선택 
             setUnavailableSubjectId('subjectTitleClicked', valueId); 
 
