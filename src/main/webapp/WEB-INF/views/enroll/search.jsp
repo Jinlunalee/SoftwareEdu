@@ -130,7 +130,7 @@
 								
 								<%-- 신청일자 --%>
 								<td>${board.enrollDt}</td>
-
+								
 								<%-- 현재 상태 옆에 (진도율 / 취소사유) --%>
 								<td>
 									${board.stateCdTitle}
@@ -264,7 +264,6 @@
 		const today1 = new Date();
 		const oneYearAgo = new Date(today1.setFullYear(today1.getFullYear() - 1));
 		const startDay = formatDate(oneYearAgo);
-		console.log("startDay : " + startDay);
 		document.getElementById('applyStartDay').value = startDay
 	}
 

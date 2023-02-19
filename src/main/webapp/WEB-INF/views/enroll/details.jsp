@@ -121,13 +121,21 @@
 			</tr>
 		</table>
 		<div class="submit-btn">
-			<input type="reset" onclick="history.back()" class="reset-btn" value="◀ 이 전">
+			<input type="reset" onclick="back()" class="reset-btn" value="◀ 이 전">
 		</div>
 	</div>
 	
 </div>
 
 <script>
+
+	function back() {
+		if(document.getElementById('add-hours-input').value) {
+			history.go(-1);
+		}else{
+			history.back();
+		}
+	}
 
 	window.onload = function () {
 		const ratio = document.getElementById('ratio').innerText;
