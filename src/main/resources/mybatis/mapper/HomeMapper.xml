@@ -136,9 +136,9 @@
 		</if>
 		<choose>
 			<when test="cases.equals('case1')">
-				AND open.course_id is null
-        		AND (state_cd = 'OPN02' OR state_cd = 'OPN03')
-        		OR (state_cd = 'OPN04' AND SYSDATE between TO_DATE(start_day, 'YYYY-MM-DD') and TO_DATE(start_day, 'YYYY-MM-DD') + 7)
+				AND open.course_id is null				
+        		AND ((state_cd = 'OPN02' OR state_cd = 'OPN03')
+	 	       		OR (state_cd = 'OPN04' AND SYSDATE between TO_DATE(start_day, 'YYYY-MM-DD') and TO_DATE(start_day, 'YYYY-MM-DD') + 7))
 				<if test="openStateCd != null and !openStateCd.equals('')">
 					AND state_cd = #{openStateCd}
 				</if>
