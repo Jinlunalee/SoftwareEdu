@@ -117,7 +117,7 @@
 	/* getSubjectCountByCourse */
 		SELECT count(subject_id) 
 		FROM open 
-		WHERE course_id = #{courseId}
+		WHERE course_id = #{courseId} AND course_open_year = #{courseOpenYear}
 	</select>
 	
 	<select id="getSubjectInfoByCourse" parameterType="String" resultType="OpenVO">
@@ -126,7 +126,7 @@
 		    subject_id, 
 		    subject_seq 
 		from open 
-		where course_id = #{courseId}
+		where course_id = #{courseId} AND course_open_year = #{courseOpenYear}
 	</select>
 	
 	<select id="recruitTotalPeople" parameterType="map" resultType="int">

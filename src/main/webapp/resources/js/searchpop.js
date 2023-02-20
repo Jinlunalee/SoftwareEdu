@@ -276,9 +276,10 @@ function moveOutside(event, value){
 
         // 수강추가 : open course만 해당
         if(path.substring(10,25)==='opencourse') {
+        	const courseOpenYear = valueArr[3];
             // 선택한 과정 정보 반영하기
             $.ajax({
-                url : 'selectsubjectlistbycourseid?courseId=' + valueId,
+                url : 'selectsubjectlistbycourseid?courseId=' + valueId + '&courseOpenYear=' + courseOpenYear,
                 dataType : "json",
                 async : false,
                 success : function(result) {

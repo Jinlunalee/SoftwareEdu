@@ -242,7 +242,7 @@
 	FROM  SUBJECT s 
 	LEFT JOIN OPEN o 
 	ON s.subject_id = o.subject_id 
-	WHERE del_yn= 'N' AND course_id = #{courseId}
+	WHERE del_yn= 'N' AND course_id = #{courseId} AND course_open_year = #{courseOpenYear}
    </select>
 
 	<select id="selectYearListByPop" parameterType="String" resultType="String">
