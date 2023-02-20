@@ -31,12 +31,12 @@
 		FROM subject
 		<where>
 			<if test="subjectId != null and !subjectId.equals('') ">
-				AND (subject_id = #{subjectId} OR REPLACE (UPPER(subject_id), ' ', '') LIKE '%'||UPPER(#{subjectId})||'%'
-					OR UPPER(subject_id) LIKE '%' || REPLACE(UPPER(#{subjectId}), ' ', '') || '%')
+				AND (subject_id = #{subjectId} OR REPLACE(subject_id, ' ', '') LIKE '%' || REPLACE(#{subjectId}, ' ', '') || '%'
+					OR LOWER(subject_id) = #{subjectId} OR REPLACE(LOWER(subject_id), ' ', '') LIKE '%' || REPLACE(LOWER(#{subjectId}), ' ', '') || '%')
 			</if>
 			<if test="subjectTitle != null and !subjectTitle.equals('')">
-				AND (subject_title = #{subjectTitle} OR REPLACE (UPPER(subject_title), ' ', '') LIKE '%'||UPPER(#{subjectTitle})||'%'
-					OR UPPER(subject_title) LIKE '%' || UPPER(#{subjectTitle}) || '%')
+				AND (subject_title = #{subjectTitle} OR REPLACE(subject_title, ' ', '') LIKE '%' || REPLACE(#{subjectTitle}, ' ', '') || '%' 
+					OR LOWER(subject_title) = #{subjectTitle} OR REPLACE(LOWER(subject_title), ' ', '') LIKE '%' || REPLACE(LOWER(#{subjectTitle}), ' ', '') || '%')
 			</if>
 			<if test="catSubjectCd != null and !catSubjectCd.equals('')">
 				AND cat_cd = #{catSubjectCd} 
@@ -59,8 +59,8 @@
 		FROM course
 		<where>
 			<if test="courseId != null and !courseId.equals('') ">
-				AND (course_id = #{courseId} OR REPLACE (UPPER(course_id), ' ', '') LIKE '%'||UPPER(#{courseId})||'%'
-					OR UPPER(course_id) LIKE '%' || REPLACE(UPPER(#{courseId}), ' ', '') || '%')
+				AND (course_id = #{courseId} OR REPLACE(course_id, ' ', '') LIKE '%' || REPLACE(#{courseId}, ' ', '') || '%' 
+					OR LOWER(course_id) = #{courseId} OR REPLACE(LOWER(course_id), ' ', '') LIKE '%' || REPLACE(LOWER(#{courseId}), ' ', '') || '%')
 			</if>
 			<if test="courseTitle != null and !courseTitle.equals('')">
 				AND (course_title = #{courseTitle} OR REPLACE (UPPER(course_title), ' ', '') LIKE '%'||UPPER(#{courseTitle})||'%'
@@ -118,12 +118,12 @@
 		LEFT JOIN common_code ON open.state_cd = common_code.comn_cd
 		WHERE del_yn = 'N' 
 		<if test="subjectId != null and !subjectId.equals('') ">
-			AND (subject.subject_id = #{subjectId} OR REPLACE (UPPER(subject.subject_id), ' ', '') LIKE '%'||UPPER(#{subjectId})||'%'
-				OR UPPER(subject.subject_id) LIKE '%' || REPLACE(UPPER(#{subjectId}), ' ', '') || '%')
+			AND (subject.subject_id = #{subjectId} OR REPLACE(subject.subject_id, ' ', '') LIKE '%' || REPLACE(#{subjectId}, ' ', '') || '%' 
+				OR LOWER(subject.subject_id) = #{subjectId} OR REPLACE(LOWER(subject.subject_id), ' ', '') LIKE '%' || REPLACE(LOWER(#{subjectId}), ' ', '') || '%')
 		</if>
 		<if test="subjectTitle != null and !subjectTitle.equals('')">
-			AND (subject_title = #{subjectTitle} OR REPLACE (UPPER(subject_title), ' ', '') LIKE '%'||UPPER(#{subjectTitle})||'%'
-				OR UPPER(subject_title) LIKE '%' || UPPER(#{subjectTitle}) || '%')
+			AND (subject_title = #{subjectTitle} OR REPLACE(subject_title, ' ', '') LIKE '%' || REPLACE(#{subjectTitle}, ' ', '') || '%' 
+				OR LOWER(subject_title) = #{subjectTitle} OR REPLACE(LOWER(subject_title), ' ', '') LIKE '%' || REPLACE(LOWER(#{subjectTitle}), ' ', '') || '%')
 		</if>
 		<if test="catSubjectCd != null and !catSubjectCd.equals('')">
 			AND subject.cat_cd = #{catSubjectCd} 
@@ -177,12 +177,12 @@
 		    where open.course_id IS NOT NULL AND del_yn = 'N' AND open.state_cd !='OPN07') /* OPN07 폐강 */
 	    <where>
 			<if test="courseId != null and !courseId.equals('') ">
-				AND (course_id = #{courseId} OR REPLACE (UPPER(course_id), ' ', '') LIKE '%'||UPPER(#{courseId})||'%'
-					OR UPPER(course_id) LIKE '%' || REPLACE(UPPER(#{courseId}), ' ', '') || '%')
+				AND (course_id = #{courseId} OR REPLACE(course_id, ' ', '') LIKE '%' || REPLACE(#{courseId}, ' ', '') || '%' 
+					OR LOWER(course_id) = #{courseId} OR REPLACE(LOWER(course_id), ' ', '') LIKE '%' || REPLACE(LOWER(#{courseId}), ' ', '') || '%')
 			</if>
 			<if test="courseTitle != null and !courseTitle.equals('')">
-				AND (course_title = #{courseTitle} OR REPLACE (UPPER(course_title), ' ', '') LIKE '%'||UPPER(#{courseTitle})||'%'
-					OR UPPER(course_title) LIKE '%' || UPPER(#{courseTitle}) || '%')
+				AND (course_title = #{courseTitle} OR REPLACE(course_title, ' ', '') LIKE '%' || REPLACE((#{courseTitle}), ' ', '') || '%'
+					OR LOWER(course_title) = #{courseTitle} OR REPLACE(LOWER(course_title), ' ', '') LIKE '%' || REPLACE(LOWER(#{courseTitle}), ' ', '') || '%')
 			</if>
 			<if test="catCourseCd != null and !catCourseCd.equals('')">
 				AND cat_course_cd = #{catCourseCd} 
@@ -217,12 +217,11 @@
 	      FROM STUDENT 
 	      WHERE 1=1 
 	      <if test="userId != null and !userId.equals('')">
-	         AND (user_id = #{userId} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{userId}) || '%'
-	         	OR UPPER(user_id) LIKE '%' || REPLACE(UPPER(#{userId}), ' ', '') || '%')
+	         AND (user_id = #{userId} OR REPLACE(user_id, ' ', '') LIKE '%' || REPLACE(#{userId}, ' ', '') || '%' 
+	         	OR UPPER(user_id) = #{userId} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || REPLACE(UPPER(#{userId}), ' ', '') || '%')
 	      </if>
 	      <if test="name != null and !name.equals('')">
-	         AND (name = #{name} OR REPLACE (name, ' ', '') LIKE '%'||#{name}||'%'
-	         	OR UPPER(name) LIKE '%' || REPLACE(UPPER(#{name}), ' ', '') || '%')
+	         AND (name = #{name} OR REPLACE(name, ' ', '') LIKE '%' || REPLACE(#{name}, ' ', '') || '%')
 	      </if>
    </select>
    

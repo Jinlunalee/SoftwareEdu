@@ -263,20 +263,19 @@
 			AND SUBSTR(e.enroll_dt, 1, 8) BETWEEN TO_DATE(#{applyStartDay}) AND TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) 
 		</if>
 		<if test='student != null and student.equals("sdName")'>
-			AND (name = #{keyword1} OR REPLACE(name, ' ', '') LIKE '%' || #{keyword1} || '%'
-				OR UPPER(name) LIKE '%' || REPLACE(UPPER(#{keyword1}), ' ', '') || '%') 
+			AND (name LIKE '%' || REPLACE(#{keyword1}, ' ', '') || '%') 
 		</if>
 		<if test='student != null and student.equals("sdId")'>
-			AND (stu.user_id = #{keyword1} OR REPLACE(UPPER(stu.user_id), ' ', '') LIKE '%' || UPPER(#{keyword1}) || '%'
-				OR UPPER(stu.user_id) LIKE '%' || REPLACE(UPPER(#{keyword1}), ' ', '') || '%') 
+			AND (stu.user_id = #{keyword1} OR REPLACE(stu.user_id, ' ', '') LIKE '%' || REPLACE(#{keyword1}, ' ', '') || '%' 
+				OR REPLACE(UPPER(stu.user_id), ' ', '') LIKE '%' || REPLACE(UPPER(#{keyword1}), ' ', '') || '%') 
 		</if>
 		<if test='course != null and course.equals("sj")'>
-			AND (sub.subject_title = #{keyword2} OR REPLACE(UPPER(sub.subject_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%'
-				OR UPPER(sub.subject_title) LIKE '%' || UPPER(#{keyword2}) || '%')   
+			AND (sub.subject_title = #{keyword2} OR REPLACE(sub.subject_title, ' ', '') LIKE '%' || REPLACE(#{keyword2}, ' ', '') || '%' 
+				OR LOWER(sub.subject_title) = #{keyword2} OR REPLACE(LOWER(sub.subject_title), ' ', '') LIKE '%' || REPLACE(LOWER(#{keyword2}), ' ', '') || '%')   
 		</if>
 		<if test='course != null and course.equals("cs")'>
-			AND c.course_id is not null AND (c.course_title = #{keyword2} OR REPLACE(UPPER(c.course_title), ' ', '') LIKE '%' || UPPER(#{keyword2}) || '%'
-				OR UPPER(c.course_title) LIKE '%' || UPPER(#{keyword2}) || '%')   
+			AND c.course_id is not null AND (c.course_title = #{keyword2} OR REPLACE(c.course_title, ' ', '') LIKE '%' || REPLACE(#{keyword2}, ' ', '') || '%' 
+				OR LOWER(c.course_title) = #{keyword2} OR REPLACE(LOWER(c.course_title), ' ', '') LIKE '%' || REPLACE(#{keyword2}, ' ', '') || '%') 
 		</if>
 		<if test='state != null and state.equals("apply")'>
 			AND e.state_cd = 'ERL01' 
@@ -319,24 +318,23 @@
 			AND s.cat_cd=#{catSubjectCd}
 		</if>
     	<if test='subject != null and subject.equals("subjId")'>
-    		AND (o.subject_id = #{keyword} OR REPLACE(UPPER(o.subject_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%'
-    			OR UPPER(o.subject_id) LIKE '%' || REPLACE(UPPER(#{keyword}), ' ', '') || '%')
+    		AND (o.subject_id = #{keyword} OR REPLACE(UPPER(o.subject_id), ' ', '') LIKE '%' || REPLACE(UPPER(#{keyword}), ' ', '') || '%' 
+    			OR LOWER(o.subject_id) = #{keyword} OR REPLACE(LOWER(o.subject_id), ' ', '') LIKE '%' || REPLACE(LOWER(#{keyword}), ' ', '') || '%') 
 		</if>
 		<if test='subject != null and subject.equals("subjTitle")'>
-			AND (subject_title = #{keyword} OR REPLACE(UPPER(subject_title), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%'
-				OR UPPER(subject_title) LIKE '%' || UPPER(#{keyword}) || '%')
+			AND (subject_title = #{keyword} OR REPLACE(subject_title, ' ', '') LIKE '%' || REPLACE(#{keyword}, ' ', '') || '%' 
+				OR LOWER(subject_title) = #{keyword} OR REPLACE(LOWER(subject_title), ' ', '') LIKE '%' || REPLACE(LOWER(#{keyword}), ' ', '') || '%')
 		</if>
     </sql>
     
     <sql id="student-search">
     /*student-search*/
     	<if test='student != null and student.equals("stdtId")'>
-    		AND (user_id = #{keyword} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%'
-    			OR UPPER(user_id) LIKE '%' || REPLACE(UPPER(#{keyword}), ' ', '') || '%')
+    		AND (user_id = #{keyword} OR REPLACE(user_id, ' ', '') LIKE '%' || REPLACE(#{keyword}, ' ', '') || '%' 
+    			OR UPPER(user_id) = #{keyword} OR REPLACE(UPPER(user_id), ' ', '') LIKE '%' || REPLACE(UPPER(#{keyword}), ' ', '') || '%')
 		</if>
 		<if test='student != null and student.equals("stdtName")'>
-			AND (name = #{keyword} OR REPLACE(UPPER(name), ' ', '') LIKE '%' || UPPER(#{keyword}) || '%'
-				OR UPPER(name) LIKE '%' || REPLACE(UPPER(#{keyword}), ' ', '') || '%')
+			AND (name = #{keyword} OR REPLACE(name, ' ', '') LIKE '%' || REPLACE(#{keyword}, ' ', '') || '%')
 		</if>
     </sql>
 	

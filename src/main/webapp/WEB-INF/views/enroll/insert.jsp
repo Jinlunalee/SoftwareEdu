@@ -123,6 +123,7 @@
 			let courseArr = courseInput.split('/');
 			let courseId = courseArr[0];
 			let courseOpenYear = courseArr[3];
+			alert(courseOpenYear);
 	
 			$.ajax({
 				type : 'POST',
