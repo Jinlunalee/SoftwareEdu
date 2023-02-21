@@ -22,7 +22,7 @@
                         <form name="sc-form" class="search-form">
                            <%--연계자료 기간 --%>
                            <div class="data-period">
-                              <span id="dataperiod">기간별 조회  <a id=dataExpl>※ 수강 시작 일자(startDay)를 기준으로 검색됩니다.</a></span>
+                              <span id="dataperiod">기간별 조회  <a id=dataExpl>※ 강좌 시작 일자(startDay)를 기준으로 검색됩니다.</a></span>
                               <div class="date-inputs">
                                  <input type="date" name="startDay" id="input_startDay" class="input-date" value="${startDay}"> ~ 
                                  <input type="date" name="endDay" id="input_endDay" class="input-date" value="${endDay}">
@@ -132,7 +132,7 @@
                               </tr>
                               <tr>
                                  <th>startDay</th>
-                                 <td>수강 시작 일자</td>
+                                 <td>강좌 시작 일자</td>
                                  <th>endDay</th>
                                  <td>강좌 마감 일자</td>
                               </tr>
